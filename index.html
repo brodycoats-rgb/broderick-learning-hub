@@ -8,84 +8,166 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
       line-height: 1.6;
-      background-color: #f7f7f7;
+      background-color: #f4f6f8;
       color: #222;
     }
 
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.05em;
+      color: #d1d5db;
+    }
+
     .container {
-      max-width: 900px;
-      margin: auto;
+      max-width: 1050px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+
+    .intro {
       background: white;
-      padding: 32px;
+      padding: 26px;
       border-radius: 12px;
+      margin-bottom: 28px;
+      border-left: 5px solid #1f2937;
     }
 
-    h1 {
-      margin-bottom: 8px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
     }
 
-    h2 {
-      margin-top: 30px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 6px;
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
     }
 
-    ul {
-      padding-left: 22px;
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.25em;
+    }
+
+    .card p {
+      color: #444;
     }
 
     a {
       color: #0057b8;
       text-decoration: none;
+      font-weight: bold;
     }
 
     a:hover {
       text-decoration: underline;
     }
 
-    .note {
-      background: #eef4ff;
-      padding: 14px;
-      border-left: 4px solid #0057b8;
-      margin-top: 18px;
+    .section {
+      background: white;
+      padding: 26px;
+      border-radius: 12px;
+      margin-top: 28px;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 0.9em;
+      margin: 40px 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <header>
     <h1>Broderick Learning Hub</h1>
-    <p>A personal HTML repository for reports, notes, learning, and personal initiatives.</p>
+    <p>Reports, notes, initiatives, templates, and structured learning in one HTML repository.</p>
+  </header>
 
-    <div class="note">
-      <strong>Purpose:</strong> This site is for organizing non-confidential learning notes, public reports, summaries, and personal knowledge development.
+  <main class="container">
+
+    <div class="intro">
+      <h2>Purpose</h2>
+      <p>
+        This repository is designed as a personal knowledge hub for organizing non-confidential
+        learning notes, public reports, issue summaries, templates, and personal development material.
+      </p>
     </div>
 
-    <h2>Main Sections</h2>
-    <ul>
-      <li><a href="reports.html">Reports</a></li>
-      <li><a href="notes.html">Learning Notes</a></li>
-      <li><a href="initiatives.html">Initiatives</a></li>
-      <li><a href="templates.html">Templates</a></li>
-    </ul>
+    <div class="grid">
+      <div class="card">
+        <h2>Reports</h2>
+        <p>Store report summaries, source notes, key findings, and follow-up questions.</p>
+        <p><a href="reports.html">Open Reports →</a></p>
+      </div>
 
-    <h2>Current Focus Areas</h2>
-    <ul>
-      <li>Government affairs and public policy</li>
-      <li>Energy reliability and utility strategy</li>
-      <li>Biostatistics and MPH coursework</li>
-      <li>Leadership and executive communication</li>
-      <li>Career development and professional positioning</li>
-    </ul>
+      <div class="card">
+        <h2>Learning Notes</h2>
+        <p>Capture concepts, definitions, plain-language explanations, examples, and open questions.</p>
+        <p><a href="notes.html">Open Notes →</a></p>
+      </div>
 
-    <h2>Working Rule</h2>
-    <p>
-      Use this repository for structured learning and non-confidential summaries.
-      Do not upload confidential company documents, internal strategy materials,
-      personal medical records, or sensitive third-party information.
-    </p>
-  </div>
+      <div class="card">
+        <h2>Initiatives</h2>
+        <p>Track personal, professional, academic, and learning initiatives with next steps.</p>
+        <p><a href="initiatives.html">Open Initiatives →</a></p>
+      </div>
+
+      <div class="card">
+        <h2>Templates</h2>
+        <p>Keep reusable structures for briefings, meeting summaries, reports, and project tracking.</p>
+        <p><a href="templates.html">Open Templates →</a></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Current Focus Areas</h2>
+      <ul>
+        <li>Government affairs and public policy</li>
+        <li>Energy reliability and utility strategy</li>
+        <li>Biostatistics and MPH coursework</li>
+        <li>Leadership and executive communication</li>
+        <li>Career development and professional positioning</li>
+        <li>HTML, knowledge management, and digital organization</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Working Rules</h2>
+      <ul>
+        <li>Use this repository for structured learning and non-confidential summaries.</li>
+        <li>Keep original reports separate from summaries when possible.</li>
+        <li>Write notes in plain language so they are useful later.</li>
+        <li>Do not upload confidential company documents, internal strategy materials, personal medical records, or sensitive third-party information.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    Broderick Learning Hub | HTML Knowledge Repository
+  </footer>
 </body>
 </html>
