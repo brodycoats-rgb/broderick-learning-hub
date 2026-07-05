@@ -17,31 +17,32 @@
     header {
       background-color: #1f2937;
       color: white;
-      padding: 34px 24px;
+      padding: 38px 24px;
       text-align: center;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 2.15em;
     }
 
     header p {
       margin-top: 10px;
       color: #d1d5db;
+      font-size: 1.05em;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1150px;
       margin: 32px auto;
       padding: 0 24px;
     }
 
     .section {
       background: white;
-      padding: 26px;
+      padding: 28px;
       border-radius: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       border: 1px solid #ddd;
     }
 
@@ -67,10 +68,20 @@
 
     .plain-box {
       background: #eef4ff;
-      padding: 16px;
+      padding: 18px;
       border-left: 5px solid #0057b8;
       border-radius: 8px;
-      margin-top: 14px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    .warning-box {
+      background: #fff7ed;
+      padding: 18px;
+      border-left: 5px solid #f97316;
+      border-radius: 8px;
+      margin-top: 16px;
+      margin-bottom: 16px;
     }
 
     .issue-card {
@@ -79,6 +90,56 @@
       border-radius: 10px;
       padding: 18px;
       margin-top: 16px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .data-card {
+      background: #f9fafb;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .data-card .number {
+      font-size: 1.55em;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 0.94em;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+    }
+
+    .source-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 14px;
+    }
+
+    .small {
+      font-size: 0.9em;
+      color: #555;
     }
 
     footer {
@@ -93,7 +154,7 @@
 <body>
   <header>
     <h1>Healthcare Policy Context</h1>
-    <p>Plain-language notes on how legislative and regulatory issues affect hospital systems.</p>
+    <p>Plain-language business, legislative, and regulatory context for understanding hospital system government affairs.</p>
   </header>
 
   <main class="container">
@@ -101,242 +162,945 @@
     <div class="section">
       <p><a href="index.html">← Back to Home</a></p>
 
-      <h2>Why This Page Exists</h2>
+      <h2>Core Learning Thesis</h2>
+
       <p>
-        This page is designed to help me understand health system government affairs from a business,
-        operational, and policy perspective. The goal is to connect legislative and regulatory issues
-        to what a hospital system actually has to manage every day.
+        Health system government affairs is not only about lobbying. It is about protecting the ability of a large,
+        mission-driven, highly regulated organization to deliver care while managing revenue pressure, labor pressure,
+        payer friction, public expectations, capital needs, and constant policy change.
       </p>
 
       <div class="plain-box">
         <strong>Plain-language explanation:</strong>
-        A hospital system is not just a place where patients receive care. It is also a major employer,
-        a regulated business, a payer-contracting organization, a public health access point, a community
-        institution, and a financial operation with tight margins.
+        A hospital system is an essential-service operating company. It must keep serving people whether the economics
+        are easy or difficult. The difference from a utility is that hospitals do not have one clean rate case or one
+        primary regulator that determines cost recovery. Hospitals are paid through a fragmented mix of Medicare,
+        Medicaid, commercial insurance, patient payments, supplemental funding, grants, and other mechanisms.
       </div>
-    </div>
-
-    <div class="section">
-      <h2>The Basic Hospital Business Model</h2>
 
       <p>
-        Hospitals provide care first, but they get paid later through a mix of Medicare, Medicaid,
-        commercial insurance, patient payments, and other sources. The challenge is that not every payer
-        pays the same amount, and some care is never fully paid for.
+        The value of government affairs is to translate policy into business terms: revenue, cost, workforce, access,
+        payer behavior, capital planning, community trust, and executive risk.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Why This Matters for the Advocate Role</h2>
+
+      <p>
+        The Vice President Government Affairs &amp; Operations role should be understood as an enterprise alignment
+        role. The job is not simply to monitor bills. The role is built around government affairs operations: state
+        team coordination, business processes, budgets, presentations, issue briefs, strategy documents, communication
+        vehicles, tracking, reporting, and support for the broader government affairs strategy.
       </p>
 
-      <div class="issue-card">
-        <h3>Medicare</h3>
-        <p>
-          Medicare generally covers older adults and some people with disabilities. For hospitals,
-          Medicare is important because it covers many patients, but payment rates may not always cover
-          the full cost of care.
-        </p>
-      </div>
+      <p>
+        The role reports to the Senior Vice President, Chief Government Affairs Officer. It is described as a critical
+        partner to the CGAO and government affairs leaders across the enterprise. It is also specifically described as
+        not serving as a registered lobbyist, which means the emphasis is likely operations, structure, execution,
+        communication, process discipline, and cross-functional alignment.
+      </p>
 
-      <div class="issue-card">
-        <h3>Medicaid</h3>
-        <p>
-          Medicaid generally covers lower-income patients and some vulnerable populations. Medicaid is
-          essential for access, but hospitals often argue that Medicaid payments are lower than the cost
-          of delivering care.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Commercial Insurance</h3>
-        <p>
-          Commercial insurance usually pays more than Medicare or Medicaid. That makes employer-sponsored
-          and private insurance important to hospital finances. But commercial insurers also create friction
-          through prior authorization, claim denials, payment delays, and disputes over medical necessity.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Uncompensated Care</h3>
-        <p>
-          Uncompensated care means care the hospital provides but does not fully get paid for. This can
-          include charity care, bad debt, or care for uninsured patients. Hospitals are expected to serve
-          the community, but that mission still has a financial cost.
-        </p>
+      <div class="plain-box">
+        <strong>Personal positioning:</strong>
+        My strongest bridge is not that I am a traditional health care lobbyist. My strongest bridge is that I am a
+        government affairs operator with experience in regulated essential-service industries, executive briefing,
+        legislative strategy, coalition management, issue tracking, and prior health-benefit program administration.
       </div>
     </div>
 
     <div class="section">
-      <h2>What Hospital Systems Are Facing Now</h2>
+      <h2>Advocate Health Enterprise Snapshot</h2>
 
-      <div class="issue-card">
-        <h3>1. Workforce Pressure</h3>
-        <p>
-          Hospitals depend on people: nurses, doctors, technicians, therapists, pharmacists, security staff,
-          billing teams, food service, maintenance, and many others. When labor costs rise or staff are hard
-          to recruit, the entire hospital operating model becomes more expensive.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Current context</th>
+            <th>Why it matters for the role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Enterprise footprint</td>
+            <td>Advocate Health has a combined footprint across Illinois, Wisconsin, North Carolina, South Carolina, Georgia, and Alabama.</td>
+            <td>The role is not only Illinois lobbying. It supports government affairs operations across a multi-state enterprise.</td>
+          </tr>
+          <tr>
+            <td>Care brands</td>
+            <td>Advocate in Illinois, Aurora in Wisconsin, Atrium Health / Wake Forest Baptist in the Carolinas, and Atrium Health Navicent / Floyd in Georgia and Alabama.</td>
+            <td>Each market has different policy dynamics, political cultures, payer issues, and regulatory environments.</td>
+          </tr>
+          <tr>
+            <td>Teammates</td>
+            <td>167,000 teammates.</td>
+            <td>Workforce policy, labor cost, workplace safety, retention, and staffing pipelines are core business issues.</td>
+          </tr>
+          <tr>
+            <td>Hospital campuses</td>
+            <td>69 hospital campuses.</td>
+            <td>Hospital policy affects facilities, capital planning, service lines, emergency readiness, and access.</td>
+          </tr>
+          <tr>
+            <td>Unique patients</td>
+            <td>5.6 million unique patients.</td>
+            <td>Policy changes affect a large patient population, not a narrow operating unit.</td>
+          </tr>
+          <tr>
+            <td>Sites of care</td>
+            <td>1,100+ sites of care.</td>
+            <td>Government affairs must understand hospitals, clinics, outpatient care, virtual care, and community-based access.</td>
+          </tr>
+          <tr>
+            <td>Community benefit</td>
+            <td>$6.2 billion community benefit.</td>
+            <td>Community benefit supports nonprofit legitimacy, public trust, tax-exempt status, and legislative positioning.</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          Workforce policy affects staffing mandates, training pipelines, workplace violence protections,
-          licensure rules, wage pressure, and labor relations.
-        </p>
+      <p class="source-note">
+        Source notes: Advocate Health 2025 Year in Review and Advocate Health 2025 Unaudited Annual Disclosure Statements.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Advocate Health High-Level 2025 Financials</h2>
+
+      <p>
+        The most important point is not only that Advocate is large. The important point is that even a large system
+        operates inside a margin-sensitive business model. Small changes in reimbursement, labor cost, drug cost,
+        supply cost, payer behavior, or Medicaid funding can have major dollar consequences.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Financial item</th>
+            <th>2025 amount</th>
+            <th>Plain-language meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Patient service revenue</td>
+            <td>$32.68 billion</td>
+            <td>The core care-delivery revenue stream. It depends heavily on Medicare, Medicaid, commercial insurance, and patient payments.</td>
+          </tr>
+          <tr>
+            <td>Other revenue</td>
+            <td>$6.27 billion</td>
+            <td>Additional revenue streams that support the enterprise beyond direct patient-service revenue.</td>
+          </tr>
+          <tr>
+            <td>Total revenue</td>
+            <td>$38.95 billion</td>
+            <td>Shows enterprise scale, but scale does not eliminate margin pressure.</td>
+          </tr>
+          <tr>
+            <td>Salaries, wages, and benefits</td>
+            <td>$21.04 billion</td>
+            <td>Labor is the dominant operating cost. Workforce policy directly affects the business model.</td>
+          </tr>
+          <tr>
+            <td>Supplies and drugs</td>
+            <td>$8.70 billion</td>
+            <td>Drug pricing, pharmacy policy, supply chain, tariffs, medical devices, and purchasing strategy affect operating cost.</td>
+          </tr>
+          <tr>
+            <td>Purchased services and other</td>
+            <td>$6.14 billion</td>
+            <td>Reflects the outside services and operating support needed to run a large health system.</td>
+          </tr>
+          <tr>
+            <td>Total expenses</td>
+            <td>$37.40 billion</td>
+            <td>The cost base is large and sensitive to labor, supplies, drugs, technology, compliance, and inflation.</td>
+          </tr>
+          <tr>
+            <td>Operating income</td>
+            <td>$1.55 billion</td>
+            <td>The amount left from operations before nonoperating income. This is the operating breathing room.</td>
+          </tr>
+          <tr>
+            <td>Operating margin</td>
+            <td>4.0%</td>
+            <td>A 4% margin is meaningful, but not unlimited. It must support reinvestment, resilience, growth, and access.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Payor Mix</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Payor</th>
+            <th>2025 share of patient service revenue</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Commercial</td>
+            <td>48%</td>
+            <td>Usually higher-paying than public programs, but often comes with prior authorization, denials, payment disputes, and contracting friction.</td>
+          </tr>
+          <tr>
+            <td>Medicare</td>
+            <td>30%</td>
+            <td>Large public payer. Medicare policy, Medicare Advantage, site-neutral payment, quality measures, and prior authorization matter.</td>
+          </tr>
+          <tr>
+            <td>Medicaid</td>
+            <td>19%</td>
+            <td>Critical for low-income and vulnerable populations. Medicaid cuts can affect access, uncompensated care, and service-line sustainability.</td>
+          </tr>
+          <tr>
+            <td>Self-pay and other</td>
+            <td>3%</td>
+            <td>Represents patients and other sources outside the three major payer categories. Can connect to charity care and medical debt issues.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Utilization Snapshot</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Utilization item</th>
+            <th>2025 volume</th>
+            <th>Business relevance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Discharges</td>
+            <td>579,331</td>
+            <td>Shows inpatient scale and the volume of patients moving through hospital beds.</td>
+          </tr>
+          <tr>
+            <td>Observation cases</td>
+            <td>169,411</td>
+            <td>Observation status is financially and operationally important because payment rules differ from inpatient admissions.</td>
+          </tr>
+          <tr>
+            <td>Total surgeries</td>
+            <td>460,480</td>
+            <td>Surgery volumes connect to service-line strategy, staffing, reimbursement, capital equipment, and outpatient migration.</td>
+          </tr>
+          <tr>
+            <td>Emergency department visits</td>
+            <td>2,364,662</td>
+            <td>Emergency care is a major access point, public expectation, and cost center.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="source-note">
+        Source notes: Advocate Health 2025 Unaudited Annual Disclosure Statements.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Advocate Aurora / Illinois-Wisconsin Context</h2>
+
+      <p>
+        The Oak Brook role is especially connected to the Illinois and Wisconsin platform, even though the job is
+        enterprise-wide. Advocate Aurora Health is the closest regional financial context for the Illinois/Wisconsin
+        portion of the system.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Financial item</th>
+            <th>2025 amount</th>
+            <th>Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Patient service revenue</td>
+            <td>$15.49 billion</td>
+            <td>Shows the scale of the care-delivery business in the Illinois/Wisconsin platform.</td>
+          </tr>
+          <tr>
+            <td>Other revenue</td>
+            <td>$2.76 billion</td>
+            <td>Supports the regional system beyond patient-service revenue.</td>
+          </tr>
+          <tr>
+            <td>Total revenue</td>
+            <td>$18.25 billion</td>
+            <td>This regional platform is substantial on its own.</td>
+          </tr>
+          <tr>
+            <td>Total expenses</td>
+            <td>$17.67 billion</td>
+            <td>Shows the scale of cost exposure in the Illinois/Wisconsin business.</td>
+          </tr>
+          <tr>
+            <td>Operating income</td>
+            <td>$579.7 million</td>
+            <td>Positive operating performance, but still sensitive to reimbursement and cost changes.</td>
+          </tr>
+          <tr>
+            <td>Operating margin</td>
+            <td>3.2%</td>
+            <td>A relatively narrow operating spread compared with total revenue and expenses.</td>
+          </tr>
+          <tr>
+            <td>Days cash on hand</td>
+            <td>338 days</td>
+            <td>Reflects liquidity strength, but does not remove the need to manage policy risk and operating pressure.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="source-note">
+        Source notes: Advocate Health 2025 Unaudited Annual Disclosure Statements, Advocate Aurora Health section.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Executive Leadership and Reporting Context</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Executive</th>
+            <th>Role</th>
+            <th>Why this person matters for government affairs context</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eugene A. Woods</td>
+            <td>Chief Executive Officer</td>
+            <td>Sets enterprise direction, public positioning, access strategy, and major transformation priorities.</td>
+          </tr>
+          <tr>
+            <td>Brad Clark</td>
+            <td>SEVP, Chief Financial Officer</td>
+            <td>Relevant to reimbursement, Medicaid, Medicare, payer policy, operating margin, capital planning, and financial sustainability.</td>
+          </tr>
+          <tr>
+            <td>Brett J. Denton</td>
+            <td>SEVP, Chief Legal Officer</td>
+            <td>Relevant to regulatory risk, compliance, litigation, transactions, governance, and legal-policy alignment.</td>
+          </tr>
+          <tr>
+            <td>Ken D. Haynes</td>
+            <td>SEVP, Chief Enterprise Services Officer</td>
+            <td>Relevant to enterprise services, operating infrastructure, integration, and cross-system execution.</td>
+          </tr>
+          <tr>
+            <td>Nakesha Lopez</td>
+            <td>SEVP, Chief People &amp; Culture Officer</td>
+            <td>Relevant to workforce, labor, retention, compensation, workplace safety, culture, and staffing policy.</td>
+          </tr>
+          <tr>
+            <td>Dia Nichols</td>
+            <td>EVP and President, Illinois Division</td>
+            <td>Directly relevant to Illinois operations, policy, access, community benefit, and state-level stakeholder relationships.</td>
+          </tr>
+          <tr>
+            <td>Gabrielle Finley-Hazle</td>
+            <td>EVP and President, Wisconsin Division</td>
+            <td>Relevant to Wisconsin legislative, regulatory, payer, and workforce issues.</td>
+          </tr>
+          <tr>
+            <td>Steve Smoot</td>
+            <td>EVP and President, North Carolina and Georgia Division</td>
+            <td>Relevant to Atrium operations, state policy, growth, payer issues, and regional access.</td>
+          </tr>
+          <tr>
+            <td>Shoeb J. Sitafalwalla</td>
+            <td>SEVP, Chief Strategy Officer</td>
+            <td>Relevant to care transformation, service-line strategy, AI, innovation, growth, and enterprise positioning.</td>
+          </tr>
+          <tr>
+            <td>Scott Rissmiller</td>
+            <td>SEVP, Chief Clinical Officer</td>
+            <td>Relevant to quality, safety, clinical operations, physician alignment, and care delivery.</td>
+          </tr>
+          <tr>
+            <td>Meghan Woltman</td>
+            <td>SVP, Chief Government Affairs Officer</td>
+            <td>The VP Government Affairs &amp; Operations role reports to the SVP, Chief Government Affairs Officer. Public Advocate materials identify Meghan Woltman as SVP, Chief Government Affairs Officer.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Likely Role Positioning</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Current understanding</th>
+            <th>Plain-language meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Formal reporting line</td>
+            <td>Reports to the SVP, Chief Government Affairs Officer.</td>
+            <td>This is a senior enterprise government affairs operations role.</td>
+          </tr>
+          <tr>
+            <td>Functional role</td>
+            <td>Oversees state government affairs team operations, projects, budgets, presentations, issue briefs, strategy documents, communication vehicles, and reporting.</td>
+            <td>The person is expected to make the government affairs function work better.</td>
+          </tr>
+          <tr>
+            <td>Lobbying status</td>
+            <td>The posting says the VP will not serve as a registered lobbyist.</td>
+            <td>This is more operational, strategic, and cross-functional than frontline lobbying.</td>
+          </tr>
+          <tr>
+            <td>Likely executive value</td>
+            <td>Structure, discipline, process, executive materials, tracking, budget management, and state-team alignment.</td>
+            <td>The role is about turning policy activity into an organized enterprise operating system.</td>
+          </tr>
+          <tr>
+            <td>Personal fit angle</td>
+            <td>Government affairs operations, legislative strategy, executive briefing, cross-functional coordination, coalition work, AI-enabled tracking, and health-benefit-program experience.</td>
+            <td>The strongest pitch is government affairs operator with health care fluency.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>National Health Care Data Snapshot</h2>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="number">$5.3T</div>
+          <p>U.S. national health expenditures in 2024.</p>
+        </div>
+
+        <div class="data-card">
+          <div class="number">18.0%</div>
+          <p>Health care share of U.S. GDP in 2024.</p>
+        </div>
+
+        <div class="data-card">
+          <div class="number">$1.118T</div>
+          <p>Medicare spending in 2024.</p>
+        </div>
+
+        <div class="data-card">
+          <div class="number">$931.7B</div>
+          <p>Medicaid spending in 2024.</p>
+        </div>
+
+        <div class="data-card">
+          <div class="number">$1.645T</div>
+          <p>Private health insurance spending in 2024.</p>
+        </div>
+
+        <div class="data-card">
+          <div class="number">$1.635T</div>
+          <p>Hospital expenditures in 2024.</p>
+        </div>
       </div>
 
-      <div class="issue-card">
-        <h3>2. Medicaid Funding Risk</h3>
-        <p>
-          Medicaid is a major part of the hospital payment system. If federal or state Medicaid funding is
-          reduced, hospitals may face more uncompensated care and weaker reimbursement.
-        </p>
+      <p class="source-note">
+        Source notes: CMS National Health Expenditure Fact Sheet.
+      </p>
+    </div>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          Hospital systems must explain to legislators that Medicaid cuts are not abstract budget changes.
-          They can affect patient access, service lines, staffing, emergency care, and community health.
-        </p>
-      </div>
+    <div class="section">
+      <h2>Current Health System Pressures</h2>
 
-      <div class="issue-card">
-        <h3>3. Payer Friction</h3>
-        <p>
-          Hospitals often face disputes with insurance companies over whether care was necessary, whether
-          it should be covered, how quickly claims are paid, and how much should be reimbursed.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Pressure</th>
+            <th>Data / evidence</th>
+            <th>Business impact</th>
+            <th>Government affairs implication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Labor and workforce</td>
+            <td>AHA reports labor accounts for 56% of hospital expenses.</td>
+            <td>Staffing is the operating model. Labor cost affects beds, throughput, access, quality, and retention.</td>
+            <td>Workforce legislation, workplace violence protections, nurse staffing rules, licensure, graduate medical education, immigration policy, and training pipelines become core advocacy issues.</td>
+          </tr>
+          <tr>
+            <td>Medicare / Medicaid underpayment</td>
+            <td>AHA reports hospitals absorbed $130 billion in Medicare and Medicaid underpayments in 2023.</td>
+            <td>Public payer shortfalls pressure margins and may require cross-subsidy from commercial reimbursement.</td>
+            <td>Medicaid cuts, Medicare rates, state-directed payments, provider taxes, supplemental payments, and site-neutral policy become enterprise financial issues.</td>
+          </tr>
+          <tr>
+            <td>Medicaid funding risk</td>
+            <td>IHA reports Illinois hospitals face up to $57 billion in federal Medicaid funding cuts over 10 years because of H.R. 1.</td>
+            <td>Medicaid cuts can increase uncompensated care and weaken access for vulnerable patients.</td>
+            <td>Government affairs must connect Medicaid policy to emergency care, behavioral health, rural access, maternity care, jobs, and community health.</td>
+          </tr>
+          <tr>
+            <td>Payer friction</td>
+            <td>AHA identifies delayed prior authorization, inappropriate denials, and narrow networks as growing barriers.</td>
+            <td>Creates administrative burden, delayed care, lower cash flow, physician frustration, and revenue-cycle pressure.</td>
+            <td>Prior authorization reform, prompt payment, insurer accountability, denial transparency, and network adequacy become major policy areas.</td>
+          </tr>
+          <tr>
+            <td>Supplies and drugs</td>
+            <td>Advocate reported $8.70 billion in supplies and drug expense in 2025.</td>
+            <td>Drug pricing, supply chain volatility, tariffs, and medical-device costs affect operating expenses.</td>
+            <td>340B, pharmacy policy, PBM regulation, drug-pricing transparency, and supply-chain resilience matter to hospital economics.</td>
+          </tr>
+          <tr>
+            <td>Capital reinvestment</td>
+            <td>Advocate reported $2.45 billion in capital expenditures in 2025.</td>
+            <td>Facilities, digital systems, equipment, service-line modernization, cybersecurity, and ambulatory expansion require capital.</td>
+            <td>Payment adequacy and regulatory flexibility affect whether hospitals can invest in future care models.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          Issues like prior authorization, claim denials, payment delays, network adequacy, and insurer
-          accountability can become legislative and regulatory priorities.
-        </p>
-      </div>
+    <div class="section">
+      <h2>Utility Industry vs. Health System: Similarities</h2>
 
-      <div class="issue-card">
-        <h3>4. Access to Care</h3>
-        <p>
-          Hospital systems must maintain access across emergency care, specialty care, behavioral health,
-          rural access, maternal health, primary care, and other services. Some services are essential but
-          financially difficult to sustain.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Similarity</th>
+            <th>Utility industry</th>
+            <th>Hospital / health system</th>
+            <th>Why it matters for government affairs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Essential service</td>
+            <td>Electric and gas service are basic infrastructure needs.</td>
+            <td>Hospital care, emergency care, and specialty care are basic health and community needs.</td>
+            <td>Both industries must explain reliability, access, affordability, and public value.</td>
+          </tr>
+          <tr>
+            <td>High regulation</td>
+            <td>Utilities are regulated by commissions, legislatures, environmental agencies, FERC, RTOs, and reliability rules.</td>
+            <td>Hospitals are regulated by CMS, state health agencies, Medicaid agencies, insurance regulators, licensing boards, accreditation bodies, and legislatures.</td>
+            <td>Both require constant translation between technical operations and public policy.</td>
+          </tr>
+          <tr>
+            <td>Capital intensity</td>
+            <td>EEI says member companies will invest nearly $1.4 trillion over the next five years, including a record $239 billion this year.</td>
+            <td>Hospitals invest heavily in facilities, medical technology, digital systems, cybersecurity, ambulatory sites, and specialized service lines.</td>
+            <td>Policy decisions shape whether long-term investment is financially sustainable.</td>
+          </tr>
+          <tr>
+            <td>Public scrutiny</td>
+            <td>Rate increases, outages, safety, affordability, clean energy, and infrastructure decisions attract political scrutiny.</td>
+            <td>Hospital prices, staffing, access, medical debt, charity care, service closures, and nonprofit status attract political scrutiny.</td>
+            <td>Government affairs must manage reputation, stakeholder expectations, and legislative risk.</td>
+          </tr>
+          <tr>
+            <td>Complex stakeholders</td>
+            <td>Customers, regulators, legislators, large-load customers, labor, environmental groups, consumer advocates, and municipalities.</td>
+            <td>Patients, payers, employers, physicians, nurses, unions, regulators, legislators, community groups, universities, and local governments.</td>
+            <td>Both require coalition-building and disciplined stakeholder mapping.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          Legislators care deeply about whether their communities have access to hospitals, emergency rooms,
-          mental health services, maternity care, and specialists.
-        </p>
-      </div>
+    <div class="section">
+      <h2>Utility Industry vs. Health System: Key Differences</h2>
 
-      <div class="issue-card">
-        <h3>5. Care Model Transformation</h3>
-        <p>
-          Health care is shifting from only hospital-based care to more outpatient care, virtual care,
-          home-based care, digital tools, and coordinated care models.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Difference</th>
+            <th>Utility industry</th>
+            <th>Hospital / health system</th>
+            <th>Plain-language meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Revenue model</td>
+            <td>Regulated utilities generally recover approved costs through rates, subject to commission approval.</td>
+            <td>Hospitals are paid through Medicare, Medicaid, commercial insurance, patient payments, 340B, grants, and supplemental programs.</td>
+            <td>Utilities have a more structured recovery model. Hospitals have a fragmented payer model.</td>
+          </tr>
+          <tr>
+            <td>Payment certainty</td>
+            <td>Rates and tariffs are approved before billing.</td>
+            <td>Hospitals often provide care first and then face payer review, denial, delay, or underpayment.</td>
+            <td>Hospitals face more uncertainty after the service is delivered.</td>
+          </tr>
+          <tr>
+            <td>Service variability</td>
+            <td>A kilowatt-hour or therm is relatively standardized.</td>
+            <td>Patient care varies by diagnosis, acuity, insurance status, complications, social needs, and clinical complexity.</td>
+            <td>Health care is operationally less predictable than utility service.</td>
+          </tr>
+          <tr>
+            <td>Regulatory center of gravity</td>
+            <td>Utilities often have a central state utility commission plus federal and environmental overlays.</td>
+            <td>Hospitals deal with many regulators and payers at the same time.</td>
+            <td>There is no single health care equivalent of a rate case that solves the revenue model.</td>
+          </tr>
+          <tr>
+            <td>Affordability politics</td>
+            <td>Affordability debates focus on customer bills, rates, energy burden, and cost allocation.</td>
+            <td>Affordability debates focus on premiums, deductibles, out-of-pocket costs, medical debt, hospital prices, and insurer behavior.</td>
+            <td>Both face affordability pressure, but health care affordability is spread across many payment channels.</td>
+          </tr>
+          <tr>
+            <td>Public emotion</td>
+            <td>Reliability and affordability are deeply important, but the service is usually standardized.</td>
+            <td>Hospital care often occurs during moments of fear, pain, vulnerability, and family crisis.</td>
+            <td>Health policy becomes personal and emotional very quickly.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          New care models often depend on reimbursement rules, telehealth policy, licensure, data-sharing,
-          privacy rules, and agency approval.
-        </p>
-      </div>
+    <div class="section">
+      <h2>Utility-to-Healthcare Translation Framework</h2>
 
-      <div class="issue-card">
-        <h3>6. Public Trust and Reputation</h3>
-        <p>
-          Hospitals are nonprofit mission-driven institutions, but they are also large businesses. The public
-          expects them to provide care, protect vulnerable patients, invest in communities, and act fairly on
-          billing and collections.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Utility concept</th>
+            <th>Healthcare equivalent</th>
+            <th>How to think about it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reliability</td>
+            <td>Access to care</td>
+            <td>Can people get the care they need, when and where they need it?</td>
+          </tr>
+          <tr>
+            <td>Rate recovery</td>
+            <td>Reimbursement adequacy</td>
+            <td>Can the system recover the cost of delivering essential services?</td>
+          </tr>
+          <tr>
+            <td>Rate case</td>
+            <td>Medicare, Medicaid, payer negotiation, supplemental payments, and policy advocacy</td>
+            <td>Health care cost recovery is fragmented across many payers and programs.</td>
+          </tr>
+          <tr>
+            <td>Grid modernization</td>
+            <td>Care model transformation</td>
+            <td>Virtual care, hospital-at-home, AI, outpatient care, interoperability, and home-based care are the health system modernization agenda.</td>
+          </tr>
+          <tr>
+            <td>Large-load growth</td>
+            <td>Patient demand, service-line growth, ED volume, and specialty access</td>
+            <td>Demand growth creates capacity, workforce, capital, and access pressure.</td>
+          </tr>
+          <tr>
+            <td>Customer affordability</td>
+            <td>Patient affordability and medical debt</td>
+            <td>The affordability debate includes premiums, deductibles, out-of-pocket costs, billing practices, and payer behavior.</td>
+          </tr>
+          <tr>
+            <td>Regulatory lag</td>
+            <td>Payment lag, claim denial risk, and reimbursement shortfall</td>
+            <td>Hospitals may deliver care today and fight for payment later.</td>
+          </tr>
+          <tr>
+            <td>Energy equity</td>
+            <td>Health equity and community benefit</td>
+            <td>Both sectors must explain how they serve vulnerable communities and improve access.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <p>
-          <strong>Why it matters for government affairs:</strong>
-          Issues such as charity care, medical debt, community benefit, tax exemption, health equity, and
-          service reductions can quickly become political and reputational issues.
-        </p>
+    <div class="section">
+      <h2>Federal Issue Watchlist</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Federal issue</th>
+            <th>Current concern</th>
+            <th>Why it matters to Advocate / hospital systems</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>H.R. 1 / Medicaid reductions and coverage loss</td>
+            <td>Hospital associations warn that Medicaid reductions and coverage losses will reduce access and strain hospital resources.</td>
+            <td>More uninsured or underinsured patients can mean more uncompensated care, emergency department pressure, and weaker hospital finances.</td>
+          </tr>
+          <tr>
+            <td>Medicaid state-directed payments and provider taxes</td>
+            <td>Federal policy changes can affect how states finance Medicaid and how supplemental hospital payments flow.</td>
+            <td>Medicaid financing is not just insurance policy. It is a core hospital revenue and access issue.</td>
+          </tr>
+          <tr>
+            <td>Site-neutral payment policy</td>
+            <td>Hospital advocates argue that site-neutral cuts ignore the standby capacity, complexity, and regulatory requirements of hospital outpatient departments.</td>
+            <td>Could reduce outpatient reimbursement and weaken the economics of hospital-based ambulatory care.</td>
+          </tr>
+          <tr>
+            <td>340B drug pricing</td>
+            <td>Hospitals oppose policies that move 340B from upfront discounts to backend rebates or restrict contract pharmacy access.</td>
+            <td>340B is tied to medication access, safety-net support, pharmacy economics, and community programs.</td>
+          </tr>
+          <tr>
+            <td>Prior authorization / Medicare Advantage</td>
+            <td>The Improving Seniors’ Timely Access to Care Act, H.R. 3514 / S. 1816, would modernize and standardize Medicare Advantage prior authorization.</td>
+            <td>Prior authorization affects care delays, administrative burden, physician frustration, revenue cycle, and patient access.</td>
+          </tr>
+          <tr>
+            <td>Price transparency and nonprofit reporting</td>
+            <td>Congress and CMS continue to focus on price transparency, affordability, and hospital reporting.</td>
+            <td>Transparency policy affects compliance burden, payer negotiations, public narrative, and nonprofit legitimacy.</td>
+          </tr>
+          <tr>
+            <td>Rural health funding</td>
+            <td>Rural Health Transformation Program funding and rural hospital support remain major federal issues.</td>
+            <td>Rural access is especially relevant to Atrium markets in the Carolinas, Georgia, and Alabama.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>State Issue Watchlist Across Advocate’s Service States</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Issues to track</th>
+            <th>Specific bills / policy areas</th>
+            <th>Business impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Illinois</td>
+            <td>340B, Medicaid financing, payer practices, Medicaid managed care, hospital assessment, drug pricing, transparency.</td>
+            <td>HB 2371 creates the Patient Access to Pharmacy Protection Act and protects 340B contract pharmacy access; 340B transparency and audit proposals remain politically important.</td>
+            <td>Illinois is core Advocate territory. 340B and Medicaid issues affect access, pharmacy economics, safety-net support, and public narrative.</td>
+          </tr>
+          <tr>
+            <td>Wisconsin</td>
+            <td>Prior authorization, AI in coverage denials, payer practices, 340B/PBM issues, nurse staffing, workforce pressure.</td>
+            <td>SB 1066 addresses the use of AI to deny prior authorization; AB 432 / SB 434 address prior authorization transparency and regulation.</td>
+            <td>Wisconsin is a payer-friction and workforce state for Aurora operations.</td>
+          </tr>
+          <tr>
+            <td>North Carolina</td>
+            <td>Prior authorization, utilization review, Certificate of Need, hospital pricing, facility fees, medical debt, Medicaid state-directed payments.</td>
+            <td>HB 434 / Lower Healthcare Costs includes hospital, insurance, transparency, and utilization-review issues; SB 370 would repeal Certificate of Need laws.</td>
+            <td>North Carolina is central to Atrium. CON and prior authorization affect growth, access, payer behavior, and competitive dynamics.</td>
+          </tr>
+          <tr>
+            <td>South Carolina</td>
+            <td>Workforce protection, tort reform, Medicaid budget stability, allied health workforce, trauma funding, emergency preparedness, 340B/PBM, telehealth.</td>
+            <td>SCHA priorities include worker assault protections, tort reform, SCWINS / CHE nursing / allied health funding, trauma funding, Medicaid funding, telehealth access, and emergency preparedness.</td>
+            <td>South Carolina connects workforce safety, liability cost, Medicaid stability, emergency readiness, and access.</td>
+          </tr>
+          <tr>
+            <td>Georgia</td>
+            <td>Behavioral health, rural hospitals, workforce, CON, licensure, 340B, payer denials, AI in prior authorization, Medicaid waivers.</td>
+            <td>GHA priorities include behavioral health access, rural hospital viability, workforce growth, and access to quality care; SB 444 addresses AI and prior authorization decisions.</td>
+            <td>Georgia is a broad hospital-policy state where workforce, rural access, payer practices, Medicaid financing, and pharmacy issues converge.</td>
+          </tr>
+          <tr>
+            <td>Alabama</td>
+            <td>Rural hospital viability, rural tax credit, Certificate of Need, Medicaid, prior authorization, rural access.</td>
+            <td>The Rural Hospital Investment Program provides a dollar-for-dollar state tax credit for qualifying rural hospital donations; SB 82 proposed removing CON requirements for new or expanded rural health facilities and services.</td>
+            <td>Alabama policy centers on rural access, hospital sustainability, Medicaid exposure, and regulatory flexibility.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="source-note">
+        Source notes: ILGA/IHA, Wisconsin Legislature, North Carolina General Assembly, SCHA, GHA, Alabama Hospital Association, Alabama Department of Revenue.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>How Policy Hits the Business</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Policy issue</th>
+            <th>Revenue impact</th>
+            <th>Cost impact</th>
+            <th>Access impact</th>
+            <th>Reputation / political impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Medicaid cuts</td>
+            <td>Lower reimbursement; more uncompensated care.</td>
+            <td>More pressure on emergency and safety-net services.</td>
+            <td>Could reduce access for vulnerable patients.</td>
+            <td>High political sensitivity because Medicaid affects low-income populations, children, seniors, and people with disabilities.</td>
+          </tr>
+          <tr>
+            <td>Prior authorization</td>
+            <td>Delays payment; increases denials and appeals.</td>
+            <td>Adds administrative cost and clinician burden.</td>
+            <td>Can delay care and discharge planning.</td>
+            <td>Hospitals can frame this as patient access and insurer accountability.</td>
+          </tr>
+          <tr>
+            <td>340B restrictions</td>
+            <td>Reduces pharmacy-related support for safety-net services.</td>
+            <td>May limit ability to subsidize community programs.</td>
+            <td>Could affect medication access for vulnerable patients.</td>
+            <td>Politically contested between hospitals, drug manufacturers, employers, and policymakers.</td>
+          </tr>
+          <tr>
+            <td>Workforce mandates</td>
+            <td>No direct revenue increase unless funded.</td>
+            <td>Can materially increase labor expense.</td>
+            <td>May improve staffing if well designed, but may strain operations if unfunded.</td>
+            <td>Strong public concern around nurse staffing, workplace safety, and care quality.</td>
+          </tr>
+          <tr>
+            <td>Site-neutral payment</td>
+            <td>Reduces hospital outpatient reimbursement.</td>
+            <td>Does not necessarily reduce standby, compliance, or facility costs.</td>
+            <td>Could pressure outpatient services, especially in underserved areas.</td>
+            <td>Hospitals must explain why hospital outpatient departments are structurally different.</td>
+          </tr>
+          <tr>
+            <td>Medical debt / charity care</td>
+            <td>Could reduce collections.</td>
+            <td>Increases financial assistance obligations.</td>
+            <td>Protects vulnerable patients from financial harm.</td>
+            <td>Central to nonprofit legitimacy and public trust.</td>
+          </tr>
+          <tr>
+            <td>Certificate of Need reform</td>
+            <td>Can change market share and growth strategy.</td>
+            <td>May increase capital competition.</td>
+            <td>Could expand access or destabilize existing providers depending on market.</td>
+            <td>Politically framed as competition and access versus system stability and planning.</td>
+          </tr>
+          <tr>
+            <td>AI in coverage decisions</td>
+            <td>Could affect denial patterns and appeal volumes.</td>
+            <td>May increase administrative burden if poorly governed.</td>
+            <td>Could delay or restrict care if automated decisions are used aggressively.</td>
+            <td>High public sensitivity because patients distrust opaque denial processes.</td>
+          </tr>
+          <tr>
+            <td>Cybersecurity and privacy</td>
+            <td>Ransomware and breaches can interrupt billing and operations.</td>
+            <td>Requires major investment in IT, compliance, and response capability.</td>
+            <td>Can disrupt care delivery and patient safety.</td>
+            <td>High reputational risk because trust is central to health care.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Interview-Ready Positioning</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Likely interview question</th>
+            <th>Strong answer angle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Why health care from utilities?</td>
+            <td>Both are essential-service, regulated, politically visible sectors. I understand how to translate operational complexity into policy strategy.</td>
+          </tr>
+          <tr>
+            <td>What is different about health care?</td>
+            <td>The payment model is more fragmented. Hospitals provide care first and then navigate Medicare, Medicaid, commercial payers, denials, prior authorization, and uncompensated care.</td>
+          </tr>
+          <tr>
+            <td>What would you need to learn quickly?</td>
+            <td>Reimbursement mechanics, Medicaid financing, Medicare Advantage, 340B, payer behavior, hospital finance, and state-specific hospital association priorities.</td>
+          </tr>
+          <tr>
+            <td>What value do you bring immediately?</td>
+            <td>Government affairs operations, issue tracking, executive briefing, matrix coordination, coalition management, AI-enabled synthesis, and disciplined multi-state legislative execution.</td>
+          </tr>
+          <tr>
+            <td>What is the role really about?</td>
+            <td>Building the operating system behind the government affairs function so the team can execute consistently across states, issues, budgets, briefings, and leadership needs.</td>
+          </tr>
+          <tr>
+            <td>How do you think about policy impact?</td>
+            <td>I would ask: how does this issue affect revenue, cost, access, workforce, payer behavior, capital planning, community trust, and executive risk?</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="plain-box">
+        <strong>Positioning statement:</strong>
+        My utility background transfers because I understand essential-service regulation, public trust, stakeholder
+        alignment, legislative strategy, infrastructure pressure, affordability politics, and the operational consequences
+        of policy decisions. The learning curve is not how to work in a regulated sector. The learning curve is the
+        health care payment model: Medicare, Medicaid, commercial payers, uncompensated care, prior authorization,
+        claim denials, and how reimbursement shapes hospital strategy.
       </div>
     </div>
 
     <div class="section">
-      <h2>How Legislative and Regulatory Issues Affect the Business</h2>
+      <h2>Learning Questions to Keep Building</h2>
 
-      <div class="issue-card">
-        <h3>Revenue</h3>
-        <p>
-          Laws and regulations affect how hospitals are paid. Medicaid rates, Medicare policy, commercial
-          insurance rules, 340B drug pricing, and state-directed payments all influence revenue.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Cost</h3>
-        <p>
-          Policy can raise or lower costs. Staffing requirements, wage laws, workplace safety mandates,
-          reporting rules, cybersecurity requirements, and compliance obligations all affect expenses.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Capacity</h3>
-        <p>
-          Policy affects whether hospitals can expand, maintain, or redesign services. Facility approvals,
-          bed rules, emergency department obligations, and workforce rules all influence capacity.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Strategy</h3>
-        <p>
-          Policy shapes long-term strategy. Telehealth, hospital-at-home, AI, behavioral health, rural health,
-          academic medicine, and outpatient care all require the right policy environment.
-        </p>
-      </div>
-
-      <div class="issue-card">
-        <h3>Reputation</h3>
-        <p>
-          Hospitals are judged not only by financial performance, but also by how they serve communities.
-          Legislators and regulators pay attention to access, affordability, billing practices, equity, and
-          community benefit.
-        </p>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>Learning Questions</h2>
       <ul>
-        <li>How does Advocate make money, and where is the financial pressure greatest?</li>
-        <li>How much of the system's business is affected by Medicare, Medicaid, and commercial insurance?</li>
-        <li>Which legislative issues most directly affect hospital revenue?</li>
-        <li>Which legislative issues most directly affect hospital cost?</li>
-        <li>How do Medicaid cuts affect access, staffing, and uncompensated care?</li>
+        <li>What share of Advocate’s revenue is tied to Medicare, Medicaid, commercial insurance, and self-pay?</li>
+        <li>Which Illinois legislative issues most directly affect hospital reimbursement?</li>
+        <li>How do Medicaid cuts move through the system and affect access, staffing, and service lines?</li>
         <li>How do prior authorization and claim denials affect hospital operations?</li>
-        <li>How does workforce policy affect care delivery?</li>
-        <li>How does a large system balance mission, margin, public trust, and political visibility?</li>
+        <li>How does workforce policy affect cost, access, quality, and retention?</li>
+        <li>How does Advocate explain its community benefit and nonprofit mission to policymakers?</li>
+        <li>Where are hospitals most politically vulnerable: prices, medical debt, closures, labor, equity, payer disputes, or nonprofit tax status?</li>
+        <li>What is the health care equivalent of utility reliability, affordability, and infrastructure investment?</li>
+        <li>How should a multi-state government affairs team track federal, state, and local developments consistently?</li>
+        <li>What dashboard or reporting cadence would help the CGAO and executive leadership see policy risk clearly?</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2>Interview Framing</h2>
-
-      <div class="plain-box">
-        <strong>Plain-language positioning:</strong>
-        Health system government affairs is about protecting the ability of the organization to deliver care.
-        That means understanding how policy affects revenue, cost, workforce, access, operations, and public trust.
-      </div>
+      <h2>Source Notes</h2>
 
       <p>
-        A strong government affairs leader should not only know the politics. The leader should understand
-        the operating reality behind the politics. The value is in translating complex health system problems
-        into clear policy priorities, executive briefings, stakeholder strategies, and legislative action.
+        This page should be updated periodically because legislative status, financial disclosures, and executive
+        leadership information can change.
       </p>
-    </div>
 
-    <div class="section">
-      <h2>Source Notes to Keep Updating</h2>
       <ul>
-        <li>Advocate Health public reports and year-in-review materials</li>
-        <li>Advocate Health investor and financial disclosure materials</li>
-        <li>Illinois Health and Hospital Association policy updates</li>
-        <li>American Hospital Association cost and workforce reports</li>
-        <li>Illinois legislative activity affecting Medicaid, hospitals, workforce, 340B, insurance, and access</li>
-        <li>Federal policy updates from CMS, HHS, and Congress</li>
+        <li><a href="https://www.advocatehealth.org/investor-relations" target="_blank" rel="noopener">Advocate Health Investor Relations</a></li>
+        <li><a href="https://2025yir.advocatehealth.org/" target="_blank" rel="noopener">Advocate Health 2025 Year in Review</a></li>
+        <li><a href="https://www.advocatehealth.org/about/leadership" target="_blank" rel="noopener">Advocate Health Leadership</a></li>
+        <li><a href="https://careers.aah.org/job/23193521/vice-president-government-affairs-operations-oak-brook-il/" target="_blank" rel="noopener">Advocate VP Government Affairs &amp; Operations Posting</a></li>
+        <li><a href="https://www.cms.gov/data-research/statistics-trends-and-reports/national-health-expenditure-data/nhe-fact-sheet" target="_blank" rel="noopener">CMS National Health Expenditure Fact Sheet</a></li>
+        <li><a href="https://www.aha.org/guides-and-reports/2026-03-09-2025-cost-caring-report" target="_blank" rel="noopener">American Hospital Association Cost of Caring Report</a></li>
+        <li><a href="https://www.aha.org/action-alert/2026-04-17-american-hospital-association-2026-advocacy-messages" target="_blank" rel="noopener">AHA 2026 Advocacy Messages</a></li>
+        <li><a href="https://www.team-iha.org/news/economic-impact-2026/" target="_blank" rel="noopener">Illinois Health and Hospital Association Economic Impact Report</a></li>
+        <li><a href="https://www.eei.org/en/resources-and-media/industry-facts" target="_blank" rel="noopener">Edison Electric Institute Industry Facts</a></li>
+        <li><a href="https://www.ilga.gov/" target="_blank" rel="noopener">Illinois General Assembly</a></li>
+        <li><a href="https://docs.legis.wisconsin.gov/" target="_blank" rel="noopener">Wisconsin Legislature</a></li>
+        <li><a href="https://www.ncleg.gov/" target="_blank" rel="noopener">North Carolina General Assembly</a></li>
+        <li><a href="https://scha.org/" target="_blank" rel="noopener">South Carolina Hospital Association</a></li>
+        <li><a href="https://www.gha.org/Advocacy/Government-Relations/2026-Legislative-Priorities" target="_blank" rel="noopener">Georgia Hospital Association Legislative Priorities</a></li>
+        <li><a href="https://www.alaha.org/" target="_blank" rel="noopener">Alabama Hospital Association</a></li>
       </ul>
     </div>
 
