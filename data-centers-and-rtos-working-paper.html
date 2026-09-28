@@ -1,0 +1,980 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Data Centers and the Regional Grid | Broderick Learning Hub</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#f4f6f8;color:#243142;font:17px/1.75 system-ui,-apple-system,sans-serif}header{background:#173749;color:white;padding:40px max(24px,calc((100% - 1140px)/2))}header a{color:#c4e8ff}h1{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.2}h2,h3,h4{line-height:1.35;color:#173749;margin-top:2.5rem}header h1{color:white}a{color:#075b8d;text-underline-offset:3px}.layout{max-width:1200px;margin:32px auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:32px;padding:0 24px}nav{position:sticky;top:20px;max-height:90vh;overflow:auto;font-size:14px;align-self:start}nav ol{padding-left:20px}nav li{margin:8px 0}article{background:white;padding:36px;border-radius:12px;min-width:0}p{margin:1em 0}.table-wrap{overflow-x:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:15px}td,th{border:1px solid #ccd7dd;padding:12px;vertical-align:top;min-width:100px}tr:first-child{background:#eaf1f5;font-weight:600}td p{margin:0 0 .5em}.source{font-size:14px;color:#54616c}.script{border-left:4px solid #39818e;background:#f0f7f7;padding:16px}.subtitle{font-size:1.2rem;color:#536777}.top{display:block;margin-top:48px}@media(max-width:800px){.layout{display:block;padding:0 14px}nav{position:static;max-height:240px;margin-bottom:24px}article{padding:22px}header{padding:28px 22px}}@media print{nav,header a,.top{display:none}.layout{display:block}body,article{background:white}article{padding:0}table{font-size:10pt}h2,h3{break-after:avoid}}</style></head><body id="top"><header><a href="index.html">← Learning Hub</a> · <a href="reports.html#ameren-learning">All energy guides</a><h1>Data Centers and the Regional Grid</h1><p>Working paper — PJM and MISO</p></header><main class="layout"><nav aria-label="On this page"><strong>On this page</strong><ol><li><a href="#skey-conclusions">Key conclusions</a></li><li><a href="#spjm-market-and-customer-impacts">PJM market and customer impacts</a></li><li><a href="#stransition-and-grandfathering">Transition and grandfathering</a></li><li><a href="#ssudden-load-loss">7.1 Sudden load loss</a></li><li><a href="#sride-through-and-protection-coordination">7.2 Ride-through and protection coordination</a></li><li><a href="#sramping-and-restoration">7.3 Ramping and restoration</a></li><li><a href="#sload-forecasting">7.4 Load forecasting</a></li><li><a href="#spower-quality-and-stability">7.5 Power quality and stability</a></li><li><a href="#sa-sound-large-load-tariff-is-a-risk-allocation-framework">A sound large-load tariff is a risk-allocation framework</a></li><li><a href="#smessages-that-are-credible-in-a-legislative-room">Messages that are credible in a legislative room</a></li></ol></nav><article><p><strong>WORKING PAPER</strong></p>
+<p>Data Centers and the Regional Grid</p>
+<p>How large computational loads are reshaping RTO planning, reliability, markets, and cost allocation, with a focus on PJM and MISO</p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Core question</strong> How can the grid connect economically valuable large loads at data-center speed without transferring reliability risk, stranded investment, or avoidable costs to existing customers?</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p><strong>Prepared for Broderick T. Coats<br />
+</strong>Government Relations working document<br />
+As of September 14, 2026</p>
+<p>Internal working paper. Regulatory filings described as “proposed” remain subject to FERC action. Company positions should be confirmed through legal, regulatory, transmission, operations, economic development, and leadership review before external use.</p>
+<h1 id="sexecutive-orientation">Executive Orientation</h1>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Bottom line</strong> Data centers are not simply another category of load growth. Their size, concentration, speed to market, power-electronic behavior, operating profile, and ability to move between grid power and backup systems can affect nearly every RTO function at once. PJM is responding primarily through resource-adequacy and emergency-curtailment constructs. MISO is building a broader integration framework around interconnection performance, visibility, forecasting, ramping, ride-through, flexible service, and coordinated generation-load studies.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>The public debate often collapses several separate problems into one. An RTO can have enough annual energy but not enough accredited capacity, enough capacity regionally but insufficient deliverability to a load pocket, adequate facilities for normal operation but inadequate disturbance performance, or enough physical capability but no fair method for assigning costs and default risk. A credible working position separates these issues before prescribing a solution.</p>
+<ul>
+<li><p>PJM’s immediate pressure is resource adequacy. PJM says 30 GW of its 32 GW forecast demand growth from 2024 to 2030 is attributable to data centers. Its August 13, 2026 proposal would create an Interim Resource Adequacy Service, a Large Load Registry, and a pathway for loads that bring new capacity; unsupported new load could be reduced before traditional customers during severe shortages.</p></li>
+<li><p>MISO’s immediate filing is more technical and operational. Its August 28, 2026 proposal distinguishes large loads from computational loads and sets expectations for data, models, telemetry, forecasts, ramping, disturbance ride-through, and ongoing coordination. MISO is separately developing flexible transmission service and a process to study load and associated generation together.</p></li>
+<li><p>FERC’s June 18, 2026 show-cause orders made large-load integration a national tariff issue. FERC rejected a one-size-fits-all national design, but required each jurisdictional RTO/ISO to justify or reform its rules around service, studies, ongoing operations, co-location, cost shifting, and transition treatment.</p></li>
+<li><p>NERC is moving toward direct reliability obligations for computational loads, including proposed entity registration and foundational standards for interconnection studies and modeling, operating data and communications, protection coordination, and disturbance monitoring.</p></li>
+<li><p>For Illinois, the distinction between PJM and MISO matters. ComEd is exposed to PJM’s tighter capacity position and concentrated data-center forecast. Ameren Illinois sits in MISO LRZ 4, where near-term load growth is more moderate, but regional adequacy, transmission headroom, project timing, and operational standards still shape the feasibility and cost of large-load growth.</p></li>
+</ul>
+<h2 id="skey-conclusions">Key conclusions</h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Finding</strong></th>
+<th><strong>Why it matters for policy and utility strategy</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Speed mismatch is structural</td>
+<td>A data center may seek service in roughly 18 to 36 months, while new generation and major transmission commonly require much longer. The policy question is how to bridge the gap without socializing the risk.</td>
+</tr>
+<tr class="even">
+<td>The queue is not the forecast</td>
+<td>Requests may be duplicated, phased, downsized, delayed, or canceled. Forecasts need readiness milestones, financial commitments, site control, executable ramp schedules, and regular reconciliation.</td>
+</tr>
+<tr class="odd">
+<td>A megawatt of load is not operationally neutral</td>
+<td>Rapid ramps or mass transfer to backup power can create frequency and voltage events similar in scale to the loss or sudden addition of a large generator.</td>
+</tr>
+<tr class="even">
+<td>Capacity and transmission are different problems</td>
+<td>Bringing generation does not by itself establish deliverability, and paying for a substation does not by itself establish regional resource adequacy.</td>
+</tr>
+<tr class="odd">
+<td>Curtailability must be real</td>
+<td>A label is insufficient. Operators need dispatchability, communications, telemetry, testing, enforceable performance, defined restoration, and clarity about compensation and penalties.</td>
+</tr>
+<tr class="even">
+<td>Cost protection must survive failure</td>
+<td>The strongest framework addresses deposits, minimum bills, ramp commitments, cancellation, downsizing, insolvency, stranded facilities, shared upgrades, and counterparty default.</td>
+</tr>
+<tr class="odd">
+<td>Grid connection can create benefits</td>
+<td>High-load-factor customers can broaden the base over which fixed costs are recovered and support grid modernization, but those benefits depend on realized load, sound rate design, and protection against speculative obligations.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sscope-terms-and-the-rto-role">1. Scope, Terms, and the RTO Role</h1>
+<p>This paper focuses on bulk-power-system and wholesale-market consequences. Distribution design, local siting, water, air permits, tax incentives, land use, and community benefit remain important but are addressed only where they intersect with RTO or utility planning.</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Term</strong></th>
+<th><strong>Working definition / distinction</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RTO/ISO</td>
+<td>A regional entity that operates the high-voltage grid, administers wholesale markets, coordinates resource adequacy, and plans regional transmission under FERC-approved rules.</td>
+</tr>
+<tr class="even">
+<td>Large load</td>
+<td>A very large end-use customer or site. Current PJM and MISO proposals use a 50 MW threshold in specified circumstances, but exact applicability differs by tariff.</td>
+</tr>
+<tr class="odd">
+<td>Computational load</td>
+<td>MISO’s proposed subset of large load with at least 25 MW of demand from IT equipment such as servers, storage, and networking hardware.</td>
+</tr>
+<tr class="even">
+<td>Resource adequacy</td>
+<td>Whether enough accredited supply and demand-side capability exist to meet demand under a defined reliability standard.</td>
+</tr>
+<tr class="odd">
+<td>Deliverability</td>
+<td>Whether the transmission network can move capacity or energy to the location where it is needed under studied conditions.</td>
+</tr>
+<tr class="even">
+<td>Ride-through</td>
+<td>The capability to remain connected, or behave in a controlled manner, through specified voltage or frequency disturbances.</td>
+</tr>
+<tr class="odd">
+<td>Ramp rate</td>
+<td>How quickly load increases or decreases, generally measured in MW per unit of time.</td>
+</tr>
+<tr class="even">
+<td>Firm service</td>
+<td>Transmission service supported by the network capability and upgrades required under the applicable tariff.</td>
+</tr>
+<tr class="odd">
+<td>Flexible / non-firm service</td>
+<td>Earlier or conditional service in exchange for curtailment or limitations under defined reliability conditions.</td>
+</tr>
+<tr class="even">
+<td>BYONC / bring your own new capacity</td>
+<td>PJM concept under which new large loads support their demand with qualifying new capacity rather than relying on an already-tight regional pool.</td>
+</tr>
+<tr class="odd">
+<td>Co-location</td>
+<td>A load located with or behind a generating facility, raising questions about transmission service, network withdrawals, reliability responsibility, and treatment of generation exports.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="swhy-the-issue-accelerated">2. Why the Issue Accelerated</h1>
+<p>National demand had been comparatively flat for years, encouraging planners and markets to optimize around modest growth. AI, cloud computing, advanced manufacturing, electrification, and reshoring changed the scale and concentration of requests. The U.S. Department of Energy reported that data centers used about 4.4% of U.S. electricity in 2023 and projected 6.7% to 12% by 2028. Berkeley Lab’s 2025 update estimates a wider 2030 range of 9.5% to 15.3%, illustrating how quickly the outlook is changing and why scenario planning is essential.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Pressure</strong></th>
+<th><strong>RTO consequence</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scale</td>
+<td>A campus can reach hundreds of MW or gigawatt scale, making one customer material to zonal planning.</td>
+</tr>
+<tr class="even">
+<td>Concentration</td>
+<td>Clusters can exhaust local substation, transmission, gas-pipeline, or capacity headroom faster than regional averages reveal.</td>
+</tr>
+<tr class="odd">
+<td>Speed</td>
+<td>Commercial schedules can be faster than study, permitting, generation procurement, or transmission construction.</td>
+</tr>
+<tr class="even">
+<td>Uncertain realization</td>
+<td>Multiple developers may seek the same limited headroom. Announced demand can materially exceed contracted and energized demand.</td>
+</tr>
+<tr class="odd">
+<td>Power electronics</td>
+<td>UPS systems, variable-speed drives, power supplies, batteries, and transfer schemes can create behavior unlike traditional industrial loads.</td>
+</tr>
+<tr class="even">
+<td>Backup transition</td>
+<td>Facilities may rapidly drop grid load or transfer to backup generation during disturbances, creating a sudden system imbalance.</td>
+</tr>
+<tr class="odd">
+<td>High load factor</td>
+<td>Steady operation can improve utilization and revenue, but also adds substantial annual energy and fuel requirements.</td>
+</tr>
+<tr class="even">
+<td>Economic-development competition</td>
+<td>States and localities may promise speed or incentives before RTO and utility studies establish full cost and timing.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sthe-impact-pathways-how-data-centers-reach-the-rto">3. The Impact Pathways: How Data Centers Reach the RTO</h1>
+<p><strong>1. Forecasting.</strong> Utility requests enter zonal and RTO demand forecasts. If readiness is overstated, capacity and transmission may be procured too early or in excess. If understated, the system may lack resources or upgrades when the load arrives.</p>
+<p><strong>2. Resource adequacy.</strong> Forecast peak demand, reserve margin, accreditation, retirements, and new entry determine whether enough capacity exists. Large-load additions can increase the reliability requirement before supply can respond.</p>
+<p><strong>3. Transmission planning.</strong> Studies determine network upgrades, deliverability, voltage support, stability, and local reliability needs. A physically nearby generator may not relieve the right constraint.</p>
+<p><strong>4. Operations.</strong> Operators need short-term forecasts, telemetry, communication, ramp limits, restoration protocols, and disturbance behavior to balance the system in real time.</p>
+<p><strong>5. Markets.</strong> Load growth affects energy, capacity, ancillary-service, congestion, and uplift outcomes. Scarcity signals can attract investment but also raise near-term customer costs.</p>
+<p><strong>6. Cost allocation.</strong> Tariffs decide who pays for customer-specific facilities, local upgrades, regional reinforcements, reserves, backstop supply, defaults, and stranded investment.</p>
+<p><strong>7. State-retail interface.</strong> State commissions and utilities control retail tariffs, line-extension policies, customer contracts, and curtailment priorities, while RTOs control regional reliability and wholesale rules. Poorly aligned authority creates gaps.</p>
+<p><strong>8. Interregional effects.</strong> PJM and MISO share seams and Illinois is divided between them. A short system cannot export surplus it does not have, and transfer limits can make nominal regional capacity unavailable to a zone.</p>
+<h1 id="spjm-capacity-pressure-and-the-iras-response">4. PJM: Capacity Pressure and the IRAS Response</h1>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>PJM’s defining problem</strong> Forecast data-center growth is arriving while recent capacity auctions have cleared short of the reliability requirement. PJM’s response therefore centers on connecting growth only with new capacity support or enforceable priority curtailment during shortage conditions.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>PJM’s August 13, 2026 filing proposes an Interim Resource Adequacy Service (IRAS) for new large loads that do not bring enough new capacity or receive qualifying backstop capacity. PJM would maintain a Large Load Registry, calculate the unsupported large-load obligation by area, and direct reductions during emergencies before traditional customers are interrupted. Retail implementation and customer-specific selection would remain with states and electric distributors.</p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 32%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>PJM element</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Open issue / risk</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>50 MW Large Load threshold</td>
+<td>Create a common trigger for registry and service treatment.</td>
+<td>Aggregation, one-mile/site rules, expansions, and projects below threshold with cumulative impact.</td>
+</tr>
+<tr class="even">
+<td>Large Load Registry</td>
+<td>Track size, location, in-service timing, backup capability, and other characteristics.</td>
+<td>Confidentiality, data quality, update frequency, and alignment with utility contracts.</td>
+</tr>
+<tr class="odd">
+<td>Bring Your Own New Capacity</td>
+<td>Match new demand with qualifying incremental capacity.</td>
+<td>Locational deliverability, accreditation, contract term, replacement supply, and counterparty default.</td>
+</tr>
+<tr class="even">
+<td>IRAS</td>
+<td>Allow connection without full capacity support but reduce unsupported demand during severe shortage.</td>
+<td>State authority, customer-specific enforceability, testing, restoration, compensation, and backup emissions.</td>
+</tr>
+<tr class="odd">
+<td>Reliability Backstop Procurement</td>
+<td>Procure supply for forecast capacity shortfalls beginning with the June 2027 framework.</td>
+<td>Who bears procurement and default risk, contract structure, and interaction with RPM.</td>
+</tr>
+<tr class="even">
+<td>Forecast treatment</td>
+<td>Exclude certain unmatched incremental large loads from future RPM demand until supported by supply.</td>
+<td>Avoiding under-procurement while preserving incentives for credible projects.</td>
+</tr>
+<tr class="odd">
+<td>Accelerated generation path</td>
+<td>Speed interconnection of state-sponsored or reliability-needed generation.</td>
+<td>Selection fairness, queue impacts, transmission readiness, and technology neutrality.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="spjm-market-and-customer-impacts">PJM market and customer impacts</h2>
+<p>The PJM Independent Market Monitor takes a more forceful view than PJM management. Its March 2026 State of the Market report attributes major recent capacity-market cost increases to existing and forecast data-center load and argues that new data centers should bring matched new generation or be fully curtailable. The report estimates that inclusion of existing and forecast data-center load increased combined capacity-market revenues across the 2025/2026, 2026/2027, and 2027/2028 auctions by about $23.1 billion. This is the IMM’s analysis and should be attributed as such, not presented as an uncontested PJM finding.</p>
+<ul>
+<li><p>Capacity: Higher forecast demand raises the reliability requirement and can move auctions up a steep demand curve when supply is tight.</p></li>
+<li><p>Energy: New high-load-factor demand increases dispatch and fuel use. Local constraints can raise congestion and marginal prices even when regional energy is available.</p></li>
+<li><p>Transmission: Northern Virginia demonstrates that concentrated load can drive both local and regional reinforcements. The IMM reports $1.4 billion of PJM baseline upgrades approved in the 2022 RTEP Window 3 for Data Center Alley reinforcements.</p></li>
+<li><p>Affordability: Existing customers can benefit from a broader load base, but only if incremental revenues exceed incremental system costs and the rate design protects against cancellation and default.</p></li>
+<li><p>Governance: IRAS deliberately depends on cooperation among PJM, states, utilities, LSEs, and customers. That federal-state interface is a design feature and a vulnerability.</p></li>
+</ul>
+<h1 id="smiso-interconnection-performance-and-a-three-part-integration-framework">5. MISO: Interconnection Performance and a Three-Part Integration Framework</h1>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>MISO’s defining problem</strong> Large loads are appearing across a broad footprint, often where the network was not designed for their scale. MISO is building a coordinated framework to connect quickly, transition with flexibility, and operate reliably over the long term.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>MISO filed proposed Large Load Interconnection Reliability Requirements with FERC on August 28, 2026. The proposal defines a large load as more than 50 MW under the filing’s criteria and creates a computational-load subset when at least 25 MW is attributable to IT equipment. The separate category is intended to target requirements to the distinctive behavior of large computing facilities.</p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 31%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>MISO requirement / initiative</strong></th>
+<th><strong>What it addresses</strong></th>
+<th><strong>Practical significance</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data and dynamic models</td>
+<td>Accurate representation of load composition, controls, protection, and responses.</td>
+<td>Allows steady-state, short-circuit, voltage, frequency, and stability studies to reflect actual equipment behavior.</td>
+</tr>
+<tr class="even">
+<td>Telemetry and PMU visibility</td>
+<td>Real-time and high-speed measurements.</td>
+<td>Helps operators observe load changes and diagnose disturbances.</td>
+</tr>
+<tr class="odd">
+<td>Operational forecasts</td>
+<td>Hourly and short-interval expected load.</td>
+<td>Improves unit commitment, dispatch, reserve sizing, and congestion management.</td>
+</tr>
+<tr class="even">
+<td>Ramping limitations</td>
+<td>Controls rapid increases or decreases in demand.</td>
+<td>Reduces abrupt energy imbalance and local voltage stress.</td>
+</tr>
+<tr class="odd">
+<td>Voltage and frequency ride-through</td>
+<td>Prevents mass disconnection for disturbances the system is expected to withstand.</td>
+<td>Avoids turning a cleared grid fault into a multi-gigawatt load-loss event.</td>
+</tr>
+<tr class="even">
+<td>Restoration / reload control</td>
+<td>Defines how quickly load returns after a disturbance.</td>
+<td>Prevents a second disturbance caused by simultaneous uncontrolled restoration.</td>
+</tr>
+<tr class="odd">
+<td>Flexible Large-load Interconnection and Transmission Service (FLITS)</td>
+<td>Conditional or non-firm service before all firm upgrades are complete.</td>
+<td>Could accelerate connection if the customer accepts enforceable reliability curtailment.</td>
+</tr>
+<tr class="even">
+<td>Load Addition Resource Study</td>
+<td>Studies large load and associated generation together.</td>
+<td>Reduces timing and assumption mismatches and may optimize network upgrades.</td>
+</tr>
+<tr class="odd">
+<td>EPR / ERAS</td>
+<td>Expedited review of transmission projects and qualifying generation.</td>
+<td>Addresses immediate timing needs while longer-term processes are redesigned.</td>
+</tr>
+<tr class="even">
+<td>Operations and reserve reforms</td>
+<td>Forecasting, down-regulation, network models, and new operating tools.</td>
+<td>Recognizes that sudden load loss may require downward generation response, not only traditional upward reserves.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stransition-and-grandfathering">Transition and grandfathering</h2>
+<p>The proposal generally avoids imposing the full new framework retroactively on loads already approved through MISO planning processes, while extending visibility requirements more broadly and preserving the ability to respond to demonstrated reliability problems. Public reporting describes roughly 30 GW of existing large-load service as largely grandfathered. The exact legal scope should be read from the filed tariff and any FERC order, not from news summaries.</p>
+<p>MISO requested an effective date of December 4, 2026 for the August filing. Separate responses on broader transmission service, cost shifting, and related large-load issues are due under the June show-cause schedule, including further work targeted for November 16, 2026.</p>
+<h1 id="spjm-and-miso-compared">6. PJM and MISO Compared</h1>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 39%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Dimension</strong></th>
+<th><strong>PJM</strong></th>
+<th><strong>MISO</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary near-term concern</td>
+<td>Regional capacity shortage and protecting traditional customers during scarcity.</td>
+<td>Reliable technical integration, visibility, and scalable service across a fast-growing footprint.</td>
+</tr>
+<tr class="even">
+<td>Core 2026 mechanism</td>
+<td>IRAS, BYONC, Large Load Registry, backstop capacity, forecast treatment.</td>
+<td>Interconnection reliability requirements, computational-load category, forecasting, FLITS, aligned load-generation studies.</td>
+</tr>
+<tr class="odd">
+<td>Large-load threshold</td>
+<td>50 MW under proposed PJM definition.</td>
+<td>More than 50 MW under proposed MISO filing criteria.</td>
+</tr>
+<tr class="even">
+<td>Data-center-specific category</td>
+<td>No separate computational-load label in the cited PJM materials.</td>
+<td>Computational load when at least 25 MW is IT equipment within a qualifying large load.</td>
+</tr>
+<tr class="odd">
+<td>Curtailment concept</td>
+<td>Unsupported new large load reduced ahead of traditional customers under emergency conditions, implemented through utilities and states.</td>
+<td>Flexible/non-firm service may be curtailed for reliability; all applicable loads remain subject to technical performance rules.</td>
+</tr>
+<tr class="even">
+<td>Generation linkage</td>
+<td>Bring new capacity, receive backstop support, or accept IRAS treatment.</td>
+<td>Developing concurrent load-generation study process; resource-adequacy coordination remains part of broader framework.</td>
+</tr>
+<tr class="odd">
+<td>Operational performance</td>
+<td>Registry, curtailment, and associated procedures; additional operational issues remain active.</td>
+<td>Explicit telemetry, forecasts, ramping, ride-through, modeling, and restoration focus.</td>
+</tr>
+<tr class="even">
+<td>Market structure</td>
+<td>Forward capacity market with a multi-year delivery structure, currently under severe pressure.</td>
+<td>Seasonal prompt capacity auction with resource adequacy centered on members, states, and zonal deliverability.</td>
+</tr>
+<tr class="odd">
+<td>Illinois relevance</td>
+<td>ComEd zone and northern Illinois data-center cluster.</td>
+<td>Ameren Illinois / LRZ 4, central and southern Illinois, and broader Midwest-South footprint.</td>
+</tr>
+<tr class="even">
+<td>Core governance challenge</td>
+<td>Align PJM reliability actions with state retail authority and LSE obligations.</td>
+<td>Align MISO tariff, transmission owners, LSEs, state-regulated resource plans, and customer operations.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sreliability-mechanics-in-plain-language">7. Reliability Mechanics in Plain Language</h1>
+<h2 id="ssudden-load-loss">7.1 Sudden load loss</h2>
+<p>A large load that disappears from the grid is not automatically good news. Generation was scheduled to serve that demand. If several facilities drop at once, generation briefly exceeds load, frequency rises, and operators must rapidly reduce output. The system risk resembles a major contingency, but in the opposite direction from losing a generator.</p>
+<h2 id="sride-through-and-protection-coordination">7.2 Ride-through and protection coordination</h2>
+<p>Data centers are designed to protect sensitive equipment and maintain customer computing service. Those protections may transfer load to batteries or onsite generators during voltage disturbances. Grid rules seek to ensure that protection settings are coordinated so that a normal, cleared transmission fault does not trigger a much larger loss of load than the original event.</p>
+<h2 id="sramping-and-restoration">7.3 Ramping and restoration</h2>
+<p>Commissioning a new building, starting high-density computing, shifting workloads, charging batteries, or restoring from backup can change demand quickly. Ramping limits and staged restoration give operators time to rebalance generation, reserves, voltage support, and transmission flows.</p>
+<h2 id="sload-forecasting">7.4 Load forecasting</h2>
+<p>Traditional short-term load models rely heavily on weather and historical customer behavior. Computational loads may be driven by workload scheduling, commercial decisions, equipment commissioning, maintenance, or automated transfers. RTOs therefore need customer-submitted forecasts and telemetry in addition to statistical models.</p>
+<h2 id="spower-quality-and-stability">7.5 Power quality and stability</h2>
+<p>Large concentrations of power-electronic equipment can affect harmonics, reactive power, short-circuit behavior, and dynamic response. The concern is not that all data centers are unstable, but that their actual controls and protection must be represented in planning models and validated in service.</p>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Important fact check</strong> The supplied news summary states that about 3,800 MW of PJM data-center load disconnected in July 2026. The strongest sources reviewed for this paper establish the policy response and a multi-gigawatt disturbance problem, but the exact event magnitude and date are not consistently stated across primary materials located here. Do not use 3,800 MW in an external document until PJM, NERC, Dominion, or the filed record is cited directly.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h1 id="sforecasting-queue-discipline-and-project-readiness">8. Forecasting, Queue Discipline, and Project Readiness</h1>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 43%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Stage</strong></th>
+<th><strong>Evidence of maturity</strong></th>
+<th><strong>Risk if missing</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Inquiry</td>
+<td>Preliminary load estimate and site geography.</td>
+<td>Creates noise but should not drive major investment.</td>
+</tr>
+<tr class="even">
+<td>Application</td>
+<td>Site control, detailed electrical data, requested service date, phasing, and study deposit.</td>
+<td>Duplicated or speculative queue positions consume study resources.</td>
+</tr>
+<tr class="odd">
+<td>Study</td>
+<td>Validated models, ramp schedule, backup configuration, operating assumptions, and network analysis.</td>
+<td>Upgrades may be designed around unrealistic behavior or timing.</td>
+</tr>
+<tr class="even">
+<td>Commercial commitment</td>
+<td>Executed service/construction agreement, collateral, minimum billing obligation, and cancellation terms.</td>
+<td>Existing customers or utility shareholders may carry stranded-asset risk.</td>
+</tr>
+<tr class="odd">
+<td>Construction</td>
+<td>Milestone tracking, procurement status, permits, customer facilities, and interdependent generation/transmission progress.</td>
+<td>Load may arrive before supply or network capability.</td>
+</tr>
+<tr class="even">
+<td>Energization</td>
+<td>Phased testing, telemetry validation, protection coordination, ramp compliance, and emergency procedures.</td>
+<td>The first operating event becomes the test of unverified controls.</td>
+</tr>
+<tr class="odd">
+<td>Ongoing operation</td>
+<td>Forecast updates, model refresh, incident reporting, periodic tests, and expansion notice.</td>
+<td>Material changes can escape planning and operational visibility.</td>
+</tr>
+</tbody>
+</table>
+<p>Forecast discipline should distinguish requested MW, studied MW, contracted MW, committed minimum demand, forecast peak, energized MW, and actual average demand. These figures answer different questions and should not be used interchangeably.</p>
+<h1 id="smarket-and-cost-impacts">9. Market and Cost Impacts</h1>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 38%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Cost / market channel</strong></th>
+<th><strong>Potential benefit</strong></th>
+<th><strong>Potential exposure</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Energy</td>
+<td>Higher sales and improved utilization can lower average fixed-cost recovery if infrastructure is already available.</td>
+<td>More fuel use, higher marginal prices, congestion, losses, and emissions depending on resource mix.</td>
+</tr>
+<tr class="even">
+<td>Capacity</td>
+<td>Long-term contracts or qualifying new supply can support entry and retain needed resources.</td>
+<td>Tight markets can clear at high prices before new supply arrives, affecting all load.</td>
+</tr>
+<tr class="odd">
+<td>Transmission</td>
+<td>New investment can strengthen the grid and unlock broader development.</td>
+<td>Regional cost allocation may charge customers far from the project; cancellations can strand local facilities.</td>
+</tr>
+<tr class="even">
+<td>Distribution</td>
+<td>Customer contributions and demand charges can support substations and feeders.</td>
+<td>Under-recovery if forecasts fail, ramps lag, or contracts permit early exit.</td>
+</tr>
+<tr class="odd">
+<td>Ancillary services</td>
+<td>Flexible load, storage, and controllable onsite assets may support balancing.</td>
+<td>Uncoordinated ramps or load loss increase reserve needs and operating costs.</td>
+</tr>
+<tr class="even">
+<td>Congestion and losses</td>
+<td>Locational investment may relieve constraints if paired with the right resources.</td>
+<td>Concentrated load can increase congestion and marginal-loss components.</td>
+</tr>
+<tr class="odd">
+<td>Economic development</td>
+<td>Capital investment, construction, tax base, and digital infrastructure can be material.</td>
+<td>Permanent employment may be modest compared with infrastructure and incentive value; benefits may be geographically concentrated.</td>
+</tr>
+<tr class="even">
+<td>Risk allocation</td>
+<td>Strong contracts can place project-specific risk with the customer creating it.</td>
+<td>PJM/RTO, LSE, utility, or ratepayer counterparty structures can unintentionally socialize default risk.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sa-sound-large-load-tariff-is-a-risk-allocation-framework">A sound large-load tariff is a risk-allocation framework</h2>
+<ul>
+<li><p>Eligibility based on scale, aggregation, voltage, load factor, concentration, expansion, and required facilities.</p></li>
+<li><p>Application and study fees that screen speculation without deterring credible projects.</p></li>
+<li><p>Site-control, permitting, financing, equipment-procurement, and construction milestones.</p></li>
+<li><p>Customer-specific facilities paid through contribution, contract demand, or other enforceable mechanism.</p></li>
+<li><p>Minimum billing demand, phased ramp commitments, contract term, and notice requirements.</p></li>
+<li><p>Collateral, parent guarantee, letter of credit, security refresh, and credit downgrade protections.</p></li>
+<li><p>Exit, downsizing, delay, and cancellation charges tied to unrecovered and committed costs.</p></li>
+<li><p>Explicit treatment of shared upgrades, reuse value, and credits if another customer later benefits.</p></li>
+<li><p>Forecast, telemetry, ramping, ride-through, emergency, testing, and incident-reporting obligations.</p></li>
+<li><p>Clear treatment of demand response, flexible service, backup generation, emissions permits, and market compensation.</p></li>
+<li><p>Confidentiality protections that allow RTO and regulatory visibility while protecting security-sensitive data and trade secrets.</p></li>
+<li><p>Periodic review so tariffs adapt without disturbing executed contracts unfairly.</p></li>
+</ul>
+<h1 id="ssolution-set-and-tradeoffs">10. Solution Set and Tradeoffs</h1>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 36%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Policy tool</strong></th>
+<th><strong>Strength</strong></th>
+<th><strong>Limitation / design caution</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bring new generation or capacity</td>
+<td>Directly links demand growth with accredited supply.</td>
+<td>Must address deliverability, accreditation, fuel, interconnection timing, replacement, and contract default.</td>
+</tr>
+<tr class="even">
+<td>Flexible interconnection</td>
+<td>Can provide earlier service using available headroom.</td>
+<td>Only credible if curtailment is measurable, enforceable, tested, and compatible with customer operations.</td>
+</tr>
+<tr class="odd">
+<td>Minimum demand charges</td>
+<td>Improves revenue certainty and reduces ramp-underperformance risk.</td>
+<td>Must be cost-based and calibrated to project phases.</td>
+</tr>
+<tr class="even">
+<td>Financial assurance</td>
+<td>Protects against cancellation and credit deterioration.</td>
+<td>Overly blunt requirements may disadvantage mid-size or lower-risk projects.</td>
+</tr>
+<tr class="odd">
+<td>Large-load registry</td>
+<td>Improves forecast reconciliation and state/RTO visibility.</td>
+<td>Requires consistent definitions, security safeguards, and frequent updates.</td>
+</tr>
+<tr class="even">
+<td>Concurrent load-generation study</td>
+<td>Reduces mismatched assumptions and can optimize upgrades.</td>
+<td>May complicate queue priority and requires clear rules if one side fails.</td>
+</tr>
+<tr class="odd">
+<td>Backstop procurement</td>
+<td>Can address near-term capacity shortfall.</td>
+<td>Counterparty and cost allocation can shift risk to customers who did not cause it.</td>
+</tr>
+<tr class="even">
+<td>Demand flexibility / workload shifting</td>
+<td>Can reduce peaks, congestion, and emergency exposure.</td>
+<td>Capability varies by workload; incentives and verification must reflect actual performance.</td>
+</tr>
+<tr class="odd">
+<td>Onsite generation and storage</td>
+<td>Can provide resilience and reduce grid demand at critical times.</td>
+<td>Air permits, fuel availability, operating limits, synchronization, and market rules matter.</td>
+</tr>
+<tr class="even">
+<td>Transmission expansion</td>
+<td>Supports broad growth and transfer capability.</td>
+<td>Long lead times and regional cost allocation make it a necessary but incomplete near-term answer.</td>
+</tr>
+<tr class="odd">
+<td>Grid-enhancing technologies</td>
+<td>May increase utilization of existing lines faster than traditional expansion.</td>
+<td>Site-specific; cannot substitute for every thermal, voltage, or stability need.</td>
+</tr>
+<tr class="even">
+<td>Phased energization</td>
+<td>Matches service with completed infrastructure and demonstrated readiness.</td>
+<td>Requires transparent milestones and may conflict with developer financing schedules.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sameren-illinois-and-illinois-government-relations-implications">11. Ameren Illinois and Illinois Government Relations Implications</h1>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Recommended posture</strong> Support responsible large-load growth while insisting that credible projects demonstrate readiness, pay the costs and risks they create, meet MISO technical and operational requirements, and enter service on a schedule aligned with transmission, distribution, and resource-adequacy reality.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>The Illinois 2025 Resource Adequacy Study found that both PJM and MISO face tightening regional balances under current load, retirement, and development assumptions. The study projected a PJM shortfall beginning in 2029 and a MISO shortfall beginning in 2031 under its reported baseline, while noting that Illinois zones are exposed to regional scarcity even when their local balance appears adequate. It also found that MISO LRZ 4 remained adequate through 2035 in the baseline but increasingly relied on imports; ComEd began relying on imports earlier and faced stronger load growth.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Ameren Illinois lens</strong></th>
+<th><strong>Questions to resolve internally</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Economic development</td>
+<td>Which projects are genuinely financeable, permitted, and ready? What service dates can be supported without unrealistic commitments?</td>
+</tr>
+<tr class="even">
+<td>Load forecast</td>
+<td>How are inquiry, study, contract, and probability-weighted forecasts reconciled with MISO and the Illinois IRP?</td>
+</tr>
+<tr class="odd">
+<td>Distribution and local transmission</td>
+<td>Which facilities are customer-specific, which have reuse value, and how are delay or cancellation costs secured?</td>
+</tr>
+<tr class="even">
+<td>MISO transmission service</td>
+<td>Will the project seek firm service, FLITS/non-firm service, phased service, or a generation-load combination?</td>
+</tr>
+<tr class="odd">
+<td>Resource adequacy</td>
+<td>Who is the LSE, how will MISO capacity obligations be met, and what happens if load arrives before supply?</td>
+</tr>
+<tr class="even">
+<td>Operations</td>
+<td>Can the customer provide required models, telemetry, forecasts, ramp control, ride-through, restoration control, and 24/7 communications?</td>
+</tr>
+<tr class="odd">
+<td>Backup power</td>
+<td>What equipment, fuel, permitted hours, transfer logic, testing, emissions, and grid-support capability exist?</td>
+</tr>
+<tr class="even">
+<td>Tariff and contract</td>
+<td>Are minimum bills, collateral, ramp obligations, exit payments, expansions, and defaults addressed through an ICC-approved structure?</td>
+</tr>
+<tr class="odd">
+<td>Customer choice</td>
+<td>How do ARES service, utility delivery, MISO obligations, and any state clean-energy requirements align without assigning supply responsibility to the wrong entity?</td>
+</tr>
+<tr class="even">
+<td>Government relations</td>
+<td>Which issues belong in statute, which belong at the ICC, which belong in MISO/FERC tariffs, and which belong in customer contracts or local permits?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="smessages-that-are-credible-in-a-legislative-room">Messages that are credible in a legislative room</h2>
+<ul>
+<li><p>“The question is not whether Illinois wants data centers. The question is whether each project is ready, whether the grid can serve it reliably, and whether the project is carrying the costs and risks it creates.”</p></li>
+<li><p>“Capacity, transmission, and distribution are separate requirements. Solving one does not automatically solve the others.”</p></li>
+<li><p>“A promise to curtail has to be backed by equipment, communications, testing, operating procedures, and enforceable consequences.”</p></li>
+<li><p>“The statute should establish principles and protections. The ICC and MISO should retain the technical record and flexibility to implement them.”</p></li>
+<li><p>“We should not turn an economic-development announcement into a binding system forecast until the project has cleared objective readiness milestones.”</p></li>
+<li><p>“Firm financial commitments protect both existing customers and credible developers by clearing speculative requests out of the path.”</p></li>
+</ul>
+<h1 id="sstakeholder-positions-and-likely-negotiating-fault-lines">12. Stakeholder Positions and Likely Negotiating Fault Lines</h1>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 35%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Stakeholder</strong></th>
+<th><strong>Likely priority</strong></th>
+<th><strong>Constructive bridge</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RTO / reliability organizations</td>
+<td>Visibility, modeling, system performance, adequacy, and operational authority.</td>
+<td>Translate technical requirements into predictable, staged compliance.</td>
+</tr>
+<tr class="even">
+<td>Utilities / transmission owners</td>
+<td>Executable service, cost recovery, credit security, constructability, and system protection.</td>
+<td>Standard readiness milestones and transparent study/service options.</td>
+</tr>
+<tr class="odd">
+<td>Data-center developers / operators</td>
+<td>Speed to power, certainty, confidentiality, scalability, and competitive rates.</td>
+<td>Flexible service, phased energization, defined timelines, and proportional requirements.</td>
+</tr>
+<tr class="even">
+<td>State commissions</td>
+<td>Just and reasonable rates, jurisdiction, cost causation, and consumer protection.</td>
+<td>Full tariff record with explicit default and stranded-cost scenarios.</td>
+</tr>
+<tr class="odd">
+<td>Governors / economic development agencies</td>
+<td>Investment, jobs, tax base, speed, and state competitiveness.</td>
+<td>Condition incentives on readiness, reporting, local benefits, and cost responsibility.</td>
+</tr>
+<tr class="even">
+<td>Consumer advocates</td>
+<td>Affordability, transparency, and no subsidies or stranded assets.</td>
+<td>Demonstrate cost-of-service, minimum revenue, collateral, and customer protections.</td>
+</tr>
+<tr class="odd">
+<td>Generators / developers</td>
+<td>Investment signals, queue access, contracts, and market treatment.</td>
+<td>Competitive procurement and bilateral structures with clear deliverability requirements.</td>
+</tr>
+<tr class="even">
+<td>Environmental / community advocates</td>
+<td>Water, emissions, clean energy, land use, and cumulative impacts.</td>
+<td>Coordinate RTO/utility requirements with permits and credible impact reporting.</td>
+</tr>
+<tr class="odd">
+<td>Local governments</td>
+<td>Tax base, infrastructure, land use, emergency response, and community impacts.</td>
+<td>Standard project information and community commitments without compromising grid security.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sdue-diligence-questions-for-any-large-load-proposal">13. Due-Diligence Questions for Any Large-Load Proposal</h1>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Topic</strong></th>
+<th><strong>Core questions</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Project maturity</td>
+<td>Who owns the project? Is there site control? What permits, financing, equipment orders, tenant commitments, and construction milestones exist?</td>
+</tr>
+<tr class="even">
+<td>Load</td>
+<td>What are requested, studied, contracted, minimum-billed, forecast peak, average, and phased MW? What is the load factor?</td>
+</tr>
+<tr class="odd">
+<td>Timing</td>
+<td>What is the energization schedule by phase, and which schedule dependencies are outside the customer’s control?</td>
+</tr>
+<tr class="even">
+<td>Service</td>
+<td>Firm, phased, flexible/non-firm, co-located, or some combination? What curtailment conditions apply?</td>
+</tr>
+<tr class="odd">
+<td>Supply</td>
+<td>Who is the LSE? How are energy, accredited capacity, reserves, and renewable claims supplied and verified?</td>
+</tr>
+<tr class="even">
+<td>Transmission</td>
+<td>What local and regional upgrades are required? Are costs direct-assigned, shared, or regionally allocated?</td>
+</tr>
+<tr class="odd">
+<td>Distribution</td>
+<td>What substations, feeders, protection, metering, and redundant delivery points are needed?</td>
+</tr>
+<tr class="even">
+<td>Operations</td>
+<td>What telemetry, forecasts, ramp limits, ride-through, protection, restoration, and communications are required?</td>
+</tr>
+<tr class="odd">
+<td>Backup</td>
+<td>What batteries, UPS, generators, fuel, permits, transfer logic, and operating limits exist?</td>
+</tr>
+<tr class="even">
+<td>Financial protection</td>
+<td>What deposits, collateral, minimum bills, guarantees, term, exit fees, and default remedies protect customers?</td>
+</tr>
+<tr class="odd">
+<td>Expansion / contraction</td>
+<td>What happens if the site grows across thresholds, phases late, downsizes, changes tenants, or sells?</td>
+</tr>
+<tr class="even">
+<td>Governance</td>
+<td>Which obligations sit in the RTO tariff, ICC tariff, construction agreement, retail contract, local permit, or incentive agreement?</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sa-defensible-policy-framework">14. A Defensible Policy Framework</h1>
+<ol type="1">
+<li><p>Establish a technology-neutral large-load definition with authority to address aggregation and material expansions.</p></li>
+<li><p>Require a transparent project-readiness ladder before load enters binding forecasts or drives shared investment.</p></li>
+<li><p>Direct the commission to establish cost-based large-load tariffs through a full evidentiary process, rather than set arbitrary rate multipliers in statute.</p></li>
+<li><p>Protect existing customers through minimum-revenue commitments, financial assurance, cancellation and downsizing remedies, and transparent treatment of reuse value.</p></li>
+<li><p>Require compliance with applicable RTO and NERC data, modeling, telemetry, forecasting, ramping, ride-through, protection, and incident-reporting requirements.</p></li>
+<li><p>Allow phased and flexible service where technically feasible, with enforceable curtailment and restoration protocols and no double payment for mandatory obligations.</p></li>
+<li><p>Coordinate generation, transmission, distribution, capacity, and fuel assumptions. Do not treat “bring your own power” as a standalone legal or engineering solution.</p></li>
+<li><p>Preserve federal and RTO authority over interstate transmission and wholesale reliability while preserving state authority over retail tariffs, siting, consumer protection, and utility service.</p></li>
+<li><p>Protect confidential and security-sensitive information while providing regulators and system operators enough detail to plan and protect the grid.</p></li>
+<li><p>Require periodic reporting that distinguishes proposals from contracted and energized load and reconciles state, utility, and RTO forecasts.</p></li>
+<li><p>Pair statewide principles with local-government information, emergency-response, infrastructure, and community-impact requirements.</p></li>
+<li><p>Use sunset reviews and transition provisions so rules can evolve without unfairly reopening settled, financeable agreements.</p></li>
+</ol>
+<h1 id="sregulatory-watchlist-as-of-september-14-2026">15. Regulatory Watchlist as of September 14, 2026</h1>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 35%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Date / status</strong></th>
+<th><strong>Item</strong></th>
+<th><strong>What to watch</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>June 18, 2026</td>
+<td>FERC show-cause orders to six jurisdictional RTOs/ISOs.</td>
+<td>How FERC defines acceptable service, studies, ongoing operations, cost protection, co-location, and transition rules.</td>
+</tr>
+<tr class="even">
+<td>August 13, 2026</td>
+<td>PJM filed IRAS / large-load framework.</td>
+<td>FERC action on IRAS, BYONC, registry, forecast exclusions, state implementation, and backstop interactions.</td>
+</tr>
+<tr class="odd">
+<td>August 28, 2026</td>
+<td>MISO filed interconnection reliability requirements.</td>
+<td>FERC action on definitions, applicability, transition, telemetry, forecasts, ramping, and ride-through.</td>
+</tr>
+<tr class="even">
+<td>September 18, 2026</td>
+<td>NERC comment window described for proposed computational-load registry revisions.</td>
+<td>Entity thresholds, jurisdiction, compliance responsibility, and relationship to RTO tariffs.</td>
+</tr>
+<tr class="odd">
+<td>September 24, 2026</td>
+<td>NERC comment window described for a disturbance-performance standards request.</td>
+<td>Scope and timing of mandatory computational-load ride-through standards.</td>
+</tr>
+<tr class="even">
+<td>November 16, 2026</td>
+<td>MISO / transmission-owner broader show-cause response deadline cited in MISO materials.</td>
+<td>Transmission service, cost shifting, study process, flexible service, and generation-load coordination.</td>
+</tr>
+<tr class="odd">
+<td>December 4, 2026</td>
+<td>Requested MISO effective date reported for interconnection rules.</td>
+<td>Whether FERC accepts, modifies, suspends, or conditions the proposed effective date.</td>
+</tr>
+<tr class="even">
+<td>Ongoing</td>
+<td>PJM, MISO, NERC, utilities, and state commissions continue implementation work.</td>
+<td>Business-practice manuals, emergency procedures, retail tariffs, customer contracts, and technical testing details.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sopen-questions-that-should-stay-open">16. Open Questions That Should Stay Open</h1>
+<ul>
+<li><p>How much announced load will actually energize, and at what ramp rate?</p></li>
+<li><p>What portion of computational load can provide dependable flexibility without compromising service obligations?</p></li>
+<li><p>Should large-load flexibility be a voluntary compensated product, a condition of expedited service, or a mandatory emergency obligation?</p></li>
+<li><p>How should accreditation and deliverability apply to customer-contracted generation, storage, and co-located resources?</p></li>
+<li><p>Who bears default risk when an RTO or utility procures long-term capacity for a customer that later fails?</p></li>
+<li><p>How should shared transmission costs be allocated when upgrades serve both a large load and broader regional needs?</p></li>
+<li><p>How should state clean-energy requirements interact with wholesale markets, customer choice, and hourly reliability?</p></li>
+<li><p>Can backup generators participate as grid resources within air-permit and reliability constraints, or should they be treated only as customer resilience assets?</p></li>
+<li><p>What data can be public without exposing critical infrastructure, trade secrets, or customer security information?</p></li>
+<li><p>How should Illinois coordinate the materially different PJM and MISO frameworks without forcing one region’s solution onto the other?</p></li>
+</ul>
+<h1 id="ssource-notes-and-reference-library">17. Source Notes and Reference Library</h1>
+<p>Primary and institutional sources are listed first. News and industry summaries are useful for orientation but should not replace filed tariffs, FERC orders, RTO manuals, or official reports in external advocacy. Access dates reflect the preparation date of this working paper.</p>
+<p><strong>1. FERC, “FERC Launches Aggressive Targeted Action to Speed Large Load Integration,” June 18, 2026.</strong> https://www.ferc.gov/news-events/news/ferc-launches-aggressive-targeted-action-speed-large-load-integration</p>
+<p><strong>2. FERC, MISO Show Cause Order, 195 FERC ¶ 61,212, Docket EL26-70-000.</strong> https://www.ferc.gov/sites/default/files/2026-06/EL26-70-000.pdf</p>
+<p><strong>3. MISO, Large Load Interconnection Reliability Requirements dashboard.</strong> https://www.misoenergy.org/engage/MISO-Dashboard/large-load-interconnection-reliability-requirements/</p>
+<p><strong>4. MISO, Large Load Additions: Accelerating Reliable Integration.</strong> https://www.misoenergy.org/planning/large-loads---container-page/large-load-additions/</p>
+<p><strong>5. MISO, Interconnection Reliability Requirements Technical Compendium, August 2026.</strong> https://cdn.misoenergy.org/20260827%20LLWG%20Item%2002c%20MISO%20Large%20Load%20Interconnection%20Reliability%20Requirements_Technical%20Compendium777982.pdf</p>
+<p><strong>6. MISO, Generation and Large Load Alignment dashboard.</strong> https://www.misoenergy.org/engage/MISO-Dashboard/generation-and-large-load-alignment/</p>
+<p><strong>7. MISO, Large Load Operational Forecasting Requirements dashboard.</strong> https://www.misoenergy.org/engage/MISO-Dashboard/operational-reliability-requirement---large-load-operational-forecasting-requirements/</p>
+<p><strong>8. PJM, “PJM Proposes Framework To Connect Data Centers Without Compromising Reliability, Affordability,” August 13, 2026.</strong> https://insidelines.pjm.com/pjm-proposes-framework-to-connect-data-centers-without-compromising-reliability-affordability/</p>
+<p><strong>9. PJM, Interim Resource Adequacy Service fact sheet.</strong> https://www.pjm.com/-/media/DotCom/about-pjm/newsroom/fact-sheets/interim-resource-adequacy-service-proposal.pdf</p>
+<p><strong>10. PJM, 2026 Load Forecast Report, January 14, 2026.</strong> https://www.pjm.com/-/media/DotCom/library/reports-notices/load-forecast/2026-load-report.pdf</p>
+<p><strong>11. PJM, Board outline for integrating large loads, January 16, 2026.</strong> https://insidelines.pjm.com/pjm-board-outlines-plans-to-integrate-large-loads-reliably/</p>
+<p><strong>12. Monitoring Analytics, 2025 State of the Market Report for PJM, Volume 1, March 12, 2026.</strong> Internal enterprise copy reviewed for this paper; public report available from Monitoring Analytics.</p>
+<p><strong>13. Illinois Agencies / E3, 2025 Resource Adequacy Study, December 15, 2025.</strong> Internal enterprise copy reviewed for this paper.</p>
+<p><strong>14. MISO, 2026 Reliability Imperative Report, updated February 2026.</strong> Internal enterprise copy reviewed for this paper.</p>
+<p><strong>15. NERC, Large Loads Action Plan.</strong> https://www.nerc.com/initiatives/large-loads-action-plan</p>
+<p><strong>16. U.S. Department of Energy, data-center electricity-demand report announcement, December 20, 2024.</strong> https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers</p>
+<p><strong>17. Lawrence Berkeley National Laboratory, Data Centers research and 2025 update.</strong> https://eta.lbl.gov/data-centers</p>
+<p><strong>18. EPRI, Grid Flexibility Needs and Data Center Characteristics, 2025.</strong> https://restservice.epri.com/publicdownload/000000003002031504/0/Product</p>
+<p><strong>19. EPRI, DCFlex Initiative.</strong> https://dcflex.epri.com/</p>
+<p><strong>20. Utility Dive, “Large loads face reliability requirements under MISO proposal,” September 1, 2026.</strong> Secondary summary used to confirm the August 28 filing date, definitions, requested effective date, and reported transition scope. https://www.utilitydive.com/news/large-load-reliability-requirements-miso-ferc/829278/</p>
+<h1 id="sappendix-a.-one-minute-brief">Appendix A. One-Minute Brief</h1>
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>One-minute explanation</strong> Data centers are affecting RTOs in three connected ways. First, the amount and speed of load growth can increase capacity needs faster than generation and transmission can be built. Second, the electrical behavior of large computing facilities, including rapid ramps and transfers to backup systems, can create real-time reliability events unless the RTO has telemetry, forecasts, ride-through, and restoration rules. Third, if tariffs and contracts are weak, existing customers can absorb capacity, transmission, and stranded-asset costs created by projects that arrive late, use less power than promised, or cancel. PJM is focused on requiring new capacity support or priority curtailment. MISO is focused on a broader technical integration framework. The sound policy position is to welcome credible projects, require them to pay their own way, preserve RTO and commission authority, and connect service timing to demonstrated readiness and actual grid capability.</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<h1 id="sappendix-b.-five-principles-to-repeat">Appendix B. Five Principles to Repeat</h1>
+<ul>
+<li><p>Welcome credible growth, not speculative obligations.</p></li>
+<li><p>Separate capacity, transmission, distribution, and operational performance.</p></li>
+<li><p>Assign project-specific costs and default risk to the project creating them.</p></li>
+<li><p>Allow flexible paths to service only when curtailment and performance are real and enforceable.</p></li>
+<li><p>Put policy principles in statute and technical implementation in evidence-based commission and RTO processes.</p></li>
+</ul>
+<a class="top" href="#top">Back to top ↑</a></article></main></body></html>

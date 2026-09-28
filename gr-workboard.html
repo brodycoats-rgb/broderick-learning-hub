@@ -1,0 +1,703 @@
+<title>GR Workboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#f5f6f2;
+    --surface:#ffffff;
+    --surface-2:#edf0e8;
+    --border:#dde1d5;
+    --text:#1e241c;
+    --text-dim:#5c6456;
+    --accent:#2f6b4c;
+    --accent-soft:#e3ede4;
+    --link:#28527d;
+    --good:#2f7a4f;
+    --good-soft:#e3f0e6;
+    --warn:#9c7420;
+    --warn-soft:#f5ecd7;
+    --crit:#a23b34;
+    --crit-soft:#f6e3e0;
+    --shadow: 0 1px 2px rgba(30,36,28,0.06), 0 1px 1px rgba(30,36,28,0.04);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14170f;
+      --surface:#1b1f16;
+      --surface-2:#22271b;
+      --border:#31371f;
+      --text:#e9ecdf;
+      --text-dim:#a4ab97;
+      --accent:#6ba980;
+      --accent-soft:#22301f;
+      --link:#7fb1d9;
+      --good:#6ba980;
+      --good-soft:#1e2f1e;
+      --warn:#d1a94c;
+      --warn-soft:#332a12;
+      --crit:#e08a80;
+      --crit-soft:#3a1e19;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14170f;
+    --surface:#1b1f16;
+    --surface-2:#22271b;
+    --border:#31371f;
+    --text:#e9ecdf;
+    --text-dim:#a4ab97;
+    --accent:#6ba980;
+    --accent-soft:#22301f;
+    --link:#7fb1d9;
+    --good:#6ba980;
+    --good-soft:#1e2f1e;
+    --warn:#d1a94c;
+    --warn-soft:#332a12;
+    --crit:#e08a80;
+    --crit-soft:#3a1e19;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    padding-inline:0;
+  }
+  h1,h2,h3{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:600;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  a{ color:var(--link); }
+
+  header.top{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:10;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+  }
+  .top-inner{
+    max-width:1120px;
+    margin:0 auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .brand .name{ font-size:1.15rem; }
+  .brand .sub{ font-size:0.75rem; color:var(--text-dim); }
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+  }
+  nav.tabs a{
+    font-size:0.82rem;
+    font-weight:500;
+    color:var(--text-dim);
+    text-decoration:none;
+    padding:6px 10px;
+    border-radius:6px;
+  }
+  nav.tabs a:hover{ background:var(--surface-2); color:var(--text); }
+
+  main{
+    max-width:1120px;
+    margin:0 auto;
+    padding:24px 20px 64px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+  }
+
+  .strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .strip .cell{
+    background:var(--surface);
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .strip .cell .num{ font-family:'Newsreader',serif; font-size:1.7rem; font-weight:600; }
+  .strip .cell .label{ font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.04em; }
+
+  section{ scroll-margin-top:70px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:1.4rem; }
+  .section-head .note{ font-size:0.8rem; color:var(--text-dim); }
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .card .card-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .card h3{ font-size:1.05rem; }
+  .pill{
+    font-size:0.68rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    padding:3px 8px;
+    border-radius:99px;
+    white-space:nowrap;
+  }
+  .pill.good{ background:var(--good-soft); color:var(--good); }
+  .pill.warn{ background:var(--warn-soft); color:var(--warn); }
+  .pill.crit{ background:var(--crit-soft); color:var(--crit); }
+  .pill.neutral{ background:var(--surface-2); color:var(--text-dim); }
+
+  .card p{ margin:0; font-size:0.86rem; color:var(--text-dim); line-height:1.5; }
+  .card .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 14px;
+    font-size:0.76rem;
+    color:var(--text-dim);
+    border-top:1px solid var(--border);
+    padding-top:10px;
+  }
+  .card .meta b{ color:var(--text); font-weight:500; }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--surface);
+  }
+  th,td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+  th{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--text-dim);
+    background:var(--surface-2);
+  }
+  tr:last-child td{ border-bottom:none; }
+  td.wrap{ white-space:normal; min-width:180px; }
+
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    border-left:2px solid var(--border);
+    margin-left:6px;
+  }
+  .tl-item{
+    position:relative;
+    padding:0 0 22px 22px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-7px;
+    top:2px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--surface);
+    border:2px solid var(--accent);
+  }
+  .tl-item .date{ font-size:0.72rem; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; }
+  .tl-item .title{ font-weight:500; margin-top:2px; }
+  .tl-item .tag{ font-size:0.72rem; color:var(--text-dim); }
+
+  .goal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .goal .bar-track{
+    height:8px;
+    border-radius:99px;
+    background:var(--surface-2);
+    overflow:hidden;
+  }
+  .goal .bar-fill{
+    height:100%;
+    background:var(--accent);
+    border-radius:99px;
+  }
+  .goal .pct{ font-size:0.78rem; color:var(--text-dim); }
+
+  .lib-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .lib-row:last-child{ border-bottom:none; }
+  .lib-row .doc-name{ font-weight:500; font-size:0.9rem; }
+  .lib-row .doc-tag{ font-size:0.72rem; color:var(--text-dim); }
+  .tag-chip{
+    font-size:0.68rem;
+    background:var(--surface-2);
+    color:var(--text-dim);
+    padding:2px 8px;
+    border-radius:99px;
+  }
+
+  .banner{
+    background:var(--accent-soft);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:0.82rem;
+    color:var(--text-dim);
+  }
+
+  footer{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px 40px;
+    font-size:0.75rem;
+    color:var(--text-dim);
+  }
+
+  @media (max-width:640px){
+    nav.tabs{ display:none; }
+    .top-inner{ justify-content:flex-start; }
+  }
+</style>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <a href="index.html" style="font-size:0.78rem;color:var(--text-dim);text-decoration:none;">&larr; Learning Hub</a>
+      <div class="name">GR Workboard</div>
+      <div class="sub">Government Relations — Illinois GA · ICC · MISO/PJM</div>
+    </div>
+    <nav class="tabs">
+      <a href="#projects">Projects</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#legislation">Legislation</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#goals">Dept. Goals</a>
+      <a href="#elections">Elections</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="overview">
+    <div class="strip">
+      <div class="cell">
+        <div class="num">2</div>
+        <div class="label">Active projects</div>
+      </div>
+      <div class="cell">
+        <div class="num">3</div>
+        <div class="label">Milestones, next 60 days</div>
+      </div>
+      <div class="cell">
+        <div class="num">6</div>
+        <div class="label">Bills tracked</div>
+      </div>
+      <div class="cell">
+        <div class="num">9</div>
+        <div class="label">Analysis docs on file</div>
+      </div>
+      <div class="cell">
+        <div class="num">3</div>
+        <div class="label">Races flagged for GR relevance</div>
+      </div>
+    </div>
+    <div class="banner" style="margin-top:14px;">
+      Projects, the analysis library, and the internal-tracker references are real. Milestones, legislation, department goals, and elections are sample rows, marked as such, so you can see the layout before you swap in your own tracker data.
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="note">Status, owner, next milestone</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Operation Resilient Grid</h3>
+          <span class="pill good">On track</span>
+        </div>
+        <p>Internal campaign to retain five natural gas CTG facilities facing CEJA-mandated retirements: Venice, Goose Creek, Pinckneyville, Raccoon Creek, and Kinmundy. Covers 2,092 MW of capacity. Founding proof case for the Political R&amp;D concept.</p>
+        <div class="meta">
+          <span><b>Owner</b> Rick</span>
+          <span><b>Next milestone</b> RREST tracker refresh</span>
+          <span><b>Tags</b> CEJA · CTG · reliability</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Political R&amp;D</h3>
+          <span class="pill warn">Reframed</span>
+        </div>
+        <p>Legislative foresight concept for the GR function, built out through a 385-bill dataset and a multi-session archive review. Concluded a new formal function isn't needed. Now a white paper for Patrick Smith on current practice plus small proposed tweaks: quarterly internal listening check-ins and a statutory-deadline tracking calendar.</p>
+        <div class="meta">
+          <span><b>Owner</b> Rick</span>
+          <span><b>Next milestone</b> White paper deck to Patrick Smith</span>
+          <span><b>Tags</b> GR strategy · foresight</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Sample project</h3>
+          <span class="pill neutral">Placeholder</span>
+        </div>
+        <p>Replace with a real project, for example ICC Future of Gas proceedings or IRP strategy work with Roland Berger. Add a status, an owner, and the next concrete milestone.</p>
+        <div class="meta">
+          <span><b>Owner</b> —</span>
+          <span><b>Next milestone</b> —</span>
+          <span><b>Tags</b> —</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="milestones">
+    <div class="section-head">
+      <h2>Milestones</h2>
+      <span class="note">Next 90 days, pulled from projects and bills</span>
+    </div>
+    <div class="table-wrap" style="padding:18px 20px;">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="date">OCT 2026</div>
+          <div class="title">White paper and deck to Patrick Smith — Political R&amp;D</div>
+          <div class="tag">Political R&amp;D</div>
+        </div>
+        <div class="tl-item">
+          <div class="date">OCT 2026</div>
+          <div class="title">RREST tracker refresh ahead of veto session prep</div>
+          <div class="tag">Operation Resilient Grid</div>
+        </div>
+        <div class="tl-item">
+          <div class="date">NOV 2026</div>
+          <div class="title">Illinois General Assembly veto session — sample placeholder date, confirm on calendar</div>
+          <div class="tag">Legislative calendar</div>
+        </div>
+        <div class="tl-item">
+          <div class="date">SAMPLE</div>
+          <div class="title">Add your own milestone here</div>
+          <div class="tag">Placeholder</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="legislation">
+    <div class="section-head">
+      <h2>Legislation</h2>
+      <span class="note">Sample rows — replace with your bill tracker export</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Bill</th>
+            <th>Subject</th>
+            <th>Stage</th>
+            <th>Position</th>
+            <th class="wrap">Next action</th>
+            <th>Tag</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">HB-0000</td>
+            <td>Sample: data center siting and interconnection</td>
+            <td>Committee</td>
+            <td><span class="pill warn">Monitor</span></td>
+            <td class="wrap">Awaiting committee hearing date</td>
+            <td><span class="tag-chip">reliability</span></td>
+          </tr>
+          <tr>
+            <td class="mono">SB-0000</td>
+            <td>Sample: CEJA implementation technical amendments</td>
+            <td>Passed committee</td>
+            <td><span class="pill good">Support</span></td>
+            <td class="wrap">Floor vote pending</td>
+            <td><span class="tag-chip">CEJA</span></td>
+          </tr>
+          <tr>
+            <td class="mono">HB-0000</td>
+            <td>Sample: capacity market cost recovery</td>
+            <td>Introduced</td>
+            <td><span class="pill crit">Oppose</span></td>
+            <td class="wrap">Sponsor meeting to request</td>
+            <td><span class="tag-chip">MISO/PJM</span></td>
+          </tr>
+          <tr>
+            <td class="mono">—</td>
+            <td>Add a bill</td>
+            <td>—</td>
+            <td><span class="pill neutral">—</span></td>
+            <td class="wrap">—</td>
+            <td><span class="tag-chip">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="analysis">
+    <div class="section-head">
+      <h2>Analysis library</h2>
+      <span class="note">Memos, briefings, and trackers on file</span>
+    </div>
+
+    <h3 style="font-size:0.95rem;margin:0 0 10px;color:var(--text-dim);font-family:'IBM Plex Sans',sans-serif;font-weight:600;">Internal trackers (referenced, not stored in this repo)</h3>
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <div class="lib-row">
+        <div>
+          <div class="doc-name">RREST tracker — Resource Reliability &amp; Engagement Strategy</div>
+          <div class="doc-tag">Operation Resilient Grid · ten sections, built through multiple versions · kept out of this repo</div>
+        </div>
+        <span class="tag-chip">CTG</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name">Fiscal impact analysis — CTG facility property tax payments</div>
+          <div class="doc-tag">Operation Resilient Grid · combined annual total roughly 2.93M, cumulative 45.3M+</div>
+        </div>
+        <span class="tag-chip">fiscal</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name">Legislator power matrix, 104th General Assembly</div>
+          <div class="doc-tag">Operation Resilient Grid</div>
+        </div>
+        <span class="tag-chip">GA relationships</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name">385-bill dataset and six-session archive review</div>
+          <div class="doc-tag">Political R&amp;D · 2020 to 2026, twenty subject areas</div>
+        </div>
+        <span class="tag-chip">foresight</span>
+      </div>
+    </div>
+
+    <h3 style="font-size:0.95rem;margin:0 0 10px;color:var(--text-dim);font-family:'IBM Plex Sans',sans-serif;font-weight:600;">Knowledge base (linked pages in this repo)</h3>
+    <div class="table-wrap">
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="ameren-illinois-energy-policy.html">Energy Policy Learning Guide</a></div>
+          <div class="doc-tag">Grid reliability, affordability, economic development, data centers, DERs — plain-language primer with scripts and knowledge checks</div>
+        </div>
+        <span class="tag-chip">learning guide</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="ameren-illinois-knowledge-center.html">Ameren Illinois Knowledge Center</a></div>
+          <div class="doc-tag">18 modules on IL utility regulation, ICC process, and customer bills — 180 practice questions</div>
+        </div>
+        <span class="tag-chip">learning guide</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="ameren-missouri-illinois-ctg.html">CTG Facilities Learning Guide</a></div>
+          <div class="doc-tag">Primer on the five CTG facilities for nontechnical audiences — technology, emissions, regulation, scripts</div>
+        </div>
+        <span class="tag-chip">learning guide · CTG</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="miso-eras-business-acumen-playbook.html">MISO ERAS Business Acumen Playbook</a></div>
+          <div class="doc-tag">How reliability need becomes accredited capacity — interconnection, resource adequacy, and transmission-planning cycles</div>
+        </div>
+        <span class="tag-chip">learning guide · MISO</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="ameren-strategic-direction.html">Strategic Direction &amp; GR Executive Briefing</a></div>
+          <div class="doc-tag">Company strategic direction, how GR supports it, executive script and mind map</div>
+        </div>
+        <span class="tag-chip">internal brief</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="data-centers-and-rtos-working-paper.html">Data Centers and RTOs Working Paper</a></div>
+          <div class="doc-tag">How large loads are reshaping PJM and MISO planning, reliability, markets, and cost allocation</div>
+        </div>
+        <span class="tag-chip">internal · RTO</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="icc-proceedings.html">ICC Proceedings Briefing</a></div>
+          <div class="doc-tag">Grid planning, resource adequacy, Future of Gas, large loads, and CEJA implementation as one strategic landscape</div>
+        </div>
+        <span class="tag-chip">internal · ICC</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="illinois-data-center-gr-playbook.html">Illinois Data Center GR Playbook</a></div>
+          <div class="doc-tag">National arc, Illinois policy landscape, Ameren Illinois positioning, and stakeholder messaging</div>
+        </div>
+        <span class="tag-chip">internal · data centers</span>
+      </div>
+      <div class="lib-row">
+        <div>
+          <div class="doc-name"><a href="illinois-legislative-trends-2020-2026.html">Illinois Legislative Trend Report, 2020-2026</a></div>
+          <div class="doc-tag">792 bill-year records — Political R&amp;D baseline on volume, churn, and top subject concentration</div>
+        </div>
+        <span class="tag-chip">internal · trends</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="goals">
+    <div class="section-head">
+      <h2>Department goals</h2>
+      <span class="note">Sample key results — replace with Betsey's team goals</span>
+    </div>
+    <div class="cards">
+      <div class="goal">
+        <div class="card-top">
+          <h3 style="font-size:1rem;">Sample: protect CTG capacity through session</h3>
+          <span class="pct">65%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:65%;"></div></div>
+        <p style="margin:0;font-size:0.8rem;color:var(--text-dim);">Tied to Operation Resilient Grid</p>
+      </div>
+      <div class="goal">
+        <div class="card-top">
+          <h3 style="font-size:1rem;">Sample: land the Political R&amp;D white paper</h3>
+          <span class="pct">80%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%;"></div></div>
+        <p style="margin:0;font-size:0.8rem;color:var(--text-dim);">Deck to Patrick Smith targeted this cycle</p>
+      </div>
+      <div class="goal">
+        <div class="card-top">
+          <h3 style="font-size:1rem;">Add a department goal</h3>
+          <span class="pct">—</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;"></div></div>
+        <p style="margin:0;font-size:0.8rem;color:var(--text-dim);">Placeholder</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="elections">
+    <div class="section-head">
+      <h2>Elections</h2>
+      <span class="note">Sample rows — races worth watching for GR relevance</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Seat</th>
+            <th>Incumbent</th>
+            <th>Status</th>
+            <th>Rating</th>
+            <th class="wrap">Why it matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sample: IL House District</td>
+            <td>—</td>
+            <td>Seeking re-election</td>
+            <td><span class="pill good">Safe</span></td>
+            <td class="wrap">Sits on the relevant energy or utilities committee</td>
+          </tr>
+          <tr>
+            <td>Sample: IL Senate District</td>
+            <td>—</td>
+            <td>Open seat</td>
+            <td><span class="pill warn">Lean</span></td>
+            <td class="wrap">District includes a facility or major account, new relationship to build</td>
+          </tr>
+          <tr>
+            <td>Sample: IL House District</td>
+            <td>—</td>
+            <td>Contested</td>
+            <td><span class="pill crit">Toss-up</span></td>
+            <td class="wrap">Either outcome changes committee leadership on an issue you track</td>
+          </tr>
+          <tr>
+            <td>—</td>
+            <td>Add a race</td>
+            <td>—</td>
+            <td><span class="pill neutral">—</span></td>
+            <td class="wrap">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  GR Workboard, part of the Broderick Learning Hub. Data shown here is a mix of real project context and sample rows marked as such. Next step, whenever you want it, is wiring this page to a data file in the repo so it updates from one file instead of edited HTML.
+</footer>
