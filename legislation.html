@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legislation — GR Workboard</title>
+<style>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#f4f6f8;
+    --surface:#ffffff;
+    --surface-2:#eef1f4;
+    --border:#dddddd;
+    --text:#222222;
+    --text-dim:#55606b;
+    --accent:#1f2937;
+    --accent-soft:#e8ebee;
+    --link:#0057b8;
+    --good:#1f7a3d;
+    --good-soft:#e3f4e7;
+    --warn:#9c6f00;
+    --warn-soft:#f7edd2;
+    --crit:#b3261e;
+    --crit-soft:#fbe4e2;
+    --shadow: 0 1px 2px rgba(31,41,55,0.08), 0 1px 1px rgba(31,41,55,0.05);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161b22;
+      --surface:#1f2937;
+      --surface-2:#28323f;
+      --border:#3a4552;
+      --text:#e9ecef;
+      --text-dim:#a3adb8;
+      --accent:#7ea6d9;
+      --accent-soft:#22303f;
+      --link:#7ea6d9;
+      --good:#5fb37c;
+      --good-soft:#1c3324;
+      --warn:#d1a94c;
+      --warn-soft:#332a12;
+      --crit:#e08a80;
+      --crit-soft:#3a1e19;
+      --shadow: 0 1px 2px rgba(0,0,0,0.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#161b22;
+    --surface:#1f2937;
+    --surface-2:#28323f;
+    --border:#3a4552;
+    --text:#e9ecef;
+    --text-dim:#a3adb8;
+    --accent:#7ea6d9;
+    --accent-soft:#22303f;
+    --link:#7ea6d9;
+    --good:#5fb37c;
+    --good-soft:#1c3324;
+    --warn:#d1a94c;
+    --warn-soft:#332a12;
+    --crit:#e08a80;
+    --crit-soft:#3a1e19;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    padding-inline:0;
+  }
+  h1,h2,h3{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:600;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+  a{ color:var(--link); }
+
+  header.top{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:10;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+  }
+  .top-inner{
+    max-width:1120px;
+    margin:0 auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .brand{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .brand .name{ font-size:1.15rem; }
+  .brand .sub{ font-size:0.75rem; color:var(--text-dim); }
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+  }
+  nav.tabs a{
+    font-size:0.82rem;
+    font-weight:500;
+    color:var(--text-dim);
+    text-decoration:none;
+    padding:6px 10px;
+    border-radius:6px;
+  }
+  nav.tabs a:hover{ background:var(--surface-2); color:var(--text); }
+
+  main{
+    max-width:1120px;
+    margin:0 auto;
+    padding:24px 20px 64px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+  }
+
+  .strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .strip .cell{
+    background:var(--surface);
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .strip .cell .num{ font-family:'Newsreader',serif; font-size:1.7rem; font-weight:600; }
+  .strip .cell .label{ font-size:0.72rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.04em; }
+
+  section{ scroll-margin-top:70px; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:1.4rem; }
+  .section-head .note{ font-size:0.8rem; color:var(--text-dim); }
+
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .card .card-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .card h3{ font-size:1.05rem; }
+  .pill{
+    font-size:0.68rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    padding:3px 8px;
+    border-radius:99px;
+    white-space:nowrap;
+  }
+  .pill.good{ background:var(--good-soft); color:var(--good); }
+  .pill.warn{ background:var(--warn-soft); color:var(--warn); }
+  .pill.crit{ background:var(--crit-soft); color:var(--crit); }
+  .pill.neutral{ background:var(--surface-2); color:var(--text-dim); }
+
+  .card p{ margin:0; font-size:0.86rem; color:var(--text-dim); line-height:1.5; }
+  .card .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 14px;
+    font-size:0.76rem;
+    color:var(--text-dim);
+    border-top:1px solid var(--border);
+    padding-top:10px;
+  }
+  .card .meta b{ color:var(--text); font-weight:500; }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.85rem;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--surface);
+  }
+  th,td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    white-space:nowrap;
+  }
+  th{
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--text-dim);
+    background:var(--surface-2);
+  }
+  tr:last-child td{ border-bottom:none; }
+  td.wrap{ white-space:normal; min-width:180px; }
+  .bill-row{ cursor:pointer; }
+  .bill-row:hover{ background:var(--surface-2); }
+  .bill-detail td{ padding:12px 14px; }
+
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    border-left:2px solid var(--border);
+    margin-left:6px;
+  }
+  .tl-item{
+    position:relative;
+    padding:0 0 22px 22px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-7px;
+    top:2px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--surface);
+    border:2px solid var(--accent);
+  }
+  .tl-item .date{ font-size:0.72rem; color:var(--text-dim); font-family:'IBM Plex Mono',monospace; }
+  .tl-item .title{ font-weight:500; margin-top:2px; }
+  .tl-item .tag{ font-size:0.72rem; color:var(--text-dim); }
+
+  .goal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .goal .bar-track{
+    height:8px;
+    border-radius:99px;
+    background:var(--surface-2);
+    overflow:hidden;
+  }
+  .goal .bar-fill{
+    height:100%;
+    background:var(--accent);
+    border-radius:99px;
+  }
+  .goal .pct{ font-size:0.78rem; color:var(--text-dim); }
+
+  .lib-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .lib-row:last-child{ border-bottom:none; }
+  .lib-row .doc-name{ font-weight:500; font-size:0.9rem; }
+  .lib-row .doc-tag{ font-size:0.72rem; color:var(--text-dim); }
+  .tag-chip{
+    font-size:0.68rem;
+    background:var(--surface-2);
+    color:var(--text-dim);
+    padding:2px 8px;
+    border-radius:99px;
+  }
+
+  .banner{
+    background:var(--accent-soft);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 16px;
+    font-size:0.82rem;
+    color:var(--text-dim);
+  }
+
+  footer{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 20px 40px;
+    font-size:0.75rem;
+    color:var(--text-dim);
+  }
+
+  @media (max-width:640px){
+    nav.tabs{ display:none; }
+    .top-inner{ justify-content:flex-start; }
+  }
+</style>
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <a href="gr-workboard.html" style="font-size:0.78rem;color:var(--text-dim);text-decoration:none;">&larr; GR Workboard</a>
+      <div class="name">Legislation — Full Bill List</div>
+      <div class="sub">Government Relations — Illinois GA · ICC · MISO/PJM</div>
+    </div>
+    <nav class="tabs">
+      <a href="gr-workboard.html#projects">Projects</a>
+      <a href="gr-workboard.html#milestones">Milestones</a>
+      <a href="legislation.html" style="color:var(--text);background:var(--surface-2);">Legislation</a>
+      <a href="gr-workboard.html#analysis">Analysis</a>
+      <a href="gr-workboard.html#elections">Elections</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="legislation">
+    <div class="section-head">
+      <h2>Legislation</h2>
+      <span class="note">71 bills tracked, week ending 9/28/26</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Bill</th>
+            <th class="wrap">Title</th>
+            <th>Industry</th>
+            <th>Position</th>
+            <th>Sponsor</th>
+            <th class="wrap">Last action</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4172</td>
+        <td class="wrap">UTILITY-PROJECT COST RECOVERY</td>
+        <td>Data Centers</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Dave Vella (D)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4172 blocks electric utilities from requiring big new customers—like data centers—to put up security deposits, letters of credit, or other financial assurances as long as they apply under existing ICC‑approved tariffs and stay in good standing. It also prevents utilities from slowing or deferring upgrades or interconnection work because those financial requirements are no longer allowed. The big question ahead is whether this shifts expectations around timelines, cost responsibility, or upgrade sequencing when large loads land fast—initial read leans oppose, pending SME confirmation.n.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Oppose in tracker. Likely concern: cost, mandates, or expanded liability without clear funding or operational feasibility. Check: cost allocation language, timing/obligation to serve, and any limits on enforcing milestones/standards. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4272</td>
+        <td class="wrap">GAS APPLIANCE LABELING</td>
+        <td>Gas</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Michael Crawford (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4272 requires that any non‑externally vented natural gas appliance manufactured after January 1, 2027 carry a specific warning label, and it gives the Attorney General authority to set rules on how that label must look and where it goes. This is really a consumer‑product labeling bill, not a siting or permitting bill, so it does not add steps that slow down storage projects or create new county‑facing compliance obligations. Its impacts fall on appliance manufacturers and retailers—not on energy storage development or local approval processes.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Oppose in tracker. Likely concern: cost, mandates, or expanded liability without clear funding or operational feasibility. Check: county requirements, NFPA references, decommissioning/security, and drainage/ag impacts. (Initial; verify with SMEs.)
+Sponsor does not plan on moving forward with his gas stove labeling bill (HB 4272) this session. He wants to do a subject matter hearing on the bill after the deadline, but that’s about as far as things will go.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4319</td>
+        <td class="wrap">DATA CENTER-PROPERTY RTS</td>
+        <td>Data Centers</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Jed Davis (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4319 would let property owners within 1,000 feet of a data center seek compensation for things like noise, lighting, traffic, or even reduced property value, and it sets up a formal appraisal process to determine those impacts. It doesn’t regulate Ameren directly, but it could influence how quickly or confidently developers move forward if they see higher liability or community‑impact risk. The key SME question is whether this could indirectly shift expectations around interconnection timing, required studies, or cost responsibility when big new loads show up fast.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4419</td>
+        <td class="wrap">COUNTY/MUNI-NATURAL GAS</td>
+        <td>Gas</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Jackie Haas (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4419 would prevent counties and municipalities from banning—or effectively banning—the use of natural gas in new construction unless voters approve such a policy through a referendum, and it limits home‑rule authority in this area. The bill fits squarely into the broader statewide debate over building electrification, local control, and the long‑term future of natural gas in homes and businesses. For Ameren, it does not directly affect operations but could influence public perception, policymaker expectations, and the narrative around natural gas use in new buildings. A neutral position is appropriate pending SME confirmation, with the key question being whether this sets a precedent that shapes future gas‑policy debates or customer behavior.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Neutral in tracker. Focus on technical cleanup and avoiding unintended consequences. Check: preemption vs. local control, consumer messaging, and enforcement scope. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4798</td>
+        <td class="wrap">EPA-GHG EMISSION LIMITS</td>
+        <td>Gas Generation</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Rep. Lawrence &quot;Larry&quot; Walsh, Jr. (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4798 lets large generators keep running during emergency, pre‑emergency, or conservative‑operations conditions and ties all flexibility on greenhouse‑gas rules to whether statewide battery storage hits 10% of Illinois’ installed capacity. It doesn’t directly change siting or interconnection rules, but it does raise questions about how generators document emergency‑operations status and how the State tracks storage levels to trigger or withhold compliance relief. The main thing for SMEs to weigh in on is whether any of this could indirectly slow project timelines or add procedural steps for developers, counties, or utilities—especially around verification of operating conditions or statewide storage thresholds.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4830</td>
+        <td class="wrap">AGRIVOLTAIC SYSTEMS</td>
+        <td>Solar</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Rep. Michelle Mussman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4830 creates a tight, statutory definition of what counts as an “agrivoltaic system,” making sure only solar projects that include real, ongoing agricultural production—not just pollinator habitat—qualify under Illinois’ dual‑use framework. It mainly affects developers and IPA program eligibility, and at first glance doesn’t look like it changes ICC authority, utility obligations, or cost‑recovery rules under the PUA. The key SME question is whether this new definition could indirectly shape utility review or interconnection processes if developers shift designs to meet the new agrivoltaic standards.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4910</td>
+        <td class="wrap">CLEAN ENERGY-WORKFORCE HUBS</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Lisa Davis (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4910 expands the Clean Jobs Workforce Hubs to offer more targeted outreach, training, and job‑placement services for people entering climate, environmental, and clean‑energy careers, and it adds new reporting requirements that break program data out by race, gender, geography, and equity status. For Ameren, the question is whether these changes shift procurement rules, program eligibility, or reporting obligations tied to utility‑funded programs; at first read, the impacts seem aimed at DCEO and workforce partners rather than utilities. SME review will help confirm whether the new data‑collection and equity requirements create any indirect compliance or customer‑program impacts.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4940</td>
+        <td class="wrap">UTILITY-IPA PROCUREMENT</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Jay Hoffman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4940 would require the IPA and DCEO to build new statewide project databases—covering clean‑energy and broadband—and let them hire a third‑party administrator outside the usual state procurement process. Developers would have to enter and maintain detailed project information, so the real impact is added reporting and administrative work. The key question for SMEs is whether these new data requirements end up slowing projects or creating indirect compliance steps that affect utilities through delays in siting, storage deployment, or local coordination.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4956</td>
+        <td class="wrap">LOC GOV-ENERGY STORAGE SYSTEMS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Steven Reick (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4956 tightens county rules for energy‑storage projects by requiring more detailed farmland‑drainage plans, mandating decommissioning plans, and baking NFPA‑based safety and repair standards into local approvals. It also forces storage developers to enter agricultural impact mitigation agreements, which adds more upfront paperwork and ongoing compliance. The big question for SMEs is whether these extra county steps could slow project timelines or create new local interactions that indirectly affect utility construction or interconnection work.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4989</td>
+        <td class="wrap">DATA CENTER HEATING/COOLING</td>
+        <td>Data Centers</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Kimberly Du Buclet (D)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4989 would require every new and existing data center in Illinois to develop a heat‑reuse plan using an air‑to‑water heat exchanger that can supply thermal energy to nearby homes or businesses. It’s part of the broader push to manage the impacts of fast‑growing data‑center load, and it could affect how developers plan and coordinate their projects. The key SME question is whether these new heat‑reuse requirements could indirectly influence utility timelines—especially interconnection, service planning, or cost‑responsibility—if developers need closer coordination with the utility to meet the mandate.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4994</td>
+        <td class="wrap">CDB-STRETCH ENERGY CODE</td>
+        <td>Energy Efficiemcy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Robyn Gabel (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4994 would let both counties and municipalities—not just municipalities—adopt the Illinois Stretch Energy Code, which effectively broadens where higher‑efficiency building standards can apply. It doesn’t directly change IPA procurement rules, program eligibility, or reporting requirements, but it could shape market participation by influencing where advanced efficiency measures become required or commonplace. SME review can confirm whether broader Stretch Code adoption could indirectly affect customer‑facing program costs or compliance expectations.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB4996</td>
+        <td class="wrap">UTILITIES-VARIOUS</td>
+        <td>VPP</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Robyn Gabel (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB4996 tweaks the VPP program by setting a floor on compensation for eligible storage systems ($250/kWh if the customer doesn’t take a separate storage rebate; $0/kWh if they did) and requiring utilities to let customers quickly share their data with aggregators. This is a program/compensation and data‑sharing change—it doesn’t add county‑facing permitting steps or slow siting for storage projects. The practical lift is on utilities and aggregators (IT/privacy workflows, consent and data pipelines), not on local approvals.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5049</td>
+        <td class="wrap">LOC GOV-RESIDENTIAL ENERGY</td>
+        <td>Energy Storage</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Ann M. Williams (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5049 basically says local governments can’t create their own rules for installing or inspecting residential energy backup systems, even in buildings with shared roofs. It doesn’t change IPA procurement or program eligibility, but it could make it easier for customers to install backup systems by cutting out local permitting hurdles. So the impact is more about smoothing the path for customer adoption than shifting major regulatory requirements.</p><p style="margin:0;"><b>GR position considerations</b><br>Pending in tracker. Needs SME review before recommending a posture. Check: eligibility definitions, procurement mechanics, and any new reporting/penalties. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5194</td>
+        <td class="wrap">INC TAX-ENERGY CHOICE</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Lawrence &quot;Larry&quot; Walsh, Jr. (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>This bill creates a new income tax credit equal to 20% of the wages a qualified utility or power‑generation company pays to a “qualified energy choice worker” in Illinois. To claim it, the company has to show that the state’s mandated clean‑energy phaseout dates (2030–2045) are creating a real, material impact on its workforce or ability to operate. It doesn’t change procurement or program rules, but it could indirectly shape workforce planning and cost impacts for utilities navigating the transition.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5221</td>
+        <td class="wrap">CONSUMER DATA PRIVACY ACT</td>
+        <td>Data Privacy</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Edgar Gonzalez, Jr. (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5221 creates a broad Consumer Data Privacy Act that gives people new rights over how their personal data is collected, used, and shared—things like opting out of targeted ads, data sales, or automated decision‑making. It mainly governs relationships between data controllers and processors, not energy storage developers or local governments. So, no—this one doesn’t add steps that slow down projects or create new county‑facing compliance obligations; its impacts sit in the general privacy/compliance space, not storage siting or permitting.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5366</td>
+        <td class="wrap">EPA-APPLIANCE STANDARDS</td>
+        <td>Energy Efficiemcy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Mary Beth Canty (D)</td>
+        <td class="wrap">Placed on Calendar 2nd Reading - Short Debate (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5366 creates a new Illinois Appliance Standards Act that directs IEPA to set minimum efficiency standards and require testing, certification, and labeling for certain products sold in the state. It doesn’t change IPA procurement rules, program eligibility, or reporting requirements, so utilities and renewable developers wouldn’t see new obligations roll back to customers. The biggest impacts are market‑side—manufacturers and retailers adjusting to updated standards—rather than anything that slows projects or affects IPA program participation.</p><p style="margin:0;"><b>GR position considerations</b><br>Representative Canty’s appliance efficiency bill (HB 5366) will not be moving this session.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5374</td>
+        <td class="wrap">EPA-ENVIRONMENTAL JUSTICE</td>
+        <td>Environmental Justice</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Diane Blair-Sherlock (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5374 updates the Environmental Protection Act to recognize that certain communities face disproportionate environmental impacts and formally defines terms related to environmental justice areas. On its own, it doesn’t create new permits, review steps, or county‑level requirements for energy storage projects. So no—it doesn’t add steps that slow down projects or create new county-facing compliance obligations, but it could signal future policy direction around siting sensitivity in EJ areas.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5429</td>
+        <td class="wrap">DISTRICT ENERGY STORAGE</td>
+        <td>TENS</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Jay Hoffman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5429 creates the new District Energy and Thermal Energy Storage Parity Act, setting up an optional ICC certification process for district‑energy infrastructure and directing IEPA to run a grant program to support qualifying projects. It’s essentially a voluntary certification and funding framework, not a siting or permitting bill, so it doesn’t add county‑level steps or slow down energy‑storage projects. The main lift falls on projects that choose to pursue certification or grants—not on utilities or local governments.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5438</td>
+        <td class="wrap">BROWNFIELD PHOTOVOLATIC REGS</td>
+        <td>Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Jay Hoffman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5438 adds large solar projects—including utility‑scale brownfield PV and systems over 5 MW—to the list of High Impact Businesses that can be located in enterprise zones, and it makes related updates to the IPA Act. This mainly expands eligibility for incentives rather than creating new siting or permitting hoops. So no—it doesn’t add steps that slow down energy‑storage projects or create new county‑facing compliance obligations; it’s more about making certain solar projects qualify for economic‑development treatment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5440</td>
+        <td class="wrap">ENERGY STORAGE REVENUE BONDS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Rep. Ryan Spain (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5440 lets the Illinois Finance Authority issue revenue bonds specifically for energy‑storage projects that are seeking state‑level storage credits or utility cost recovery, and it requires the Authority to coordinate with the IPA so financing is structured to keep costs low for ratepayers. This is a financing‑tool bill, not a permitting or siting bill, so it doesn’t add county‑level steps or slow down storage projects. Any impacts would show up in how developers choose to finance projects—not in local compliance or utility‑facing processes.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5477</td>
+        <td class="wrap">WIND &amp; SOLAR FACILITY DRAINAGE</td>
+        <td>Wind &amp; Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Suzanne M. Ness (D)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5477 says that if a wind or solar project is planned in an unincorporated area right next to a city, it either has to be annexed into that city or follow the city’s zoning rules, and it lays out factors for judging whether siting or special‑use permits meet state, federal, and local standards. That can add steps—think annexation petitions, municipal zoning reviews, and extra city–county coordination—which can slow timelines and change who the developer answers to. It doesn’t create brand‑new county compliance programs, but it can shift jurisdiction and add procedural layers where projects sit on the municipal edge.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5479</td>
+        <td class="wrap">EPA-GREENHOUSE GAS-EQUITY</td>
+        <td>Gas</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Rep. Jay Hoffman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>This bill tightens the greenhouse‑gas rules for certain gas‑fired electric generating units by clarifying which communities count for triggering the stricter deadlines. Under the change, the tougher requirements only apply if the nearby equity‑investment‑eligible community was officially designated by the Restore, Reinvest, and Renew Board as of January 11, 2024 and is located in an R3 area under the Cannabis Regulation and Tax Act. In practice, this narrows the number of units that must meet the accelerated reduction schedule. The goal seems to be providing more clarity and limiting compliance to communities already formally recognized when the rules were set.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5513</td>
+        <td class="wrap">HYPERSCALE DATA CENTERS</td>
+        <td>Data Centers</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Robyn Gabel (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5513 creates a sweeping regulatory framework for hyperscale data centers—covering environmental reviews, water‑use permits, community‑benefit agreements, public reporting, and annual fees tied to peak demand. While most of the requirements fall on developers rather than utilities, the sheer volume of new approvals and studies could influence how quickly big loads move through planning. The key SME question is whether these added obligations might indirectly affect service expectations, interconnection timelines, or upgrade cost‑responsibility when a large data‑center load arrives fast.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5538</td>
+        <td class="wrap">EPA-GHG-EMITTING UNITS-10YRS</td>
+        <td>Gas</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Rep. Ryan Spain (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>HB5538 gives gas‑fired generators and cogeneration units an extra 10 years to meet Illinois’ carbon‑reduction deadlines, effectively pushing back when these plants must hit reduced or zero‑emissions targets. In practice, that means enforcement comes later and operators have more runway to keep units online during tight system conditions, which can help with reliability but may also delay emissions‑control investments. The key SME question is whether the extended timelines meaningfully change reliability planning or shift cost impacts for customers if retrofits, replacements, or compliance spending get pushed further into the future.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HB5607</td>
+        <td class="wrap">ADVANCED TECHNOLOGY LEADERSHIP</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Rep. Jay Hoffman (D)</td>
+        <td class="wrap">Rule 19(a) / Re-referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>The bill would require large Illinois data centers to increase their use of clean energy by purchasing and retiring verified clean energy certificates. Over time, they would also need to match their electricity use with clean energy production on an hour by hour basis, and the clean energy would have to come from facilities within the same regional power grid. The Illinois Power Agency would decide which data centers are covered and would oversee compliance while working to keep administrative costs low.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">HR744</td>
+        <td class="wrap">DATA CENTERS-SUPPLY OWN ENERGY</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Rep. Tony M. McCombie (R)</td>
+        <td class="wrap">Referred to Rules Committee (in the House)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>Urges all data centers in Illinois to provide their own energy to alleviate the burden they place on Illinois residents. Urges the Illinois Power Agency and the Illinois Environmental Protection Agency to, pursuant to 415 ILCS 5/9.15(o), develop a plan to reduce or delay CO2e and copollutant emissions reductions. Urges the Illinois Commerce Commission to approve the plan developed by Illinois Power Agency and the Illinois Environmental Protection Agency.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2727</td>
+        <td class="wrap">UTILITIES-VARIOUS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Chris Balkema (R)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2727 defines “battery storage resource” and “total State‑installed generation capacity,” and says the State can’t grant variances or regulatory relief from emissions‑reduction requirements once battery storage reaches 10% of Illinois’ total generation capacity. In practice, that means gas‑fired emitting units can’t be forced to close early or lose their compliance flexibility until storage hits that threshold, which effectively ties retirement pressure to how fast storage builds out. It doesn’t add county‑level siting steps or slow local approvals—its impacts show up in statewide compliance timing and generator‑planning decisions.</p><p style="margin:0;"><b>GR position considerations</b><br>Support the delaying of retirements. The RTO vote piece is a bit concerning, but probably worth accepting in order to delay retirements.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2736</td>
+        <td class="wrap">EPA-NATURAL GAS PEAKER PLANTS</td>
+        <td>Gas</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Li Arellano, Jr. (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2736 lets every natural‑gas peaker plant in Illinois run essentially continuously until 30 days after IEPA posts notice that the state has brought at least 21,000 MW of new utility‑scale renewables online. IEPA is also directed to update rules and permits so these plants can operate under this temporary flexibility. It doesn’t add county‑level steps or slow storage projects—this one is really about giving peakers room to operate for reliability until the state hits its renewables‑capacity milestone.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Support in tracker. Likely value: clarity, reliability protection, streamlined processes, or beneficial program design. Check: county requirements, NFPA references, decommissioning/security, and drainage/ag impacts. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2842</td>
+        <td class="wrap">CO2 PIPELINES-EMINENT DOMAIN</td>
+        <td>Carbon Sequestration</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Michael W. Halpin (D)</td>
+        <td class="wrap">Rule 3-9(a) / Re-referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2842 would bar carbon‑dioxide pipeline developers from seeking or using eminent‑domain authority through the ICC, even if they hold a certificate under the Carbon Dioxide Transportation and Sequestration Act. That effectively narrows the Commission’s role and removes a major tool that pipeline operators have relied on for routing and land acquisition. The key SME question is whether taking eminent domain off the table meaningfully shifts ICC authority or creates new utility‑side cost, siting, or compliance implications when CO₂‑transport infrastructure intersects with utility assets or planned projects.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2875</td>
+        <td class="wrap">CONSUMER DATA PRIVACY</td>
+        <td>Data Privacy</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Laura M. Murphy (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2875 creates a broad Consumer Data Privacy Act that applies to businesses handling large volumes of Illinois consumers’ personal data or earning significant revenue from selling it. It’s a data‑governance bill—not a siting or permitting bill—so it doesn’t add steps that slow energy‑storage projects or create county‑level compliance obligations. Any impact would fall on companies’ internal data‑handling practices, not on local approvals or project timelines.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2886</td>
+        <td class="wrap">GENETIC INFO PRIVACY-BIOMARKER</td>
+        <td>Data Privacy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Bill Cunningham (D)</td>
+        <td class="wrap">Placed on Calendar Order of 3rd Reading March 3, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2886 expands Illinois’ genetic‑privacy rules so that biomarker testing—along with genetic testing—is fully confidential, and insurers can’t use that information for underwriting or non‑therapeutic purposes unless the individual voluntarily shares favorable results. This is strictly a privacy and insurance‑use update, not a land‑use or permitting change. So no—it doesn’t add steps that slow down energy‑storage projects or create any new county‑facing compliance obligations.</p><p style="margin:0;"><b>GR position considerations</b><br>Pending in tracker. Needs SME review before recommending a posture. Check: county requirements, NFPA references, decommissioning/security, and drainage/ag impacts. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2958</td>
+        <td class="wrap">AGRIVOLTAIC SYSTEMS</td>
+        <td>Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Doris Turner (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2958 lays out a very specific definition of what counts as an “agrivoltaic system,” making sure only solar projects that pair real, ongoing agricultural production with generation—not just pollinator plantings—qualify under the IPA and PUA frameworks. The bill mainly tightens eligibility for developers, and at first glance doesn’t appear to shift ICC authority, utility obligations, or cost‑recovery expectations in a meaningful way. The SME question is whether these stricter criteria could indirectly affect utility review or interconnection processes if more projects are redesigned to meet the new agrivoltaic standard.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Neutral in tracker. Focus on technical cleanup and avoiding unintended consequences. Check: ICC authority, cost recovery, reporting deadlines, and enforceability. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2979</td>
+        <td class="wrap">COUNTY/MUNI-NATURAL GAS</td>
+        <td>Gas</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Patrick J. Joyce (D)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB2979 says local governments can’t ban natural gas in new construction unless voters approve it through a referendum, and it limits home‑rule authority so cities can’t get around that requirement. It’s a clear, precedent‑setting move in the gas‑vs‑electrification debate because it reins in local bans and signals strong state‑level support for preserving consumer choice. The SME question is whether this shifts the broader narrative or customer expectations around gas use in new buildings—and whether other states might look to a similar model.</p><p style="margin:0;"><b>GR position considerations</b><br>Tagged Support in tracker. Likely value: clarity, reliability protection, streamlined processes, or beneficial program design. Check: preemption vs. local control, consumer messaging, and enforcement scope. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3078</td>
+        <td class="wrap">LOC GOV-ENERGY STORAGE SYSTEMS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Doris Turner (D)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3078 tightens county requirements for energy‑storage projects by requiring more detailed farmland‑drainage plans and making decommissioning plans mandatory rather than optional. That means developers have to provide more documentation up front and follow the agricultural‑impact mitigation agreement for drainage repairs, which can add some extra coordination with counties. So yes—it can add steps that slow projects or create new county‑facing compliance obligations, especially around drainage, restoration, and decommissioning paperwork.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3234</td>
+        <td class="wrap">EPA-GREENHOUSE GAS-EQUITY</td>
+        <td>Gas</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Bill Cunningham (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>This bill makes a small but important clarification to the state’s greenhouse‑gas rules for certain gas‑fired power plants. Right now, some units face stricter emission‑reduction deadlines if they are located near an equity‑investment‑eligible community. What this amendment does is tighten that definition so it only applies when the nearby community was officially designated by the Restore, Reinvest, and Renew Board as of January 11, 2024 and is located in an R3 area under the Cannabis Regulation and Tax Act.
+Speaker: In plain terms, it narrows which power plants have to follow the faster emission‑reduction schedule and gives everyone clearer boundaries on who is covered.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3246</td>
+        <td class="wrap">UTILITIES-HYDROGEN BATTERIES</td>
+        <td>Hydrogen Fuel Cells</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Laura Ellman (D)</td>
+        <td class="wrap">Rule 3-9(a) / Re-referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3246 directs the Illinois Power Agency to run a major new energy‑storage procurement—over 1,038 MW of stand‑alone, cost‑effective storage by 2029/2030 for utilities over 300,000 customers—and updates related county provisions. The bill drives utility‑scale storage deployment but doesn’t itself add new county‑level steps or local permitting requirements, so it shouldn’t slow projects on the siting side. The main lift is on procurement, contracting, and development timelines, not on creating new county‑facing compliance obligations.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3268</td>
+        <td class="wrap">RES SOLAR PERMITTING PLATFORM</td>
+        <td>Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Laura Ellman (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3268 would require cities and counties over 10,000 residents to adopt an automated residential solar‑permitting platform by mid‑2027, with the goal of processing at least 75% of standard residential solar applications through that system. This is meant to speed up approvals, not slow them down, and it doesn’t add new county‑facing requirements beyond adopting and using the platform itself. So no—it doesn’t create new steps that slow projects; if anything, it pushes local governments toward faster, more standardized solar permitting.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3409</td>
+        <td class="wrap">LOC GOV-ENERGY STORAGE SYSTEMS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Christopher Belt (D)</td>
+        <td class="wrap">Rule 3-9(a) / Re-referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3409 tightens county rules for energy‑storage projects by requiring more detailed farmland‑drainage plans and making decommissioning plans mandatory instead of optional. That means developers have to provide more documentation up front and work more closely with counties on drainage repair and restoration. So yes—it adds steps and creates new county‑facing compliance obligations that can slow timelines, especially around drainage planning and decommissioning requirements.</p><p style="margin:0;"><b>GR position considerations</b><br>This bill adds new requirements for developers when they build certain types of facilities. For Ameren, the only impact would be if we end up constructing something that falls under the bill’s definition, so most effects are limited or indirect. There is no expected financial impact on customers unless Ameren builds a covered facility. A neutral position makes sense, and the measure could be improved by clarifying what happens to these facilities after leases expire and tightening up any unclear language.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3450</td>
+        <td class="wrap">MUNI CD-SOLAR ENERGY SYSTEM</td>
+        <td>Solar Energy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. David Koehler (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3450 would let municipalities regulate—or even prohibit—solar installations if it aligns with their comprehensive plan or zoning authority, removing the current protection that blocks local bans. That means more local discretion, which can add steps and slow projects through extra zoning reviews, potential prohibitions in certain areas, and new compliance with city‑specific standards. It doesn’t create county‑level obligations, but it can materially change municipal approvals and timelines for rooftop or small solar.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3488</td>
+        <td class="wrap">WIND &amp; SOLAR AFFECT WATER FLOW</td>
+        <td>Wind &amp; Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Sally J. Turner (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3488 would require wind and solar developers to fully compensate landowners if a project damages drainage—whether on the owner’s land, adjoining land, or drainage‑district property—and the Department of Agriculture would determine the amount owed. This raises the bar for siting because developers now face automatic, state‑determined compensation obligations for water‑flow impacts, which can make projects harder to place and increase local scrutiny. It doesn’t create new referendum or preemption rules, but it strengthens local leverage and could make permitting and community engagement more complicated.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3548</td>
+        <td class="wrap">CONSUMER DATA PRIVACY ACT</td>
+        <td>Data Privacy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3548 sets up a new Consumer Data Privacy Act that gives people clear rights over their personal data—things like correcting information, deleting it, getting a copy, or opting out of targeted ads, data sales, or profiling. It’s a data‑privacy bill, not a land‑use or permitting bill, so it doesn’t add steps that slow energy‑storage projects or create any new county‑facing compliance obligations. Any impact stays on the data‑governance side, not project siting or local approvals.</p><p style="margin:0;"><b>GR position considerations</b><br>Pending in tracker. Needs SME review before recommending a posture. Check: county requirements, NFPA references, decommissioning/security, and drainage/ag impacts. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3574</td>
+        <td class="wrap">REGULATION-TECH</td>
+        <td>Shell</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3574 makes only a technical change to a short‑title section of the Public Utilities Act, so it doesn’t alter how the ICC operates or how utilities handle cost recovery, compliance, or service obligations. In other words, it doesn’t shift Commission authority or utility duties in any meaningful way. This one is a straightforward monitor, pending SME confirmation, but no substantive impacts are expected.</p><p style="margin:0;"><b>GR position considerations</b><br>Monitor unless a clear utility obligation or cost impact emerges. Check: ICC authority, cost recovery, reporting deadlines, and enforceability. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3575</td>
+        <td class="wrap">REGULATION-TECH</td>
+        <td>Shell</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3575 is just a technical tweak to a short‑title provision in the Public Utilities Act, with no substantive changes to how the ICC regulates utilities. It doesn’t shift Commission authority, utility obligations, cost‑recovery rules, or compliance expectations in any meaningful way. This one is a simple monitor, pending SME confirmation, but no impacts are expected.</p><p style="margin:0;"><b>GR position considerations</b><br>Monitor unless a clear utility obligation or cost impact emerges. Check: ICC authority, cost recovery, reporting deadlines, and enforceability. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3576</td>
+        <td class="wrap">REGULATION-TECH</td>
+        <td>Shell</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3576 makes a purely technical change to the short‑title section of the Telecommunications Article within the Public Utilities Act, without touching any of the substantive regulatory provisions. It doesn’t shift ICC authority, alter utility obligations, or change cost‑recovery or compliance requirements in any meaningful way. This one is a straightforward monitor, pending SME confirmation, but no operational or regulatory impacts are expected.</p><p style="margin:0;"><b>GR position considerations</b><br>Monitor unless a clear utility obligation or cost impact emerges. Check: ICC authority, cost recovery, reporting deadlines, and enforceability. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3578</td>
+        <td class="wrap">DATA CENTERS-FOREIGN OWNERSHIP</td>
+        <td>Data Centers</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3578 would block any “foreign‑adversary‑owned” company from building a data center in Illinois unless the ICC, IPA, and DCEO jointly study the project and certify that its load is fully self‑generated and won’t affect PJM or MISO. That’s a big new hurdle, and it could definitely slow timelines or change expectations around interconnection, because a developer wouldn’t even get to the utility‑service stage unless the agencies sign off. The SME question is whether this certification effectively shifts who pays for upgrades or alters service obligations when large loads show up—but the joint‑study requirement alone is a major new gating step.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty aroun</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3580</td>
+        <td class="wrap">ENERGY-GENERATION TASK FORCE</td>
+        <td>Energy-Generation</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Jil Tracy (R)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3580 sets up an Illinois Regional Generation Reliability Task Force—basically a study and coordination group—not a new compliance program. That means no direct operational, cost, or timeline impacts for utilities or customers right now, beyond modest administrative costs to staff/participate and any future reporting the task force might request. The real impacts would only come later if its recommendations are turned into binding rules or legislation.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3581</td>
+        <td class="wrap">EPA-GREENHOUSE GASES</td>
+        <td>Greenhouse Fuel Cells</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Dale Fowler (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3581 would roll back the greenhouse‑gas provisions in the Environmental Protection Act to the version that existed before P.A. 102‑662, effectively undoing the accelerated emissions‑reduction timelines and requirements added in that law. In practical terms, that would push enforcement further out and give generators more operational flexibility during tight reliability conditions, but it also delays emissions‑control investments and could shift costs depending on how long older units stay online. SME input will help clarify whether reverting to the older framework meaningfully changes reliability planning or alters cost impacts for customers.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3606</td>
+        <td class="wrap">EPA-HEAT RATE</td>
+        <td>Heat Fuel Cells</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Steve Stadelman (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3606 defines “heat rate” in statute and then requires gas‑fired and other large GHG‑emitting units with a heat rate of 7,000 Btu/kWh or higher to cut their CO₂‑equivalent emissions by 50% by 2035, based on a 12‑month average. This is a statewide emissions‑compliance requirement—not a siting or county‑level permitting rule—so it doesn’t add local steps or create new county‑facing obligations for energy‑storage projects. Any impact would fall on generators planning compliance, not on storage development timelines or local approval workflows.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3613</td>
+        <td class="wrap">RURAL BROADBAND DEPLOY STUDY</td>
+        <td>Broadband Deployment</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Rachel Ventura (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3613 simply directs the Broadband Advisory Council to study the social and economic costs and benefits of expanding rural broadband through cooperatives, looking at things like telehealth access, remote work, and education. It’s a research and policy‑evaluation bill—not a permitting, siting, or land‑use bill—so it doesn’t add steps that slow down energy‑storage projects or create new county‑facing compliance obligations. Any impacts stay within broadband planning, not storage development or local approvals.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3629</td>
+        <td class="wrap">CTY CD-COMMERCIAL WIND/SOLAR</td>
+        <td>Wind &amp; Solar</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Terri Bryant (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3629 carves out a set of southern Illinois counties—those south of I‑70 plus the listed counties—so the statewide siting rules from P.A. 102‑1123 for wind, solar, and storage wouldn’t apply there. It doesn’t add new county‑level steps on its own, but it shifts projects back to local processes, which can either speed things up (if locals are more flexible) or slow them down (if locals add stricter reviews). Bottom line: no new county‑facing obligations created by the bill itself, but more variability in siting timelines and requirements in the exempted counties.</p><p style="margin:0;"><b>GR position considerations</b><br>Pending in tracker. Needs SME review before recommending a posture. Check: county requirements, NFPA references, decommissioning/security, and drainage/ag impacts. (Initial; verify with SMEs.)</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3652</td>
+        <td class="wrap">BROADBAND PROVIDERS-EASEMENTS</td>
+        <td>Broadband Deployment</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Paul Faraci (D)</td>
+        <td class="wrap">Rule 3-9(a) / Re-referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3652 expands the rights of broadband providers—especially electric‑cooperative broadband grantees—by letting them use existing electric easements outside their grant area and enter private property for broadband deployment as long as they have the proper state or local permits. This doesn’t create new county‑level obligations for energy‑storage projects, but it does shift some land‑access dynamics by strengthening broadband providers’ ability to build infrastructure across private property. For storage specifically, it doesn’t add steps or slow down projects—its impacts stay squarely in the broadband‑deployment space.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3665</td>
+        <td class="wrap">INC TAX-ENERGY CHOICE</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Meg Loughran Cappel (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3665 creates a 20% Illinois income‑tax credit for wages paid to “qualified energy choice workers” by regulated utilities or baseload/intermediate generators that can show material operational impacts from the state’s 2030–2045 phaseout timelines. This is a tax incentive administered through the Department of Revenue—it doesn’t add county‑level permitting steps or slow energy‑storage projects. Any impact is on employer tax filings and workforce planning, not local compliance or siting.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3705</td>
+        <td class="wrap">ENERGY STORAGE REVENUE BONDS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Sue Rezin (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3705 is basically a financing bill for energy‑storage projects. It allows the Illinois Finance Authority to issue revenue bonds specifically for storage projects that want to qualify for state storage credits or utility cost recovery. The idea is that the IFA and the Illinois Power Agency work together so the financing stays affordable for customers.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3761</td>
+        <td class="wrap">DATA CENTERS-VARIOUS</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Mike Simmons (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3761 creates a data‑center self‑direct program under the IPA Act, letting data‑center customers reduce what they pay toward renewable‑energy procurement if they bring new additive clean‑energy generation online. It mainly affects how large loads participate in IPA cost‑recovery—not how they interconnect—but it could shape service expectations if more data‑center developers lean on self‑direct structures when planning new capacity. The SME question is whether shifting REC‑cost responsibility this way changes upgrade economics or timeline pressures when big loads hit the system quickly.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty aroun</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3794</td>
+        <td class="wrap">LOC GOV-RESIDENTIAL ENERGY</td>
+        <td>Energy Storage</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Javier L. Cervantes (D)</td>
+        <td class="wrap">Placed on Calendar Order of 3rd Reading March 26, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3794 bars counties and municipalities from regulating the installation or inspection of residential energy‑backup systems—including in buildings with shared roofs—and it formally defines what counts as a REBS. It doesn’t change IPA procurement rules, program eligibility, or reporting requirements, but it could indirectly shape market participation by making it easier for customers to install backup systems without navigating local permitting rules. Overall, no major utility‑side obligations roll back to customers—this is mostly about simplifying local approval pathways.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3830</td>
+        <td class="wrap">DATA CENTERS-VARIOUS</td>
+        <td>Data Centers</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Sen. Rachel Ventura (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3830 sets up a data‑center self‑direct program under the IPA Act, letting large data‑center customers lower the renewable‑energy procurement charges they pay if they bring new additive clean‑energy generation online. It doesn’t directly change interconnection rules or service obligations, but it could shape expectations around who pays what when big loads show up—especially if more developers pursue self‑direct options as part of their project planning. The SME question is whether this shift in REC‑cost responsibility could indirectly affect upgrade funding, timing pressures, or utility‑customer negotiations during rapid large‑load development.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3838</td>
+        <td class="wrap">BROADBAND DEPLOYMENT ACT</td>
+        <td>Broadband Deployment</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Paul Faraci (D)</td>
+        <td class="wrap">Placed on Calendar Order of 2nd Reading March 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3838 creates a new Broadband Deployment Act, laying out findings and definitions but not adding any new permitting, siting, or county‑level procedures. It’s essentially a policy‑framing bill for broadband expansion, not a land‑use or energy‑storage measure. So no—it doesn’t slow projects or create county‑facing compliance obligations, and its impacts stay within broadband planning rather than storage development.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3856</td>
+        <td class="wrap">BIPA-SECURITY PURPOSE</td>
+        <td>BIPA</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. John F. Curran (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3856 updates Illinois’ Biometric Information Privacy Act to spell out a broad “security purpose” definition—covering things like preventing theft or fraud, controlling access to property, protecting people from harm, and assisting law‑enforcement investigations. This is a privacy/usage clarification, not a siting or permitting change, so it doesn’t add steps that slow energy‑storage projects or create new county‑facing obligations. Practically, it may even ease compliance for facilities that use biometrics for access control, though companies should still keep their BIPA notices, consent, retention schedules, and security practices up to date.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3890</td>
+        <td class="wrap">CONSUMER DATA PRIVACY</td>
+        <td>Data Privacy</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Rachel Ventura (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3890 establishes a broad Data Privacy Protection Act that applies to companies handling large volumes of Illinois consumers’ personal data or generating significant revenue from selling it. It sets requirements around how personal data is processed, secured, and how consumers must be notified if there’s a breach. This is a data‑privacy bill, not a land‑use or permitting bill—so it does not add steps that slow energy‑storage projects or create new county‑facing compliance obligations; its impacts stay entirely on the information‑governance side.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3927</td>
+        <td class="wrap">CLEAN ENERGY-WORKFORCE HUBS</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Lakesia Collins (D)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3927 expands the Clean Jobs Workforce Hubs under the Energy Transition Act so they specifically target outreach, training, and placement for people pursuing climate, environmental, and clean‑energy careers, and it formally defines what that sector includes. It doesn’t change IPA procurement rules or program eligibility, and it doesn’t add new reporting for utilities—its impacts sit with DCEO and workforce partners. So no, it doesn’t roll back new obligations or costs to customers, though it could subtly shape market participation by growing the clean‑energy talent pipeline.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3929</td>
+        <td class="wrap">ENVIORNMENTAL GOAL EXTENSIONS</td>
+        <td>Clean Energy Transition</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Donald P. DeWitte (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3929 moves Illinois’ clean‑energy target from 2050 to 2060, resetting the long‑term policy direction in the Illinois Power Agency Act and making a technical conforming change in the PUA. That shift doesn’t directly change ICC authority, utility obligations, or cost‑recovery rules, but it does recalibrate expectations about the pace of the transition and could influence long‑range planning assumptions. SME input will help confirm whether extending the target effectively eases compliance pressure or materially changes how utilities model future investments.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3970</td>
+        <td class="wrap">UTILITY-COST-BENEFIT ANALYSIS</td>
+        <td>Gas</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Seth Lewis (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3970 requires the ICC to run a full, independent cost‑benefit analysis before it can approve any gas‑system decarbonization pathway or mandate—looking at lifecycle emissions, systemwide costs, stranded‑asset risk, rate impacts, equity concerns, reliability, workforce effects, and whether market‑based options could do the job more cheaply. That’s a major procedural hurdle for gas‑sector policymaking, but it doesn’t add county‑level steps or slow down energy‑storage projects, since the bill’s requirements sit entirely within ICC decision‑making. The main impact is on how fast the Commission can move on gas‑system pilots or mandates, not on local permitting or storage‑project timelines.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3974</td>
+        <td class="wrap">GAS APPLIANCE LABELING</td>
+        <td>Gas</td>
+        <td><span class="pill crit">Oppose</span></td>
+        <td>Sen. Graciela Guzman (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3974 requires that any non‑externally vented natural‑gas appliance manufactured after January 1, 2027 carry a specific safety warning label, and it gives the Attorney General authority to set additional formatting and placement rules for that label. It’s strictly a consumer‑product labeling bill, so it doesn’t add steps that slow down storage projects or create new county‑facing compliance obligations. The impacts fall on appliance manufacturers and retailers—not on energy‑storage siting, permitting, or local approvals.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3979</td>
+        <td class="wrap">UTILITIES-REGULATORY TAKINGS</td>
+        <td>Gas</td>
+        <td><span class="pill good">Support</span></td>
+        <td>Sen. Donald P. DeWitte (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB3979 would require every decarbonization pilot, pathway, or gas‑system infrastructure plan coming out of the ICC’s Future of Gas proceeding (Docket 24‑0158) to complete a Regulatory Takings Assessment before it can be approved. That adds a Commission‑level procedural step, but it doesn’t create county‑facing requirements or slow down energy‑storage projects, since it applies only to gas‑system regulatory actions. The practical impact is on ICC timelines and analysis—not local permitting or storage‑related compliance.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB4003</td>
+        <td class="wrap">UTILITIES-RESTORE VARIOUS</td>
+        <td>Energy Storage</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Chapin Rose (R)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB4003 removes an existing provision in the Illinois Finance Authority Act related to energy‑storage projects and makes a corresponding update in the Illinois Power Agency Act. It doesn’t introduce new siting rules, county‑level procedures, or permitting steps—so it doesn’t slow down projects or create new local compliance obligations. The real impact depends on what specific financing authority was removed, but on its face this bill doesn’t touch storage siting, safety reviews, or county interactions.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB4016</td>
+        <td class="wrap">HYPERSCALE DATA CENTERS</td>
+        <td>Data Centers</td>
+        <td><span class="pill warn">Neutral</span></td>
+        <td>Sen. Ram Villivalam (D)</td>
+        <td class="wrap">Rule 2-10 Committee Deadline Established As April 24, 2026 (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB4016 creates a sweeping regulatory framework for hyperscale data centers—covering cumulative‑impact assessments, public notice, community‑benefit agreements, bans on NDAs, annual peak‑demand fees, water‑resource planning, quarterly water‑use reporting, and a new Water Impact Permit with hearings and 5‑year renewals. Most of these obligations fall on developers, but the volume of new studies, permits, and public‑process steps could definitely slow how quickly big loads move from concept to interconnection. The SME question is whether these added requirements materially change service expectations, interconnection timelines, or upgrade‑cost responsibility when a hyperscale load shows up fast—and whether utilities will be pulled into water‑planning or peak‑demand reporting dynamics.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty aroun</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB4020</td>
+        <td class="wrap">DISTRICT ENERGY STORAGE</td>
+        <td>Energy Storage</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Bill Cunningham (D)</td>
+        <td class="wrap">Referred to Assignments (in the Senate)</td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>SB4020 creates a new District Energy and Thermal Energy Storage Parity Act, giving the ICC an optional certification program for district‑energy infrastructure and directing IEPA to run a grant program to help fund qualifying projects. It’s a voluntary certification/financing structure—not a siting or permitting change—so it doesn’t add steps that slow projects or create new county‑facing compliance obligations. Any effects would come only if a developer chooses to participate in the certification or grant program, not from new local requirements.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB2181</td>
+        <td class="wrap">DATA CENTER REPORTING</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Steve Stadelman</td>
+        <td class="wrap"></td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>Creates the Illinois Data Center Energy and Water Reporting Act. Defines terms. Provides that, beginning January 1, 2026, all data centers operating within the State shall annually report the data center&#x27;s energy and water consumption to the Illinois Power Agency for the preceding calendar year. Sets forth requirements for the content of the report. Provides that reports shall be submitted to the Agency no later than March 31 of each year. Sets forth provisions concerning data confidentiality and public access to information and the enforcement of the Act and penalties. Provides that the Agency shall conduct a comprehensive study on the impact that data centers in the State are having on rate-paying customers. Sets forth requirements for the content of the study. Provides that the Agency shall submit a report detailing the findings of the study to the General Assembly and the Governor no later than 12 months after the effective date of the Act. Sets forth rulemaking provisions for the Agency. Effective immediately.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3030</td>
+        <td class="wrap">EPA-NOISE-CRYPTO-MINING</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Sue Rezin                    
+                
+            </td>
+        <td class="wrap"></td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>Amends the Environmental Protection Act. Provides that cryptocurrency mining facilities shall apply noise-reduction techniques, including certain specified techniques. Provides that the Pollution Control Board shall adopt rules implementing these provisions. Provides that the Environmental Protection Agency, as the noise control agency for the State, shall enforce these provisions, as well as the rules adopted under these provisions. Provides that the Agency may adopt rules to administer and implement these provisions, as applicable. Defines terms.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB3120</td>
+        <td class="wrap">DCEO-DATA CENTERS</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Laura M. Murphy</td>
+        <td class="wrap"></td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>Amends the Department of Commerce and Economic Opportunity Law of the Civil Administrative Code of Illinois. Provides that a new or existing data center is a qualifying data center for purposes of the Act only if it provides in its application details regarding the water stewardship strategy used by it. Requires the Department of Commerce and Economic Opportunity&#x27;s annual report to the General Assembly and the Governor on data center investments to provides details regarding the water stewardship strategies used by each recipient business.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr><tr class="bill-row" onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden">
+        <td class="mono">SB4004</td>
+        <td class="wrap">AQUIFER PROTECTION ACT</td>
+        <td>Data Centers</td>
+        <td><span class="pill neutral">Pending</span></td>
+        <td>Sen. Chapin Rose</td>
+        <td class="wrap"></td>
+        <td style="text-align:center;color:var(--text-dim);">▾</td>
+      </tr>
+      <tr class="bill-detail" hidden><td colspan="7" style="white-space:normal;background:var(--surface-2);font-size:0.82rem;color:var(--text-dim);"><p style="margin:0 0 8px;"><b>Working rationale</b><br>Creates the Data Center Water Transparency and Aquifer Protection Act. Provides that, beginning January 1, 2027, no data center operating within the State shall use water from the Mahomet Aquifer. Prohibits State agencies from issuing or renewing a permit authorizing a data center to withdraw groundwater from the Mahomet Aquifer. Requires existing data centers to transition to alternative water sources and cease all groundwater withdrawals from the Mahomet Aquifer by no later than January 1, 2028. Provides that a unit of local government may not enter into, enforce, or renew any nondisclosure agreement, confidentiality clause, or similar contractual provision with a data center that restricts the disclosure of information related to the data center&#x27;s water use. Contains provisions concerning data confidentiality and public access. Establishes penalties for violations. Grants the Illinois Environmental Protection Agency rulemaking powers.</p><p style="margin:0;"><b>GR position considerations</b><br>Industry stakeholders are opposing all data center legislation this session because of the broader cumulative impact these bills could have on utilities, including higher compliance costs, stricter operational requirements, and increased uncertainty around future infrastructure planning and investment.</p></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-top:8px;">Click a row to expand the working rationale and GR position considerations. Source: RTC Tracked Bills, week ending 9/28/26. 71 bills tracked.</p>
+  </section>
+
+</main>
+
+<footer>
+  Full bill list for the GR Workboard, part of the Broderick Learning Hub. Source: RTC Tracked Bills, week ending 9/28/26. <a href="gr-workboard.html#legislation">&larr; Back to the Legislation summary</a>
+</footer>
+
+</body>
+</html>
