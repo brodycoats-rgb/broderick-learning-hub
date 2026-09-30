@@ -1,0 +1,1532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; }
+  [hidden] { display: none !important; }
+</style>
+<title>Illinois Battery Storage Primer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column under a sticky module nav. Every module runs script, terms, callouts, mind map, sources.
+   Encoding: teal = MISO / Ameren Illinois, indigo = PJM / ComEd, amber tint = internal debrief (verify before use). */
+:root {
+  --bg: #F2F5F8;
+  --surface: #FFFFFF;
+  --surface-2: #E7ECF3;
+  --fg: #14213A;
+  --fg-2: #455471;
+  --line: #CBD4E0;
+  --accent: #B4471C;
+  --accent-ink: #FFFFFF;
+  --link: #0A5C9E;
+  --miso: #0B7A75;
+  --pjm: #4A4FC4;
+  --warn-bg: #FFF1D6;
+  --warn-fg: #5E4100;
+  --warn-line: #DDB258;
+  --ok: #1B7F4B;
+  --ok-bg: #E2F4EA;
+  --no: #B42318;
+  --no-bg: #FDE7E4;
+  --b1: #0B7A75;
+  --b2: #4A4FC4;
+  --b3: #B4471C;
+  --b4: #8A3B8F;
+  --b5: #4E6B2F;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1626;
+    --surface: #16213A;
+    --surface-2: #1D2A47;
+    --fg: #E6ECF5;
+    --fg-2: #A9B6CC;
+    --line: #2C3B5C;
+    --accent: #F0915F;
+    --accent-ink: #1A0D05;
+    --link: #8CC4FF;
+    --miso: #4FD1C5;
+    --pjm: #9DA2FF;
+    --warn-bg: #3A2C0B;
+    --warn-fg: #F3D38C;
+    --warn-line: #7A5D1A;
+    --ok: #5DD39E;
+    --ok-bg: #103526;
+    --no: #FF8C82;
+    --no-bg: #3D1714;
+    --b1: #4FD1C5;
+    --b2: #9DA2FF;
+    --b3: #F0915F;
+    --b4: #D79BE0;
+    --b5: #A9CF82;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1626;
+  --surface: #16213A;
+  --surface-2: #1D2A47;
+  --fg: #E6ECF5;
+  --fg-2: #A9B6CC;
+  --line: #2C3B5C;
+  --accent: #F0915F;
+  --accent-ink: #1A0D05;
+  --link: #8CC4FF;
+  --miso: #4FD1C5;
+  --pjm: #9DA2FF;
+  --warn-bg: #3A2C0B;
+  --warn-fg: #F3D38C;
+  --warn-line: #7A5D1A;
+  --ok: #5DD39E;
+  --ok-bg: #103526;
+  --no: #FF8C82;
+  --no-bg: #3D1714;
+  --b1: #4FD1C5;
+  --b2: #9DA2FF;
+  --b3: #F0915F;
+  --b4: #D79BE0;
+  --b5: #A9CF82;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 17px/1.62 var(--serif);
+  padding-inline: 16px;
+  padding-block: 0 72px;
+}
+a { color: var(--link); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.wrap { max-width: 860px; margin-inline: auto; }
+
+/* navigation */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  margin-inline: -16px;
+  padding-inline: 16px;
+}
+.nav-in {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-block: 10px;
+  max-width: 860px;
+  margin-inline: auto;
+  scrollbar-width: thin;
+}
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  font: 600 12.5px/1 var(--sans);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--fg-2);
+  background: var(--surface);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.chip b { font: 500 12px var(--mono); color: var(--accent); margin-right: 6px; }
+.chip:hover { border-color: var(--accent); color: var(--fg); }
+.chip.is-done::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok);
+  margin-left: 7px;
+}
+
+/* hero */
+.hero { padding-block: 40px 8px; }
+.eyebrow {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+h1 {
+  font: 800 clamp(2.1rem, 5.4vw, 3.3rem)/1.04 var(--sans);
+  letter-spacing: -0.02em;
+  margin: 10px 0 14px;
+  text-wrap: balance;
+}
+.lede { font-size: 1.15rem; color: var(--fg-2); max-width: 62ch; margin: 0 0 12px; }
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-block: 22px 26px;
+  border-top: 2px solid var(--fg);
+  border-bottom: 1px solid var(--line);
+}
+.ledger > div { padding: 14px 14px 14px 0; }
+.ledger > div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.fig { font: 500 clamp(1.4rem, 4vw, 2rem)/1.1 var(--mono); font-variant-numeric: tabular-nums; }
+.fig-lab { font: 400 13.5px/1.4 var(--sans); color: var(--fg-2); margin-top: 4px; }
+.howto { font: 400 15.5px/1.55 var(--sans); max-width: 66ch; margin: 0 0 22px; }
+
+.legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-block: 0 10px; }
+.legend > div { font: 400 14px/1.5 var(--sans); color: var(--fg-2); display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.privacy { font: 400 13.5px/1.5 var(--sans); color: var(--fg-2); margin: 8px 0 0; }
+
+.tag {
+  display: inline-block;
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 7px;
+  border-radius: 3px;
+  border: 1px solid;
+}
+.tag-pub { color: var(--miso); border-color: var(--miso); }
+.tag-news { color: var(--fg-2); border-color: var(--fg-2); }
+.tag-int { color: var(--warn-fg); background: var(--warn-bg); border-color: var(--warn-line); }
+.tag-ameren { color: var(--miso); border-color: var(--miso); background: var(--surface); }
+
+/* sections */
+.block { padding-block: 44px 6px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.block:first-of-type { border-top: 0; }
+.m-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px 16px; flex-wrap: wrap; }
+h2 {
+  font: 800 clamp(1.5rem, 3.6vw, 2.05rem)/1.14 var(--sans);
+  letter-spacing: -0.01em;
+  margin: 4px 0 8px;
+  text-wrap: balance;
+}
+h3.sub {
+  font: 600 12px/1.3 var(--mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin: 22px 0 10px;
+}
+.goal { font: 400 15.5px/1.5 var(--sans); color: var(--fg-2); margin: 0 0 20px; max-width: 66ch; }
+.goal span { font: 600 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg); margin-right: 6px; }
+.done { display: flex; gap: 8px; align-items: center; font: 500 13px var(--sans); color: var(--fg-2); cursor: pointer; padding-top: 8px; }
+.done input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+.script {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 20px 22px;
+  margin-block: 0 8px;
+}
+.lab { font: 600 11.5px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+.script p { margin: 0 0 0.95em; max-width: 66ch; }
+.script p:last-child { margin-bottom: 0; }
+.script .lead { font: 600 1.06rem/1.5 var(--sans); }
+
+.terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px 22px; margin: 0 0 18px; }
+.term { font: 400 14.5px/1.5 var(--sans); min-width: 0; }
+.term b { display: block; font-weight: 700; }
+.term span { color: var(--fg-2); }
+
+.callout {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 14px 16px;
+  border-radius: 4px;
+  margin-block: 0 12px;
+  font: 400 15.5px/1.55 var(--sans);
+}
+.callout .tag { margin-bottom: 10px; }
+.callout p { margin: 0 0 0.6em; }
+.callout p:last-child { margin-bottom: 0; }
+.callout ul { margin: 0.3em 0 0; padding-left: 1.2em; }
+.callout li { margin-bottom: 0.3em; }
+.c-ameren { border-color: var(--miso); }
+.c-deb { background: var(--warn-bg); border-color: var(--warn-line); color: var(--warn-fg); }
+.c-deb a { color: inherit; }
+
+.tablewrap { overflow-x: auto; margin-block: 0 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 580px; font: 400 14.5px/1.45 var(--sans); }
+th {
+  font: 600 11.5px/1.3 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  color: var(--fg-2);
+  background: var(--surface-2);
+}
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.num { font-family: var(--mono); font-size: 13.5px; }
+.t-miso { color: var(--miso); font-weight: 700; }
+.t-pjm { color: var(--pjm); font-weight: 700; }
+.note { font: 400 13.5px/1.5 var(--sans); color: var(--fg-2); margin: -4px 0 14px; max-width: 70ch; }
+
+.mapbox { margin-block: 22px 14px; }
+.map-scroll { overflow-x: auto; border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 14px; }
+.map-scroll svg { display: block; }
+.hint { font: 400 12.5px/1.4 var(--sans); color: var(--fg-2); margin: 8px 0 0; }
+.mm-edge { fill: none; stroke-width: 2; opacity: 0.85; }
+.mm-node text { fill: var(--fg); font: 500 13px var(--sans); }
+.mm-root rect { fill: var(--accent); }
+.mm-root text { fill: var(--accent-ink); font-weight: 700; font-size: 14px; }
+.mm-branch rect { fill: var(--surface); stroke-width: 2; }
+.mm-branch text { font-weight: 700; }
+.mm-leaf rect { fill: var(--surface-2); }
+
+.srcline { font: 400 13.5px/1.6 var(--sans); color: var(--fg-2); margin: 10px 0 0; }
+a.src { font: 500 12px var(--mono); padding: 1px 4px; border: 1px solid var(--line); border-radius: 3px; text-decoration: none; margin-right: 2px; background: var(--surface); }
+
+/* quiz */
+.scorebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font: 500 14px var(--sans);
+  margin-block: 16px 6px;
+}
+.score-fig { font: 500 18px var(--mono); font-variant-numeric: tabular-nums; }
+.btn {
+  font: 600 13px var(--sans);
+  padding: 8px 12px;
+  border: 1px solid var(--fg);
+  background: transparent;
+  color: var(--fg);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--surface-2); }
+.q { border-top: 1px solid var(--line); padding-block: 22px 8px; }
+.q-meta { font: 500 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-2); margin: 0 0 6px; }
+.q-text { font: 600 1.06rem/1.45 var(--sans); margin: 0 0 12px; max-width: 66ch; }
+.opts { display: grid; gap: 8px; }
+.opt {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--fg);
+  border-radius: 4px;
+  font: 400 15.5px/1.45 var(--sans);
+  cursor: pointer;
+}
+.opt .k { font: 500 12px var(--mono); color: var(--accent); flex: none; padding-top: 3px; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; color: var(--fg); }
+.opt.ok { border-color: var(--ok); background: var(--ok-bg); }
+.opt.no { border-color: var(--no); background: var(--no-bg); }
+.q-exp { display: none; font: 400 15px/1.55 var(--sans); margin: 12px 0 0; padding: 12px 14px; background: var(--surface-2); border-radius: 4px; max-width: 70ch; }
+.q.answered .q-exp { display: block; }
+.q-exp strong { margin-right: 4px; }
+.verdict { font: 600 15px var(--sans); margin: 14px 0 0; }
+
+/* glossary */
+.gsearch { width: 100%; max-width: 420px; font: 400 15px var(--sans); padding: 10px 12px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 4px; }
+.gcount { font: 400 13px var(--sans); color: var(--fg-2); margin: 8px 0 14px; }
+.gloss { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 0 30px; margin: 0; }
+.gloss > div { border-top: 1px solid var(--line); padding-block: 12px; font: 400 14.5px/1.5 var(--sans); min-width: 0; }
+.gloss dt { font-weight: 700; }
+.gloss dd { margin: 2px 0 0; color: var(--fg-2); }
+
+/* sources */
+.sources { list-style: none; margin: 0; padding: 0; font: 400 14.5px/1.5 var(--sans); }
+.sources li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 8px; padding-block: 10px; border-top: 1px solid var(--line); scroll-margin-top: 70px; }
+.sources .sid { font: 500 12.5px var(--mono); color: var(--accent); padding-top: 2px; }
+.sources .tag { margin-left: 6px; vertical-align: 1px; }
+.sources .meta { display: block; color: var(--fg-2); font-size: 13.5px; }
+.foot { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line); font: 400 13.5px/1.5 var(--sans); color: var(--fg-2); }
+
+@media (max-width: 640px) {
+  .ledger { grid-template-columns: 1fr; }
+  .ledger > div, .ledger > div + div { padding: 12px 0; border-left: 0; }
+  .ledger > div + div { border-top: 1px solid var(--line); }
+  .legend { grid-template-columns: 1fr; }
+  .script { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Modules">
+  <div class="nav-in">
+    <a class="chip" href="#map"><b>0</b>Big picture</a>
+    <a class="chip" href="#m1" data-chip="m1"><b>1</b>Why batteries</a>
+    <a class="chip" href="#m2" data-chip="m2"><b>2</b>Who's who</a>
+    <a class="chip" href="#m3" data-chip="m3"><b>3</b>How we got here</a>
+    <a class="chip" href="#m4" data-chip="m4"><b>4</b>The law</a>
+    <a class="chip" href="#m5" data-chip="m5"><b>5</b>The auction</a>
+    <a class="chip" href="#m6" data-chip="m6"><b>6</b>The contract</a>
+    <a class="chip" href="#m7" data-chip="m7"><b>7</b>Round one results</a>
+    <a class="chip" href="#m8" data-chip="m8"><b>8</b>Ameren and customers</a>
+    <a class="chip" href="#m9" data-chip="m9"><b>9</b>Risks</a>
+    <a class="chip" href="#m10" data-chip="m10"><b>10</b>Reliability</a>
+    <a class="chip" href="#m11" data-chip="m11"><b>11</b>What's next</a>
+    <a class="chip" href="#check">Debrief check</a>
+    <a class="chip" href="#quiz">Quiz</a>
+    <a class="chip" href="#glossary">Glossary</a>
+    <a class="chip" href="#sources">Sources</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Learning module · Updated September 30, 2026</div>
+  <h1>Illinois Battery Storage Primer</h1>
+  <p class="lede">A self-paced course for newcomers. It covers why Illinois decided to buy 3,000 MW of grid batteries, what the first auction delivered, and what it means for Ameren Illinois and its customers.</p>
+
+  <div class="ledger" aria-label="State of play">
+    <div><div class="fig">3,000 MW</div><div class="fig-lab">State goal, under contract and committed to operate by December 31, 2030</div></div>
+    <div><div class="fig">600 MW</div><div class="fig-lab">Contracted in round one, out of 1,038 MW sought</div></div>
+    <div><div class="fig">2,400 MW</div><div class="fig-lab">Still to contract in later rounds</div></div>
+  </div>
+
+  <p class="howto">How to use it: read each module's plain-language script, open its mind map for the picture, look up any unfamiliar term in the glossary, and take the 30-question quiz at the end. Eleven modules, about 40 minutes.</p>
+
+  <div class="legend" aria-label="Source labels">
+    <div><span class="tag tag-pub">Public</span>Taken from IPA, ICC, or procurement administrator documents.</div>
+    <div><span class="tag tag-news">News</span>From news or trade coverage. Check against the primary document before relying on it.</div>
+    <div><span class="tag tag-int">Debrief · verify</span>From today's staff meeting. Internal and preliminary. Confirm before any external use.</div>
+  </div>
+  <p class="privacy">This page holds internal meeting material. It is private to you until you choose to share it.</p>
+</header>
+
+<section class="block" id="map" aria-labelledby="maph">
+  <div class="eyebrow">Module 0</div>
+  <h2 id="maph">The big picture in one minute</h2>
+  <p class="goal"><span>You will be able to</span> tell the whole story in five sentences, then hang every later detail on this map.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Illinois passed a law to buy 3,000 megawatts of grid batteries by the end of 2030. The first auction contracted 600.</p>
+    <p>Illinois wants a large fleet of batteries to keep the lights on and bills steady as older power plants retire and demand grows. The Clean and Reliable Grid Affordability Act, known as CRGA, made 3,000 megawatts the state goal.</p>
+    <p>The Illinois Power Agency runs the buying. Developers bid for 20-year contracts. The Illinois Commerce Commission approves the winners. The local utility signs the contract and collects the cost from customers through a line on the bill called a rider.</p>
+    <p>The first auction ran on August 26, 2026. The state asked for 1,038 megawatts and contracted 600. Ameren Illinois's region got 520 megawatts from four projects, more than its 450 megawatt target. ComEd's region got 80 megawatts from one project, far below its 588 megawatt target.</p>
+    <p>Nothing from this auction is running yet. Ahead are feedback on the auction due October 28, a statewide reliability plan in mid-November, an Ameren Illinois rider that the debrief says should be filed this year, and more auctions in 2027.</p>
+  </div>
+
+  <div class="mapbox">
+    <h3 class="sub">Overall mind map</h3>
+    <div class="map-scroll"><div class="map" data-map="overall"></div></div>
+    <p class="hint">On a phone, scroll the map sideways.</p>
+  </div>
+  <p class="srcline">Sources: <a class="src" href="#s2">S2</a><a class="src" href="#s3">S3</a><a class="src" href="#s5">S5</a><a class="src" href="#s7">S7</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 1 -->
+<section class="block" id="m1" aria-labelledby="m1h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 1 of 11</div><h2 id="m1h">Why the grid needs batteries</h2></div>
+    <label class="done"><input type="checkbox" data-done="m1"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> explain in two sentences what a grid battery does and why Illinois wants more of them.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">A grid battery moves electricity from a time when it is cheap to a time when it is needed.</p>
+    <p>Electricity has one unusual rule. The amount put onto the grid has to match the amount people use, every second of the day. Power plants do that job. In the late afternoon and evening, demand is high and solar output is fading, so the grid needs supply that can arrive fast.</p>
+    <p>A grid battery is a large bank of rechargeable cells plugged into the high-voltage system. It charges when electricity is plentiful and cheap. It discharges when electricity is scarce and expensive. The batteries in this course are designed to deliver full power for four hours. That is what "four-hour duration" means. A 100 MW battery with four hours of duration holds up to 400 MWh.</p>
+    <p>Two limits matter from the start. A battery does not make energy. It stores energy made elsewhere and loses some on the way, so it takes in more than it gives back. And four hours is short. A battery helps with an evening peak. It helps much less with a cold snap that lasts several days.</p>
+    <p>Why is Illinois buying them now? State agencies report resource adequacy challenges in both grid regions that serve Illinois. In ICC workshops in early 2025, NRDC and the Union of Concerned Scientists each presented analyses estimating that Illinois could need up to 3,000 MW of storage by 2030. That figure became the state goal. For scale, news coverage cites about 141 MW of utility-scale storage installed in Illinois today, and another outlet says about 200 MW.</p>
+  </div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="mw,mwh,duration,rte,ra"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>Stakeholders told the ICC that MISO Zone 4, where Ameren Illinois serves customers, imports electricity and faces reliability pressure from plant retirements and tighter reserve margins. <a class="src" href="#s8">S8</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p>Bryce described the main use case as the hours when solar output falls but demand stays high. He also stressed that batteries have limited duration and must recharge, so adding battery capacity does not fix every reliability problem. <a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 1</h3><div class="map-scroll"><div class="map" data-map="m1"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s8">S8</a><a class="src" href="#s14">S14</a><a class="src" href="#s9">S9</a><a class="src" href="#s19">S19</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 2 -->
+<section class="block" id="m2" aria-labelledby="m2h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 2 of 11</div><h2 id="m2h">Who's who</h2></div>
+    <label class="done"><input type="checkbox" data-done="m2"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> name who buys, who approves, who pays, and which grid operator covers which part of Illinois.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Five groups matter. One fact about the grid confuses almost every newcomer, so learn it first.</p>
+    <p>The General Assembly passes the laws. The Illinois Power Agency, or IPA, runs the buying. The Illinois Commerce Commission, or ICC, is the state utility regulator and approves the results. Utilities, Ameren Illinois and ComEd, sign the contracts and collect the money from customers. Developers build and run the batteries.</p>
+    <p>Here is the fact. Illinois is split between two regional grid operators, called RTOs. MISO runs the grid in central and southern Illinois, where Ameren Illinois serves customers. PJM runs the grid in northern Illinois, where ComEd serves customers. Each has its own rules, its own waiting line for new projects, and its own capacity market. The storage program buys separately in each region.</p>
+    <p>The IPA hired a consulting firm, NERA, to run the bidding itself. NERA is called the procurement administrator.</p>
+  </div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="ipa,icc,rto,miso,pjm,nera"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>Ameren Illinois is the utility buyer for projects in MISO Zone 4. ComEd is the buyer for projects in the PJM ComEd area. Ameren Illinois does not select the winners. <a class="src" href="#s8">S8</a><a class="src" href="#s3">S3</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p>Justin noted that Ameren does not see ComEd's confidential bidding information. For that reason the team cannot tell why the PJM side fell short. <a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 2</h3><div class="map-scroll"><div class="map" data-map="m2"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s1">S1</a><a class="src" href="#s4">S4</a><a class="src" href="#s8">S8</a><a class="src" href="#s9">S9</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 3 -->
+<section class="block" id="m3" aria-labelledby="m3h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 3 of 11</div><h2 id="m3h">How we got here</h2></div>
+    <label class="done"><input type="checkbox" data-done="m3"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> place the key dates in order and say which law did what.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">The storage program started as a workshop and became a statewide goal in about a year.</p>
+    <p>An earlier law, Public Act 103-1066, told the ICC to run workshops on how to buy utility-scale storage. Seven workshops drew more than 200 people between late January and March 2025. The ICC staff report followed on May 1, 2025.</p>
+    <p>That report made the main design choices. Use a 20-year contract called an indexed storage credit. Start with about 1,038 MW of standalone batteries, split 450 MW for Ameren's zone in MISO and 588 MW for ComEd's area in PJM. Aim for at least 3,000 MW by 2030.</p>
+    <p>The General Assembly passed the Clean and Reliable Grid Affordability Act on October 30, 2025. Governor Pritzker signed it on January 8, 2026 as Public Act 104-0458, and it took effect June 1, 2026. CRGA made the 3,000 MW target part of state law and set the first procurement for no later than August 26, 2026.</p>
+    <p>You may notice that the ICC report talks about an August 2025 bidding date. That date came from the earlier law. The first auction ran a year later, under CRGA. The auction took place on August 26, 2026, and the ICC approved the results on September 1.</p>
+  </div>
+
+  <h3 class="sub">Timeline</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Date</th><th>What happened</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td class="num">Mar 2024</td><td>IPA policy study estimates costs and benefits of storage options.</td><td><a class="src" href="#s8">S8</a></td></tr>
+      <tr><td class="num">Jan–Mar 2025</td><td>Seven ICC workshops, 200+ participants.</td><td><a class="src" href="#s8">S8</a></td></tr>
+      <tr><td class="num">Feb 20, 2025</td><td>Public Act 103-1066 approved. It called for an initial procurement of up to 1,500 MW.</td><td><a class="src" href="#s8">S8</a></td></tr>
+      <tr><td class="num">May 1, 2025</td><td>ICC staff report recommends an ISC contract, 1,038 MW (450 MISO, 588 PJM), and 3 GW by 2030.</td><td><a class="src" href="#s8">S8</a></td></tr>
+      <tr><td class="num">Oct 30, 2025</td><td>General Assembly passes CRGA (SB 25).</td><td><a class="src" href="#s2">S2</a></td></tr>
+      <tr><td class="num">Dec 15, 2025</td><td>Joint Resource Adequacy Study issued by IPA, ICC and IEPA.</td><td><a class="src" href="#s14">S14</a></td></tr>
+      <tr><td class="num">Jan 8, 2026</td><td>Governor signs CRGA as Public Act 104-0458.</td><td><a class="src" href="#s2">S2</a></td></tr>
+      <tr><td class="num">Jun 1, 2026</td><td>CRGA takes effect.</td><td><a class="src" href="#s2">S2</a></td></tr>
+      <tr><td class="num">Jun 30, 2026</td><td>Bidder webcast on the final contract and RFP rules.</td><td><a class="src" href="#s4">S4</a></td></tr>
+      <tr><td class="num">Aug 26, 2026</td><td>First storage procurement event.</td><td><a class="src" href="#s1">S1</a></td></tr>
+      <tr><td class="num">Sep 1, 2026</td><td>ICC approves results: 600 MW.</td><td><a class="src" href="#s3">S3</a></td></tr>
+      <tr><td class="num">Sep 23–28, 2026</td><td>IPA asks stakeholders for feedback on round one and the 2027 round.</td><td><a class="src" href="#s6">S6</a><a class="src" href="#s7">S7</a></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="crga,ceja,isc,tolling,rastudy"></div>
+
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p>The transcript calls the new law "Sergio" and flags its formal name for confirmation. Public sources point to CRGA, Public Act 104-0458. This looks like a transcription error. <a class="src" href="#s18">S18</a><a class="src" href="#s2">S2</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 3</h3><div class="map-scroll"><div class="map" data-map="m3"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s1">S1</a><a class="src" href="#s2">S2</a><a class="src" href="#s3">S3</a><a class="src" href="#s8">S8</a><a class="src" href="#s14">S14</a></p>
+</section>
+
+<!-- MODULE 4 -->
+<section class="block" id="m4" aria-labelledby="m4h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 4 of 11</div><h2 id="m4h">What the law requires</h2></div>
+    <label class="done"><input type="checkbox" data-done="m4"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> list CRGA's storage goal, the main bidder rules, and the price check that protects customers.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">CRGA sets a goal, says how to buy, and puts guardrails on price, labor and planning.</p>
+    <p>The goal is 3,000 MW of new storage under contract and committed to reach commercial operation by December 31, 2030. The IPA must buy it in rounds. Round one targeted 1,038 MW of standalone storage. More rounds are planned for 2027 and possibly 2028.</p>
+    <p>Bidders face rules. Contracts run 20 years. Projects must follow prevailing wage and project labor agreement requirements, sign labor peace agreements, and meet a minimum equity standard. Each bid carries a fee of at least $10,000. Bidders must show experience bringing at least 100 MW of energy facilities to commercial readiness. Large utilities cannot bid.</p>
+    <p>The price check works like this. The procurement administrator sets a confidential benchmark. A bid above it is not cost-effective and cannot win. The IPA then sends its picks to the ICC for approval.</p>
+    <p>CRGA also plans ahead. The IPA must release a draft Energy Storage Resources Procurement Plan by June 1, 2027 and update it every two years. The law creates a statewide Integrated Resource Plan. It also lets the IPA explore a Storage for All program that pairs batteries with Illinois Solar for All projects, using up to 25 percent of that program's budget. Storage projects also get the state's clean energy siting approach, which advocates describe as aligning storage siting and permitting with wind and solar.</p>
+  </div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="crga,nameplate,standalone,benchmark,storageforall"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>Projects had to connect in MISO Zone 4 or the PJM ComEd area. The ICC staff explained that this keeps Ameren Illinois customers paying for reliability inside Ameren's own territory, and ComEd customers paying for reliability inside ComEd's. <a class="src" href="#s8">S8</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p>Speaker 1 said the law requires a report to the General Assembly explaining the shortfall. The team did not know whether it will be public, and Bryce planned to ask. I could not find that requirement in the public pages reviewed, so treat it as unconfirmed. <a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 4</h3><div class="map-scroll"><div class="map" data-map="m4"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s2">S2</a><a class="src" href="#s6">S6</a><a class="src" href="#s1">S1</a><a class="src" href="#s11">S11</a><a class="src" href="#s12">S12</a><a class="src" href="#s8">S8</a></p>
+</section>
+
+<!-- MODULE 5 -->
+<section class="block" id="m5" aria-labelledby="m5h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 5 of 11</div><h2 id="m5h">How the first auction worked</h2></div>
+    <label class="done"><input type="checkbox" data-done="m5"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> describe who could bid, how winners were picked, and why Ameren's region finished above its target.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Think of a sealed-bid auction with a hidden price ceiling.</p>
+    <p>Developers bid a price for a 20-year contract. NERA compares each bid to the confidential benchmark, then picks the lowest-priced qualifying bids until each region's target is full.</p>
+    <p>Eligibility in round one was narrow. Standalone batteries, at least 20 MW, four hours of duration, connected to MISO Zone 4 or PJM's ComEd area. Projects had to be in a grid operator's waiting line or well into development. Commercial operation was due by December 31, 2029.</p>
+    <p>The targets were soft. If the last project that fit would push a region over target, and skipping it would leave the target unfilled, the rules allowed going over. That is how Ameren's region ended at 520 MW against a 450 MW target.</p>
+    <p>The ICC approved the results on September 1, 2026 and contracts were awarded. The public notice names the winners and their towns. It gives one average winning price for the auction and no price for each project.</p>
+  </div>
+
+  <h3 class="sub">Rule details reported by trade press</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Rule</th><th>As reported</th><th>Label</th></tr></thead>
+    <tbody>
+      <tr><td>Operating deadline</td><td>December 31, 2029. An extension to December 31, 2030 is available by posting more collateral.</td><td><span class="tag tag-news">News</span></td></tr>
+      <tr><td>Size and duration</td><td>At least 20 MW, four hours of continuous discharge.</td><td><span class="tag tag-news">News</span></td></tr>
+      <tr><td>Round-trip efficiency</td><td>At least 70 percent, and 85 percent in the first delivery year.</td><td><span class="tag tag-news">News</span></td></tr>
+      <tr><td>Availability</td><td>4,320 hours per delivery year.</td><td><span class="tag tag-news">News</span></td></tr>
+      <tr><td>What counts as new</td><td>The project must energize on or after June 1, 2026.</td><td><span class="tag tag-news">News</span></td></tr>
+      <tr><td>Soft cap</td><td>A region may run up to 50 percent over its target to fit the last project.</td><td><span class="tag tag-news">News</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">These details come from MGRID's summary of the RFP materials. Check the final RFP rules on the procurement administrator's site before quoting them. <a class="src" href="#s10">S10</a><a class="src" href="#s4">S4</a></p>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="rfp,cod,softcap,queue,benchmark"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>The soft cap is why the MISO result reads as 520 MW against a 450 MW target. The rules allowed it, and the ICC approved the results. <a class="src" href="#s3">S3</a><a class="src" href="#s8">S8</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p>Bryce said the rules allowed flexibility in project selection, and the discussion did not treat the 70 MW overage as a mistake. He also said projects must operate by December 2029 with a possible one-year extension, which matches the public sources. <a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 5</h3><div class="map-scroll"><div class="map" data-map="m5"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s1">S1</a><a class="src" href="#s4">S4</a><a class="src" href="#s3">S3</a><a class="src" href="#s8">S8</a><a class="src" href="#s10">S10</a></p>
+</section>
+
+<!-- MODULE 6 -->
+<section class="block" id="m6" aria-labelledby="m6h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 6 of 11</div><h2 id="m6h">How the 20-year contract pays</h2></div>
+    <label class="done"><input type="checkbox" data-done="m6"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> explain the strike price, the two reference prices, and who pays whom when markets move.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">This is the hardest module and the most important one. Take it slowly.</p>
+    <p>A developer bids a strike price, in dollars per megawatt-hour. Think of it as the price that lets the project pay for itself. The contract then compares that strike price to a reference price built from the market. The reference price has two parts. One is a theoretical energy profit: what a four-hour battery could earn by charging in the four cheapest hours of a day and discharging in the four priciest. The other is a theoretical capacity payment: what the grid operator's capacity market would pay for dependable supply.</p>
+    <p>The gap between the strike price and the reference price moves the money. If market revenue is low, the gap is positive and the utility pays the developer the difference. If market revenue is high, the gap is negative and, in the ICC's model contract, the developer pays the difference back.</p>
+    <p>Notice who controls the battery. The developer owns it, runs it and sells into the market. The utility does not dispatch it. That is the main difference from a tolling contract, where the utility controls the battery and pays a fixed fee. A tolling contract can look like a lease on the utility's books, which can raise borrowing costs. That is one reason ICC staff recommended the ISC for round one.</p>
+    <p>Because the reference price is a formula, it is not the developer's actual trading profit. A developer who operates well can beat the formula. One who operates poorly can miss it. Payments also depend on the battery meeting minimum performance requirements. If it does not, payments can be suspended or ended. The IPA stays involved as a referee: under the model contract it can approve deadline extensions and mediate disputes.</p>
+  </div>
+
+  <h3 class="sub">Worked example</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Case</th><th class="num">Strike</th><th class="num">Energy ref.</th><th class="num">Capacity ref.</th><th class="num">Reference total</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>A. Soft market</td><td class="num">$110</td><td class="num">$45</td><td class="num">$40</td><td class="num">$85</td><td>Utility pays developer $25 per unit.</td></tr>
+      <tr><td>B. Strong market</td><td class="num">$110</td><td class="num">$75</td><td class="num">$50</td><td class="num">$125</td><td>Developer pays back $15 per unit (ICC model).</td></tr>
+      <tr><td>C. Lower accreditation</td><td class="num">$110</td><td class="num">$45</td><td class="num">$25</td><td class="num">$70</td><td>Utility pays developer $40 per unit. Less capacity value means more support.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Illustrative numbers in dollars per MWh of contract volume. They are not from the contract. The real contract counts volume in indexed storage credits.</p>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="strike,isc,reap,rcp,tolling,cfd"></div>
+
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <ul>
+      <li>Bryce said the IPA calculates a theoretical energy revenue opportunity. That matches the public model. The offset is a formula, not the developer's actual trading revenue.</li>
+      <li>Open question on customer credits. Speaker 3 asked whether this resembles the CEJA nuclear support mechanism. Bryce said the battery contracts would not produce a payment back to customers. The ICC's 2025 model describes payments back to the utility when reference prices exceed the strike price, and it recommends a rider that can also provide bill credits. Those statements do not obviously match. Check the final ISC settlement terms and the rider design before saying anything outside the company.</li>
+    </ul>
+    <p><a class="src" href="#s18">S18</a><a class="src" href="#s8">S8</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 6</h3><div class="map-scroll"><div class="map" data-map="m6"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s8">S8</a><a class="src" href="#s5">S5</a><a class="src" href="#s10">S10</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 7 -->
+<section class="block" id="m7" aria-labelledby="m7h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 7 of 11</div><h2 id="m7h">Round one results</h2></div>
+    <label class="done"><input type="checkbox" data-done="m7"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> recite the round one numbers, name the four Ameren projects, and say what is known and unknown about the PJM shortfall.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">The state sought 1,038 MW and contracted 600 MW. The gap is almost all in northern Illinois.</p>
+    <p>Ameren's region, MISO Zone 4, sought 450 MW and got 520 MW from four projects. ComEd's region, PJM, sought 588 MW and got 80 MW from one project. The 438 MW shortfall sits almost entirely in ComEd's territory.</p>
+    <p>Keep one idea straight. These are contracts, not batteries. Nothing from this auction is operating yet. Developers have until the end of 2029, with extensions possible, to connect and start running. News coverage notes that 600 MW is more than four times the roughly 141 MW of utility-scale storage installed in Illinois today.</p>
+    <p>Why did PJM come up short? Nobody outside the process can say for certain. The public record names winners and does not name losing bidders, so we do not know whether developers bid and lost on price or did not bid at all. Experts quoted by Capitol News Illinois pointed to the rigid first-round rules and to a mismatch between the required operating date and where projects sat in PJM's slow interconnection line. Several projects were also aging out of that line around the time of the auction.</p>
+    <p>The same experts called the result a step forward and not a failure. They expect round two to tell us more, because those bids will come from developers who responded to the new law.</p>
+  </div>
+
+  <h3 class="sub">Results by region</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Region</th><th>Utility buyer</th><th class="num">Target</th><th class="num">Awarded</th><th class="num">Versus target</th><th class="num">Projects</th></tr></thead>
+    <tbody>
+      <tr><td><span class="t-miso">MISO Zone 4</span></td><td>Ameren Illinois</td><td class="num">450 MW</td><td class="num">520 MW</td><td class="num">+70 MW</td><td class="num">4</td></tr>
+      <tr><td><span class="t-pjm">PJM ComEd area</span></td><td>ComEd</td><td class="num">588 MW</td><td class="num">80 MW</td><td class="num">−508 MW</td><td class="num">1</td></tr>
+      <tr><td><b>Total</b></td><td></td><td class="num">1,038 MW</td><td class="num">600 MW</td><td class="num">−438 MW</td><td class="num">5</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><span class="tag tag-pub">Public</span> <a class="src" href="#s3">S3</a><a class="src" href="#s5">S5</a></p>
+
+  <h3 class="sub">Winning projects</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Project company</th><th>Town</th><th class="num">MW</th><th>Buyer</th></tr></thead>
+    <tbody>
+      <tr><td>Gatehouse Energy Storage LLC</td><td>Du Bois</td><td class="num">185</td><td><span class="t-miso">Ameren Illinois</span></td></tr>
+      <tr><td>KCE IL 1, LLC</td><td>Flora</td><td class="num">100</td><td><span class="t-miso">Ameren Illinois</span></td></tr>
+      <tr><td>KCE IL 2, LLC</td><td>Herrick</td><td class="num">100</td><td><span class="t-miso">Ameren Illinois</span></td></tr>
+      <tr><td>McDuff Battery Storage, LLC</td><td>Casey</td><td class="num">135</td><td><span class="t-miso">Ameren Illinois</span></td></tr>
+      <tr><td>Lincoln Reserve Energy, LLC</td><td>Calumet City</td><td class="num">80</td><td><span class="t-pjm">ComEd</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">The notice lists one average winning bid price for the auction: $110.52 per MWh. Three of the five projects are at least 50 percent inside an Energy Transition Community Grant Area. MGRID identifies the KCE companies as Key Capture Energy projects. <a class="src" href="#s5">S5</a><a class="src" href="#s10">S10</a></p>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="softcap,etc,strike,lrz4,comedlda"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>Ameren Illinois becomes the contract counterparty for four projects totaling 520 MW, all in MISO Zone 4. <a class="src" href="#s3">S3</a><a class="src" href="#s8">S8</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <ul>
+      <li>The meeting named Dubois, Flora, Herrick, Casey and Kalamazoo, and the notes flagged that as five places for four projects. The public notice lists those four Ameren towns and Calumet City for the PJM project. "Kalamazoo" is probably a transcription slip for Calumet City.</li>
+      <li>The meeting estimated strike prices of about $106–$107 for MISO and $120–$130 for PJM. The public notice gives one average of $110.52. These are different measures, so do not mix them in an external statement.</li>
+      <li>Justin did not expect another procurement in 2026 and anticipated spring 2027. The IPA says only that more events are planned for 2027 and potentially 2028.</li>
+    </ul>
+    <p><a class="src" href="#s18">S18</a><a class="src" href="#s3">S3</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 7</h3><div class="map-scroll"><div class="map" data-map="m7"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s3">S3</a><a class="src" href="#s5">S5</a><a class="src" href="#s9">S9</a><a class="src" href="#s10">S10</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 8 -->
+<section class="block" id="m8" aria-labelledby="m8h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 8 of 11</div><h2 id="m8h">What it means for Ameren Illinois and customers</h2></div>
+    <label class="done"><input type="checkbox" data-done="m8"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to describe</span> Ameren Illinois's role, how costs reach the bill, and why every cost figure so far is a projection.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Ameren Illinois signs the contracts and collects the money. It does not own or run the batteries.</p>
+    <p>For the four MISO projects, Ameren Illinois is the buyer. Its job is administrative. It settles payments with the developers, checks the performance data they report, monitors collateral, and designs and runs the customer charge.</p>
+    <p>Collection happens through a rider, which is a line on the bill that recovers one kind of cost. ICC staff recommended a pass-through rider like the one ComEd uses for carbon mitigation credits. The utility sets charges from a forecast of contract costs, then reconciles each year against what was actually paid. Costs can be spread by usage in kilowatt-hours or by each customer's share of peak demand. The ICC report left that choice to the tariff case.</p>
+    <p>How big is the bill effect? Early public estimates were small. The IPA's 2024 refresh, reported by the ICC, put the average Ameren residential customer between about 19 cents and $1.69 a month, depending on program size (1 to 3 GW) and capacity prices. The debrief gave a preliminary rate of $0.00121 per kWh for the 520 MW, which is $1.21 for 1,000 kWh. Those are different calculations. Neither is an approved rate.</p>
+    <p>Gross and net are different numbers. The debrief cited up to about $1.6 billion in maximum contract value over 20 years and about $890 million in projected customer cost after market offsets. The offsets move with energy and capacity prices, so the net figure is a projection. A similar pattern showed up before the auction. The IPA estimated that all 3 GW would cost about $9.7 billion to develop and operate over 20 years, and about $1 billion to customers after revenue is credited back.</p>
+  </div>
+
+  <h3 class="sub">Illustration at $0.00121 per kWh</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Monthly use</th><th class="num">Illustrative charge</th><th>Who this is</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1,000 kWh</td><td class="num">$1.21</td><td>Typical home</td></tr>
+      <tr><td class="num">2,000 kWh</td><td class="num">$2.42</td><td>High-use home</td></tr>
+      <tr><td class="num">124,000,000 kWh</td><td class="num">$150,040</td><td>Very large industrial site, such as a refinery</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><span class="tag tag-int">Debrief · verify</span> Illustrative arithmetic using the meeting's preliminary rate. Not an approved bill impact. <a class="src" href="#s18">S18</a></p>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="rider,passthrough,plc,grossnet,kwh,zec"></div>
+
+  <div class="callout c-ameren"><span class="tag tag-ameren">Ameren angle</span>
+    <p>In 2025 Ameren Illinois told the ICC that direct customer cost could come out positive or negative depending on market prices. Its analysis said a net reduction would need lower construction costs, stable capacity accreditation and high capacity prices. <a class="src" href="#s8">S8</a><a class="src" href="#s16">S16</a></p></div>
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <ul>
+      <li>Expected rider timing: a new rider filed in 2026, actual charges likely in 2027, and possibly a zero-dollar administrative line on bills in 2026. These are expectations, not a schedule.</li>
+      <li>Collection may start before the batteries are energized to avoid a deficit. The notes do not explain the funding schedule.</li>
+      <li>Justin compared the roughly $1.20 per MWh battery estimate with an existing $1.60 per MWh ZEC charge. The programs have different contract structures.</li>
+      <li>No answer was recorded on the projected cost of the 80 MW PJM award, on network upgrades, or on which customers sit in the "largest users" average.</li>
+    </ul>
+    <p><a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 8</h3><div class="map-scroll"><div class="map" data-map="m8"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s8">S8</a><a class="src" href="#s16">S16</a><a class="src" href="#s17">S17</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 9 -->
+<section class="block" id="m9" aria-labelledby="m9h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 9 of 11</div><h2 id="m9h">Risks and open questions</h2></div>
+    <label class="done"><input type="checkbox" data-done="m9"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> separate what the meeting established from what it only raised.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Five risks come up again and again. For each one, know what is established and what is only a worry.</p>
+    <p>First, delivery. A contract does not guarantee a battery. Justin pointed to an estimated 60 percent failure rate for awarded utility-scale renewable contracts as a caution. That was an analogy and not a finding about these projects. Mike asked whether a developer could win a contract and then sell the project. Justin said that is possible. Nobody said a winner plans to sell.</p>
+    <p>Second, money. The cost depends on market prices for 20 years. High market revenue lowers customer support. Low revenue raises it.</p>
+    <p>Third, accreditation. Grid operators count only part of a battery's size as dependable capacity. The meeting cited about 74 percent for a four-hour battery in MISO and about 50 percent in PJM. At 74 percent, a 100 MW battery counts as 74 MW. If that percentage falls, capacity revenue falls and customer support rises. A 2025 Ameren comment to the ICC used about 44 percent in an illustration, so confirm the current method before quoting any percentage.</p>
+    <p>Fourth, place. Four of the five projects are in downstate towns. The meeting raised construction traffic, road damage, soil compaction on farmland, the amount of land used, reduced local control and whether host communities receive a fair benefit. One legislator has called repeatedly about a project near his farm.</p>
+    <p>Fifth, safety. The meeting raised battery fires and the readiness of rural and volunteer fire departments. Claims in the meeting that no fire standards or codes apply were not substantiated. Do not repeat them as fact.</p>
+  </div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="accreditation,elcc,capacity,arbitrage,netuser"></div>
+
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <p><b>What the meeting did not establish</b></p>
+    <ul>
+      <li>A 60 percent failure rate for these battery projects.</li>
+      <li>That any winning developer intends to sell its project.</li>
+      <li>That accreditation will fall. Justin called it a risk to watch.</li>
+      <li>That the awarded sites are poorly located. The team wants to understand each site's grid value, and Bryce planned to discuss placement with Jason Clyde.</li>
+      <li>That fire codes do not apply. The follow-up is to find what applies to each project and who pays for emergency preparation.</li>
+    </ul>
+    <p><a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 9</h3><div class="map-scroll"><div class="map" data-map="m9"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s18">S18</a><a class="src" href="#s16">S16</a><a class="src" href="#s12">S12</a><a class="src" href="#s11">S11</a></p>
+</section>
+
+<!-- MODULE 10 -->
+<section class="block" id="m10" aria-labelledby="m10h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 10 of 11</div><h2 id="m10h">The bigger reliability picture</h2></div>
+    <label class="done"><input type="checkbox" data-done="m10"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> place batteries inside the state's planning studies and name the open reliability worries.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Batteries are one tool in a larger plan, and the plan is still being written.</p>
+    <p>Illinois agencies published a joint Resource Adequacy Study on December 15, 2025. It found resource adequacy challenges in both PJM and MISO that are likely to affect the cost and reliability of electricity for Illinois customers.</p>
+    <p>CRGA then created a statewide Integrated Resource Plan, the IRP. The ICC leads it, working with the IPA, the Illinois EPA and the Illinois Finance Authority. The first IRP is due in mid-November 2026. A related Resource Adequacy Mitigation Plan uses the same inputs. The law also orders a joint IPA and ICC study of whether Illinois should stay in its current grid operators, due December 1, 2026.</p>
+    <p>The IPA says it will use the round one results, the Resource Adequacy Study and the IRP to adjust future storage targets and the split between MISO and PJM.</p>
+    <p>In the debrief, reliability worries went beyond batteries. They covered imported gas generation, future nuclear plants, and winter fuel supply. Those are questions about whether resources get built and whether they can run when the weather is worst.</p>
+  </div>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="irp,rastudy,smr,peaker,dualfuel"></div>
+
+  <div class="callout c-deb"><span class="tag tag-int">Debrief · verify</span>
+    <ul>
+      <li>Bryce discussed a modeled need for about 8,000 MW of imported gas generation against a referenced 15,000 MW peak. The notes do not say which area the 15,000 MW covers, so do not call it the Illinois statewide peak.</li>
+      <li>Justin questioned the model's reliance on future nuclear plants, including small modular reactors. Bryce raised cost and schedule concerns. No answer was recorded on how much modeled capacity depends on them.</li>
+      <li>Bryce called winter reliability his most immediate concern. A gas plant that can start may still lack fuel in severe weather. The status of dual-fuel retrofits at Illinois gas plants is open.</li>
+      <li>The mitigation plan is expected in mid-to-late October 2026. The transcript calls it a "CJ" plan. It most likely refers to the Resource Adequacy Mitigation Plan, but the title and date need confirmation.</li>
+      <li>Communications: Bryce favors a stronger public explanation of reliability risks. An op-ed was considered earlier and the company hesitated. No campaign was approved.</li>
+    </ul>
+    <p><a class="src" href="#s18">S18</a></p></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 10</h3><div class="map-scroll"><div class="map" data-map="m10"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s14">S14</a><a class="src" href="#s13">S13</a><a class="src" href="#s2">S2</a><a class="src" href="#s15">S15</a><a class="src" href="#s1">S1</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- MODULE 11 -->
+<section class="block" id="m11" aria-labelledby="m11h">
+  <div class="m-head">
+    <div><div class="eyebrow">Module 11 of 11</div><h2 id="m11h">What's next and how to talk about it</h2></div>
+    <label class="done"><input type="checkbox" data-done="m11"> Mark as read</label>
+  </div>
+  <p class="goal"><span>You will be able to</span> name the dates ahead, the questions the IPA is weighing for round two, and which statements are safe to make today.</p>
+
+  <div class="script">
+    <div class="lab">Plain-language script</div>
+    <p class="lead">Feedback on the first auction is due October 28. After that the calendar fills quickly.</p>
+    <p>Stakeholder feedback on round one and the 2027 round is due to the IPA on October 28, 2026 at 5 p.m. Central. The mitigation plan is expected in mid-to-late October, according to the debrief. The first IRP is due in mid-November. The single-state RTO study is due December 1. An Ameren Illinois rider filing is expected during 2026, with charges likely in 2027. The next storage auction is planned for 2027. A draft storage procurement plan is due June 1, 2027.</p>
+    <p>The IPA's questions could change round two. Should it hold one big auction or several? What time of year works best? Should the auction time line up with grid operator study milestones? How should it split megawatts between MISO and PJM, given round one split 43 percent and 57 percent? Should unfilled PJM megawatts roll forward? Should it allow batteries paired with solar or wind? Should it keep the indexed storage credit contract?</p>
+    <p>For talking about it, stick to what is public. The two lists below separate what you can say today from what needs a check first.</p>
+  </div>
+
+  <h3 class="sub">Watch list</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>When</th><th>What</th><th>Label</th></tr></thead>
+    <tbody>
+      <tr><td class="num">Oct 28, 2026</td><td>Feedback on round one and the 2027 round due to the IPA, 5 p.m. CT. The debrief shows no owner assigned yet for Ameren's response.</td><td><span class="tag tag-pub">Public</span></td></tr>
+      <tr><td class="num">Mid–late Oct 2026</td><td>Reliability mitigation plan expected.</td><td><span class="tag tag-int">Debrief</span></td></tr>
+      <tr><td class="num">Nov 15–16, 2026</td><td>First statewide IRP due to the ICC. IPA pages give both dates.</td><td><span class="tag tag-pub">Public</span></td></tr>
+      <tr><td class="num">Dec 1, 2026</td><td>Single-state RTO study due.</td><td><span class="tag tag-pub">Public</span></td></tr>
+      <tr><td class="num">2026</td><td>Ameren Illinois battery rider expected to be filed. Charges likely 2027.</td><td><span class="tag tag-int">Debrief</span></td></tr>
+      <tr><td class="num">2027</td><td>Next storage procurement. Justin anticipated spring. The IPA says 2027, with 2028 possible.</td><td><span class="tag tag-pub">Public</span> <span class="tag tag-int">Debrief</span></td></tr>
+      <tr><td class="num">Jun 1, 2027</td><td>Draft Energy Storage Resources Procurement Plan due.</td><td><span class="tag tag-pub">Public</span></td></tr>
+      <tr><td class="num">Dec 31, 2029</td><td>Round one commercial operation deadline, with extensions possible.</td><td><span class="tag tag-pub">Public</span></td></tr>
+      <tr><td class="num">Dec 31, 2030</td><td>Date by which the full 3,000 MW must be committed to operate.</td><td><span class="tag tag-pub">Public</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout c-ameren"><span class="tag tag-pub">Safe to say today</span>
+    <ul>
+      <li>CRGA set a goal of 3,000 MW of storage under contract and committed to operate by the end of 2030.</li>
+      <li>The first round contracted 600 MW of the 1,038 MW sought: 520 MW in MISO Zone 4 from four projects, and 80 MW in the PJM ComEd area from one project.</li>
+      <li>These are contracts for projects still to be built. None of this capacity is operating.</li>
+      <li>The IPA ran the auction, the ICC approved the results, and Ameren Illinois is the utility buyer for the MISO projects.</li>
+      <li>The IPA is collecting feedback through October 28 and plans more procurements in 2027 and potentially 2028.</li>
+    </ul></div>
+  <div class="callout c-deb"><span class="tag tag-int">Check first</span>
+    <ul>
+      <li>Customer cost figures: $0.00121 per kWh, $890 million, $1.6 billion.</li>
+      <li>Regional strike price estimates against the public $110.52 average.</li>
+      <li>Any statement about customer credits or payments back.</li>
+      <li>Attrition rates, developer sales and accreditation percentages.</li>
+      <li>Anything about fire codes or emergency response requirements.</li>
+      <li>Rider filing and billing dates, and the mitigation plan date.</li>
+    </ul></div>
+
+  <h3 class="sub">Questions a legislator may ask</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Question</th><th>Where the answer stands</th></tr></thead>
+    <tbody>
+      <tr><td>Why is this project in my district?</td><td>Developers choose sites. The lowest-priced qualifying bids won in each region. The winner list is public. Whether sites fit grid needs is still being reviewed internally.</td></tr>
+      <tr><td>Who is the developer, and have they built before?</td><td>Names and towns are public. Bidders had to show experience with 100 MW or more. Track records and milestones are being gathered by Justin's group.</td></tr>
+      <tr><td>What will it cost me?</td><td>No approved rate exists. Early public estimates and the debrief's preliminary figure differ. The rider filing will set it.</td></tr>
+      <tr><td>Who pays for road damage and emergency response?</td><td>Open. Not answered in the debrief.</td></tr>
+      <tr><td>What if the project is never built?</td><td>Payments depend on the battery operating, and collateral is at risk if a developer walks away. Details of the final contract still need checking.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">These questions are drawn from the concerns recorded in the debrief. The answers are a starting point, not approved messaging. <a class="src" href="#s18">S18</a><a class="src" href="#s8">S8</a><a class="src" href="#s6">S6</a></p>
+
+  <h3 class="sub">Key terms</h3>
+  <div class="terms" data-terms="irp,colocated,cod,rider"></div>
+
+  <div class="mapbox"><h3 class="sub">Mind map · Module 11</h3><div class="map-scroll"><div class="map" data-map="m11"></div></div></div>
+  <p class="srcline">Sources: <a class="src" href="#s6">S6</a><a class="src" href="#s7">S7</a><a class="src" href="#s2">S2</a><a class="src" href="#s3">S3</a><a class="src" href="#s13">S13</a><a class="src" href="#s18">S18</a></p>
+</section>
+
+<!-- DEBRIEF CHECK -->
+<section class="block" id="check" aria-labelledby="checkh">
+  <div class="eyebrow">Reference</div>
+  <h2 id="checkh">Debrief check</h2>
+  <p class="goal">How today's meeting notes line up with the public record. Use it as a checklist before anything goes outside the company.</p>
+  <div class="tablewrap"><table style="min-width:760px">
+    <thead><tr><th>Topic</th><th>Debrief says</th><th>Public record says</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Law name</td><td>"Sergio," formal name flagged for confirmation.</td><td>Clean and Reliable Grid Affordability Act, Public Act 104-0458. <a class="src" href="#s2">S2</a></td><td>Likely a transcription error. Use CRGA.</td></tr>
+      <tr><td>Targets and results</td><td>MISO 450 to 520 MW. PJM 588 to 80 MW. Total 1,038 to 600 MW.</td><td>Same numbers. <a class="src" href="#s3">S3</a></td><td>Matches.</td></tr>
+      <tr><td>Project locations</td><td>Dubois, Flora, Herrick, Casey, Kalamazoo.</td><td>Du Bois, Flora, Herrick, Casey (Ameren). Calumet City (ComEd). <a class="src" href="#s5">S5</a></td><td>Confirm with Justin's group. Kalamazoo is likely a slip for Calumet City.</td></tr>
+      <tr><td>Operating deadline</td><td>December 2029, possible one-year extension.</td><td>December 31, 2029. Trade press reports extension to 2030 with more collateral. <a class="src" href="#s1">S1</a><a class="src" href="#s10">S10</a></td><td>Matches. Verify extension terms in the final RFP rules.</td></tr>
+      <tr><td>Strike prices</td><td>About $106–$107 MISO, $120–$130 PJM.</td><td>One average winning bid price: $110.52 per MWh. <a class="src" href="#s5">S5</a></td><td>Different measures. Confirm the basis before use.</td></tr>
+      <tr><td>Customer credit</td><td>Battery contracts would not produce a payment back to customers.</td><td>ICC 2025 model: payments flow back to the utility when reference prices exceed the strike. A rider can provide bill credits. <a class="src" href="#s8">S8</a></td><td>Check the final ISC settlement terms and the rider design.</td></tr>
+      <tr><td>Shortfall report</td><td>A report to the General Assembly is required. Public or not is unknown.</td><td>Not found in the public pages reviewed.</td><td>Bryce to ask whether it will be public.</td></tr>
+      <tr><td>Next procurement</td><td>None in 2026. Spring 2027 anticipated.</td><td>2027 and potentially 2028. Timing is an open IPA question. <a class="src" href="#s3">S3</a><a class="src" href="#s6">S6</a></td><td>Treat spring 2027 as an expectation only.</td></tr>
+      <tr><td>Feedback deadline</td><td>October 28.</td><td>October 28, 2026 at 5 p.m. CT. <a class="src" href="#s7">S7</a></td><td>Matches. Assign an owner.</td></tr>
+      <tr><td>Mitigation plan</td><td>Expected mid-to-late October. Called a "CJ" plan.</td><td>The IPA, ICC and IEPA run a Resource Adequacy Mitigation Plan. Workshops ran through July 2026. <a class="src" href="#s15">S15</a></td><td>Confirm the title and release date.</td></tr>
+      <tr><td>15,000 MW peak</td><td>Referenced with 8,000 MW of imported gas. Area not identified.</td><td>Not identified.</td><td>Find the geography before quoting.</td></tr>
+      <tr><td>Accreditation</td><td>About 74 percent (MISO, four-hour) and 50 percent (PJM).</td><td>A 2025 Ameren workshop comment used about 44 percent for MISO storage in an illustration. <a class="src" href="#s16">S16</a></td><td>Methods change. Confirm the current value and its source.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Left out on purpose: the second half of the meeting (legislative outreach, ARES reform, data center policy, retreat planning, event logistics and the safety message) is not about battery storage.</p>
+</section>
+
+<!-- QUIZ -->
+<section class="block" id="quiz" aria-labelledby="quizh">
+  <div class="eyebrow">Check yourself</div>
+  <h2 id="quizh">Quiz: 30 questions</h2>
+  <p class="goal">Pick an answer to see whether it is right and why. Your score updates as you go.</p>
+  <div class="scorebar" role="status" aria-live="polite">
+    <div>Answered <span class="score-fig" id="sAnswered">0</span> of <span class="score-fig" id="sTotal">30</span></div>
+    <div>Correct <span class="score-fig" id="sCorrect">0</span></div>
+    <button type="button" class="btn" id="quizReset">Reset quiz</button>
+  </div>
+  <div id="quizList"></div>
+  <p class="verdict" id="quizVerdict" hidden></p>
+</section>
+
+<!-- GLOSSARY -->
+<section class="block" id="glossary" aria-labelledby="glossh">
+  <div class="eyebrow">Reference</div>
+  <h2 id="glossh">Glossary</h2>
+  <p class="goal">Plain-language definitions. Type to filter.</p>
+  <input class="gsearch" id="gSearch" type="search" placeholder="Filter terms, for example strike or MISO" aria-label="Filter glossary">
+  <p class="gcount" id="gCount"></p>
+  <dl class="gloss" id="glossList"></dl>
+</section>
+
+<!-- SOURCES -->
+<section class="block" id="sources" aria-labelledby="srch">
+  <div class="eyebrow">Reference</div>
+  <h2 id="srch">Sources</h2>
+  <p class="goal">Public pages were read on September 30, 2026. Labels show how much weight each one can carry.</p>
+  <ol class="sources">
+    <li id="s1"><span class="sid">S1</span><span><a href="https://ipa.illinois.gov/renewable-resources/energy-storage.html">IPA: Energy Storage, Procurements and Programs</a><span class="tag tag-pub">Public</span><span class="meta">Illinois Power Agency. Round one scope, contract basics, 2026 COD.</span></span></li>
+    <li id="s2"><span class="sid">S2</span><span><a href="https://ipa.illinois.gov/crga.html">IPA: Public Act 104-0458 (CRGA) Implementation</a><span class="tag tag-pub">Public</span><span class="meta">Illinois Power Agency. Dates, storage plan, Storage for All, IRP, RTO study.</span></span></li>
+    <li id="s3"><span class="sid">S3</span><span><a href="https://ipa.illinois.gov/announcements/illinois-commerce-commission-approves-600-mw-of-energy-storage-p.html">IPA: Illinois Commerce Commission Approves 600 MW of Energy Storage Projects</a><span class="tag tag-pub">Public</span><span class="meta">Announcement of the September 1, 2026 ICC approval.</span></span></li>
+    <li id="s4"><span class="sid">S4</span><span><a href="https://www.ipa-energyrfp.com/energy-storage/">Procurement Administrator: Energy Storage RFP page and FAQs</a><span class="tag tag-pub">Public</span><span class="meta">NERA Economic Consulting for the IPA. Targets, eligibility, benchmarks.</span></span></li>
+    <li id="s5"><span class="sid">S5</span><span><a href="https://nera-content-media.s3.us-east-1.amazonaws.com/ipa/Summer_2026_Energy_Storage_RFP_Results_01_SEP_2026_eb934945bd.pdf">Procurement Administrator: Summer 2026 Energy Storage RFP Results (Sept 1, 2026)</a><span class="tag tag-pub">Public</span><span class="meta">Winners, towns, MW, average winning bid price.</span></span></li>
+    <li id="s6"><span class="sid">S6</span><span><a href="https://ipa.illinois.gov/content/dam/soi/en/web/ipa/documents/20260923-rfi-ipa-storage-procurements.pdf">IPA: Request for Information, Utility-Scale Storage Procurements (Sept 23, 2026)</a><span class="tag tag-pub">Public</span><span class="meta">Questions for round two, statutory requirements, 43/57 split.</span></span></li>
+    <li id="s7"><span class="sid">S7</span><span><a href="https://www.ipa-energyrfp.com/announcements/energy-storage-rfp-announcement-illinois-power-agency-requests-feedback-on-2026-and-2027-storage-procurements/">Procurement Administrator: IPA Requests Feedback on 2026 and 2027 Storage Procurements (Sept 28, 2026)</a><span class="tag tag-pub">Public</span><span class="meta">Feedback deadline October 28, 2026, 5 p.m. CT.</span></span></li>
+    <li id="s8"><span class="sid">S8</span><span><a href="https://www.ilga.gov/documents/reports/ReportsSubmitted/5853RSGAEmail12781RSGAAttachEnergy%20Storage%20Procurement%20Report%205.1.2025.pdf">ICC Staff: Energy Storage Procurement Report (May 1, 2025)</a><span class="tag tag-pub">Public</span><span class="meta">Design of the ISC, cost recovery, geography, ratepayer estimates. Model terms may differ from the final contract.</span></span></li>
+    <li id="s9"><span class="sid">S9</span><span><a href="https://capitolnewsillinois.com/news/huge-step-forward-illinois-inches-closer-on-battery-storage-solar-goals/">Capitol News Illinois: "Huge step forward" (Sept 14, 2026)</a><span class="tag tag-news">News</span><span class="meta">Results, expert views on the PJM shortfall, installed storage today.</span></span></li>
+    <li id="s10"><span class="sid">S10</span><span><a href="https://mgrid.org/2026/09/07/illinois-storage-auction-520-mw-downstate-80-mw-comed-territory/">MGRID: Illinois Storage Auction Buys 520 MW Downstate and Only 80 MW in ComEd Territory (Sept 7, 2026)</a><span class="tag tag-news">News</span><span class="meta">Trade summary that cites IPA documents. Source of the rule details in Module 5. Verify against the RFP rules.</span></span></li>
+    <li id="s11"><span class="sid">S11</span><span><a href="https://gov-pritzker-newsroom.prezly.com/gov-pritzker-signs-historic-clean-and-reliable-grid-affordability-act">Governor's Office: Pritzker Signs Clean and Reliable Grid Affordability Act</a><span class="tag tag-pub">Public</span><span class="meta">Summary of CRGA provisions at signing.</span></span></li>
+    <li id="s12"><span class="sid">S12</span><span><a href="https://cleanpower.org/news/governor-pritzker-signs-landmark-energy-storage-bill-to-keep-costs-low-and-strengthen-the-grid/">American Clean Power Association: Governor Pritzker Signs Landmark Energy Storage Bill (Jan 8, 2026)</a><span class="tag tag-news">News</span><span class="meta">Industry view. Source for storage siting and permitting alignment.</span></span></li>
+    <li id="s13"><span class="sid">S13</span><span><a href="https://ipa.illinois.gov/electricity-procurement/ra-planning/irp-info.html">IPA: Integrated Resource Planning</a><span class="tag tag-pub">Public</span><span class="meta">IRP leadership and timeline.</span></span></li>
+    <li id="s14"><span class="sid">S14</span><span><a href="https://ipa.illinois.gov/announcements/ipa--icc--iepa-issue-the-2025-resource-adequacy-study.html">IPA, ICC, IEPA: 2025 Resource Adequacy Study issued</a><span class="tag tag-pub">Public</span><span class="meta">Findings on PJM and MISO resource adequacy challenges.</span></span></li>
+    <li id="s15"><span class="sid">S15</span><span><a href="https://ipa.illinois.gov/electricity-procurement/ra-planning/ra-irp-workshop-information.html">IPA: Resource Adequacy and IRP workshop information</a><span class="tag tag-pub">Public</span><span class="meta">2026 workshop series for the Mitigation Plan and IRP.</span></span></li>
+    <li id="s16"><span class="sid">S16</span><span><a href="https://icc.illinois.gov/downloads/public/Storage-Workshops/Ameren%20Initial%20Workshop%20Discussion%20Comments.pdf">Ameren Illinois: Initial Workshop Discussion Comments to the ICC (2025)</a><span class="tag tag-pub">Public</span><span class="meta">Seen through a search excerpt. The 44 percent accreditation figure was an illustration in those comments.</span></span></li>
+    <li id="s17"><span class="sid">S17</span><span><a href="https://www.canarymedia.com/articles/energy-storage/illinois-pass-clean-reliable-grid-bill">Canary Media: Illinois lawmakers just passed another big clean-energy bill</a><span class="tag tag-news">News</span><span class="meta">Pre-auction IPA estimate: about $9.7 billion gross, about $1 billion to customers for 3 GW.</span></span></li>
+    <li id="s18"><span class="sid">S18</span><span>Staff meeting debrief, September 30, 2026 (Discussion 1, battery storage)<span class="tag tag-int">Debrief · verify</span><span class="meta">Internal and preliminary. Not for external use.</span></span></li>
+    <li id="s19"><span class="sid">S19</span><span><a href="https://pv-magazine-usa.com/2026/01/12/illinois-sets-energy-storage-procurement-goal/">pv magazine USA: Illinois sets energy storage procurement goal (Jan 12, 2026)</a><span class="tag tag-news">News</span><span class="meta">Source for the roughly 200 MW installed figure.</span></span></li>
+  </ol>
+  <p class="foot">Built September 30, 2026. Figures change as the IPA, ICC and Ameren Illinois publish more. Where two sources differ, this page says so and does not pick one.</p>
+</section>
+
+</div>
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Mind map data ---------- */
+  var MAPS = {
+    overall: { t: "Illinois|battery storage", c: [
+      { t: "Why", c: ["Evening peak as solar fades", "Plant retirements, rising demand", "Goal: 3,000 MW by end of 2030"] },
+      { t: "Law and players", c: ["CRGA, signed Jan 8, 2026", "IPA buys, ICC approves", "Utilities sign the contracts"] },
+      { t: "Auction and contract", c: ["Auction held Aug 26, 2026", "20-year indexed storage credit", "Confidential price benchmark"] },
+      { t: "Round one results", c: ["600 MW of 1,038 MW sought", "MISO Zone 4: 520 MW, 4 projects", "PJM ComEd: 80 MW, 1 project"] },
+      { t: "Ameren and customers", c: ["Ameren Illinois is the buyer", "Rider on the bill", "Cost figures are projections"] },
+      { t: "Risks and next steps", c: ["Delivery, price, sites, safety", "Feedback due Oct 28, 2026", "More auctions in 2027"] }
+    ] },
+
+    m1: { t: "Why batteries", c: [
+      { t: "The grid rule", c: ["Supply matches demand|every second", "Evening peak as solar fades"] },
+      { t: "What a battery does", c: ["Charges when power is cheap", "Discharges when it is scarce", "Four-hour duration:|100 MW holds 400 MWh"] },
+      { t: "Limits", c: ["Stores energy, does not make it", "Loses some on the way|(round-trip efficiency)", "Four hours is short for|multi-day cold snaps"] },
+      { t: "Why Illinois", c: ["Reliability challenges in|both MISO and PJM", "Up to 3,000 MW cited in|2025 ICC workshops", "About 141 MW installed|today (news)"] }
+    ] },
+
+    m2: { t: "Who's who", c: [
+      { t: "Makes the law", c: ["General Assembly", "CRGA (Public Act 104-0458)"] },
+      { t: "Buys and approves", c: ["IPA runs the buying", "NERA runs the bidding", "ICC approves results"] },
+      { t: "Utility buyers", c: ["Ameren Illinois:|MISO Zone 4", "ComEd:|PJM ComEd area"] },
+      { t: "Grid operators", c: ["MISO: central and|southern Illinois", "PJM: northern Illinois"] },
+      { t: "Builders", c: ["Developers build, own|and run the batteries"] }
+    ] },
+
+    m3: { t: "How we got here", c: [
+      { t: "2024 to 2025", c: ["Mar 2024: IPA study", "Jan to Mar 2025:|seven ICC workshops", "May 1, 2025:|ICC staff report"] },
+      { t: "The law", c: ["Oct 30, 2025: passed", "Jan 8, 2026: signed|(PA 104-0458)", "Jun 1, 2026: effective"] },
+      { t: "The auction", c: ["Aug 26, 2026: auction", "Sep 1, 2026: ICC approves", "Sep 23 to 28: feedback|requests"] },
+      { t: "Debrief note", c: ["'Sergio' is probably|a slip for CRGA"] }
+    ] },
+
+    m4: { t: "What the law|requires", c: [
+      { t: "Goal", c: ["3,000 MW by Dec 31, 2030", "Bought in rounds,|1,038 MW first"] },
+      { t: "Bidder rules", c: ["20-year contracts", "Prevailing wage, PLA,|labor peace, equity", "Bid fee of $10,000 or more", "100 MW of experience", "Large utilities cannot bid"] },
+      { t: "Price protection", c: ["Confidential benchmark", "Above it: not cost-effective", "ICC approves the picks"] },
+      { t: "Planning", c: ["Draft storage plan|by Jun 1, 2027", "Statewide IRP", "Storage for All option"] }
+    ] },
+
+    m5: { t: "How the auction|worked", c: [
+      { t: "Who can bid", c: ["Standalone batteries", "20 MW or more, four hours", "MISO Zone 4 or|PJM ComEd area", "In a queue or well developed"] },
+      { t: "Picking winners", c: ["Each bid checked against|the benchmark", "Lowest qualifying bids|fill each region's target"] },
+      { t: "Key rules", c: ["Operate by Dec 31, 2029", "Extension to 2030 with|more collateral (news)", "Soft cap lets a region|exceed its target"] },
+      { t: "After the bids", c: ["ICC approved Sep 1, 2026", "One average price:|$110.52 per MWh"] }
+    ] },
+
+    m6: { t: "The 20-year|contract", c: [
+      { t: "The bid", c: ["Developer bids a strike|price in $ per MWh"] },
+      { t: "Reference price", c: ["Theoretical energy|arbitrage revenue", "Theoretical capacity|revenue"] },
+      { t: "Settlement", c: ["Strike above reference:|utility pays developer", "Reference above strike:|developer pays back|(ICC model)"] },
+      { t: "Who does what", c: ["Developer owns, runs,|sells to the market", "Utility settles, does|not dispatch", "IPA: extensions,|disputes"] },
+      { t: "Versus tolling", c: ["Tolling: utility controls|the battery, pays a fee", "Can look like a lease|on the books"] }
+    ] },
+
+    m7: { t: "Round one|results", c: [
+      { t: "Totals", c: ["1,038 MW sought", "600 MW contracted", "438 MW short"] },
+      { t: "MISO and Ameren", c: ["Target 450 MW", "Awarded 520 MW", "Four projects"] },
+      { t: "PJM and ComEd", c: ["Target 588 MW", "Awarded 80 MW", "One project:|Calumet City"] },
+      { t: "Why PJM fell short", c: ["Not known for certain", "Experts: rigid rules and|queue timing"] },
+      { t: "Price", c: ["Public average:|$110.52 per MWh", "Debrief estimates are|a different measure"] }
+    ] },
+
+    m8: { t: "Ameren and|customers", c: [
+      { t: "Ameren's role", c: ["Buyer for four MISO projects", "Settles payments,|checks data, monitors|collateral"] },
+      { t: "Cost recovery", c: ["Pass-through rider", "Forecast, then reconcile|each year", "Cost spread set in|the tariff case"] },
+      { t: "Bill effect", c: ["2024 estimate: about|$0.19 to $1.69 a month", "Debrief: $0.00121 per kWh", "Neither is an approved rate"] },
+      { t: "Gross and net", c: ["Up to about $1.6B gross", "About $890M net|(projected)"] },
+      { t: "Timing (debrief)", c: ["Rider filed in 2026", "Charges likely in 2027"] }
+    ] },
+
+    m9: { t: "Risks and|open questions", c: [
+      { t: "Delivery", c: ["A contract is not|a battery", "Winners could sell|(possible, not planned)"] },
+      { t: "Money", c: ["Depends on 20 years of|market prices", "Accreditation: if the|percentage falls,|support rises"] },
+      { t: "Place", c: ["Traffic, roads, farmland", "Local control and|community benefit"] },
+      { t: "Safety", c: ["Battery fires", "Rural and volunteer|fire departments"] },
+      { t: "Not established", c: ["60% failure for these|projects", "Developer sales", "That fire codes do|not apply"] }
+    ] },
+
+    m10: { t: "The bigger|reliability picture", c: [
+      { t: "Studies", c: ["Resource Adequacy Study,|Dec 15, 2025", "First IRP due mid-Nov 2026", "RTO study due Dec 1, 2026"] },
+      { t: "Debrief worries", c: ["Imported gas generation", "Reliance on future nuclear", "Winter fuel supply"] },
+      { t: "Use in storage", c: ["IPA will adjust targets|and the MISO/PJM split"] },
+      { t: "Communication", c: ["Stronger public explanation|favored, nothing approved"] }
+    ] },
+
+    m11: { t: "What's next", c: [
+      { t: "Dates", c: ["Oct 28: feedback due", "Mid-Nov: IRP due", "Dec 1: RTO study due", "2027: next auction"] },
+      { t: "IPA's questions", c: ["One auction or several?", "MISO/PJM split", "Roll unfilled PJM MW?", "Pair with solar or wind?", "Keep the ISC contract?"] },
+      { t: "Say or check", c: ["Say: goal, 600 MW,|nothing operating yet", "Check: costs, credits,|attrition, fire codes"] }
+    ] }
+  };
+
+  /* ---------- Glossary data ---------- */
+  var GLOSS = [
+    { id: "mw", t: "Megawatt (MW)", d: "A unit of power: how fast electricity can flow at one moment. One MW is 1,000 kilowatts. A battery's MW rating is how hard it can push power out." },
+    { id: "mwh", t: "Megawatt-hour (MWh)", d: "A unit of energy: power over time. One MW running for one hour is one MWh. A battery's MWh rating is how much it can hold. A 100 MW, four-hour battery holds up to 400 MWh." },
+    { id: "kwh", t: "Kilowatt-hour (kWh)", d: "The unit on your electric bill. A 1,000-watt heater running for one hour uses one kWh. One MWh equals 1,000 kWh." },
+    { id: "nameplate", t: "Nameplate capacity", d: "The maximum power a facility is built and labeled to deliver. A 100 MW battery has 100 MW of nameplate capacity, even if the grid counts only part of it as dependable." },
+    { id: "bess", t: "Battery energy storage system (BESS)", d: "The whole grid battery facility: the cells, the power-conversion equipment, the controls and the safety systems." },
+    { id: "duration", t: "Duration", d: "How many hours a battery can deliver its full power before it is empty. Round one required four hours." },
+    { id: "rte", t: "Round-trip efficiency", d: "The share of electricity put into a battery that comes back out. At 85 percent, charging with 100 units returns 85. The rest is lost, mostly as heat." },
+    { id: "netuser", t: "Net user of electricity", d: "Because of those losses, a battery takes in more electricity than it gives back. On net it uses electricity. It moves energy in time and does not create it." },
+    { id: "standalone", t: "Standalone storage", d: "A battery that connects to the grid on its own and is not bundled with a solar or wind project. Round one accepted only standalone batteries." },
+    { id: "colocated", t: "Co-located (paired) storage", d: "A battery built at the same site as solar or wind, often sharing one grid connection. The IPA is asking whether round two should allow it." },
+    { id: "arbitrage", t: "Energy arbitrage", d: "Buying power when it is cheap (charging) and selling it when it is expensive (discharging). It is the basic way a battery earns money from the energy market." },
+    { id: "ra", t: "Resource adequacy", d: "Having enough dependable supply to meet demand, including at the tightest moments, such as a heat wave or a long winter cold snap." },
+    { id: "capacity", t: "Capacity", d: "Payment for being available to supply power when the grid needs it, separate from payment for the energy itself. Each grid operator has its own capacity market or process." },
+    { id: "accreditation", t: "Accreditation", d: "The share of a resource's rated size that the grid operator counts as dependable capacity. At 74 percent, a 100 MW battery counts as 74 MW. The percentage depends on the operator's method and can change." },
+    { id: "elcc", t: "ELCC (effective load carrying capability)", d: "A method grid operators use to work out how much dependable capacity a resource adds, given when it can and cannot run." },
+    { id: "rto", t: "Regional transmission organization (RTO)", d: "An independent operator that runs the high-voltage grid and wholesale electricity markets across several states. Illinois is served by two: MISO and PJM." },
+    { id: "miso", t: "MISO", d: "The Midcontinent Independent System Operator. It runs the grid and markets across much of the central United States, including central and southern Illinois, where Ameren Illinois serves customers." },
+    { id: "pjm", t: "PJM", d: "The grid operator for much of the Mid-Atlantic and parts of the Midwest, including northern Illinois, where ComEd serves customers." },
+    { id: "lrz4", t: "MISO Zone 4 (LRZ 4)", d: "MISO's Local Resource Zone 4: the central and southern Illinois area that includes Ameren Illinois's territory. One of the two regions bought for in round one." },
+    { id: "comedlda", t: "PJM ComEd area (ComEd LDA)", d: "PJM's local deliverability area for ComEd's territory in northern Illinois. The other region bought for in round one." },
+    { id: "interconnection", t: "Interconnection", d: "The physical and contractual connection of a project to the high-voltage grid, including studies to confirm the grid can handle it." },
+    { id: "queue", t: "Interconnection queue", d: "The waiting line of projects that want to connect to the grid. Each grid operator runs its own, and the studies can take years." },
+    { id: "cod", t: "Commercial operation date (COD)", d: "The date a project is built, tested and running commercially. Round one projects are due by December 31, 2029, with extensions possible." },
+    { id: "ipa", t: "Illinois Power Agency (IPA)", d: "The state agency that plans and runs certain power purchases for Illinois, including the storage auctions. It hired NERA to run the bidding." },
+    { id: "icc", t: "Illinois Commerce Commission (ICC)", d: "The state regulator of utilities such as Ameren Illinois and ComEd. It approved the auction results and decides how utilities recover costs from customers." },
+    { id: "nera", t: "NERA (procurement administrator)", d: "The consulting firm the IPA hired to run the bidding, compare bids with the benchmark, and publish the results." },
+    { id: "rfp", t: "Request for proposals (RFP)", d: "The formal invitation to developers to submit priced bids under published rules. NERA ran it for round one." },
+    { id: "benchmark", t: "Confidential benchmark", d: "A price ceiling set by the procurement administrator and kept secret until bids are in. A bid above it is not cost-effective and cannot win." },
+    { id: "softcap", t: "Soft cap", d: "A limit on how far a region's awards may exceed its target so the last project can fit. It explains MISO's 520 MW against a 450 MW target. Trade press reports a limit of 50 percent over." },
+    { id: "strike", t: "Strike price", d: "The price per MWh that a developer bids. In effect it is the price that lets the project pay for itself. It is compared with the reference price to set the payment." },
+    { id: "isc", t: "Indexed storage credit (ISC)", d: "The 20-year contract type used in round one. The developer's payment depends on the gap between its strike price and a formula-based reference price, not on a fixed fee." },
+    { id: "reap", t: "Reference energy arbitrage price", d: "A formula estimate of what a four-hour battery could earn by charging in the cheapest hours of a day and discharging in the priciest. It is theoretical, not the developer's actual trading profit." },
+    { id: "rcp", t: "Reference capacity price", d: "A formula estimate of what the grid operator's capacity market would pay a battery for dependable supply." },
+    { id: "cfd", t: "Contract for differences (CfD)", d: "A contract in which one side pays the other the gap between an agreed price and a market reference price. The ISC works on a similar idea, though the details differ." },
+    { id: "tolling", t: "Tolling agreement", d: "A different contract type. The utility controls when the battery charges and discharges and pays the owner a fixed fee. ICC staff preferred the ISC for round one, partly because tolling can be treated like a lease." },
+    { id: "dispatch", t: "Dispatch", d: "Deciding when a battery or power plant charges, runs and stops. Under the ISC the developer dispatches the battery, not the utility." },
+    { id: "collateral", t: "Collateral", d: "Money or a guarantee a developer posts so the buyer is protected if the project is not built or performs badly." },
+    { id: "counterparty", t: "Counterparty", d: "The other side of a contract. For the four MISO projects, Ameren Illinois is the counterparty to each developer." },
+    { id: "rider", t: "Rider", d: "A line item in a utility's tariff and on customer bills that recovers one specific cost, separate from base rates." },
+    { id: "tariff", t: "Tariff", d: "The utility's published rates and rules, approved by the ICC. A rider is one part of it." },
+    { id: "passthrough", t: "Pass-through", d: "A way of recovering a contract's cost from customers at what it actually costs. The charge is set on a forecast, then reconciled to actual payments each year." },
+    { id: "plc", t: "Peak load contribution (PLC)", d: "A customer's share of the grid's peak demand. One way to spread costs is by each customer's peak share instead of by kWh used." },
+    { id: "grossnet", t: "Gross and net cost", d: "Gross is the full contract value. Net is projected customer cost after market revenue offsets. The net figure moves with energy and capacity prices, so it is a projection." },
+    { id: "crga", t: "CRGA", d: "The Clean and Reliable Grid Affordability Act, Public Act 104-0458. Signed January 8, 2026 and effective June 1, 2026. It sets the 3,000 MW storage goal and creates the statewide IRP." },
+    { id: "ceja", t: "CEJA", d: "The Climate and Equitable Jobs Act of 2021, an earlier Illinois climate and energy law. It created the carbon mitigation credit program. The debrief compared the battery contract to it." },
+    { id: "cmc", t: "Carbon mitigation credit (CMC)", d: "A payment program created by CEJA to support certain nuclear plants. Utilities recover the cost through a rider, which ICC staff used as the model for the battery rider." },
+    { id: "zec", t: "Zero-emission credit (ZEC)", d: "An existing Illinois program that pays certain nuclear plants for carbon-free power, funded by a per-kWh charge on bills. The debrief used it as a comparison for the expected battery charge." },
+    { id: "storageforall", t: "Storage for All", d: "An option in CRGA for the IPA to pair batteries with Illinois Solar for All projects, using up to 25 percent of that program's budget." },
+    { id: "etc", t: "Energy Transition Community Grant Area", d: "An area that Illinois energy law singles out for extra support because of past reliance on coal and other fossil fuel plants or mines. The results notice says three of the five winning projects are at least 50 percent inside one." },
+    { id: "irp", t: "Integrated Resource Plan (IRP)", d: "The statewide long-term plan for having enough power supply, created by CRGA. The ICC leads it with the IPA, the Illinois EPA and the Illinois Finance Authority. The first is due in mid-November 2026." },
+    { id: "rastudy", t: "Resource Adequacy Study", d: "A joint study issued December 15, 2025 by the IPA, ICC and Illinois EPA. It found resource adequacy challenges in both PJM and MISO." },
+    { id: "smr", t: "Small modular reactor (SMR)", d: "A smaller nuclear reactor designed to be built in factory-made modules. The debrief questioned models that count on such plants being built in time." },
+    { id: "peaker", t: "Peaker plant", d: "A power plant run only when demand is highest, often gas-fired. Batteries can compete with peakers for evening-peak service." },
+    { id: "dualfuel", t: "Dual-fuel", d: "A gas plant that can switch to a backup fuel, often oil, when natural gas supply is short during severe cold." }
+  ];
+
+  /* ---------- Quiz data ---------- */
+  var QUIZ = [
+    { m: 1, q: "A grid battery is rated at 100 MW with four-hour duration. How much energy can it hold?",
+      o: ["100 MWh", "400 MWh", "4 MWh", "25 MWh"], a: 1,
+      e: "Energy is power times time: 100 MW x 4 hours = 400 MWh." },
+    { m: 1, q: "Why is a grid battery called a net user of electricity?",
+      o: ["It produces electricity from chemical reactions with no input", "It is owned by the utility that buys its output", "It runs only during the evening peak", "It takes in more electricity than it sends back, because some is lost"], a: 3,
+      e: "Round-trip losses mean it gives back less than it takes in. A battery shifts energy in time and does not create any." },
+    { m: 1, q: "What does resource adequacy mean?",
+      o: ["Having enough dependable supply to meet demand, including at the tightest moments", "Having enough transmission lines to reach every customer", "A rating of how clean a power plant is", "The share of a battery's size that can be charged each day"], a: 0,
+      e: "Resource adequacy is about having enough dependable supply when the grid is under the most stress." },
+    { m: 2, q: "Which grid operator runs the grid where Ameren Illinois serves customers?",
+      o: ["PJM, in the ComEd area", "PJM, in northern Illinois", "MISO, in northern Illinois", "MISO, in Zone 4 (central and southern Illinois)"], a: 3,
+      e: "Ameren Illinois is in MISO Zone 4. ComEd is in PJM. The program buys separately in each region." },
+    { m: 2, q: "Who runs the auction itself, and who approves the results?",
+      o: ["Ameren Illinois runs it and the IPA approves", "The ICC runs it and NERA approves", "NERA, hired by the IPA, runs it and the ICC approves", "MISO runs it and the governor approves"], a: 2,
+      e: "The IPA runs the procurement and hired NERA as procurement administrator. The ICC approves the results. Utilities sign the contracts afterward." },
+    { m: 3, q: "What is the formal name of the law that set the 3,000 MW storage goal?",
+      o: ["Public Act 103-1066", "Clean and Reliable Grid Affordability Act, Public Act 104-0458", "Climate and Equitable Jobs Act (CEJA)", "No law did. The ICC set it by rule"], a: 1,
+      e: "CRGA is Public Act 104-0458. Public Act 103-1066 was the earlier law that started the workshops. CEJA is a 2021 law." },
+    { m: 3, q: "When did CRGA take effect?",
+      o: ["October 30, 2025", "January 8, 2026", "June 1, 2026", "August 26, 2026"], a: 2,
+      e: "The General Assembly passed it October 30, 2025. The governor signed it January 8, 2026. It took effect June 1, 2026. August 26, 2026 was the first auction." },
+    { m: 3, q: "What is the main difference between an indexed storage credit (ISC) and a tolling agreement?",
+      o: ["An ISC is for wind and tolling is for solar", "Under an ISC the utility controls the battery. Under tolling the developer does", "An ISC lasts one year and tolling lasts twenty", "Under an ISC the developer runs the battery and sells into the market. Under tolling the utility controls it and pays a fixed fee"], a: 3,
+      e: "That control difference matters. Tolling can be treated like a lease on the utility's books, which is one reason ICC staff recommended the ISC for round one." },
+    { m: 4, q: "What storage goal does CRGA set?",
+      o: ["3,000 MW under contract and committed to operate by December 31, 2030", "1,038 MW operating by December 31, 2029", "3,000 MWh operating by 2026", "600 MW by the end of 2027"], a: 0,
+      e: "3,000 MW is the state goal. 1,038 MW was the round one target, and 600 MW is what round one contracted." },
+    { m: 4, q: "Which projects were eligible in round one?",
+      o: ["Any battery in Illinois, including home batteries", "Standalone batteries of any size, in PJM only", "Standalone batteries connected in MISO Zone 4 or the PJM ComEd area", "Only batteries paired with solar, in MISO"], a: 2,
+      e: "Round one was limited to standalone batteries in those two regions. Module 5 adds the size and duration rules: at least 20 MW and four hours." },
+    { m: 5, q: "What happens to a bid that is above the confidential benchmark?",
+      o: ["It is accepted at the benchmark price", "It is not cost-effective and cannot win", "It goes to the ICC for a separate vote", "It is carried into the next round"], a: 1,
+      e: "The benchmark is a hidden price ceiling. A bid above it is not cost-effective, so it cannot be selected." },
+    { m: 5, q: "By when must round one projects reach commercial operation, before any extension?",
+      o: ["June 1, 2026", "December 31, 2027", "August 26, 2028", "December 31, 2029"], a: 3,
+      e: "The deadline is December 31, 2029. Trade press reports an extension to 2030 by posting more collateral. Verify that in the final RFP rules." },
+    { m: 5, q: "Why did the Ameren Illinois region finish at 520 MW against a 450 MW target?",
+      o: ["The ICC raised the target after the auction", "A bidder was allowed to bid below the benchmark by mistake", "The soft cap let the region go over target to fit the last project that qualified", "ComEd transferred 70 MW of its target"], a: 2,
+      e: "The rules allowed a region to exceed its target to fit the last qualifying project. The ICC approved the results." },
+    { m: 6, q: "Under the ISC, who owns, runs and sells the battery's output into the market?",
+      o: ["The developer", "Ameren Illinois", "The IPA", "The ICC"], a: 0,
+      e: "The developer operates the battery. The utility settles payments but does not dispatch the battery." },
+    { m: 6, q: "What is the strike price?",
+      o: ["The price customers pay per kWh", "The benchmark NERA keeps secret", "The price at which the grid operator buys capacity", "The price per MWh the developer bids, which is compared with a formula-based reference price"], a: 3,
+      e: "The gap between the strike price and the reference price sets the payment. The benchmark is a separate hidden ceiling used to screen bids." },
+    { m: 6, q: "The reference price has two parts. Which are they?",
+      o: ["A fuel price and a labor price", "A theoretical energy arbitrage revenue and a theoretical capacity revenue", "A construction cost and an interconnection cost", "A state subsidy and a federal tax credit"], a: 1,
+      e: "Both parts are formulas built from market data, not the developer's actual trading results." },
+    { m: 6, q: "A project has a $110 strike price and the reference total is $85. Under the ICC model, what happens per unit?",
+      o: ["The developer pays back $25", "The developer pays back $85", "The utility pays the developer $25", "Nothing is paid"], a: 2,
+      e: "Strike minus reference is $110 - $85 = $25, and it is positive, so the utility pays the developer. This is case A in the worked example." },
+    { m: 6, q: "The debrief said the battery contracts would not produce a payment back to customers. The ICC's 2025 model describes payments back to the utility when reference prices exceed the strike. How should you handle that in an outside conversation?",
+      o: ["Check the final ISC settlement terms and the rider design first, and avoid stating it either way until confirmed", "Repeat the debrief statement, because it is newer", "Say customers will receive credits, because the ICC model says so", "Avoid mentioning cost at all"], a: 0,
+      e: "The two statements do not obviously match, and the ICC model may differ from the final contract. Confirm the final terms before saying anything outside the company." },
+    { m: 7, q: "How much did round one contract, out of how much sought?",
+      o: ["1,038 MW of 1,038 MW", "600 MW of 1,038 MW", "520 MW of 450 MW", "80 MW of 588 MW"], a: 1,
+      e: "Total: 600 MW of 1,038 MW. The other two options are the regional figures for MISO and PJM." },
+    { m: 7, q: "Which statement about the regional results is correct?",
+      o: ["MISO fell short and PJM exceeded its target", "Both regions met their targets exactly", "Both regions fell short", "MISO Zone 4 exceeded its 450 MW target with 520 MW, and PJM got 80 MW against 588 MW"], a: 3,
+      e: "The 438 MW total shortfall sits almost entirely in the PJM ComEd area." },
+    { m: 7, q: "What did experts quoted by Capitol News Illinois point to as possible reasons for the PJM shortfall?",
+      o: ["Developers refused to pay the bid fee", "Rigid first-round rules, and a mismatch between the required operating date and PJM's slow interconnection queue", "The ICC rejected most PJM bids", "ComEd withdrew from the program"], a: 1,
+      e: "These are expert views, not proof. The public record does not name losing bidders, so nobody outside the process can say for certain." },
+    { m: 7, q: "After round one, how many megawatts remain to be contracted toward the 3,000 MW goal?",
+      o: ["438 MW", "1,038 MW", "2,400 MW", "3,000 MW"], a: 2,
+      e: "3,000 MW minus 600 MW contracted leaves 2,400 MW for later rounds." },
+    { m: 8, q: "What is Ameren Illinois's role in the storage program?",
+      o: ["It picks the winning projects", "It owns and operates the batteries", "It sets the benchmark", "It is the utility buyer for the MISO projects: it signs contracts, settles payments and runs the customer charge"], a: 3,
+      e: "Ameren Illinois's role is administrative. The IPA and NERA run the bidding and the ICC approves the results." },
+    { m: 8, q: "How did ICC staff recommend that costs reach customers?",
+      o: ["A pass-through rider, like ComEd's carbon mitigation credit rider, reconciled each year", "A one-time fee paid by developers", "A permanent base-rate increase with no true-up", "Directly from the state budget"], a: 0,
+      e: "Charges are set from a forecast and reconciled to actual contract costs. How costs are spread among customers was left to the tariff case." },
+    { m: 8, q: "Using the debrief's preliminary rate of $0.00121 per kWh, what is the illustrative charge for a home that uses 2,000 kWh in a month?",
+      o: ["$0.24", "$1.21", "$24.20", "$2.42"], a: 3,
+      e: "2,000 kWh x $0.00121 = $2.42. A 1,000 kWh home would be $1.21. This is illustrative arithmetic, not an approved rate." },
+    { m: 8, q: "What is the difference between gross and net cost in the debrief's figures?",
+      o: ["Gross is what customers pay and net is what developers pay", "Gross counts one year and net counts twenty", "There is no difference, they are two names for the same number", "Gross is the maximum contract value. Net is projected customer cost after market revenue offsets, and it is a projection"], a: 3,
+      e: "The debrief cited up to about $1.6 billion gross and about $890 million net. The net number moves with energy and capacity prices." },
+    { m: 9, q: "A 100 MW four-hour battery has a 74 percent accreditation. How much does the grid operator count as dependable capacity, and what happens if the percentage falls?",
+      o: ["100 MW, and customer support falls", "74 MW, and customer support falls", "74 MW, and capacity revenue falls so customer support rises", "26 MW, and customer support rises"], a: 2,
+      e: "74 percent of 100 MW is 74 MW. Less dependable capacity means less capacity revenue, so the utility's payment under the contract rises. The 74 percent figure is from the debrief, so confirm the current value." },
+    { m: 9, q: "What does the 60 percent failure rate in the debrief tell us about these battery projects?",
+      o: ["It is the measured failure rate of round one batteries", "Nothing directly. It was an analogy from awarded renewable contracts, not a finding about these projects", "It was published by the ICC as a reason to cancel the program", "It applies only to ComEd projects"], a: 1,
+      e: "The meeting did not establish any failure rate for these projects. Do not repeat the figure as a forecast." },
+    { m: 10, q: "When is the first statewide Integrated Resource Plan due?",
+      o: ["Mid-November 2026 (IPA pages give November 15 and 16)", "June 1, 2027", "October 28, 2026", "December 31, 2030"], a: 0,
+      e: "The IRP is due to the ICC in mid-November 2026. October 28 is the storage feedback deadline, and June 1, 2027 is the draft storage procurement plan." },
+    { m: 11, q: "When is feedback on round one and the 2027 round due to the IPA?",
+      o: ["September 28, 2026", "October 28, 2026 at 5 p.m. Central", "November 15, 2026", "December 1, 2026"], a: 1,
+      e: "The request for feedback was announced September 28, and responses are due October 28, 2026 at 5 p.m. CT. The debrief shows no owner assigned yet for Ameren's response." }
+  ];
+
+  /* ---------- Helpers ---------- */
+  var NS = "http://www.w3.org/2000/svg";
+  function $(id) { return document.getElementById(id); }
+  function h(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function s(tag, attrs) {
+    var n = document.createElementNS(NS, tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    return n;
+  }
+  var LETTERS = ["A", "B", "C", "D"];
+
+  /* ---------- Mind maps ---------- */
+  function buildMap(host, tree) {
+    var LH = 16, PX = 12, PY = 8, GX = 36, GY = 8, GB = 16, PAD = 3;
+    host.textContent = "";
+    var svg = s("svg", { role: "img" });
+    var gE = s("g"), gN = s("g");
+    svg.appendChild(gE);
+    svg.appendChild(gN);
+    host.appendChild(svg);
+
+    var colW = [];
+    var labels = [];
+
+    function mk(n, d, b) {
+      var text = typeof n === "string" ? n : n.t;
+      var node = { d: d, b: b, lines: text.split("|"), kids: [] };
+      var cls = d === 0 ? "mm-root" : d === 1 ? "mm-branch" : "mm-leaf";
+      var g = s("g", { "class": "mm-node " + cls });
+      var r = s("rect", { rx: 5, ry: 5 });
+      var tx = s("text");
+      node.spans = node.lines.map(function (ln, i) {
+        var ts = s("tspan", { x: 0, y: i * LH + 12 });
+        ts.textContent = ln;
+        tx.appendChild(ts);
+        return ts;
+      });
+      g.appendChild(r);
+      g.appendChild(tx);
+      gN.appendChild(g);
+      node.r = r;
+      var w = 0;
+      node.spans.forEach(function (ts, i) {
+        var len = 0;
+        try { len = ts.getComputedTextLength(); } catch (e) { len = 0; }
+        if (!len) len = node.lines[i].length * 7.2;
+        if (len > w) w = len;
+      });
+      node.w = Math.ceil(w) + 2 * PX;
+      node.h = node.lines.length * LH + 2 * PY;
+      colW[d] = Math.max(colW[d] || 0, node.w);
+      if (d <= 1) labels.push(node.lines.join(" "));
+      if (typeof n !== "string" && n.c) {
+        n.c.forEach(function (k, i) { node.kids.push(mk(k, d + 1, d === 0 ? i : b)); });
+      }
+      return node;
+    }
+
+    var root = mk(tree, 0, -1);
+
+    function gapOf(n) { return n.d === 0 ? GB : GY; }
+    function measure(n) {
+      var tot = 0;
+      n.kids.forEach(function (k, i) { tot += measure(k) + (i ? gapOf(n) : 0); });
+      n.kt = tot;
+      n.sh = Math.max(n.h, tot);
+      return n.sh;
+    }
+    function place(n, top) {
+      n.y = top + (n.sh - n.h) / 2;
+      var y = top + (n.sh - n.kt) / 2;
+      n.kids.forEach(function (k) { place(k, y); y += k.sh + gapOf(n); });
+    }
+    measure(root);
+    place(root, 0);
+
+    var xs = [];
+    var acc = 0;
+    colW.forEach(function (w, i) { xs[i] = acc; acc += w + GX; });
+    var totalW = acc - GX;
+
+    function draw(n) {
+      n.x = xs[n.d];
+      n.r.setAttribute("x", n.x);
+      n.r.setAttribute("y", n.y);
+      n.r.setAttribute("width", colW[n.d]);
+      n.r.setAttribute("height", n.h);
+      if (n.d === 1) n.r.setAttribute("style", "stroke:var(--b" + ((n.b % 5) + 1) + ")");
+      if (n.d >= 2) n.r.setAttribute("style", "stroke:var(--line);stroke-width:1");
+      n.spans.forEach(function (ts, i) {
+        ts.setAttribute("x", n.x + PX);
+        ts.setAttribute("y", n.y + PY + i * LH + 12);
+      });
+      n.kids.forEach(function (k) {
+        draw(k);
+        var x1 = n.x + colW[n.d], y1 = n.y + n.h / 2;
+        var x2 = k.x, y2 = k.y + k.h / 2;
+        var xm = (x1 + x2) / 2;
+        gE.appendChild(s("path", {
+          "class": "mm-edge",
+          d: "M" + x1 + " " + y1 + " C" + xm + " " + y1 + " " + xm + " " + y2 + " " + x2 + " " + y2,
+          style: "stroke:var(--b" + ((k.b % 5) + 1) + ")"
+        }));
+      });
+    }
+    draw(root);
+
+    var W = totalW + 2 * PAD, H = root.sh + 2 * PAD;
+    svg.setAttribute("width", W);
+    svg.setAttribute("height", H);
+    svg.setAttribute("viewBox", (-PAD) + " " + (-PAD) + " " + W + " " + H);
+    svg.setAttribute("aria-label", "Mind map. " + labels.join(". "));
+  }
+
+  function renderMaps() {
+    var hosts = document.querySelectorAll(".map[data-map]");
+    for (var i = 0; i < hosts.length; i++) {
+      var key = hosts[i].getAttribute("data-map");
+      if (MAPS[key]) buildMap(hosts[i], MAPS[key]);
+    }
+  }
+
+  /* ---------- Terms under each module ---------- */
+  var GMAP = {};
+  GLOSS.forEach(function (g) { GMAP[g.id] = g; });
+
+  function renderTerms() {
+    var boxes = document.querySelectorAll(".terms[data-terms]");
+    for (var i = 0; i < boxes.length; i++) {
+      var box = boxes[i];
+      box.textContent = "";
+      box.getAttribute("data-terms").split(",").forEach(function (id) {
+        var g = GMAP[id.trim()];
+        if (!g) return;
+        var d = h("div", "term");
+        d.appendChild(h("b", null, g.t));
+        d.appendChild(h("span", null, g.d));
+        box.appendChild(d);
+      });
+    }
+  }
+
+  /* ---------- Glossary ---------- */
+  var SORTED = GLOSS.slice().sort(function (a, b) {
+    return a.t.toLowerCase().localeCompare(b.t.toLowerCase());
+  });
+
+  function renderGloss() {
+    var list = $("glossList");
+    var q = $("gSearch").value.trim().toLowerCase();
+    list.textContent = "";
+    var n = 0;
+    SORTED.forEach(function (g) {
+      if (q && (g.t + " " + g.d).toLowerCase().indexOf(q) === -1) return;
+      n++;
+      var wrap = h("div");
+      wrap.appendChild(h("dt", null, g.t));
+      wrap.appendChild(h("dd", null, g.d));
+      list.appendChild(wrap);
+    });
+    $("gCount").textContent = n
+      ? (q ? n + " of " + SORTED.length + " terms match" : SORTED.length + " terms, in alphabetical order")
+      : "No terms match. Try a shorter word.";
+  }
+
+  /* ---------- Quiz ---------- */
+  var answered = 0, correct = 0, missed = {};
+
+  function updateScore() {
+    $("sAnswered").textContent = answered;
+    $("sCorrect").textContent = correct;
+    $("sTotal").textContent = QUIZ.length;
+    var v = $("quizVerdict");
+    if (answered === QUIZ.length) {
+      var mods = Object.keys(missed).map(Number).sort(function (a, b) { return a - b; });
+      var msg;
+      if (correct >= 26) msg = "Well done. You have the core of it. Use the Debrief check table to see where the meeting notes still need confirming.";
+      else if (correct >= 18) msg = "A solid base. Review the modules for the questions you missed, then try again.";
+      else msg = "Early days, which is normal for a new topic. Reread the big picture and Modules 1 to 3, then try again.";
+      v.textContent = "You scored " + correct + " of " + QUIZ.length + ". " + msg +
+        (mods.length ? " Modules to revisit: " + mods.join(", ") + "." : "");
+      v.hidden = false;
+    } else {
+      v.hidden = true;
+      v.textContent = "";
+    }
+  }
+
+  function renderQuiz() {
+    var list = $("quizList");
+    list.textContent = "";
+    answered = 0; correct = 0; missed = {};
+    QUIZ.forEach(function (item, qi) {
+      var box = h("div", "q");
+      box.appendChild(h("p", "q-meta", "Question " + (qi + 1) + " of " + QUIZ.length + " · Module " + item.m));
+      var qt = h("p", "q-text", item.q);
+      qt.id = "qt" + qi;
+      box.appendChild(qt);
+      var opts = h("div", "opts");
+      opts.setAttribute("role", "group");
+      opts.setAttribute("aria-labelledby", "qt" + qi);
+      var exp = h("p", "q-exp");
+      var btns = item.o.map(function (text, oi) {
+        var b = h("button", "opt");
+        b.type = "button";
+        b.appendChild(h("span", "k", LETTERS[oi]));
+        b.appendChild(h("span", null, text));
+        b.addEventListener("click", function () {
+          if (box.classList.contains("answered")) return;
+          box.classList.add("answered");
+          btns.forEach(function (x) { x.disabled = true; });
+          var right = oi === item.a;
+          answered++;
+          if (right) {
+            correct++;
+            b.classList.add("ok");
+            b.firstChild.textContent = "✓";
+          } else {
+            missed[item.m] = true;
+            b.classList.add("no");
+            b.firstChild.textContent = "✗";
+            btns[item.a].classList.add("ok");
+            btns[item.a].firstChild.textContent = "✓";
+          }
+          exp.textContent = "";
+          exp.appendChild(h("strong", null, right ? "Correct." : "Not quite. The answer is " + LETTERS[item.a] + "."));
+          exp.appendChild(document.createTextNode(" " + item.e));
+          updateScore();
+        });
+        opts.appendChild(b);
+        return b;
+      });
+      box.appendChild(opts);
+      box.appendChild(exp);
+      list.appendChild(box);
+    });
+    updateScore();
+  }
+
+  /* ---------- Reading progress (per viewer, optional) ---------- */
+  var DONE_KEY = "il-storage-primer-done";
+  var done = [];
+  function loadDone() {
+    try {
+      var v = JSON.parse(localStorage.getItem(DONE_KEY) || "[]");
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+  function saveDone() {
+    try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch (e) { /* storage unavailable */ }
+  }
+  function initDone() {
+    done = loadDone();
+    var boxes = document.querySelectorAll("input[data-done]");
+    for (var i = 0; i < boxes.length; i++) {
+      (function (box) {
+        var id = box.getAttribute("data-done");
+        var chip = document.querySelector('a.chip[data-chip="' + id + '"]');
+        var on = done.indexOf(id) > -1;
+        box.checked = on;
+        if (chip) chip.classList.toggle("is-done", on);
+        box.addEventListener("change", function () {
+          var at = done.indexOf(id);
+          if (box.checked && at === -1) done.push(id);
+          if (!box.checked && at > -1) done.splice(at, 1);
+          if (chip) chip.classList.toggle("is-done", box.checked);
+          saveDone();
+        });
+      })(boxes[i]);
+    }
+  }
+
+  /* ---------- Start ---------- */
+  renderTerms();
+  renderGloss();
+  renderQuiz();
+  initDone();
+  renderMaps();
+
+  $("gSearch").addEventListener("input", renderGloss);
+  $("quizReset").addEventListener("click", function () {
+    renderQuiz();
+    var top = $("quiz");
+    if (top && top.scrollIntoView) top.scrollIntoView();
+  });
+
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load('500 13px "Libre Franklin"'),
+      document.fonts.load('700 13px "Libre Franklin"')
+    ]).then(renderMaps, function () {});
+    if (document.fonts.ready) document.fonts.ready.then(renderMaps, function () {});
+  }
+})();
+</script>
+</body>
+</html>
