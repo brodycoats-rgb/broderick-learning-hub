@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Senator Koehler Lunch Briefing</title>
+<meta name="description" content="Briefing for the informative lunch with Senator Koehler on the Ameren Illinois Multi-Year Grid Plan.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0; --card: #f6f8fa;
+    --accent: #0969da; --accent-soft: #ddf4ff;
+    --danger: #cf222e; --danger-soft: #ffebe9;
+    --warn: #9a6700; --warn-soft: #fff8c5;
+    --ok: #1a7f37; --ok-soft: #dafbe1;
+    --chg: #c8e6ff;
+    --shadow: 0 1px 0 rgba(31,35,40,.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --border: #3d444d; --card: #151b23;
+      --accent: #4493f8; --accent-soft: #121d2f;
+      --danger: #ff7b72; --danger-soft: #2d1416;
+      --warn: #e3b341; --warn-soft: #2a2008;
+      --ok: #56d364; --ok-soft: #0f2a17;
+      --chg: #16345c;
+      --shadow: none;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg); font-size: 16px; line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 16px 80px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  p { margin: 0 0 12px; }
+  ul, ol { margin: 0 0 12px; padding-left: 22px; }
+  li { margin: 4px 0; }
+
+  /* Header */
+  header { padding-bottom: 22px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+  h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.2; margin: 0 0 12px; letter-spacing: -.01em; }
+  .lede { font-size: 17px; color: var(--muted); margin: 0 0 14px; max-width: 72ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .chips li { font-size: 13px; padding: 2px 10px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); background: var(--card); margin: 0; }
+
+  /* Callouts and change marks */
+  .callout { border-radius: 8px; padding: 12px 16px; margin: 0 0 16px; font-size: 15px; border: 1px solid var(--border); background: var(--card); }
+  .callout.note { background: var(--accent-soft); border-color: transparent; }
+  .callout.warn { background: var(--warn-soft); border-color: transparent; }
+  .callout.danger { background: var(--danger-soft); border-color: transparent; }
+  .callout > strong:first-child { margin-right: 4px; }
+  mark.chg { background: var(--chg); color: inherit; padding: 1px 3px; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .flag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 0 7px; border-radius: 999px; color: var(--warn); background: var(--warn-soft); border: 1px solid var(--warn); vertical-align: 1px; margin-left: 2px; white-space: nowrap; }
+
+  /* TOC */
+  nav.toc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 8px; }
+  nav.toc a { display: block; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--fg); font-size: 14px; line-height: 1.35; }
+  nav.toc a:hover { border-color: var(--accent); text-decoration: none; }
+  nav.toc a span { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+
+  /* Headings */
+  h2 { font-size: 26px; line-height: 1.3; margin: 52px 0 6px; padding-bottom: 8px; border-bottom: 1px solid var(--border); letter-spacing: -.01em; scroll-margin-top: 16px; }
+  h2 .part { display: block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+  h3 { font-size: 18px; line-height: 1.35; margin: 26px 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 16px; }
+
+  /* Generic card */
+  .card { border: 1px solid var(--border); border-radius: 8px; background: var(--bg); padding: 16px 18px 6px; margin: 0 0 14px; box-shadow: var(--shadow); break-inside: avoid; }
+  .card h3 { margin-top: 0; }
+  .card.accent { border-left: 4px solid var(--accent); }
+  .card.danger { border-left: 4px solid var(--danger); }
+
+  /* Field card */
+  .field { border: 2px solid var(--accent); border-radius: 12px; padding: 22px 22px 10px; background: var(--bg); margin: 0 0 8px; }
+  .field-title { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+  .field-title h2 { border: 0; margin: 0; padding: 0; }
+  .field-title .tag { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .field h4 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 18px 0 6px; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
+  .dates { list-style: none; padding: 0; margin: 0 0 12px; font-size: 15px; }
+  .dates li { display: flex; gap: 12px; padding: 5px 0; border-bottom: 1px dashed var(--border); margin: 0; }
+  .dates li b { flex: none; min-width: 92px; font-variant-numeric: tabular-nums; }
+  .lines { margin: 4px 0 14px; }
+  .lines div { border-bottom: 1px solid var(--border); height: 30px; font-size: 13px; color: var(--muted); padding-top: 6px; }
+
+  /* Key-value project card */
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--border); }
+  thead th { background: var(--card); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); white-space: nowrap; }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  .table-scroll { overflow-x: auto; margin: 4px 0 16px; border: 1px solid var(--border); border-radius: 8px; }
+  .table-scroll table { min-width: 620px; }
+  table.kv th { width: 190px; background: var(--card); font-size: 14px; color: var(--fg); }
+  table.kv td p:last-child, table td p:last-child { margin-bottom: 0; }
+  td.item { font-weight: 600; }
+  td.src a { display: block; font-size: 13.5px; margin-bottom: 2px; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 9px; border-radius: 999px; white-space: nowrap; }
+  .pill.ok { color: var(--ok); background: var(--ok-soft); }
+  .pill.warn { color: var(--warn); background: var(--warn-soft); }
+
+  /* Three messages */
+  .msgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 16px; counter-reset: m; }
+  .msg { counter-increment: m; border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 8px; padding: 14px 16px; background: var(--card); }
+  .msg::before { content: counter(m); display: block; font-size: 30px; font-weight: 800; line-height: 1; color: var(--accent); margin-bottom: 6px; }
+  .msg p { font-size: 16.5px; font-weight: 600; line-height: 1.4; margin: 0; }
+
+  /* Timeline */
+  .timeline { list-style: none; padding: 0; margin: 0 0 12px; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 15px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .timeline > li { position: relative; padding: 0 0 18px 50px; margin: 0; }
+  .step-num { position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--bg); }
+  .timeline h3 { margin: 0 0 2px; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+  .dur { font-size: 12px; font-weight: 600; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 9px; background: var(--card); }
+  .timeline ul { margin-top: 6px; }
+
+  /* Scripts */
+  .script { border-left: 4px solid var(--accent); background: var(--card); border-radius: 0 8px 8px 0; padding: 14px 18px 4px; margin: 0 0 16px; }
+  .script p { font-size: 16px; }
+  .track-head { display: flex; align-items: center; gap: 10px; margin: 28px 0 8px; }
+  .track-head h3 { margin: 0; }
+  .track-head .dur { font-size: 13px; color: var(--accent); border-color: var(--accent); }
+  .stop { font-style: italic; color: var(--muted); }
+  .point { margin: 0 0 12px; padding: 10px 14px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); }
+  .point b.lbl { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+
+  /* Q&A accordions */
+  details.qa { border: 1px solid var(--border); border-radius: 8px; margin: 0 0 10px; background: var(--bg); }
+  details.qa > summary { cursor: pointer; padding: 12px 16px; font-weight: 600; list-style: none; display: flex; gap: 10px; align-items: flex-start; }
+  details.qa > summary::-webkit-details-marker { display: none; }
+  details.qa > summary::before { content: "+"; flex: none; width: 20px; height: 20px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); color: var(--accent); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; line-height: 1; margin-top: 2px; }
+  details.qa[open] > summary::before { content: "\2212"; }
+  details.qa > .ans { padding: 2px 16px 6px 46px; }
+  details.qa.new { border-color: var(--accent); }
+  details.qa.quiz .opts { list-style: none; padding: 0; margin: 4px 0 10px; }
+  details.qa.quiz .opts li { padding: 7px 12px; margin: 5px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--card); font-size: 15px; }
+  details.qa.quiz .opts li b { display: inline-block; width: 22px; color: var(--accent); }
+  details.qa.quiz .key { padding: 10px 14px; border-radius: 8px; background: var(--ok-soft); margin: 0 0 10px; font-size: 15px; }
+  .quiz-q { padding: 12px 16px 0; }
+  .quiz-q p { font-weight: 600; margin-bottom: 4px; }
+
+  /* Checklists */
+  .check { list-style: none; padding: 0; margin: 0 0 12px; }
+  .check li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; margin: 0 0 8px; background: var(--bg); }
+  .check input { flex: none; width: 18px; height: 18px; margin-top: 4px; accent-color: var(--accent); }
+  .check li.done { background: var(--card); color: var(--muted); }
+  .check li.done span { text-decoration: line-through; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .open-q { counter-reset: oq; list-style: none; padding: 0; }
+  .open-q li { counter-increment: oq; padding: 8px 12px 8px 40px; position: relative; border: 1px solid var(--border); border-radius: 8px; margin: 0 0 8px; background: var(--card); }
+  .open-q li::before { content: counter(oq); position: absolute; left: 10px; top: 8px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+
+  /* Quiz */
+  .quiz-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 8px; }
+  .btn { font: inherit; font-size: 14px; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--fg); cursor: pointer; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tog { font-size: 14px; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+  .tog input { accent-color: var(--accent); width: 16px; height: 16px; }
+  .qsec h3 { margin: 30px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .q { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px 10px; margin: 0 0 12px; background: var(--bg); break-inside: avoid; }
+  .q.priority { border-left: 4px solid var(--accent); }
+  .q.new { border-color: var(--accent); }
+  .qhead { display: flex; gap: 10px; align-items: flex-start; }
+  .qn { flex: none; min-width: 28px; height: 28px; padding: 0 6px; border-radius: 14px; background: var(--fg); color: var(--bg); font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .qt { font-weight: 600; margin: 0; flex: 1; }
+  .pill.pri { color: var(--accent); background: var(--accent-soft); flex: none; }
+  .pill.nw { color: var(--ok); background: var(--ok-soft); flex: none; }
+  .q .opts { list-style: none; padding: 0; margin: 10px 0 8px 38px; }
+  .q .opts li { padding: 6px 12px; margin: 5px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--card); font-size: 15px; }
+  .q .opts li b { display: inline-block; width: 22px; color: var(--accent); }
+  .q details.ad { margin: 0 0 4px 38px; }
+  .q details.ad > summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--accent); list-style: none; padding: 4px 0; }
+  .q details.ad > summary::-webkit-details-marker { display: none; }
+  .q details.ad[open] > summary { display: none; }
+  .q .key { padding: 10px 14px; border-radius: 8px; background: var(--ok-soft); font-size: 15px; margin: 4px 0 6px; }
+  #quiz.only-priority .q:not(.priority) { display: none; }
+  .qsec[hidden] { display: none; }
+  .sources { padding-left: 20px; columns: 2; column-gap: 32px; font-size: 14.5px; }
+  .sources li { break-inside: avoid; margin: 5px 0; }
+  .changes li { margin: 7px 0; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+  .top { font-size: 13px; float: right; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+  @media (max-width: 760px) {
+    nav.toc { grid-template-columns: 1fr 1fr; }
+    .msgs, .two, .field-grid { grid-template-columns: 1fr; }
+    .sources { columns: 1; }
+    .q .opts, .q details.ad { margin-left: 0; }
+    .wrap { padding-top: 28px; }
+    .field { padding: 16px 14px 6px; }
+    table.kv th { width: auto; }
+    table.kv, table.kv tbody, table.kv tr, table.kv th, table.kv td { display: block; }
+    table.kv tr { border: 1px solid var(--border); border-radius: 8px; margin: 0 0 10px; overflow: hidden; }
+    table.kv th { border-bottom: 1px solid var(--border); padding: 8px 14px; }
+    table.kv td { border: 0; }
+    .table-scroll { overflow: visible; border: 0; }
+    .table-scroll table { min-width: 0; }
+    .table-scroll thead { display: none; }
+    .table-scroll tbody tr { display: block; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; margin: 0 0 10px; }
+    .table-scroll td { display: block; border: 0; padding: 3px 0; }
+    .table-scroll td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 6px; }
+    .table-scroll td.item { font-size: 15.5px; padding-bottom: 2px; }
+  }
+  @media print {
+    .wrap { max-width: none; padding: 0; }
+    nav.toc, .top { display: none; }
+    .field { break-after: page; }
+    .table-scroll { overflow: visible; }
+    a { color: inherit; }
+    details.qa > summary::before { display: none; }
+    .quiz-tools { display: none; }
+    h2 { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+<header>
+  <p class="eyebrow">Ameren Illinois Government Relations</p>
+  <h1>Senator Koehler Lunch Briefing</h1>
+  <p class="lede">Ameren Illinois Multi-Year Grid Plan, 2028 to 2031 (ICC Docket 26-0051). Informative lunch in Peoria with no ask. Built from the Grid Outreach Legislator Conversation Guide and public sources current to September 30, 2026. Source links are in each section and collected at the end.</p>
+  <ul class="chips">
+    <li>Lunch Monday, October 5</li>
+    <li>Peoria</li>
+    <li>No ask, listen more than you talk</li>
+  </ul>
+</header>
+
+<div class="callout note">
+  <strong>Revised edition.</strong> This follows the flow of your original. <mark class="chg">Blue highlighted text</mark> is new or changed, and an orange <span class="flag">Confirm</span> tag marks something to verify before Monday. A short list of every change is at the end.
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <a href="#field"><span>Front</span>Field card</a>
+  <a href="#part1"><span>Part 1</span>Project card and three messages</a>
+  <a href="#part2"><span>Part 2</span>The lunch from start to finish</a>
+  <a href="#part3"><span>Part 3</span>The Senator, recent news and his positions</a>
+  <a href="#part4"><span>Part 4</span>Peoria and central Illinois issues</a>
+  <a href="#part5"><span>Part 5</span>Storm scenarios</a>
+  <a href="#part6"><span>Part 6</span>Talk tracks</a>
+  <a href="#part7"><span>Part 7</span>Feedback questions and hard questions</a>
+  <a href="#part8"><span>Part 8</span>Gaps to close and the ten minute drill</a>
+  <a href="#part9"><span>Part 9</span>Quiz and answer key, 54 questions</a>
+</nav>
+
+<!-- ================= FIELD CARD ================= -->
+<section id="field" style="margin-top:28px">
+  <div class="field">
+    <div class="field-title">
+      <h2>Field card</h2>
+      <span class="tag">New &middot; the one page to carry</span>
+    </div>
+
+    <div class="callout danger" style="margin-bottom:0">
+      <strong>Before you go.</strong> Check with Ameren compliance on meal and reporting rules for state officials, including who pays.
+    </div>
+
+    <h4>Purpose</h4>
+    <p>Inform the Senator on our Multi-Year Grid Plan and where the related state planning stands, and draw out his candid feedback. No ask.</p>
+
+    <h4>Your three messages</h4>
+    <ol>
+      <li>The distribution grid is under growing strain from aging equipment, severe weather, and new demand.</li>
+      <li>Planned work costs less than emergency repair.</li>
+      <li>The Grid Plan is the near-term decision that matters.</li>
+    </ol>
+
+    <div class="field-grid">
+      <div>
+        <h4>Numbers to have cold</h4>
+        <ul>
+          <li>About 75% of roughly 900,000 wood poles are 30 years or older. About 250,000 are 50 or older.</li>
+          <li>Distributed energy interconnections grew from 493 in 2015 to 40,132. Capacity grew from 8 MW to 967 MW.</li>
+          <li><mark class="chg">The plan as filed is about $2.8 billion over four years.</mark> <span class="flag">Confirm</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dates</h4>
+        <ul class="dates">
+          <li><b>Oct 8</b><span>Draft Mitigation Plan released</span></li>
+          <li><b>October</b><span><mark class="chg">Judges' proposed order expected</mark></span></li>
+          <li><b>Nov 15</b><span>Statewide IRP due to the ICC</span></li>
+          <li><b>November</b><span>Veto session, data center action</span></li>
+          <li><b>December</b><span>ICC Phase I decision expected</span></li>
+          <li><b>Jan 2027</b><span>Phase II begins, cost and customer impact</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>The five hardest questions, one line each</h4>
+    <ol>
+      <li><b>Is this rate base growth presented as reliability?</b> Fair question. The ICC reviews every part, we are accountable to reliability measures with financial consequences, and cost is tested in Phase II.</li>
+      <li><mark class="chg"><b>CUB says more than $300 million should come out.</b> That is what the hearing process is for. Glad to walk through how any item is justified, and I would like to hear if any concern you.</mark></li>
+      <li><b>What will this cost my constituents?</b> <mark class="chg">The plan as filed is about $2.8 billion over four years.</mark> Bill impact is decided in Phase II starting January 2027. I will get you the numbers as they develop.</li>
+      <li><b>Where does Ameren stand on the POWER Act?</b> Check with the team first. Safe framing is that data centers are major new load, the state is setting the rules, and you would like his view.</li>
+      <li><b>My constituents in Bloomington-Normal were out a long time.</b> Acknowledge first. Do not defend a timeline you do not have. Commit to McLean restoration data this week and ask what he heard.</li>
+    </ol>
+
+    <div class="field-grid">
+      <div>
+        <h4>Your personal notes <mark class="chg">New</mark></h4>
+        <div class="lines">
+          <div>Family names</div>
+          <div>Last conversation and anything to follow up on</div>
+          <div>Anything still open between you</div>
+        </div>
+      </div>
+      <div>
+        <h4>Follow ups <mark class="chg">New</mark></h4>
+        <ul class="dates">
+          <li><b>Tue Oct 6</b><span>Thank you note that mentions one thing he said</span></li>
+          <li><b>Thu Oct 8</b><span>Note that the Mitigation Plan draft is out</span></li>
+          <li><b>Fri Oct 9</b><span>Peoria and McLean reliability numbers, planned work, and McLean restoration data</span></li>
+          <li><b>Mon Oct 12</b><span>Answers to anything else he asked</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Thank you note draft <mark class="chg">New</mark></h4>
+    <div class="script" style="margin-bottom:8px">
+      <p>Senator, thank you for the time yesterday. I appreciated hearing [one thing he said]. As promised, I will get you the Peoria and McLean area reliability numbers this week, and I will send a note when the Mitigation Plan draft is out on October 8. Please call me with any questions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 1 ================= -->
+<h2 id="part1"><span class="part">Part 1 <a class="top" href="#top">Back to top</a></span>Project card and three messages</h2>
+
+<table class="kv" style="border:1px solid var(--border);border-radius:8px;overflow:hidden;border-collapse:separate;border-spacing:0">
+  <tbody>
+    <tr>
+      <th scope="row">One sentence purpose</th>
+      <td>Inform the Senator on our Multi-Year Grid Plan and where the related state planning stands, and draw out his candid feedback. Planned distribution investment protects reliability and costs less than emergency repair.</td>
+    </tr>
+    <tr>
+      <th scope="row">Status and next milestones</th>
+      <td>
+        <p>Filed with the ICC in January 2026. This is Phase I, which defines the projects, scope, benefits, and analysis, with a decision expected December 2026. <mark class="chg">The plan as filed is about $2.8 billion over four years, and CUB is asking the ICC to cut more than $300 million. The judges' proposed order is expected in October.</mark> <span class="flag">Confirm</span> Cost and cost to customers are decided in Phase II, which begins January 2027. The draft Mitigation Plan is released October 8, three days after your meeting. The statewide IRP is due to the ICC by November 15. Veto session is this fall, and the Governor is asking for data center action in November.</p>
+        <p><mark class="chg">Confirm the $2.8 billion against the filing, and confirm how you name the step that follows. CUB describes cost recovery as a separate multi-year rate plan that Ameren proposes in 2027.</mark></p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Who matters</th>
+      <td>The ICC decides the Grid Plan. Senator Koehler is a long-serving energy policy voice, a clean energy and electrification advocate, and sits on the Energy and Public Utilities Committee. His district includes Peoria and Bloomington-Normal. You have known him for 16 years. <mark class="chg">He is not on the ballot this year. He won a sixth term in November 2024 and the term runs to January 2029.</mark></td>
+    </tr>
+    <tr>
+      <th scope="row">Facts to cite cold</th>
+      <td>
+        <ol style="margin-bottom:8px">
+          <li>About 75% of roughly 900,000 wood poles are 30 years or older, and about 250,000 are 50 or older.</li>
+          <li>Distributed energy interconnections grew from 493 in 2015 to 40,132, and connected capacity from 8 MW to 967 MW.</li>
+          <li><mark class="chg">The plan as filed is about $2.8 billion over four years.</mark> <span class="flag">Confirm</span></li>
+        </ol>
+        <p><mark class="chg">Use with care. Each dollar of storm hardening can avoid two to five dollars in later costs. The briefing has no source for this, so get the benefit-cost basis from the filing before you say it.</mark> <span class="flag">Confirm</span></p>
+        <p>Also know that <mark class="chg">Illinois leads the nation with 210 confirmed tornadoes as of August 29, a state record and second only to Texas in 2015 for any state in any year.</mark></p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Biggest risk</th>
+      <td>
+        <p>The question "is this rate base growth presented as reliability?" and the bill increase concern. Bills rose mostly from regional supply and capacity costs, not local delivery, but he may not separate the two. <mark class="chg">Your best answer is to name the filed total, then explain that cost to customers is not decided yet.</mark> Phase I is about need and scope, and Phase II starting January 2027 is where cost and customer impact are tested.</p>
+        <p><mark class="chg">Expect him to have seen CUB's testimony that more than $300 million of the plan is wasteful or questionable. Ameren also has a separate $65.3 million reconciliation request pending (Docket 26-0214) that CUB is challenging.</mark></p>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Open question to listen for</th>
+      <td>What he is hearing at home on bills and restoration after the August storms, and how crowded he expects veto session to be.</td>
+    </tr>
+    <tr>
+      <th scope="row">The goal</th>
+      <td>An informative session with no ask. You want him to understand what is in front of the ICC and why the timing matters, and you want his honest feedback on how it lands. Listen more than you talk.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Your three messages</h3>
+<div class="msgs">
+  <div class="msg"><p>The distribution grid is under growing strain from aging equipment, severe weather, and new demand.</p></div>
+  <div class="msg"><p>Planned work costs less than emergency repair. <span class="flag">Confirm basis</span></p></div>
+  <div class="msg"><p>The Grid Plan is the near-term decision that matters.</p></div>
+</div>
+<p class="sub">Source <a href="#sources">Grid Outreach Guide</a></p>
+
+<!-- ================= PART 2 ================= -->
+<h2 id="part2"><span class="part">Part 2 <a class="top" href="#top">Back to top</a></span>The lunch from start to finish</h2>
+
+<div class="callout danger">
+  <mark class="chg"><strong>Before Monday.</strong> Check with Ameren compliance on meal and reporting rules for state officials, including who pays. This moved up from the last line of this part.</mark>
+</div>
+
+<p>You have known the Senator for 16 years, so keep this natural. Treat the stages as a map and not a script, and follow his lead on formality and pace.</p>
+
+<ol class="timeline">
+  <li>
+    <span class="step-num">1</span>
+    <h3>Greeting <span class="dur">first 5 to 10 minutes</span></h3>
+    <ul>
+      <li>Arrive 10 minutes early and pick a table where you can talk easily. Phone away, papers in your bag until the end.</li>
+      <li>Greet him the way you always have. After 16 years, warmth and a bit of shared history will do more than formality.</li>
+      <li>Let him steer the ordering. Choose something easy to eat, since you will be doing some of the talking.</li>
+    </ul>
+  </li>
+  <li>
+    <span class="step-num">2</span>
+    <h3>Icebreakers and family <span class="dur">next 10 minutes</span></h3>
+    <ul>
+      <li>Ask about his family by name and follow up on something specific from your last conversation. <mark class="chg">Fill in your notes on the field card before you go.</mark></li>
+      <li>Bridge lightly to the fall. "How is the season treating you? What are you hearing back home, and are people mentioning energy bills?"</li>
+      <li>Note what he says about bills and veto session, because it tells you where to lean later.</li>
+    </ul>
+  </li>
+  <li>
+    <span class="step-num">3</span>
+    <h3>Peoria and district conversation <span class="dur">about 10 minutes, before your pitch</span></h3>
+    <ul>
+      <li>Pick two or three topics from Parts 3 and 4, starting with the least contentious, such as storm recovery, Rivian, and the Peoria Solar Energy Center.</li>
+      <li>Ask, then listen. The goal is to learn what he is thinking about his own community so your briefing lands in his world.</li>
+      <li>Bridge when there is a natural opening. "That connects to something in front of the ICC this fall, if you are open to hearing it."</li>
+    </ul>
+  </li>
+  <li>
+    <span class="step-num">4</span>
+    <h3>Your briefing <span class="dur">about 10 minutes, with pauses</span></h3>
+    <ul>
+      <li>Use the 5 minute track in Part 6, delivered in chunks, and pause after each of the three messages.</li>
+      <li>Say early that you have no ask. "I am not here to ask for anything. I wanted you to hear it from us, and I would value your honest read."</li>
+      <li>Mention that Phase I defines scope and benefits and that cost and customer impact come in Phase II starting January 2027.</li>
+    </ul>
+  </li>
+  <li>
+    <span class="step-num">5</span>
+    <h3>Questions and feedback <span class="dur">15 to 20 minutes</span></h3>
+    <ul>
+      <li>Hand it to him cleanly. "That is the overview. What is your honest read?"</li>
+      <li>Choose two or three feedback questions from Part 7. With a 16 year relationship you can be blunt, for example "what is the weakest part of this?"</li>
+      <li>Take brief notes, do not defend, and say so when you do not know something and promise a follow up.</li>
+    </ul>
+  </li>
+  <li>
+    <span class="step-num">6</span>
+    <h3>Closing and next steps <span class="dur">last 5 to 10 minutes</span></h3>
+    <ul>
+      <li>Play back what you heard from him in a sentence or two.</li>
+      <li>Offer concrete follow ups such as the Peoria and McLean area reliability numbers this week and a note when the Mitigation Plan draft is out on October 8.</li>
+      <li>Hand over the one pager and your card with your cell number, thank him, and end on something personal.</li>
+      <li>Send a short thank you within 24 hours that mentions one thing he said. <mark class="chg">A draft is on the field card.</mark></li>
+    </ul>
+  </li>
+</ol>
+
+<!-- ================= PART 3 ================= -->
+<h2 id="part3"><span class="part">Part 3 <a class="top" href="#top">Back to top</a></span>The Senator, recent news and his positions</h2>
+
+<p>His district includes Bloomington-Normal as well as Peoria, which matters for storms and data centers. This covers public activity only. <mark class="chg">No public statement was found from him on the Ameren Illinois Grid Plan, on Ameren, or on his vote on the 2025 energy package,</mark> so treat those as open questions you can learn from him.</p>
+
+<h3>Recent news</h3>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Topic</th><th>What is happening</th><th>Why it matters to your lunch</th><th>Sources</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="item">Data centers and the POWER Act</td>
+      <td data-label="What is happening">In a June 9 interview he backed the POWER Act, which would make new data centers disclose water use and carry more of their own electricity costs. It did not advance in spring. Governor Pritzker is now pressing lawmakers to pass it in the fall veto session and has indicated November.</td>
+      <td data-label="Why it matters to your lunch">Probably the most current energy topic on his mind. Listen first. Check Ameren's position before Monday and do not volunteer one.</td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a><a href="https://www.wthitv.com/2026/09/28/pritzker-calls-lawmakers-pass-data-center-regulations/">WTHI</a><a href="https://capitolnewsillinois.com/news/power-act-lawmakers-seek-to-regulate-new-data-centers-power-water-usage/">Capitol News</a></td>
+    </tr>
+    <tr>
+      <td class="item">Storm recovery</td>
+      <td data-label="What is happening">On August 26 he released information on disaster assistance for McLean and Tazewell county residents and businesses hit by the summer storms. The Governor asked FEMA for a major disaster declaration for eight counties, and McLean reported $42.5 million in damage. <mark class="chg">The request covers storms from August 11 to 16 and includes Cook and Will counties. The McLean figure is not isolated to outage damage.</mark></td>
+      <td data-label="Why it matters to your lunch">He is personally engaged on storm recovery. The worst Ameren outages were in Bloomington-Normal, in his district. Ask before you explain.</td>
+      <td class="src" data-label="Sources"><a href="https://www.senatordavekoehler.com/news">Koehler releases</a><a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT</a><a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></td>
+    </tr>
+    <tr>
+      <td class="item">Energy committee role</td>
+      <td data-label="What is happening">Sits on the Senate Energy and Public Utilities Committee, plus Agriculture, Health and Human Services, Higher Education, and Public Health. Vice chair of Appropriations for Health and Human Services.</td>
+      <td data-label="Why it matters to your lunch">He knows the energy debates well, which supports skipping the basics.</td>
+      <td class="src" data-label="Sources"><a href="https://ballotpedia.org/David_Koehler">Ballotpedia</a></td>
+    </tr>
+    <tr>
+      <td class="item">Affordability and consumer protection</td>
+      <td data-label="What is happening">He backed two bills letting the Department of Insurance halt excessive home and auto insurance rate increases, and passed a law against insurer underpayment for diagnostic procedures.</td>
+      <td data-label="Why it matters to your lunch">He scrutinizes industry pricing, so expect the rate base question to be asked seriously.</td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></td>
+    </tr>
+    <tr>
+      <td class="item">Transit</td>
+      <td data-label="What is happening">In September 2025 he called the downstate transit funding bill vital to CityLink, citing a roughly $200 million shortfall. <mark class="chg">The outcome is not confirmed.</mark></td>
+      <td data-label="Why it matters to your lunch">Good for his transportation electrification interest. Ask how it turned out first.</td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/local-news/2025-09-30/koehler-public-transit-funding-bill-vital-to-peorias-citylink-other-downstate-transportation-agencies">WCBU transit</a></td>
+    </tr>
+    <tr>
+      <td class="item">District investments</td>
+      <td data-label="What is happening">An August 10 release announced $3.15 million in state grants for two site development projects, including road work for a 51 acre airport industrial site.</td>
+      <td data-label="Why it matters to your lunch">Ties to economic development and site readiness.</td>
+      <td class="src" data-label="Sources"><a href="https://www.senatordavekoehler.com/news">Koehler releases</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>What he has said and done on energy and data centers</h3>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Topic</th><th>What he has said or done</th><th>Confidence</th><th>Sources</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="item">Data centers overall</td>
+      <td data-label="What he has said or done">If done right, a data center is a good addition, because in smaller communities it becomes a tremendous tax base for schools, counties, and municipalities. He called opposition "not in my backyard syndrome."</td>
+      <td data-label="Confidence"><span class="pill ok">High, direct quote</span></td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a><a href="https://www.nprillinois.org/illinois/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">NPR Illinois</a></td>
+    </tr>
+    <tr>
+      <td class="item">Data center concerns</td>
+      <td data-label="What he has said or done">He named electricity, water, and noise pollution as the main issues. On water he said you should not take drinking water out of the Mahomet aquifer to run a data center.</td>
+      <td data-label="Confidence"><span class="pill ok">High, direct quote</span></td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a><a href="https://www.nprillinois.org/illinois/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">NPR Illinois</a></td>
+    </tr>
+    <tr>
+      <td class="item">Who regulates</td>
+      <td data-label="What he has said or done">State rules can address power and water, but noise is a zoning matter for the municipality or county.</td>
+      <td data-label="Confidence"><span class="pill ok">High</span></td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></td>
+    </tr>
+    <tr>
+      <td class="item">POWER Act</td>
+      <td data-label="What he has said or done">He supports it. It would make new data centers pay their own energy costs and report water use. It was introduced February 11, 2026, sponsored by Sen. Ram Villivalam and Rep. Robyn Gabel, and did not advance in spring. He said it "didn't really go anywhere."</td>
+      <td data-label="Confidence"><span class="pill ok">High on support</span> He is not the sponsor.</td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a><a href="https://capitolnewsillinois.com/news/power-act-lawmakers-seek-to-regulate-new-data-centers-power-water-usage/">Capitol News</a></td>
+    </tr>
+    <tr>
+      <td class="item">Transportation electrification</td>
+      <td data-label="What he has said or done">2019 bill SB 2059 directed the ICC to plan for transportation electrification. 2022 bill SB 2940 extended the CEJA electric vehicle rebate to electric motorcycles.</td>
+      <td data-label="Confidence"><span class="pill warn">Medium, older records</span></td>
+      <td class="src" data-label="Sources"><a href="https://www.sierraclub.org/illinois/heart-illinois/thank-senator-koehler">Sierra Club</a><a href="https://www.illinoissenatedemocrats.com/caucus-news/49-senator-dave-koehler-news/4236-koehler-backed-electric-vehicle-rebate-program-opens-in-illinois">Senate Dems</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Open questions to listen for at lunch</h3>
+<ol class="open-q">
+  <li>Does he see the POWER Act passing in the November veto session, and what would he change?</li>
+  <li>Does he think data center costs belong in state law, at the ICC, or in local agreements?</li>
+  <li>What has he heard about restoration after the August storms?</li>
+  <li>How does he read the Grid Plan, and does he see reliability spending as an affordability issue?</li>
+</ol>
+
+<!-- ================= PART 4 ================= -->
+<h2 id="part4"><span class="part">Part 4 <a class="top" href="#top">Back to top</a></span>Peoria and central Illinois issues, including economic development</h2>
+
+<p>These come from recent news coverage. Confirm current status before Monday, since several items are moving quickly. <mark class="chg">Two dates pass before lunch. The Four Creeks hearings were scheduled to end October 1 and the Greater Peoria EDC comment window closes October 2.</mark></p>
+
+<h3>Energy and community issues</h3>
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Topic</th><th>What is happening</th><th>How it connects</th><th>Sources</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="item">Storms</td>
+      <td data-label="What is happening">Tornadoes and flash flooding hit Tazewell, Woodford, and Peoria counties on April 2 and 3. On August 13 a storm with gusts near 70 mph cut power to about 29,000 customers across central Illinois. Ameren's own update said its outages peaked around 26,000 with the worst damage in Bloomington-Normal, where sub transmission poles, distribution poles, and transmission structures were down.</td>
+      <td data-label="How it connects">Storm hardening and faster recovery for hospitals, schools, transit, and employers.</td>
+      <td class="src" data-label="Sources"><a href="https://www.weather.gov/ilx/2026-apr2-3">NWS</a><a href="https://www.25newsnow.com/2026/08/13/tens-thousands-without-power-after-wind-rain-blow-through-heart-illinois/">25 News Now</a><a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></td>
+    </tr>
+    <tr>
+      <td class="item">Peoria Solar Energy Center</td>
+      <td data-label="What is happening">Ameren's 2.5 MW solar facility on Prichard Road, about $20 million, with a 1.5 MW battery to test optimization on the distribution network. Built under CEJA and expected to be operating by the third quarter of 2026. <mark class="chg">That quarter has ended, so confirm it is in service.</mark></td>
+      <td data-label="How it connects">Shows the two way grid and storage in practice and ties to his clean energy record.</td>
+      <td class="src" data-label="Sources"><a href="https://www.wcbu.org/local-news/2025-07-31/ameren-illinois-touts-new-20m-peoria-solar-energy-center-as-step-toward-states-clean-energy-target">WCBU solar</a></td>
+    </tr>
+    <tr>
+      <td class="item">Data centers</td>
+      <td data-label="What is happening"><b>Pekin.</b> A 321 acre proposal drew organized opposition, the mayor declined in March, and the developer terminated the deal on May 5. <b>East Peoria.</b> The city bought 272.5 acres for $5.2 million for housing with a pledge of no data center or solar farm. <b>Normal.</b> The moratorium expires November 30 with a proposed extension to May 31, 2027 while the state considers the POWER Act. <b>Bloomington.</b> Public hearings are set for October 16 and November 16.</td>
+      <td data-label="How it connects">Load growth and whether communities want the demand the grid is asked to serve. Much of it is in or near his district.</td>
+      <td class="src" data-label="Sources"><a href="https://www.datacenterdynamics.com/en/news/developer-withdraws-data-center-proposal-in-pekin-illinois/">DCD</a><a href="https://wmbdradio.com/2026/07/22/5-2-million-east-peoria-land-deal-wins-final-approval-city-pledges-no-data-center-there/">WMBD</a><a href="https://www.25newsnow.com/2026/09/20/normal-consider-longer-moratorium-data-centers-bloomington-schedules-pair-public-hearings/">25 News moratorium</a><a href="https://www.wglt.org/local-news/2026-08-24/data-center-energy-consumption-raises-concerns-about-long-term-costs-and-reliability">WGLT data centers</a></td>
+    </tr>
+    <tr>
+      <td class="item">Wind</td>
+      <td data-label="What is happening">Repsol's Four Creeks Wind proposes up to 113 turbines and up to 663 MW in northwest Peoria County. County Zoning Board of Appeals hearings started September 14 and could run through October 1. About $230 million in property taxes is projected. <mark class="chg">The hearings end before lunch, so check the outcome.</mark></td>
+      <td data-label="How it connects">Regional generation, transmission, and local acceptance.</td>
+      <td class="src" data-label="Sources"><a href="https://www.25newsnow.com/2026/08/24/public-hearings-set-begin-proposed-peoria-county-wind-farm/">25 News wind</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Economic development talking points</h3>
+<div class="callout warn">
+  <mark class="chg"><strong>Careful with site readiness.</strong> CUB is attacking the $44.1 million proactive economic development fund in the plan as a "build it and they will come" strategy. Bridge through reliability for employers who already operate here, like Alcast, and not through speculative site readiness.</mark>
+</div>
+<p>Reliability and capacity are site selection issues, so these are natural bridges from his district to your plan. <mark class="chg">This part is cut to the two employers that matter most. The rest are below and only need to come up if he raises them.</mark></p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Employer or item</th><th>What is happening</th><th>Energy angle and a question for him</th><th>Sources</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="item">Rivian, Normal</td>
+      <td data-label="What is happening">R2 production began in April 2026, with up to 155,000 R2s a year at full scale. On April 17 an EF-1 tornado collapsed part of the roof of Building 2, the R2 area, and production restarted within five days. On May 19 the Governor announced an $11.5 million IDOT tunnel grant and $5 million for Heartland Community College EV career pathways.</td>
+      <td data-label="Energy angle and a question for him">A huge employer, an EV maker, and a storm story in his district. Ask how he sees the state supporting the growth and what reliability means to employers like this.</td>
+      <td class="src" data-label="Sources"><a href="https://www.25newsnow.com/2026/05/19/rivian-ramps-up-r2-production-normal-hiring-accelerates/">25 News Rivian</a><a href="https://electrek.co/2026/04/22/rivian-r2-starts-production-tornado-deliveries-spring/">Electrek</a></td>
+    </tr>
+    <tr>
+      <td class="item">Alcast, Peoria</td>
+      <td data-label="What is happening">Aluminum manufacturer with about 300 employees and plans for 100 more. Its president said even brief power disruptions can halt production and damage equipment.</td>
+      <td data-label="Energy angle and a question for him">A clean example of why reliability is an economic issue.</td>
+      <td class="src" data-label="Sources"><a href="https://www.25newsnow.com/2026/02/18/ameren-plans-surge-power-use-peoria-factory-feels-pressure/">25 News Ameren</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<details class="qa">
+  <summary>More district employers, only if he raises them</summary>
+  <div class="ans" style="padding-left:16px">
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Employer or item</th><th>What is happening</th><th>Energy angle and a question for him</th><th>Sources</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="item">Damera, Greater Peoria</td>
+          <td data-label="What is happening">First U.S. all-electric minibus manufacturing plant, $31.5 million and 90 jobs, announced May 2025.</td>
+          <td data-label="Energy angle and a question for him">Fits his electrification record. Ask whether he has seen it and what it tells him about EV manufacturing in the region.</td>
+          <td class="src" data-label="Sources"><a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">GPEDC wins</a></td>
+        </tr>
+        <tr>
+          <td class="item">Caterpillar, Peoria</td>
+          <td data-label="What is happening">$30 million downtown renovation for engineering roles, 200 or more jobs, announced April 2025.</td>
+          <td data-label="Energy angle and a question for him">Headquarters era engineering jobs downtown. Ask what employers tell him they need.</td>
+          <td class="src" data-label="Sources"><a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">GPEDC wins</a></td>
+        </tr>
+        <tr>
+          <td class="item">Epic Medical and other wins</td>
+          <td data-label="What is happening">Epic Medical, $25 million and 100 jobs for IV bag manufacturing. Viridis Chemical, $24 million. Bradley University, $25 million residence hall project.</td>
+          <td data-label="Energy angle and a question for him">Manufacturing and healthcare supply chains need steady power.</td>
+          <td class="src" data-label="Sources"><a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">GPEDC wins</a></td>
+        </tr>
+        <tr>
+          <td class="item">Morton Industries, East Peoria</td>
+          <td data-label="What is happening">80,000 square foot plant making stainless steel cooling tubes for data centers, with 50 to 100 jobs.</td>
+          <td data-label="Energy angle and a question for him">Shows how data center demand creates local manufacturing jobs as well as load.</td>
+          <td class="src" data-label="Sources"><a href="https://www.wcbu.org/local-news/2026-07-20/morton-industries-expands-to-east-peoria-manufacturing-facility-in-support-of-the-data-center-market">WCBU Morton</a></td>
+        </tr>
+        <tr>
+          <td class="item">Regional strategy</td>
+          <td data-label="What is happening">The Greater Peoria EDC draft 2026 to 2030 strategy covers five counties, with themes of infrastructure that supports growth, inclusive participation, and regional identity. Comments are open through October 2.</td>
+          <td data-label="Energy angle and a question for him">Site readiness and power go together. Ask what he would put in the strategy. <mark class="chg">The comment window closes before lunch.</mark></td>
+          <td class="src" data-label="Sources"><a href="https://www.933thedrive.com/2026/09/10/gpedc-seeks-public-input-on-five-year-plan/">GPEDC plan</a></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="sub"><mark class="chg">The Ameren growth outlook row moved to Part 7, where it sits with the rate base question it could feed.</mark></p>
+  </div>
+</details>
+
+<!-- ================= PART 5 ================= -->
+<h2 id="part5"><span class="part">Part 5 <a class="top" href="#top">Back to top</a></span>Storm scenarios</h2>
+
+<p>He is engaged on storm recovery and his district took the worst of it, so expect this topic. Use the facts below and promise specifics when you lack them. Do not guess at restoration times or costs.</p>
+
+<div class="card accent">
+  <h3>Facts to have ready</h3>
+  <ul>
+    <li>The August 13 storm brought gusts near 70 mph. Ameren outages peaked around 26,000, and Bloomington-Normal was the most severely affected area, with outages also in Peoria, Champaign, and Danville.</li>
+    <li>Sub transmission poles, distribution poles, and transmission structures were down in McLean County, and Ameren brought in contractors and crews from other regions.</li>
+    <li>Across all utilities about 29,000 customers lost power. <mark class="chg">The Governor's FEMA request covers storms from August 11 to 16 in eight counties, including Cook and Will, and McLean County reported $42.5 million in damage. That damage figure is not isolated to outage damage, so keep it separate from the outage story.</mark></li>
+    <li>OSF St. Joseph Medical Center diverted its emergency room after flooding and roof damage, and Connect Transit suspended service. The report ties the hospital to flooding and roof damage, so do not attribute it to the outage.</li>
+    <li>Rivian's plant was hit by an EF-1 tornado on April 17 and restarted production within five days.</li>
+  </ul>
+  <p class="sub">Sources <a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a> &middot; <a href="https://www.25newsnow.com/2026/08/13/tens-thousands-without-power-after-wind-rain-blow-through-heart-illinois/">25 News Now</a> &middot; <a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT</a> &middot; <a href="https://electrek.co/2026/04/22/rivian-r2-starts-production-tornado-deliveries-spring/">Electrek</a></p>
+</div>
+
+<details class="qa" open>
+  <summary>If he says "My constituents in Bloomington-Normal were out for a long time. What went wrong?"</summary>
+  <div class="ans"><p>Acknowledge first. Explain that gusts near 70 mph took down poles and structures across the system, and that crews came in from other regions. Do not defend the timeline you do not have. Commit to sending McLean restoration data this week, and ask what he heard.</p></div>
+</details>
+<details class="qa" open>
+  <summary>If he says "Why not just bury the lines?"</summary>
+  <div class="ans"><p>Say the right mix depends on the location and the damage patterns, and that the Grid Plan defines scope by need and benefit. Offer to get specifics for his district. Do not quote undergrounding costs unless you have confirmed numbers.</p></div>
+</details>
+<details class="qa" open>
+  <summary>If he says "A hospital emergency room and the bus system shut down. How do you protect critical services?"</summary>
+  <div class="ans"><p>Use the facts. The hospital diversion was flooding and roof damage. Say critical services are a core reason for planned hardening, and offer to confirm how critical facilities were prioritized in restoration.</p></div>
+</details>
+<details class="qa" open>
+  <summary>If he says "Who pays for all this hardening?"</summary>
+  <div class="ans"><p>Phase I defines the projects, scope, and benefits. <mark class="chg">The plan as filed is about $2.8 billion over four years.</mark> Cost and cost to customers are decided in Phase II beginning January 2027, where they are tested. The value case is two to five dollars avoided for each dollar spent. <span class="flag">Confirm basis</span></p></div>
+</details>
+<details class="qa" open>
+  <summary>If he says "Isn't this going to keep happening?"</summary>
+  <div class="ans"><p>Use the tornado point. <mark class="chg">Illinois leads the nation with 210 confirmed tornadoes as of August 29, a state record.</mark> The question is whether the system is strengthened on a planned schedule or repaired after failures.</p></div>
+</details>
+<details class="qa" open>
+  <summary>If he says "What could the state do to help?" (You ask him)</summary>
+  <div class="ans"><p>This is a feedback question to put to him. Ask what he heard about recovery and whether state agencies and utilities coordinated well. Take notes and do not defend.</p></div>
+</details>
+
+<!-- ================= PART 6 ================= -->
+<h2 id="part6"><span class="part">Part 6 <a class="top" href="#top">Back to top</a></span>Talk tracks</h2>
+
+<div class="track-head"><h3>Hallway version</h3><span class="dur">30 seconds</span></div>
+<div class="script">
+  <p>Senator, the short version is that the distribution grid is under strain and the decision that matters most comes in December. About three quarters of our wood poles are at least 30 years old, distributed energy connections have grown from under 500 to more than 40,000, and new load like fleet charging is coming. Planned work costs less than emergency repair. I am not here with an ask. I wanted you to hear it from us directly, and I would value your honest read.</p>
+</div>
+
+<div class="track-head"><h3>Leadership update version</h3><span class="dur">2 minutes</span></div>
+<div class="script">
+  <p>Senator, you have worked on electrification for years<mark class="chg">.</mark> The next question is whether the distribution system is ready for the added load. Fleet charging can put a lot of demand on one circuit at the same time, so the policy goal and the grid plan have to move together.</p>
+  <p>The growth in solar shows the policy is taking hold. In 2015 we had 493 distributed energy interconnections. Today we have more than 40,000, and connected capacity has gone from 8 megawatts to 967. That is real progress, but it also means power is moving in both directions on a system built for one.</p>
+  <p>Cost matters, and the plan should be tested carefully. <mark class="chg">The plan as filed is about $2.8 billion over four years, and parties in the case are already testing it, which is how the process should work.</mark> The affordability case is that planned storm hardening can avoid two to five dollars in later costs for every dollar invested. <span class="flag">Confirm basis</span> About three quarters of our wood poles are at least 30 years old, so the choice is replacing equipment on a schedule or during an outage.</p>
+  <p>On process, this phase of the Grid Plan defines the projects, scope, and benefits. Cost and what it means for customers is decided in Phase II, starting in January 2027, so this is the time to get the need and the scope right. On timing, the draft Mitigation Plan comes out October 8, the statewide IRP is due in November, and the Phase I decision is expected in December. Those assumptions need to line up. I am not here with an ask. I wanted you to hear this directly from us, and I would value your honest feedback on it.</p>
+  <p class="stop">Then stop talking and let him respond.</p>
+</div>
+<p class="sub"><mark class="chg">The original line "including the state fleet" is removed because nothing in Part 3 supports it. Add it back if you can confirm it.</mark></p>
+
+<div class="track-head"><h3>Full briefing version</h3><span class="dur">5 minutes</span></div>
+<div class="point"><b class="lbl">Opening</b>Spend a minute on the fall and what he is hearing at home on energy bills. If he raises affordability on his own, that is your opening for the value point. Then bridge to the wider market.</div>
+<div class="point"><b class="lbl">The market</b>After nearly twenty years of mostly flat demand, we are seeing growth again from data centers, manufacturing, and electrification, much of it arriving at the same time on a system built for a different pattern of use. Capacity prices got everyone's attention because supply is tightening as demand grows. Generation gets the attention, but the distribution grid decides whether that power reaches homes and businesses reliably.</div>
+<div class="point"><b class="lbl">Point one, the grid was built for another era</b>About 75% of roughly 900,000 in-service wood poles are at least 30 years old, and about 250,000 are 50 or older. That does not mean every pole is replaced now. It means the work has to be prioritized over time, and the choice is planned replacement versus replacement during an outage, which is more disruptive and more expensive.</div>
+<div class="point"><b class="lbl">Point two, severe weather</b>Illinois is today's tornado alley. <mark class="chg">To date in 2026, Illinois leads the nation with 210 confirmed tornadoes as of August 29, a state record.</mark> Closer to home, the August 13 storm brought gusts near 70 mph and took down poles and structures in McLean County. That puts Illinois communities at greater risk and makes storm hardening more important for families, businesses, farms, schools, and critical services. <span class="flag">Warnings claim dropped</span></div>
+<div class="point"><b class="lbl">Point three, clean energy needs the grid</b>Interconnections grew from 493 to 40,132 and capacity from 8 MW to 967 MW. Fleet charging concentrates load in one place at one time, which makes it a wires question before it is a vehicle question. Long interconnection queues slow clean energy development, so grid investment is tied to faster and more predictable connections.</div>
+<div class="point"><b class="lbl">Point four, value</b>Each dollar spent on storm hardening can avoid two to five dollars in later costs. <span class="flag">Confirm basis</span> The investment has a cost and should be reviewed carefully. That review is exactly what Phase II is for.</div>
+<div class="point"><b class="lbl">Process and timing</b>Phase I, which is where we are, defines the projects, scope, benefits, and analysis. <mark class="chg">The judges' proposed order is expected in October.</mark> Cost and customer cost come in Phase II beginning January 2027. The Mitigation Plan draft is released October 8 and will likely show the resources needed to fill the reliability gap, which may signal where the final IRP lands. The IRP is due November 15 and the Phase I decision is expected in December. They cover different parts of the system, but the assumptions and timelines need to align.</div>
+<div class="point"><b class="lbl">Close</b>Say plainly that you are not asking for anything today and that his feedback is what you came for. Move to the feedback questions. At the end, thank him, tell him to call you with questions, and promise a direct answer or a follow up when you need more information.</div>
+
+<!-- ================= PART 7 ================= -->
+<h2 id="part7"><span class="part">Part 7 <a class="top" href="#top">Back to top</a></span>Feedback questions and hard questions</h2>
+
+<h3>Questions that draw out his feedback</h3>
+<p>Pick two or three. Ask, then let the silence work, and resist defending the plan.</p>
+<ul class="check" style="list-style:none">
+  <li><input type="checkbox" id="fq1"><label for="fq1">Where does this fit with what you are hearing from constituents on reliability and bills?</label></li>
+  <li><input type="checkbox" id="fq2"><label for="fq2">As fleet electrification and solar keep growing, where do you see the distribution system becoming the constraint?</label></li>
+  <li><input type="checkbox" id="fq3"><label for="fq3">What would you want to see from us to be confident the scope is right?</label></li>
+  <li><input type="checkbox" id="fq4"><label for="fq4">Is there anything in how we describe this that does not land, or that you would say differently?</label></li>
+  <li><input type="checkbox" id="fq5"><label for="fq5">How do you expect the Mitigation Plan and the IRP to be received in veto session?</label></li>
+  <li><input type="checkbox" id="fq6"><label for="fq6">How do you see the data center debate playing out in November, and where does it leave the local grid?</label></li>
+  <li><input type="checkbox" id="fq7"><label for="fq7">What did you hear from people about restoration after the August storms?</label></li>
+  <li><input type="checkbox" id="fq8"><label for="fq8">Who else should we be hearing from on this?</label></li>
+</ul>
+
+<h3>Hardest questions to rehearse</h3>
+<p class="sub">Say each answer out loud once. <mark class="chg">New and changed answers are marked. Confirm the new wording with your regulatory team before you use it.</mark></p>
+
+<details class="qa" open>
+  <summary>Is this rate base growth presented as reliability?</summary>
+  <div class="ans">
+    <p>That is a fair question. The ICC reviews every part of the plan, and we are accountable to reliability measures with financial consequences. Right now the ICC is reviewing need and scope. Cost and customer impact are decided in Phase II beginning January 2027, where they get tested. I am glad to walk through how any specific investment is justified.</p>
+    <div class="callout warn"><mark class="chg"><strong>Know this before he asks.</strong> A February 2026 report says Ameren projects about 6.2 percent annual electric sales growth through 2030 and a $31.8 billion five year investment plan. Both figures are Ameren company-wide, not just Illinois, and they are exactly what a rate base question would use. Do not volunteer them. Know the Illinois share if he asks. Source <a href="https://www.25newsnow.com/2026/02/18/ameren-plans-surge-power-use-peoria-factory-feels-pressure/">25 News Ameren</a></mark></div>
+  </div>
+</details>
+
+<details class="qa new" open>
+  <summary><mark class="chg">CUB says more than $300 million of this plan is wasteful or questionable. What do you say?</mark></summary>
+  <div class="ans">
+    <p><mark class="chg">That is what the hearing process is for. CUB, ICC Staff, and others test every line, and the judges weigh it. I will not argue the individual items over lunch, but I am glad to walk you through how any one of them is justified, and I would like to hear whether any of them concern you.</mark></p>
+    <p><mark class="chg">Know the six items. Reliability metrics ($125 million), customer growth ($78.4 million), the proactive economic development fund ($44.1 million), reliability projects under $100,000 ($59.2 million), the hydrogen pilot ($20.3 million), and pole replacement ($14.7 million). CUB argues the growth forecast is overstated when system load is forecast to decline.</mark> <span class="flag">Confirm wording</span></p>
+    <p class="sub">Sources <a href="https://www.citizensutilityboard.org/blog/2026/06/29/cub-uncovers-hundreds-of-millions-of-dollars-in-questionable-ameren-spending/">CUB, June 29</a> &middot; <a href="https://www.citizensutilityboard.org/blog/2026/08/03/in-two-cases-before-state-regulators-cub-challenges-ameren-rate-hike-plus-300-million-in-questionable-spending-in-utilitys-grid-plan/">CUB, August 3</a></p>
+  </div>
+</details>
+
+<details class="qa" open>
+  <summary>Bills are already too high. Why more?</summary>
+  <div class="ans">
+    <p>Much of the recent increase came from regional supply and capacity costs, while this plan addresses local delivery. It will have a customer cost, and that is set in Phase II beginning January 2027, so nothing is decided on price yet. The value is fewer outages and less emergency work later.</p>
+    <p><mark class="chg">Be ready for him to connect this to the delivery side. Ameren has a pending $65.3 million reconciliation request (Docket 26-0214) that CUB says includes at least $14.8 million in overcharges. Acknowledge that delivery costs are part of his constituents' bills too.</mark></p>
+  </div>
+</details>
+
+<details class="qa" open>
+  <summary>What will this cost my constituents?</summary>
+  <div class="ans">
+    <p><mark class="chg">The plan as filed is about $2.8 billion over four years.</mark> <span class="flag">Confirm</span> Under the ICC process, this phase defines the projects, scope, and benefits. Cost and the cost to customers are decided in Phase II beginning January 2027. I will make sure you get the numbers as they are available.</p>
+    <p class="sub"><mark class="chg">This replaces "we are still working on the total," which would not hold up with the filed figure public.</mark></p>
+  </div>
+</details>
+
+<details class="qa" open>
+  <summary>Where does Ameren stand on the POWER Act and data centers?</summary>
+  <div class="ans"><p>Check with the team before Monday. A safe framing is that data centers are a major source of new load and the grid has to serve it reliably, the state is deciding the rules, and you would like to hear his view. Do not state a company position you have not confirmed.</p></div>
+</details>
+
+<details class="qa" open>
+  <summary>Why not wait a year?</summary>
+  <div class="ans"><p>The need keeps growing, and delay can mean more emergency repairs and less flexibility on cost. The better question is whether the work is necessary and paced responsibly.</p></div>
+</details>
+
+<details class="qa" open>
+  <summary>Can't clean energy solve this?</summary>
+  <div class="ans"><p>It is part of the answer, but every project still connects to the distribution system. As more power flows both ways, the grid needs upgrades to handle it safely and keep new connections moving.</p></div>
+</details>
+
+<details class="qa" open>
+  <summary>What does this do for Peoria and McLean County?</summary>
+  <div class="ans"><p>This is where you need district figures in hand. Without them, say you will send him the Peoria and McLean area reliability and planned work numbers this week.</p></div>
+</details>
+
+<!-- ================= PART 8 ================= -->
+<h2 id="part8"><span class="part">Part 8 <a class="top" href="#top">Back to top</a></span>Gaps to close and the ten minute drill</h2>
+
+<h3>Gaps to close before Monday</h3>
+<ul class="check">
+  <li><input type="checkbox" id="g1"><label for="g1"><mark class="chg">Check with Ameren compliance on meal and reporting rules for state officials, including who pays.</mark></label></li>
+  <li><input type="checkbox" id="g2"><label for="g2">Get Ameren's position on the POWER Act and data center legislation from the regulatory and legislative team. He is likely to raise it.</label></li>
+  <li><input type="checkbox" id="g3"><label for="g3">Pull restoration data for the August 13 storm in McLean and Tazewell counties, including time to restore and the causes. Those outages were in his district.</label></li>
+  <li><input type="checkbox" id="g4"><label for="g4"><mark class="chg">Confirm the $2.8 billion against the filing, and practice saying it with the Phase II line so the answer is confident and not evasive. Confirm how you name the step that follows, since CUB calls it a separate multi-year rate plan in 2027.</mark></label></li>
+  <li><input type="checkbox" id="g5"><label for="g5"><mark class="chg">Get the benefit-cost basis for "two to five dollars avoided per dollar." It carries your affordability case and has no source in this briefing.</mark></label></li>
+  <li><input type="checkbox" id="g6"><label for="g6"><mark class="chg">Get the regulatory team's answers to CUB's six items and to the pending $65.3 million reconciliation request.</mark></label></li>
+  <li><input type="checkbox" id="g7"><label for="g7"><mark class="chg">Source the claim that Illinois had 463 tornado warnings, more than all traditional tornado alley states combined, or leave it out. The confirmed count of 210 as of August 29 is supported.</mark></label></li>
+  <li><input type="checkbox" id="g8"><label for="g8">Pull Peoria and McLean area reliability numbers and planned work, plus the leave-behind one pager. <mark class="chg">The one pager is referenced throughout and is not part of this file.</mark></label></li>
+  <li><input type="checkbox" id="g9"><label for="g9">Get Peoria area interconnection counts and battery storage figures from the Ameren team. <mark class="chg">No public local numbers were found.</mark></label></li>
+  <li><input type="checkbox" id="g10"><label for="g10">The Mitigation Plan draft is not out until October 8, so on Monday you can only say what it is likely to show. Frame it as a signal on the resources needed to fill the reliability gap, which may point to the direction of the final IRP.</label></li>
+  <li><input type="checkbox" id="g11"><label for="g11">Check the outcome of the Four Creeks wind hearings and confirm the Peoria Solar Energy Center is in service.</label></li>
+  <li><input type="checkbox" id="g12"><label for="g12">Confirm the November 15 IRP date is still current.</label></li>
+  <li class="done"><input type="checkbox" id="g13" checked><label for="g13"><span>Verify whether he is on the ballot this year.</span> <mark class="chg">Resolved. He won a sixth term in November 2024 and the term runs to January 2029.</mark></label></li>
+  <li><input type="checkbox" id="g14"><label for="g14">Prepare one concrete example on fleet charging or interconnection timelines, since those are his home turf. <mark class="chg">Also verify the state fleet reference before adding it back to the 2 minute track.</mark></label></li>
+  <li><input type="checkbox" id="g15"><label for="g15">Decide what you will say if he asks about the ICC process directly. The guide's line is that you are not asking him to intervene, which fits an informative meeting.</label></li>
+</ul>
+
+<h3>Ten minute drill before you walk in</h3>
+<ul class="check">
+  <li><input type="checkbox" id="d1"><label for="d1">Reread the project card and the three numbers.</label></li>
+  <li><input type="checkbox" id="d2"><label for="d2">Say the 30 second version out loud once, ending on your invitation for his feedback.</label></li>
+  <li><input type="checkbox" id="d3"><label for="d3">Pick the two or three feedback questions you will ask.</label></li>
+  <li><input type="checkbox" id="d4"><label for="d4">Say your answer to the rate base question out loud once.</label></li>
+  <li><input type="checkbox" id="d5"><label for="d5">Plan to take notes on what he says and follow up within a week.</label></li>
+  <li><input type="checkbox" id="d6"><label for="d6">Check the leave-behinds and your business card with your cell number on it.</label></li>
+</ul>
+
+<!-- ================= PART 9 ================= -->
+<h2 id="part9"><span class="part">Part 9 <a class="top" href="#top">Back to top</a></span>The quiz and answer key</h2>
+<p class="sub">52 questions from your original, with each answer and its source under the question. <mark class="chg">Eleven answers carry updates, two questions are new, and ten are marked Priority as the ones to get right first.</mark></p>
+
+<div class="quiz-tools" role="group" aria-label="Quiz controls">
+  <button type="button" class="btn" id="qz-open">Show all answers</button>
+  <button type="button" class="btn" id="qz-close">Hide all answers</button>
+  <label class="tog"><input type="checkbox" id="qz-pri"> Priority questions only</label>
+</div>
+
+<div id="quiz">
+<section class="qsec"><h3>A. His remarks and record on energy and data centers</h3>
+<article class="q" id="q1"><div class="qhead"><span class="qn">1</span><p class="qt">Which aquifer did Senator Koehler name when he said you should not take drinking water from it to run a data center?</p></div><ul class="opts"><li><b>A.</b>Mahomet aquifer</li><li><b>B.</b>Ogallala aquifer</li><li><b>C.</b>Cambrian-Ordovician aquifer</li><li><b>D.</b>Illinoian Glacial aquifer</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> Mahomet aquifer. He said you should not take drinking water out of the Mahomet aquifer to run a data center. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q2"><div class="qhead"><span class="qn">2</span><p class="qt">What three main concerns about data centers did he identify?</p></div><ul class="opts"><li><b>A.</b>Tax incentives, jobs, and land use</li><li><b>B.</b>Electricity, water, and noise pollution</li><li><b>C.</b>Emissions, backup generators, and traffic</li><li><b>D.</b>Broadband, security, and property values</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Electricity, water, and noise pollution. He named electricity, water, and noise pollution. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q3"><div class="qhead"><span class="qn">3</span><p class="qt">Who did he say should handle data center noise?</p></div><ul class="opts"><li><b>A.</b>Local government through zoning, whether a municipality or county</li><li><b>B.</b>The utility serving the site</li><li><b>C.</b>The Illinois EPA</li><li><b>D.</b>The Illinois Commerce Commission</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> Local government through zoning, whether a municipality or county. He called noise a matter of zoning it right at the municipal or county level. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q4"><div class="qhead"><span class="qn">4</span><p class="qt">How did he describe opposition to data centers?</p></div><ul class="opts"><li><b>A.</b>As a problem only for large cities</li><li><b>B.</b>As something the state should override entirely</li><li><b>C.</b>As "not in my backyard syndrome," adding that done right they are a good addition and a big tax base</li><li><b>D.</b>As fully justified in every community</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> As "not in my backyard syndrome," adding that done right they are a good addition and a big tax base. He said a well done data center is a good addition, especially for school, county, and municipal tax bases in smaller communities. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q5"><div class="qhead"><span class="qn">5</span><p class="qt">What happened to the POWER Act in the spring session?</p></div><ul class="opts"><li><b>A.</b>It passed the Senate and stalled in the House</li><li><b>B.</b>It was vetoed by the Governor</li><li><b>C.</b>It did not advance to a vote</li><li><b>D.</b>It was signed and took effect</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> It did not advance to a vote. He said the bill was introduced but did not really go anywhere. It awaits the veto session. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q6"><div class="qhead"><span class="qn">6</span><p class="qt">What does the POWER Act require of new data centers on cost?</p></div><ul class="opts"><li><b>A.</b>Receive utility rate discounts</li><li><b>B.</b>Pay a flat annual fee to the state</li><li><b>C.</b>Buy only natural gas power</li><li><b>D.</b>Pay their own energy costs, including needed infrastructure, without shifting costs to residents</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Pay their own energy costs, including needed infrastructure, without shifting costs to residents. Capitol News Illinois describes the bill as requiring data centers to cover their own energy costs and barring cost shifting to residents. <em>Source</em> <a href="https://capitolnewsillinois.com/news/power-act-lawmakers-seek-to-regulate-new-data-centers-power-water-usage/">Capitol News</a></div></details></article>
+<article class="q" id="q7"><div class="qhead"><span class="qn">7</span><p class="qt">Who sponsors the POWER Act in the Senate?</p></div><ul class="opts"><li><b>A.</b>Sen. Dave Koehler</li><li><b>B.</b>Sen. Ram Villivalam</li><li><b>C.</b>Sen. Michael Hastings</li><li><b>D.</b>Sen. Willie Preston</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Sen. Ram Villivalam. Villivalam sponsors in the Senate and Rep. Robyn Gabel in the House. Koehler supports the bill but is not the sponsor. <em>Source</em> <a href="https://capitolnewsillinois.com/news/power-act-lawmakers-seek-to-regulate-new-data-centers-power-water-usage/">Capitol News</a></div></details></article>
+<article class="q" id="q8"><div class="qhead"><span class="qn">8</span><p class="qt">What do the two insurance bills that passed this session let the Department of Insurance do?</p></div><ul class="opts"><li><b>A.</b>Set premiums directly for all carriers</li><li><b>B.</b>Take over claims processing</li><li><b>C.</b>Ban all rate increases for two years</li><li><b>D.</b>Halt excessive rate increases and require reimbursement when rates are found excessive</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Halt excessive rate increases and require reimbursement when rates are found excessive. He voted for the home insurance compromise and supported the auto bill. <em>Source</em> <a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU interview</a></div></details></article>
+<article class="q" id="q9"><div class="qhead"><span class="qn">9</span><p class="qt">What did his 2019 bill SB 2059 direct the ICC to do?</p></div><ul class="opts"><li><b>A.</b>Build public charging stations</li><li><b>B.</b>Approve all utility rate cases faster</li><li><b>C.</b>Shut down coal plants</li><li><b>D.</b>Develop a forward-looking plan for increasing transportation electrification</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Develop a forward-looking plan for increasing transportation electrification. SB 2059, Beneficial Vehicle Electrification, required an ICC plan within 270 days. <em>Source</em> <a href="https://www.sierraclub.org/illinois/heart-illinois/thank-senator-koehler">Sierra Club</a></div></details></article>
+<article class="q" id="q10"><div class="qhead"><span class="qn">10</span><p class="qt">What did his 2022 bill SB 2940 do?</p></div><ul class="opts"><li><b>A.</b>Banned gas powered state vehicles</li><li><b>B.</b>Extended the CEJA electric vehicle rebate to electric motorcycles</li><li><b>C.</b>Funded the state fleet charging network</li><li><b>D.</b>Created the statewide interconnection queue</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Extended the CEJA electric vehicle rebate to electric motorcycles. The rebate was $4,000 for standard electric vehicles and $1,500 for electric motorcycles. <em>Source</em> <a href="https://www.illinoissenatedemocrats.com/caucus-news/49-senator-dave-koehler-news/4236-koehler-backed-electric-vehicle-rebate-program-opens-in-illinois">Senate Dems</a></div></details></article>
+<article class="q" id="q11"><div class="qhead"><span class="qn">11</span><p class="qt">What did he say in September 2025 about the downstate transit funding bill?</p></div><ul class="opts"><li><b>A.</b>It is vital to CityLink, with a roughly $200 million downstate shortfall without it</li><li><b>B.</b>It should be funded only by the Chicago region</li><li><b>C.</b>It is unnecessary given ridership</li><li><b>D.</b>It should be paid by utilities</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> It is vital to CityLink, with a roughly $200 million downstate shortfall without it. The bill relies on a $1.50 tax on non-medical and grocery deliveries. The outcome is not confirmed. <em>Source</em> <a href="https://www.wcbu.org/local-news/2025-09-30/koehler-public-transit-funding-bill-vital-to-peorias-citylink-other-downstate-transportation-agencies">WCBU transit</a></div></details></article>
+<article class="q" id="q12"><div class="qhead"><span class="qn">12</span><p class="qt">Which Senate committee on his list is most directly tied to your work?</p></div><ul class="opts"><li><b>A.</b>Executive</li><li><b>B.</b>Energy and Public Utilities</li><li><b>C.</b>Labor</li><li><b>D.</b>Transportation</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Energy and Public Utilities. Ballotpedia lists Energy and Public Utilities, Agriculture, Health and Human Services, Higher Education, and Public Health. <em>Source</em> <a href="https://ballotpedia.org/David_Koehler">Ballotpedia</a></div></details></article>
+</section>
+<section class="qsec"><h3>B. The latest news</h3>
+<article class="q" id="q13"><div class="qhead"><span class="qn">13</span><p class="qt">What is Governor Pritzker pressing lawmakers to pass in the fall veto session, with action indicated for November?</p></div><ul class="opts"><li><b>A.</b>A ban on all new data centers</li><li><b>B.</b>The POWER Act on data centers</li><li><b>C.</b>A repeal of the Clean and Reliable Grid Affordability Act</li><li><b>D.</b>A new capacity market for utilities</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> The POWER Act on data centers. He wants data centers to pay their fair share and meet water and pollution standards. <em>Source</em> <a href="https://www.wthitv.com/2026/09/28/pritzker-calls-lawmakers-pass-data-center-regulations/">WTHI</a></div></details></article>
+<article class="q" id="q14"><div class="qhead"><span class="qn">14</span><p class="qt">What did Koehler's August 26 press release address?</p></div><ul class="opts"><li><b>A.</b>Funding for electric school buses</li><li><b>B.</b>Closure of a power plant</li><li><b>C.</b>A new rate freeze for customers</li><li><b>D.</b>Disaster assistance for McLean and Tazewell county residents hit by the summer storms</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Disaster assistance for McLean and Tazewell county residents hit by the summer storms. It highlighted SBA loans and tax relief options. <em>Source</em> <a href="https://www.senatordavekoehler.com/news">Koehler releases</a></div></details></article>
+<article class="q" id="q15"><div class="qhead"><span class="qn">15</span><p class="qt">About how many customers across all utilities lost power in central Illinois in the August 13 storm?</p></div><ul class="opts"><li><b>A.</b>About 2,900</li><li><b>B.</b>About 29,000</li><li><b>C.</b>About 120,000</li><li><b>D.</b>About 500</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> About 29,000. Reports put about 20,000 Ameren customers in McLean County, nearly 9,000 Corn Belt customers, and about 1,000 Ameren customers in Peoria and Tazewell. <em>Source</em> <a href="https://www.25newsnow.com/2026/08/13/tens-thousands-without-power-after-wind-rain-blow-through-heart-illinois/">25 News Now</a></div></details></article>
+<article class="q" id="q16"><div class="qhead"><span class="qn">16</span><p class="qt">Where was the most severe impact of Ameren's August 13 outages?</p></div><ul class="opts"><li><b>A.</b>Madison County</li><li><b>B.</b>The Bloomington-Normal area in McLean County, which is in his district</li><li><b>C.</b>Peoria County</li><li><b>D.</b>Sangamon County</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> The Bloomington-Normal area in McLean County, which is in his district. Ameren named Bloomington-Normal as the most severely impacted area. <em>Source</em> <a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></div></details></article>
+<article class="q" id="q17"><div class="qhead"><span class="qn">17</span><p class="qt">How much damage did McLean County report from the August storms?</p></div><ul class="opts"><li><b>A.</b>$4.25 million</li><li><b>B.</b>$1.2 million</li><li><b>C.</b>$42.5 million</li><li><b>D.</b>$425 million</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> $42.5 million. It included over 400 residential claims and nearly two dozen business claims. <mark class="chg">The $42.5 million is not isolated to outage damage, so keep it separate from the outage story.</mark> <em>Source</em> <a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT</a></div></details></article>
+<article class="q" id="q18"><div class="qhead"><span class="qn">18</span><p class="qt">How many counties are in the Governor's request for a federal major disaster declaration?</p></div><ul class="opts"><li><b>A.</b>Five</li><li><b>B.</b>Twelve</li><li><b>C.</b>Two</li><li><b>D.</b>Eight</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Eight. McLean, Champaign, Ford, Tazewell, Cook, Fulton, Vermillion, and Will. <mark class="chg">The request covers storms from August 11 to 16 and includes Cook and Will, so do not tie it only to the August 13 outage.</mark> <em>Source</em> <a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT</a></div></details></article>
+<article class="q" id="q19"><div class="qhead"><span class="qn">19</span><p class="qt">What happened to the proposed 321 acre data center in Pekin?</p></div><ul class="opts"><li><b>A.</b>It moved to East Peoria</li><li><b>B.</b>The developer terminated the land agreement on May 5, 2026</li><li><b>C.</b>It was approved and is under construction</li><li><b>D.</b>The city council approved it in March</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> The developer terminated the land agreement on May 5, 2026. Mayor Mary Burress declined to proceed in March and Western Hospitality Partners then terminated the deal amid organized opposition. <em>Source</em> <a href="https://www.datacenterdynamics.com/en/news/developer-withdraws-data-center-proposal-in-pekin-illinois/">DCD</a></div></details></article>
+<article class="q" id="q20"><div class="qhead"><span class="qn">20</span><p class="qt">What is East Peoria's plan for the 272.5 acres it bought for $5.2 million?</p></div><ul class="opts"><li><b>A.</b>Build a data center campus</li><li><b>B.</b>Expand the airport</li><li><b>C.</b>Lease it to a wind developer</li><li><b>D.</b>Create housing, with a pledge that it will not become a data center or solar farm</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Create housing, with a pledge that it will not become a data center or solar farm. Mayor John Kahl made the pledge. The price was about $19,100 per acre. <em>Source</em> <a href="https://wmbdradio.com/2026/07/22/5-2-million-east-peoria-land-deal-wins-final-approval-city-pledges-no-data-center-there/">WMBD</a></div></details></article>
+<article class="q" id="q21"><div class="qhead"><span class="qn">21</span><p class="qt">What will Morton Industries make at its new East Peoria plant?</p></div><ul class="opts"><li><b>A.</b>Transformer cores</li><li><b>B.</b>Electric vehicle batteries</li><li><b>C.</b>Stainless steel cooling tubes for data centers</li><li><b>D.</b>Wind turbine blades</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> Stainless steel cooling tubes for data centers. The 80,000 square foot plant plans to hire 50 to 100 people. <em>Source</em> <a href="https://www.wcbu.org/local-news/2026-07-20/morton-industries-expands-to-east-peoria-manufacturing-facility-in-support-of-the-data-center-market">WCBU Morton</a></div></details></article>
+<article class="q" id="q22"><div class="qhead"><span class="qn">22</span><p class="qt">What is the Four Creeks Wind project in northwest Peoria County?</p></div><ul class="opts"><li><b>A.</b>A Repsol proposal for up to 113 turbines and up to 663 MW</li><li><b>B.</b>A gas peaker plant</li><li><b>C.</b>A 50 MW utility owned solar farm</li><li><b>D.</b>A battery storage site</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> A Repsol proposal for up to 113 turbines and up to 663 MW. Turbines could reach 657 feet. County hearings began September 14 and may continue through October 1. <mark class="chg">The county hearings were scheduled to end October 1, so check the outcome before lunch.</mark> <em>Source</em> <a href="https://www.25newsnow.com/2026/08/24/public-hearings-set-begin-proposed-peoria-county-wind-farm/">25 News wind</a></div></details></article>
+<article class="q" id="q23"><div class="qhead"><span class="qn">23</span><p class="qt">Which body is reviewing the Four Creeks Wind application?</p></div><ul class="opts"><li><b>A.</b>The Illinois Commerce Commission</li><li><b>B.</b>The Illinois Power Agency</li><li><b>C.</b>The Peoria County Zoning Board of Appeals</li><li><b>D.</b>MISO</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> The Peoria County Zoning Board of Appeals. County zoning decides the siting, which fits his view that local zoning handles local effects. <em>Source</em> <a href="https://www.25newsnow.com/2026/08/24/public-hearings-set-begin-proposed-peoria-county-wind-farm/">25 News wind</a></div></details></article>
+<article class="q" id="q24"><div class="qhead"><span class="qn">24</span><p class="qt">What is the Peoria Solar Energy Center?</p></div><ul class="opts"><li><b>A.</b>A community solar subscription</li><li><b>B.</b>Ameren's 2.5 MW solar facility with a 1.5 MW battery on Prichard Road</li><li><b>C.</b>A 250 MW wind and solar hybrid</li><li><b>D.</b>A state owned charging depot</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Ameren's 2.5 MW solar facility with a 1.5 MW battery on Prichard Road. About $20 million, built under CEJA and expected to be operating by the third quarter of 2026. <mark class="chg">That quarter has ended, so confirm it is in service.</mark> <em>Source</em> <a href="https://www.wcbu.org/local-news/2025-07-31/ameren-illinois-touts-new-20m-peoria-solar-energy-center-as-step-toward-states-clean-energy-target">WCBU solar</a></div></details></article>
+<article class="q" id="q25"><div class="qhead"><span class="qn">25</span><p class="qt">What did his August 10 press release announce?</p></div><ul class="opts"><li><b>A.</b>A school construction loan</li><li><b>B.</b>A $3.15 million state grant for two site development projects, including road work at a 51 acre airport industrial site</li><li><b>C.</b>A $315 million transit award</li><li><b>D.</b>A new hospital wing</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> A $3.15 million state grant for two site development projects, including road work at a 51 acre airport industrial site. It ties to economic development and site readiness in the district. <em>Source</em> <a href="https://www.senatordavekoehler.com/news">Koehler releases</a></div></details></article>
+<article class="q" id="q26"><div class="qhead"><span class="qn">26</span><p class="qt">Per a February 2026 report, what electric sales growth does Ameren project through 2030?</p></div><ul class="opts"><li><b>A.</b>About 0.6 percent a year</li><li><b>B.</b>About 20 percent a year</li><li><b>C.</b>About 6.2 percent a year, with a $31.8 billion five year investment plan</li><li><b>D.</b>No growth</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> About 6.2 percent a year, with a $31.8 billion five year investment plan. This is company wide. The article featured Alcast, a Peoria aluminum manufacturer. <mark class="chg">Both figures are company-wide, not just Illinois. Do not volunteer them, and know the Illinois share if he asks.</mark> <em>Source</em> <a href="https://www.25newsnow.com/2026/02/18/ameren-plans-surge-power-use-peoria-factory-feels-pressure/">25 News Ameren</a></div></details></article>
+</section>
+<section class="qsec"><h3>C. Grid plan facts and how to respond</h3>
+<article class="q priority" id="q27"><div class="qhead"><span class="qn">27</span><p class="qt">When does Phase II of the Grid Plan begin, and what does it decide?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>June 2027, where rates take effect</li><li><b>B.</b>January 2027, where cost and cost to customers are decided</li><li><b>C.</b>October 2026, where the route is approved</li><li><b>D.</b>December 2026, where the projects are chosen</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> January 2027, where cost and cost to customers are decided. Phase I defines projects, scope, benefits, and analysis. Phase II sets cost and customer impact. <mark class="chg">Confirm how you name this step. CUB describes cost recovery as a separate multi-year rate plan that Ameren proposes in 2027.</mark> <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q priority" id="q28"><div class="qhead"><span class="qn">28</span><p class="qt">When is the draft Mitigation Plan released?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>November 15, 2026</li><li><b>B.</b>September 30, 2026</li><li><b>C.</b>January 1, 2027</li><li><b>D.</b>October 8, 2026</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> October 8, 2026. It will likely show resources needed to fill the reliability gap, which may signal the final IRP path. <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q priority" id="q29"><div class="qhead"><span class="qn">29</span><p class="qt">When is the initial Integrated Resource Plan due to the ICC?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>October 8, 2026</li><li><b>B.</b>December 15, 2026</li><li><b>C.</b>November 15, 2026</li><li><b>D.</b>March 1, 2027</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> November 15, 2026. The IRP process runs through 2027. <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q" id="q30"><div class="qhead"><span class="qn">30</span><p class="qt">When is the ICC decision on the Multi-Year Grid Plan, Docket 26-0051, expected?</p></div><ul class="opts"><li><b>A.</b>March 2026</li><li><b>B.</b>December 2026</li><li><b>C.</b>June 2027</li><li><b>D.</b>It has already been decided</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> December 2026. The plan was filed in January 2026 and covers 2028 to 2031. <mark class="chg">CUB reports the judges' proposed order is expected in October, with a final order in November or December.</mark> <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q" id="q31"><div class="qhead"><span class="qn">31</span><p class="qt">How did distributed energy interconnections grow from 2015 to today?</p></div><ul class="opts"><li><b>A.</b>From 493 to 40,132, and capacity from 8 MW to 967 MW</li><li><b>B.</b>From 4,930 to 10,000</li><li><b>C.</b>From 493 to 4,013</li><li><b>D.</b>From 49 to 400</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> From 493 to 40,132, and capacity from 8 MW to 967 MW. This is your clean energy readiness proof point. <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q priority" id="q32"><div class="qhead"><span class="qn">32</span><p class="qt">About what share of roughly 900,000 in-service wood poles are at least 30 years old?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>About 95 percent</li><li><b>B.</b>About 40 percent</li><li><b>C.</b>About 10 percent</li><li><b>D.</b>About 75 percent</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> About 75 percent. About 250,000 are 50 years or older. <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q" id="q33"><div class="qhead"><span class="qn">33</span><p class="qt">What does planned storm hardening avoid per dollar spent?</p></div><ul class="opts"><li><b>A.</b>Ten dollars</li><li><b>B.</b>Nothing measurable</li><li><b>C.</b>Two to five dollars in later costs</li><li><b>D.</b>Fifty cents</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> Two to five dollars in later costs. This is the value message, and Phase II is where cost is tested. <mark class="chg">Confirm the benefit-cost basis before you say it. The briefing has no source for this figure.</mark> <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q" id="q34"><div class="qhead"><span class="qn">34</span><p class="qt"><mark class="chg">How many confirmed tornadoes had Illinois recorded as of August 29, 2026, and how does that compare?</mark></p></div><ul class="opts"><li><b>A.</b><mark class="chg">Forty confirmed tornadoes, near the long term average</mark></li><li><b>B.</b><mark class="chg">Fewer than the prior year</mark></li><li><b>C.</b><mark class="chg">About 210 confirmed tornadoes, a state record and the most of any state this year</mark></li><li><b>D.</b><mark class="chg">Over 2,000 confirmed tornadoes</mark></li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> <mark class="chg">About 210 confirmed tornadoes as of August 29, per the National Weather Service in Romeoville. That is a state record and second only to Texas at 244 in 2015 for any state in any year. The earlier claim of 463 tornado warnings, more than all traditional tornado alley states combined, has no source, so leave it out until confirmed. <em>Source</em> <a href="https://weather.com/2026/08/29/storms/tornado/illinois-tornadoes-record-year">Weather.com</a></mark></div></details></article>
+<article class="q priority" id="q35"><div class="qhead"><span class="qn">35</span><p class="qt">If he raises the POWER Act and asks for Ameren's position, what is the best response?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>Say you have not heard of the bill</li><li><b>B.</b>Say data centers are major new load the grid must serve reliably, that the state is setting the rules, and ask for his view, without stating a position you have not confirmed</li><li><b>C.</b>Argue against the bill to defend the company</li><li><b>D.</b>State the company position from memory</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Say data centers are major new load the grid must serve reliably, that the state is setting the rules, and ask for his view, without stating a position you have not confirmed. Check Ameren's position with the regulatory and legislative team before Monday. <em>Source</em> <a href="https://www.wthitv.com/2026/09/28/pritzker-calls-lawmakers-pass-data-center-regulations/">WTHI</a></div></details></article>
+<article class="q priority" id="q36"><div class="qhead"><span class="qn">36</span><p class="qt">He asks whether the Grid Plan is rate base growth presented as reliability. What is the best answer?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>That is not a fair question</li><li><b>B.</b>Costs are already set and cannot change</li><li><b>C.</b>Reliability is always worth any cost</li><li><b>D.</b>The ICC reviews every part of the plan, we are accountable to reliability measures with financial consequences, and cost and customer impact are tested in Phase II</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> The ICC reviews every part of the plan, we are accountable to reliability measures with financial consequences, and cost and customer impact are tested in Phase II. This answer acknowledges the concern and uses the Phase II point. <em>Source</em> Grid Outreach Guide</div></details></article>
+</section>
+<section class="qsec"><h3>D. Economic development</h3>
+<article class="q" id="q37"><div class="qhead"><span class="qn">37</span><p class="qt">What did Rivian begin producing in Normal in April 2026, and at what full scale volume?</p></div><ul class="opts"><li><b>A.</b>Commercial vans, at up to 300,000 a year</li><li><b>B.</b>The R2, at up to 155,000 a year</li><li><b>C.</b>The R1S, at up to 15,000 a year</li><li><b>D.</b>Battery packs only</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> The R2, at up to 155,000 a year. It is a $1.5 billion R2 investment announced in 2024, plus a $120 million supplier park announced in 2025. <em>Source</em> <a href="https://www.25newsnow.com/2026/05/19/rivian-ramps-up-r2-production-normal-hiring-accelerates/">25 News Rivian</a></div></details></article>
+<article class="q" id="q38"><div class="qhead"><span class="qn">38</span><p class="qt">Which state support did the Governor announce for the Rivian expansion on May 19?</p></div><ul class="opts"><li><b>A.</b>An $11.5 million IDOT tunnel under U.S. 150 and $5 million to Heartland Community College for EV career pathways</li><li><b>B.</b>Free power for ten years</li><li><b>C.</b>A $500 million tax credit</li><li><b>D.</b>A new interstate interchange only</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> An $11.5 million IDOT tunnel under U.S. 150 and $5 million to Heartland Community College for EV career pathways. He said companies choose to grow here when Illinois invests in people, infrastructure, and innovation. <em>Source</em> <a href="https://www.25newsnow.com/2026/05/19/rivian-ramps-up-r2-production-normal-hiring-accelerates/">25 News Rivian</a></div></details></article>
+<article class="q" id="q39"><div class="qhead"><span class="qn">39</span><p class="qt">What does Damera Corporation plan in Greater Peoria?</p></div><ul class="opts"><li><b>A.</b>A steel mill with 900 jobs</li><li><b>B.</b>A data center campus</li><li><b>C.</b>A wind blade factory</li><li><b>D.</b>The first U.S. all-electric minibus manufacturing plant, about $31.5 million and 90 jobs</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> The first U.S. all-electric minibus manufacturing plant, about $31.5 million and 90 jobs. Announced in May 2025. It fits his electrification record. <em>Source</em> <a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">GPEDC wins</a></div></details></article>
+<article class="q" id="q40"><div class="qhead"><span class="qn">40</span><p class="qt">What did Caterpillar announce for downtown Peoria in April 2025?</p></div><ul class="opts"><li><b>A.</b>A $3 million warehouse</li><li><b>B.</b>A $30 million renovation for engineering roles, adding 200 or more jobs</li><li><b>C.</b>A new headquarters in Chicago</li><li><b>D.</b>A plant closure</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> A $30 million renovation for engineering roles, adding 200 or more jobs. It is listed among Greater Peoria EDC's recent wins. <em>Source</em> <a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">GPEDC wins</a></div></details></article>
+<article class="q" id="q41"><div class="qhead"><span class="qn">41</span><p class="qt">What are the three core themes of the Greater Peoria EDC 2026 to 2030 strategy?</p></div><ul class="opts"><li><b>A.</b>Rail, ports, and airports</li><li><b>B.</b>Tax cuts, energy exports, and tourism</li><li><b>C.</b>Data centers, wind, and solar</li><li><b>D.</b>Infrastructure supporting growth, inclusive economic participation, and regional identity</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> Infrastructure supporting growth, inclusive economic participation, and regional identity. It covers five counties and comments are open through October 2. <mark class="chg">The comment window closes October 2, before lunch.</mark> <em>Source</em> <a href="https://www.933thedrive.com/2026/09/10/gpedc-seeks-public-input-on-five-year-plan/">GPEDC plan</a></div></details></article>
+<article class="q" id="q42"><div class="qhead"><span class="qn">42</span><p class="qt">What did the president of Peoria's Alcast say about power reliability?</p></div><ul class="opts"><li><b>A.</b>Even brief power disruptions can halt production and damage equipment</li><li><b>B.</b>Reliability does not matter to manufacturers</li><li><b>C.</b>Power is only a cost issue</li><li><b>D.</b>Outages are cheaper than upgrades</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> Even brief power disruptions can halt production and damage equipment. Alcast has about 300 employees and plans to add 100. <em>Source</em> <a href="https://www.25newsnow.com/2026/02/18/ameren-plans-surge-power-use-peoria-factory-feels-pressure/">25 News Ameren</a></div></details></article>
+<article class="q" id="q43"><div class="qhead"><span class="qn">43</span><p class="qt">What is the status of Normal's data center moratorium?</p></div><ul class="opts"><li><b>A.</b>It expires November 30, 2026, with a proposed extension to May 31, 2027 while the state considers the POWER Act</li><li><b>B.</b>It covers only solar farms</li><li><b>C.</b>It is permanent</li><li><b>D.</b>It was repealed in May</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> It expires November 30, 2026, with a proposed extension to May 31, 2027 while the state considers the POWER Act. Town staff noted renewed interest at the state level in data center regulation. <em>Source</em> <a href="https://www.25newsnow.com/2026/09/20/normal-consider-longer-moratorium-data-centers-bloomington-schedules-pair-public-hearings/">25 News moratorium</a></div></details></article>
+<article class="q" id="q44"><div class="qhead"><span class="qn">44</span><p class="qt">When are Bloomington's public hearings on data centers?</p></div><ul class="opts"><li><b>A.</b>October 8 and November 15</li><li><b>B.</b>October 16 and November 16, 2026</li><li><b>C.</b>December 1 and December 15</li><li><b>D.</b>September 14 and October 1</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> October 16 and November 16, 2026. Bloomington does not appear to be extending its moratorium. Hearings are before the planning commission. <em>Source</em> <a href="https://www.25newsnow.com/2026/09/20/normal-consider-longer-moratorium-data-centers-bloomington-schedules-pair-public-hearings/">25 News moratorium</a></div></details></article>
+</section>
+<section class="qsec"><h3>E. Storm scenarios</h3>
+<article class="q" id="q45"><div class="qhead"><span class="qn">45</span><p class="qt">What did Ameren's August 13 update say about the outage peak and wind?</p></div><ul class="opts"><li><b>A.</b>Outages peaked at 260,000 with tornado winds</li><li><b>B.</b>Outages peaked around 26,000 with gusts reaching 70 mph</li><li><b>C.</b>No outages occurred</li><li><b>D.</b>Outages peaked at 260 with 20 mph gusts</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Outages peaked around 26,000 with gusts reaching 70 mph. The worst damage was in Bloomington-Normal, with outages also in Peoria, Champaign, and Danville. <em>Source</em> <a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></div></details></article>
+<article class="q" id="q46"><div class="qhead"><span class="qn">46</span><p class="qt">What kinds of equipment did Ameren report down in McLean County?</p></div><ul class="opts"><li><b>A.</b>Only underground cable</li><li><b>B.</b>Sub transmission poles, distribution poles, and transmission structures</li><li><b>C.</b>Only substations</li><li><b>D.</b>Only customer meters</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Sub transmission poles, distribution poles, and transmission structures. Damage assessors, line workers, tree trimmers, and contractors were deployed. <em>Source</em> <a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></div></details></article>
+<article class="q" id="q47"><div class="qhead"><span class="qn">47</span><p class="qt">What happened at Rivian's Normal plant on April 17, 2026?</p></div><ul class="opts"><li><b>A.</b>Nothing happened</li><li><b>B.</b>An EF-1 tornado collapsed part of the roof in Building 2, and production restarted within five days</li><li><b>C.</b>A power outage ended R2 production</li><li><b>D.</b>A fire closed the plant for a year</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> An EF-1 tornado collapsed part of the roof in Building 2, and production restarted within five days. R2 production officially launched April 22, on the original timeline. <em>Source</em> <a href="https://electrek.co/2026/04/22/rivian-r2-starts-production-tornado-deliveries-spring/">Electrek</a></div></details></article>
+<article class="q priority" id="q48"><div class="qhead"><span class="qn">48</span><p class="qt">He says his constituents were out for a long time. What is the best first response?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>Say weather is unpredictable and move on</li><li><b>B.</b>Acknowledge it, explain the 70 mph winds and structure damage, commit to sending McLean restoration data, and ask what he heard</li><li><b>C.</b>Defend the restoration timeline from memory</li><li><b>D.</b>Change the subject to rates</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer B.</b> Acknowledge it, explain the 70 mph winds and structure damage, commit to sending McLean restoration data, and ask what he heard. Do not defend a timeline you have not confirmed. <em>Source</em> <a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren update</a></div></details></article>
+<article class="q" id="q49"><div class="qhead"><span class="qn">49</span><p class="qt">He asks why you do not bury all the lines. What is the best response?</p></div><ul class="opts"><li><b>A.</b>Say it is far too expensive and end the discussion</li><li><b>B.</b>Promise to bury everything</li><li><b>C.</b>The right mix depends on the location and damage patterns, the plan defines scope by need and benefit, and you will get specifics for his district</li><li><b>D.</b>Say that is a question for the ICC only</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> The right mix depends on the location and damage patterns, the plan defines scope by need and benefit, and you will get specifics for his district. Avoid quoting undergrounding costs unless you have confirmed numbers. <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q priority" id="q50"><div class="qhead"><span class="qn">50</span><p class="qt">How should you reference the OSF St. Joseph emergency room diversion on August 13?</p><span class="pill pri">Priority</span></div><ul class="opts"><li><b>A.</b>As unrelated to the storm</li><li><b>B.</b>As a power outage caused by Ameren</li><li><b>C.</b>As a problem in Peoria</li><li><b>D.</b>As flooding and roof damage at the hospital, used as an example of storms straining critical services, without blaming the outage</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer D.</b> As flooding and roof damage at the hospital, used as an example of storms straining critical services, without blaming the outage. The report cites flooding and roof damage at the hospital and a transit service suspension. <em>Source</em> <a href="https://www.25newsnow.com/2026/08/13/tens-thousands-without-power-after-wind-rain-blow-through-heart-illinois/">25 News Now</a></div></details></article>
+<article class="q" id="q51"><div class="qhead"><span class="qn">51</span><p class="qt">He asks who pays for storm hardening. What is the best response?</p></div><ul class="opts"><li><b>A.</b>Cost and cost to customers are decided in Phase II beginning January 2027, where they are tested, and the value case is two to five dollars avoided per dollar</li><li><b>B.</b>No one, because it is free</li><li><b>C.</b>The state pays through disaster aid</li><li><b>D.</b>It is already included in current rates</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> Cost and cost to customers are decided in Phase II beginning January 2027, where they are tested, and the value case is two to five dollars avoided per dollar. Phase I defines projects, scope, and benefits. <mark class="chg">Also name the filed total, about $2.8 billion, and confirm it against the filing.</mark> <em>Source</em> Grid Outreach Guide</div></details></article>
+<article class="q" id="q52"><div class="qhead"><span class="qn">52</span><p class="qt">What is the best question to ask him about storm recovery?</p></div><ul class="opts"><li><b>A.</b>What did you hear from constituents about restoration, and what could be done better</li><li><b>B.</b>Can you fix the FEMA process</li><li><b>C.</b>Do you agree we restored power quickly</li><li><b>D.</b>Will you support our plan</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> What did you hear from constituents about restoration, and what could be done better. It draws out his feedback without defending. <em>Source</em> <a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT</a></div></details></article>
+</section>
+<section class="qsec"><h3>F. New since the original</h3><p class="sub">Two questions on the filed total and CUB's challenge.</p>
+<article class="q priority new" id="q53"><div class="qhead"><span class="qn">53</span><p class="qt"><mark class="chg">What is the total of the Grid Plan as filed, as CUB describes the case?</mark></p><span class="pill pri">Priority</span><span class="pill nw">New</span></div><ul class="opts"><li><b>A.</b>About $280 million</li><li><b>B.</b>About $28 billion</li><li><b>C.</b>About $2.8 billion over four years</li><li><b>D.</b>About $800 million</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer C.</b> About $2.8 billion for 2028 to 2031. Confirm against the filing. <em>Source</em> <a href="https://www.citizensutilityboard.org/blog/2026/08/03/in-two-cases-before-state-regulators-cub-challenges-ameren-rate-hike-plus-300-million-in-questionable-spending-in-utilitys-grid-plan/">CUB, August 3</a></div></details></article>
+<article class="q priority new" id="q54"><div class="qhead"><span class="qn">54</span><p class="qt"><mark class="chg">He says CUB wants more than $300 million removed from the plan. What is the best response?</mark></p><span class="pill pri">Priority</span><span class="pill nw">New</span></div><ul class="opts"><li><b>A.</b>Say the hearing process tests every line, offer to walk through how any item is justified, and ask whether any concern him</li><li><b>B.</b>Go through each of the six items and rebut them one at a time over lunch</li><li><b>C.</b>Agree the plan is padded and promise to revise it</li><li><b>D.</b>Say CUB opposes every utility plan and its numbers should be ignored</li></ul><details class="ad"><summary>Show answer</summary><div class="key"><b>Answer A.</b> Do not litigate the case at lunch, and do not dismiss the critic. The six items are reliability metrics ($125 million), customer growth ($78.4 million), the proactive economic development fund ($44.1 million), reliability projects under $100,000 ($59.2 million), the hydrogen pilot ($20.3 million), and pole replacement ($14.7 million). Confirm the wording with your regulatory team. <em>Source</em> <a href="https://www.citizensutilityboard.org/blog/2026/06/29/cub-uncovers-hundreds-of-millions-of-dollars-in-questionable-ameren-spending/">CUB, June 29</a></div></details></article>
+</section>
+</div>
+
+<!-- ================= SOURCES ================= -->
+<h2 id="sources"><span class="part">Sources <a class="top" href="#top">Back to top</a></span>Every link used in this briefing</h2>
+<ul class="sources">
+  <li>Grid Outreach Legislator Conversation Guide (internal)</li>
+  <li><a href="https://www.wcbu.org/state-news/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">WCBU, Koehler on data centers and insurance, June 9, 2026</a></li>
+  <li><a href="https://www.nprillinois.org/illinois/2026-06-09/state-sen-koehler-on-the-end-of-session-crunch-and-push-for-data-center-insurance-industry-regulation">NPR Illinois, same interview</a></li>
+  <li><a href="https://www.wthitv.com/2026/09/28/pritzker-calls-lawmakers-pass-data-center-regulations/">WTHI, Pritzker calls for data center rules, September 28, 2026</a></li>
+  <li><a href="https://capitolnewsillinois.com/news/power-act-lawmakers-seek-to-regulate-new-data-centers-power-water-usage/">Capitol News Illinois, POWER Act</a></li>
+  <li><a href="https://www.senatordavekoehler.com/news">Senator Koehler press releases</a></li>
+  <li><a href="https://www.wglt.org/local-news/2026-09-16/gov-pritzker-seeks-disaster-declaration-for-mclean-county-following-august-storms">WGLT, disaster declaration request, September 16, 2026</a></li>
+  <li><a href="https://ameren.mediaroom.com/2026-08-13-Ameren-Illinois-Storm-Update">Ameren Illinois storm update, August 13, 2026</a></li>
+  <li><a href="https://ballotpedia.org/David_Koehler">Ballotpedia, David Koehler</a></li>
+  <li><a href="https://www.wcbu.org/local-news/2025-09-30/koehler-public-transit-funding-bill-vital-to-peorias-citylink-other-downstate-transportation-agencies">WCBU, Koehler on transit funding, September 30, 2025</a></li>
+  <li><a href="https://www.sierraclub.org/illinois/heart-illinois/thank-senator-koehler">Sierra Club Illinois, SB 2059</a></li>
+  <li><a href="https://www.illinoissenatedemocrats.com/caucus-news/49-senator-dave-koehler-news/4236-koehler-backed-electric-vehicle-rebate-program-opens-in-illinois">Illinois Senate Democrats, EV rebate and SB 2940</a></li>
+  <li><a href="https://www.weather.gov/ilx/2026-apr2-3">National Weather Service, April 2 and 3 severe weather</a></li>
+  <li><a href="https://www.25newsnow.com/2026/08/13/tens-thousands-without-power-after-wind-rain-blow-through-heart-illinois/">25 News Now, August 13 storm outages</a></li>
+  <li><a href="https://www.wcbu.org/local-news/2025-07-31/ameren-illinois-touts-new-20m-peoria-solar-energy-center-as-step-toward-states-clean-energy-target">WCBU, Peoria Solar Energy Center</a></li>
+  <li><a href="https://www.datacenterdynamics.com/en/news/developer-withdraws-data-center-proposal-in-pekin-illinois/">DCD, Pekin data center withdrawal</a></li>
+  <li><a href="https://wmbdradio.com/2026/07/22/5-2-million-east-peoria-land-deal-wins-final-approval-city-pledges-no-data-center-there/">WMBD, East Peoria land deal</a></li>
+  <li><a href="https://www.25newsnow.com/2026/09/20/normal-consider-longer-moratorium-data-centers-bloomington-schedules-pair-public-hearings/">25 News Now, Normal and Bloomington data center moratorium, September 20, 2026</a></li>
+  <li><a href="https://www.wglt.org/local-news/2026-08-24/data-center-energy-consumption-raises-concerns-about-long-term-costs-and-reliability">WGLT, data center energy concerns, August 24, 2026</a></li>
+  <li><a href="https://www.25newsnow.com/2026/08/24/public-hearings-set-begin-proposed-peoria-county-wind-farm/">25 News Now, Four Creeks wind hearings</a></li>
+  <li><a href="https://www.25newsnow.com/2026/05/19/rivian-ramps-up-r2-production-normal-hiring-accelerates/">25 News Now, Rivian R2 expansion, May 19, 2026</a></li>
+  <li><a href="https://electrek.co/2026/04/22/rivian-r2-starts-production-tornado-deliveries-spring/">Electrek, tornado at Rivian, April 2026</a></li>
+  <li><a href="https://greaterpeoriaedc.org/why-greater-peoria/recent-wins-in-greater-peoria/">Greater Peoria EDC, recent wins</a></li>
+  <li><a href="https://www.wcbu.org/local-news/2026-07-20/morton-industries-expands-to-east-peoria-manufacturing-facility-in-support-of-the-data-center-market">WCBU, Morton Industries expansion</a></li>
+  <li><a href="https://www.25newsnow.com/2026/02/18/ameren-plans-surge-power-use-peoria-factory-feels-pressure/">25 News Now, Ameren load growth and Alcast, February 2026</a></li>
+  <li><a href="https://www.933thedrive.com/2026/09/10/gpedc-seeks-public-input-on-five-year-plan/">93.3 The Drive, Greater Peoria EDC five year plan</a></li>
+  <li><mark class="chg"><a href="https://www.citizensutilityboard.org/blog/2026/06/29/cub-uncovers-hundreds-of-millions-of-dollars-in-questionable-ameren-spending/">CUB, questionable Ameren spending, June 29, 2026</a></mark></li>
+  <li><mark class="chg"><a href="https://www.citizensutilityboard.org/blog/2026/08/03/in-two-cases-before-state-regulators-cub-challenges-ameren-rate-hike-plus-300-million-in-questionable-spending-in-utilitys-grid-plan/">CUB, two Ameren cases, August 3, 2026</a></mark></li>
+  <li><mark class="chg"><a href="https://weather.com/2026/08/29/storms/tornado/illinois-tornadoes-record-year">Weather.com, Illinois tornado record, August 29, 2026</a></mark></li>
+  <li><mark class="chg"><a href="https://www.wcbu.org/state-news/2024-11-05/democratic-sen-koehler-headed-to-6th-term-after-defeating-gop-challenger-owens">WCBU, Koehler wins sixth term, November 5, 2024</a></mark></li>
+</ul>
+
+<!-- ================= CHANGES ================= -->
+<h2 id="changes"><span class="part">Appendix <a class="top" href="#top">Back to top</a></span>What changed from the original</h2>
+<ol class="changes">
+  <li>Added the one page field card at the front, with a follow up list and a thank you note draft.</li>
+  <li>Moved the compliance check to the field card, the top of Part 2, and the top of the Part 8 list.</li>
+  <li>Added the personal notes box for family names, your last conversation, and anything still open.</li>
+  <li>Stated the $2.8 billion filed total and CUB's $300 million challenge in Parts 1, 5, 6, and 7, and replaced "still working on the total."</li>
+  <li>Added a hard question on CUB's challenge and a prep note on the pending $65.3 million reconciliation request.</li>
+  <li>Moved the Ameren growth outlook and $31.8 billion plan to Part 7 as a warning under the rate base question.</li>
+  <li>Replaced the tornado warnings claim with the supported confirmed count of 210, and listed the warnings claim as a gap to source.</li>
+  <li>Separated the FEMA request and the $42.5 million McLean figure from the outage story.</li>
+  <li>Flagged the "two to five dollars" figure, which has no source in the briefing, and added a gap to get its basis.</li>
+  <li>Removed "including the state fleet" from the 2 minute track because Part 3 does not support it.</li>
+  <li>Marked the Four Creeks hearings and the EDC comment window as passing before lunch, and added a site readiness caution in Part 4.</li>
+  <li>Trimmed Part 4's economic development table to Rivian and Alcast, with the rest folded away.</li>
+  <li>Closed the ballot question. He won a sixth term in November 2024.</li>
+  <li>Kept the full 52 question quiz and answer key, with each answer and source under its question. Updated eleven answers for changed facts (one is the replaced tornado question), added two questions on the filed total and CUB, and marked ten as Priority.</li>
+  <li>Changed "I found no public statement" and "I did not confirm" to neutral wording.</li>
+</ol>
+
+<footer>
+  Internal preparation material. Public sources as of September 30, 2026. Items marked Confirm need verification before Monday.
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var quiz = document.getElementById('quiz');
+  if (!quiz) return;
+  function setAll(open) {
+    var d = quiz.querySelectorAll('details.ad');
+    for (var i = 0; i < d.length; i++) { if (open) d[i].setAttribute('open', ''); else d[i].removeAttribute('open'); }
+  }
+  document.getElementById('qz-open').addEventListener('click', function () { setAll(true); });
+  document.getElementById('qz-close').addEventListener('click', function () { setAll(false); });
+  document.getElementById('qz-pri').addEventListener('change', function (e) {
+    quiz.classList.toggle('only-priority', e.target.checked);
+    var secs = quiz.querySelectorAll('.qsec');
+    for (var i = 0; i < secs.length; i++) {
+      secs[i].hidden = e.target.checked && !secs[i].querySelector('.q.priority');
+    }
+  });
+  window.addEventListener('beforeprint', function () {
+    var all = document.querySelectorAll('details.qa, details.ad');
+    for (var i = 0; i < all.length; i++) all[i].setAttribute('open', '');
+  });
+})();
+</script>
+</body>
+</html>
