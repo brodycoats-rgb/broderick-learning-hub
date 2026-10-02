@@ -1,0 +1,764 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RTC Bill Dashboard | Broderick Learning Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one-screen executive band (hero + KPI tiles + read-out), then charts, watchlist, and a full bill explorer with a detail drawer. */
+:root{
+  --bg:#f1f3f6; --surface:#ffffff; --surface-2:#f6f7f9;
+  --ink:#12161d; --ink-2:#465061; --ink-3:#667085;
+  --line:#e2e5ea; --line-2:#c9ced6;
+  --accent:#1f63bd; --accent-ink:#ffffff; --accent-wash:#e7eefa;
+  --c-oppose:#eb6834; --c-support:#2a78d6; --c-neutral:#9aa1ad; --c-open:#eda100;
+  --stage-1:#86b6ef; --stage-2:#3987e5; --stage-3:#256abf; --stage-4:#184f95;
+  --warn-wash:#fdf3dc; --warn-ink:#7a5200;
+  --serif:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1116; --surface:#161a21; --surface-2:#1b2029;
+    --ink:#eef1f5; --ink-2:#b3bbc8; --ink-3:#8b94a3;
+    --line:#262c36; --line-2:#363d4a;
+    --accent:#6da7ec; --accent-ink:#0e1116; --accent-wash:#1a2740;
+    --c-oppose:#d95926; --c-support:#3987e5; --c-neutral:#5f6877; --c-open:#c98500;
+    --stage-1:#184f95; --stage-2:#256abf; --stage-3:#3987e5; --stage-4:#86b6ef;
+    --warn-wash:#2c2310; --warn-ink:#f0c46a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1116; --surface:#161a21; --surface-2:#1b2029;
+  --ink:#eef1f5; --ink-2:#b3bbc8; --ink-3:#8b94a3;
+  --line:#262c36; --line-2:#363d4a;
+  --accent:#6da7ec; --accent-ink:#0e1116; --accent-wash:#1a2740;
+  --c-oppose:#d95926; --c-support:#3987e5; --c-neutral:#5f6877; --c-open:#c98500;
+  --stage-1:#184f95; --stage-2:#256abf; --stage-3:#3987e5; --stage-4:#86b6ef;
+  --warn-wash:#2c2310; --warn-ink:#f0c46a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;padding-inline:16px;padding-block:20px 56px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
+h1,h2,h3,p{margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;padding-bottom:4px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;letter-spacing:-.01em;text-wrap:balance;margin-top:4px}
+.top-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:7px 12px;font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08);color:var(--accent-ink)}
+.btn.small{padding:4px 9px;font-size:13px}
+.fresh{display:inline-flex;align-items:center;gap:8px;background:var(--warn-wash);color:var(--warn-ink);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600}
+.fresh::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c-open)}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;min-width:0}
+.card h2{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.25}
+.card .sub{color:var(--ink-3);font-size:13px;margin-top:2px}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline;margin-bottom:14px}
+
+/* executive band */
+.band{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px}
+.hero{display:flex;flex-direction:column;gap:14px;justify-content:space-between}
+.hero-num{font-size:68px;line-height:1;font-weight:700;letter-spacing:-.02em}
+.hero-label{font-size:15px;color:var(--ink-2);margin-top:6px}
+.hero-meta{color:var(--ink-3);font-size:13px;margin-top:2px}
+.stackbar{display:flex;gap:2px;height:22px}
+.stackbar .seg{border-radius:2px}
+.stackbar .seg:last-child{border-radius:2px 4px 4px 2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.sw.oppose,.seg.oppose{background:var(--c-oppose)}
+.sw.support,.seg.support{background:var(--c-support)}
+.sw.neutral,.seg.neutral{background:var(--c-neutral)}
+.sw.open,.seg.open{background:var(--c-open)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:flex;flex-direction:column;gap:2px;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile .k{font-size:13px;color:var(--ink-2);font-weight:600}
+.tile .v{font-size:32px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
+.tile .v small{font-size:15px;font-weight:600;color:var(--ink-3);margin-left:6px}
+.tile .d{font-size:13px;color:var(--ink-3)}
+
+/* read-out */
+.reads{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+.read{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.read:nth-child(-n+2){border-top:0}
+.read .lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
+.read p{color:var(--ink-2)}
+.read b{color:var(--ink);font-weight:600}
+.billref{border:0;background:none;padding:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:2px}
+.billref:hover{text-decoration-color:currentColor}
+
+/* chart rows */
+.grid2{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px}
+.grid2b{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr) 44px;gap:12px;align-items:center;min-height:26px}
+.row .lbl{font-size:13px;color:var(--ink-2);text-align:left;background:none;border:0;padding:0;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .lbl:hover{color:var(--accent);text-decoration:underline}
+.row .n{font-size:13px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.bar{display:flex;gap:2px;height:20px}
+.bar .seg{border-radius:2px;cursor:pointer;min-width:3px}
+.bar .seg:last-child{border-radius:2px 4px 4px 2px}
+.bar .seg:hover{filter:brightness(1.12)}
+.bar.single .seg{background:var(--stage-3)}
+.stagerow{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:2px 0}
+.stagerow .head{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.stagerow .head b{font-weight:600}
+.stagerow .head span{color:var(--ink-3);font-variant-numeric:tabular-nums}
+.stagerow .note{font-size:12px;color:var(--ink-3)}
+.stagebtn{background:none;border:0;padding:0;text-align:left;cursor:pointer;display:block;width:100%}
+.stagebtn:hover .head b{color:var(--accent)}
+.s1{background:var(--stage-1)} .s2{background:var(--stage-2)} .s3{background:var(--stage-3)} .s4{background:var(--stage-4)}
+.splitbar{display:flex;gap:2px;height:10px;margin-top:6px}
+.splitbar i{display:block;border-radius:2px}
+.party-d{background:var(--ink-2)} .party-r{background:var(--line-2)}
+
+/* ledger */
+.ledger{display:flex;flex-direction:column}
+.led{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.led:first-child{border-top:0;padding-top:0}
+.led .dt{font-weight:700;font-variant-numeric:tabular-nums}
+.led .dt small{display:block;font-weight:500;color:var(--ink-3);font-size:12px}
+.led .ev{color:var(--ink-2)}
+.led .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:600;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.chip .sw{width:8px;height:8px;border-radius:50%}
+.chip.flag{background:transparent;border-color:var(--line-2)}
+.chip.warnflag{background:var(--warn-wash);border-color:transparent;color:var(--warn-ink)}
+.chip.link{cursor:pointer;background:var(--accent-wash);border-color:transparent;color:var(--accent)}
+.chip.link:hover{filter:brightness(.95)}
+
+/* tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child td{border-bottom:0}
+th{background:var(--surface-2);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap;position:sticky;top:0}
+th button{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer}
+th button:hover{color:var(--ink)}
+th .arr{opacity:.7}
+tbody tr.clk{cursor:pointer}
+tbody tr.clk:hover td{background:var(--surface-2)}
+td.bill{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.ttl{min-width:200px}
+td .sub2{display:block;color:var(--ink-3);font-size:12px}
+.sme-y{color:var(--ink-2)} .sme-n{color:var(--warn-ink);font-weight:600}
+.scroll-y{max-height:640px;overflow:auto}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.filters input,.filters select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:6px 10px;min-width:0}
+.filters input{flex:1 1 220px}
+.filters select{flex:0 1 170px}
+.count{color:var(--ink-3);font-size:13px;margin-left:auto}
+.activef{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,12,16,.45);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:21;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.drawer header{padding:18px 20px 12px;border-bottom:1px solid var(--line);display:flex;gap:12px;justify-content:space-between;align-items:flex-start}
+.drawer h3{font-family:var(--serif);font-size:20px;line-height:1.25}
+.drawer .body{padding:16px 20px;overflow:auto;display:flex;flex-direction:column;gap:16px;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+.drawer .meta{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 12px;font-size:13px}
+.drawer .meta dt{color:var(--ink-3)} .drawer .meta dd{margin:0}
+.drawer h4{margin:0 0 4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.drawer .txt{white-space:pre-wrap;color:var(--ink-2)}
+.drawer .empty{color:var(--ink-3);font-style:italic}
+.note-box{background:var(--warn-wash);color:var(--warn-ink);border-radius:6px;padding:10px 12px;font-size:13px}
+
+/* misc */
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:5px 9px;border-radius:5px;max-width:280px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;z-index:40;font-weight:600}
+.banner{border-radius:8px;padding:12px 16px;background:var(--accent-wash);color:var(--ink)}
+.banner.err{background:var(--warn-wash);color:var(--warn-ink)}
+.dq{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px}
+.dq li{color:var(--ink-2)} .dq ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.chg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.chg-grid h4{margin:0 0 6px;font-size:13px}
+.chg-grid ul{margin:0;padding-left:18px;color:var(--ink-2)}
+.foot{color:var(--ink-3);font-size:12px}
+@media (max-width:980px){
+  .band,.grid2,.grid2b{grid-template-columns:minmax(0,1fr)}
+  .reads,.dq{grid-template-columns:minmax(0,1fr)}
+  .read:nth-child(2){border-top:1px solid var(--line)}
+}
+@media (max-width:560px){
+  h1{font-size:25px}
+  .hero-num{font-size:56px}
+  .tiles{grid-template-columns:minmax(0,1fr)}
+  .read{grid-template-columns:minmax(0,1fr);gap:2px}
+  .row{grid-template-columns:minmax(0,1fr) 36px;gap:4px 8px}
+  .row .lbl{grid-column:1 / span 2}
+  .row .bar{grid-column:1}
+  .row .n{grid-column:2}
+  .card{padding:16px}
+  .count{margin-left:0;flex-basis:100%}
+}
+@media (prefers-reduced-motion: no-preference){
+  .tile,.btn{transition:border-color .12s,color .12s}
+}
+</style>
+
+<style>.hubbar{position:sticky;top:0;z-index:30;display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-family:var(--sans);font-size:14px}.hubbar b{font-family:var(--serif);color:var(--accent);margin-right:auto}.hubbar a{color:var(--ink-2);text-decoration:none;padding:5px 12px;border-radius:999px}.hubbar a:hover{background:var(--accent-wash)}.sampletag{background:#fff1e8;color:#8a3a12;border-left:5px solid #eb6834;padding:8px 14px;border-radius:0 8px 8px 0;font-size:13.5px}@media (prefers-color-scheme:dark){.sampletag{background:#33200f;color:#f6b48f}}</style>
+<nav class="hubbar" aria-label="Hub"><b>⚡ Broderick Learning Hub</b><a href="index.html">Home</a><a href="grid-plan.html">Grid Plan</a><a href="reports.html">Reports</a></nav>
+<div class="wrap" id="app">
+  <div class="sampletag"><b>Sample data.</b> Every bill shown here is fictional. Use “Load updated tracker” to read your own weekly .xlsx locally in your browser; nothing is uploaded.</div>
+  <div class="top">
+    <div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1>Illinois Legislative Portfolio</h1>
+    </div>
+    <div class="top-actions">
+      <span class="fresh" id="fresh" hidden></span>
+      <input type="file" id="file" accept=".xlsx,.xls,.csv" hidden>
+      <button class="btn primary" data-act="upload" id="uploadBtn">Load updated tracker</button>
+    </div>
+  </div>
+  <div id="banner" hidden></div>
+
+  <section class="band" aria-label="Portfolio summary">
+    <div class="card hero" id="hero"></div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="card" id="reads" aria-label="Executive read-out"></section>
+
+  <div id="changes"></div>
+
+  <section class="grid2">
+    <div class="card" id="byIndustry"></div>
+    <div class="card" id="pipeline"></div>
+  </section>
+
+  <section class="grid2b">
+    <div class="card" id="sponsors"></div>
+    <div class="card" id="dates"></div>
+  </section>
+
+  <section class="card" id="watch"></section>
+
+  <section class="card" id="explorer">
+    <div class="card-head">
+      <div><h2>Bill explorer</h2><p class="sub">Every tracked bill. Select a row for the meeting script, SME feedback and GR considerations.</p></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="activef" id="activef"></div>
+    <div class="tablewrap scroll-y"><table id="tbl"></table></div>
+  </section>
+
+  <section class="card" id="dq"></section>
+  <p class="foot" id="foot"></p>
+</div>
+
+<div id="overlay"></div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+"use strict";
+var RAW = [{"state": "IL", "bill": "HB0101", "title": "SAMPLE LARGE LOAD DEPOSITS", "industry": "Data Centers", "script": "HB0101 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill would add compliance cost with no offsetting benefit. We oppose the bill.", "gr": "", "sponsor": "Representative Alex Sample (D)", "last": "Referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, oppose"}, {"state": "IL", "bill": "HB0102", "title": "SAMPLE GAS APPLIANCE NOTICE", "industry": "Gas", "script": "HB0102 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill would add compliance cost with no offsetting benefit. We oppose the bill.", "gr": "", "sponsor": "Representative Blair Example (R)", "last": "Rule 19(a) / Re-referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, Oppose"}, {"state": "IL", "bill": "HB0103", "title": "SAMPLE STORAGE SITING", "industry": "Energy Storage", "script": "HB0103 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Representative Casey Placeholder (D)", "last": "Referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "HB0104", "title": "SAMPLE LOCAL GAS CHOICE", "industry": "Gas", "script": "HB0104 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Protects fuel choice and customer connections. We support the concept, with clarifications.", "gr": "", "sponsor": "Representative Blair Example (R)", "last": "Rule 19(a) / Re-referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "HB0105", "title": "SAMPLE EFFICIENCY STANDARDS", "industry": "Energy Efficiemcy", "script": "HB0105 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Representative Drew Mock (D)", "last": "Placed on Calendar 2nd Reading - Short Debate (in the House)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "HB0106", "title": "SAMPLE DATA CENTER REPORTING", "industry": "Data Centers", "script": "HB0106 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Representative Alex Sample (D)", "last": "Rule 19(a) / Re-referred to Rules Committee (in the House)", "hearing": "", "tags": "Pending"}, {"state": "IL", "bill": "HB0107", "title": "SAMPLE CLEAN ENERGY HUBS", "industry": "Clean Energy Transition", "script": "HB0107 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Representative Emery Demo (D)", "last": "Referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "HB0108", "title": "SAMPLE SOLAR PERMITTING", "industry": "Solar", "script": "HB0108 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Representative Casey Placeholder (D)", "last": "Rule 19(a) / Re-referred to Rules Committee (in the House)", "hearing": "", "tags": "2026, pending"}, {"state": "IL", "bill": "HR0201", "title": "SAMPLE RESOLUTION ON LOAD GROWTH", "industry": "Data Centers", "script": "HR0201 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Representative Finley Test (R)", "last": "Referred to Rules Committee (in the House)", "hearing": "", "tags": ""}, {"state": "IL", "bill": "SB0301", "title": "SAMPLE PEAKER RELIABILITY", "industry": "Gas", "script": "SB0301 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill preserves operational flexibility. We would support the measure.", "gr": "", "sponsor": "Senator Gray Sample (R)", "last": "Referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, support/neutral"}, {"state": "IL", "bill": "SB0302", "title": "SAMPLE GENERATION TASK FORCE", "industry": "Energy-Generation", "script": "SB0302 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill preserves operational flexibility. We would support the measure.", "gr": "", "sponsor": "Senator Gray Sample (R)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "", "tags": "2026, Support"}, {"state": "IL", "bill": "SB0303", "title": "SAMPLE PRIVACY ACT", "industry": "Data Privacy", "script": "SB0303 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill would add compliance cost with no offsetting benefit. We oppose the bill.", "gr": "", "sponsor": "Senator Harper Mock (D)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "", "tags": "2026, Oppose"}, {"state": "IL", "bill": "SB0304", "title": "SAMPLE PRIVACY ACT II", "industry": "Data Privacy", "script": "SB0304 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Senator Harper Mock (D)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "SB0305", "title": "SAMPLE BIOMETRIC NOTICE", "industry": "Data Privacy", "script": "SB0305 is a fictional sample bill used to demonstrate the dashboard.", "sme": "No Impact", "gr": "", "sponsor": "Senator Indigo Demo (D)", "last": "Placed on Calendar Order of 3rd Reading February 26, 2026 (in the Senate)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "SB0306", "title": "SAMPLE STORAGE REVENUE BONDS", "industry": "Energy Storage", "script": "SB0306 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Senator Gray Sample (R)", "last": "Referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, pending"}, {"state": "IL", "bill": "SB0307", "title": "SAMPLE RESIDENTIAL STORAGE", "industry": "Energy Storage", "script": "SB0307 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Senator Jules Example (D)", "last": "Placed on Calendar Order of 3rd Reading March 5, 2026 (in the Senate)", "hearing": "", "tags": "2026, pending"}, {"state": "IL", "bill": "SB0308", "title": "SAMPLE DATA CENTER TARIFFS", "industry": "Data Centers", "script": "SB0308 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: This fictional bill would add compliance cost with no offsetting benefit. We oppose the bill.", "gr": "", "sponsor": "Senator Kai Placeholder (D)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "Sample Subcommittee on Technology | February 12, 2026 at 1:00pm", "tags": "2026, Oppose"}, {"state": "IL", "bill": "SB0309", "title": "SAMPLE HYPERSCALE STANDARDS", "industry": "Data Centers", "script": "SB0309 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Senator Kai Placeholder (D)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "Sample Subcommittee on Technology | February 12, 2026 at 1:00pm", "tags": "2026, Neutral"}, {"state": "IL", "bill": "SB0310", "title": "SAMPLE DATA CENTER WATER USE", "industry": "Data Centers", "script": "SB0310 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Senator Gray Sample (R)", "last": "Rule 2-10 Committee Deadline Established As March 20, 2026 (in the Senate)", "hearing": "Sample Subcommittee on Technology | February 12, 2026 at 1:00pm", "tags": "2026, pending"}, {"state": "IL", "bill": "SB0311", "title": "SAMPLE DATA CENTER OVERSIGHT", "industry": "Data Centers", "script": "SB0311 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Sen. Harper Mock", "last": "", "hearing": "Sample Subcommittee on Technology | February 12, 2026 at 1:00pm", "tags": ""}, {"state": "IL", "bill": "SB0312", "title": "SAMPLE SHELL BILL A", "industry": "Shell", "script": "SB0312 is a fictional sample bill used to demonstrate the dashboard.", "sme": "", "gr": "", "sponsor": "Senator Gray Sample (R)", "last": "Referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, shell bill/watch only"}, {"state": "IL", "bill": "SB0313", "title": "SAMPLE BROADBAND EASEMENTS", "industry": "Broadband Deployment", "script": "SB0313 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Opportunity for fiber leasing revenue. A support position is recommended.", "gr": "", "sponsor": "Senator Jules Example (D)", "last": "Rule 3-9(a) / Re-referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, Support"}, {"state": "IL", "bill": "SB0314", "title": "SAMPLE CLEAN ENERGY GOALS", "industry": "Clean Energy Transition", "script": "SB0314 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Senator Indigo Demo (D)", "last": "Referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, Neutral"}, {"state": "IL", "bill": "SB0315", "title": "SAMPLE WIND AND SOLAR DRAINAGE", "industry": "Wind & Solar", "script": "SB0315 is a fictional sample bill used to demonstrate the dashboard.", "sme": "SAMPLE FEEDBACK: Limited impact on operations. A neutral position is recommended.", "gr": "", "sponsor": "Senator Jules Example (D)", "last": "Referred to Assignments (in the Senate)", "hearing": "", "tags": "2026, Neutral"}];
+var DEFAULT_SOURCE = {name:"sample_tracker.xlsx"};
+var MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var MON3=MONTHS.map(function(m){return m.slice(0,3)});
+var STANCE_LABEL={Oppose:"Oppose",Support:"Support",Neutral:"Neutral / watch",Open:"No position yet"};
+var STANCE_ORDER={Oppose:0,Support:1,Open:2,Neutral:3};
+var STAGE_LABEL={floor:"Floor calendar",hearing:"Hearing noticed",deadline:"Committee deadline set",referred:"Awaiting committee",none:"No action recorded"};
+var MOM={floor:4,hearing:3,deadline:2,referred:1,none:0};
+var TODAY=new Date();
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function pct(n,t){return t?Math.round(n/t*100):0}
+function plural(n,w,p){return n+" "+(n===1?w:(p||w+"s"))}
+function fmtDate(d){return MON3[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear()}
+function daysBetween(a,b){return Math.round((b-a)/864e5)}
+
+/* ---------- normalization ---------- */
+function tagOf(t){
+  var s=(t||"").toLowerCase();
+  if(!s.trim()) return "Untagged";
+  if(s.indexOf("support/neutral")>-1) return "Support/Neutral";
+  if(s.indexOf("oppose")>-1) return "Oppose";
+  if(s.indexOf("support")>-1) return "Support";
+  if(s.indexOf("neutral")>-1) return "Neutral";
+  if(s.indexOf("pending")>-1) return "Pending";
+  if(s.indexOf("shell")>-1) return "Watch";
+  return "Untagged";
+}
+function groupOf(tag){
+  if(tag==="Oppose") return "Oppose";
+  if(tag==="Support") return "Support";
+  if(tag==="Pending"||tag==="Untagged") return "Open";
+  return "Neutral";
+}
+var IND_FIX={"energy efficiemcy":"Energy Efficiency","solar energy":"Solar"};
+function cleanIndustry(s){var k=(s||"").trim(); return IND_FIX[k.toLowerCase()]||k||"Unspecified"}
+function parseDates(text){
+  var out=[],re=/(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s*(\d{4})/g,m;
+  while((m=re.exec(text||""))){out.push(new Date(+m[3],MONTHS.indexOf(m[1]),+m[2]))}
+  return out;
+}
+var SME_RX=[
+  /\bwe (?:could |would )(support|oppose)\b/i,
+  /\bwe (support|oppose) (?:the|this) (?:bill|measure|concept|proposal|legislation)\b/i,
+  /\b(opposition|support) is recommended\b/i,
+  /\brecommend(?:ation|ed)?(?: position)?(?: is| of|:)?(?: to)? (support|oppose)\b/i,
+  /\ba (support|oppose) position is recommended\b/i
+];
+function smeLean(sme){
+  for(var i=0;i<SME_RX.length;i++){
+    var m=SME_RX[i].exec(sme||"");
+    if(m){var w=m[1].toLowerCase(); return w==="opposition"?"oppose":w}
+  }
+  return "";
+}
+function stageOf(last,hearing){
+  var l=last||"";
+  if(/3rd Reading/i.test(l)) return {key:"floor",label:"Floor: 3rd reading"};
+  if(/2nd Reading/i.test(l)) return {key:"floor",label:"Floor: 2nd reading"};
+  if(/Committee Deadline/i.test(l)) return {key:"deadline",label:"Committee deadline set"};
+  if(/Re-referred/i.test(l)) return {key:"referred",label:/Rules/i.test(l)?"House Rules (re-referred)":"Senate Assignments (re-referred)"};
+  if(/Rules Committee/i.test(l)) return {key:"referred",label:"House Rules"};
+  if(/Assignments/i.test(l)) return {key:"referred",label:"Senate Assignments"};
+  if(hearing) return {key:"hearing",label:"Hearing noticed"};
+  return {key:"none",label:"No action recorded"};
+}
+function compute(rows){
+  var partyBy={};
+  var pre=rows.filter(function(r){return r.bill}).map(function(r){
+    var m=String(r.sponsor||"").replace(/\s+/g," ").trim();
+    var pm=m.match(/\(([DRI])\)\s*$/);
+    var name=m.replace(/\s*\([DRI]\)\s*$/,"").replace(/^(Representative|Senator|Sen\.|Rep\.)\s+/i,"").trim();
+    if(pm) partyBy[name]=pm[1];
+    return Object.assign({},r,{_name:name,_party:pm?pm[1]:"",_partyFilled:false});
+  });
+  return pre.map(function(r){
+    var b=Object.assign({},r);
+    b.bill=String(r.bill).trim();
+    b.sme=(r.sme||"").trim(); b.gr=(r.gr||"").trim(); b.script=(r.script||"").trim();
+    b.last=(r.last||"").replace(/\s+/g," ").trim(); b.hearing=(r.hearing||"").replace(/\s+/g," ").trim();
+    b.tag=tagOf(r.tags); b.stance=groupOf(b.tag);
+    b.industry=cleanIndustry(r.industry); b.industryRaw=(r.industry||"").trim();
+    var st=stageOf(b.last,b.hearing); b.stageKey=st.key; b.stage=st.label;
+    b.momentum=b.stageKey==="floor"?4:(b.hearing?3:MOM[b.stageKey]);
+    b.chamber=/^H/i.test(b.bill)?"House":"Senate";
+    if(!b._party && partyBy[b._name]){b._party=partyBy[b._name]; b._partyFilled=true}
+    b.hasSME=!!b.sme;
+    var lean=smeLean(b.sme); b.lean=lean;
+    b.drift=false;
+    if(lean){
+      if(b.tag==="Neutral"||b.tag==="Pending"||b.tag==="Untagged") b.drift=true;
+      if(b.tag==="Support"&&lean==="oppose") b.drift=true;
+      if(b.tag==="Oppose"&&lean==="support") b.drift=true;
+    }
+    b.flags=[];
+    if(b.stageKey==="floor") b.flags.push(["Floor calendar","key"]);
+    if(b.hearing) b.flags.push(["Hearing noticed","key"]);
+    if(b.stance==="Open") b.flags.push(["No position","warn"]);
+    if(!b.hasSME) b.flags.push(["No SME feedback","warn"]);
+    if(b.drift) b.flags.push(["Tag vs SME text","warn"]);
+    b.score=b.momentum*2+(b.stance==="Open"?2:0)+(!b.hasSME?1:0)+(b.drift?2:0)+(b.stance==="Oppose"?1:0);
+    b.dates=[];
+    parseDates(b.last).forEach(function(d){b.dates.push({d:d,type:/Committee Deadline/i.test(b.last)?"Committee deadline":(/3rd Reading/i.test(b.last)?"Placed on 3rd reading calendar":(/2nd Reading/i.test(b.last)?"Placed on 2nd reading calendar":b.last))})});
+    if(b.hearing){
+      var hn=b.hearing.split("|")[0].trim();
+      parseDates(b.hearing).forEach(function(d){b.dates.push({d:d,type:"Hearing: "+hn})});
+    }
+    return b;
+  });
+}
+
+/* ---------- state ---------- */
+var source={name:DEFAULT_SOURCE.name};
+var bills=compute(RAW);
+var prevSnapshot=null, changes=null;
+var F={q:"",stance:"",industry:"",stage:"",chamber:"",flag:"",sponsor:"",sort:"stage",dir:-1};
+var FILTER_KEYS=["q","stance","industry","stage","chamber","flag","sponsor"];
+
+function weekEnding(name){
+  var m=/WE[_\s-]?(\d{2})(\d{2})(\d{2})/i.exec(name||"");
+  if(!m) return "";
+  return MON3[+m[1]-1]+" "+(+m[2])+", 20"+m[3];
+}
+function stat(bs){
+  var o={total:bs.length,Oppose:0,Support:0,Neutral:0,Open:0,pending:0,untagged:0,noSME:0,movers:0,moversOpen:0,moversNoSME:0,floor:0,hearing:0,deadline:0,referred:0,none:0,house:0,senate:0,houseRules:0,senateAssign:0,rereferred:0,drift:[],floorBills:[],D:0,R:0,I:0,Q:0};
+  bs.forEach(function(b){
+    o[b.stance]++; if(b.tag==="Pending")o.pending++; if(b.tag==="Untagged")o.untagged++;
+    if(!b.hasSME)o.noSME++;
+    o[b.stageKey]++;
+    if(b.momentum>=2){o.movers++; if(b.stance==="Open")o.moversOpen++; if(!b.hasSME)o.moversNoSME++}
+    if(b.chamber==="House")o.house++; else o.senate++;
+    if(b.stageKey==="referred"){ if(/Rules/i.test(b.stage))o.houseRules++; else o.senateAssign++; if(/re-referred/i.test(b.stage))o.rereferred++ }
+    if(b.drift)o.drift.push(b);
+    if(b.stageKey==="floor")o.floorBills.push(b);
+    if(b._party==="D")o.D++; else if(b._party==="R")o.R++; else if(b._party==="I")o.I++; else o.Q++;
+  });
+  return o;
+}
+function countBy(bs,fn){var m={};bs.forEach(function(b){var k=fn(b);m[k]=(m[k]||0)+1});return m}
+
+/* ---------- render: header ---------- */
+function renderHeader(S){
+  var we=weekEnding(source.name);
+  document.getElementById("eyebrow").textContent="RTC tracked bills"+(we?" · week ending "+we:"")+" · "+S.total+" bills";
+  var latest=null;
+  bills.forEach(function(b){b.dates.forEach(function(x){if(!latest||x.d>latest)latest=x.d})});
+  var el=document.getElementById("fresh");
+  if(latest){
+    var ago=daysBetween(latest,TODAY);
+    el.hidden=false;
+    el.textContent=ago>=0?("Latest dated event: "+fmtDate(latest)+" ("+ago+" days ago)"):("Next dated event: "+fmtDate(latest)+" (in "+(-ago)+" days)");
+    el.title="Latest date found in the Last Action and Scheduled Hearing columns";
+  } else el.hidden=true;
+}
+
+/* ---------- render: hero + tiles ---------- */
+function stackBarHtml(S,total){
+  var keys=["Oppose","Support","Neutral","Open"],h='<div class="stackbar" role="img" aria-label="Stance mix">';
+  keys.forEach(function(k){ if(S[k]) h+='<div class="seg '+k.toLowerCase()+'" style="flex:'+S[k]+' 1 0" data-tip="'+STANCE_LABEL[k]+': '+plural(S[k],'bill')+' ('+pct(S[k],total)+'%)"></div>'});
+  return h+"</div>";
+}
+function legendHtml(S){
+  var keys=["Oppose","Support","Neutral","Open"];
+  return '<div class="legend">'+keys.map(function(k){return '<span><i class="sw '+k.toLowerCase()+'"></i>'+STANCE_LABEL[k]+' <b>'+S[k]+'</b></span>'}).join("")+"</div>";
+}
+function renderBand(S){
+  document.getElementById("hero").innerHTML=
+   '<div><div class="hero-num">'+S.total+'</div><div class="hero-label">bills tracked</div>'+
+   '<div class="hero-meta">'+S.house+' House · '+S.senate+' Senate · '+S.Oppose+' opposed, '+S.Support+' supported</div></div>'+
+   '<div><div class="eyebrow" style="margin-bottom:8px">Where we stand</div>'+stackBarHtml(S,S.total)+legendHtml(S)+'</div>';
+  var tiles=[
+    {k:"Awaiting committee",v:S.referred,p:pct(S.referred,S.total),d:"House Rules "+S.houseRules+" · Senate Assignments "+S.senateAssign,f:"stage=referred"},
+    {k:"Reached a floor calendar",v:S.floor,p:pct(S.floor,S.total),d:"2nd or 3rd reading",f:"stage=floor"},
+    {k:"No position yet",v:S.Open,p:pct(S.Open,S.total),d:S.pending+" pending · "+S.untagged+" untagged",f:"stance=Open"},
+    {k:"No SME feedback",v:S.noSME,p:pct(S.noSME,S.total),d:S.moversNoSME+" of them have a hearing, deadline or floor date",f:"flag=noSME"}
+  ];
+  document.getElementById("tiles").innerHTML=tiles.map(function(t){
+    return '<button class="tile" data-act="filter" data-f="'+t.f+'"><span class="k">'+t.k+'</span><span class="v">'+t.v+'<small>'+t.p+'%</small></span><span class="d">'+t.d+'</span></button>';
+  }).join("");
+}
+
+/* ---------- render: read-out ---------- */
+function billLink(b){return '<button class="billref" data-act="open" data-bill="'+esc(b.bill)+'">'+esc(b.bill)+'</button>'}
+function renderReads(S){
+  var ind=countBy(bills,function(b){return b.industry});
+  var top=Object.keys(ind).sort(function(a,b){return ind[b]-ind[a]||a.localeCompare(b)});
+  var top3=top.slice(0,3), top3n=top3.reduce(function(s,k){return s+ind[k]},0);
+  var lead=top[0], lb=bills.filter(function(b){return b.industry===lead});
+  var lOpp=lb.filter(function(b){return b.stance==="Oppose"}).length, lOpen=lb.filter(function(b){return b.stance==="Open"}).length;
+  var items=[];
+  items.push(["Concentration","<b>"+top3.join(", ").replace(/, ([^,]*)$/," and $1")+"</b> make up "+top3n+" of "+S.total+" bills ("+pct(top3n,S.total)+"%). "+lead+" is the largest theme at "+lb.length+": "+lOpp+" opposed, "+lOpen+" with no position yet."]);
+  items.push(["Bottleneck","<b>"+S.referred+" of "+S.total+" bills ("+pct(S.referred,S.total)+"%)</b> are still in House Rules or Senate Assignments, "+S.rereferred+" of them re-referred. Only "+S.floor+" have reached a floor calendar"+(S.floorBills.length?": "+S.floorBills.map(billLink).join(", "):"")+"."]);
+  items.push(["Decision gap","<b>"+S.Open+" bills ("+pct(S.Open,S.total)+"%)</b> have no position and "+S.noSME+" have no SME feedback. Of the "+S.movers+" bills with a floor date, hearing or committee deadline, "+S.moversOpen+" have no position and "+S.moversNoSME+" have no SME feedback."]);
+  var dr=S.drift;
+  items.push(["Tag vs SME text", dr.length? "<b>"+plural(dr.length,"bill")+"</b> carry a Neutral or Pending tag while the SME text reads Support or Oppose: "+dr.slice(0,6).map(billLink).join(", ")+". Worth confirming the tag." : "No bills where the SME text clearly leans against the tracker tag."]);
+  items.push(["Sponsors", S.D+" Democratic sponsors, "+S.R+" Republican"+(S.Q?", "+S.Q+" unknown":"")+". "+(function(){var sp=countBy(bills,function(b){return b._name});var k=Object.keys(sp).sort(function(a,b){return sp[b]-sp[a]})[0];return "<b>"+esc(k)+"</b> sponsors the most bills ("+sp[k]+")."})()]);
+  var latest=null; bills.forEach(function(b){b.dates.forEach(function(x){if(!latest||x.d>latest)latest=x.d})});
+  if(latest){var ago=daysBetween(latest,TODAY);
+    items.push(["Data freshness", ago>30? "The latest date in this tracker is <b>"+fmtDate(latest)+"</b>, "+ago+" days ago. If statuses have not been refreshed from ILGA, treat stage counts as a spring snapshot." : "The latest date in this tracker is "+fmtDate(latest)+"."]);}
+  var h='<div class="card-head"><div><h2>Executive read-out</h2><p class="sub">Generated from the tracker each time it loads.</p></div></div><div class="reads">';
+  items.forEach(function(it){h+='<div class="read"><div class="lab">'+it[0]+'</div><p>'+it[1]+'</p></div>'});
+  document.getElementById("reads").innerHTML=h+"</div>";
+}
+
+/* ---------- render: stance by industry ---------- */
+function renderIndustry(){
+  var ind=countBy(bills,function(b){return b.industry});
+  var names=Object.keys(ind).sort(function(a,b){return ind[b]-ind[a]||a.localeCompare(b)});
+  var shown=names.slice(0,9), rest=names.slice(9);
+  var max=ind[names[0]]||1, h='';
+  function seg(bs,industryFilter){
+    var s='';
+    ["Oppose","Support","Neutral","Open"].forEach(function(k){
+      var n=bs.filter(function(b){return b.stance===k}).length;
+      if(n) s+='<div class="seg '+k.toLowerCase()+'" style="flex:'+n+' 1 0" data-tip="'+esc(industryFilter||"Other")+' · '+STANCE_LABEL[k]+': '+plural(n,'bill')+'" data-act="filter" data-f="'+(industryFilter?'industry='+esc(industryFilter)+';':'')+'stance='+k+'"></div>';
+    });
+    return s;
+  }
+  shown.forEach(function(n){
+    var bs=bills.filter(function(b){return b.industry===n});
+    h+='<div class="row"><button class="lbl" data-act="filter" data-f="industry='+esc(n)+'" title="'+esc(n)+'">'+esc(n)+'</button><div class="bar" style="width:'+(bs.length/max*100)+'%">'+seg(bs,n)+'</div><div class="n">'+bs.length+'</div></div>';
+  });
+  if(rest.length){
+    var rb=bills.filter(function(b){return rest.indexOf(b.industry)>-1});
+    h+='<div class="row"><span class="lbl" style="cursor:default" title="'+esc(rest.join(", "))+'">Other ('+rest.length+' categories)</span><div class="bar" style="width:'+(rb.length/max*100)+'%">'+seg(rb,"")+'</div><div class="n">'+rb.length+'</div></div>';
+  }
+  var S=stat(bills);
+  document.getElementById("byIndustry").innerHTML=
+    '<div class="card-head"><div><h2>Stance by industry</h2><p class="sub">Bar length is bill count. Select a segment to list those bills.</p></div></div><div class="rows">'+h+'</div>'+legendHtml(S);
+}
+
+/* ---------- render: pipeline ---------- */
+function renderPipeline(S){
+  var withHearing=bills.filter(function(b){return b.stageKey==="deadline"&&b.hearing}).length;
+  var defs=[
+    {k:"floor",cls:"s4",n:S.floor,note:"Placed on 2nd or 3rd reading calendar"},
+    {k:"hearing",cls:"s3",n:S.hearing,note:"Hearing noticed, no action recorded"},
+    {k:"deadline",cls:"s2",n:S.deadline,note:"Committee deadline set"+(withHearing?"; "+withHearing+" also have a hearing noticed":"")},
+    {k:"referred",cls:"s1",n:S.referred,note:"House Rules "+S.houseRules+" · Senate Assignments "+S.senateAssign}
+  ];
+  if(S.none) defs.push({k:"none",cls:"s1",n:S.none,note:"No Last Action or hearing on file"});
+  var max=Math.max.apply(null,defs.map(function(d){return d.n}))||1;
+  var h=defs.map(function(d){
+    return '<button class="stagebtn" data-act="filter" data-f="stage='+d.k+'"><div class="stagerow"><div class="head"><b>'+STAGE_LABEL[d.k]+'</b><span>'+d.n+' · '+pct(d.n,S.total)+'%</span></div><div class="bar single" style="width:100%"><div class="seg '+d.cls+'" style="width:'+(d.n/max*100)+'%;flex:none;min-width:'+(d.n?3:0)+'px" data-tip="'+STAGE_LABEL[d.k]+': '+plural(d.n,'bill')+'"></div></div><div class="note">'+d.note+'</div></div></button>';
+  }).join("");
+  document.getElementById("pipeline").innerHTML='<div class="card-head"><div><h2>Legislative pipeline</h2><p class="sub">Furthest stage reached, from the Last Action column.</p></div></div><div class="rows" style="gap:12px">'+h+'</div>';
+}
+
+/* ---------- render: sponsors ---------- */
+function renderSponsors(S){
+  var sp={}; bills.forEach(function(b){var k=b._name; if(!sp[k])sp[k]={n:0,party:b._party,bills:[]}; sp[k].n++; sp[k].bills.push(b)});
+  var names=Object.keys(sp).sort(function(a,b){return sp[b].n-sp[a].n||a.localeCompare(b)});
+  var thr=3, top=names.filter(function(k){return sp[k].n>=thr});
+  if(top.length<4){thr=2; top=names.filter(function(k){return sp[k].n>=thr}).slice(0,8)}
+  var max=sp[names[0]].n||1;
+  var h=top.map(function(k){
+    var opp=sp[k].bills.filter(function(b){return b.stance==="Oppose"}).length;
+    return '<div class="row"><button class="lbl" data-act="filter" data-f="sponsor='+esc(k)+'" title="'+esc(k)+'">'+esc(k)+(sp[k].party?' ('+sp[k].party+')':'')+'</button><div class="bar" style="width:'+(sp[k].n/max*100)+'%"><div class="seg" style="flex:1;background:var(--stage-3)" data-tip="'+esc(k)+': '+plural(sp[k].n,'bill')+(opp?', '+opp+' opposed':'')+'"></div></div><div class="n">'+sp[k].n+'</div></div>';
+  }).join("");
+  var twos=names.filter(function(k){return sp[k].n===2}).length, ones=names.filter(function(k){return sp[k].n===1}).length;
+  var tot=S.D+S.R+S.I+S.Q||1;
+  document.getElementById("sponsors").innerHTML='<div class="card-head"><div><h2>Sponsor concentration</h2><p class="sub">Primary sponsors with the most bills in the portfolio.</p></div></div><div class="rows">'+h+'</div>'+
+    '<p class="sub" style="margin-top:12px">'+names.length+' sponsors in total'+(thr>=3?': '+twos+' with 2 bills, '+ones+' with 1.':'.')+'</p>'+
+    '<div class="splitbar" data-tip="Bills by sponsor party"><i class="party-d" style="flex:'+S.D+'"></i><i class="party-r" style="flex:'+S.R+'"></i>'+(S.Q+S.I?'<i style="flex:'+(S.Q+S.I)+';background:var(--line)"></i>':'')+'</div>'+
+    '<div class="legend"><span><i class="sw party-d"></i>Democratic sponsors <b>'+S.D+'</b></span><span><i class="sw party-r"></i>Republican <b>'+S.R+'</b></span></div>';
+}
+
+/* ---------- render: dates ---------- */
+function renderDates(){
+  var ev={};
+  bills.forEach(function(b){b.dates.forEach(function(x){var k=x.d.getTime()+"|"+x.type; if(!ev[k])ev[k]={d:x.d,type:x.type,bills:[]}; ev[k].bills.push(b)})});
+  var list=Object.keys(ev).map(function(k){return ev[k]}).sort(function(a,b){return a.d-b.d||a.type.localeCompare(b.type)});
+  var h=list.map(function(e){
+    var ago=daysBetween(e.d,TODAY), rel=ago>0?(ago+" days ago"):(ago===0?"today":("in "+(-ago)+" days"));
+    var chips=e.bills.slice(0,8).map(function(b){return '<button class="chip link" data-act="open" data-bill="'+esc(b.bill)+'">'+esc(b.bill)+'</button>'}).join("");
+    if(e.bills.length>8) chips+='<span class="chip">+'+(e.bills.length-8)+' more</span>';
+    return '<div class="led"><div class="dt">'+MON3[e.d.getMonth()]+' '+e.d.getDate()+'<small>'+rel+'</small></div><div><div class="ev"><b>'+plural(e.bills.length,"bill")+'</b> · '+esc(e.type)+'</div><div class="chips">'+chips+'</div></div></div>';
+  }).join("");
+  document.getElementById("dates").innerHTML='<div class="card-head"><div><h2>Key dates in the tracker</h2><p class="sub">Every date found in Last Action and Scheduled Hearing.</p></div></div><div class="ledger">'+(h||'<p class="sub">No dated events in the tracker.</p>')+'</div>';
+}
+
+/* ---------- render: watchlist ---------- */
+function chipStance(b){return '<span class="chip"><i class="sw '+b.stance.toLowerCase()+'"></i>'+esc(b.tag==="Untagged"?"No tag":b.tag)+'</span>'}
+function flagChips(b){return b.flags.map(function(f){return '<span class="chip '+(f[1]==="warn"?"warnflag":"flag")+'">'+f[0]+'</span>'}).join(" ")}
+function renderWatch(){
+  var list=bills.filter(function(b){return b.flags.length&&b.momentum>=2}).sort(function(a,b){return b.score-a.score||a.bill.localeCompare(b.bill)}).slice(0,10);
+  var h=list.map(function(b){
+    return '<tr class="clk" data-act="open" data-bill="'+esc(b.bill)+'" tabindex="0"><td class="bill">'+esc(b.bill)+'</td><td class="ttl">'+esc(b.title)+'<span class="sub2">'+esc(b.industry)+'</span></td><td>'+chipStance(b)+'</td><td>'+esc(b.stage)+'</td><td style="display:flex;flex-wrap:wrap;gap:4px">'+flagChips(b)+'</td></tr>';
+  }).join("");
+  document.getElementById("watch").innerHTML='<div class="card-head"><div><h2>Priority watchlist</h2><p class="sub">Bills with a floor date, hearing or committee deadline, ranked by stage, then open decisions and missing SME input.</p></div></div><div class="tablewrap"><table><thead><tr><th>Bill</th><th>Title</th><th>Stance</th><th>Stage</th><th>Flags</th></tr></thead><tbody>'+(h||'<tr><td colspan="5">Nothing flagged.</td></tr>')+'</tbody></table></div>';
+}
+
+/* ---------- explorer ---------- */
+function filtered(){
+  var q=F.q.trim().toLowerCase();
+  var out=bills.filter(function(b){
+    if(q && (b.bill+" "+b.title+" "+b.industry+" "+b._name+" "+b.sme+" "+b.script).toLowerCase().indexOf(q)===-1) return false;
+    if(F.stance && b.stance!==F.stance) return false;
+    if(F.industry && b.industry!==F.industry) return false;
+    if(F.stage && b.stageKey!==F.stage) return false;
+    if(F.chamber && b.chamber!==F.chamber) return false;
+    if(F.sponsor && b._name!==F.sponsor) return false;
+    if(F.flag==="noSME" && b.hasSME) return false;
+    if(F.flag==="drift" && !b.drift) return false;
+    if(F.flag==="hearing" && !b.hearing) return false;
+    return true;
+  });
+  var k=F.sort,d=F.dir;
+  out.sort(function(a,b){
+    var r=0;
+    if(k==="stage") r=(a.momentum-b.momentum)||(a.score-b.score);
+    else if(k==="stance") r=STANCE_ORDER[a.stance]-STANCE_ORDER[b.stance];
+    else if(k==="sme") r=(a.hasSME?1:0)-(b.hasSME?1:0);
+    else if(k==="bill") r=a.bill.localeCompare(b.bill,undefined,{numeric:true});
+    else if(k==="sponsor") r=a._name.localeCompare(b._name);
+    else r=String(a[k]).localeCompare(String(b[k]));
+    return r*d||a.bill.localeCompare(b.bill,undefined,{numeric:true});
+  });
+  return out;
+}
+function opt(v,l,cur){return '<option value="'+esc(v)+'"'+(cur===v?' selected':'')+'>'+esc(l)+'</option>'}
+function renderFilters(){
+  var inds=Object.keys(countBy(bills,function(b){return b.industry})).sort();
+  var h='<input id="f-q" type="search" placeholder="Search bill, title, sponsor, feedback" value="'+esc(F.q)+'" aria-label="Search bills">'+
+   '<select id="f-stance" aria-label="Stance">'+opt("","All stances",F.stance)+["Oppose","Support","Neutral","Open"].map(function(k){return opt(k,STANCE_LABEL[k],F.stance)}).join("")+'</select>'+
+   '<select id="f-industry" aria-label="Industry">'+opt("","All industries",F.industry)+inds.map(function(k){return opt(k,k,F.industry)}).join("")+'</select>'+
+   '<select id="f-stage" aria-label="Stage">'+opt("","All stages",F.stage)+["floor","hearing","deadline","referred","none"].map(function(k){return opt(k,STAGE_LABEL[k],F.stage)}).join("")+'</select>'+
+   '<select id="f-chamber" aria-label="Chamber">'+opt("","Both chambers",F.chamber)+opt("House","House",F.chamber)+opt("Senate","Senate",F.chamber)+'</select>'+
+   '<select id="f-flag" aria-label="Flags">'+opt("","Any flag",F.flag)+opt("noSME","No SME feedback",F.flag)+opt("drift","Tag vs SME text",F.flag)+opt("hearing","Hearing noticed",F.flag)+'</select>'+
+   '<span class="count" id="count"></span>'+
+   '<button class="btn small" data-act="reset">Reset</button><button class="btn small" data-act="copy">Copy list</button>';
+  document.getElementById("filters").innerHTML=h;
+}
+function renderActive(){
+  var chips=[];
+  if(F.sponsor) chips.push('Sponsor: '+F.sponsor);
+  var h=chips.map(function(c){return '<span class="chip link" data-act="clearSponsor" title="Remove filter">'+esc(c)+' ×</span>'}).join("");
+  document.getElementById("activef").innerHTML=h;
+}
+function renderTable(){
+  var rows=filtered();
+  var c=document.getElementById("count"); if(c) c.textContent=rows.length+" of "+bills.length+" bills";
+  function th(k,l){var on=F.sort===k; return '<th aria-sort="'+(on?(F.dir>0?"ascending":"descending"):"none")+'"><button data-act="sort" data-k="'+k+'">'+l+(on?' <span class="arr">'+(F.dir>0?"▲":"▼")+'</span>':'')+'</button></th>'}
+  var h='<thead><tr>'+th("bill","Bill")+th("title","Title")+th("industry","Industry")+th("stance","Stance")+th("stage","Stage")+th("sponsor","Sponsor")+th("sme","SME")+'</tr></thead><tbody>';
+  rows.forEach(function(b){
+    h+='<tr class="clk" data-act="open" data-bill="'+esc(b.bill)+'" tabindex="0"><td class="bill">'+esc(b.bill)+'</td><td class="ttl">'+esc(b.title)+(b.hearing?'<span class="sub2">Hearing: '+esc(b.hearing.split("|").pop().trim())+'</span>':'')+'</td><td>'+esc(b.industry)+'</td><td>'+chipStance(b)+(b.drift?' <span class="chip warnflag" data-tip="SME text reads '+esc(b.lean)+'">review</span>':'')+'</td><td>'+esc(b.stage)+'</td><td>'+esc(b._name)+(b._party?' ('+b._party+')':'')+'</td><td class="'+(b.hasSME?'sme-y':'sme-n')+'">'+(b.hasSME?'On file':'Missing')+'</td></tr>';
+  });
+  if(!rows.length) h+='<tr><td colspan="7" style="padding:24px;text-align:center;color:var(--ink-3)">No bills match these filters.</td></tr>';
+  document.getElementById("tbl").innerHTML=h+'</tbody>';
+}
+
+/* ---------- data quality ---------- */
+function renderDQ(S){
+  var items=[];
+  var typo=bills.filter(function(b){return b.industryRaw!==b.industry});
+  if(typo.length) items.push("<b>"+plural(typo.length,"bill")+"</b> had an industry label normalized for the charts: "+Object.keys(countBy(typo,function(b){return b.industryRaw+" → "+b.industry})).map(esc).join("; ")+".");
+  var fc=bills.filter(function(b){return /fuel cells/i.test(b.industryRaw)&&!/hydrogen/i.test(b.title)});
+  if(fc.length) items.push("<b>"+plural(fc.length,"bill")+" have industry labels that look misapplied</b> ("+fc.map(function(b){return esc(b.bill)+" “"+esc(b.industryRaw)+"”"}).join(", ")+"). Titles read as gas and generation. Left as entered.");
+  var ut=bills.filter(function(b){return b.tag==="Untagged"});
+  if(ut.length) items.push("<b>"+plural(ut.length,"bill")+" have no Team Categories tag</b>: "+ut.map(billLink).join(", ")+". Counted as no position yet.");
+  var nl=bills.filter(function(b){return !b.last});
+  if(nl.length) items.push("<b>"+plural(nl.length,"bill")+" have no Last Action</b>, only a hearing notice: "+nl.map(billLink).join(", ")+".");
+  var pf=bills.filter(function(b){return b._partyFilled});
+  if(pf.length) items.push("<b>"+plural(pf.length,"sponsor entry","sponsor entries")+" had no party</b> in the source. Party was filled from the same sponsor on other bills.");
+  items.push("<b>"+S.noSME+" bills have no SME feedback.</b> Use the explorer's “No SME feedback” flag to list them.");
+  items.push("<b>Tag vs SME text</b> is a keyword read of explicit recommendation phrases in the SME feedback. It is a prompt to re-check the tag, not a determination.");
+  var wt=bills.filter(function(b){return b.tag==="Watch"}).length;
+  if(wt) items.push(plural(wt,"shell bill")+" tagged watch-only are grouped with Neutral.");
+  document.getElementById("dq").innerHTML='<div class="card-head"><div><h2>Data notes</h2><p class="sub">What was cleaned or inferred to build this view. Source fields are unchanged.</p></div></div><ul class="dq" style="list-style:none;padding:0">'+items.map(function(i){return '<li>'+i+'</li>'}).join("")+'</ul>';
+  document.getElementById("foot").textContent="Source: "+source.name+" (Full Context sheet). Stage, stance and sponsor party are derived from the Last Action, Team Categories and Primary Sponsor columns.";
+}
+
+/* ---------- changes (after loading a new tracker) ---------- */
+function renderChanges(){
+  var el=document.getElementById("changes");
+  if(!changes){el.innerHTML="";return}
+  function list(a,f){return a.length?'<ul>'+a.slice(0,12).map(f).join("")+(a.length>12?'<li>+'+(a.length-12)+' more</li>':'')+'</ul>':'<p class="sub">None</p>'}
+  el.innerHTML='<section class="card"><div class="card-head"><div><h2>What changed</h2><p class="sub">'+esc(changes.from)+' → '+esc(changes.to)+'</p></div></div><div class="chg-grid">'+
+   '<div><h4>New bills ('+changes.added.length+')</h4>'+list(changes.added,function(b){return '<li>'+billLink(b)+' '+esc(b.title)+'</li>'})+'</div>'+
+   '<div><h4>Removed ('+changes.removed.length+')</h4>'+list(changes.removed,function(b){return '<li>'+esc(b.bill)+' '+esc(b.title)+'</li>'})+'</div>'+
+   '<div><h4>Stage moved ('+changes.stage.length+')</h4>'+list(changes.stage,function(c){return '<li>'+billLink(c.b)+': '+esc(c.from)+' → '+esc(c.to)+'</li>'})+'</div>'+
+   '<div><h4>Position changed ('+changes.stance.length+')</h4>'+list(changes.stance,function(c){return '<li>'+billLink(c.b)+': '+esc(c.from)+' → '+esc(c.to)+'</li>'})+'</div>'+
+   '</div></section>';
+}
+function diff(oldB,newB,fromLabel,toLabel){
+  var om={},nm={}; oldB.forEach(function(b){om[b.bill]=b}); newB.forEach(function(b){nm[b.bill]=b});
+  var c={from:fromLabel,to:toLabel,added:[],removed:[],stage:[],stance:[]};
+  newB.forEach(function(b){var o=om[b.bill]; if(!o){c.added.push(b);return}
+    if(o.stage!==b.stage) c.stage.push({b:b,from:o.stage,to:b.stage});
+    if(o.tag!==b.tag) c.stance.push({b:b,from:o.tag,to:b.tag});});
+  oldB.forEach(function(b){if(!nm[b.bill]) c.removed.push(b)});
+  return c;
+}
+
+/* ---------- drawer ---------- */
+function openBill(id){
+  var b=bills.filter(function(x){return x.bill===id})[0]; if(!b) return;
+  var txt=function(s,empty){return s?'<div class="txt">'+esc(s)+'</div>':'<div class="empty">'+empty+'</div>'};
+  var h='<div class="scrim" data-act="close"></div><aside class="drawer" role="dialog" aria-modal="true" aria-label="'+esc(b.bill)+'"><header><div><div class="eyebrow">'+esc(b.bill)+' · '+esc(b.industry)+'</div><h3>'+esc(b.title)+'</h3><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">'+chipStance(b)+'<span class="chip">'+esc(b.stage)+'</span>'+flagChips(b)+'</div></div><button class="btn small" data-act="close" id="closeBtn">Close</button></header><div class="body">'+
+   '<dl class="meta"><dt>Sponsor</dt><dd>'+esc(b._name)+(b._party?' ('+b._party+')':'')+'</dd><dt>Last action</dt><dd>'+esc(b.last||"None on file")+'</dd><dt>Hearing</dt><dd>'+esc(b.hearing||"None scheduled")+'</dd><dt>Tracker tags</dt><dd>'+esc(b.tags||"None")+'</dd></dl>'+
+   (b.drift?'<div class="note-box">The SME feedback reads <b>'+esc(b.lean)+'</b>, but the tracker tag is <b>'+esc(b.tag)+'</b>. Confirm which is current.</div>':'')+
+   '<div><h4>SME feedback</h4>'+txt(b.sme,"No SME feedback on file.")+'</div>'+
+   '<div><h4>GR position considerations</h4>'+txt(b.gr,"None recorded.")+'</div>'+
+   '<div><h4>Meeting script</h4>'+txt(b.script,"None recorded.")+'</div></div></aside>';
+  document.getElementById("overlay").innerHTML=h;
+  var cb=document.getElementById("closeBtn"); if(cb) cb.focus();
+}
+function closeDrawer(){document.getElementById("overlay").innerHTML=""}
+
+/* ---------- actions ---------- */
+function setFilters(str){
+  FILTER_KEYS.forEach(function(k){F[k]=""});
+  (str||"").split(";").forEach(function(p){var i=p.indexOf("="); if(i>0){var k=p.slice(0,i),v=p.slice(i+1); if(FILTER_KEYS.indexOf(k)>-1) F[k]=v}});
+  renderFilters(); renderActive(); renderTable();
+  var ex=document.getElementById("explorer"); if(ex&&ex.scrollIntoView) ex.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function toast(msg){
+  var t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.appendChild(t);
+  setTimeout(function(){t.remove()},2200);
+}
+function copyList(){
+  var rows=filtered();
+  var tsv=["Bill\tTitle\tIndustry\tStance\tStage\tSponsor\tSME feedback"].concat(rows.map(function(b){return [b.bill,b.title,b.industry,b.tag,b.stage,b._name+(b._party?" ("+b._party+")":""),b.hasSME?"On file":"Missing"].join("\t")})).join("\n");
+  function fallback(){var ta=document.createElement("textarea");ta.value=tsv;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){} ta.remove(); toast(ok?"Copied "+rows.length+" bills":"Copy was blocked. Select rows manually.")}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tsv).then(function(){toast("Copied "+rows.length+" bills")},fallback)} else fallback();
+}
+function showBanner(msg,err){var b=document.getElementById("banner");b.hidden=!msg;b.className="banner"+(err?" err":"");b.textContent=msg||""}
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-act]"); if(!t) return;
+  var a=t.getAttribute("data-act");
+  if(a==="filter"){setFilters(t.getAttribute("data-f"))}
+  else if(a==="open"){openBill(t.getAttribute("data-bill"))}
+  else if(a==="close"){closeDrawer()}
+  else if(a==="sort"){var k=t.getAttribute("data-k"); if(F.sort===k)F.dir=-F.dir; else{F.sort=k;F.dir=(k==="stage")?-1:1} renderTable()}
+  else if(a==="reset"){setFilters("");}
+  else if(a==="clearSponsor"){F.sponsor="";renderActive();renderTable()}
+  else if(a==="copy"){copyList()}
+  else if(a==="upload"){document.getElementById("file").click()}
+});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape") closeDrawer();
+  if((e.key==="Enter"||e.key===" ")&&e.target&&e.target.matches&&e.target.matches("tr.clk")){e.preventDefault();openBill(e.target.getAttribute("data-bill"))}
+});
+document.addEventListener("input",function(e){if(e.target.id==="f-q"){F.q=e.target.value;renderTable()}});
+document.addEventListener("change",function(e){
+  var m=/^f-(stance|industry|stage|chamber|flag)$/.exec(e.target.id||"");
+  if(m){F[m[1]]=e.target.value;renderTable()}
+});
+
+/* tooltip */
+var tip=document.getElementById("tip");
+document.addEventListener("mouseover",function(e){var t=e.target.closest&&e.target.closest("[data-tip]"); if(!t){tip.hidden=true;return} tip.textContent=t.getAttribute("data-tip"); tip.hidden=false});
+document.addEventListener("mousemove",function(e){if(tip.hidden)return; var x=e.clientX+14,y=e.clientY+16; if(x+tip.offsetWidth>window.innerWidth-8)x=e.clientX-tip.offsetWidth-14; if(y+tip.offsetHeight>window.innerHeight-8)y=e.clientY-tip.offsetHeight-12; tip.style.left=x+"px";tip.style.top=y+"px"});
+document.addEventListener("scroll",function(){tip.hidden=true},true);
+
+/* upload */
+var fileInput=document.getElementById("file");
+if(typeof XLSX==="undefined"){document.getElementById("uploadBtn").title="The spreadsheet reader did not load, so uploads are unavailable in this view."}
+fileInput.addEventListener("change",function(){
+  var f=fileInput.files&&fileInput.files[0]; if(!f) return;
+  if(typeof XLSX==="undefined"){showBanner("The spreadsheet reader could not load, so the file cannot be read here.",true);return}
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{
+      var wb=XLSX.read(new Uint8Array(rd.result),{type:"array"});
+      var name=wb.SheetNames.indexOf("Full Context")>-1?"Full Context":wb.SheetNames[0];
+      var json=XLSX.utils.sheet_to_json(wb.Sheets[name],{defval:"",raw:false});
+      var rows=json.map(function(r){var o={state:"",bill:"",title:"",industry:"",script:"",sme:"",gr:"",sponsor:"",last:"",hearing:"",tags:""};
+        Object.keys(r).forEach(function(k){var m=COLS[String(k).trim().toLowerCase()]; if(m) o[m]=String(r[k]==null?"":r[k]).trim()}); return o});
+      if(!rows.some(function(r){return r.bill})){showBanner("No Bill column found. Use the same columns as the Full Context sheet.",true);return}
+      var nb=compute(rows);
+      var fromLabel=weekEnding(source.name)||source.name, toLabel=weekEnding(f.name)||f.name;
+      changes=diff(bills,nb,fromLabel,toLabel);
+      bills=nb; source={name:f.name};
+      showBanner("Loaded "+nb.length+" bills from "+f.name+". Changes from the previous load are shown below the read-out.",false);
+      renderAll();
+    }catch(err){showBanner("That file could not be read: "+(err&&err.message||err),true)}
+    fileInput.value="";
+  };
+  rd.readAsArrayBuffer(f);
+});
+var COLS={"state":"state","bill":"bill","title":"title","industry":"industry","meeting script":"script","sme feedback":"sme","gr position considerations":"gr","primary sponsor":"sponsor","last action":"last","scheduled hearing":"hearing","team categories":"tags"};
+
+function renderAll(){
+  var S=stat(bills);
+  renderHeader(S); renderBand(S); renderReads(S); renderChanges(); renderIndustry(); renderPipeline(S); renderSponsors(S); renderDates(); renderWatch();
+  renderFilters(); renderActive(); renderTable(); renderDQ(S);
+}
+renderAll();
+window.__bills=bills; /* inspection aid */
+})();
+</script>

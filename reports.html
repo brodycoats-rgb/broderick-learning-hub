@@ -5,55 +5,24 @@
   <title>Reports | Broderick Learning Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      line-height: 1.6;
-      background-color: #f7f7f7;
-      color: #222;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: white;
-      padding: 32px;
-      border-radius: 12px;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      margin-top: 30px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 6px;
-    }
-
-    a {
-      color: #0057b8;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .report-card {
-      border: 1px solid #ddd;
-      padding: 18px;
-      border-radius: 10px;
-      margin-top: 18px;
-      background: #fafafa;
-    }
-
-    .label {
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
+  <style>body{--c:#2a78d6}
+:root{--bg:#f6f8fb;--card:#fff;--ink:#0f1a24;--mut:#5b6772;--line:#d5dde5;--navy:#12365a;--link:#1f63bd;--tint:#eaf1f8}
+@media (prefers-color-scheme:dark){:root{--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--link:#6da7ec;--tint:#1a2735}}
+*{box-sizing:border-box}
+body{font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;padding:28px 16px 48px;line-height:1.65;background:var(--bg);color:var(--ink)}
+.container{max-width:920px;margin:auto;background:var(--card);padding:0 36px 36px;border-radius:16px;border:1px solid var(--line);border-top:8px solid var(--c);overflow:hidden}
+h1,h2,h3,h4{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;color:var(--navy);line-height:1.2}
+h1{font-size:clamp(30px,5vw,44px);margin:6px 0 8px;font-weight:800}
+h2{margin-top:36px;font-size:26px;padding-bottom:8px;border-bottom:3px solid var(--c)}
+h3{font-size:21px}h4{font-size:16px;margin:18px 0 4px;color:var(--c)}
+a{color:var(--link);text-decoration:none;font-weight:600}a:hover{text-decoration:underline}
+.container>p:first-child{margin:0 -36px 18px;padding:12px 36px;background:var(--tint);font-size:14px}
+.report-card,.template-card,.initiative-card,.note-card{border:1px solid var(--line);border-left:6px solid var(--c);padding:18px 22px;border-radius:12px;margin-top:18px;background:var(--bg)}
+.report-card h3,.template-card h3,.initiative-card h3,.note-card h3{margin-top:0}
+.label{font-size:.9em;color:var(--mut);margin:2px 0}
+li{margin:3px 0}
+:focus-visible{outline:3px solid #2a78d6;outline-offset:2px}
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
