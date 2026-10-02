@@ -1,0 +1,212 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MYIGP Executive Analysis</title>
+<meta name="description" content="Two-minute executive analysis of Ameren Illinois' 2028-2031 Multi-Year Integrated Grid Plan: context, key numbers, benefits, risks and what to watch.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--bg:#f6f8fb;--card:#fff;--ink:#0f1a24;--mut:#5b6772;--line:#d5dde5;--navy:#12365a;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#8a5cd6;--tint:#eaf1f8;--warn:#fff4dc;--warnb:#c98500;--good:#e6f4ec;--goodb:#1a8f64;--bad:#fce9e7;--badb:#b42318;--info:#eaf1f8;--infob:#2a78d6;--hero1:#12365a;--hero2:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--warn:#33290f;--warnb:#e0a82e;--good:#10291f;--goodb:#3fc496;--bad:#35191a;--badb:#f1837a;--info:#1a2735;--infob:#5aa0ee;--hero1:#0b2540;--hero2:#1b4f8f}}
+:root[data-theme="dark"]{--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--warn:#33290f;--warnb:#e0a82e;--good:#10291f;--goodb:#3fc496;--bad:#35191a;--badb:#f1837a;--info:#1a2735;--infob:#5aa0ee;--hero1:#0b2540;--hero2:#1b4f8f}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;line-height:1.2;color:var(--navy)}
+a{color:var(--s1)}
+.site{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:4px;align-items:center;padding:8px 16px;flex-wrap:wrap}
+.site b{font-family:"Bricolage Grotesque",sans-serif;color:var(--navy);margin-right:auto;font-size:15px}
+.site a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--mut);font-size:14px;font-weight:500}
+.site a:hover{background:var(--tint)}.site a[aria-current]{background:var(--navy);color:var(--card)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{background:var(--navy);color:var(--card);text-align:left;padding:9px 12px;font-weight:600}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--tint) 45%,transparent)}
+td.fb{font-weight:600;background:var(--tint)!important}
+.callout{border-left:5px solid var(--infob);background:var(--info);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.callout .lab{font:700 11.5px/1 "IBM Plex Sans";letter-spacing:.09em;text-transform:uppercase;color:var(--infob);margin-bottom:6px}
+.callout p{margin:4px 0}
+.callout.warn{background:var(--warn);border-color:var(--warnb)}.callout.warn .lab{color:var(--warnb)}
+.callout.good{background:var(--good);border-color:var(--goodb)}.callout.good .lab{color:var(--goodb)}
+.callout.bad{background:var(--bad);border-color:var(--badb)}.callout.bad .lab{color:var(--badb)}
+figure{margin:18px 0;text-align:center}figure img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+figcaption{font-size:13px;color:var(--mut);margin-top:6px}
+.foot{color:var(--mut);font-size:13.5px;border-top:1px solid var(--line);margin-top:48px;padding:20px 0 40px}
+.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:7px 12px}
+.btn:hover{border-color:var(--s1)}
+:focus-visible{outline:3px solid var(--s1);outline-offset:2px}
+@media print{.site,.side{display:none}}
+
+.hero{background:linear-gradient(125deg,var(--hero1) 0%,var(--hero2) 60%,#1baf7a 130%);color:#fff;padding:48px 0 70px}
+.hero .k{letter-spacing:.14em;font-size:12px;font-weight:600;opacity:.85;text-transform:uppercase}
+.hero h1{color:#fff;font-size:clamp(30px,6vw,52px);margin:8px 0 10px;max-width:820px}
+.hero p{max-width:720px;font-size:18px;opacity:.95;margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:-46px}
+.tile{background:var(--card);border-radius:14px;padding:16px 18px;border:1px solid var(--line);border-top:6px solid var(--c);box-shadow:0 6px 18px rgba(10,30,60,.10)}
+.tile .n{font:800 34px/1.1 "Bricolage Grotesque",sans-serif;color:var(--c)}.tile .l{font-size:14px;color:var(--mut);margin-top:4px}
+.tile small{display:block;margin-top:6px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+section.sec{margin:46px 0}
+.eyebrow{font:700 12px/1 "IBM Plex Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--c,var(--s1));margin-bottom:6px}
+section.sec h2{font-size:clamp(24px,4vw,32px);margin:0 0 6px}
+.lede{color:var(--mut);max-width:760px;margin:0 0 18px}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.g5{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card.c{border-top:5px solid var(--c)}.card h3{margin:0 0 6px;font-size:18px;color:var(--c,var(--navy))}.card p{margin:4px 0;font-size:15px}
+.card .q{font-weight:600;font-size:14.5px;color:var(--ink);margin-top:8px}
+.big{font:800 26px/1 "Bricolage Grotesque",sans-serif;color:var(--c)}
+.tl{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:20px}
+.tl:before{content:"";position:absolute;left:3%;right:3%;top:13px;height:4px;background:var(--line);border-radius:2px}
+.st{position:relative;text-align:center;font-size:13px;padding-top:34px}
+.st:before{content:"";position:absolute;left:50%;top:6px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--card);border:4px solid var(--s1)}
+.st.past:before{background:var(--s1)}.st.now:before{background:var(--s2);border-color:var(--s2);box-shadow:0 0 0 6px color-mix(in srgb,var(--s2) 25%,transparent)}
+.st.next:before{border-color:var(--s3)}.st b{display:block;font-size:13.5px}.st span{color:var(--mut)}
+@media(max-width:700px){.tl{grid-template-columns:1fr;gap:14px}.tl:before{left:13px;right:auto;top:0;bottom:0;width:4px;height:auto}.st{text-align:left;padding:0 0 0 40px}.st:before{left:14px;top:2px}}
+.bar{display:flex;height:46px;border-radius:10px;overflow:hidden;font-weight:600;color:#fff;font-size:14px;position:relative;margin:34px 0 8px}
+.bar div{display:flex;align-items:center;padding:0 12px;white-space:nowrap}
+.bar .a{background:var(--s3)}.bar .b{background:#8fa3b8;color:#10202f}
+.mark{position:absolute;top:-24px;bottom:-8px;width:0;border-left:3px dashed var(--s2)}.mark span{position:absolute;top:-4px;left:6px;font-size:12px;color:var(--s2);font-weight:600;white-space:nowrap;transform:translateY(-100%);margin-top:6px}
+.hb{margin:12px 0}.hb .row{display:grid;grid-template-columns:minmax(120px,210px) 1fr 70px;gap:10px;align-items:center;margin:7px 0;font-size:14px}
+.hb .tr{background:var(--tint);border-radius:6px;height:22px;overflow:hidden}.hb .fi{height:100%;border-radius:6px;background:var(--c,var(--s1))}
+.hb .v{font-weight:600;text-align:right}
+@media(max-width:560px){.hb .row{grid-template-columns:1fr 60px}.hb .row .tr{grid-column:1/-1;order:3}}
+.chain{display:flex;flex-wrap:wrap;gap:8px;counter-reset:s}.chain div{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:10px;padding:10px 12px;font-size:14px}.chain b{display:block;color:var(--c)}
+.chain div:before{counter-increment:s;content:counter(s);float:right;font:800 22px "Bricolage Grotesque";color:var(--c);opacity:.35}
+.ladder{display:grid;gap:6px}.rung{padding:9px 14px;border-radius:8px;color:#fff;font-size:14.5px;display:flex;justify-content:space-between;gap:10px}.rung span{opacity:.9;font-size:13px}
+.dm{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.say,.avoid{border-radius:12px;padding:14px 16px;font-size:15px}.say{background:var(--good);border-left:5px solid var(--goodb)}.avoid{background:var(--bad);border-left:5px solid var(--badb)}
+.say b,.avoid b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}.say b{color:var(--goodb)}.avoid b{color:var(--badb)}
+.cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.cta a{display:block;text-decoration:none;color:#fff;border-radius:14px;padding:18px 20px;background:linear-gradient(120deg,var(--c),color-mix(in srgb,var(--c) 60%,#000))}
+.cta a b{font:700 20px "Bricolage Grotesque";display:block}.cta a span{opacity:.9;font-size:14px}
+.src{font-size:13px;color:var(--mut);margin-top:8px}
+</style></head><body>
+<nav class="site" aria-label="Site"><b>Grid Plan Knowledge Center</b><a href="grid-plan.html">Home</a><a href="executive-analysis.html" aria-current="page">Executive analysis</a><a href="guide.html">Full guide</a></nav>
+<header class="hero"><div class="wrap">
+<div class="k">Executive analysis · ICC Docket 26-0051</div>
+<h1>Ameren Illinois 2028–2031 Grid Plan, in two minutes</h1>
+<p>One portfolio for how the distribution grid is kept reliable, ready for growth and fair to customers. The plan is only as strong as its proof: <b>need, timing, affordability and accountability</b>.</p>
+<p style="font-size:14px;opacity:.8">Current as of 1 October 2026. Filed figures are Ameren’s; “CUB” figures are the Citizens Utility Board’s public claims. Confirm in the docket before external use.</p>
+</div></header>
+
+<div class="wrap">
+<div class="tiles">
+ <div class="tile" style="--c:var(--s1)"><small>Filed</small><div class="n">$2.68B</div><div class="l">Electric capital additions in service, 2028–2031 (Table 61)</div></div>
+ <div class="tile" style="--c:var(--s3)"><small>Modeled</small><div class="n">$8.64B</div><div class="l">Estimated total benefits of the plan</div></div>
+ <div class="tile" style="--c:var(--s4)"><small>Modeled</small><div class="n">47%</div><div class="l">Share of benefits to EIECs and low-income customers ($4.08B)</div></div>
+ <div class="tile" style="--c:var(--s2)"><small>Ameren estimate</small><div class="n">~$5/mo</div><div class="l">Added to a typical residential bill each year from 2028</div></div>
+</div>
+
+<section class="sec" style="--c:var(--s1)">
+<div class="eyebrow">1 · Context</div><h2>What this plan is, and is not</h2>
+<p class="lede">A Multi-Year Integrated Grid Plan (MYIGP) is a coordinated plan for the electric <b>distribution</b> system, required under the Public Utilities Act as amended by CEJA and refined by CRGA. Filed January 20, 2026; 406 pages; 20 sections.</p>
+<div class="grid g2">
+ <div class="card c" style="--c:var(--s3)"><h3>It is</h3><p>An engineering roadmap and a regulatory proof document in one.</p><p>A single portfolio that links reliability, data, DER, electrification, efficiency, economic development and equity.</p><p>A case that must show <b>why, when and at what pace</b> each investment is needed.</p></div>
+ <div class="card c" style="--c:var(--s2)"><h3>It is not</h3><p>A generation plan, MISO queue study, wholesale capacity plan or transmission plan.</p><p>Automatic approval of every project or dollar.</p><p>A guarantee that every modeled benefit will occur. <b>The grid plan sets no rates;</b> a rate plan follows in 2027.</p></div>
+</div>
+</section>
+
+<section class="sec" style="--c:var(--s2)">
+<div class="eyebrow">2 · Where the case stands</div><h2>Docket timeline</h2>
+<p class="lede">The Commission rejected the first plan in 2023 and approved a refiled plan with modifications in 2024. This filing is the second cycle.</p>
+<div class="tl">
+ <div class="st past"><b>Jan 20, 2026</b><span>Plan filed</span></div>
+ <div class="st past"><b>Mar 31</b><span>Supplemental filing</span></div>
+ <div class="st past"><b>May 7</b><span>Staff and intervenor testimony</span></div>
+ <div class="st past"><b>Aug 5</b><span>Evidentiary hearing (scheduled; confirm held)</span></div>
+ <div class="st now"><b>Oct 2026 · today</b><span>ALJ proposed order due (per CUB)</span></div>
+ <div class="st next"><b>Nov–Dec 2026</b><span>Final order expected, then rate plan in 2027</span></div>
+</div>
+<p class="src">Dates from the guide and CUB’s June 2026 public post. Confirm in the docket.</p>
+</section>
+
+<section class="sec" style="--c:var(--s3)">
+<div class="eyebrow">3 · Benefits</div><h2>Who the modeled benefits reach</h2>
+<p class="lede">The filing models about $8.64 billion in total benefits. About 47% is expected to flow to Equity Investment Eligible Communities (EIECs) and low-income customers, above the 40% benchmark the ICC cited in 2023.</p>
+<div class="bar" role="img" aria-label="Of $8.64 billion, $4.08 billion (47 percent) goes to EIECs and low-income customers; $4.56 billion to other customers. A dashed line marks the 40 percent benchmark."><div class="a" style="width:47.2%">$4.08B · 47% EIEC and low-income</div><div class="b" style="width:52.8%">$4.56B · other customers</div><i class="mark" style="left:40%"><span>40% benchmark</span></i></div>
+<div class="grid g3" style="margin-top:14px">
+ <div class="card c" style="--c:var(--s3)"><h3>Reliability and safety</h3><p>Fewer and shorter outages; safer equipment and operations.</p></div>
+ <div class="card c" style="--c:var(--s1)"><h3>Readiness for growth</h3><p>Capacity for large loads, EVs, DER and electrification without ad-hoc fixes.</p></div>
+ <div class="card c" style="--c:var(--s4)"><h3>Fairness and access</h3><p>A tested share of benefits to communities that have been underserved.</p></div>
+</div>
+<aside class="callout warn"><div class="lab">Read with care</div><p>The 47% is a <b>modeled share of benefits</b>, not bill relief or realized cash savings. Pair it with measurable service and burden outcomes.</p></aside>
+</section>
+
+<section class="sec" style="--c:var(--s2)">
+<div class="eyebrow">4 · Money and risk</div><h2>Bills, and the cost of doing nothing</h2>
+<div class="grid g2">
+ <div class="card c" style="--c:var(--s2)"><h3>Bill pressure</h3>
+  <p>Ameren estimates about <b>$5.00 a month</b> added to the typical residential bill each year from 2028, aiming to keep total bills near inflation.</p>
+  <div class="hb"><div class="row" style="--c:var(--s2)"><span>CUB: delivery cost growth</span><div class="tr"><div class="fi" style="width:94%"></div></div><span class="v">~4%/yr</span></div>
+  <div class="row" style="--c:var(--s1)"><span>Inflation CUB cites</span><div class="tr"><div class="fi" style="width:80%"></div></div><span class="v">3.4%/yr</span></div></div>
+  <p class="src">CUB’s claims, June 2026; CUB also calls the plan a 48% increase over the current grid plan.</p></div>
+ <div class="card c" style="--c:var(--s4)"><h3>No-investment risk (modeled)</h3>
+  <p>The right-sizing analysis models annual system risk growing from about <b>$572.9M</b> to <b>more than $3B by 2050</b> if nothing is done.</p>
+  <div class="hb"><div class="row" style="--c:var(--s1)"><span>Annual risk, starting level</span><div class="tr"><div class="fi" style="width:19.1%"></div></div><span class="v">$573M</span></div>
+  <div class="row" style="--c:var(--s2)"><span>Annual risk, 2050</span><div class="tr"><div class="fi" style="width:100%"></div></div><span class="v">&gt;$3B</span></div></div>
+  <p class="src">Modeled, not audited. Depends on probability, consequence and escalation assumptions.</p></div>
+</div>
+</section>
+
+<section class="sec" style="--c:var(--s1)">
+<div class="eyebrow">5 · The five tests</div><h2>What makes a grid investment persuasive</h2>
+<p class="lede">Every claim in the plan is judged against five tests. A positive result on one does not excuse a weak answer on another.</p>
+<div class="grid g5">
+ <div class="card c" style="--c:#2a78d6"><h3>Affordability</h3><p>How much will bills change, for whom, and when?</p><div class="q">A governing constraint, not an afterthought</div></div>
+ <div class="card c" style="--c:#1baf7a"><h3>Cost-effectiveness</h3><p>Do expected benefits justify costs?</p><div class="q">Evidence, not a blank check</div></div>
+ <div class="card c" style="--c:#8a5cd6"><h3>Equity</h3><p>Do benefits reach EIECs and low-income customers?</p><div class="q">Show it as service people can see</div></div>
+ <div class="card c" style="--c:#eb6834"><h3>Right-sizing</h3><p>Is the amount, pace and timing matched to measured risk?</p><div class="q">Condition, consequence, probability, timing</div></div>
+ <div class="card c" style="--c:#c98500"><h3>Evidence</h3><p>How strong is the proof behind each number?</p><div class="q">Observed data beats announcements</div></div>
+</div>
+<h3 style="margin:26px 0 8px">The chain of logic: bring any debate back to these eight steps</h3>
+<div class="chain">
+ <div style="--c:#2a78d6"><b>Policy objective</b>What public purpose?</div><div style="--c:#1a8fd6"><b>System condition</b>What is changing or at risk?</div><div style="--c:#1baf7a"><b>Need</b>What problem requires action?</div><div style="--c:#8a5cd6"><b>Alternatives</b>Are wires the best tool?</div><div style="--c:#eb6834"><b>Portfolio decision</b>Why this project, this year?</div><div style="--c:#c98500"><b>Customer value</b>What benefits result?</div><div style="--c:#d6407a"><b>Fairness</b>Who pays, who benefits?</div><div style="--c:#12365a"><b>Accountability</b>How will results be checked?</div>
+</div>
+</section>
+
+<section class="sec" style="--c:var(--s2)">
+<div class="eyebrow">6 · Scrutiny</div><h2>Lessons from the last case, and the critic’s list</h2>
+<div class="grid g2">
+ <div class="card c" style="--c:var(--s2)"><h3>Prior grid plan</h3>
+  <p><b>Dec 14, 2023:</b> first plan rejected, 4–1 vote.</p><p><b>Dec 19, 2024:</b> refiled plan approved with modifications.</p>
+  <div class="hb"><div class="row" style="--c:var(--s1)"><span>Proposed</span><div class="tr"><div class="fi" style="width:100%"></div></div><span class="v">$333M</span></div>
+  <div class="row" style="--c:var(--s3)"><span>Allowed</span><div class="tr"><div class="fi" style="width:24.9%"></div></div><span class="v">$83M</span></div></div>
+  <p class="src">Takeaway: the Commission trims what is not proven. Roughly one quarter of the proposed amount was allowed.</p></div>
+ <div class="card c" style="--c:var(--s4)"><h3>CUB: items it calls questionable</h3>
+  <div class="hb"><div class="row" style="--c:var(--s4)"><span>Reliability metrics</span><div class="tr"><div class="fi" style="width:100%"></div></div><span class="v">$125M</span></div>
+  <div class="row" style="--c:var(--s4)"><span>Customer additions forecast</span><div class="tr"><div class="fi" style="width:62.7%"></div></div><span class="v">$78.4M</span></div>
+  <div class="row" style="--c:var(--s4)"><span>Small reliability projects</span><div class="tr"><div class="fi" style="width:47.4%"></div></div><span class="v">$59.2M</span></div>
+  <div class="row" style="--c:var(--s4)"><span>Proactive economic development</span><div class="tr"><div class="fi" style="width:35.3%"></div></div><span class="v">$44.1M</span></div>
+  <div class="row" style="--c:var(--s4)"><span>Hydrogen pilot</span><div class="tr"><div class="fi" style="width:16.2%"></div></div><span class="v">$20.3M</span></div>
+  <div class="row" style="--c:var(--s4)"><span>Pole replacement</span><div class="tr"><div class="fi" style="width:11.8%"></div></div><span class="v">$14.7M</span></div></div>
+  <p class="src">CUB’s claims, June 2026 (items total $341.7M against its stated “over $300 million”). Not findings.</p></div>
+</div>
+<h3 style="margin:26px 0 8px">Evidence hierarchy: lead with the strongest proof</h3>
+<div class="ladder">
+ <div class="rung" style="background:#1a8f64">1 · Observed data<span>strongest</span></div><div class="rung" style="background:#2a8f8f">2 · Calibrated models</div><div class="rung" style="background:#2a78d6">3 · Executed agreements</div><div class="rung" style="background:#6b6fd6">4 · Scenario forecasts</div><div class="rung" style="background:#c98500">5 · Expert judgment</div><div class="rung" style="background:#b4532a">6 · Aspirational narratives<span>weakest</span></div>
+</div>
+<p class="src">The weaker the evidence, the more staging, off-ramps and customer protections matter.</p>
+</section>
+
+<section class="sec" style="--c:var(--s3)">
+<div class="eyebrow">7 · Messaging</div><h2>How to talk about it</h2>
+<div class="dm">
+ <div class="say"><b>Say</b>“The real test is showing that each piece is needed, timed right and affordable.”<br><br>“A modeled share of benefits is not bill relief. Here are the service outcomes we will measure.”<br><br>“Growth is welcome, with milestones and protections so other customers are not left holding the risk.”</div>
+ <div class="avoid"><b>Avoid</b>Implying cost-effectiveness removes bill impact.<br><br>Promising a given investment prevents a specific outage.<br><br>Treating economic-development announcements as connected load.<br><br>Quoting a total without naming its definition ($2.68B capital additions vs. CUB’s $2.8B).</div>
+</div>
+</section>
+
+<section class="sec" style="--c:var(--s4)">
+<div class="eyebrow">8 · What to watch</div><h2>Next decisions and open questions</h2>
+<div class="grid g3">
+ <div class="card c" style="--c:var(--s4)"><h3>Docket</h3><p>ALJ proposed order, exceptions and replies, then the final order expected by end of 2026.</p></div>
+ <div class="card c" style="--c:var(--s2)"><h3>Proof points</h3><p>Reliability outcome data, firm need dates for projects, large-load protections and forecast accuracy.</p></div>
+ <div class="card c" style="--c:var(--s1)"><h3>Numbers discipline</h3><p>One total, one definition. Label every figure as filed, modeled, estimated or approved.</p></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="eyebrow" style="--c:var(--s1)">Go deeper</div><h2>Learn it, then use it</h2>
+<div class="cta">
+ <a href="guide.html" style="--c:#12365a"><b>Full guide →</b><span>Five parts, field manual, tough questions, flashcards and a 26-question check.</span></a>
+ <a href="guide.html#part-4-practice" style="--c:#2a78d6"><b>Practice →</b><span>Flashcards and an interactive 26-question knowledge check.</span></a>
+</div>
+</section>
+<div class="foot">Source: Ameren Illinois Multi-Year Integrated Grid Plan, Exhibit 2.1, ICC Docket 26-0051 (filed January 20, 2026), and Citizens Utility Board public statements (June 2026). Modeled figures are Ameren’s estimates and have not been independently audited. This page is a learning aid, not a legal or regulatory document.</div>
+</div></body></html>

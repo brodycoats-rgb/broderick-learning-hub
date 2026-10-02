@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid Plan Knowledge Center</title>
+<meta name="description" content="Learning resources for Ameren Illinois' 2028-2031 Multi-Year Integrated Grid Plan: executive analysis and full guide.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>:root{--bg:#f6f8fb;--card:#fff;--ink:#0f1a24;--mut:#5b6772;--line:#d5dde5;--navy:#12365a;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#8a5cd6;--tint:#eaf1f8;--warn:#fff4dc;--warnb:#c98500;--good:#e6f4ec;--goodb:#1a8f64;--bad:#fce9e7;--badb:#b42318;--info:#eaf1f8;--infob:#2a78d6;--hero1:#12365a;--hero2:#2a78d6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--warn:#33290f;--warnb:#e0a82e;--good:#10291f;--goodb:#3fc496;--bad:#35191a;--badb:#f1837a;--info:#1a2735;--infob:#5aa0ee;--hero1:#0b2540;--hero2:#1b4f8f}}
+:root[data-theme="dark"]{--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--warn:#33290f;--warnb:#e0a82e;--good:#10291f;--goodb:#3fc496;--bad:#35191a;--badb:#f1837a;--info:#1a2735;--infob:#5aa0ee;--hero1:#0b2540;--hero2:#1b4f8f}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;line-height:1.2;color:var(--navy)}
+a{color:var(--s1)}
+.site{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:4px;align-items:center;padding:8px 16px;flex-wrap:wrap}
+.site b{font-family:"Bricolage Grotesque",sans-serif;color:var(--navy);margin-right:auto;font-size:15px}
+.site a{padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--mut);font-size:14px;font-weight:500}
+.site a:hover{background:var(--tint)}.site a[aria-current]{background:var(--navy);color:var(--card)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{background:var(--navy);color:var(--card);text-align:left;padding:9px 12px;font-weight:600}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--tint) 45%,transparent)}
+td.fb{font-weight:600;background:var(--tint)!important}
+.callout{border-left:5px solid var(--infob);background:var(--info);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+.callout .lab{font:700 11.5px/1 "IBM Plex Sans";letter-spacing:.09em;text-transform:uppercase;color:var(--infob);margin-bottom:6px}
+.callout p{margin:4px 0}
+.callout.warn{background:var(--warn);border-color:var(--warnb)}.callout.warn .lab{color:var(--warnb)}
+.callout.good{background:var(--good);border-color:var(--goodb)}.callout.good .lab{color:var(--goodb)}
+.callout.bad{background:var(--bad);border-color:var(--badb)}.callout.bad .lab{color:var(--badb)}
+figure{margin:18px 0;text-align:center}figure img{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+figcaption{font-size:13px;color:var(--mut);margin-top:6px}
+.foot{color:var(--mut);font-size:13.5px;border-top:1px solid var(--line);margin-top:48px;padding:20px 0 40px}
+.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:7px 12px}
+.btn:hover{border-color:var(--s1)}
+:focus-visible{outline:3px solid var(--s1);outline-offset:2px}
+@media print{.site,.side{display:none}}
+
+.hero{background:linear-gradient(125deg,var(--hero1),var(--hero2) 65%,#1baf7a 140%);color:#fff;padding:64px 0 80px}
+.hero .k{letter-spacing:.14em;font-size:12px;font-weight:600;opacity:.85;text-transform:uppercase}
+.hero h1{color:#fff;font-size:clamp(32px,6vw,56px);margin:8px 0 12px;max-width:820px}.hero p{max-width:680px;font-size:18px;opacity:.95}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:-48px}
+.cd{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-top:7px solid var(--c);border-radius:16px;padding:22px;box-shadow:0 8px 22px rgba(10,30,60,.1);transition:transform .15s}
+.cd:hover{transform:translateY(-3px)}.cd .t{font:700 12px/1 "IBM Plex Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.cd h2{margin:8px 0;font-size:25px}.cd p{margin:6px 0;color:var(--mut)}.cd .go{color:var(--c);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:34px 0}
+.facts div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--mut)}.facts b{display:block;font:800 24px "Bricolage Grotesque";color:var(--navy)}
+</style></head><body>
+<nav class="site" aria-label="Site"><b>Grid Plan Knowledge Center</b><a href="grid-plan.html" aria-current="page">Home</a><a href="executive-analysis.html">Executive analysis</a><a href="guide.html">Full guide</a></nav>
+<header class="hero"><div class="wrap"><div class="k">ICC Docket 26-0051</div><h1>Ameren Illinois 2028–2031 Multi-Year Integrated Grid Plan</h1><p>Plain-language learning resources: a two-minute executive view for decision-makers and a full guide with a field manual, flashcards and a knowledge check.</p></div></header>
+<div class="wrap">
+<div class="cards">
+<a class="cd" href="executive-analysis.html" style="--c:var(--s2)"><div class="t">2-minute read</div><h2>Executive analysis</h2><p>Context, key numbers, benefits, risks, the five tests, lessons from the last case and what to watch. Charts throughout.</p><span class="go">Open →</span></a>
+<a class="cd" href="guide.html" style="--c:var(--s1)"><div class="t">Full guide · about 2 hours</div><h2>Knowledge Center guide</h2><p>Five parts from orientation to practice: key facts, the tests, tough questions, meeting scripts, 34 flashcards and a 26-question check.</p><span class="go">Open →</span></a>
+</div>
+<div class="facts"><div><b>Jan 20, 2026</b>Plan filed</div><div><b>$2.68B</b>Capital additions, 2028–2031</div><div><b>$8.64B</b>Modeled benefits</div><div><b>Nov–Dec 2026</b>Final order expected</div></div>
+<div class="foot">Learning aid built from the filed plan and public statements. Figures are labeled as filed, modeled, estimated or claimed by others. Confirm against the filing and the ICC docket before external use. Current as of 1 October 2026.</div>
+</div></body></html>
