@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illinois 2026 Election Cycle Briefing</title>
+<style>
+:root{
+  --navy:#0f1b3d; --ink:#1b2440; --muted:#5b6585; --bg:#f2f5fb; --card:#ffffff;
+  --blue:#2563eb; --blue2:#60a5fa; --blue3:#bfdbfe; --red:#dc2626; --red2:#f87171; --red3:#fecaca;
+  --purple:#7c3aed; --gold:#f59e0b; --teal:#0d9488; --green:#16a34a; --pink:#db2777;
+  --safeD:#1d4ed8; --likelyD:#3b82f6; --leanD:#93c5fd; --toss:#f59e0b; --leanR:#fca5a5; --likelyR:#ef4444; --safeR:#b91c1c;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+a{color:var(--blue)}
+.hero{background:linear-gradient(120deg,#0f1b3d 0%,#3b2a8c 55%,#c026d3 100%);color:#fff;padding:48px 20px 40px}
+.wrap{max-width:1100px;margin:0 auto}
+.hero h1{margin:0 0 8px;font-size:clamp(28px,5vw,46px);letter-spacing:-.5px}
+.hero p{margin:0 0 18px;max-width:760px;font-size:18px;opacity:.92}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px}
+.pill b{color:#fde68a}
+nav{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e3e8f4;box-shadow:0 2px 10px rgba(15,27,61,.06)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 20px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:600;font-size:14px;padding:6px 12px;border-radius:999px;background:#eef2ff}
+nav a:hover{background:#dbe4ff}
+section{padding:36px 20px 8px}
+h2{font-size:28px;margin:0 0 6px;color:var(--navy)}
+h2 .bar{display:inline-block;width:10px;height:26px;border-radius:4px;margin-right:10px;vertical-align:-3px}
+h3.sec{font-size:20px;margin:26px 0 8px;color:var(--navy)}
+.lead{color:var(--muted);margin:0 0 20px;max-width:840px}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+@media(max-width:520px){.g2{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:18px;padding:20px;box-shadow:0 4px 18px rgba(15,27,61,.07)}
+.card h3{margin:0 0 4px;font-size:18px}
+.card .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
+.tile{border-radius:18px;padding:20px;color:#fff;box-shadow:0 6px 18px rgba(15,27,61,.15)}
+.tile .big{font-size:34px;font-weight:800;line-height:1.05}
+.tile .lab{font-size:14px;opacity:.95;margin-top:6px}
+.tile .src{font-size:11.5px;opacity:.85;margin-top:8px}
+.t-blue{background:linear-gradient(135deg,#1d4ed8,#38bdf8)}
+.t-red{background:linear-gradient(135deg,#b91c1c,#fb923c)}
+.t-purple{background:linear-gradient(135deg,#6d28d9,#d946ef)}
+.t-teal{background:linear-gradient(135deg,#0f766e,#34d399)}
+.t-gold{background:linear-gradient(135deg,#d97706,#fbbf24);color:#2a1a00}
+.t-pink{background:linear-gradient(135deg,#be185d,#f472b6)}
+.t-navy{background:linear-gradient(135deg,#0f1b3d,#3b5bdb)}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;color:#fff}
+.c-safeD{background:var(--safeD)}.c-likelyD{background:var(--likelyD)}.c-leanD{background:var(--leanD);color:#0b2a63}
+.c-toss{background:var(--toss);color:#2a1a00}.c-leanR{background:var(--leanR);color:#5c0d0d}.c-likelyR{background:var(--likelyR)}.c-safeR{background:var(--safeR)}
+.hint{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#3730a3;border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600;margin:0 0 14px}
+/* clickable */
+[data-open]{cursor:pointer}
+.name{text-align:left;display:inline-block;border:0;background:none;padding:0;font:inherit;font-weight:700;color:var(--blue);text-decoration:underline dotted;text-underline-offset:3px;cursor:pointer}
+.name.R{color:var(--red)}.name.I{color:var(--purple)}
+.name:hover{background:#eef2ff;border-radius:4px}
+/* script boxes */
+details.script{background:linear-gradient(180deg,#fff,#f8f7ff);border:1px solid #ddd6fe;border-left:6px solid var(--purple);border-radius:14px;padding:4px 18px;margin:0 0 20px}
+details.script summary{cursor:pointer;font-weight:800;color:#4c1d95;padding:12px 0;font-size:15px}
+details.script .say{font-size:15.5px;margin:2px 0 10px}
+details.script .say:before{content:"Say it this way";display:block;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--purple);font-weight:800;margin-bottom:2px}
+details.script h5{margin:10px 0 4px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--purple)}
+details.script ul{margin:0 0 12px;padding-left:20px}
+details.script li{margin:3px 0}
+details.script .act{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;border-radius:10px;padding:8px 12px;margin:6px 0 14px;font-size:14px}
+details.script .act b{display:block;font-size:11px;letter-spacing:.8px;text-transform:uppercase}
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:12px;overflow-x:auto}
+.col{border-radius:14px;padding:10px;min-width:170px}
+.col h4{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#fff;padding:6px 8px;border-radius:8px}
+.race{background:#fff;border-radius:10px;padding:8px 10px;margin-bottom:8px;border-left:6px solid #999;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .12s,box-shadow .12s}
+.race:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.16)}
+.race b{display:block;font-size:13.5px}
+.race span{color:var(--muted);font-size:12px}
+.tag{float:right;font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:#eef2ff;color:#3730a3}
+/* bars */
+.row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13.5px}
+.row .nm{width:150px;flex:none;font-weight:600}
+.row .track{flex:1;background:#eef1f8;border-radius:999px;height:20px;position:relative;overflow:hidden}
+.row .fill{height:100%;border-radius:999px}
+.row .val{width:112px;flex:none;text-align:right;color:var(--muted);font-size:12.5px}
+@media(max-width:520px){.row .nm{width:96px}.row .val{width:84px}}
+.stack{display:flex;height:40px;border-radius:12px;overflow:hidden;position:relative;margin:26px 0 8px}
+.stack div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;min-width:0;overflow:hidden}
+.mark{position:absolute;top:-12px;bottom:-12px;width:0;border-left:3px dashed #111;z-index:3}
+.mark i{position:absolute;top:-16px;left:-50px;width:100px;text-align:center;font-style:normal;font-size:11px;font-weight:700;color:#111;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.legend span:before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-size:12.5px}
+td{padding:8px 10px;border-bottom:1px solid #edf0f7;vertical-align:top}
+.tablewrap{overflow-x:auto}
+.plain{margin:0;padding-left:18px;font-size:14px}.plain li{margin-bottom:8px}
+.mrow{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;margin:7px 0;font-size:13px}.mrow .nm{font-weight:600}.mrow.il .nm{color:#be185d}
+.sbar{height:9px;border-radius:5px;margin:2px 0}.trend{font-weight:800;font-size:18px}.up{color:#16a34a}.down{color:#dc2626}.flat{color:#f59e0b}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.donut{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:0 auto}
+.donut div{width:104px;height:104px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;font-size:28px;color:var(--navy)}
+.steps{display:flex;gap:0;overflow-x:auto;padding:6px 0 14px}
+.step{flex:1;min-width:170px;padding:14px 12px 14px 22px;color:#fff;position:relative;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%,14px 50%);margin-right:-6px}
+.step:first-child{clip-path:polygon(0 0,calc(100% - 16px) 0,100% 50%,calc(100% - 16px) 100%,0 100%);padding-left:14px}
+.step b{display:block;font-size:13.5px}
+.step span{font-size:12px;opacity:.95}
+footer{padding:30px 20px 60px;color:var(--muted);font-size:13px}
+ul.src li{margin:3px 0}
+.log li{margin:4px 0}
+.warn{background:#fff7e6;border:1px solid #fcd34d;border-radius:12px;padding:10px 14px;font-size:13px;color:#7a4b00}
+/* tight race cards */
+.tcard{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(15,27,61,.08);border-top:6px solid #999}
+.tcard .seat{font-weight:800;font-size:15px}
+.tcard .holds{font-size:12px;color:var(--muted)}
+.tcard .num{font-size:34px;font-weight:900;line-height:1.1;margin:8px 0 0}
+.tcard .num small{font-size:13px;font-weight:600;color:var(--muted)}
+.meter{display:flex;gap:3px;margin:6px 0 8px}
+.meter i{flex:1;height:8px;border-radius:4px;background:#e5e9f5}
+.tcard p{margin:4px 0;font-size:13.5px}
+.tcard .vs{font-size:13.5px;margin-top:8px;padding-top:8px;border-top:1px dashed #dde3f2}
+.explain{background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:12px 16px;margin-bottom:16px;font-size:14px}
+.explain b{color:#92400e}
+.stress{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.stress .box{border-radius:14px;padding:14px;background:#f8fafc;border:1px solid #e2e8f0}
+.stress .big{font-size:26px;font-weight:900}
+/* lanes */
+.lanes{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:10px;overflow-x:auto}
+.lane{border-radius:14px;padding:10px;min-width:170px}
+.lane h4{margin:0 0 4px;font-size:13px;color:var(--navy)}
+.lane p{margin:0 0 8px;font-size:11.5px;color:var(--muted)}
+.lchip{display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:4px 10px;margin:5px 0;font-size:12.5px;box-shadow:0 1px 3px rgba(0,0,0,.1);cursor:pointer;border:0;width:100%;text-align:left;font-family:inherit}
+.lchip:hover{box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.lchip i{width:10px;height:10px;border-radius:50%;flex:none}
+.lchip .cf{margin-left:auto;font-size:10px;color:var(--muted)}
+/* news */
+.news{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(15,27,61,.07);border-left:6px solid var(--purple)}
+.news .d{font-size:12px;font-weight:700;color:var(--muted)}
+.news h4{margin:2px 0 6px;font-size:16px}
+.news p{margin:4px 0;font-size:13.5px}
+.news .rec{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px;padding:7px 10px;font-size:13px;color:#065f46;margin-top:8px}
+.news .rec b{font-size:11px;text-transform:uppercase;letter-spacing:.7px}
+/* issue accordions */
+details.issue{background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(15,27,61,.07);overflow:hidden}
+details.issue summary{cursor:pointer;list-style:none;padding:0}
+details.issue summary::-webkit-details-marker{display:none}
+details.issue .body{padding:14px 20px 18px;font-size:14px}
+details.issue .body h5{margin:12px 0 3px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+details.issue .body p{margin:2px 0}
+details.issue .body ul{margin:2px 0;padding-left:20px}
+details.issue summary .tile{border-radius:0;box-shadow:none;padding:16px 20px}
+details.issue summary .tile .big{font-size:26px}
+details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weight:700}
+/* mayor cards */
+.mcard{background:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 4px 16px rgba(15,27,61,.08);border-top:6px solid #999;cursor:pointer;transition:transform .12s}
+.mcard:hover{transform:translateY(-2px)}
+.mcard b{font-size:16px}
+.mcard .r{font-size:12.5px;color:var(--muted)}
+.mcard p{margin:6px 0 0;font-size:13.5px}
+.mcard .lane-tag{display:inline-block;font-size:11px;font-weight:800;padding:2px 9px;border-radius:999px;margin-top:6px;color:#fff}
+/* modal */
+#ov{position:fixed;inset:0;background:rgba(15,27,61,.55);display:none;align-items:flex-start;justify-content:center;z-index:50;overflow-y:auto;padding:30px 14px}
+#ov.on{display:flex}
+#modal{background:#fff;border-radius:20px;max-width:720px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden}
+#modal .mh{padding:20px 24px;color:#fff;position:relative}
+#modal .mh h3{margin:0;font-size:24px}
+#modal .mh .s{opacity:.92;font-size:14px;margin-top:2px}
+#modal .x{position:absolute;right:14px;top:14px;border:0;background:rgba(255,255,255,.25);color:#fff;border-radius:999px;width:34px;height:34px;font-size:20px;cursor:pointer}
+#modal .mb{padding:18px 24px 24px;font-size:14.5px}
+#modal .mb h5{margin:14px 0 4px;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+#modal .mb p{margin:3px 0}
+#modal .mb ul{margin:3px 0;padding-left:20px}
+#modal .mb .box{background:#f3f4ff;border-radius:12px;padding:10px 14px;margin:8px 0}
+#modal .mb .box.g{background:#ecfdf5}
+#modal .mb .conf{display:inline-block;font-size:11px;font-weight:700;background:#fff7e6;color:#7a4b00;border:1px solid #fcd34d;border-radius:999px;padding:1px 9px}
+.mwho{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.mwho button{border:1px solid #dbe4ff;background:#eef2ff;border-radius:999px;padding:5px 12px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;color:#1e3a8a}
+.mwho button.R{background:#fff1f1;border-color:#fecaca;color:#991b1b}
+.mwho button.I{background:#f5f0ff;border-color:#ddd6fe;color:#5b21b6}
+.bubble{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.bubble div{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px}
+.bubble b{display:block;font-size:22px}
+
+/* avatars */
+.av{display:inline-grid;place-items:center;width:var(--s,44px);height:var(--s,44px);border-radius:50%;background:var(--c,#64748b);color:#fff;font-weight:800;font-size:calc(var(--s,44px)*.36);flex:none;overflow:hidden;border:2px solid rgba(255,255,255,.7);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.av{position:relative}.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.mcard .top{display:flex;gap:10px;align-items:center}
+#modal .mh .top{display:flex;gap:16px;align-items:center}
+#modal .mh .top .av{--s:72px;border-color:#fff}
+/* money layout */
+.moneywrap{display:grid;grid-template-columns:minmax(0,2fr) minmax(290px,1fr);gap:16px;align-items:start}
+@media(max-width:960px){.moneywrap{grid-template-columns:1fr}}
+.side{position:sticky;top:64px;max-height:calc(100vh - 80px);overflow-y:auto;background:linear-gradient(180deg,#fff7ed,#fff);border:1px solid #fed7aa;border-top:6px solid #ea580c;border-radius:16px;padding:16px;box-shadow:0 6px 20px rgba(234,88,12,.12)}
+@media(max-width:960px){.side{position:static;max-height:none}}
+.side h3{margin:0 0 4px;font-size:18px;color:#9a3412}
+.side .u{background:#fff;border:1px solid #fde4cc;border-radius:12px;padding:10px 12px;margin:10px 0}
+.side .u b{font-size:14px}
+.side .u .par{font-size:11.5px;color:var(--muted)}
+.side .u ul{margin:6px 0;padding-left:18px;font-size:12.5px}
+.side .amt{display:inline-block;font-size:11px;font-weight:700;background:#fef3c7;color:#92400e;border:1px dashed #f59e0b;border-radius:999px;padding:1px 9px}
+.stk{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#eef1f8;margin:4px 0}
+.stk i{display:block;height:100%}
+.pm{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.pm{grid-template-columns:1fr}}
+.pm .col2{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 16px rgba(15,27,61,.07)}
+.pm .good{border-top:6px solid #16a34a}.pm .bad{border-top:6px solid #dc2626}
+.pm .it{border-bottom:1px solid #edf0f7;padding:8px 0}
+.pm .it:last-child{border:0}
+.pm .it .d{font-size:11.5px;font-weight:700;color:var(--muted)}
+.pm .it b{display:block;font-size:14.5px}
+.pm .it p{margin:2px 0;font-size:13px}
+.spk{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 18px rgba(15,27,61,.07);margin-bottom:16px}
+.spk .av{--s:96px;border-color:#e2e8f0}
+@media(max-width:560px){.spk{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <h1>Illinois 2026 Election Cycle Briefing</h1>
+  <p>A government affairs reference covering Illinois statewide, congressional, legislative and Chicago races, the national fight for Congress, and a primer on 2028. Click any underlined name or race tile for background.</p>
+  <div class="pills"><span class="pill">As of <b id="asof"></b></span><span class="pill"><b id="days"></b> days to Election Day</span><span class="pill">Election Day <b>Nov 3, 2026</b></span><span class="pill">Veto session <b>Nov 17-19 and Dec 1-3</b></span></div>
+</div></header>
+
+<nav><div class="wrap">
+  <a href="#glance">At a glance</a><a href="#news">Latest news</a><a href="#board">Race board</a><a href="#tight">Tight races</a><a href="#money">Follow the money</a><a href="#majorities">Majorities</a><a href="#legislature">Legislature ideology</a><a href="#speaker">Speaker Welch</a><a href="#ideology">Candidate ideology</a><a href="#issues">Major issues</a><a href="#chicago">Chicago mayor</a><a href="#mayormom">Chicago momentum</a><a href="#national">National races</a><a href="#y2028">2028 primer</a><a href="#update">Updating</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="glance">
+  <h2><span class="bar" style="background:#7c3aed"></span>At a glance</h2>
+  <p class="lead">Democrats are favored in every Illinois statewide race. The close contests are a handful of legislative seats, one congressional district, and the argument over electricity prices and data centers.</p>
+  <div id="s-glance"></div>
+  <div class="grid g4" id="glanceTiles"></div>
+  <div class="card" style="margin-top:16px"><h3>How to use this page</h3>
+    <ul><li>Open the purple <b>script</b> box at the top of each section for a plain-language briefing you can say out loud, plus the key points.</li>
+    <li>Click any underlined name, race tile or candidate card to open a short profile with background, positions and risks.</li>
+    <li>Green boxes are suggested follow-ups. They are recommendations, not facts.</li></ul></div>
+</section>
+
+<section id="news">
+  <h2><span class="bar" style="background:#7c3aed"></span>Latest news and what to do about it</h2>
+  <p class="lead">The stories that moved in the last few weeks, with a suggested follow-up for each.</p>
+  <div id="s-news"></div>
+  <div class="grid g2" id="newsCards"></div>
+  <div class="card" style="margin-top:16px"><h3>Where to keep watching</h3><div id="watchList"></div></div>
+</section>
+
+<section id="board">
+  <h2><span class="bar" style="background:#2563eb"></span>Illinois race board</h2>
+  <p class="lead">Every race on one board, sorted from safest for Democrats on the left to safest for Republicans on the right. Click a tile for the matchup, a plain-language script and the key points. The tile border shows which party holds the seat today.</p>
+  <div id="s-board"></div>
+  <div class="card"><div class="ladder" id="ladder"></div>
+  <p class="note">Congress ratings for IL-13 (Solid D) and IL-17 (Likely D) come from Cook Political Report. All other reads are this briefing's judgment.</p></div>
+</section>
+
+<section id="tight">
+  <h2><span class="bar" style="background:#f59e0b"></span>Tight races</h2>
+  <p class="lead">The seats where a few hundred votes or a change of mood could flip control. Sorted from closest to least close.</p>
+  <div id="s-tight"></div>
+  <div class="explain"><b>How to read the cards.</b> The big number is how many votes the winner won by last time. Fewer votes means a thinner cushion, shown by more filled bars. "Harris +4" means Kamala Harris won that district by 4 points for president in 2024, which tells you how Democratic or Republican the seat leans. Click any name for a profile.</div>
+  <div class="grid g3" id="tightCards"></div>
+  <h3 class="sec">Stress test. What if every close race goes wrong for Democrats?</h3>
+  <div class="card"><div class="stress" id="stress"></div>
+  <p class="note">Built from this briefing's target lists. Democratic-held seats at risk are HD-97, HD-76, HD-112 and SD-48, SD-36, SD-57. Democratic pickup targets are the Republican-held seats on the board. It shows a range, not a forecast.</p></div>
+</section>
+
+<section id="money">
+  <h2><span class="bar" style="background:#ea580c"></span>Follow the money</h2>
+  <p class="lead">Who has the cash, where it comes from, and what the closest races cost. The orange panel tracks utility and energy company money.</p>
+  <div id="s-money"></div>
+  <div class="grid g4" id="moneyTiles" style="margin-bottom:16px"></div>
+  <div class="moneywrap">
+    <div>
+      <div class="card"><h3>Governor, April to June 2026 (millions)</h3><p class="sub">Reports through June 30. Pritzker is largely self-funded</p>
+        <h4 style="margin:10px 0 0;font-size:13px">Raised</h4><div id="govRaised"></div>
+        <h4 style="margin:10px 0 0;font-size:13px">Spent</h4><div id="govSpent"></div>
+        <h4 style="margin:10px 0 0;font-size:13px">Cash on hand at June 30</h4><div id="govCash"></div>
+        <ul class="note" id="govNotes"></ul></div>
+      <div class="card" style="margin-top:16px"><h3>Legislative caucus war chests, July 2026 (millions)</h3><p class="sub">The committees that decide how much each close seat gets</p><div id="caucusBars"></div><p class="note">House Democrats have about 8 times House Republicans. Senate Democrats have about 7 times Senate Republicans.</p></div>
+      <div class="card" style="margin-top:16px"><h3>Who gives, by sector</h3><p class="sub">Statewide, Nov 2022 to Oct 2024</p>
+        <div class="stk"><i style="width:33%;background:#2563eb"></i><i style="width:67%;background:#cbd5e1"></i></div>
+        <p class="note" style="margin-top:2px" id="laborNote"></p><div id="sectors"></div></div>
+      <div class="card" style="margin-top:16px"><h3>Chicago mayor, cash on hand (millions)</h3><p class="sub">Second quarter 2026 reports</p><div id="mayorCash"></div>
+        <h3 style="margin-top:18px">Who is funding Giannoulias</h3><p class="sub">Largest reported gifts, in millions. Blue is labor, purple is business or individuals</p><div id="giannBars"></div><ul class="note" id="giannNotes"></ul></div>
+      <h3 class="sec">What the close races cost</h3>
+      <div class="card"><h3>2024 benchmark. Four targeted House seats (thousands of dollars)</h3><p class="sub">Solid color is money raised. Lighter color is in-kind support from party committees. Pieces are as reported by The Daily Line and may miss some periods and outside groups</p><div id="raceCost"></div>
+        <div class="explain" style="margin:12px 0 0"><b>The lesson.</b> In all four seats the Democratic side reported far more money, and Republicans still won all four, two by fewer than 300 votes. Money helps but it does not decide close seats. Republicans may also have had help from groups not captured here.</div></div>
+      <div class="grid g4" style="margin-top:16px" id="primaryTiles"></div>
+    </div>
+    <aside class="side" id="utilSide" aria-label="Utility and energy company money"></aside>
+  </div>
+</section>
+
+<section id="majorities">
+  <h2><span class="bar" style="background:#16a34a"></span>Majorities and control</h2>
+  <p class="lead">Dashed lines mark the number needed for a veto-proof three-fifths majority. Democrats can lose several seats and keep it.</p>
+  <div id="s-majorities"></div>
+  <div class="grid g2">
+    <div class="card"><h3>Illinois House (118 seats)</h3><p class="sub">Democrats need 71 for a veto-proof three-fifths majority</p><div id="ilHouse"></div></div>
+    <div class="card"><h3>Illinois Senate (59 seats)</h3><p class="sub">Democrats need 36 for three-fifths. 39 seats are on the ballot</p><div id="ilSenate"></div></div>
+  </div>
+</section>
+
+<section id="legislature">
+  <h2><span class="bar" style="background:#be185d"></span>Ideology of the whole legislature</h2>
+  <p class="lead">Illinois is run by one party, so the real ideological fights happen inside the Democratic caucus and inside the Republican caucus. Here is who the blocs are and how big they are.</p>
+  <div id="s-legislature"></div>
+  <div class="grid g2">
+    <div class="card"><h3>Caucus blocs by size</h3><p class="sub">Members of the 177 seat General Assembly. Blocs overlap, so do not add them up</p><div id="blocBars"></div><p class="note">Sizes are from public caucus pages and may be out of date. Verify before quoting.</p></div>
+    <div class="card"><h3>Who holds the gavels</h3><div id="leaders"></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>The spectrum, left to right</h3><p class="sub">An illustrative map of the blocs. Width is not to scale</p><div id="spectrum"></div></div>
+  <div class="grid g3" style="margin-top:16px" id="blocCards"></div>
+</section>
+
+<section id="speaker">
+  <h2><span class="bar" style="background:#0f766e"></span>Speaker Chris Welch</h2>
+  <p class="lead">The most powerful Democrat in the House, scored on money, ideology and press.</p>
+  <div id="s-speaker"></div>
+  <div class="spk"><span class="av" id="spkAv" data-av="welch"></span><div><h3 style="margin:0">Emanuel "Chris" Welch</h3><div class="note" style="margin:2px 0 8px">Speaker since Jan 13, 2021. First African American Speaker. Represents the 7th House district in Cook County.</div><button class="name" data-open="p:welch">Open full profile</button></div></div>
+  <div class="grid g2">
+    <div class="card"><h3>Fundraising</h3><div id="spkFund"></div></div>
+    <div class="card"><h3>Ideology and style</h3><ul id="spkIdeo"></ul></div>
+  </div>
+  <h3 class="sec">Good press and bad press</h3>
+  <div class="pm"><div class="col2 good"><h3 style="margin:0 0 6px;color:#166534">Good press</h3><div id="spkGood"></div></div><div class="col2 bad"><h3 style="margin:0 0 6px;color:#991b1b">Bad press</h3><div id="spkBad"></div></div></div>
+  <div class="card" style="margin-top:16px"><h3>Net read and what to watch</h3><p id="spkNet" style="font-weight:700"></p><ul id="spkWatch"></ul><p class="note">The net read is this briefing's judgment. Allegations described here are reported by the outlets cited, and the people named deny them or have not been charged where noted.</p></div>
+</section>
+
+<section id="ideology">
+  <h2><span class="bar" style="background:#db2777"></span>Ideology of the candidates</h2>
+  <p class="lead">Where the main figures and the competitive legislative candidates sit. Placement is based only on what the sources show. Where nothing is established, the candidate sits in the "not yet established" lane rather than being guessed.</p>
+  <div id="s-ideology"></div>
+  <div class="card"><h3>Statewide and Chicago figures</h3><p class="sub">Illustrative left to right placement</p><div id="ideo"></div></div>
+  <div class="card" style="margin-top:16px"><h3>Competitive legislative candidates by lane</h3><p class="sub">Click a name for the basis. A filled dot means two or more sources or stated positions. A hollow dot means a single source or a thin basis</p><div class="lanes" id="lanes"></div>
+  <p class="note">This is a first pass. For incumbents, the strongest evidence is roll call votes and group scorecards from labor, business and advocacy groups. Adding those is the recommended next upgrade.</p></div>
+</section>
+
+<section id="issues">
+  <h2><span class="bar" style="background:#0d9488"></span>Major issues facing Illinois</h2>
+  <p class="lead">Cost of living and electricity bills dominate. Data centers have become the lens through which both parties talk about energy. Tap a tile to see what it means, why it is hot now, who says what and what to watch.</p>
+  <div id="s-issues"></div>
+  <div class="grid g2" id="issueDeep"></div>
+  <div class="grid g4" id="issueTiles" style="margin-top:16px"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Ameren Illinois supply price</h3><p class="sub">Summer Price to Compare in cents per kWh, from an aggregator citing the ICC. Verify at pluginillinois.org</p><div id="ptc"></div></div>
+    <div class="card"><h3>Where the governor candidates stand on data centers</h3><div id="dcTable"></div></div>
+  </div>
+</section>
+
+<section id="chicago">
+  <h2><span class="bar" style="background:#c026d3"></span>Chicago mayor, Feb 23, 2027</h2>
+  <p class="lead">Sixteen names appear across press rosters. Petitions are due by 5 p.m. Oct 26 and challenges will thin the field. A runoff is set for Apr 6 if no one tops 50 percent.</p>
+  <div id="s-chicago"></div>
+  <h3 class="sec">Who is running</h3>
+  <p class="hint">Click any card for background, platform and risks</p>
+  <div class="grid g3" id="mayorCards"></div>
+  <p class="note">Names come from the Sun-Times, Fox 32, NBC Chicago and Wikipedia rosters. They do not all agree, and the number who file valid petitions will be smaller.</p>
+  <h3 class="sec">The issues driving the race</h3>
+  <div class="grid g2" id="mayorIssues"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Chicago's projected budget gap (millions)</h3><p class="sub">City projections reported Sept 2026</p><div id="gapBars"></div><p class="note">The gap is the main attack line on Mayor Johnson and the first problem for whoever wins.</p></div>
+    <div class="card"><h3>Latest reported campaign money (millions)</h3><p class="sub">Raised or cash on hand, depending on the source. Treat as a rough ranking</p><div id="mayorMoney"></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Mayor Johnson approval</h3><p class="sub">Mansueto Institute poll. Sun-Times cites 30 percent</p><div class="donut" id="donut"><div>23%</div></div><p class="note" style="text-align:center">13.6 percent want him to run again and 58 percent are not excited by another campaign</p></div>
+    <div class="card"><h3>How the runoff could play out</h3><div id="scenarios"></div></div>
+  </div>
+  <h3 class="sec">Where each candidate stands</h3>
+  <div class="card"><div class="tablewrap" id="mayorMatrix"></div><p class="note">"Not stated" means the sources reviewed did not report a position, not that the candidate has none.</p></div>
+</section>
+
+<section id="national">
+  <h2><span class="bar" style="background:#dc2626"></span>National races, 2026 midterms</h2>
+  <p class="lead">Democrats need a net gain of four Senate seats and a handful in the House. The environment favors Democrats but the Senate map still leans Republican.</p>
+  <div id="s-national"></div>
+  <div class="grid g4" id="natTiles"></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>U.S. Senate, Cook ratings of the 35 seats up</h3><p class="sub">Republicans hold 53 seats. Democrats need 51 for control</p><div id="usSenate"></div></div>
+    <div class="card"><h3>U.S. House ratings (435 seats)</h3><p class="sub">NBC News Decision Desk ratings. 218 needed</p><div id="usHouse"></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Senate battlegrounds</h3><div class="tablewrap" id="senateTable"></div>
+  <p class="note">Matchups reflect nominees reported by CBS News, Cook and NPR. Confirm each name before circulating.</p></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Governors, 36 races</h3><p class="sub">Four outright toss-ups in one aggregator's ratings</p><div id="govTiles" class="grid" style="grid-template-columns:repeat(2,1fr)"></div><p class="note">Illinois's own race is not among them. Pritzker is a strong favorite.</p></div>
+    <div class="card"><h3>Environment</h3><div id="envBars"></div><p class="note">Generic ballot is the NBC News average. Trump approval is from an aggregator and varies by pollster.</p></div>
+  </div>
+</section>
+
+<section id="y2028">
+  <h2><span class="bar" style="background:#6d28d9"></span>2028 presidential primer, momentum and early polls</h2>
+  <p class="lead">The 2028 race is open on both sides and no major candidate has declared. This section shows every name that appears in the polling averages, how the numbers have moved, and where prediction markets disagree with the polls.</p>
+  <div id="s-y2028"></div>
+  <div class="grid g4" id="p28Tiles" style="margin-bottom:16px"></div>
+  <div class="card"><h3>Democratic field, three ways to read it</h3><p class="sub">Poll averages in blue and teal, prediction market in gold. A dash means that source did not list the name</p><div class="legend" style="margin-bottom:10px"><span style="--c:#2563eb">RealClearPolling, Sept 9</span><span style="--c:#0d9488">Pollsmax average</span><span style="--c:#f59e0b">Polymarket odds</span></div><div id="demField"></div><p class="note" id="demRest"></p></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Democratic momentum, June 2025 to June 2026</h3><p class="sub">McLaughlin poll, same pollster both times. Hollow dot is the earlier reading</p><div id="demMove"></div></div>
+    <div class="card"><h3>Why the Democratic polls disagree</h3><ul class="plain" id="whyDis"></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Republican field, polling average</h3><p class="sub">Pollsmax average, based on four national polls in the prior 50 days. Three Democratic-side names that appeared in the list were removed as likely data noise</p><div id="gopField"></div></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Vance and Rubio, Emerson readings</h3><p class="sub">Same pollster, three readings in 2026</p><div id="gopLine"></div></div>
+    <div class="card"><h3>Republican momentum, July to August 2026</h3><p class="sub">McLaughlin, 433 Republican primary voters, MOE 3.1. Hollow dot is July</p><div id="gopMove"></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>How the road to 2028 unfolds</h3><div class="steps" id="road"></div>
+  <p class="note">The 2028 primary calendar and early state order are not final. Check the parties' rules committees before quoting dates for primaries or caucuses.</p></div>
+  <div class="grid g4" style="margin-top:16px" id="primerCards"></div>
+</section>
+
+<section id="mayormom">
+  <h2><span class="bar" style="background:#c026d3"></span>Chicago mayor, momentum and early polls</h2>
+  <p class="lead">Who is gaining, who is fading, and what the thin early data says. Only one strong public poll exists so far, so treat all of this as an early read.</p>
+  <div id="s-mayormom"></div>
+  <div class="grid g4" id="mmTiles" style="margin-bottom:16px"></div>
+  <div class="card"><h3>Momentum scoreboard</h3><p class="sub">Arrows are an analyst read from money, polls and markets, not a poll result</p><div class="tablewrap"><table><thead><tr><th>Candidate</th><th>Trend</th><th>Signals</th><th>Read</th></tr></thead><tbody id="mmBoard"></tbody></table></div></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Prediction market odds</h3><p class="sub">PredictionEdge. Kalshi shows Giannoulias 64 and Johnson 8, so the sites disagree on Johnson</p><div id="mmMarket"></div><p class="note">The percentages add to more than 100, which means they are not normalized. Use them as mood, not a forecast.</p></div>
+    <div class="card"><h3>Q2 money flow, millions of dollars</h3><p class="sub">Raised, spent and cash on hand through June 30</p><div id="mmFlow"></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Early polls so far</h3><div class="tablewrap"><table><thead><tr><th>Pollster</th><th>Dates</th><th>Sample</th><th>Result</th><th>How to use it</th></tr></thead><tbody id="mmPolls"></tbody></table></div></div>
+</section>
+
+<section id="update">
+  <h2><span class="bar" style="background:#0f1b3d"></span>Keeping this page current</h2>
+  <div class="grid g2">
+    <div class="card"><h3>How to update</h3>
+      <ol><li>Open this file and find the <code>DATA</code> block at the top of the script.</li><li>Change numbers, ratings, news items or profiles and set <code>asOf</code>.</li><li>Add a line to <code>log</code>, then commit the file to the repo.</li></ol>
+      <p class="note">Charts, scripts, profiles and news are all drawn from that block, so no other edits are needed. People live in <code>PEOPLE</code>, race details in <code>RACE</code>.</p></div>
+    <div class="card"><h3>Update log</h3><ul class="log" id="log"></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Confidence and gaps</h3>
+  <div class="warn" id="gaps"></div></div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <h3>Sources</h3>
+  <ul class="src" id="sources"></ul>
+  <p>This briefing is an analytical reference, not an endorsement and not legal or compliance advice. Scripts and green follow-up boxes are suggestions written for briefing use.</p>
+</div></footer>
+
+<div id="ov" aria-hidden="true"><div id="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="mh" id="mh"><button class="x" id="mx" aria-label="Close">&times;</button><div class="top"><span id="mav"></span><div><h3 id="mt"></h3><div class="s" id="ms"></div></div></div></div><div class="mb" id="mb"></div></div></div>
+
+<script>
+/* ===================== DATA (edit here) ===================== */
+const DATA = {
+  asOf: '2026-10-02',
+  electionDay: '2026-11-03',
+  log: [
+    '2026-10-02  Edition 2. Added click-through profiles, plain-language scripts, latest news with follow-ups, simpler tight-race cards, legislature and candidate ideology, issue explainers, full Chicago mayor field.',
+    '2026-10-02  Edition 1. Illinois statewide, congressional, legislative and Chicago races, national overview, 2028 primer.'
+  ],
+  gaps: 'No independent 2026 general election poll for Illinois governor was found. The only reading is a Nov 2025 Victory Research survey. Congressional pairings other than IL-2, 4, 8 and 17, the SD-35, 38 and 54 candidates, and HD-113 were carried forward and not re-verified. Ideology lanes use only what the sources show. Incumbent legislators mostly sit in "not yet established" until roll call and scorecard data is added. Caucus sizes come from public pages that may be out of date. Sources disagree on some seat numbers, for example the Barrington Hills seat appears as HD-52 and HD-96 and the Senate seat for Hills as SD-26 and SD-38. This page uses HD-52 and SD-26.',
+
+  /* ---------- plain-language scripts for each section ---------- */
+  scripts: {
+    glance: {
+      say: 'Illinois is a blue state with a very predictable top of the ticket. Governor Pritzker is the strong favorite for a third term and Lieutenant Governor Stratton should win the open U.S. Senate seat. The real action is in about a dozen legislative seats, one congressional district, and a fight over electricity prices and data centers that both parties now care about. After the election, the legislature returns for a short veto session in November, and that is when data center rules are most likely to move.',
+      points: [
+        'Statewide races. Democrats are favored in all six.',
+        'Congress. IL-17 is the only seat that could change hands, and it leans Democratic.',
+        'Legislature. Democrats hold 78 of 118 House seats and 40 of 59 Senate seats. They can lose several and keep a veto-proof majority.',
+        'Chicago. The mayor race is Feb 23, 2027, and the incumbent is weak in the polls.'
+      ],
+      act: 'Open the Latest news section next. It lists what changed in the last few weeks and one suggested follow-up for each item.'
+    },
+    news: {
+      say: 'Three stories matter most right now. First, Governor Pritzker is demanding that the legislature pass data center rules, called the POWER Act, in the six days of veto session starting Nov 17. Second, Chicago faces an 882 million dollar budget gap and the mayor has just launched a re-election bid with weak approval. Third, ethics problems have hit two Democratic legislators in seats that Republicans want, which is why those seats are now toss-ups.',
+      points: [
+        'Data centers are the top energy story and the veto session is the deadline.',
+        'The Chicago budget gap shapes the whole mayor race.',
+        'Ethics cases in HD-97 and HD-76 turned safe-looking seats into toss-ups.',
+        'Petitions for Chicago mayor are due Oct 26 and challenges will cut the field.'
+      ],
+      act: 'Pick the two or three items that touch your issues and book the follow-ups listed under them before the Nov 3 election, when schedules fill up.'
+    },
+    board: {
+      say: 'Think of this board as a ladder. On the left, the races Democrats should win easily. On the right, the ones Republicans should hold. The middle column, toss-ups, is only six seats and every one is a legislative race. If you only have time to learn six races, learn SD-48, SD-24, HD-52, HD-76, HD-97 and HD-104.',
+      points: [
+        'Nine races are safe or likely Democratic, including all six statewide offices.',
+        'Six are true toss-ups. All are House or Senate districts.',
+        'Border color shows who holds the seat now. Blue is a Democrat and red is a Republican.',
+        'Ratings are this briefing\'s judgment except where Cook Political Report is cited.'
+      ],
+      act: 'Click each toss-up tile and note which committee members or leaders have a stake in it.'
+    },
+    tight: {
+      say: 'Here is the simple version. Two seats were decided by fewer than 300 votes last time, HD-52 by 47 and HD-104 by 269. Two Democratic seats have been shaken by ethics cases. Those are the places where a small swing, a good campaign, or one bad news cycle changes who sits in the chamber. But even if Republicans win every Democratic seat on the at-risk list, Democrats would still keep a veto-proof majority in both chambers.',
+      points: [
+        'The thinnest cushion in the state is HD-52, won by 47 votes.',
+        'HD-97 and HD-76 are Democratic-held toss-ups because of ethics cases, not because the districts changed.',
+        'SD-24, SD-26 and SD-33 are Republican-held seats that lean toward a Democratic pickup because of suburban voting patterns.',
+        'The stress test shows control of both chambers is not in doubt, only the margin.'
+      ],
+      act: 'If your agenda needs a veto-proof majority, track the six Democratic-held seats on the stress test. If it needs bipartisan cover, track the Republican-held toss-ups.'
+    },
+    majorities: {
+      say: 'Democrats have the House 78 to 40 and the Senate 40 to 19. A three-fifths majority, which can override a veto, is 71 in the House and 36 in the Senate. So Democrats can lose seven House seats and four Senate seats before they lose that power. Control of the chambers themselves is not in play this year.',
+      points: [
+        'House cushion. 7 seats above the veto-proof line.',
+        'Senate cushion. 4 seats above the line, with 39 of 59 seats on the ballot.',
+        'Republicans have held 40 House seats since 2018.'
+      ],
+      act: 'Treat the supermajority as the real stake. Ask whether your bills need it.'
+    },
+    legislature: {
+      say: 'Illinois politics is mostly decided inside the Democratic caucus. Speaker Welch and Senate President Harmon run mainstream, labor-friendly majorities. The progressive bloc is small but loud, around two dozen House members, and the Black Caucus is the biggest organized bloc with 31 members. On the Republican side, leader McCombie runs a caucus that is trying to win suburban seats while a small Freedom Caucus of seven pushes harder to the right, and the two sides fought openly last October. So the main fights that decide bills are Democrats versus Democrats on money and priorities, and Republicans versus Republicans on tone.',
+      points: [
+        'Democrats. Mainstream majority, a Progressive Caucus of about 21 in the House, a Black Caucus of about 31, a Latino Caucus of about 15.',
+        'Republicans. Leadership caucus plus an Illinois Freedom Caucus of about 7.',
+        'Leaders. Speaker Welch, Senate President Harmon, House Leader McCombie, Senate Leader Curran.',
+        'Caucus numbers overlap, so do not add them.'
+      ],
+      act: 'To count votes on a bill, start with the Democratic caucus blocs, not the party totals.'
+    },
+    ideology: {
+      say: 'Among statewide figures, Pritzker and Stratton sit in the mainstream Democratic lane, Bailey sits at the conservative end, and Corbett is an independent in the middle right. Among legislative candidates the picture is thinner. We can place Nabeela Syed as a progressive from her stated positions, Michele Clark as a mainstream affordability Democrat, and Frank Lesko as an anti-establishment Republican who won his county job by promising to abolish it. For most incumbents we do not yet have enough evidence to place them honestly, so they sit in a separate lane until we add vote records.',
+      points: [
+        'Placement uses stated positions and reporting, not guesses.',
+        'Filled dot means two or more sources. Hollow dot means one source or a thin basis.',
+        'The next upgrade is roll call votes and group scorecards for incumbents.'
+      ],
+      act: 'Ask for the voting record upgrade if you need to predict how a specific legislator will vote on energy.'
+    },
+    issues: {
+      say: 'Voters are worried about prices. Electricity bills rose sharply this summer because the regional grid operator paid a record price for capacity, and data centers are being blamed for pushing demand and cost up. The governor has paused new data center tax breaks and wants rules passed in veto session. His opponent wants to pause even existing deals. Taxes, crime, state and city budgets, and a run of ethics scandals fill out the rest of the list.',
+      points: [
+        'Electricity. The MISO capacity price hit 666.50 dollars per megawatt-day, and Ameren Illinois supply prices rose from about 8.8 to about 11.3 cents per kWh.',
+        'Data centers. Both major candidates say they should bring their own power.',
+        'Costs. 60 percent in one survey named high taxes as a top issue.',
+        'Trust. Two legislators have faced harassment findings or allegations.'
+      ],
+      act: 'Use the expandable tiles to pull a one-paragraph background and the Ameren angle on each issue before meetings.'
+    },
+    chicago: {
+      say: 'The Chicago mayor race is wide open and the incumbent is in trouble. Brandon Johnson has 23 percent approval in one poll and under 650 thousand dollars in the bank. Secretary of State Alexi Giannoulias has about 22 million dollars and is the presumed front-runner. Comptroller Susana Mendoza and Congressman Mike Quigley are the other big names, and at least a dozen more are running. With that many candidates, a runoff on April 6 is the most likely outcome. The big issues are the 882 million dollar budget gap, public safety, housing, and who can work with the City Council.',
+      points: [
+        'Giannoulias has money and business and building-trades support.',
+        'Johnson has the Chicago Teachers Union and a base among Black voters, but weak numbers.',
+        'Mendoza, Quigley and Kelly are competing for the same moderate and law-and-order voters.',
+        'Petitions are due Oct 26. Expect some names to be knocked off.'
+      ],
+      act: 'Do not rely on the full list of 16 names. Recheck after Oct 26 when the filings and challenges are known.'
+    },
+    national: {
+      say: 'Nationally, Democrats are ahead on the generic ballot by about nine points, but the Senate map is hard. Republicans hold 53 seats and Democrats need a net gain of four to take control. A forecast model gives Democrats about a 23 percent chance. The House looks friendlier to Democrats, with 225 seats at least leaning their way versus 202 for Republicans, and 8 toss-ups. Illinois is not a battleground, but results here and in the Senate will shape federal energy and budget policy.',
+      points: [
+        'Senate. 53 R to 47 D now. Seven toss-ups.',
+        'House. Democrats lead the ratings 225 to 202.',
+        'Generic ballot. D+9 in the NBC News average.',
+        'Governors. Arizona, Nevada, Wisconsin and Michigan are the toss-ups.'
+      ],
+      act: 'Watch Texas, Ohio, Maine and North Carolina. They decide the Senate.'
+    },
+    y2028: {
+      say: 'The 2028 race is open on both sides. On the Republican side it looks like Vice President Vance against Secretary of State Rubio, nearly tied in a May poll. On the Democratic side no one has broken away. Buttigieg and Newsom lead, and Governor Pritzker sits around four percent but keeps showing up on shortlists. A comfortable third term in November helps his case.',
+      points: [
+        'Republicans. Vance 36, Rubio 35 in Emerson May 2026.',
+        'Democrats. Buttigieg 18, Newsom 16, Beshear 9, Pritzker 4.4.',
+        'The calendar and early-state order are not final.',
+        'Polls this early mostly measure name recognition.'
+      ],
+      act: 'Watch Pritzker\'s margin on Nov 3. A big win would raise his national profile and the stakes for Illinois policy.'
+    },
+    ilgov: {}
+  },
+
+  glance: [
+    {cls:'t-blue', big:'Pritzker', lab:'Favored for a third term over Bailey. Corbett (I) also on the ballot.', src:'Only poll found is Nov 2025 (54-34)'},
+    {cls:'t-navy', big:'Stratton', lab:'Heavy favorite for the open U.S. Senate seat over Tracy.', src:'Forecasters rate Solid or Safe D'},
+    {cls:'t-purple', big:'IL-17', lab:'The one competitive congressional race. Sorensen (D) vs Vancil (R).', src:'Cook rating Likely D'},
+    {cls:'t-gold', big:'6 seats', lab:'Legislative toss-ups to watch: SD-48, SD-24, HD-52, 76, 97, 104.', src:'Ratings are this briefing\'s judgment'}
+  ],
+
+  /* ---------- latest news. date, tag, head, src, url, why, act ---------- */
+  news: [
+    {d:'Sep 25', tag:'Energy', head:'Pritzker demands data center rules in veto session', src:'Rockford News First, Crain\'s',
+      url:'https://www.rockfordnewsfirst.com/2026/09/25/pritzker-demands-data-center-regulations-during-veto-session/',
+      why:'The governor wants the POWER Act passed in the six days that start Nov 17. It covers fair-share payment, water use, reporting and pollution protections. Senate Republicans filed a rival bill that gives local governments more control, including no data centers within three miles of homes without written consent. An environmental group estimates data centers could add 37 billion dollars to electricity costs through 2050 without guardrails.',
+      act:'Ask for a briefing from committee staff on where the POWER Act text and the Senate Republican bill differ, and whether an agreed version exists before Nov 17.'},
+    {d:'Sep 13', tag:'Chicago', head:'Mayor Johnson launches re-election bid', src:'WTTW, Axios',
+      url:'https://news.wttw.com/2026/09/13/mayor-brandon-johnson-launches-reelection-campaign-vowing-we-can-t-go-backward',
+      why:'Johnson frames the race as working class against corporate class. He promises mental health clinics, a pause on new data centers, a phase-out of tipped minimum wage and 10 paid days off. Rivals point to his approval and the budget gap.',
+      act:'If you work with the city, plan for two possible futures, a Johnson second term and a Giannoulias or other business-friendly mayor, and avoid commitments that depend on one outcome.'},
+    {d:'Sep 3', tag:'Chicago', head:'City projects 882 million dollar 2027 budget gap', src:'Sun-Times, WBEZ, WTTW',
+      url:'https://chicago.suntimes.com/city-hall/2026/09/03/mayor-brandon-johnson-2027-budget-forecast-chicago-city-hall-deficit',
+      why:'The gap is smaller than last year\'s 1.2 billion but projected to grow to 943 million in 2028 and about 1.02 billion in 2029. Drivers include pensions, bond payments, about 400 million for police misconduct settlements, and lower TIF surpluses. Johnson says he will not close it on the backs of working people.',
+      act:'Watch the mayor\'s fall budget proposal for any new fees or taxes that touch utilities or large energy users.'},
+    {d:'Aug 20', tag:'Ethics', head:'New allegation against Rep. Murri-Briel in HD-76', src:'Capitol News Illinois',
+      url:'https://www.newsfromthestates.com/article/amid-democratic-scandals-illinois-republicans-hoping-flip-legislative-seats',
+      why:'A former staffer alleges harassment and other misconduct. Murri-Briel denies it and says the Legislative Inspector General found a 2025 complaint without merit. She won by 595 votes in 2024, so the seat is a toss-up.',
+      act:'If you have scheduled meetings with this office, keep them on policy and check with your compliance team on optics before any event or contribution.'},
+    {d:'Jul', tag:'Ethics', head:'Rep. Harry Benton resigns after inspector general finding', src:'Capitol News Illinois',
+      url:'https://www.newsfromthestates.com/article/amid-democratic-scandals-illinois-republicans-hoping-flip-legislative-seats',
+      why:'The inspector general found a pattern of sexual harassment. Jessica Dixon Heitman now holds HD-97 and faces Republican Gabby Shanahan, who is running on trust and accountability. Benton won by about 2,300 votes in 2024.',
+      act:'HD-97 is a first-term incumbent again. Request an introductory meeting before the veto session.'},
+    {d:'Jun 5', tag:'Energy', head:'Pritzker pauses new data center tax incentives', src:'Capitol News Illinois',
+      url:'https://capitolnewsillinois.com/news/data-centers-emerging-as-key-issue-in-illinois-governors-race/',
+      why:'The pause covers new tax credits. About 650 million dollars in exemptions were committed across 34 projects before it. Bailey wants existing deals paused too and says he pushed the governor to act. The governor\'s campaign disputes that.',
+      act:'Prepare a one-page summary of how the pause affects planned load in your service area and share it before veto session meetings.'},
+    {d:'Jan 8', tag:'Energy', head:'Pritzker signs major energy reform law', src:'WTTW',
+      url:'https://news.wttw.com/2026/01/08/pritzker-signs-major-energy-reform-bill-amid-projected-shortages',
+      why:'The law adds incentives for battery storage, lifts the ban on large new nuclear plants, enables virtual power plants, requires time-of-use pricing options and gives the ICC authority for long-term planning. The state power agency projects 13.4 billion dollars in savings over 20 years, but new storage charges start on bills in 2030.',
+      act:'Track the ICC rulemakings that implement it. Several will land during the next legislature\'s first year.'},
+    {d:'Oct 26', tag:'Date', head:'Chicago mayoral petitions due at 5 p.m.', src:'Sun-Times, Wikipedia',
+      url:'https://chicago.suntimes.com/elections/2026/09/13/who-is-running-for-chicago-mayor-2027-election',
+      why:'Candidates need 12,500 valid signatures. Challenges follow, and the final ballot may be much shorter than the list of 16 names.',
+      act:'Set a calendar reminder for Oct 27 to refresh the mayor section of this page.'}
+  ],
+  watch: [
+    ['Capitol News Illinois','https://capitolnewsillinois.com','Daily state government reporting, free'],
+    ['Capitol Fax','https://capitolfax.com','Insider blog on legislative and campaign moves'],
+    ['Chicago Sun-Times and WBEZ','https://chicago.suntimes.com','City Hall and mayor race coverage'],
+    ['Illinois Legislative Inspector General','https://olig.illinois.gov','Ethics reports that can reshape races'],
+    ['Cook Political Report and 270toWin','https://www.cookpolitical.com','National ratings updates'],
+    ['Illinois State Board of Elections','https://www.elections.il.gov','Campaign finance filings and ballot access']
+  ],
+
+  races: [
+    {id:'gov',n:'Governor',d:'Pritzker v Bailey',tag:'State',col:'D',inc:'D'},
+    {id:'ussen',n:'U.S. Senate',d:'Stratton v Tracy (open)',tag:'State',col:'D',inc:'D'},
+    {id:'ag',n:'Attorney General',d:'Raoul v Fioretti',tag:'State',col:'D',inc:'D'},
+    {id:'sos',n:'Secretary of State',d:'Giannoulias v Harris',tag:'State',col:'D',inc:'D'},
+    {id:'comp',n:'Comptroller (open)',d:'Croke v Drew',tag:'State',col:'D',inc:'D'},
+    {id:'treas',n:'Treasurer',d:'Frerichs v Solomon',tag:'State',col:'D',inc:'D'},
+    {id:'il17',n:'IL-17',d:'Sorensen v Vancil',tag:'Congress',col:'D',inc:'D'},
+    {id:'sd57',n:'SD-57',d:'Belt v Rhyne',tag:'Senate',col:'D',inc:'D'},
+    {id:'hd113',n:'HD-113',d:'Hoffman (opponent not confirmed)',tag:'House',col:'D',inc:'D'},
+    {id:'sd36',n:'SD-36',d:'Halpin v Beekman',tag:'Senate',col:'leanD',inc:'D'},
+    {id:'sd33',n:'SD-33 (open)',d:'Clark (D) v Republican TBD',tag:'Senate',col:'leanD',inc:'R'},
+    {id:'sd26',n:'SD-26',d:'Syed v Hills',tag:'Senate',col:'leanD',inc:'R'},
+    {id:'hd47',n:'HD-47 (open)',d:'Bray-Parker v Vrankovich',tag:'House',col:'leanD',inc:'R'},
+    {id:'hd112',n:'HD-112',d:'Stuart v Ford',tag:'House',col:'leanD',inc:'D'},
+    {id:'sd48',n:'SD-48',d:'Turner v Lesko',tag:'Senate',col:'toss',inc:'D'},
+    {id:'sd24',n:'SD-24',d:'McAdams v Lewis',tag:'Senate',col:'toss',inc:'R'},
+    {id:'hd52',n:'HD-52',d:'Peterson v McLaughlin',tag:'House',col:'toss',inc:'R'},
+    {id:'hd97',n:'HD-97',d:'Dixon Heitman v Shanahan',tag:'House',col:'toss',inc:'D'},
+    {id:'hd76',n:'HD-76',d:'Murri-Briel v Bishop',tag:'House',col:'toss',inc:'D'},
+    {id:'hd104',n:'HD-104',d:'Roberson v Schweizer',tag:'House',col:'toss',inc:'R'},
+    {id:'sd56',n:'SD-56',d:'Geldert-Murphey v Harriss',tag:'Senate',col:'leanR',inc:'R'},
+    {id:'hd65',n:'HD-65',d:'Rivard v Ugaste',tag:'House',col:'leanR',inc:'R'},
+    {id:'hd114',n:'HD-114',d:'McClellan v Schmidt',tag:'House',col:'leanR',inc:'R'},
+    {id:'sd59',n:'SD-59',d:'Mueller v Jacobs (appointed)',tag:'Senate',col:'likelyR',inc:'R'},
+    {id:'sd35',n:'SD-35, 38, 54',d:'Syverson, Rezin, McClure',tag:'Senate',col:'likelyR',inc:'R'},
+    {id:'hd118',n:'HD-118',d:'Markel v Doody',tag:'House',col:'likelyR',inc:'R'}
+  ],
+
+  /* ---------- tight race cards. sq = squeaker meter 1 to 5. v = votes ---------- */
+  tight: [
+    {id:'hd52', seat:'HD-52 Barrington Hills', holds:'R', v:47, y:'2024', lean:'Rematch', sq:5, why:'Decided by 47 votes. The Republican incumbent was heavily outspent and had awkward moments, per The Illinoize.', read:'Toss-up', col:'toss'},
+    {id:'hd104', seat:'HD-104 Danville and Champaign', holds:'R', v:269, y:'2024', lean:'Harris +4', sq:5, why:'New lines added Democratic voters from Champaign-Urbana. The Republican was appointed in 2023.', read:'Toss-up', col:'toss'},
+    {id:'hd76', seat:'HD-76 La Salle and Ottawa', holds:'D', v:595, y:'2024', lean:'Rematch', sq:4, why:'New harassment allegation in August, which she denies. The same Republican is back for a rematch.', read:'Toss-up', col:'toss'},
+    {id:'sd48', seat:'SD-48 Springfield and Decatur', holds:'D', v:1350, y:'2022, about', lean:'Harris +1.2', sq:3, why:'Democrat Turner won by under 2 points in 2022. Republican Lesko has never lost an election but raises little money.', read:'Toss-up', col:'toss'},
+    {id:'hd97', seat:'HD-97 Plainfield', holds:'D', v:2300, y:'2024, about', lean:'Harris +4', sq:3, why:'Benton resigned over harassment findings. A new Democrat holds the seat and faces the same Republican as before.', read:'Toss-up', col:'toss'},
+    {id:'sd24', seat:'SD-24 suburbs', holds:'R', v:null, y:'', lean:'Harris +3', sq:3, why:'A Democratic target if the suburban trend holds. Outcome depends on how much money Senate leadership puts in.', read:'Toss-up', col:'toss'},
+    {id:'sd33', seat:'SD-33 St. Charles area', holds:'R', v:null, y:'', lean:'Harris +2', sq:3, why:'Open seat after Republican Don DeWitte retired. Democrats got their preferred candidate.', read:'Lean D flip', col:'leanD'},
+    {id:'hd65', seat:'HD-65 Geneva', holds:'R', v:null, y:'', lean:'Trump +1', sq:2, why:'The district is trending Democratic and the Republican incumbent faces a well-credentialed challenger.', read:'Lean R', col:'leanR'},
+    {id:'sd26', seat:'SD-26 northwest suburbs', holds:'R', v:null, y:'', lean:'Harris +10', sq:2, why:'Demographics favor Democrats. A sitting state representative and the party\'s top choice is running.', read:'Lean D flip', col:'leanD'},
+    {id:'hd47', seat:'HD-47 Wheaton', holds:'R', v:null, y:'', lean:'Harris +11', sq:2, why:'Open seat after Republican Amy Grant retired. Democrats call their candidate a top recruit.', read:'Lean D flip', col:'leanD'}
+  ],
+  stress: [
+    {t:'House. Worst case for Democrats', big:'75 seats', d:'Democrats lose HD-97, HD-76 and HD-112 and flip nothing. They would still hold 75, four above the 71 needed.'},
+    {t:'House. Best case for Democrats', big:'83 seats', d:'Democrats hold all theirs and flip HD-47, HD-52, HD-104, HD-65 and HD-114. Realistically they flip some, not all.'},
+    {t:'Senate. Worst case for Democrats', big:'37 seats', d:'Democrats lose SD-48, SD-36 and SD-57 and flip nothing. They would still hold 37, one above the 36 needed.'},
+    {t:'Senate. Best case for Democrats', big:'44 seats', d:'Democrats hold all theirs and flip SD-24, SD-26, SD-33 and SD-56.'}
+  ],
+
+  ilHouse:[{l:'Democrats',v:78,c:'#2563eb'},{l:'Republicans',v:40,c:'#dc2626'}], ilHouseMark:71,
+  ilSenate:[{l:'Democrats',v:40,c:'#2563eb'},{l:'Republicans',v:19,c:'#dc2626'}], ilSenateMark:36,
+
+  /* ---------- legislature blocs ---------- */
+  blocs: [
+    {n:'Black Caucus (both chambers)',v:31,c:'#7c3aed',d:'Largest organized bloc. Joint chair Lakesia Collins. Focus on education funding, job training, apprenticeships and expungement.'},
+    {n:'House Progressive Caucus',v:21,c:'#db2777',d:'Founded 2019. Co-chairs Will Guzzardi, Theresa Mah and Carol Ammons. Started with minimum wage, cannabis legalization and campaign finance.'},
+    {n:'Latino Caucus',v:15,c:'#0d9488',d:'9 representatives and 6 senators, all Democrats. Chairs include Aaron Ortiz, Cristina Castro and Karina Villa.'},
+    {n:'Illinois Freedom Caucus',v:7,c:'#b91c1c',d:'Six House members and one senator. Led by Rep. Chris Miller. Clashed with House Republican Leader McCombie in October 2025.'}
+  ],
+  leaders: [
+    ['House','Speaker Emanuel "Chris" Welch (D)','Minority Leader Tony McCombie (R)'],
+    ['Senate','President Don Harmon (D)','Minority Leader John Curran (R)'],
+    ['House No. 2s','Majority Leader Robyn Gabel (D)','Conference Chair Jeff Keicher (R)'],
+    ['Senate No. 2s','Majority Leader Kimberly Lightford (D)','Deputy Leader Sue Rezin (R)']
+  ],
+  spectrum: [
+    {l:'Progressive Caucus',s:'About 21 House members. Pushes revenue, labor and climate priorities.',w:14,c:'#db2777'},
+    {l:'Democratic mainstream',s:'The governing majority under Welch and Harmon. Labor-friendly and cost-conscious.',w:34,c:'#2563eb'},
+    {l:'Democratic moderates',s:'Suburban and downstate Democrats in swing seats. Often focus on taxes and utility bills.',w:18,c:'#60a5fa'},
+    {l:'Republican leadership',s:'Led by McCombie and Curran. Focus on taxes, affordability and winning suburban seats.',w:22,c:'#ef4444'},
+    {l:'Freedom Caucus',s:'About 7 members. Hardline opposition to most Democratic policy.',w:12,c:'#7f1d1d'}
+  ],
+  blocCards: [
+    {cls:'t-purple',big:'Inside fights',lab:'Most bills are decided inside the Democratic caucus. Progressives, labor, Black and Latino caucuses and swing-seat moderates all bargain with the Speaker and President.',src:'Briefing judgment'},
+    {cls:'t-red',big:'GOP split',lab:'In Oct 2025 McCombie stripped Freedom Caucus members of some legislative privileges after they criticized her. They said she was "declaring war on conservatives".',src:'Illinois Freedom Caucus, Wikipedia'},
+    {cls:'t-teal',big:'Why it matters',lab:'Energy bills pass when labor, the Black Caucus and swing-seat Democrats agree. Republicans mostly shape the debate rather than the votes.',src:'Briefing judgment'}
+  ],
+
+  /* ---------- statewide figures strip. p = D, R or I ---------- */
+  ideology: [
+    {n:'Johnson',x:5,p:'D'},{n:'Stratton',x:17,p:'D'},{n:'Pritzker',x:25,p:'D'},{n:'Croke',x:31,p:'D'},
+    {n:'Giannoulias',x:39,p:'D'},{n:'Quigley',x:44,p:'D'},{n:'Mendoza',x:52,p:'D'},{n:'Corbett',x:60,p:'I'},
+    {n:'Tracy',x:70,p:'R'},{n:'Kelly Jr.',x:76,p:'R'},{n:'Bailey',x:90,p:'R'}
+  ],
+  /* lanes for legislative candidates. People ids come from PEOPLE and carry lane and conf. */
+  lanes: [
+    {k:'prog',l:'Progressive Democrat',s:'Stated positions on the left of the Democratic caucus',bg:'#fce7f3'},
+    {k:'main',l:'Mainstream Democrat',s:'Affordability and kitchen-table message',bg:'#e0ecff'},
+    {k:'none',l:'Not yet established',s:'Sources reviewed did not show enough',bg:'#f1f5f9'},
+    {k:'estR',l:'Republican, establishment',s:'Works inside the leadership caucus',bg:'#ffe4e6'},
+    {k:'popR',l:'Republican, outsider or populist',s:'Anti-establishment brand or message',bg:'#fecaca'}
+  ],
+
+  /* ---------- issue explainers ---------- */
+  issueDeep: [
+    {cls:'t-gold', big:'Electricity prices', lab:'Capacity price spike drives higher bills', src:'MISO, ICC, CUB',
+     what:'Electric bills rose sharply this year. Part of the cost is the price of reserving enough power plants for peak days, set in the regional MISO capacity auction.',
+     now:'The 2026-27 summer auction cleared at 666.50 dollars per megawatt-day. Ameren Illinois supply price (Price to Compare) went from about 8.77 to about 11.33 cents per kWh. ComEd rose about 9 percent to about 10.4 cents. Both reset Oct 1.',
+     who:['Democrats blame federal tariffs, Trump policies and data center demand.','Republicans blame the climate law (CEJA) and closing fossil plants too fast.','Consumer groups want the ICC and legislature to protect residential customers.'],
+     watch:['Whether the veto session adds ratepayer protections.','Winter bills as heating demand rises.','Next MISO auction results.'],
+     ang:'Utility bills are the number one local complaint, so expect candidates to attack suppliers and utilities.'},
+    {cls:'t-purple', big:'Data centers and POWER Act', lab:'115 operating and 67 proposed in Illinois', src:'UVA Weldon Cooper, Jan 2026',
+     what:'Large AI data centers use huge amounts of electricity and water. The question is who pays for new power and grid upgrades.',
+     now:'The governor paused new tax credits on June 5 after about 650 million dollars in exemptions were already committed across 34 projects. He wants the POWER Act passed in veto session. Senate Republicans have a rival bill giving local governments more say.',
+     who:['Pritzker. Data centers must bring their own power and use closed-loop water.','Bailey. Pause all incentives, including existing deals, and set up consumer relief paid by data centers.','Johnson (Chicago). Pause on new data centers.','68 percent of respondents in one survey back regulation, including 62 percent of Republicans.'],
+     watch:['Nov 17 to 19 and Dec 1 to 3 veto session.','Whether the governor and legislative leaders agree on one bill before then.'],
+     ang:'Both parties now agree on the problem. The fight is over how tough the rules are and who is at the table.'},
+    {cls:'t-teal', big:'The January energy law', lab:'Storage, nuclear and planning', src:'WTTW, Jan 2026',
+     what:'A major law signed Jan 8, 2026 reshaped how Illinois plans and buys power.',
+     now:'It adds battery storage incentives, lifts the ban on new large nuclear plants, enables virtual power plants, requires time-of-use rate options, and gives the ICC authority for long-term planning. The state power agency projects 13.4 billion dollars in savings over 20 years. Storage charges begin showing on bills in 2030.',
+     who:['Supporters. Environmental groups, labor (up to 100,000 potential jobs) and utility watchdogs.','Critics. Republicans and business groups. One called it a guaranteed rate increase.'],
+     watch:['ICC rulemakings that implement the law.','Fights over whether savings projections hold up.'],
+     ang:'Implementation happens at the ICC, not the legislature, so regulatory work matters as much as bills.'},
+    {cls:'t-red', big:'Taxes and cost of living', lab:'60 percent name high taxes as a top issue', src:'2025 survey, 752 likely voters',
+     what:'Property taxes, grocery and rent costs and utility bills all feed one message about affordability.',
+     now:'Republicans center their legislative campaigns on "cost of living at the door". Democrats try to tie prices to Trump tariffs and Iran policy that raised gas prices. Michele Clark and Ricky Rivard, among others, stress affordability. Maria Pappas and Joe Holberg make property taxes a Chicago theme.',
+     who:['Republicans. Taxes and spending are too high.','Democrats. Prices are being driven by federal policy and corporate power.'],
+     watch:['Property tax relief proposals in the veto session or next spring.','Chicago budget fees.'],
+     ang:'Any proposal that adds a cost to customers will be framed against this message.'},
+    {cls:'t-blue', big:'Public safety', lab:'34 percent rate Pritzker good on crime, 59 percent bad', src:'Victory Research, Nov 2025',
+     what:'Crime is down but perception lags. It matters most in the Chicago mayor race.',
+     now:'Johnson says 2025 homicides hit a 60-year low and violent crime fell more than 20 percent, with another 7.6 percent drop in 2026. Rivals say residents still do not feel safe. Giannoulias promises 1,000 more officers. Kelly and Carter-Walters run on law and order.',
+     who:['Johnson. Prevention, youth jobs and mental health work.','Giannoulias, Kelly, Mendoza. More police and a stronger sense of order.'],
+     watch:['Summer and fall crime numbers.','Federal immigration enforcement in Chicago.'],
+     ang:'Safety shapes which Chicago candidate gets to the runoff.'},
+    {cls:'t-pink', big:'Budgets and pensions', lab:'882 million dollar Chicago gap for 2027', src:'City projection via press',
+     what:'Chicago and the state both carry large pension and debt costs.',
+     now:'The city projects 882 million for 2027, about 943 million in 2028 and about 1.02 billion in 2029. Drivers include pension payments, bond costs, police settlements and shrinking TIF surpluses. A debt sale program failed. New taxes on cloud computing, social media and sports betting are outperforming but face legal challenges.',
+     who:['Johnson. Raise revenue from wealthy residents and corporations, not property taxes.','Pappas, Cardenas, Quigley. Discipline and structural fixes.','Aldermen. City Council is a co-equal branch and wants a say.'],
+     watch:['The mayor\'s fall budget proposal.','Whether any new tax takes effect.'],
+     ang:'Whatever fees the city adopts can ripple to utility and franchise costs.'},
+    {cls:'t-navy', big:'Ethics and trust', lab:'Benton resigned. Ammons indicted. New allegations in HD-76.', src:'Capitol News Illinois',
+     what:'A string of cases involving Democratic legislators gives Republicans a message about accountability.',
+     now:'Benton resigned in July after the inspector general found a pattern of harassment. Rep. Carol Ammons was indicted. In August a former staffer made new allegations against Murri-Briel, which she denies. Republicans say voters care more about cost of living than ethics, but they run on both.',
+     who:['Democrats. These are individual cases, and the party acted when findings were made.','Republicans. A pattern that needs new leadership.'],
+     watch:['New inspector general reports.','Whether Democratic leadership funds the affected seats.'],
+     ang:'Optics matter. Keep meetings and contributions routine and compliant.'}
+  ],
+  issues: [
+    {cls:'t-teal', big:'59.5%', lab:'say Illinois is on the wrong track', src:'Victory Research, Nov 2025'},
+    {cls:'t-gold', big:'$666.50', lab:'per MW-day in MISO\'s 2026-27 summer capacity auction', src:'MISO via regional reports'},
+    {cls:'t-purple', big:'115 + 67', lab:'data centers operating and proposed in Illinois', src:'UVA Weldon Cooper, Jan 2026'},
+    {cls:'t-red', big:'60%', lab:'named high taxes as a top issue', src:'2025 survey, 752 likely voters'}
+  ],
+  ptc: [{n:'Before June 2026',v:8.77,c:'#14b8a6'},{n:'June to Sept 2026',v:11.33,c:'#f59e0b'}],
+  dc: [
+    {w:'Pritzker (D)',a:'Paused new incentives June 5. Says data centers must bring their own power and use closed-loop water. Wants the POWER Act passed in veto session.'},
+    {w:'Bailey (R)',a:'Pause all incentives, including existing deals. Data centers supply their own power and fund consumer relief. Wants fossil fuel expansion and a rollback of parts of the climate law.'},
+    {w:'Corbett (I)',a:'Says the state rushed in without guardrails and closed gas plants too fast.'}
+  ],
+
+  /* ---------- Chicago mayor ---------- */
+  gap: [{n:'2027',v:882,c:'#db2777'},{n:'2028',v:943,c:'#be185d'},{n:'2029',v:1020,c:'#831843'}],
+  mayorMoney: [
+    {n:'Giannoulias',v:21.7,c:'#7c3aed'},{n:'Kelly',v:2.2,c:'#0d9488'},{n:'Mendoza',v:1.6,c:'#db2777'},{n:'Johnson',v:0.63,c:'#f59e0b'},{n:'Quigley',v:0.38,c:'#2563eb'}
+  ],
+  scenarios: [
+    {t:'Giannoulias vs Johnson',d:'Money and business backing against the incumbent\'s union and Black voter base. A classic left versus center fight. Giannoulias is favored on dollars, Johnson on organization.'},
+    {t:'Giannoulias vs another moderate',d:'If Mendoza or Quigley consolidates the lane Johnson lost, the runoff becomes a contest between two establishment figures and the incumbent could miss it.'},
+    {t:'Giannoulias vs a law and order candidate',d:'If Kelly, Carter-Walters and others split but one rises, public safety becomes the runoff issue.'},
+    {t:'Wild card',d:'Willie Wilson drew about 9 percent in 2023 from older Black voters. He could split Johnson\'s base and keep a second progressive off the runoff ballot.'}
+  ],
+  mayorIssues: [
+    {t:'Budget gap',c:'#db2777',d:'882 million dollars for 2027, rising after. Johnson says wealthy residents and corporations should pay. Pappas, Cardenas and Quigley stress discipline. Holberg proposes buying back the parking meters.'},
+    {t:'Public safety',c:'#2563eb',d:'Homicides at a 60-year low per Johnson, but rivals say people do not feel safe. Giannoulias promises 1,000 more officers. Kelly and Carter-Walters run on law and order and the latter wants federal help.'},
+    {t:'Housing and affordability',c:'#0d9488',d:'Holberg wants 100,000 new units and a property tax freeze. Brewer stresses affordable housing. Su wants a 10 percent property tax cut and 15 percent lower rents. Johnson stresses renter protections.'},
+    {t:'Transit',c:'#7c3aed',d:'CTA safety, cleanliness and reliability matter to riders. Quigley says he secured 2 billion dollars for the Red Line extension. Holberg says crime stats do not match rider experience.'},
+    {t:'Schools and CPS',c:'#f59e0b',d:'Aging buildings and falling enrollment. Johnson wants closed schools turned into community assets. Holberg suggests flexible use of buildings.'},
+    {t:'City Hall competence and the Council',c:'#be185d',d:'Mendoza calls recent decisions a "blizzard of incompetence". Johnson has a strained relationship with the Council and thin ties in Springfield. Nee and Quinlan run on trust and reform.'},
+    {t:'Washington and immigration',c:'#dc2626',d:'Johnson defends sanctuary status and resists federal enforcement. Carter-Walters opposes sanctuary policies. Federal cuts add budget pressure.'},
+    {t:'Data centers',c:'#0f1b3d',d:'Johnson wants a pause on new data centers in the city, mirroring the state debate.'}
+  ],
+  /* matrix rows: id, safety, budget, housing, other */
+  matrix: [
+    ['johnson','Prevention, youth jobs, mental health clinics','Higher taxes on wealthy and corporations, no property tax rise','Renter protections, repurpose closed schools','Pause on data centers, 10 paid days off, end tipped wage'],
+    ['giannoulias','1,000 more police officers','Not stated in sources reviewed','Not stated','Modern, more competent government services'],
+    ['mendoza','Law and order, public trust in City Hall','Fiscal management from state role','Lower rents and more benefits (reported)','Slogan "progress people can feel"'],
+    ['quigley','Not stated','Cut the roughly 1 billion dollar debt, no tax route out','Not stated','Municipal charter, Red Line extension, "risk the job to save the city"'],
+    ['kelly','Restore public safety','Not stated','Not stated','Business lobbyist, pro-Trump messaging'],
+    ['pappas','Not stated','Property tax reform and fiscal competence','Not stated','Cook County Treasurer since 1998'],
+    ['cardenas','Not stated','Fiscal discipline and pensions','Housing affordability','Former alderman, Navy veteran'],
+    ['brewer','Not stated','Not stated','Affordable housing expansion','Economic growth with investment in neglected areas'],
+    ['holberg','CTA safety and rider experience','Buy back parking meters, freeze property taxes','100,000 new housing units','Financial literacy, flexible CPS buildings'],
+    ['carter','Law and order, federal help','Forensic audits of departments','Not stated','Opposes sanctuary policies'],
+    ['nee','Not stated','Not stated','Not stated','Honest governance and public trust'],
+    ['wilson','Not stated','Not stated','Not stated','Jobs, contracts and schools, philanthropy'],
+    ['su','Not stated','Cut sales tax, cut property tax 10 percent','Cut rents 15 percent','Tax reduction'],
+    ['quinlan','Not stated','Not stated','Not stated','Owes no one, reform']
+  ],
+
+  natTiles: [
+    {cls:'t-red', big:'53 to 47', lab:'Republican Senate majority today. Democrats need a net +4', src:'Cook, Sept 23'},
+    {cls:'t-blue', big:'D+9', lab:'generic ballot, 52 to 43', src:'NBC News average'},
+    {cls:'t-purple', big:'23%', lab:'model odds Democrats win the Senate', src:'Pollsmax, Oct 1'},
+    {cls:'t-gold', big:'225 to 202', lab:'House seats leaning D vs R, with 8 toss-ups', src:'NBC News ratings'}
+  ],
+  usSenate: [
+    {l:'Solid D',v:9,c:'#1d4ed8'},{l:'Likely D',v:2,c:'#3b82f6'},{l:'Lean D',v:1,c:'#93c5fd',t:'#0b2a63'},
+    {l:'Toss-up',v:7,c:'#f59e0b',t:'#2a1a00'},{l:'Lean R',v:1,c:'#fca5a5',t:'#5c0d0d'},{l:'Likely R',v:2,c:'#ef4444'},{l:'Solid R',v:13,c:'#b91c1c'}
+  ],
+  usHouse: [
+    {l:'Solid D',v:196,c:'#1d4ed8'},{l:'Likely D',v:9,c:'#3b82f6'},{l:'Lean D',v:20,c:'#93c5fd',t:'#0b2a63'},
+    {l:'Toss-up',v:8,c:'#f59e0b',t:'#2a1a00'},{l:'Lean R',v:6,c:'#fca5a5',t:'#5c0d0d'},{l:'Likely R',v:37,c:'#ef4444'},{l:'Solid R',v:159,c:'#b91c1c'}
+  ],
+  senateTable: [
+    ['North Carolina','Open (R)','Cooper (D) v Whatley (R)','Lean D','leanD'],
+    ['Georgia','Ossoff (D)','Ossoff v Mike Collins (R)','Likely D','likelyD'],
+    ['Michigan','Open (D)','El-Sayed (D) v Rogers (R)','Toss-up','toss'],
+    ['Maine','Collins (R)','Troy Jackson (D) v Collins','Toss-up','toss'],
+    ['Ohio','Husted (R)','Sherrod Brown (D) v Husted','Toss-up','toss'],
+    ['Texas','Open (R)','Talarico (D) v Paxton (R)','Toss-up','toss'],
+    ['Alaska','Sullivan (R)','Peltola (D) v Sullivan','Toss-up','toss'],
+    ['Iowa','Open (R)','Hinson (R) v Democratic nominee','Toss-up','toss'],
+    ['New Hampshire','Open (D)','Open seat','Toss-up','toss']
+  ],
+  gov: [
+    {n:'Arizona',s:'Open or Hobbs (D) defends',c:'t-gold'},{n:'Nevada',s:'Lombardo (R) defends',c:'t-gold'},
+    {n:'Wisconsin',s:'Open (Evers term-limited)',c:'t-gold'},{n:'Michigan',s:'Open (Whitmer term-limited)',c:'t-gold'}
+  ],
+  env: [
+    {n:'Generic ballot D',v:52,c:'#2563eb',t:'52%'},{n:'Generic ballot R',v:43,c:'#dc2626',t:'43%'},
+    {n:'Trump approve',v:39,c:'#f59e0b',t:'about 39%'},{n:'Trump disapprove',v:57,c:'#7c3aed',t:'about 57%'}
+  ],
+  dem2028: [
+    {n:'Buttigieg',v:18,c:'#2563eb'},{n:'Newsom',v:16,c:'#7c3aed'},{n:'Beshear',v:9,c:'#0d9488'},{n:'Pritzker',v:4.4,c:'#db2777'}
+  ],
+  gop2028: [
+    {n:'Vance',v:36,c:'#dc2626'},{n:'Rubio',v:35,c:'#f59e0b'}
+  ],
+  momentum: [
+    {n:'Vance',a:52,b:36,la:'Feb 2026',lb:'May 2026',c:'#dc2626'},
+    {n:'Rubio',a:20,b:35,la:'Feb 2026',lb:'May 2026',c:'#f59e0b'},
+    {n:'Newsom',a:25,b:16,la:'Aug 2025',lb:'May 2026',c:'#7c3aed'}
+  ],
+  road: [
+    {t:'Nov 3, 2026',d:'Midterms test the Trump era and the 2028 field',c:'#2563eb'},
+    {t:'2027',d:'Invisible primary. Fundraising, books, early state visits',c:'#7c3aed'},
+    {t:'Early 2028',d:'Primaries and caucuses. Order not final',c:'#db2777'},
+    {t:'Summer 2028',d:'Nominating conventions',c:'#f59e0b'},
+    {t:'Nov 7, 2028',d:'General election',c:'#dc2626'},
+    {t:'Jan 20, 2029',d:'Inauguration',c:'#0d9488'}
+  ],
+  primer: [
+    {cls:'t-purple',big:'Open race',lab:'Trump is barred from a third term, so neither party has an incumbent.'},
+    {cls:'t-red',big:'Vance v Rubio',lab:'Rubio rose from 20 to 35 percent in three months. Rubio has said he would back Vance if Vance runs.'},
+    {cls:'t-pink',big:'Illinois angle',lab:'Pritzker polls near 4 percent but is a repeat name on shortlists. A comfortable third term would raise his profile.'}
+  ],
+  sources: [
+    ['Capitol News Illinois, Amid Democratic scandals, Illinois Republicans hoping to flip legislative seats','https://www.newsfromthestates.com/article/amid-democratic-scandals-illinois-republicans-hoping-flip-legislative-seats'],
+    ['The Illinoize, Ten legislative seats most likely to flip','https://www.theillinoize.com/articles/opinion-top-ten-seats-november-2026'],
+    ['Sun-Times, Who is vying to be mayor of Chicago','https://chicago.suntimes.com/elections/2026/09/13/who-is-running-for-chicago-mayor-2027-election'],
+    ['Fox 32, Chicago race for mayor 2027','https://www.fox32chicago.com/news/who-is-running-chicago-mayor-2027-aug-26'],
+    ['NBC Chicago, Who is running for Chicago mayor','https://www.nbcchicago.com/news/local/who-is-running-for-chicago-mayor-and-when-is-the-next-election-here-are-the-candidates-so-far/3988598/'],
+    ['Wikipedia, 2027 Chicago mayoral election','https://en.wikipedia.org/wiki/2027_Chicago_mayoral_election'],
+    ['WTTW, Johnson launches reelection campaign','https://news.wttw.com/2026/09/13/mayor-brandon-johnson-launches-reelection-campaign-vowing-we-can-t-go-backward'],
+    ['Axios Chicago, Johnson reelection','https://www.axios.com/local/chicago/2026/09/13/brandon-johnson-reelection-chicago-mayor-giannoulias-mendoza-quigley'],
+    ['CBS Chicago, Mansueto Institute poll','https://www.cbsnews.com/chicago/news/mayor-brandon-johnson-mayoral-reelection-poll-university-chicago-mansueto-institute/'],
+    ['Sun-Times, Chicago 882M budget gap','https://chicago.suntimes.com/city-hall/2026/09/03/mayor-brandon-johnson-2027-budget-forecast-chicago-city-hall-deficit'],
+    ['WTTW, Joe Holberg interview','https://news.wttw.com/2026/07/14/mayoral-candidate-joe-holberg-chicago-s-budget-gap-violence-prevention-and-future-cps'],
+    ['Capitol News Illinois, Data centers and the governor\'s race','https://capitolnewsillinois.com/news/data-centers-emerging-as-key-issue-in-illinois-governors-race/'],
+    ['Rockford News First, Pritzker demands data center rules','https://www.rockfordnewsfirst.com/2026/09/25/pritzker-demands-data-center-regulations-during-veto-session/'],
+    ['WTTW, Pritzker signs energy reform bill','https://news.wttw.com/2026/01/08/pritzker-signs-major-energy-reform-bill-amid-projected-shortages'],
+    ['Wikipedia, 104th Illinois General Assembly','https://en.wikipedia.org/wiki/104th_Illinois_General_Assembly'],
+    ['Wikipedia, Illinois Freedom Caucus','https://en.wikipedia.org/wiki/Illinois_Freedom_Caucus'],
+    ['Wikipedia, Illinois House Progressive Caucus','https://en.wikipedia.org/wiki/Illinois_House_of_Representatives_Progressive_Caucus'],
+    ['Wikipedia, Illinois Legislative Black Caucus','https://en.wikipedia.org/wiki/Illinois_Legislative_Black_Caucus'],
+    ['Wikipedia, Illinois Legislative Latino Caucus','https://en.wikipedia.org/wiki/Illinois_Legislative_Latino_Caucus'],
+    ['Politics1, Illinois candidate guide','https://politics1.com/IL.htm'],
+    ['Fox 32, 2026 Illinois midterm guide','https://www.fox32chicago.com/news/2026-illinois-midterm-general-election'],
+    ['Cook Political Report, 2026 Senate ratings','https://www.cookpolitical.com/ratings/senate-race-ratings'],
+    ['270toWin, Cook Senate ratings as of Sept 23','https://www.270towin.com/2026-senate-election/cook-political-report-2026-senate'],
+    ['NBC News, Race for Congress','https://www.nbcnews.com/politics/2026-elections/midterms'],
+    ['Pollsmax, 2026 Senate forecast','https://www.pollsmax.com/senate/'],
+    ['CBS News, 12 key Senate races','https://www.cbsnews.com/news/key-senate-races-2026/'],
+    ['Daily Signal, Emerson 2028 poll of May 2026','https://www.dailysignal.com/?p=199625'],
+    ['Cook Political Report, IL-17','https://www.cookpolitical.com/house/race/483036'],
+    ['Citizens Utility Board, Why Ameren prices spiked','https://www.citizensutilityboard.org/blog/2025/05/23/cub-qa-why-is-amerens-electricity-price-spiking/'],
+    ['Shaw Local, Governor candidates on data centers','https://www.shawlocal.com/news/election/2026/09/30/illinois-governors-race-candidates-talk-data-center-costs-infrastructure/'],
+    ['Full Illinois briefing with race by race scripts (Claude doc)','https://claude.ai/code/artifact/a35753d6-1970-4dae-b856-a74c276e5ba2']
+  ]
+};
+/* ===================== PEOPLE (click-through profiles) =====================
+   p = D, R or I. lane = legislative ideology lane (prog, main, none, estR, popR). conf = hi or lo.
+   ml = mayor lane (prog, estab, law, fiscal, outsider). */
+const PEOPLE = {};
+function P(id, o){ PEOPLE[id] = Object.assign({id:id}, o); }
+
+/* ---------- statewide and congress ---------- */
+P('pritzker',{n:'JB Pritzker',p:'D',role:'Governor, seeking a third term',bio:'Governor since 2019. Won in 2022 by 13 points. Reported net worth about 4.3 billion dollars. Would be the first Illinois governor since Jim Thompson to win a third term. A frequent name on 2028 shortlists, at about 4 percent in the Emerson May 2026 poll.',pos:['Paused new data center tax credits June 5 and wants the POWER Act passed in veto session.','Data centers must bring their own power and use closed-loop water.','Signed the January 2026 energy reform law.'],risk:'Affordability and electricity bills. Only poll found is Nov 2025 (54 to 34 over Bailey), with 34 percent rating him good on crime and 59 percent bad.',lane:'main',conf:'lo'});
+P('bailey',{n:'Darren Bailey',p:'R',role:'Republican nominee for governor',bio:'Former state senator and state representative. Lost the 2022 governor race by 13 points. Lost the 2024 Republican primary for Congress against Rep. Mike Bost.',pos:['Pause all data center incentives, including existing deals, and have data centers supply their own power.','Create consumer relief funds paid by data centers.','Expand fossil fuels and roll back parts of the climate law (CEJA).'],risk:'Capitol News Illinois found false his claim that Pritzker owns 25 percent of Facebook. Opposed the 2019 incentive law, then backed its 2021 expansion, then called for restrictions.',lane:'popR',conf:'lo'});
+P('corbett',{n:'Collin Corbett',p:'I',role:'Independent candidate for governor',bio:'On the ballot as an independent. Little biographical detail was found in the sources reviewed.',pos:['Says the state rushed in data centers without guardrails and closed gas plants too fast.'],risk:'Low name recognition and funding, so a limited vote share is expected.'});
+P('stratton',{n:'Juliana Stratton',p:'D',role:'Lieutenant Governor, Democratic nominee for U.S. Senate',bio:'Lieutenant governor and former state representative. Won the Democratic nomination for the seat of retiring Sen. Dick Durbin. Would be the state\'s second Black woman in the U.S. Senate.',pos:['Runs as an ally of the governor, who picked her as running mate.'],risk:'Heavy favorite. Little general election risk reported.'});
+P('tracy',{n:'Don Tracy',p:'R',role:'Republican nominee for U.S. Senate',bio:'Attorney and former chair of the Illinois Republican Party.',pos:['Not detailed in sources reviewed.'],risk:'Faces a statewide partisan gap of more than 10 points.'});
+P('raoul',{n:'Kwame Raoul',p:'D',role:'Attorney General, seeking re-election',bio:'Incumbent attorney general. Former state senator.',pos:['Not detailed in sources reviewed.'],risk:'Low. Heavy favorite.'});
+P('fioretti',{n:'Bob Fioretti',p:'R',role:'Republican nominee for Attorney General',bio:'Former Chicago alderman and attorney.',pos:['Not detailed in sources reviewed.'],risk:'Long shot in a Democratic year.'});
+P('giannoulias',{n:'Alexi Giannoulias',p:'D',ml:'estab',role:'Secretary of State and candidate for Chicago mayor',age:50,bio:'Secretary of State since 2023 and also on the November ballot for that office. Former state treasurer. Lost the 2010 U.S. Senate race. Former vice president at his family\'s Broadway Bank, which later failed. Played professional basketball in Greece. Entered the mayor race Aug 2 with about 21.7 million dollars on hand as of June 30.',pos:['Promises 1,000 more police officers and "more competent leadership".','Modernizing government services.','Backed by business leaders and the building trades.'],risk:'The bank failure will be an attack line. He is running for two offices at once. Specific policies are thin in the coverage found.',line:'Money and business backing make him the presumed front-runner.'});
+P('dharris',{n:'Diane Harris',p:'R',role:'Republican nominee for Secretary of State',bio:'Joliet Junior College trustee and retired shop owner.',pos:['Not detailed in sources reviewed.'],risk:'Faces a popular incumbent.'});
+P('croke',{n:'Margaret Croke',p:'D',role:'Democratic nominee for Comptroller (open seat)',bio:'State representative and political organizer. Seat is open because Comptroller Susana Mendoza is running for mayor.',pos:['Not detailed in sources reviewed.'],risk:'Low.'});
+P('drew',{n:'Bryan Drew',p:'R',role:'Republican nominee for Comptroller',bio:'Attorney.',pos:['Not detailed in sources reviewed.'],risk:'Long shot.'});
+P('frerichs',{n:'Mike Frerichs',p:'D',role:'State Treasurer, seeking re-election',bio:'Incumbent treasurer.',pos:['Not detailed in sources reviewed.'],risk:'Low.'});
+P('solomon',{n:'Max Solomon',p:'R',role:'Republican nominee for Treasurer',bio:'Attorney and pastor.',pos:['Not detailed in sources reviewed.'],risk:'Long shot.'});
+P('sorensen',{n:'Eric Sorensen',p:'D',role:'U.S. Representative, IL-17',bio:'Seeking a third term in the Rockford, Quad Cities, Peoria and Bloomington-Normal district. Won with 54.4 percent in 2024. Harris carried the district by about 5 points. Raised about 1.5 million dollars, with about 960,000 on hand as of February.',pos:['Not detailed in sources reviewed.'],risk:'The one Illinois House seat that could change hands. Cook rates it Likely D.'});
+P('vancil',{n:'Dillan Vancil',p:'R',role:'Republican nominee, IL-17',bio:'Coffee-shop owner. Won the March primary 58 to 42. Had raised about 175,000 dollars as of February.',pos:['Message centers on electricity bills and a "broken health care system".'],risk:'Needs outside Republican spending that had not been reported.'});
+
+/* ---------- Illinois Senate ---------- */
+P('turner',{n:'Doris Turner',p:'D',role:'State Senator, SD-48 (Springfield)',bio:'Won in 2022 by under 2 points, about 1,300 to 1,400 votes. Had about 500,000 dollars on hand in mid-2025.',pos:['Not detailed in sources reviewed.'],risk:'Harris carried the district by 1.2 points. One of three Democratic-held Senate seats Republicans target.',lane:'none'});
+P('lesko',{n:'Frank Lesko',p:'R',role:'Sangamon County Recorder, Republican nominee, SD-48',bio:'Described as someone who has "never lost an election". Won the recorder race in 2024 by 31 votes on a promise to abolish the office, and voters did abolish it. Raises little money, about 8,000 dollars in mid-2025.',pos:['Small-government message built on cutting his own office.'],risk:'Weak fundraiser and described as unconventional.',lane:'popR',conf:'lo',basis:'Won his county job by promising to abolish it, per The Illinoize. A single source.'});
+P('halpin',{n:'Mike Halpin',p:'D',role:'State Senator, SD-36 (Rock Island)',bio:'Incumbent Democrat in the Quad Cities seat. Republicans have targeted it since 2025.',pos:['Not detailed in sources reviewed.'],risk:'Targeted by Senate Republicans.',lane:'none'});
+P('beekman',{n:'Brad Beekman',p:'R',role:'Republican nominee, SD-36',bio:'Republican challenger. Background not detailed in sources reviewed.',pos:['Not detailed.'],risk:'Needs a Quad Cities swing.',lane:'none'});
+P('belt',{n:'Christopher Belt',p:'D',role:'State Senator, SD-57 (Swansea)',bio:'Incumbent Democrat in the Metro East. Named by Republican leader Curran as a target.',pos:['Not detailed in sources reviewed.'],risk:'Republicans target him, but the seat is rated Likely D.',lane:'none'});
+P('rhyne',{n:'Daniel Rhyne',p:'R',role:'Republican nominee, SD-57',bio:'Republican challenger. Background not detailed.',pos:['Not detailed.'],risk:'Long shot.',lane:'none'});
+P('harriss',{n:'Erica Harriss',p:'R',role:'State Senator, SD-56 (Madison and St. Clair)',bio:'Won 51.4 percent in 2022.',pos:['Not detailed in sources reviewed.'],risk:'Democrats target the seat. Democratic primary winner took 53.5 percent.',lane:'none'});
+P('geldert',{n:'Marsia Geldert-Murphey',p:'D',role:'Democratic nominee, SD-56',bio:'Won the Democratic primary with 53.5 percent.',pos:['Not detailed in sources reviewed.'],risk:'Needs Metro East turnout.',lane:'none'});
+P('jacobs',{n:'Paul Jacobs',p:'R',role:'State Senator, SD-59 (appointed June 17)',bio:'Appointed after Sen. Fowler resigned. Previously held the House seat now numbered HD-118.',pos:['Not detailed in sources reviewed.'],risk:'Heavily Republican district.',lane:'none'});
+P('mueller',{n:'Tamiko "T.C." Mueller',p:'D',role:'Democratic nominee, SD-59',bio:'Democratic challenger in a 14-county southern Illinois district.',pos:['Not detailed.'],risk:'Likely R seat.',lane:'none'});
+P('clark',{n:'Michele Clark',p:'D',role:'Democratic nominee, SD-33 (open)',bio:'Director of Development at the D300 Food Pantry. Former chief operating officer at the Boys and Girls Club of Dundee Township. Former childcare business owner. Democrats\' preferred candidate.',pos:['Policies to lower the cost of living, including groceries, childcare and property taxes.','Property tax freeze for senior homeowners.','More investment in public schools and educators, and apprenticeships linked to trade schools.'],risk:'Republican nominee was not confirmed in sources reviewed.',lane:'main',conf:'hi',basis:'Campaign priorities on affordability, childcare and senior property tax freezes.'});
+P('syed',{n:'Nabeela Syed',p:'D',role:'State Representative, Democratic nominee SD-26',bio:'27-year-old state representative from Palatine in HD-51. Daughter of immigrants from Hyderabad, India. Political science degree from UC Berkeley. Won in 2022 at age 23 with 53.3 percent and was re-elected in 2024 with 56.2 percent. One of the state\'s youngest and few Muslim legislators.',pos:['Protect abortion access.','Mandatory firearm registration, assault weapon limits and limits on large magazines.','Property tax reform, including fairer assessment of large commercial properties.','Wider voting access, including online registration and preregistration at 16.'],risk:'Faces an incumbent in a district where Harris won by almost 10 points, which favors her.',lane:'prog',conf:'hi',basis:'Stated positions on abortion, gun regulation and voting access.'});
+P('hills',{n:'Darby Hills',p:'R',role:'State Senator, SD-26 (Barrington Hills)',bio:'Incumbent Republican in a district with Democratic-trending demographics. Harris won by almost 10 points and Pritzker by 11 in 2022.',pos:['Not detailed in sources reviewed.'],risk:'Demographics could not be much worse for Republicans, per The Illinoize.',lane:'none'});
+P('mcadams',{n:'Ben McAdams',p:'D',role:'Democratic nominee, SD-24 (Bloomingdale)',bio:'Democratic challenger in suburban Senate district. The Illinoize calls him "super liberal".',pos:['Not detailed beyond that label in sources reviewed.'],risk:'Funding from Senate leadership will decide how competitive it is.',lane:'prog',conf:'lo',basis:'One outside label from The Illinoize. Positions not verified.'});
+P('lewis',{n:'Seth Lewis',p:'R',role:'State Senator, SD-24 (Bartlett)',bio:'Incumbent Republican. Harris won the district by 3 points in 2024 and Pritzker by 5 in 2022.',pos:['Not detailed in sources reviewed.'],risk:'District leans away from his party at the top of the ticket.',lane:'none'});
+
+/* ---------- Illinois House ---------- */
+P('braypark',{n:'Erica Bray-Parker',p:'D',role:'Wheaton City Councilmember, Democratic nominee HD-47 (open)',bio:'Called Democrats\' top recruit. Democrats are "super confident" after retiring Republican Rep. Amy Grant\'s consistent overperformance.',pos:['Not detailed beyond local government role.'],risk:'Faces a small business owner from Carol Stream.',lane:'main',conf:'lo',basis:'Local elected official recruited by the party. Positions not verified.'});
+P('vrankovich',{n:'Robert Vrankovich',p:'R',role:'Republican nominee, HD-47',bio:'Small business owner from Carol Stream.',pos:['Not detailed.'],risk:'Harris won the district by 11 points.',lane:'none'});
+P('mclaughlin',{n:'Martin McLaughlin',p:'R',role:'State Representative, HD-52 (Barrington Hills)',bio:'Won by 47 votes in 2024, the narrowest margin on the board. Heavily outspent. Emphasizes authenticity and direct communication and wants better Republican messaging.',pos:['Moving forward with effective programs and improving GOP messaging.'],risk:'The Illinoize says he committed "politically awkward" acts and that Peterson was not the Democrats\' first choice last time.',lane:'estR',conf:'lo',basis:'Focus on messaging and effectiveness. No hardline label found.'});
+P('peterson',{n:'Maria Peterson',p:'D',role:'Democratic nominee, HD-52',bio:'Rematch challenger who lost by 47 votes.',pos:['Not detailed.'],risk:'Needs funding and turnout.',lane:'none'});
+P('dixon',{n:'Jessica Dixon Heitman',p:'D',role:'State Representative, HD-97 (Plainfield)',bio:'Holds the seat after Rep. Harry Benton resigned in July following an inspector general finding of a pattern of sexual harassment.',pos:['Not detailed in sources reviewed.'],risk:'New to the seat and defending a district Harris won by 4 points.',lane:'none'});
+P('shanahan',{n:'Gabby Shanahan',p:'R',role:'Republican nominee, HD-97',bio:'Grassroots engagement director. Rematch candidate who lost to Benton by about 4 points in 2024.',pos:['Runs on trust in government and accountability.'],risk:'Needs more than an ethics message. Republicans say cost of living is the stronger theme.',lane:'estR',conf:'lo',basis:'Accountability message. No hardline positions found.'});
+P('murri',{n:'Amy Murri-Briel',p:'D',role:'State Representative, HD-76 (La Salle and Ottawa)',bio:'Won by 595 votes in 2024. In August 2026 a former staffer alleged harassment, sexual comments and supplying drugs during campaign work. She denies it and says the Legislative Inspector General reviewed a 2025 complaint and found no merit.',pos:['Not detailed in sources reviewed.'],risk:'Allegations are unresolved in public. Republicans say she is out of step.',lane:'none'});
+P('bishop',{n:'Liz Bishop',p:'R',role:'Republican nominee, HD-76',bio:'Second challenge to Murri-Briel.',pos:['Not detailed.'],risk:'Needs a repeat of 2024 turnout.',lane:'none'});
+P('schweizer',{n:'Brandun Schweizer',p:'R',role:'State Representative, HD-104 (Danville)',bio:'Appointed in 2023. Won by 269 votes in 2024. Sits on the House Energy and Environment Committee and has worked on Mahomet Aquifer protection.',pos:['Not detailed beyond committee work.'],risk:'New lines added Champaign-Urbana voters. Harris won by 4 points.',lane:'none'});
+P('roberson',{n:'Mary Catherine Roberson',p:'D',role:'Democratic nominee, HD-104',bio:'Staffer for Rep. Robin Kelly. The Illinoize reported she had not yet engaged the House Democratic campaign arm.',pos:['Not detailed.'],risk:'Fundraising and party support are open questions.',lane:'none'});
+P('ugaste',{n:'Dan Ugaste',p:'R',role:'State Representative, HD-65 (Geneva)',bio:'Incumbent in a district Trump won by 1 point in 2024 and Pritzker by 1 in 2022.',pos:['Not detailed in sources reviewed.'],risk:'District trending against Republicans.',lane:'none'});
+P('rivard',{n:'Ricky Rivard',p:'D',role:'Democratic nominee, HD-65',bio:'Real estate agent and professor.',pos:['Not detailed.'],risk:'Needs the Geneva trend to continue.',lane:'none'});
+P('stuart',{n:'Katie Stuart',p:'D',role:'State Representative, HD-112 (Edwardsville)',bio:'Incumbent Democrat. Republican leader McCombie lists the seat as a target.',pos:['Not detailed.'],risk:'Targeted by Republicans.',lane:'none'});
+P('ford',{n:'Jimmy Ford',p:'R',role:'Republican nominee, HD-112',bio:'Republican challenger. Background not detailed.',pos:['Not detailed.'],risk:'Needs Metro East swing.',lane:'none'});
+P('schmidt',{n:'Kevin Schmidt',p:'R',role:'State Representative, HD-114',bio:'Won a close 2024 race targeted by both parties.',pos:['Not detailed.'],risk:'Targeted again.',lane:'none'});
+P('mcclellan',{n:'George McClellan Jr.',p:'D',role:'Democratic nominee, HD-114',bio:'Democratic challenger in Millstadt, Cahokia Heights and Dupo.',pos:['Not detailed.'],risk:'Needs turnout.',lane:'none'});
+P('hoffman',{n:'Jay Hoffman',p:'D',role:'State Representative, HD-113',bio:'Senior House Democrat and a negotiator on complex energy and infrastructure legislation. No certified opponent was confirmed.',pos:['Not detailed.'],risk:'Low.',lane:'none'});
+
+/* ---------- Chicago mayor, other candidates ---------- */
+P('johnson',{n:'Brandon Johnson',p:'D',ml:'prog',role:'Mayor of Chicago, seeking a second term',age:50,bio:'Former Chicago Teachers Union organizer. Elected in 2023 with 52 percent in the runoff against Paul Vallas. Launched his re-election bid Sept 13 at the DuSable Black History Museum with the Chicago Teachers Union behind him. Still popular among Black voters.',pos:['Higher taxes on wealthy residents and corporations, not property taxes.','Mental health clinics, repurposing closed schools, ending the tipped minimum wage and 10 paid days off.','Pause on new data centers. Defends sanctuary status.','Says homicides hit a 60-year low in 2025.'],risk:'Approval 23 percent in the Mansueto poll (30 percent in a Sun-Times figure). Only 13.6 percent want him to run again. Under 650,000 dollars on hand. 882 million dollar 2027 budget gap. Strained City Council and thin ties in Springfield.',line:'Frames the race as working class versus corporate class.'});
+P('mendoza',{n:'Susana Mendoza',p:'D',ml:'estab',role:'Illinois Comptroller, candidate for mayor',age:54,bio:'Comptroller since 2016, nearly a decade as the state\'s chief fiscal control officer. Former state legislator for about a decade and former Chicago city clerk. Finished fifth in the 2019 mayor race with about 9 percent. Entered June 3 and is leaving her state office to run.',pos:['Government experience and fiscal management.','Says "we are paying more for less, we do not feel safe, and too many people no longer believe City Hall can solve problems".','Called Johnson administration decisions a "blizzard of incompetence".','Lower rents and increased benefits are reported themes.'],risk:'About 1.6 million dollars raised. 47 percent of voters "excited" about her in the Mansueto poll, versus 52 percent for Giannoulias. Must break through a crowded middle lane.',line:'Targets Northwest and Southwest Side voters.'});
+P('quigley',{n:'Mike Quigley',p:'D',ml:'estab',role:'U.S. Representative (IL-5), candidate for mayor',age:67,bio:'In Congress since 2009. Former Cook County commissioner who started as an aldermanic aide. Degrees from Roosevelt University, University of Chicago and Loyola law school. Formally launched June 27. Also on the November ballot for Congress.',pos:['Says "Chicago is in crisis" and the city cannot tax its way out. Wants to cut the roughly 1 billion dollar debt.','Backs a municipal charter for the city.','Says he secured 2 billion dollars for the Red Line extension.','Supports Medicare for All, abortion rights and LGBTQ rights.'],risk:'Raised about 300,000 to 375,000 dollars, well behind Giannoulias. Age 67.',line:'"Risk the job to save the city."'});
+P('kelly',{n:'John Kelly Jr.',p:'R',ml:'law',role:'Lobbyist, candidate for mayor',age:53,bio:'Lobbyist from a long-time Chicago family. Former employee of the Illinois Attorney General\'s office. Clients include the White Sox and the United Center. Helped secure the Bally\'s casino deal. Co-owns a security company. Political science degree from Illinois Wesleyan.',pos:['Restore public safety. Says residents do not feel safe despite crime statistics.','Pro-Trump messaging was reported by the Sun-Times.'],risk:'About 2.2 million dollars raised. Questions about conflicts of interest with lobbying clients.',line:'Law-and-order lane with more money than most challengers.'});
+P('pappas',{n:'Maria Pappas',p:'D',ml:'fiscal',role:'Cook County Treasurer, candidate for mayor',age:77,bio:'Treasurer since 1998 and also seeking an eighth term. Oversees property tax collection for about 2,200 local governments. Known for a flamboyant style. Reported to be motivated to stop fellow Greek-American Giannoulias.',pos:['Property tax reform and affordability. Says rising taxes hit lower-income, mostly Black and Latino residents hardest.','Challenges Johnson\'s progressive tax proposals.'],risk:'Age 77. About 278,000 dollars raised. Her own Sept 2025 poll showed her beating Johnson 56 to 23 head to head, but that was an internal poll.',line:'Fiscal competence and property taxes.'});
+P('cardenas',{n:'George Cardenas',p:'D',ml:'fiscal',role:'Cook County Board of Review Commissioner',age:61,bio:'Former alderman of the 12th Ward for nearly two decades. Navy veteran. Degrees from Northeastern Illinois University. Entered June 16. Calls himself a long shot.',pos:['Fiscal discipline, pensions and budget solutions.','Housing affordability and economic stability.'],risk:'Abstained on the parking meter privatization vote. Low money and name recognition.',line:'Southwest Side experience.'});
+P('brewer',{n:'Matt Brewer',p:'D',ml:'outsider',role:'Former Chicago Housing Authority chair and CEO',age:46,bio:'Attorney and South Side native with degrees from Stanford, Yale Law and Harvard Business School. Co-founder of Chicago\'s first Black-owned cannabis dispensary and co-owner of Wiener\'s Circle. Had a public power struggle with Johnson over CHA leadership that led to HUD involvement.',pos:['Affordable housing expansion.','Economic growth that also invests in overlooked communities.'],risk:'Limited detail on policy in the coverage found. Ties to the Johnson CHA dispute cut both ways.',line:'Reform and rags-to-riches story.'});
+P('holberg',{n:'Joe Holberg',p:'D',ml:'fiscal',role:'Entrepreneur and former teacher',age:38,bio:'First candidate to announce, on Oct 6, 2025. Michigan-born. Former West Side middle school math teacher and first-generation college student. Founded the wealth advisory firm Spring, sold in 2023, and works at Mariner Wealth Advisors.',pos:['Build 100,000 new housing units and freeze property taxes.','Buy back the parking meters to keep the income in the city.','CTA safety and cleanliness, and flexible use of school buildings.'],risk:'Low name recognition and a small donor base.',line:'Financial literacy and anti-poverty framing.'});
+P('carter',{n:'Danielle Carter-Walters',p:'R',ml:'law',role:'Business owner, co-founder of Chicago Flips Red',bio:'Fitness business owner. Co-founder of the "Chicago Flips Red" grassroots movement. Testified before Congress on migrant issues. Sources differ on whether she or her husband is the retired Chicago police officer.',pos:['Restore law and order and welcome federal law enforcement help.','Forensic audits of city departments to find waste, fraud and abuse.','Opposes sanctuary policies.'],risk:'Pro-Trump brand in a heavily Democratic city.',line:'Anti-sanctuary conservative lane.'});
+P('nee',{n:'Dr. Lisa Nee',p:'D',ml:'outsider',role:'Interventional cardiologist',age:59,bio:'Humboldt Park cardiologist and Loyola graduate. Led medical teams during COVID-19 and was a VA whistleblower on patient care failures. Leaving medicine to run.',pos:['Rebuild public trust in leaders. Says that is residents\' top concern.','Honest governance without political connections.'],risk:'First-time candidate with limited resources.',line:'The doctor as outsider.'});
+P('wilson',{n:'Willie Wilson',p:'I',ml:'outsider',role:'Businessman and philanthropist',age:78,bio:'McDonald\'s franchise owner, gospel television producer and medical supplies founder. Ran for mayor in 2015, 2019 and 2023, finishing fifth with about 9 percent last time. Also ran for president in 2016 and U.S. Senate in 2020. Endorsed Lightfoot and then Vallas in past runoffs, and both lost. Strong with older Black voters.',pos:['Jobs, contracts and schools.','Community support through philanthropy, including gas and grocery giveaways.'],risk:'Perennial candidate. Could split Johnson\'s base.',line:'Wild card in the Black vote.'});
+P('su',{n:'Mark Su',p:'R',ml:'outsider',role:'Software engineer and media creator',bio:'30-year Chicago resident and CPS parent. Took 8 percent in the 2026 Republican congressional primary.',pos:['Cut the sales tax and cut property taxes 10 percent.','Cut rents 15 percent, with few details on how.'],risk:'Thin implementation detail.',line:'Tax cut platform.'});
+P('quinlan',{n:'William J. Quinlan',p:'D',ml:'outsider',role:'Election attorney',age:56,bio:'Former Illinois general counsel under Gov. Rod Blagojevich, per the Sun-Times.',pos:['Runs as someone who "owes no one".'],risk:'Association with the Blagojevich administration. Limited detail on policy.',line:'Reform pitch.'});
+P('stanton',{n:'Liam Stanton',p:'D',ml:'outsider',role:'Business owner',bio:'Announced Feb 22, 2026. Little detail in the sources reviewed.',pos:['Not detailed.'],risk:'Low name recognition.',line:'Early declared candidate.'});
+P('logalbo',{n:'Johnny Logalbo',p:'D',ml:'outsider',role:'Addiction recovery counselor',bio:'Listed among lesser-known declared candidates on Wikipedia.',pos:['Not detailed.'],risk:'Low name recognition.',line:'Lesser-known candidate.'});
+DATA.matrix.push(['stanton','Not stated','Not stated','Not stated','Not stated'],['logalbo','Not stated','Not stated','Not stated','Not stated']);
+
+DATA.mayorLanes = {
+  prog:{l:'Progressive incumbent',c:'#7c3aed'},
+  estab:{l:'Establishment and business',c:'#2563eb'},
+  law:{l:'Law and order',c:'#b91c1c'},
+  fiscal:{l:'Fiscal and property tax',c:'#0d9488'},
+  outsider:{l:'Outsider or reform',c:'#f59e0b'}
+};
+DATA.mayorOrder = ['johnson','giannoulias','mendoza','quigley','kelly','pappas','cardenas','brewer','holberg','carter','nee','wilson','su','quinlan','stanton','logalbo'];
+
+/* ---------- RACE detail (click on board tiles and tight cards) ---------- */
+const RACE = {
+  gov:{t:'Governor',people:['pritzker','bailey','corbett'],why:'Pritzker seeks a third term, which would be the first in Illinois since Jim Thompson. Bailey is the 2022 nominee Pritzker beat by 13 points.',
+    script:'Governor Pritzker is a strong favorite over Darren Bailey. The only poll we found is from last November, 54 to 34, so treat it as old. The thing to watch is the margin. A win in the low double digits shows he is safe. A single-digit race would signal real anger over prices. Data centers are the issue both men are talking about, and the governor wants rules passed in veto session.',
+    points:['Only poll is Nov 2025 (54 to 34).','Both nominees say data centers should bring their own power.','They split on the climate law (CEJA). Bailey wants parts rolled back.','Collin Corbett (I) is also on the ballot.'],act:'Watch the margin on Nov 3 as a gauge for how strong his mandate is for the veto session.'},
+  ussen:{t:'U.S. Senate',people:['stratton','tracy'],why:'Open seat after Sen. Dick Durbin\'s retirement. Illinois has not elected a Republican senator since 2010.',
+    script:'This one is not close. Lieutenant Governor Juliana Stratton is the Democratic nominee for Dick Durbin\'s open seat, and she is heavily favored over Don Tracy, a former state Republican chair. If she wins she would be only the state\'s second Black woman in the U.S. Senate.',
+    points:['Rated Solid or Safe D by forecasters.','Stratton is the lieutenant governor and former state representative.','Tracy is an attorney and former state GOP chair.'],act:'None needed before the election. Plan an introduction after Nov 3.'},
+  ag:{t:'Attorney General',people:['raoul','fioretti'],why:'Incumbent Raoul is favored.',script:'Attorney General Kwame Raoul is a clear favorite for a third term against former alderman Bob Fioretti.',points:['Heavy Democratic favorite.'],act:'Routine.'},
+  sos:{t:'Secretary of State',people:['giannoulias','dharris'],why:'Giannoulias is on this ballot while running for Chicago mayor.',script:'Alexi Giannoulias is on the ballot for secretary of state in November while also running for mayor of Chicago in February. If he wins both, the state office would open up. Republican Diane Harris is a long shot.',points:['If he wins the mayor race, a vacancy follows.','Harris is a Joliet Junior College trustee.'],act:'Plan for a possible vacancy in 2027.'},
+  comp:{t:'Comptroller (open)',people:['croke','drew'],why:'Open because Susana Mendoza is running for mayor.',script:'The comptroller seat is open because Susana Mendoza left it to run for mayor. State Rep. Margaret Croke is the favorite over attorney Bryan Drew.',points:['Democrats favored.'],act:'Routine.'},
+  treas:{t:'Treasurer',people:['frerichs','solomon'],why:'Incumbent Frerichs is favored.',script:'Treasurer Mike Frerichs is favored over attorney and pastor Max Solomon.',points:['Democratic favorite.'],act:'Routine.'},
+  il17:{t:'IL-17',people:['sorensen','vancil'],why:'The one Illinois House seat that could change hands.',script:'Congressman Eric Sorensen holds the Rockford to Peoria district Harris won by about five points. His Republican opponent, coffee-shop owner Dillan Vancil, is talking about electricity bills and health care. Cook rates it Likely Democratic. The upset path needs outside Republican money and a rough night for Democrats.',points:['Cook rating Likely D.','Sorensen raised about 1.5 million dollars. Vancil about 175,000 as of February.','Vancil\'s message is electricity bills.'],act:'Watch for outside Republican ad reservations in October. That is the signal the race is real.'},
+  sd57:{t:'SD-57',people:['belt','rhyne'],why:'Metro East Democratic seat Republicans have named as a target.',script:'Sen. Christopher Belt is a Metro East Democrat Republican leaders have named a target. We rate it Likely Democratic, so he is a lower-risk defense for Democrats.',points:['Likely D.','Named by Leader Curran as a target.'],act:'Routine.'},
+  hd113:{t:'HD-113',people:['hoffman'],why:'Senior Democrat. No certified opponent confirmed.',script:'Rep. Jay Hoffman is a senior Democrat and a lead negotiator on complex infrastructure bills. We did not confirm an opponent.',points:['Likely D.'],act:'Confirm the opponent on the state elections site.'},
+  sd36:{t:'SD-36',people:['halpin','beekman'],why:'Quad Cities seat Republicans have targeted since 2025.',script:'Sen. Mike Halpin of Rock Island is the incumbent Democrat. Republicans have been targeting the seat since last year. We rate it Lean Democratic.',points:['Lean D.','Brad Beekman is the Republican nominee.'],act:'Watch for Senate Republican spending in the Quad Cities.'},
+  sd33:{t:'SD-33 (open)',people:['clark'],why:'Open seat after Republican Don DeWitte retired. Harris won it by 2 points and Pritzker by 5 in 2022.',script:'This St. Charles area seat is open because Republican Senator Don DeWitte is retiring. Democrats have their preferred candidate in Michele Clark, who has run a childcare business and works at a food pantry. She is running on affordability. We lean it toward a Democratic pickup. We did not confirm the Republican nominee.',points:['Lean D flip.','Clark focuses on costs, childcare and senior property tax freezes.','Republican nominee not confirmed.'],act:'Confirm the Republican nominee before circulating this page.'},
+  sd26:{t:'SD-26',people:['syed','hills'],why:'Democrats\' top Senate target. Harris won by almost 10 points.',script:'Rep. Nabeela Syed is a 27-year-old Democrat from Palatine and the party\'s preferred challenger to Republican Senator Darby Hills. The district is Democratic at the top of the ticket, Harris won it by almost ten points, so we lean it toward a Democratic pickup. Syed is progressive on abortion, guns and voting rights, and she also makes a property tax argument.',points:['Lean D flip.','Syed won her House seat in 2022 at age 23.','Hills\'s ideology is not established in the sources reviewed.'],act:'If Syed wins, expect a new voice on the Senate side from the northwest suburbs.'},
+  hd47:{t:'HD-47 (open)',people:['braypark','vrankovich'],why:'Open seat after Rep. Amy Grant retired. Harris won by 11.',script:'Republican Amy Grant is retiring from the Wheaton seat. Democrats call Wheaton Councilmember Erica Bray-Parker a top recruit. Harris won the district by 11 points, so we lean it toward a Democratic pickup.',points:['Lean D flip.','Republican nominee is a Carol Stream small business owner.'],act:'Add to the list of suburban seats that could shift the House caucus\'s makeup.'},
+  hd112:{t:'HD-112',people:['stuart','ford'],why:'Edwardsville seat targeted by Republican Leader McCombie.',script:'Rep. Katie Stuart of Edwardsville is an incumbent Democrat Republican leaders have listed as a target. We rate it Lean Democratic.',points:['Lean D.'],act:'Routine.'},
+  sd48:{t:'SD-48',people:['turner','lesko'],why:'Springfield and Decatur. Turner won by under 2 points in 2022. Harris won by 1.2 in 2024.',script:'Sen. Doris Turner of Springfield is the incumbent Democrat. She won by under two points last time and Harris carried the district by just over one point. Her opponent is Frank Lesko, the Sangamon County Recorder, who has never lost an election and won his job by promising to abolish it. He raises very little money though, and she has a big cash advantage. It is a toss-up on the map and a lean to Turner on money.',points:['Toss-up.','Turner had about 500,000 dollars in mid-2025 versus about 8,000 for Lesko.','Lesko won his 2024 race by 31 votes.'],act:'SD-48 is in central Illinois. Offer a local briefing to either office after Nov 3.'},
+  sd24:{t:'SD-24',people:['mcadams','lewis'],why:'Suburban seat, Harris +3 in 2024 and Pritzker +5 in 2022.',script:'Republican Sen. Seth Lewis of Bartlett faces Democrat Ben McAdams in a suburban district that leaned Democratic at the top of the ticket. Money from Senate leadership will decide how competitive it gets. We call it a toss-up.',points:['Toss-up.','McAdams is labeled "super liberal" by The Illinoize, one source.','Depends on Senate leadership funding.'],act:'Watch the Senate Democratic and Republican campaign committee spending reports.'},
+  hd52:{t:'HD-52',people:['mclaughlin','peterson'],why:'Decided by 47 votes in 2024.',script:'This is the tightest seat in Illinois. Republican Rep. Martin McLaughlin won by forty-seven votes in 2024, and Democrat Maria Peterson is back for a rematch. He was heavily outspent last time and had some awkward moments. Both sides know one good ad could swing it.',points:['Toss-up.','47 votes.','Rematch.'],act:'If you know constituents in Barrington Hills, expect a high number of mailers and calls.'},
+  hd97:{t:'HD-97',people:['dixon','shanahan'],why:'Plainfield seat vacated after Benton resigned.',script:'Rep. Harry Benton resigned in July after an inspector general found a pattern of harassment. Jessica Dixon Heitman now holds the Plainfield seat and faces the same Republican, Gabby Shanahan, who is running on trust and accountability. Benton won by about 2,300 votes and Harris carried the district by 4, so the seat leans Democratic by the numbers, but the scandal makes it a toss-up.',points:['Toss-up.','Benton won by about 2,300 votes.','Shanahan emphasizes accountability.'],act:'Request an introductory meeting with Rep. Dixon Heitman\'s office before the veto session.'},
+  hd76:{t:'HD-76',people:['murri','bishop'],why:'Won by 595 votes in 2024. New allegation in August.',script:'Rep. Amy Murri-Briel of Ottawa won by 595 votes last time. In August a former staffer made new allegations against her. She denies them and says the inspector general reviewed a complaint last year and found no merit. Republican Liz Bishop is back for a rematch. Allegations plus a narrow margin make it a toss-up.',points:['Toss-up.','595-vote margin.','Allegations are denied.'],act:'Keep meetings to policy only and check compliance guidance before events.'},
+  hd104:{t:'HD-104',people:['schweizer','roberson'],why:'Won by 269 votes in 2024. Harris +4.',script:'Republican Rep. Brandun Schweizer of Danville won by 269 votes in 2024. Redistricting added Democratic voters from Champaign-Urbana. His opponent, Mary Catherine Roberson, works for Rep. Robin Kelly, but she had not engaged the House Democratic campaign arm when we last saw reporting. It is a toss-up.',points:['Toss-up.','Schweizer sits on the House Energy and Environment Committee.','Party support for Roberson was uncertain.'],act:'He is on the energy committee. Maintain contact whichever way the election goes.'},
+  sd56:{t:'SD-56',people:['harriss','geldert'],why:'Metro East seat. Harriss won 51.4 percent in 2022.',script:'Republican Sen. Erica Harriss won in 2022 with about 51 percent. Democrat Marsia Geldert-Murphey won her primary with 53.5 percent. We lean it Republican.',points:['Lean R.'],act:'Routine.'},
+  hd65:{t:'HD-65',people:['ugaste','rivard'],why:'Geneva seat that Trump won by only 1 point.',script:'Republican Rep. Dan Ugaste holds a Geneva district Trump won by one point. The district is trending the wrong way for Republicans, but we lean it Republican because of incumbency.',points:['Lean R.'],act:'Routine.'},
+  hd114:{t:'HD-114',people:['schmidt','mcclellan'],why:'Metro East seat targeted by both parties in 2024.',script:'Republican Rep. Kevin Schmidt won a close race in 2024 and is being targeted again by Democrat George McClellan Jr.',points:['Lean R.'],act:'Routine.'},
+  sd59:{t:'SD-59',people:['jacobs','mueller'],why:'Heavily Republican southern Illinois seat.',script:'Paul Jacobs was appointed to this seat in June after Sen. Fowler resigned. It is a heavily Republican 14-county district, so we rate it Likely Republican.',points:['Likely R.'],act:'Routine.'},
+  sd35:{t:'SD-35, 38, 54',people:[],why:'Republican Senators Syverson, Rezin and McClure. Not re-verified.',script:'Three Republican senators, Syverson, Rezin and McClure, are rated Likely Republican. Sen. Sue Rezin is the Republican deputy leader and Sen. McClure is influential on energy and utility topics. These pairings were carried forward and not re-verified.',points:['Likely R.','Not re-verified.'],act:'Verify nominees before relying on this row.'},
+  hd118:{t:'HD-118',people:['jacobs'],why:'Southern Illinois seat Jacobs left when he moved to the Senate.',script:'This southern Illinois seat was Paul Jacobs\'s before he moved to the Senate. Democrat Homer "Chip" Markel faces Republican Scott Doody. We rate it Likely Republican.',points:['Likely R.'],act:'Routine.'}
+};
+/* ===================== EDITION 3 DATA: money, Speaker, photos ===================== */
+
+/* ---------- Speaker Welch as a clickable person ---------- */
+P('welch',{n:'Chris Welch',p:'D',role:'Speaker of the Illinois House (D-Hillside)',bio:'Emanuel "Chris" Welch has been Speaker since Jan 13, 2021, the first African American in the job. He is a lawyer, a partner at Ancel Glink, and a former president of the Proviso Township High School District 209 board. He represents the 7th House district in Cook County. He chaired the special House committee on the ComEd bribery scandal, which ended without findings.',pos:['Passed the assault weapons ban, the Climate and Equitable Jobs Act, the SAFE-T Act and new maps under his speakership.','Says "we balanced the budget every year I have been speaker".','Said the Bears stadium ask was "insensitive" while families struggle with costs.'],risk:'His handling of the Benton harassment case, a fight with the state party over money, and older allegations that resurfaced in 2021, which he denies. See the Speaker section for the full scorecard.',lane:'main',conf:'lo',basis:'Pragmatic, labor-aligned governing style. Briefing judgment, not a scored measure.'});
+P('harmon',{n:'Don Harmon',p:'D',role:'President of the Illinois Senate (D-Oak Park)',bio:'Senate President. Leads the 40 member Democratic caucus, which holds a cash advantage of about 7 to 1 over Senate Republicans in July 2026 reports.',pos:['Said in 2019 that the General Assembly would not advance a ComEd-backed bill until the lobbying investigation was understood.'],risk:'Not detailed.',lane:'none'});
+P('mccombie',{n:'Tony McCombie',p:'R',role:'House Republican Leader (R-Savanna)',bio:'Leads the 40 member House Republican caucus. Had about 1.6 million dollars in her caucus committee in July 2026, against 12.7 million for Speaker Welch. In Oct 2025 she clashed with the Freedom Caucus and stripped some members of privileges.',pos:['Called on Welch to step down over the Benton case, saying "he is not supporting victims".'],risk:'Internal fights with the Freedom Caucus while trying to win suburban seats.',lane:'estR',conf:'lo',basis:'Leads the leadership caucus and has fought the Freedom Caucus.'});
+P('curran',{n:'John Curran',p:'R',role:'Senate Republican Leader (R-Downers Grove)',bio:'Leads the 19 member Senate Republican caucus, which had about 3.2 million dollars in July 2026 reports against 21.6 million for Senate Democrats.',pos:['Has named Democratic-held seats such as SD-57 as targets.'],risk:'Large cash gap.',lane:'estR',conf:'lo',basis:'Leads the leadership caucus.'});
+
+/* ---------- Wikipedia title for each person who has an article. Photos load live and are verified ---------- */
+const WIKI = {pritzker:'JB_Pritzker',bailey:'Darren_Bailey',stratton:'Juliana_Stratton',raoul:'Kwame_Raoul',giannoulias:'Alexi_Giannoulias',mendoza:'Susana_Mendoza',quigley:'Mike_Quigley',johnson:'Brandon_Johnson',welch:'Emanuel_Chris_Welch',harmon:'Don_Harmon',mccombie:'Tony_McCombie',curran:'John_Curran_(Illinois_politician)',sorensen:'Eric_Sorensen_(politician)',syed:'Nabeela_Syed',pappas:'Maria_Pappas',wilson:'Willie_Wilson_(businessman)',frerichs:'Michael_Frerichs',croke:'Margaret_Croke',cardenas:'George_C%C3%A1rdenas',hoffman:'Jay_Hoffman'};
+
+/* ---------- scripts for the new sections ---------- */
+DATA.scripts.money = {
+  say: 'Follow the money and the picture is lopsided. Governor Pritzker raised more than 11 million dollars in one quarter and spent about 7 million on ads, while Darren Bailey ended June with about 128 thousand dollars. In the legislature, Democratic caucus committees held about 34 million dollars in July against about 5 million for Republicans. Organized labor is the biggest single funder of Illinois campaigns, roughly a third of the money given to candidates. In the Chicago mayor race, Alexi Giannoulias has about 22 million dollars, mostly from unions and large donors, while the incumbent has under 700 thousand. The cautionary tale is 2024. In four targeted House seats Democrats raised far more than Republicans and still lost all four, two by less than 300 votes.',
+  points: [
+    'Governor. Pritzker cash on hand 3.1 million at June 30 after spending 7 million on ads. Bailey had 128 thousand.',
+    'Caucus committees, July 2026. House Democrats 12.7 million vs House Republicans 1.6 million. Senate Democrats 21.6 million vs Senate Republicans 3.2 million.',
+    'Labor gave 67.4 million in the 2022 to 2024 cycle, about a third of support to candidates. Democrats got 4.90 dollars for every 1 dollar Republicans got.',
+    'Chicago mayor. Giannoulias raised 22.2 million since 2023. Johnson raised 3.5 million but had under 700 thousand on hand.',
+    'Money is not destiny. HD-52 Democrats raised about 1.8 million to the Republican\'s 0.1 million in 2024 and lost by 47 votes.'
+  ],
+  act: 'Use the utilities sidebar as a checklist. Pull current contribution totals from Illinois Sunshine and the State Board of Elections before any meeting where political giving could come up.'
+};
+DATA.scripts.speaker = {
+  say: 'Speaker Chris Welch is the most powerful Democrat in the House and he is having a rough fall. On the plus side, he holds a 78 seat supermajority, sits on about 12.7 million dollars in his caucus committee, says he has balanced the budget every year he has been speaker, and drew praise for saying a new Bears stadium was insensitive when families are struggling. On the minus side, he is criticized for how his office handled harassment complaints about Representative Harry Benton, whose campaign he had given more than a million dollars. Then in September his caucus walked out of the state party\'s coordinated campaign after a fight over money, and the party gave him a 2.1 million dollar refund. His style is pragmatic, labor friendly and more interested in affordability than ideology. Republicans have called on him to step down.',
+  points: [
+    'Money. About 12.7 million in the caucus committee, about 8 times House Republicans.',
+    'Ideology. Pragmatic mainstream Democrat who needs 60 of his 78 members to move a bill, with 28 members from Chicago.',
+    'Good press. Supermajority, balanced budgets, the Bears stand, a push on affordability.',
+    'Bad press. Benton handling, the dispute with the state party, older allegations from before he became speaker that he denies.',
+    'He is not on the ballot for Speaker until the new House meets in January 2027.'
+  ],
+  act: 'Assume the Speaker\'s office is stretched during the veto session. Send short, one page materials and ask for staff time rather than a principal meeting.'
+};
+
+/* ---------- money data ---------- */
+DATA.money = {
+  asOf: 'State filings through June 30, 2026 unless noted',
+  tiles: [
+    {cls:'t-blue',big:'11 to 1',lab:'Pritzker spent about 11 dollars for every 1 dollar Bailey spent in Q2',src:'Capitol News Illinois'},
+    {cls:'t-purple',big:'$22.2M',lab:'Giannoulias raised for mayor since 2023, versus $3.5M for Johnson',src:'Institute for the Public Good via Axios'},
+    {cls:'t-teal',big:'$67.4M',lab:'from organized labor in 2022 to 2024, about a third of candidate support',src:'WTTW analysis'},
+    {cls:'t-gold',big:'4.9 to 1',lab:'Democrats got 4.90 dollars for each 1 dollar Republicans got',src:'WTTW analysis, 2022 to 2024'}
+  ],
+  govRaised:[{n:'Pritzker',v:11,c:'#2563eb',t:'over $11M'},{n:'Bailey',v:1.33,c:'#dc2626',t:'$1.33M'}],
+  govSpent:[{n:'Pritzker',v:7,c:'#2563eb',t:'over $7M'},{n:'Bailey',v:1.28,c:'#dc2626',t:'$1.28M'}],
+  govCash:[{n:'Pritzker',v:3.1,c:'#2563eb',t:'$3.1M'},{n:'Corbett (I)',v:0.38,c:'#7c3aed',t:'$0.38M'},{n:'Bailey',v:0.128,c:'#dc2626',t:'$0.13M'}],
+  govNotes:[
+    'Pritzker is largely self-funded. Fox 32 reported about 25 million dollars of his own money in the campaign, and he gave 500,000 dollars to the state party.',
+    'About half of Bailey\'s Q2 money came from small non-itemized gifts. His biggest donation was 25,000 dollars from businessman Gary Rabine. Richard Uihlein, who gave Bailey more than 12 million dollars in 2022, had not given.',
+    'Bailey\'s direct mail prospecting raised about 600,000 dollars at a cost of about 900,000, reported by The Illinoize.',
+    'Corbett\'s 380,000 dollars includes a 500,000 dollar self-loan.'
+  ],
+  caucus:[
+    {n:'House Democrats (Welch)',v:12.7,c:'#2563eb',t:'$12.7M'},
+    {n:'House Republicans (McCombie)',v:1.6,c:'#dc2626',t:'$1.6M'},
+    {n:'Senate Democrats (Harmon)',v:21.6,c:'#1d4ed8',t:'$21.6M'},
+    {n:'Senate Republicans (Curran)',v:3.2,c:'#b91c1c',t:'$3.2M'}
+  ],
+  mayorCash:[
+    {n:'Giannoulias',v:21.85,c:'#7c3aed',t:'$21.85M'},{n:'Kelly',v:2.04,c:'#0d9488',t:'$2.04M'},{n:'Mendoza',v:1.6,c:'#db2777',t:'$1.6M'},{n:'Holberg',v:1.0,c:'#f59e0b',t:'$1M+'},{n:'Johnson',v:0.63,c:'#f97316',t:'$0.63M'},{n:'Quigley',v:0.38,c:'#2563eb',t:'$0.38M'}
+  ],
+  giannoulias:[
+    {n:'Local 150 Operating Engineers',v:2.0,s:'labor',t:'$2M (Feb, Mar)'},
+    {n:'IBEW Local 134',v:1.0,s:'labor',t:'$1M in Feb'},
+    {n:'Neil Bluhm company or family',v:1.0,s:'biz',t:'$1M'},
+    {n:'Liz Lefkofsky',v:0.5,s:'person',t:'$500K'},
+    {n:'IBEW Illinois PAC',v:0.25,s:'labor',t:'$250K'},
+    {n:'DRIVE Committee (Teamsters)',v:0.25,s:'labor',t:'$250K'},
+    {n:'LFO Management',v:0.25,s:'biz',t:'$250K'},
+    {n:'Chicago Teamsters Local',v:0.135,s:'labor',t:'$135K'},
+    {n:'Jonathan Levin and Michael Sacks firm',v:0.1,s:'biz',t:'$100K'}
+  ],
+  giannNotes:[
+    'Labor gave Giannoulias about 5.7 million dollars this year per The Illinoize, including Operating Engineers, IBEW, Teamsters, LIUNA, Plumbers and Pipefitters, Ironworkers and the Illinois Education Association.',
+    'Small donations are under 2 percent of his total. Johnson raised 482,000 dollars from small donors, 14 percent of his funds.',
+    'These totals include money raised since the 2023 runoff, and Giannoulias is also running for secretary of state in November.'
+  ],
+  /* cost of contentious races. Values in thousands of dollars. Raised is Q3 plus late contributions as reported. Ink is in-kind support */
+  raceCost:[
+    {seat:'HD-52 Barrington Hills',dr:1773,di:328,rr:101,ri:0,res:'Republican McLaughlin won by 47 votes'},
+    {seat:'HD-47 Wheaton',dr:950,di:256,rr:50,ri:54,res:'Republican Grant held the seat'},
+    {seat:'HD-104 Danville',dr:688,di:173,rr:279,ri:191,res:'Republican Schweizer won by 269 votes'},
+    {seat:'HD-114 Metro East',dr:1451,di:398,rr:233,ri:59,res:'Republican Schmidt won'}
+  ],
+  primary:[
+    {cls:'t-navy',big:'$125M',lab:'spent in five competitive congressional primaries, $70M outside and $54M by campaigns',src:'AP, March 2026'},
+    {cls:'t-purple',big:'$34M+',lab:'outside spending in the U.S. Senate primary',src:'AP, March 2026'},
+    {cls:'t-red',big:'$24M',lab:'of his own money spent by Raja Krishnamoorthi, who lost by 7 points',src:'AP, March 2026'},
+    {cls:'t-gold',big:'$5M+',lab:'from Pritzker to Illinois Future PAC',src:'AP, March 2026'}
+  ],
+  labor:{pct:33,note:'Organized labor gave $67.4 million in the Nov 2022 to Oct 2024 window, about one third of all support to candidates from both parties. Trade associations for nursing homes, Realtors, trial lawyers and alcohol distributors also appear among top donors.'},
+  sectors:[
+    {n:'Organized labor',d:'Biggest single funder outside individuals. Operating Engineers Local 150 gave 400,000 dollars each to Harmon and Welch in Dec 2023.',c:'#2563eb'},
+    {n:'Self-funders and billionaires',d:'Pritzker is the top individual donor. Neil Bluhm and Liz Lefkofsky give to Giannoulias.',c:'#7c3aed'},
+    {n:'Party and caucus committees',d:'Four Democratic committees moved 25.2 million dollars among themselves and to candidates in the 2022 to 2024 window.',c:'#0d9488'},
+    {n:'Trade associations',d:'Nursing homes, Realtors, trial lawyers and alcohol distributors. Often give to both parties.',c:'#f59e0b'},
+    {n:'Utilities and energy companies',d:'Documented giving is thin in recent public coverage. See the sidebar.',c:'#dc2626'}
+  ]
+};
+
+/* ---------- utilities sidebar. amt is null until someone loads current totals from Illinois Sunshine ---------- */
+DATA.utilities = {
+  intro: 'Public coverage reviewed for this edition shows little current 2026 giving by utilities, so this panel lists what is documented and leaves current totals blank to be filled in from the State Board of Elections and Illinois Sunshine. Nothing here is estimated.',
+  roster: [
+    {n:'Ameren Illinois',p:'Ameren Corp',doc:['Stayed neutral while taking part in hearings on the 2026 energy bill (E&E News).'],amt:null},
+    {n:'ComEd',p:'Exelon',doc:['A federal investigation from 2019 looked at lobbying payments and political contributions. WBEZ reported tens of millions of dollars in lobbyist payments and comparable contributions.','Sen. Harmon said then that the General Assembly would not advance a ComEd-backed bill until the facts were known.','Stayed neutral on the 2026 energy bill (E&E News).','Later developments including the 200 million dollar 2020 deferred prosecution agreement and the 2025 conviction of former Speaker Madigan are widely reported. Verify before quoting.'],amt:null},
+    {n:'Nicor Gas',p:'Southern Company Gas',doc:['No specific giving found in the sources reviewed.'],amt:null},
+    {n:'Peoples Gas and North Shore Gas',p:'WEC Energy Group',doc:['In 2018 gave more than 560,000 dollars to aldermanic, legislative and attorney general candidates, about five times its usual level, per Crain\'s via the Citizens Utility Board.','That included 56,000 to Speaker Madigan and 48,300 to Kwame Raoul. Timing matched scrutiny of its 300 million dollar a year main replacement program.','Regulators cap its charitable giving recoverable from customers at about 4.5 million dollars.'],amt:null},
+    {n:'Constellation',p:'Constellation Energy',doc:['Backed the nuclear expansion provisions in the 2026 energy bill (E&E News).'],amt:null},
+    {n:'Other regulated utilities',p:'MidAmerican, Illinois American Water, Aqua Illinois and others',doc:['Not reviewed for this edition.'],amt:null}
+  ],
+  ratepayer: [
+    'Illinois electric and gas utilities spent about 6.5 million dollars a year on trade association dues and about 28 million dollars on lawyers and experts in six ICC cases in 2023, much of it recoverable from customers.',
+    'Senate Bill 2885 and House Bill 5061 would bar billing customers for lawyers, trade groups, charity and advertising. The sponsors estimated 45 to 63 million dollars a year in savings. Status was pending in 2024 and should be checked.'
+  ],
+  how: [
+    ['Illinois Sunshine','https://www.illinoissunshine.org','Search committees, receipts and expenditures'],
+    ['State Board of Elections','https://www.elections.il.gov','Official D-1, D-2 and A-1 reports and committee lookups'],
+    ['Secretary of State lobbying','https://www.cyberdriveillinois.com/departments/index/lobbyist/home.html','Lobbyist registrations and expenditures'],
+    ['FEC','https://www.fec.gov','Federal PACs and candidates'],
+    ['Citizens Utility Board','https://www.citizensutilityboard.org','Ratepayer-side analysis of utility political spending']
+  ]
+};
+
+/* ---------- Speaker scorecard ---------- */
+DATA.speaker = {
+  fund: [
+    ['Caucus committee cash','About $12.7M in July 2026. House Republicans had about $1.6M.'],
+    ['Local 150 gift','$400,000 from Operating Engineers Local 150 in Dec 2023, and the same to Senate President Harmon.'],
+    ['Direct to candidates','$493,000 to Maria Peterson in HD-52 in 2024. Over $1M to Harry Benton\'s campaign, per the Sun-Times.'],
+    ['State party dispute','Caucus left the party\'s coordinated campaign in Sept 2026. The party refunded $2.1M and the House asked for review of another $2M spent on direct mail.']
+  ],
+  ideology: [
+    'Pragmatic, labor-aligned Democrat who leads from the center of a diverse caucus. Briefing judgment, not a scored measure.',
+    'Under his speakership the House passed the assault weapons ban, the Climate and Equitable Jobs Act and the SAFE-T Act.',
+    'Needs 60 of 78 House Democrats to move a bill, and 28 of them are from Chicago.',
+    'Says he wants bipartisan problem solving and downplays caucus conflict.'
+  ],
+  good: [
+    {d:'Jan 2026',h:'Calls Bears stadium ask "insensitive"',w:'Said talk of a new stadium for a building not yet 25 years old ignores what real people are going through. Popular framing on affordability.',u:'https://news.wttw.com/2026/01/06/illinois-house-speaker-calls-bears-stadium-ask-insensitive-amid-budget-pressures'},
+    {d:'Jan 2025',h:'Says the budget has balanced every year',w:'Told NPR Illinois "we balanced the budget every year I have been speaker", despite a projected 3.2 billion dollar gap.',u:'https://www.nprillinois.org/government-politics/2025-01-21/budget-constraints-caucus-tensions-face-house-speaker-welch-in-his-third-term'},
+    {d:'2022',h:'Grew the House majority to 78',w:'Democrats expanded their supermajority to 78 seats in 2022 and have held it since.',u:'https://en.wikipedia.org/wiki/Emanuel_Chris_Welch'},
+    {d:'Sep 2026',h:'Pushed back on the state party\'s ask',w:'Got a 2.1 million dollar refund and kept House dollars for House races. His caucus framed it as protecting members.',u:'https://capitolfax.com/2026/09/21/democratic-party-splits-over-money'}
+  ],
+  bad: [
+    {d:'Jul 2026',h:'Criticism over the Benton case',w:'The Sun-Times reports his office knew of an earlier complaint about Rep. Benton years before and took months to respond, after the Speaker gave Benton more than 1 million dollars. Leader McCombie called on him to step down.',u:'https://chicago.suntimes.com/the-watchdogs/2026/07/28/illinois-house-speaker-emanuel-chris-welch-harry-benton-michael-j-madigan-sexual-harassment-inquiry'},
+    {d:'Sep 2026',h:'Public split with the state Democratic Party',w:'The party chair said she did not demand 10,000 dollar personal checks from members. The caucus said it did. The dispute surfaced less than two months before Election Day.',u:'https://www.shawlocal.com/opinion/2026/09/22/rich-miller-welch-state-dems-offer-different-accounts-of-campaign-funding-dispute/'},
+    {d:'Jan 2025',h:'Heated closed-door caucus meeting',w:'A hemp regulation fight included shouting and accusations aimed at state agency staff. The governor criticized it publicly and Welch said he asked members to apologize.',u:'https://www.nprillinois.org/government-politics/2025-01-21/budget-constraints-caucus-tensions-face-house-speaker-welch-in-his-third-term'},
+    {d:'2021 onward',h:'Older allegations that were never resolved',w:'Allegations from before he became Speaker resurfaced in 2021, including a 2002 police report. He was never charged and denies wrongdoing. Rep. Kelly Cassidy and NOW called for an inquiry. School board era lawsuits were dismissed or settled.',u:'https://chicago.suntimes.com/the-watchdogs/2026/07/28/illinois-house-speaker-emanuel-chris-welch-harry-benton-michael-j-madigan-sexual-harassment-inquiry'}
+  ],
+  net: 'Mixed and trending negative over the last three months. Strong on money and numbers, weak on trust.',
+  watch: ['Whether more Democratic members break with him over the party funding fight.','Further inspector general reports from the Benton matter.','Whether HD-97 and HD-76 turn into losses that shrink the caucus.','The Speaker vote when the new House meets in January 2027.']
+};
+
+/* ---------- news additions ---------- */
+DATA.news.unshift(
+  {d:'Sep 21', tag:'Money', head:'House Democrats quit the state party\'s coordinated campaign', src:'Capitol Fax, Shaw Local',
+    url:'https://capitolfax.com/2026/09/21/democratic-party-splits-over-money',
+    why:'Speaker Welch\'s caucus left less than two months before the election after a dispute over how much members would pay into the coordinated campaign. The party refunded 2.1 million dollars. The two sides give different accounts of whether members were asked for 10,000 dollar checks.',
+    act:'Expect House races to be run from the Speaker\'s own committee. Update contacts for House campaign communications and do not assume the state party speaks for House members.'},
+  {d:'Jul 28', tag:'Speaker', head:'Sun-Times questions Welch\'s handling of the Benton case', src:'Chicago Sun-Times',
+    url:'https://chicago.suntimes.com/the-watchdogs/2026/07/28/illinois-house-speaker-emanuel-chris-welch-harry-benton-michael-j-madigan-sexual-harassment-inquiry',
+    why:'The report says the Speaker\'s office knew of an earlier complaint and took months to act. Leader McCombie says he should step down. Welch has not been charged with anything and denies wrongdoing in the older matters.',
+    act:'Track whether more members call for new leadership. A leadership change would reshape the veto session agenda.'}
+);
+DATA.sources.push(
+  ['Capitol News Illinois, Pritzker spends big in second fundraising quarter','https://capitolnewsillinois.com/news/pritzker-spends-big-in-second-fundraising-quarter-as-bailey-struggles-to-keep-up/'],
+  ['The Illinoize, GOP falls further behind Democrats in fundraising','https://www.theillinoize.com/articles/gop-falls-further-behind-fundraising'],
+  ['Capitol Fax, Democratic Party splits over money','https://capitolfax.com/2026/09/21/democratic-party-splits-over-money'],
+  ['Shaw Local, Rich Miller on the Welch and state party dispute','https://www.shawlocal.com/opinion/2026/09/22/rich-miller-welch-state-dems-offer-different-accounts-of-campaign-funding-dispute/'],
+  ['Chicago Sun-Times, Speaker Welch navigates a new crisis','https://chicago.suntimes.com/the-watchdogs/2026/07/28/illinois-house-speaker-emanuel-chris-welch-harry-benton-michael-j-madigan-sexual-harassment-inquiry'],
+  ['WTTW, Speaker calls Bears stadium ask insensitive','https://news.wttw.com/2026/01/06/illinois-house-speaker-calls-bears-stadium-ask-insensitive-amid-budget-pressures'],
+  ['NPR Illinois, Budget constraints and caucus tensions face Welch','https://www.nprillinois.org/government-politics/2025-01-21/budget-constraints-caucus-tensions-face-house-speaker-welch-in-his-third-term'],
+  ['Wikipedia, Chris Welch','https://en.wikipedia.org/wiki/Emanuel_Chris_Welch'],
+  ['WTTW, By the numbers: unions lead funding of state elections','https://news.wttw.com/node/49109'],
+  ['Axios Chicago, Giannoulias laps field in fundraising','https://www.axios.com/local/chicago/2026/09/21/campaign-fundraising-money-mayor-chicago-2027-alexi-johnson-kelly-mendoza'],
+  ['Sun-Times, Johnson falls further behind Giannoulias in fundraising','https://chicago.suntimes.com/elections/2026/07/15/alexi-giannoulias-brandon-johnson-potential-mayoral-candidates-campaign-fundraising-gap'],
+  ['The Illinoize, Unions coalescing around Giannoulias','https://www.theillinoize.com/articles/unions-coalescing-around-giannoulias-mayoral'],
+  ['The Daily Line, Spending in targeted House races (2024)','https://www.thedailyline.com/spending-races-targeted-house-democrats'],
+  ['AP via Audacy, Where big spending won and lost in the Illinois primary','https://www.audacy.com/wwl/news/politics/ap-election-2026-illinois-spending'],
+  ['Citizens Utility Board, Peoples Gas campaign contributions','https://www.citizensutilityboard.org/peoples-gas-suddenly-is-extraordinarily-generous-with-campaign-contributions/'],
+  ['WTTW, Customers pay for utilities\' lawyers and corporate donations','https://news.wttw.com/node/46785'],
+  ['Utility Dive, Investigations of ComEd and Exelon lobbying','https://www.utilitydive.com/news/investigations-of-comed-exelon-lobbying-threaten-illinois-energy-transitio/568676/'],
+  ['E&E News, Illinois lawmakers clash on shielding consumers from energy bills','https://www.eenews.net/articles/illinois-lawmakers-clash-on-how-to-shield-consumers-from-rising-energy-bills/']
+);
+DATA.log.unshift('2026-10-02  Edition 3. Added candidate photos (live from Wikipedia with initials fallback), Follow the money section with utilities sidebar and race cost chart, and Speaker Welch scorecard.');
+DATA.gaps += ' Utility contribution totals for 2026 are blank on purpose because current figures were not found in public coverage. Race cost figures for 2024 combine Q3 and late reports and may miss independent spending. Photos load from Wikipedia when the visitor is online and are checked against the article text, otherwise initials show.';
+/* keep mayor cash consistent with Q2 reports */
+DATA.mayorMoney = [{n:'Giannoulias',v:21.85,c:'#7c3aed'},{n:'Kelly',v:2.04,c:'#0d9488'},{n:'Mendoza',v:1.6,c:'#db2777'},{n:'Holberg',v:1.0,c:'#f59e0b'},{n:'Johnson',v:0.63,c:'#f97316'},{n:'Quigley',v:0.38,c:'#2563eb'}];
+/* ===================== EDITION 4: momentum and early polls ===================== */
+DATA.scripts.y2028 = {
+  say: 'Nobody major has declared for 2028 yet. Most are waiting until after the November midterms. Early polls are mostly name recognition, and they disagree depending on who is named. On the Democratic side, polls that include Kamala Harris put her first at roughly 26 to 28 percent, with Newsom, Buttigieg and Ocasio-Cortez bunched behind. Prediction markets see a different race, with Ocasio-Cortez, Newsom and Jon Ossoff on top and Harris at 7 percent. On the Republican side Vice President Vance leads every average, around 38 percent, with Rubio near 20 and Donald Trump Jr. near 10. Rubio has had one close call in an Emerson poll, but most other polls show Vance well ahead. Governor Pritzker polls around 3 to 5 percent, which is a real shortlist name but not a leader.',
+  points: [
+    'Democrats, poll averages in September. RealClearPolling has Harris 26.3, Newsom 14.3, Buttigieg 12.6, Ocasio-Cortez 10.9, Ossoff 8.8, Kelly 6.8.',
+    'Democrats, markets. Polymarket shows Ocasio-Cortez 18, Newsom 16, Ossoff 15, Harris 7, Shapiro 6, Buttigieg 5, Beshear 3. Markets and polls point at different people.',
+    'Momentum, McLaughlin June 2025 to June 2026. Newsom up 8 points to 16. Pritzker up 4 to 5. Harris down 4 to 26. Buttigieg down 2 to 8.',
+    'Republicans, Pollsmax average. Vance 37.7, Rubio 19.9, Trump Jr. 10.1, DeSantis 7.2, Kennedy 4.1, Haley 3.7.',
+    'Republican momentum is mixed. Emerson had Rubio at 38 and Vance at 39 in July. McLaughlin in August had Vance 32 (down 3), Trump Jr. 19 (up 3), Rubio 12 (down 3).',
+    'Formal field. Only minor candidates have filed. A former Border Patrol commander has an exploratory committee. The serious names have said they will decide after the midterms.'
+  ],
+  act: 'Treat 2028 as background for now. The two Illinois items to watch are Pritzker\'s margin on Nov 3 and whether he says anything about a national run afterward.'
+};
+DATA.poll28 = {
+  dem: [
+    {n:'Harris',a:26.3,b:28.3,m:7,c:'#2563eb'},
+    {n:'Newsom',a:14.3,b:14.8,m:16,c:'#7c3aed'},
+    {n:'Buttigieg',a:12.6,b:11.7,m:5,c:'#0d9488'},
+    {n:'Ocasio-Cortez',a:10.9,b:9.2,m:18,c:'#db2777'},
+    {n:'Ossoff',a:8.8,b:7.8,m:15,c:'#f59e0b'},
+    {n:'Kelly',a:6.8,b:6.4,m:null,c:'#16a34a'},
+    {n:'Shapiro',a:null,b:5.6,m:6,c:'#ea580c'},
+    {n:'Beshear',a:null,b:3.0,m:3,c:'#0891b2'},
+    {n:'Pritzker',a:null,b:3.2,m:null,c:'#be185d',il:1}
+  ],
+  demRest: 'Booker 3.2, Warren 3.0, Whitmer 2.0, Walz 2.0, Cooper 2.0, Murphy 2.0, Moore 1.0, Klobuchar 1.0, Warnock 1.0, Fetterman 1.0, Polis 1.0, Khanna 0.9, Emanuel 0.9',
+  gop: [
+    {n:'Vance',v:37.7},{n:'Rubio',v:19.9},{n:'Trump Jr.',v:10.1},{n:'DeSantis',v:7.2},{n:'Kennedy Jr.',v:4.1},{n:'Haley',v:3.7},{n:'Kemp',v:3.0},{n:'Cruz',v:2.8},{n:'Abbott',v:2.3},{n:'Ramaswamy',v:2.3},{n:'Cotton',v:2.0},{n:'Hawley',v:1.5},{n:'Scott',v:1.5},{n:'Carlson',v:1.0},{n:'Youngkin',v:1.0},{n:'Massie',v:1.0},{n:'Greene',v:1.0},{n:'Stefanik',v:1.0},{n:'Britt',v:1.0},{n:'Noem',v:0.7}
+  ],
+  /* McLaughlin, June 2025 vs June 2026 */
+  demMove: [
+    {n:'Harris',a:30,b:26},{n:'Newsom',a:8,b:16},{n:'Buttigieg',a:10,b:8},{n:'Ocasio-Cortez',a:7,b:9},{n:'Shapiro',a:3,b:5},{n:'Booker',a:7,b:5},{n:'Pritzker',a:1,b:5},{n:'Whitmer',a:3,b:2},{n:'Moore',a:1,b:2}
+  ],
+  /* Emerson readings, Feb, May, Jul 2026 */
+  gopLine: {
+    x:['Feb 2026','May 2026','Jul 2026'],
+    s:[{n:'Vance',v:[52,36,39],c:'#dc2626'},{n:'Rubio',v:[20,35,38],c:'#f59e0b'}]
+  },
+  /* McLaughlin, July vs Aug 2026 */
+  gopMove: [{n:'Vance',a:35,b:32,c:'#dc2626'},{n:'Trump Jr.',a:16,b:19,c:'#7c3aed'},{n:'Rubio',a:15,b:12,c:'#f59e0b'}]
+};
+DATA.primer = [
+  {cls:'t-purple',big:'No one declared',lab:'Only minor candidates have filed. The serious names are waiting until after the Nov 3 midterms.'},
+  {cls:'t-red',big:'Vance leads',lab:'First in every Republican average, about 38 percent. Rubio has had one near tie but averages about 20.'},
+  {cls:'t-blue',big:'Harris or not',lab:'Polls that list Harris put her first. Polls and markets that downplay her show Newsom, Buttigieg, Ocasio-Cortez and Ossoff.'},
+  {cls:'t-pink',big:'Illinois angle',lab:'Pritzker polls 3 to 5 percent, up from 1 in June 2025. Rahm Emanuel, also tied to Chicago, polls under 1 percent.'}
+];
+DATA.news.unshift(
+  {d:'Aug-Sep 2026', tag:'2028', head:'2028 polls shift, but averages still disagree',
+   src:'Newsweek, RealClearPolling, Pollsmax', url:'https://www.newsweek.com/new-poll-shows-how-top-2028-potential-democratic-candidates-have-shifted-12126335',
+   why:'McLaughlin shows Newsom up 8 points since June 2025 and Harris down 4, while the averages still put Harris first. On the GOP side Vance slipped to 32 in an August McLaughlin poll as Trump Jr. rose to 19.',
+   act:'Do not quote one poll as the state of the race. Cite the average and say which candidates were named.'},
+  {d:'Jul-Sep 2026', tag:'Chicago', head:'Giannoulias leads on money, excitement and markets',
+   src:'Capitol Fax, Sun-Times, PredictionEdge', url:'https://capitolfax.com/2026/07/15/poll-giannoulias-generates-most-excitement-in-early-mayor%E2%80%99s-race/',
+   why:'A June NORC poll found Giannoulias had the lowest share of Chicagoans not excited about him, while only 13.6 percent of likely voters want Johnson to run again. Giannoulias had 21.85 million dollars on hand to Johnson\'s 631 thousand.',
+   act:'Treat Giannoulias as the early favorite but remember the race is seven months out and the field is still forming.'}
+);
+
+/* ---------- Chicago mayor momentum ---------- */
+DATA.scripts.mayormom = {
+  say: 'Seven months before the February 23 vote, the early signals point one way. Secretary of State Alexi Giannoulias leads on money, on excitement in the one good public poll, and in prediction markets, where he trades near 64 percent. Mayor Johnson is moving the other way. His approval is 23 percent, only 13.6 percent of likely voters said they want him to run again, and he had about 631 thousand dollars at the end of June. Susana Mendoza and Mike Quigley are the main moderate alternatives, and neither has yet shown the money or the poll numbers to match Giannoulias. The caution is that there is very little public polling. Nobody has published a full head-to-head poll of the current field.',
+  points: [
+    'Money. Giannoulias had 21.85 million on hand at June 30. Johnson had 631 thousand. In Q2 Giannoulias raised 3.65 million and spent 106 thousand. Johnson raised 109 thousand and spent 290 thousand.',
+    'Polling. NORC for UChicago, June 15 to 23, 1,194 adults, margin of error 4.05. Johnson approval 23 percent, disapproval 54.2, not excited 58. Giannoulias had the lowest not excited figure at 14.5, Mendoza 16, Quigley 20.',
+    'Markets. PredictionEdge lists Giannoulias 64, Johnson 18, Mendoza 15, Brewer 9. Kalshi shows Giannoulias 64 and Johnson 8. The two disagree on Johnson and the PredictionEdge numbers add to more than 100, so treat markets as a rough mood gauge.',
+    'Older polls are weak evidence. A February 2025 M3 poll tested people who are no longer running, and a September 2025 Victory Research poll had Pappas ahead of Johnson 56 to 23 in a head-to-head that does not match the real field.',
+    'Calendar. Petitions are due Oct 26. First round Feb 23, runoff Apr 6 if no one tops 50 percent.'
+  ],
+  act: 'Ask the firms you rely on whether they will publish a full-field poll after petitions are filed. That is the first data that will really tell you who makes the runoff.'
+};
+DATA.mayorMom = {
+  poll: [
+    ['NORC at UChicago (Mansueto Institute)','Jun 15-23, 2026','1,194 adults, MOE 4.05','Johnson approval 23, disapprove 54.2. Want Johnson to run again: 13.6 percent. Not excited: Giannoulias 14.5, Mendoza 16, Quigley 20, Johnson 58.','Best current read. Measures excitement, not vote choice.'],
+    ['Victory Research','Sep 27-29, 2025','800 likely voters, MOE 3.5','Pappas 56, Johnson 23, undecided 21.','Two-way test only. Pappas has since raised little, about 278 thousand as of April.'],
+    ['M3 Strategies','Feb 21-22, 2025','696 likely voters, MOE 3.7','Vallas 27, Giannoulias 21, Mendoza 12, Johnson 8, Buckner 6, Conway 6, Wilson 6, Gutierrez 5.','Old. Several named people are not running.']
+  ],
+  market: [
+    {n:'Giannoulias',v:64,c:'#7c3aed'},{n:'Johnson',v:18,c:'#f59e0b'},{n:'Mendoza',v:15,c:'#db2777'},{n:'Brewer',v:9,c:'#0d9488'},{n:'Holberg',v:5,c:'#2563eb'},{n:'Pappas',v:4,c:'#64748b'},{n:'Wilson',v:3,c:'#16a34a'}
+  ],
+  flow: [
+    {n:'Giannoulias',raised:3.65,spent:0.106,cash:21.85,c:'#7c3aed'},
+    {n:'Johnson',raised:0.109,spent:0.29,cash:0.631,c:'#f59e0b'}
+  ],
+  board: [
+    {n:'Giannoulias',dir:'up',c:'#7c3aed',sig:'21.85 million on hand. Lowest not-excited score among tested names. About 64 percent in markets.',read:'Front runner. Risk is that early favorites in Chicago have lost before and he has not yet faced a full-field attack.'},
+    {n:'Johnson',dir:'down',c:'#f59e0b',sig:'Approval 23 percent. 13.6 percent want him to run. 631 thousand on hand, spent nearly 3 times what he raised in Q2. Launched Sept 13.',read:'Weakest incumbent numbers in the field, but still has the Teachers Union and a Black voter base. Can make a runoff in a split field.'},
+    {n:'Mendoza',dir:'flat',c:'#db2777',sig:'Entered June 3. 1.6 million on hand. Not-excited 16 percent. Around 15 percent in one market.',read:'Most visible moderate alternative. Needs money to match.'},
+    {n:'Quigley',dir:'flat',c:'#2563eb',sig:'Formal entry late June. About 377 thousand on hand. Not-excited 20 percent.',read:'Respected but low cash. Watch the next quarterly report.'},
+    {n:'Kelly',dir:'up',c:'#0d9488',sig:'City Hall lobbyist with 2.04 million on hand, second highest in the field.',read:'Money without a public poll number. A name to watch.'},
+    {n:'Holberg',dir:'up',c:'#2563eb',sig:'More than 1 million on hand. About 5 percent in markets.',read:'Self-funded style outsider. Low name recognition.'},
+    {n:'Wilson',dir:'flat',c:'#16a34a',sig:'About 3 percent in markets. Drew about 9 percent in 2023.',read:'Could split older Black voters and affect who makes the runoff.'}
+  ]
+};
+DATA.sources.push(
+  ['Pollsmax, 2028 Democratic primary','https://www.pollsmax.com/2028-democratic-primary/'],
+  ['Pollsmax, 2028 Republican primary','https://www.pollsmax.com/2028-republican-primary/'],
+  ['RealClearPolling, 2028 Democratic nomination','https://www.realclearpolling.com/polls/president/democratic-primary/2028/national'],
+  ['Newsweek, McLaughlin 2028 Democratic poll shift','https://www.newsweek.com/new-poll-shows-how-top-2028-potential-democratic-candidates-have-shifted-12126335'],
+  ['Newsweek, McLaughlin August 2026 GOP poll','https://www.newsweek.com/jd-vance-trump-jr-rubio-2028-poll-12375578'],
+  ['2028 Tracker, declared candidates','https://2028tracker.com/'],
+  ['Capitol Fax, NORC poll on Chicago mayor excitement','https://capitolfax.com/2026/07/15/poll-giannoulias-generates-most-excitement-in-early-mayor%E2%80%99s-race/'],
+  ['Sun-Times, Q2 mayoral fundraising','https://chicago.suntimes.com/elections/2026/07/15/alexi-giannoulias-brandon-johnson-potential-mayoral-candidates-campaign-fundraising-gap'],
+  ['PredictionEdge, Chicago mayor odds','https://www.predictionedge.com/elections/mayor/chicago-race/']
+);
+DATA.log.unshift('2026-10-02  Edition 4. Rebuilt the 2028 primer with full Democratic and Republican fields, poll averages, markets and momentum. Added a Chicago mayor momentum section with early polls, markets, money flow and a scoreboard.');
+DATA.gaps += ' 2028 polls differ by who is named, so averages and markets are shown side by side. Three entries in the Pollsmax lists that looked like data noise were left out. Republican prediction market odds and the Emerson May and July question wording were not reviewed. Chicago mayor markets are thin and the two sites disagree on Johnson.';
+/* ===================== RENDERING ===================== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmtDate = s => new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+$('asof').textContent = fmtDate(DATA.asOf);
+$('days').textContent = Math.max(0, Math.ceil((new Date(DATA.electionDay+'T00:00:00') - new Date())/86400000));
+
+const pc = p => p==='D'?'#2563eb':p==='R'?'#dc2626':'#7c3aed';
+const nameBtn = id => { const p = PEOPLE[id]; if(!p) return ''; const cls = p.ml ? '' : (p.p==='R'?'R':p.p==='I'?'I':''); return `<button class="name ${cls}" data-open="p:${id}">${esc(p.n)}</button>`; };
+
+
+/* ---------- avatars and live photos ---------- */
+const PHOTO = {};
+const ini = id => { const w = PEOPLE[id].n.replace(/^(Dr\.|Sen\.|Rep\.)\s*/,'').replace(/[^A-Za-z .'-]/g,'').split(/\s+/).filter(Boolean); return ((w[0]||'')[0]||'') + ((w.length>1?w[w.length-1]:'')[0]||''); };
+const avColor = id => { const p = PEOPLE[id]; return p.ml ? DATA.mayorLanes[p.ml].c : pc(p.p); };
+const avatar = (id,size) => `<span class="av" data-av="${id}" style="--s:${size}px;--c:${avColor(id)}"><b style="font-weight:800">${ini(id)}</b>${PHOTO[id]?`<img src="${PHOTO[id]}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
+function applyPhotos(){
+  document.querySelectorAll('[data-av]').forEach(el=>{
+    const id = el.getAttribute('data-av');
+    if(!el.querySelector('b')){ el.style.setProperty('--c',avColor(id)); el.innerHTML = `<b style="font-weight:800">${ini(id)}</b>`; }
+    if(PHOTO[id] && !el.querySelector('img')){ const im = document.createElement('img'); im.src = PHOTO[id]; im.alt = ''; im.referrerPolicy = 'no-referrer'; im.onerror = ()=>im.remove(); el.appendChild(im); }
+  });
+}
+async function loadPhotos(){
+  const ids = Object.keys(WIKI).filter(id=>PEOPLE[id]);
+  for(let i=0;i<ids.length;i+=10){
+    const chunk = ids.slice(i,i+10);
+    const titles = chunk.map(id=>decodeURIComponent(WIKI[id]).replace(/_/g,' '));
+    const url = 'https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&redirects=1&prop=pageimages%7Cextracts&piprop=thumbnail&pithumbsize=240&exintro=1&explaintext=1&exsentences=3&exlimit=max&titles='+encodeURIComponent(titles.join('|'));
+    try{
+      const j = await (await fetch(url)).json(); const q = j.query||{};
+      const map = {}; (q.normalized||[]).forEach(n=>map[n.from]=n.to); const red = {}; (q.redirects||[]).forEach(n=>red[n.from]=n.to);
+      const pages = Object.values(q.pages||{});
+      chunk.forEach((id,k)=>{
+        let t = titles[k]; t = map[t]||t; t = red[t]||t;
+        const pg = pages.find(x=>x.title===t);
+        const last = PEOPLE[id].n.split(' ').pop().replace(/[^A-Za-z]/g,'');
+        if(pg && pg.thumbnail && pg.extract && /Illinois|Chicago|Cook County/i.test(pg.extract) && pg.extract.toLowerCase().includes(last.toLowerCase())) PHOTO[id] = pg.thumbnail.source;
+      });
+    }catch(e){ /* offline or blocked, initials stay */ }
+  }
+  applyPhotos();
+}
+
+/* ---------- scripts ---------- */
+Object.keys(DATA.scripts).forEach(k=>{
+  const el = $('s-'+k), s = DATA.scripts[k];
+  if(!el || !s.say) return;
+  el.innerHTML = `<details class="script" open><summary>Plain-language script and key points</summary><p class="say">${esc(s.say)}</p><h5>Key points</h5><ul>${s.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${s.act?`<div class="act"><b>Suggested follow-up</b>${esc(s.act)}</div>`:''}</details>`;
+});
+
+const tile = t => `<div class="tile ${t.cls}"><div class="big">${t.big}</div><div class="lab">${t.lab}</div>${t.src?`<div class="src">${t.src}</div>`:''}</div>`;
+$('glanceTiles').innerHTML = DATA.glance.map(tile).join('');
+$('issueTiles').innerHTML = DATA.issues.map(tile).join('');
+$('natTiles').innerHTML = DATA.natTiles.map(tile).join('');
+$('primerCards').innerHTML = DATA.primer.map(tile).join('');
+$('blocCards').innerHTML = DATA.blocCards.map(tile).join('');
+
+/* ---------- news ---------- */
+$('newsCards').innerHTML = DATA.news.map(n=>`<div class="news"><div class="d">${esc(n.d)} &middot; ${esc(n.tag)}</div><h4>${esc(n.head)}</h4><p>${esc(n.why)}</p><p class="note"><a href="${n.url}" target="_blank" rel="noopener">Source, ${esc(n.src)}</a></p><div class="rec"><b>Suggested follow-up</b><br>${esc(n.act)}</div></div>`).join('');
+$('watchList').innerHTML = '<ul>'+DATA.watch.map(w=>`<li><a href="${w[1]}" target="_blank" rel="noopener">${esc(w[0])}</a>. ${esc(w[2])}</li>`).join('')+'</ul>';
+
+/* ---------- ladder ---------- */
+const cols = [
+  {k:'D',l:'Safe or Likely D',bg:'#1d4ed8',tint:'#e8efff'},
+  {k:'leanD',l:'Lean D',bg:'#60a5fa',tint:'#eef5ff'},
+  {k:'toss',l:'Toss-up',bg:'#f59e0b',tint:'#fff6e0'},
+  {k:'leanR',l:'Lean R',bg:'#f87171',tint:'#fff0f0'},
+  {k:'likelyR',l:'Likely R',bg:'#b91c1c',tint:'#ffe9e9'}
+];
+$('ladder').innerHTML = cols.map(c => `<div class="col" style="background:${c.tint}"><h4 style="background:${c.bg}">${c.l} (${DATA.races.filter(r=>r.col===c.k).length})</h4>${
+  DATA.races.filter(r=>r.col===c.k).map(r=>`<div class="race" role="button" tabindex="0" data-open="r:${r.id}" style="border-left-color:${r.inc==='D'?'#2563eb':'#dc2626'}"><span class="tag">${r.tag}</span><b>${r.n}</b><span>${r.d}</span></div>`).join('')}</div>`).join('');
+
+/* ---------- bar helpers ---------- */
+const bar = (name,pct,color,val) => `<div class="row"><div class="nm">${name}</div><div class="track"><div class="fill" style="width:${Math.max(2,pct)}%;background:${color}"></div></div><div class="val">${val}</div></div>`;
+
+/* ---------- tight race cards ---------- */
+const readCol = {toss:'#f59e0b','leanD':'#60a5fa','leanR':'#f87171'};
+$('tightCards').innerHTML = DATA.tight.map(t=>{
+  const r = RACE[t.id]||{people:[]};
+  const sqc = t.sq>=5?'#dc2626':t.sq>=4?'#f97316':t.sq>=3?'#f59e0b':'#94a3b8';
+  const m = '<div class="meter">'+[1,2,3,4,5].map(i=>`<i style="${i<=t.sq?`background:${sqc}`:''}"></i>`).join('')+'</div>';
+  const big = t.v ? `<div class="num">${t.v.toLocaleString()} <small>votes in ${esc(t.y)}</small></div>` : `<div class="num" style="font-size:24px">${esc(t.lean)}</div>`;
+  const chips = [`<span class="chip c-${t.col}">${t.read}</span>`, t.v?`<span class="chip" style="background:#64748b">${esc(t.lean)}</span>`:''].join(' ');
+  return `<div class="tcard" style="border-top-color:${t.holds==='R'?'#dc2626':'#2563eb'}"><div class="seat">${t.seat}</div><div class="holds">Held by ${t.holds==='R'?'Republicans':'Democrats'}</div>${big}${m}<p>${chips}</p><p>${esc(t.why)}</p><div class="vs"><b>Who is running.</b> ${r.people.map(nameBtn).join(', ')||'See race board'} <button class="name" style="font-size:12px" data-open="r:${t.id}">Open race details</button></div></div>`;
+}).join('');
+$('stress').innerHTML = DATA.stress.map(s=>`<div class="box"><div class="note" style="margin:0">${s.t}</div><div class="big">${s.big}</div><p style="margin:4px 0 0;font-size:13.5px">${s.d}</p></div>`).join('');
+
+/* ---------- stacks ---------- */
+function stack(el, segs, mark, label, total){
+  total = total || segs.reduce((a,s)=>a+s.v,0);
+  const pm = mark/total*100;
+  $(el).innerHTML = `<div class="stack">${segs.map(s=>`<div style="width:${s.v/total*100}%;background:${s.c};${s.t?`color:${s.t}`:''}">${s.v>=Math.max(3,total*0.025)?s.v:''}</div>`).join('')}<div class="mark" style="left:${pm}%"><i>${label}</i></div></div><div class="legend">${segs.map(s=>`<span style="--c:${s.c}">${s.l} ${s.v}</span>`).join('')}</div>`;
+}
+stack('ilHouse', DATA.ilHouse, DATA.ilHouseMark, '71 supermajority');
+stack('ilSenate', DATA.ilSenate, DATA.ilSenateMark, '36 supermajority');
+stack('usSenate', DATA.usSenate, 51, '51 for control');
+stack('usHouse', DATA.usHouse, 218, '218 for control');
+
+/* ---------- legislature ---------- */
+const bmax = Math.max(...DATA.blocs.map(b=>b.v));
+$('blocBars').innerHTML = DATA.blocs.map(b=>bar(b.n,b.v/bmax*100,b.c,b.v+' members')+`<p class="note" style="margin:-4px 0 10px">${esc(b.d)}</p>`).join('');
+$('leaders').innerHTML = '<table><tr><th></th><th>Democrats</th><th>Republicans</th></tr>'+DATA.leaders.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')+'</table>';
+$('spectrum').innerHTML = '<div style="display:flex;border-radius:12px;overflow:hidden;min-height:44px">'+DATA.spectrum.map(s=>`<div style="width:${s.w}%;background:${s.c};color:#fff;font-size:12px;font-weight:700;padding:8px 6px;display:flex;align-items:center;justify-content:center;text-align:center">${s.l}</div>`).join('')+'</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:12px">'+DATA.spectrum.map(s=>`<div style="border-left:5px solid ${s.c};padding:2px 10px;font-size:13px"><b>${s.l}</b><br><span style="color:var(--muted)">${s.s}</span></div>`).join('')+'</div><div class="legend" style="margin-top:10px"><span style="--c:#db2777">More progressive</span><span style="--c:#7f1d1d">More conservative</span></div>';
+
+/* ---------- ideology strip ---------- */
+(function(){
+  const W=1000,H=250,pad=40;
+  const items = DATA.ideology.map((d,i)=>{
+    const x = pad + d.x/100*(W-2*pad); const up = i%2===0;
+    const ly = up ? 78 - (i%4===0?0:22) : 168 + (i%4===1?0:22);
+    return `<line x1="${x}" y1="${up?ly+6:122}" x2="${x}" y2="${up?118:ly-12}" stroke="${pc(d.p)}" stroke-width="2"/><circle cx="${x}" cy="120" r="11" fill="${pc(d.p)}" stroke="#fff" stroke-width="3"/><text x="${x}" y="${ly}" text-anchor="middle" font-size="15" font-weight="700" fill="${pc(d.p)}">${d.n}</text>`;
+  }).join('');
+  $('ideo').innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Illustrative left to right placement of Illinois candidates"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#1d4ed8"/><stop offset=".5" stop-color="#a78bfa"/><stop offset="1" stop-color="#b91c1c"/></linearGradient></defs><rect x="${pad}" y="114" width="${W-2*pad}" height="12" rx="6" fill="url(#g)"/>${items}<text x="${pad}" y="${H-6}" font-size="13" fill="#5b6585">More progressive</text><text x="${W-pad}" y="${H-6}" text-anchor="end" font-size="13" fill="#5b6585">More conservative</text></svg>`;
+})();
+/* lanes. Only legislative candidates, those whose race id starts with sd or hd */
+const RACE_OF = {};
+Object.keys(RACE).forEach(k=>{ if(/^(sd|hd)/.test(k)) RACE[k].people.forEach(id=>{ if(!RACE_OF[id]) RACE_OF[id]=RACE[k].t.split(' ')[0]; }); });
+(function(){
+  const legIds = new Set();
+  Object.keys(RACE).forEach(k=>{ if(/^(sd|hd)/.test(k)) RACE[k].people.forEach(id=>legIds.add(id)); });
+  $('lanes').innerHTML = DATA.lanes.map(L=>{
+    const ppl = [...legIds].map(id=>PEOPLE[id]).filter(p=>p && p.lane===L.k);
+    return `<div class="lane" style="background:${L.bg}"><h4>${L.l} (${ppl.length})</h4><p>${L.s}</p>${ppl.map(p=>`<button class="lchip" data-open="p:${p.id}"><i style="background:${pc(p.p)};${p.conf==='hi'?'':`background:#fff;border:2px solid ${pc(p.p)}`}"></i>${esc(p.n)}<span class="cf">${(RACE_OF[p.id]||'')}</span></button>`).join('')}</div>`;
+  }).join('');
+})();
+
+/* ---------- issues ---------- */
+$('issueDeep').innerHTML = DATA.issueDeep.map(i=>`<details class="issue"><summary><div class="tile ${i.cls}"><div class="big">${i.big}</div><div class="lab">${i.lab}</div><div class="src">${i.src}</div><div class="more">Tap to open the explainer</div></div></summary><div class="body"><h5>What it is</h5><p>${i.what}</p><h5>Why it is hot now</h5><p>${i.now}</p><h5>Who says what</h5><ul>${i.who.map(w=>`<li>${w}</li>`).join('')}</ul><h5>What to watch</h5><ul>${i.watch.map(w=>`<li>${w}</li>`).join('')}</ul><div class="box" style="background:#ecfdf5;border-radius:10px;padding:8px 12px;margin-top:10px;color:#065f46"><b>Why it matters for utilities.</b> ${i.ang}</div></div></details>`).join('');
+const mp = Math.max(...DATA.ptc.map(p=>p.v));
+$('ptc').innerHTML = DATA.ptc.map(p=>bar(p.n,p.v/mp*100,p.c,p.v.toFixed(2)+'¢')).join('') + '<p class="note">That is about a 29 percent jump. ComEd rose about 9 percent to 10.4¢. Both reset Oct 1.</p>';
+$('dcTable').innerHTML = '<table>'+DATA.dc.map(r=>`<tr><td style="width:110px"><b>${r.w}</b></td><td>${r.a}</td></tr>`).join('')+'</table>';
+
+/* ---------- Chicago ---------- */
+$('mayorCards').innerHTML = DATA.mayorOrder.map(id=>{
+  const p = PEOPLE[id], L = DATA.mayorLanes[p.ml];
+  return `<div class="mcard" role="button" tabindex="0" data-open="p:${id}" style="border-top-color:${L.c}"><div class="top">${avatar(id,46)}<div><b>${esc(p.n)}</b><div class="r">${esc(p.role)}${p.age?`, ${p.age}`:''}</div></div></div><span class="lane-tag" style="background:${L.c}">${L.l}</span><p>${esc(p.line||p.pos[0])}</p></div>`;
+}).join('');
+$('mayorIssues').innerHTML = DATA.mayorIssues.map(i=>`<div class="card" style="border-top:6px solid ${i.c}"><h3>${i.t}</h3><p style="margin:4px 0 0;font-size:14px">${i.d}</p></div>`).join('');
+const gm = Math.max(...DATA.gap.map(g=>g.v));
+$('gapBars').innerHTML = DATA.gap.map(g=>bar(g.n,g.v/gm*100,g.c,'$'+g.v.toLocaleString()+'M')).join('');
+const mm = Math.max(...DATA.mayorMoney.map(m=>m.v));
+$('mayorMoney').innerHTML = DATA.mayorMoney.map(m=>bar(m.n,m.v/mm*100,m.c,'$'+m.v+'M')).join('');
+$('donut').style.background = 'conic-gradient(#f59e0b 0 23%, #e5e7eb 23% 100%)';
+$('scenarios').innerHTML = DATA.scenarios.map(s=>`<p style="margin:8px 0"><b>${s.t}.</b> ${s.d}</p>`).join('')+'<p class="note">These are scenarios from this briefing, not predictions.</p>';
+$('mayorMatrix').innerHTML = '<table><tr><th>Candidate</th><th>Public safety</th><th>Budget and taxes</th><th>Housing</th><th>Other</th></tr>'+DATA.matrix.map(r=>`<tr><td>${nameBtn(r[0])}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')+'</table>';
+
+/* ---------- national ---------- */
+$('senateTable').innerHTML = '<table><tr><th>State</th><th>Seat</th><th>Matchup</th><th>Cook</th></tr>'+DATA.senateTable.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td><span class="chip c-${r[4]}">${r[3]}</span></td></tr>`).join('')+'</table>';
+$('govTiles').innerHTML = DATA.gov.map(g=>`<div class="tile ${g.c}" style="padding:14px"><div class="big" style="font-size:22px">${g.n}</div><div class="lab">${g.s}</div></div>`).join('');
+$('envBars').innerHTML = DATA.env.map(e=>bar(e.n,e.v,e.c,e.t)).join('');
+
+/* ---------- 2028 ---------- */
+$('road').innerHTML = DATA.road.map(r=>`<div class="step" style="background:${r.c}"><b>${r.t}</b><span>${r.d}</span></div>`).join('');
+
+/* ---------- update ---------- */
+$('log').innerHTML = DATA.log.map(l=>`<li>${l}</li>`).join('');
+$('gaps').textContent = DATA.gaps;
+$('sources').innerHTML = DATA.sources.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join('');
+
+/* ---------- modal ---------- */
+let lastFocus = null;
+function openModal(head, sub, color, html, avId){
+  $('mav').innerHTML = avId ? avatar(avId,72) : ''; if(avId) applyPhotos();
+  $('mh').style.background = `linear-gradient(120deg,${color},#0f1b3d)`;
+  $('mt').textContent = head; $('ms').textContent = sub; $('mb').innerHTML = html;
+  $('ov').classList.add('on'); $('ov').setAttribute('aria-hidden','false');
+  lastFocus = document.activeElement; $('mx').focus(); $('ov').scrollTop = 0;
+}
+function closeModal(){ $('ov').classList.remove('on'); $('ov').setAttribute('aria-hidden','true'); if(lastFocus && lastFocus.focus) lastFocus.focus(); }
+const list = a => '<ul>'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+function showPerson(id){
+  const p = PEOPLE[id]; if(!p) return;
+  const L = p.ml ? DATA.mayorLanes[p.ml] : null;
+  const color = L ? L.c : pc(p.p);
+  const party = L ? '' : (p.p==='D'?'Democrat':p.p==='R'?'Republican':'Independent');
+  let h = `<h5>Background</h5><p>${esc(p.bio)}</p><h5>Positions and message</h5>${list(p.pos.map(esc))}<h5>Risks and watch points</h5><p>${esc(p.risk)}</p>`;
+  if(p.lane){ const LL = DATA.lanes.find(l=>l.k===p.lane); h += p.lane==='none' ? `<h5>Ideology lane</h5><p><span class="conf">Not yet established</span></p><p class="note">The sources reviewed did not show enough to place this person. Roll call votes and group scorecards would settle it.</p>` : `<h5>Ideology lane</h5><p><b>${LL?LL.l:''}</b> <span class="conf">${p.conf==='hi'?'Solid basis':'Thin basis'}</span></p>${p.basis?`<p class="note">${esc(p.basis)}</p>`:''}`; }
+  if(L){ h += `<h5>Lane in the race</h5><p><b>${L.l}</b>. The Chicago mayor race is nonpartisan, so party labels are not used.</p>`; }
+  const races = Object.keys(RACE).filter(k=>RACE[k].people.includes(id));
+  if(races.length) h += `<h5>Races</h5><div class="mwho">${races.map(k=>`<button data-open="r:${k}">${esc(RACE[k].t)}</button>`).join('')}</div>`;
+  openModal(p.n, p.role + (party?'. '+party:''), color, h, id);
+}
+function showRace(id){
+  const r = RACE[id]; if(!r) return;
+  const meta = DATA.races.find(x=>x.id===id) || {};
+  const colr = {D:'#1d4ed8',leanD:'#60a5fa',toss:'#f59e0b',leanR:'#f87171',likelyR:'#b91c1c'}[meta.col] || '#0f1b3d';
+  const lab = {D:'Safe or Likely D',leanD:'Lean D',toss:'Toss-up',leanR:'Lean R',likelyR:'Likely R'}[meta.col]||'';
+  let h = `<p>${esc(r.why)}</p><h5>Plain-language script</h5><div class="box"><p>${esc(r.script)}</p></div><h5>Key points</h5>${list(r.points.map(esc))}`;
+  if(r.people.length) h += `<h5>Candidates and incumbents, click for background</h5><div class="mwho">${r.people.map(pid=>{const q=PEOPLE[pid];return `<button class="${q.p==='R'?'R':q.p==='I'?'I':''}" data-open="p:${pid}">${esc(q.n)}</button>`;}).join('')}</div>`;
+  if(r.act) h += `<h5>Suggested follow-up</h5><div class="box g"><p>${esc(r.act)}</p></div>`;
+  openModal(r.t, (meta.d||'') + (lab?'. '+lab:''), colr, h);
+}
+document.addEventListener('click', e=>{
+  const el = e.target.closest('[data-open]');
+  if(el){ const [t,id] = el.getAttribute('data-open').split(':'); if(t==='p') showPerson(id); else showRace(id); return; }
+  if(e.target===$('ov') || e.target.closest('#mx')) closeModal();
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape' && $('ov').classList.contains('on')) closeModal();
+  if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.race,.mcard')){ e.preventDefault(); e.target.click(); }
+});
+
+/* ===================== EDITION 3 RENDERING ===================== */
+(function(){
+  const M = DATA.money;
+  $('moneyTiles').innerHTML = M.tiles.map(tile).join('');
+  const bars = (arr,max)=>arr.map(b=>bar(b.n,b.v/max*100,b.c,b.t)).join('');
+  $('govRaised').innerHTML = bars(M.govRaised,12);
+  $('govSpent').innerHTML = bars(M.govSpent,12);
+  $('govCash').innerHTML = bars(M.govCash,3.5);
+  $('govNotes').innerHTML = M.govNotes.map(n=>`<li>${esc(n)}</li>`).join('');
+  $('caucusBars').innerHTML = bars(M.caucus,22);
+  $('laborNote').textContent = M.labor.note;
+  $('sectors').innerHTML = M.sectors.map(s=>`<p style="margin:8px 0;font-size:13.5px"><span style="display:inline-block;width:11px;height:11px;border-radius:3px;background:${s.c};margin-right:6px"></span><b>${s.n}.</b> ${esc(s.d)}</p>`).join('');
+  $('mayorCash').innerHTML = bars(M.mayorCash,23);
+  const sc = {labor:'#2563eb',biz:'#7c3aed',person:'#a78bfa'};
+  $('giannBars').innerHTML = M.giannoulias.map(g=>bar(g.n,g.v/2*100,sc[g.s],g.t)).join('');
+  $('giannNotes').innerHTML = M.giannNotes.map(n=>`<li>${esc(n)}</li>`).join('');
+  const mx = Math.max(...M.raceCost.map(r=>Math.max(r.dr+r.di,r.rr+r.ri)));
+  const row = (lab,a,b,c1,c2)=>`<div class="row"><div class="nm" style="width:130px">${lab}</div><div class="track" style="border-radius:6px"><div style="display:flex;height:100%"><i style="display:block;width:${a/mx*100}%;background:${c1}"></i><i style="display:block;width:${b/mx*100}%;background:${c2}"></i></div></div><div class="val">$${(a+b).toLocaleString()}K</div></div>`;
+  $('raceCost').innerHTML = M.raceCost.map(r=>`<div style="margin:12px 0 4px"><b>${r.seat}</b> <span class="note" style="margin:0">${esc(r.res)}</span></div>${row('Democratic side',r.dr,r.di,'#2563eb','#93c5fd')}${row('Republican side',r.rr,r.ri,'#dc2626','#fca5a5')}`).join('');
+  $('primaryTiles').innerHTML = M.primary.map(tile).join('');
+
+  /* utilities sidebar */
+  const U = DATA.utilities;
+  $('utilSide').innerHTML = `<h3>Utility and energy money</h3><p class="note" style="margin:0 0 8px">${esc(U.intro)}</p>`
+   + U.roster.map(u=>`<div class="u"><b>${esc(u.n)}</b> <span class="par">${esc(u.p)}</span><ul>${u.doc.map(d=>`<li>${esc(d)}</li>`).join('')}</ul><span class="amt">Current giving, ${u.amt===null?'not loaded':u.amt}</span></div>`).join('')
+   + `<h3 style="margin-top:16px;font-size:15px">Ratepayer-funded costs</h3><ul style="font-size:12.5px;padding-left:18px">${U.ratepayer.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`
+   + `<h3 style="margin-top:16px;font-size:15px">Where to pull current totals</h3><ul style="font-size:12.5px;padding-left:18px">${U.how.map(h=>`<li><a href="${h[1]}" target="_blank" rel="noopener">${esc(h[0])}</a>. ${esc(h[2])}</li>`).join('')}</ul>`
+   + `<p class="note">To fill a blank, set <code>amt</code> for that utility in <code>DATA.utilities.roster</code>.</p>`;
+
+  /* Speaker */
+  const S = DATA.speaker;
+  $('spkFund').innerHTML = '<table>'+S.fund.map(f=>`<tr><td style="width:36%"><b>${esc(f[0])}</b></td><td>${esc(f[1])}</td></tr>`).join('')+'</table>';
+  $('spkIdeo').innerHTML = S.ideology.map(x=>`<li>${esc(x)}</li>`).join('');
+  const pm = a => a.map(i=>`<div class="it"><div class="d">${esc(i.d)}</div><b>${esc(i.h)}</b><p>${esc(i.w)}</p><p class="note" style="margin:0"><a href="${i.u}" target="_blank" rel="noopener">Source</a></p></div>`).join('');
+  $('spkGood').innerHTML = pm(S.good); $('spkBad').innerHTML = pm(S.bad);
+  $('spkNet').textContent = S.net;
+  $('spkWatch').innerHTML = S.watch.map(x=>`<li>${esc(x)}</li>`).join('');
+  /* scripts for the new sections were added after the first pass, render them now */
+  ['money','speaker'].forEach(k=>{ const el = $('s-'+k), s = DATA.scripts[k]; el.innerHTML = `<details class="script" open><summary>Plain-language script and key points</summary><p class="say">${esc(s.say)}</p><h5>Key points</h5><ul>${s.points.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${s.act?`<div class="act"><b>Suggested follow-up</b>${esc(s.act)}</div>`:''}</details>`; });
+  /* news cards re-rendered because two items were added */
+  $('newsCards').innerHTML = DATA.news.map(n=>`<div class="news"><div class="d">${esc(n.d)} &middot; ${esc(n.tag)}</div><h4>${esc(n.head)}</h4><p>${esc(n.why)}</p><p class="note"><a href="${n.url}" target="_blank" rel="noopener">Source, ${esc(n.src)}</a></p><div class="rec"><b>Suggested follow-up</b><br>${esc(n.act)}</div></div>`).join('');
+  $('log').innerHTML = DATA.log.map(l=>`<li>${l}</li>`).join('');
+  $('gaps').textContent = DATA.gaps;
+  $('sources').innerHTML = DATA.sources.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a></li>`).join('');
+  applyPhotos();
+  loadPhotos();
+})();
+
+/* ===================== EDITION 4 rendering ===================== */
+(function(){
+  const Q = DATA.poll28, M = DATA.mayorMom;
+  $('p28Tiles').innerHTML = [
+    {cls:'t-blue',big:'Harris 26-28',lab:'Leads Democratic averages when she is named. Newsom 14, Buttigieg 12 to 13.'},
+    {cls:'t-red',big:'Vance 38',lab:'Leads the Republican average. Rubio 20, Trump Jr. 10, DeSantis 7.'},
+    {cls:'t-purple',big:'Markets differ',lab:'Polymarket has Ocasio-Cortez 18, Newsom 16, Ossoff 15, Harris 7.'},
+    {cls:'t-pink',big:'Pritzker 3 to 5',lab:'Up from 1 percent in June 2025 in McLaughlin. Still a shortlist name, not a leader.'}
+  ].map(tile).join('');
+
+  /* Democratic three way view */
+  const mini = (v,c,mx) => v==null ? '<div style="font-size:11px;color:#94a3b8">no figure</div>' : `<div style="display:flex;align-items:center;gap:6px"><div class="sbar" style="width:${Math.max(2,v/mx*100)}%;background:${c}"></div><span style="font-size:12px;font-weight:700">${v}</span></div>`;
+  $('demField').innerHTML = Q.dem.map(d=>`<div class="mrow${d.il?' il':''}"><div class="nm">${d.n}${d.il?' (IL)':''}</div><div>${mini(d.a,'#2563eb',30)}${mini(d.b,'#0d9488',30)}${mini(d.m,'#f59e0b',30)}</div></div>`).join('');
+  $('demRest').textContent = 'Other names in the Pollsmax average, all at 3.2 percent or lower: ' + Q.demRest + '.';
+
+  /* dumbbell */
+  const dumb = (rows,mx,title) => {
+    const W=520, rh=30, H=rows.length*rh+34, x0=110, x1=470, X=v=>x0+(v/mx)*(x1-x0);
+    let s='';
+    for(let g=0;g<=mx;g+=10){ s+=`<line x1="${X(g)}" x2="${X(g)}" y1="14" y2="${H-20}" stroke="#e5e9f5"/><text x="${X(g)}" y="${H-5}" text-anchor="middle" font-size="11" fill="#5b6585">${g}%</text>`; }
+    rows.forEach((r,i)=>{
+      const y=24+i*rh, up=r.b>=r.a, col=r.c||(up?'#16a34a':'#dc2626'), d=r.b-r.a;
+      s+=`<text x="${x0-10}" y="${y+4}" text-anchor="end" font-size="12.5" font-weight="600" fill="#1b2440">${r.n}</text>`+
+         `<line x1="${X(r.a)}" x2="${X(r.b)}" y1="${y}" y2="${y}" stroke="${col}" stroke-width="4" stroke-linecap="round" opacity=".55"/>`+
+         `<circle cx="${X(r.a)}" cy="${y}" r="6" fill="#fff" stroke="${col}" stroke-width="2.5"/><circle cx="${X(r.b)}" cy="${y}" r="7" fill="${col}"/>`+
+         `<text x="${X(Math.max(r.a,r.b))+12}" y="${y+4}" font-size="12" font-weight="700" fill="${col}">${r.b}% (${d>0?'+':''}${d})</text>`;
+    });
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${title}">${s}</svg>`;
+  };
+  $('demMove').innerHTML = dumb(Q.demMove.map(r=>({...r,c:r.b>=r.a?'#16a34a':'#dc2626'})),40,'Democratic poll movement, June 2025 to June 2026') + '<p class="note">Green is up, red is down. Pritzker rose from 1 to 5. Harris fell from 30 to 26. Wes Moore and Whitmer are near the floor.</p>';
+  $('gopMove').innerHTML = dumb(Q.gopMove,40,'Republican poll movement, July to August 2026') + '<p class="note">Trump Jr. had a May low of 12 in the same series. Vance still leads by 13 points in this poll.</p>';
+
+  $('whyDis').innerHTML = [
+    'Who is named. Averages that include Harris put her first. Polls that leave her out show Newsom, Buttigieg and Ocasio-Cortez on top. Emerson in May had Buttigieg 18 and Newsom 16 with no Harris at the top, so its list of names likely differed. The exact question wording was not reviewed.',
+    'Who answers. Some polls sample all voters, others only likely Democratic primary voters. Name recognition is strongest for Harris and Newsom.',
+    'Markets price a different question. Polymarket asks who wins the nomination, not who is ahead today. It rates Harris at 7 even though polls put her near 27.',
+    'Single polls swing. Buttigieg has ranged from 9 to 25 and Harris from 17 to 42 in recent polls, according to Pollsmax.'
+  ].map(x=>`<li>${esc(x)}</li>`).join('');
+
+  /* GOP field */
+  const gcol = ['#dc2626','#f59e0b','#7c3aed','#2563eb','#0d9488','#db2777','#16a34a'];
+  $('gopField').innerHTML = Q.gop.map((d,i)=>bar(d.n,d.v/40*100,gcol[i%gcol.length],d.v+'%')).join('');
+
+  /* Emerson line chart */
+  (function(){
+    const L=Q.gopLine, W=520,H=260,x0=70,x1=430,y0=24,y1=210,mx=60;
+    const X=i=>x0+i*(x1-x0)/(L.x.length-1), Y=v=>y1-(v/mx)*(y1-y0);
+    let s='';
+    for(let g=0;g<=60;g+=20) s+=`<line x1="${x0-20}" x2="${x1+30}" y1="${Y(g)}" y2="${Y(g)}" stroke="#e5e9f5"/><text x="${x0-26}" y="${Y(g)+4}" text-anchor="end" font-size="11" fill="#5b6585">${g}%</text>`;
+    L.x.forEach((t,i)=>{ s+=`<text x="${X(i)}" y="${H-12}" text-anchor="middle" font-size="12" fill="#5b6585">${t}</text>`; });
+    L.s.forEach((se,k)=>{
+      s+=`<polyline fill="none" stroke="${se.c}" stroke-width="4" stroke-linejoin="round" points="${se.v.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>`;
+      se.v.forEach((v,i)=>{ s+=`<circle cx="${X(i)}" cy="${Y(v)}" r="6" fill="${se.c}"/><text x="${X(i)}" y="${Y(v)+(k?20:-12)}" text-anchor="middle" font-size="12" font-weight="700" fill="${se.c}">${v}</text>`; });
+      s+=`<text x="${x1+36}" y="${Y(se.v[se.v.length-1])+(k?18:-4)}" font-size="13" font-weight="700" fill="${se.c}">${se.n}</text>`;
+    });
+    $('gopLine').innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Vance and Rubio Emerson readings">${s}</svg><p class="note">Rubio closed from 20 to 38 while Vance fell from 52 to 39. Other pollsters still show Vance ahead by double digits, so this is the closest reading, not the average.</p>`;
+  })();
+
+  /* Chicago momentum */
+  $('mmTiles').innerHTML = [
+    {cls:'t-purple',big:'Giannoulias',lab:'Leads on cash (21.85 million), excitement and markets (about 64 percent).'},
+    {cls:'t-gold',big:'Johnson 23%',lab:'Job approval in the June NORC poll. Only 13.6 percent want him to run again.'},
+    {cls:'t-blue',big:'Thin data',lab:'One strong public poll. No full-field vote-choice poll yet.'},
+    {cls:'t-pink',big:'Oct 26',lab:'Petitions due. First round Feb 23, runoff Apr 6.'}
+  ].map(tile).join('');
+  const arrow = {up:'&#9650;',down:'&#9660;',flat:'&#9644;'};
+  $('mmBoard').innerHTML = M.board.map(b=>`<tr><td style="font-weight:700;color:${b.c}">${b.n}</td><td><span class="trend ${b.dir}">${arrow[b.dir]}</span></td><td>${esc(b.sig)}</td><td>${esc(b.read)}</td></tr>`).join('');
+  $('mmMarket').innerHTML = M.market.map(d=>bar(d.n,d.v,d.c,d.v+'%')).join('');
+  const mf = M.flow;
+  $('mmFlow').innerHTML = mf.map(f=>`<div style="margin-bottom:14px"><b style="color:${f.c}">${f.n}</b>${bar('Raised',f.raised/4*100,f.c,f.raised)}${bar('Spent',f.spent/4*100,'#94a3b8',f.spent)}${bar('Cash',f.cash/22*100,f.c,f.cash)}</div>`).join('') + '<p class="note">Raised and spent bars use one scale and cash uses another so both are readable. Read the numbers.</p>';
+  $('mmPolls').innerHTML = M.poll.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+})();
+</script>
+</body>
+</html>
