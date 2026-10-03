@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utility Giving 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..900&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --surface:#f7f8f9; --ink:#0f1d2b; --ink2:#46566a; --muted:#6f7b89; --hair:#dde2e8; --hair2:#c9d0d8;
+  --u1:#eb6834; --u2:#1baf7a; --u3:#eda100; --u4:#e87ba4; --u5:#4a3aa7;
+  --dem:#2a78d6; --rep:#e34948;
+  --s1:#0f1d2b; --s2:#4d5f73; --s3:#8a9aab; --s4:#c3ccd6;
+  --wash:#eef1f4;
+  --head:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --surface:#1a1a19; --ink:#f3f3f0; --ink2:#c3c2b7; --muted:#8e8d84; --hair:#2e2e2c; --hair2:#403f3c;
+    --u1:#d95926; --u2:#199e70; --u3:#c98500; --u4:#d55181; --u5:#9085e9;
+    --dem:#3987e5; --rep:#e66767;
+    --s1:#f3f3f0; --s2:#a8b3c0; --s3:#6a7889; --s4:#3a4350; --wash:#222221;
+  }
+}
+:root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface:#1a1a19; --ink:#f3f3f0; --ink2:#c3c2b7; --muted:#8e8d84; --hair:#2e2e2c; --hair2:#403f3c;
+    --u1:#d95926; --u2:#199e70; --u3:#c98500; --u4:#d55181; --u5:#9085e9;
+    --dem:#3987e5; --rep:#e66767;
+    --s1:#f3f3f0; --s2:#a8b3c0; --s3:#6a7889; --s4:#3a4350; --wash:#222221;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 18px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:3px}
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+.top-in{max-width:1240px;margin:0 auto;padding:10px 28px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.brand{font:800 15px/1 var(--head);font-stretch:85%;letter-spacing:.01em;margin-right:auto}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{font:600 14px/1 var(--body);text-decoration:none;color:var(--ink2);padding:7px 9px;border-radius:6px}
+.top nav a:hover{background:var(--wash);color:var(--ink)}
+.ctl{display:flex;gap:6px}
+.ctl button{font:600 14px/1 var(--body);color:var(--ink);background:transparent;border:1px solid var(--hair2);border-radius:999px;padding:8px 13px;cursor:pointer}
+.ctl button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+main{max-width:1240px;margin:0 auto;padding:0 28px 80px}
+/* hero */
+.hero{padding:72px 0 40px}
+.hero h1{font:800 clamp(42px,7.2vw,96px)/.95 var(--head);font-stretch:78%;letter-spacing:-.02em;margin:0 0 22px;max-width:15ch}
+.hero p.lede{font-size:21px;max-width:44ch;color:var(--ink2);margin:0 0 44px}
+/* bus-bar sections */
+section.sec{position:relative;padding:56px 0 56px 40px;border-top:1px solid var(--hair)}
+section.sec::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:var(--hair2)}
+section.sec::after{content:"";position:absolute;left:3px;top:62px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--ink)}
+section.hero-sec{border-top:none;padding-top:0}
+section.hero-sec::after{top:8px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:40px}
+body.show-script .grid{grid-template-columns:minmax(0,1.9fr) minmax(260px,1fr)}
+h2{font:800 clamp(30px,4vw,52px)/1 var(--head);font-stretch:80%;letter-spacing:-.015em;margin:0 0 12px;max-width:22ch}
+.sub{color:var(--ink2);margin:0 0 30px;max-width:60ch}
+.big{font:800 clamp(56px,8vw,112px)/.9 var(--head);font-stretch:72%;letter-spacing:-.03em}
+.script{display:none;align-self:start;position:sticky;top:76px;border-left:3px solid var(--ink);padding:2px 0 2px 20px}
+body.show-script .script{display:block}
+.script h3{font:800 17px/1.1 var(--head);font-stretch:85%;margin:0 0 4px}
+.script .dur{font-size:14px;color:var(--muted);margin:0 0 12px}
+.script p{font-size:17px;line-height:1.6;margin:0 0 12px;color:var(--ink)}
+.script .cue{font-size:14px;color:var(--muted);font-style:italic}
+/* charts */
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:18px 0 0;font-size:15px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:14px;height:10px;border-radius:2px}
+.hbar{display:flex;gap:2px;height:60px}
+.hbar>div{border-radius:2px;position:relative;min-width:3px}
+.hbar>div:first-child{border-radius:6px 2px 2px 6px}.hbar>div:last-child{border-radius:2px 6px 6px 2px}
+.hbar>div:hover,.hbar>div:focus-visible{filter:brightness(1.08);outline:2px solid var(--ink);outline-offset:2px}
+.kpis{display:flex;flex-wrap:wrap;gap:36px 56px;margin-top:40px}
+.kpis div{min-width:130px}
+.kpis b{display:block;font:800 44px/1 var(--head);font-stretch:78%;letter-spacing:-.01em}
+.kpis span{font-size:15px;color:var(--ink2)}
+.rows{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:150px minmax(0,1fr) 78px;gap:14px;align-items:center}
+.row .nm{display:flex;align-items:center;gap:9px;font:600 16px/1.15 var(--body)}
+.row .nm i{width:10px;height:10px;border-radius:50%;flex:none}
+.row .val{font:700 16px/1 var(--body);text-align:right}
+.seg{display:flex;gap:2px;height:28px}
+.seg>div{position:relative;border-radius:2px;min-width:2px;display:flex;align-items:center;justify-content:center;color:#fff;font:700 13px/1 var(--body);overflow:visible;white-space:nowrap}
+.seg>div:first-child{border-radius:5px 2px 2px 5px}.seg>div:last-child{border-radius:2px 5px 5px 2px}
+.seg>div:hover{filter:brightness(1.12);outline:2px solid var(--ink);outline-offset:1px;z-index:2}
+.hatch{background-image:repeating-linear-gradient(45deg,transparent 0 3px,var(--surface) 3px 5px)}
+.axisnote{display:grid;grid-template-columns:150px 1fr 78px;gap:14px;color:var(--muted);font-size:13px;margin-top:6px}
+.mid{position:relative}
+.mid::after{content:"";position:absolute;left:50%;top:-4px;bottom:-4px;width:1px;background:var(--ink);opacity:.5;pointer-events:none}
+/* waffle */
+.blocks{display:flex;flex-wrap:wrap;gap:30px 40px}
+.blk h4{margin:0 0 4px;font:800 18px/1.1 var(--head);font-stretch:85%}
+.blk .st{font-size:14px;color:var(--ink2);margin-bottom:10px}
+.wf{display:grid;grid-template-columns:repeat(10,17px);gap:3px}
+.wf button{all:unset;width:17px;height:17px;border-radius:3px;box-sizing:border-box;cursor:default}
+.wf button:hover,.wf button:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.wf .a{background:var(--u1)}.wf .p{background:var(--s3)}.wf .n{border:2px solid var(--hair2)}
+/* columns */
+.cols svg{width:100%;height:auto;display:block;overflow:visible}
+.tick{fill:var(--muted);font:600 13px var(--body)}
+.grid-l{stroke:var(--hair);stroke-width:1}
+.lbl{fill:var(--ink);font:700 14px var(--body)}
+.col:hover rect.m,.col:focus-visible rect.m{filter:brightness(1.1)}
+/* scale */
+.scalebar{position:relative;height:46px;background:var(--s4);border-radius:6px;margin:26px 0 10px}
+.scalebar .sl{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--u1);border-radius:6px 0 0 6px}
+.callout{display:flex;gap:16px;align-items:flex-start;font-size:16px;color:var(--ink2)}
+.callout b{color:var(--ink)}
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair2);border-radius:999px;padding:7px 13px 7px 10px;font:600 15px/1 var(--body)}
+.chip i{width:9px;height:9px;border-radius:50%}
+.chip small{font:600 13px var(--body);color:var(--muted)}
+.chip.t{background:var(--wash)}
+/* tables, tips */
+details.tbl{margin-top:26px;border-top:1px solid var(--hair)}
+details.tbl summary{cursor:pointer;font:600 15px var(--body);color:var(--ink2);padding:12px 0}
+details.tbl[open] summary{color:var(--ink)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;font-size:15px;min-width:100%}
+th,td{padding:7px 12px 7px 0;text-align:right;border-bottom:1px solid var(--hair);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:700;color:var(--ink2)}
+body:not(.show-tables) details.tbl{display:none}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--surface);padding:10px 12px;border-radius:8px;font:400 14px/1.35 var(--body);max-width:260px;opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s}
+#tip.on{opacity:1;transform:none}
+#tip b{font:800 17px/1.1 var(--head);display:block;margin-bottom:2px}
+#tip .r{display:flex;gap:8px;align-items:center;justify-content:space-between}
+#tip .r i{width:10px;height:3px;border-radius:2px;display:inline-block;margin-right:6px;vertical-align:middle}
+.all-script{display:none;margin-top:60px;border-top:1px solid var(--hair);padding-top:36px}
+body.show-script .all-script{display:block}
+.all-script pre{white-space:pre-wrap;font:400 16px/1.65 var(--body);background:var(--wash);padding:22px;border-radius:10px;max-height:420px;overflow:auto}
+.btn{font:600 14px var(--body);border:1px solid var(--hair2);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+footer{margin-top:50px;color:var(--muted);font-size:14px;max-width:80ch}
+@media (max-width:900px){
+  body.show-script .grid{grid-template-columns:minmax(0,1fr)}
+  .script{position:static}
+  .row{grid-template-columns:110px minmax(0,1fr) 62px}
+  .axisnote{grid-template-columns:110px 1fr 62px}
+  main{padding:0 18px 60px}.top-in{padding:10px 18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#tip{transition:none}}
+@media print{.top,.ctl{display:none}body{font-size:15px}.script{display:block!important;position:static}body .grid{grid-template-columns:1fr 1fr!important}section.sec{break-inside:avoid}}
+</style>
+</head>
+<body class="show-script">
+<header class="top"><div class="top-in">
+  <div class="brand">Utility giving 2026</div>
+  <nav aria-label="Sections">
+    <a href="#hero">Total</a><a href="#where">Recipients</a><a href="#party">Party</a><a href="#leaders">Leaders</a><a href="#top12">Top 12</a><a href="#recent">Since Oct 2025</a><a href="#coverage">Coverage</a><a href="#timing">Timing</a><a href="#scale">Scale</a><a href="#gaps">Gaps</a>
+  </nav>
+  <div class="ctl">
+    <button id="bScript" aria-pressed="true">Script</button>
+    <button id="bTables" aria-pressed="false">Data tables</button>
+    <button id="bTheme" aria-pressed="false">Dark</button>
+  </div>
+</div></header>
+<main>
+  <section class="sec hero-sec" id="hero">
+   <div class="hero">
+    <h1>Who five Illinois utilities fund</h1>
+    <p class="lede">Every political contribution from Ameren Illinois, Nicor, Peoples Gas, Illinois American Water and Constellation, January 1 to September 30, 2026.</p>
+   </div>
+   <div class="grid"><div id="v-hero"></div><aside class="script" id="s-hero"></aside></div>
+  </section>
+
+  <section class="sec" id="where"><div class="grid"><div>
+    <h2>Most of it lands in legislators' own campaign committees</h2>
+    <p class="sub">Each bar is one utility's giving, split by who received it. Peoples Gas is the outlier: nearly a quarter goes to Chicago aldermen and ward organizations.</p>
+    <div id="v-where"></div></div><aside class="script" id="s-where"></aside></div></section>
+
+  <section class="sec" id="party"><div class="grid"><div>
+    <h2>Ameren is the most balanced giver; Nicor is almost all Democratic</h2>
+    <p class="sub">Share of each utility's legislator giving that went to Democrats and Republicans. The line marks an even split.</p>
+    <div id="v-party"></div></div><aside class="script" id="s-party"></aside></div></section>
+
+  <section class="sec" id="leaders"><div class="grid"><div>
+    <h2>The four leaders each drew about $35,000</h2>
+    <p class="sub">Campaign committees of Speaker Welch, Senate President Harmon, House Republican Leader McCombie and Senate Republican Leader Curran, by utility.</p>
+    <div id="v-leaders"></div></div><aside class="script" id="s-leaders"></aside></div></section>
+
+  <section class="sec" id="top12"><div class="grid"><div>
+    <h2>Ameren's twelve biggest recipients</h2>
+    <p class="sub">Caucus and party committees sit alongside the leaders at the top.</p>
+    <div id="v-top12"></div></div><aside class="script" id="s-top12"></aside></div></section>
+
+  <section class="sec" id="recent"><div class="grid"><div>
+    <h2>Since October 2025, six committees took $36,500 to $48,300 each</h2>
+    <p class="sub">The fifteen committees that received the most from the five utilities combined. Ameren counts from Oct 3, 2025; the other four files start in January 2026.</p>
+    <div id="v-recent"></div>
+    <h3 style="font:800 22px/1.1 var(--head);font-stretch:85%;margin:48px 0 6px">The ten biggest fundraisers, and what the utilities gave them</h3>
+    <p class="sub" style="margin-bottom:18px">Grey bars are funds raised since Oct 3, 2025 (from the top-100 list). The figure on the right is utility money to that committee.</p>
+    <div id="v-fund10"></div></div><aside class="script" id="s-recent"></aside></div></section>
+
+  <section class="sec" id="coverage"><div class="grid"><div>
+    <h2>Ameren reached 101 of 177 legislators; 57 got nothing from any of the five</h2>
+    <p class="sub">One square per member of the General Assembly. Hover a square for the member's amounts.</p>
+    <div id="v-coverage"></div></div><aside class="script" id="s-coverage"></aside></div></section>
+
+  <section class="sec" id="timing"><div class="grid"><div>
+    <h2>September alone was 38% of Ameren's year</h2>
+    <p class="sub">Ameren Illinois contributions by month, 2026.</p>
+    <div id="v-timing" class="cols"></div></div><aside class="script" id="s-timing"></aside></div></section>
+
+  <section class="sec" id="scale"><div class="grid"><div>
+    <h2>A steady program, and a sliver of what the big committees raise</h2>
+    <p class="sub">Ameren's yearly giving since 2015, and its size next to the top-100 committees' fundraising.</p>
+    <div id="v-years" class="cols"></div>
+    <div id="v-scale" style="margin-top:44px"></div></div><aside class="script" id="s-scale"></aside></div></section>
+
+  <section class="sec" id="gaps"><div class="grid"><div>
+    <h2>Nineteen legislators got peer-utility money but nothing from Ameren in 2026</h2>
+    <p class="sub">Outlined chips are members whose committees are in the top 100 by funds raised. A dot after the name marks someone Ameren did fund in late 2025.</p>
+    <div id="v-gaps"></div></div><aside class="script" id="s-gaps"></aside></div></section>
+
+  <section class="sec" id="end"><div class="grid"><div>
+    <h2>What to take from it</h2>
+    <div class="rows" id="v-end" style="gap:18px;max-width:62ch"></div>
+    <footer id="foot"></footer></div><aside class="script" id="s-end"></aside></div></section>
+
+  <div class="all-script"><h2 style="font-size:32px">Full script</h2>
+    <p class="sub">All section scripts in order, for reading or pasting into a doc.</p>
+    <p><button class="btn" id="bCopy">Copy script</button></p>
+    <pre id="full"></pre></div>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+const D={"utilities": [{"name": "Ameren Illinois", "total": 482240.38000000006, "gifts": 189, "cats": {"Legislator": 393655.81000000006, "Party / caucus": 73584.57, "Trade / business PAC": 7500.0, "Chicago local (alderman/ward)": 0.0, "Other / unmatched": 7500.0}, "party": {"HouseD": 116850.27, "HouseR": 98500.0, "SenateD": 105435.27, "SenateR": 72870.27}, "legfunded": 101}, {"name": "Nicor Gas", "total": 47200.0, "gifts": 36, "cats": {"Legislator": 40950.0, "Party / caucus": 3500.0, "Trade / business PAC": 1500.0, "Chicago local (alderman/ward)": 0.0, "Other / unmatched": 1250.0}, "party": {"HouseD": 16500.0, "HouseR": 500.0, "SenateD": 23450.0, "SenateR": 500.0}, "legfunded": 27}, {"name": "Peoples Gas", "total": 88250.0, "gifts": 72, "cats": {"Legislator": 44000.0, "Party / caucus": 21500.0, "Trade / business PAC": 0.0, "Chicago local (alderman/ward)": 20250.0, "Other / unmatched": 2500.0}, "party": {"HouseD": 17750.0, "HouseR": 9000.0, "SenateD": 10750.0, "SenateR": 6500.0}, "legfunded": 36}, {"name": "Illinois American Water", "total": 89500.0, "gifts": 56, "cats": {"Legislator": 71500.0, "Party / caucus": 10000.0, "Trade / business PAC": 6000.0, "Chicago local (alderman/ward)": 0.0, "Other / unmatched": 2000.0}, "party": {"HouseD": 22500.0, "HouseR": 17000.0, "SenateD": 22000.0, "SenateR": 10000.0}, "legfunded": 43}, {"name": "Constellation", "total": 102600.0, "gifts": 32, "cats": {"Legislator": 72000.0, "Party / caucus": 15000.0, "Trade / business PAC": 15600.0, "Chicago local (alderman/ward)": 0.0, "Other / unmatched": 0.0}, "party": {"HouseD": 10000.0, "HouseR": 19000.0, "SenateD": 21500.0, "SenateR": 21500.0}, "legfunded": 23}], "roster": [{"n": "Aaron Ortiz", "ch": "House", "p": "D", "a": [1000.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Elizabeth Hernandez", "ch": "House", "p": "D", "a": [11000.0, 1000.0, 1500.0, 0.0, 0.0]}, {"n": "Eva-Dina Delgado", "ch": "House", "p": "D", "a": [5000.0, 1500.0, 1000.0, 1000.0, 2000.0]}, {"n": "Lilian Jim\u00e9nez", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Kimberly du Buclet", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Sonya Harper", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Emanuel Chris Welch", "ch": "House", "p": "D", "a": [16000.0, 10000.0, 8500.0, 0.0, 4000.0]}, {"n": "La Shawn Ford", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Yolonda Morris", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jawaharial Williams", "ch": "House", "p": "D", "a": [3000.0, 0.0, 500.0, 1000.0, 0.0]}, {"n": "Ann Williams", "ch": "House", "p": "D", "a": [1000.0, 0.0, 1000.0, 0.0, 0.0]}, {"n": "Margaret Croke", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Hoan Huynh", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Kelly Cassidy", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Michael Kelly", "ch": "House", "p": "D", "a": [2000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Kevin Olickal", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jennifer Gong-Gershowitz", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Robyn Gabel", "ch": "House", "p": "D", "a": [1000.0, 0.0, 1000.0, 0.0, 0.0]}, {"n": "Lindsey LaPointe", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Bradley Stephens", "ch": "House", "p": "R", "a": [2500.0, 0.0, 0.0, 1000.0, 1500.0]}, {"n": "Abdelnasser Rashid", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Angelica Guerrero-Cuellar", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Edgar Gonz\u00e1lez Jr.", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Theresa Mah", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Curtis Tarver", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Kam Buckner", "ch": "House", "p": "D", "a": [8000.0, 0.0, 1000.0, 1000.0, 0.0]}, {"n": "Justin Slaughter", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Robert Rita", "ch": "House", "p": "D", "a": [5000.0, 0.0, 1000.0, 1000.0, 0.0]}, {"n": "Thaddeus Jones", "ch": "House", "p": "D", "a": [0.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Will Davis", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Michael Crawford", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Lisa Davis", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Marcus C. Evans Jr.", "ch": "House", "p": "D", "a": [0.0, 1000.0, 0.0, 0.0, 0.0]}, {"n": "Nicholas Smith", "ch": "House", "p": "D", "a": [0.0, 0.0, 500.0, 0.0, 0.0]}, {"n": "Mary Gill", "ch": "House", "p": "D", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Rick Ryan", "ch": "House", "p": "D", "a": [2000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Patrick Sheehan", "ch": "House", "p": "R", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Debbie Meyers-Martin", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Will Guzzardi", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jaime Andrade Jr.", "ch": "House", "p": "D", "a": [4000.0, 0.0, 0.0, 0.0, 2000.0]}, {"n": "Janet Yang Rohr", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Margaret DeLaRosa", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Anna Moeller", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Fred Crespo", "ch": "House", "p": "D", "a": [1000.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Martha Deuter", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Diane Blair-Sherlock", "ch": "House", "p": "D", "a": [1000.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Amy Grant", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jennifer Sanalitro", "ch": "House", "p": "R", "a": [0.0, 250.0, 0.0, 1000.0, 0.0]}, {"n": "Maura Hirschauer", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Barbara Hernandez", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Nabeela Syed", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Martin McLaughlin", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 2000.0, 0.0]}, {"n": "Nicolle Grasse", "ch": "House", "p": "D", "a": [0.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Mary Beth Canty", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Justin Cochran", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Michelle Mussman", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Tracy Katz Muhl", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Bob Morgan", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 2000.0]}, {"n": "Daniel Didech", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Rita Mayfield", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Joyce Mason", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Laura Faver Dias", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Steve Reick", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Tom Weber", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Dan Ugaste", "ch": "House", "p": "R", "a": [3000.0, 0.0, 0.0, 2000.0, 0.0]}, {"n": "Suzanne Ness", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Maurice West", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Dave Vella", "ch": "House", "p": "D", "a": [4000.0, 250.0, 0.0, 1000.0, 0.0]}, {"n": "Joe Sosnowski", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jeff Keicher", "ch": "House", "p": "R", "a": [1000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Daniel Swanson", "ch": "House", "p": "R", "a": [2500.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Gregg Johnson", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Ryan Spain", "ch": "House", "p": "R", "a": [5000.0, 0.0, 1000.0, 1500.0, 4000.0]}, {"n": "Bradley Fritts", "ch": "House", "p": "R", "a": [1000.0, 0.0, 250.0, 0.0, 0.0]}, {"n": "Jed Davis", "ch": "House", "p": "R", "a": [1000.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Murri Briel", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Norma Hernandez", "ch": "House", "p": "D", "a": [0.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Camille Lilly", "ch": "House", "p": "D", "a": [0.0, 0.0, 250.0, 0.0, 0.0]}, {"n": "Jackie Haas", "ch": "House", "p": "R", "a": [3000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Anthony DeLuca", "ch": "House", "p": "D", "a": [1500.0, 0.0, 0.0, 1500.0, 0.0]}, {"n": "Anne Stava-Murray", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Nicole La Ha", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Matt Hanson", "ch": "House", "p": "D", "a": [0.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Stephanie Kifowit", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Dagmara Avelar", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Lawrence M. Walsh Jr.", "ch": "House", "p": "D", "a": [5000.0, 0.0, 1500.0, 6000.0, 0.0]}, {"n": "Bill Hauter", "ch": "House", "p": "R", "a": [4000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Regan Deering", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 1000.0]}, {"n": "Tony McCombie", "ch": "House", "p": "R", "a": [20000.0, 0.0, 5000.0, 0.0, 10000.0]}, {"n": "John Cabello", "ch": "House", "p": "R", "a": [4000.0, 0.0, 250.0, 0.0, 0.0]}, {"n": "Sharon Chung", "ch": "House", "p": "D", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jehan Gordon-Booth", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Travis Weaver", "ch": "House", "p": "R", "a": [1000.0, 0.0, 250.0, 1000.0, 0.0]}, {"n": "Norine Hammond", "ch": "House", "p": "R", "a": [0.0, 0.0, 1000.0, 0.0, 2000.0]}, {"n": "Michael Coffey", "ch": "House", "p": "R", "a": [2000.0, 0.0, 500.0, 0.0, 0.0]}, {"n": "Sue Scherer", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jessica Dixon Heitman", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Natalie Manley", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Kyle Moore", "ch": "House", "p": "R", "a": [4000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "C. D. Davidsmeyer", "ch": "House", "p": "R", "a": [2500.0, 0.0, 750.0, 1500.0, 500.0]}, {"n": "Chris Miller", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Adam Niemerg", "ch": "House", "p": "R", "a": [1000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Carol Ammons", "ch": "House", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Brandun Schweizer", "ch": "House", "p": "R", "a": [3000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Dennis Tipsword", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jason Bunting", "ch": "House", "p": "R", "a": [3000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Brad Halbrook", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Wayne Rosenthal", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Charles Meier", "ch": "House", "p": "R", "a": [7500.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Blaine Wilhour", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Amy Elik", "ch": "House", "p": "R", "a": [4000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Katie Stuart", "ch": "House", "p": "D", "a": [3000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Jay Hoffman", "ch": "House", "p": "D", "a": [8350.27, 1000.0, 0.0, 6000.0, 0.0]}, {"n": "Kevin Schmidt", "ch": "House", "p": "R", "a": [5000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "David Friess", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Dave Severin", "ch": "House", "p": "R", "a": [3500.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Patrick Windhorst", "ch": "House", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Scott Doody", "ch": "House", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Javier Cervantes", "ch": "Senate", "p": "D", "a": [1000.0, 11250.0, 0.0, 0.0, 0.0]}, {"n": "Omar Aquino", "ch": "Senate", "p": "D", "a": [6000.0, 3000.0, 750.0, 1000.0, 3000.0]}, {"n": "Mattie Hunter", "ch": "Senate", "p": "D", "a": [6000.0, 0.0, 1000.0, 1000.0, 2500.0]}, {"n": "Kimberly Lightford", "ch": "Senate", "p": "D", "a": [5000.0, 0.0, 1000.0, 1000.0, 0.0]}, {"n": "Lakesia Collins", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Sara Feigenholtz", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 5000.0]}, {"n": "Mike Simmons", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Ram Villivalam", "ch": "Senate", "p": "D", "a": [3000.0, 2500.0, 500.0, 1500.0, 0.0]}, {"n": "Laura Fine", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Robert Martwick", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Mike Porfirio", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 1000.0]}, {"n": "Celina Villanueva", "ch": "Senate", "p": "D", "a": [1000.0, 0.0, 250.0, 1000.0, 0.0]}, {"n": "Robert Peters", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Emil Jones III", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Napoleon Harris", "ch": "Senate", "p": "D", "a": [5500.0, 1000.0, 500.0, 0.0, 0.0]}, {"n": "Willie Preston", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Elgie Sims", "ch": "Senate", "p": "D", "a": [0.0, 1000.0, 1000.0, 0.0, 0.0]}, {"n": "William Cunningham", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 1000.0, 0.0, 0.0]}, {"n": "Michael Hastings", "ch": "Senate", "p": "D", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Graciela Guzm\u00e1n", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Laura Ellman", "ch": "Senate", "p": "D", "a": [4000.0, 2000.0, 0.0, 1000.0, 0.0]}, {"n": "Cristina Castro", "ch": "Senate", "p": "D", "a": [4000.0, 0.0, 1000.0, 0.0, 2000.0]}, {"n": "Suzy Glowiak", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Seth Lewis", "ch": "Senate", "p": "R", "a": [0.0, 250.0, 0.0, 1000.0, 0.0]}, {"n": "Karina Villa", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Darby Hills", "ch": "Senate", "p": "R", "a": [3000.0, 0.0, 0.0, 2000.0, 0.0]}, {"n": "Mark L. Walker", "ch": "Senate", "p": "D", "a": [0.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Laura Murphy", "ch": "Senate", "p": "D", "a": [5000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Julie Morrison", "ch": "Senate", "p": "D", "a": [3500.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Adriane Johnson", "ch": "Senate", "p": "D", "a": [1000.0, 0.0, 250.0, 0.0, 0.0]}, {"n": "Mary Edly-Allen", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Craig Wilcox", "ch": "Senate", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Don DeWitte", "ch": "Senate", "p": "R", "a": [0.0, 0.0, 500.0, 0.0, 0.0]}, {"n": "Steve Stadelman", "ch": "Senate", "p": "D", "a": [5000.0, 2000.0, 0.0, 2000.0, 0.0]}, {"n": "Dave Syverson", "ch": "Senate", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Michael Halpin", "ch": "Senate", "p": "D", "a": [6000.0, 200.0, 0.0, 1000.0, 0.0]}, {"n": "Li Arellano Jr.", "ch": "Senate", "p": "R", "a": [2000.0, 250.0, 0.0, 0.0, 0.0]}, {"n": "Sue Rezin", "ch": "Senate", "p": "R", "a": [7870.27, 0.0, 1500.0, 0.0, 5000.0]}, {"n": "Don Harmon", "ch": "Senate", "p": "D", "a": [19600.0, 0.0, 2500.0, 7500.0, 5000.0]}, {"n": "Patrick Joyce", "ch": "Senate", "p": "D", "a": [4000.0, 0.0, 750.0, 1000.0, 3000.0]}, {"n": "John Curran", "ch": "Senate", "p": "R", "a": [20000.0, 0.0, 2500.0, 5000.0, 5000.0]}, {"n": "Linda Holmes", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Rachel Ventura", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Sally Turner", "ch": "Senate", "p": "R", "a": [7000.0, 0.0, 0.0, 1000.0, 1000.0]}, {"n": "Andrew Chesney", "ch": "Senate", "p": "R", "a": [3000.0, 0.0, 0.0, 0.0, 4000.0]}, {"n": "Dave Koehler", "ch": "Senate", "p": "D", "a": [10000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Neil Anderson", "ch": "Senate", "p": "R", "a": [2500.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Doris Turner", "ch": "Senate", "p": "D", "a": [9350.27, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Meg Loughran Cappel", "ch": "Senate", "p": "D", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Jil Tracy", "ch": "Senate", "p": "R", "a": [6000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Chapin Rose", "ch": "Senate", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Paul Faraci", "ch": "Senate", "p": "D", "a": [4000.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Chris Balkema", "ch": "Senate", "p": "R", "a": [2000.0, 0.0, 0.0, 0.0, 3000.0]}, {"n": "Steve McClure", "ch": "Senate", "p": "R", "a": [4000.0, 0.0, 0.0, 1000.0, 0.0]}, {"n": "Jason Plummer", "ch": "Senate", "p": "R", "a": [1500.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Erica Harriss", "ch": "Senate", "p": "R", "a": [0.0, 0.0, 0.0, 0.0, 0.0]}, {"n": "Christopher Belt", "ch": "Senate", "p": "D", "a": [485.0, 250.0, 250.0, 3000.0, 0.0]}, {"n": "Terri Bryant", "ch": "Senate", "p": "R", "a": [6000.0, 0.0, 2000.0, 0.0, 3500.0]}, {"n": "Paul Jacobs", "ch": "Senate", "p": "R", "a": [4000.0, 0.0, 0.0, 0.0, 0.0]}], "gap": [{"n": "Sara Feigenholtz", "ch": "Senate", "p": "D", "peers": 5000.0, "top100": true, "late25": 2000.0}, {"n": "Norine Hammond", "ch": "House", "p": "R", "peers": 3000.0, "top100": true, "late25": 2000.0}, {"n": "Martin McLaughlin", "ch": "House", "p": "R", "peers": 2000.0, "top100": false, "late25": 0.0}, {"n": "Bob Morgan", "ch": "House", "p": "D", "peers": 2000.0, "top100": false, "late25": 0.0}, {"n": "Elgie Sims", "ch": "Senate", "p": "D", "peers": 2000.0, "top100": false, "late25": 0.0}, {"n": "Jennifer Sanalitro", "ch": "House", "p": "R", "peers": 1250.0, "top100": false, "late25": 1000.0}, {"n": "Seth Lewis", "ch": "Senate", "p": "R", "peers": 1250.0, "top100": true, "late25": 2000.0}, {"n": "Margaret Croke", "ch": "House", "p": "D", "peers": 1000.0, "top100": true, "late25": 0.0}, {"n": "Marcus C. Evans Jr.", "ch": "House", "p": "D", "peers": 1000.0, "top100": true, "late25": 0.0}, {"n": "Mike Porfirio", "ch": "Senate", "p": "D", "peers": 1000.0, "top100": false, "late25": 0.0}, {"n": "William Cunningham", "ch": "Senate", "p": "D", "peers": 1000.0, "top100": false, "late25": 0.0}, {"n": "Nicholas Smith", "ch": "House", "p": "D", "peers": 500.0, "top100": false, "late25": 0.0}, {"n": "Don DeWitte", "ch": "Senate", "p": "R", "peers": 500.0, "top100": false, "late25": 0.0}, {"n": "Thaddeus Jones", "ch": "House", "p": "D", "peers": 250.0, "top100": false, "late25": 0.0}, {"n": "Nicolle Grasse", "ch": "House", "p": "D", "peers": 250.0, "top100": false, "late25": 0.0}, {"n": "Norma Hernandez", "ch": "House", "p": "D", "peers": 250.0, "top100": false, "late25": 0.0}, {"n": "Camille Lilly", "ch": "House", "p": "D", "peers": 250.0, "top100": false, "late25": 0.0}, {"n": "Matt Hanson", "ch": "House", "p": "D", "peers": 250.0, "top100": false, "late25": 2000.0}, {"n": "Mark L. Walker", "ch": "Senate", "p": "D", "peers": 250.0, "top100": false, "late25": 0.0}], "months": [{"m": 1, "amt": 38000.0, "n": 24}, {"m": 2, "amt": 19714.3, "n": 13}, {"m": 3, "amt": 16500.0, "n": 10}, {"m": 4, "amt": 29000.0, "n": 5}, {"m": 5, "amt": 5500.0, "n": 5}, {"m": 6, "amt": 45835.27, "n": 19}, {"m": 7, "amt": 61000.0, "n": 24}, {"m": 8, "amt": 82090.81, "n": 37}, {"m": 9, "amt": 184600.0, "n": 52}], "years": [{"y": 2015, "amt": 673066.83}, {"y": 2016, "amt": 688695.25}, {"y": 2017, "amt": 604097.14}, {"y": 2018, "amt": 556422.32}, {"y": 2019, "amt": 537955.17}, {"y": 2020, "amt": 575640.31}, {"y": 2021, "amt": 489479.73}, {"y": 2022, "amt": 619220.2}, {"y": 2023, "amt": 565752.03}, {"y": 2024, "amt": 585030.38}, {"y": 2025, "amt": 509146.45}, {"y": 2026, "amt": 482240.38}], "recipients": [{"c": "ISDF, NFP", "amt": 25000.0, "cat": "Party / caucus"}, {"c": "Democratic Party of Illinois", "amt": 20000.0, "cat": "Party / caucus"}, {"c": "Friends of John Curran", "amt": 20000.0, "cat": "Legislator"}, {"c": "McCombie for Illinois", "amt": 20000.0, "cat": "Legislator"}, {"c": "Friends of Don Harmon for State Senate", "amt": 19600.0, "cat": "Legislator"}, {"c": "People for Emanuel Chris Welch", "amt": 16000.0, "cat": "Legislator"}, {"c": "House Republican Organization", "amt": 15000.0, "cat": "Party / caucus"}, {"c": "Senate Republican Victory Fund", "amt": 11500.0, "cat": "Party / caucus"}, {"c": "Citizens for Elizabeth Hernandez", "amt": 11000.0, "cat": "Legislator"}, {"c": "Friends of Dave Koehler", "amt": 10000.0, "cat": "Legislator"}, {"c": "Friends of Doris Turner", "amt": 9350.27, "cat": "Legislator"}, {"c": "Committee to Elect Jay C Hoffman", "amt": 8350.27, "cat": "Legislator"}], "scale": {"ameren_top100": 274485.54, "top100": 293584037.2, "ameren_window": 656840.38}, "recent": [{"c": "Friends of Don Harmon for State Senate", "a": [33300.0, 0.0, 2500.0, 7500.0, 5000.0], "tot": 48300.0, "cat": "Legislator", "rank": 5, "raised": 11651042.22}, {"c": "ISDF, NFP", "a": [25000.0, 0.0, 10000.0, 5000.0, 5000.0], "tot": 45000.0, "cat": "Party / caucus", "rank": 8, "raised": 8656691.71}, {"c": "Friends of John Curran", "a": [30000.0, 0.0, 2500.0, 5000.0, 5000.0], "tot": 42500.0, "cat": "Legislator", "rank": 22, "raised": 2334320.74}, {"c": "McCombie for Illinois", "a": [27000.0, 0.0, 5000.0, 0.0, 10000.0], "tot": 42000.0, "cat": "Legislator", "rank": 23, "raised": 2260398.86}, {"c": "Democratic Party of Illinois", "a": [25000.0, 1000.0, 2500.0, 0.0, 10000.0], "tot": 38500.0, "cat": "Party / caucus", "rank": 4, "raised": 14169114.97}, {"c": "People for Emanuel Chris Welch", "a": [24000.0, 0.0, 8500.0, 0.0, 4000.0], "tot": 36500.0, "cat": "Legislator", "rank": 3, "raised": 15429331.1}, {"c": "Manufacturers PAC (MPAC)", "a": [5000.0, 0.0, 0.0, 3000.0, 12500.0], "tot": 20500.0, "cat": "Trade / business PAC", "rank": null, "raised": null}, {"c": "Senate Republican Victory Fund", "a": [15500.0, 0.0, 0.0, 5000.0, 0.0], "tot": 20500.0, "cat": "Party / caucus", "rank": 49, "raised": 909720.17}, {"c": "Friends of Omar Aquino", "a": [11000.0, 3000.0, 750.0, 1000.0, 3000.0], "tot": 18750.0, "cat": "Legislator", "rank": null, "raised": null}, {"c": "Friends for Larry Walsh Jr", "a": [11000.0, 0.0, 1500.0, 6000.0, 0.0], "tot": 18500.0, "cat": "Legislator", "rank": null, "raised": null}, {"c": "House Republican Organization", "a": [15000.0, 0.0, 2500.0, 0.0, 0.0], "tot": 17500.0, "cat": "Party / caucus", "rank": 18, "raised": 2698738.23}, {"c": "Friends of Sue Rezin", "a": [10870.27, 0.0, 1500.0, 0.0, 5000.0], "tot": 17370.27, "cat": "Legislator", "rank": null, "raised": null}, {"c": "Committee to Elect Jay C Hoffman", "a": [8350.27, 1000.0, 0.0, 6000.0, 0.0], "tot": 15350.27, "cat": "Legislator", "rank": 43, "raised": 1036438.0}, {"c": "Friends for Eva Dina Delgado", "a": [9000.0, 1500.0, 1000.0, 1000.0, 2000.0], "tot": 14500.0, "cat": "Legislator", "rank": null, "raised": null}, {"c": "Friends of Ryan Spain", "a": [8000.0, 0.0, 1000.0, 1500.0, 4000.0], "tot": 14500.0, "cat": "Legislator", "rank": null, "raised": null}], "fund10": [{"c": "JB for Governor", "rank": 1, "raised": 90574221.46, "a": [0, 0, 0, 0, 0]}, {"c": "Citizens for Giannoulias", "rank": 2, "raised": 18513127.27, "a": [0, 0, 0, 0, 0]}, {"c": "People for Emanuel Chris Welch", "rank": 3, "raised": 15429331.1, "a": [24000.0, 0.0, 8500.0, 0.0, 4000.0]}, {"c": "Democratic Party of Illinois", "rank": 4, "raised": 14169114.97, "a": [25000.0, 1000.0, 2500.0, 0.0, 10000.0]}, {"c": "Friends of Don Harmon for State Senate", "rank": 5, "raised": 11651042.22, "a": [33300.0, 0.0, 2500.0, 7500.0, 5000.0]}, {"c": "Chicagoland Operators Joint Labor-Management PAC", "rank": 6, "raised": 9037973.89, "a": [0, 0, 0, 0, 0]}, {"c": "Democrats for the Illinois House", "rank": 7, "raised": 9006976.38, "a": [0, 0, 0, 0, 0]}, {"c": "ISDF, NFP", "rank": 8, "raised": 8656691.71, "a": [25000.0, 0.0, 10000.0, 5000.0, 5000.0]}, {"c": "Common Ground Collective IEC", "rank": 9, "raised": 5740500.0, "a": [0, 0, 0, 0, 0]}, {"c": "INCS Action Independent Committee", "rank": 10, "raised": 4830172.15, "a": [0, 0, 0, 0, 0]}], "recent_tot": 984390.38, "recent_n": 457, "recent_top15_share": 0.4167762590284557};
+const U=D.utilities, UN=U.map(u=>u.name), UC=['--u1','--u2','--u3','--u4','--u5'];
+const SH={ 'Ameren Illinois':'Ameren','Nicor Gas':'Nicor','Peoples Gas':'Peoples Gas','Illinois American Water':'Ill. American Water','Constellation':'Constellation'};
+const col=i=>`var(${UC[i]})`;
+const $=s=>document.querySelector(s);
+const money=v=>v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e4?'$'+Math.round(v/1e3)+'K':v>=1000?'$'+(v/1e3).toFixed(1).replace(/\.0$/,'')+'K':'$'+Math.round(v).toLocaleString();
+const full=v=>'$'+Math.round(v).toLocaleString();
+const pct=(v,d=0)=>(v*100).toFixed(d)+'%';
+function h(tag,attrs={},kids=[]){const e=document.createElement(tag);for(const k in attrs){if(k==='text')e.textContent=attrs[k];else if(k==='style')e.style.cssText=attrs[k];else if(k==='class')e.className=attrs[k];else e.setAttribute(k,attrs[k]);}(Array.isArray(kids)?kids:[kids]).forEach(c=>c!=null&&e.append(c));return e;}
+function sv(tag,attrs={},kids=[]){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const k in attrs){if(k==='text')e.textContent=attrs[k];else e.setAttribute(k,attrs[k]);}(Array.isArray(kids)?kids:[kids]).forEach(c=>c&&e.append(c));return e;}
+/* tooltip */
+const tip=$('#tip');
+function tipShow(ev,title,rows){tip.replaceChildren();tip.append(h('b',{text:title}));rows.forEach(r=>{const d=h('div',{class:'r'});const l=h('span');if(r.c){const i=h('i');i.style.background=r.c;l.append(i);}l.append(document.createTextNode(r.k));d.append(l,h('span',{text:r.v}));tip.append(d)});tip.classList.add('on');tipMove(ev)}
+function tipMove(ev){const w=tip.offsetWidth,hh=tip.offsetHeight;let x=ev.clientX+14,y=ev.clientY+14;if(x+w>innerWidth-8)x=ev.clientX-w-14;if(y+hh>innerHeight-8)y=ev.clientY-hh-14;tip.style.left=x+'px';tip.style.top=y+'px'}
+function tipHide(){tip.classList.remove('on')}
+function bindTip(el,title,rows){el.addEventListener('pointerenter',e=>tipShow(e,title,rows));el.addEventListener('pointermove',tipMove);el.addEventListener('pointerleave',tipHide);el.addEventListener('focus',()=>{const r=el.getBoundingClientRect();tipShow({clientX:r.left+r.width/2,clientY:r.top},title,rows)});el.addEventListener('blur',tipHide);el.setAttribute('tabindex','0')}
+function legend(items){return h('div',{class:'legend'},items.map(i=>{const s=h('span');const ic=h('i');ic.style.backgroundColor=i.c;if(i.hatch)ic.className='hatch';s.append(ic,document.createTextNode(i.t));return s}))}
+function table(headers,rows){const t=h('table');const th=h('thead');const tr=h('tr');headers.forEach(x=>tr.append(h('th',{text:x})));th.append(tr);t.append(th);const tb=h('tbody');rows.forEach(r=>{const tr=h('tr');r.forEach(c=>tr.append(h('td',{text:c})));tb.append(tr)});t.append(tb);const d=h('details',{class:'tbl'},[h('summary',{text:'Data table'}),h('div',{class:'tw'},t)]);return d}
+const short=n=>n.replace('Friends of ','').replace('Friends for ','').replace('Citizens for ','').replace('People for ','').replace('Committee to Elect ','').replace(' for State Senate','').replace(' for Illinois','').replace(' for Illinois','');
+const TOT=U.reduce((s,u)=>s+u.total,0), GIFTS=U.reduce((s,u)=>s+u.gifts,0);
+
+/* 1 hero */
+(function(){
+  const v=$('#v-hero');
+  const bar=h('div',{class:'hbar'});
+  U.forEach((u,i)=>{const d=h('div',{style:`flex:${u.total} 1 0;background:${col(i)}`});bindTip(d,u.name,[{k:'Total given',v:full(u.total)},{k:'Share of five-utility total',v:pct(u.total/TOT,1)},{k:'Gifts',v:u.gifts},{k:'Average gift',v:full(u.total/u.gifts)}]);bar.append(d)});
+  v.append(h('div',{class:'big',text:full(TOT).replace(/,\d{3}$/,'')==full(TOT)?'':'$'+Math.round(TOT/1000)+'K'}));
+  v.append(h('p',{class:'sub',style:'margin:10px 0 24px',text:'given across all five utilities in nine months. Ameren Illinois is $'+Math.round(U[0].total/1000)+'K of it, more than the other four combined.'}));
+  v.append(bar);
+  v.append(legend(U.map((u,i)=>({c:col(i),t:`${SH[u.name]} ${money(u.total)} (${pct(u.total/TOT)})`}))));
+  const lg=U.reduce((s,u)=>s+u.cats['Legislator'],0);
+  const k=h('div',{class:'kpis'});
+  [[GIFTS,'contributions'],[full(TOT/GIFTS),'average gift'],[pct(lg/TOT),'to legislators\' own committees'],['120 of 177','legislators funded by at least one utility']].forEach(([a,b])=>k.append(h('div',{},[h('b',{text:String(a)}),h('span',{text:b})])));
+  v.append(k);
+  v.append(table(['Utility','Total','Gifts','Average gift','Share'],U.map(u=>[u.name,full(u.total),u.gifts,full(u.total/u.gifts),pct(u.total/TOT,1)])));
+})();
+
+/* 2 where */
+(function(){
+  const v=$('#v-where');
+  const K=[['Legislator','Legislator committees','var(--s1)'],['Party / caucus','Party and caucus committees','var(--s2)'],['Trade / business PAC','Trade and business PACs','var(--s3)'],['Chicago local (alderman/ward)','Chicago aldermen and wards','var(--s4)','hatch'],['Other / unmatched','Other or unmatched','var(--hair2)']];
+  const rows=h('div',{class:'rows'});
+  U.forEach((u,i)=>{
+    const seg=h('div',{class:'seg'});
+    K.forEach(([k,lab,c,cl])=>{const val=u.cats[k]||0;if(val<=0)return;const f=val/u.total;const d=h('div',{style:`flex:${val} 1 0;background-color:${c};color:${(k==='Legislator'||k==='Party / caucus')?'var(--surface)':'var(--ink)'}`,class:cl||''});if(f>=.09&&!cl)d.textContent=pct(f);bindTip(d,SH[u.name]+': '+lab,[{k:'Amount',v:full(val)},{k:'Share of utility giving',v:pct(f,1)}]);seg.append(d)});
+    const nm=h('div',{class:'nm'});const dot=h('i');dot.style.background=col(i);nm.append(dot,document.createTextNode(SH[u.name]));
+    rows.append(h('div',{class:'row'},[nm,seg,h('div',{class:'val',text:money(u.total)})]));
+  });
+  v.append(rows);
+  v.append(legend(K.map(([k,lab,c,cl])=>({c,t:lab,hatch:!!cl}))));
+  v.append(table(['Utility','Legislators','Party / caucus','Trade PACs','Chicago local','Other'],U.map(u=>[u.name,...K.map(([k])=>full(u.cats[k]||0))])));
+  // hatched segments: label for Peoples local
+  document.querySelectorAll('#v-where .hatch').forEach(e=>{e.style.color='var(--ink)'});
+})();
+
+/* 3 party */
+(function(){
+  const v=$('#v-party');const rows=h('div',{class:'rows'});
+  const all={HD:0,HR:0,SD:0,SR:0};
+  const list=U.map((u,i)=>({n:SH[u.name],i,hd:u.party.HouseD,hr:u.party.HouseR,sd:u.party.SenateD,sr:u.party.SenateR}));
+  list.forEach(x=>{all.HD+=x.hd;all.HR+=x.hr;all.SD+=x.sd;all.SR+=x.sr});
+  list.push({n:'All five',i:-1,hd:all.HD,hr:all.HR,sd:all.SD,sr:all.SR});
+  list.forEach(x=>{
+    const d=x.hd+x.sd,r=x.hr+x.sr,t=d+r;
+    const bar=h('div',{class:'seg mid'});
+    const a=h('div',{style:`flex:${d} 1 0;background:var(--dem)`,text:pct(d/t)});
+    const b=h('div',{style:`flex:${r} 1 0;background:var(--rep)`,text:pct(r/t)});
+    bindTip(a,x.n+': Democrats',[{k:'House Democrats',v:full(x.hd)},{k:'Senate Democrats',v:full(x.sd)},{k:'Total',v:full(d)}]);
+    bindTip(b,x.n+': Republicans',[{k:'House Republicans',v:full(x.hr)},{k:'Senate Republicans',v:full(x.sr)},{k:'Total',v:full(r)}]);
+    bar.append(a,b);
+    const nm=h('div',{class:'nm'});if(x.i>=0){const dot=h('i');dot.style.background=col(x.i);nm.append(dot)}nm.append(document.createTextNode(x.n));
+    if(x.i<0)nm.style.fontWeight='800';
+    rows.append(h('div',{class:'row'},[nm,bar,h('div',{class:'val',text:money(t)})]));
+  });
+  v.append(rows);
+  v.append(legend([{c:'var(--dem)',t:'Democratic legislators'},{c:'var(--rep)',t:'Republican legislators'}]));
+  v.append(h('p',{class:'sub',style:'margin-top:18px',text:'For comparison, Democrats hold 118 of the 177 seats, about 67%.'}));
+  v.append(table(['Utility','House D','House R','Senate D','Senate R'],list.map(x=>[x.n,full(x.hd),full(x.hr),full(x.sd),full(x.sr)])));
+})();
+
+/* 4 leaders */
+(function(){
+  const v=$('#v-leaders');
+  const L=[['Emanuel Chris Welch','Speaker Welch'],['Don Harmon','President Harmon'],['Tony McCombie','Leader McCombie'],['John Curran','Leader Curran']];
+  const byName=Object.fromEntries(D.roster.map(r=>[r.n,r]));
+  const max=Math.max(...L.map(([n])=>byName[n].a.reduce((a,b)=>a+b,0)));
+  const rows=h('div',{class:'rows'});
+  L.forEach(([n,lab])=>{
+    const r=byName[n],tot=r.a.reduce((a,b)=>a+b,0);
+    const wrap=h('div',{style:`width:${tot/max*100}%`});const seg=h('div',{class:'seg'});
+    r.a.forEach((a,i)=>{if(a<=0)return;const d=h('div',{style:`flex:${a} 1 0;background:${col(i)}`});bindTip(d,lab+': '+SH[UN[i]],[{k:'Amount',v:full(a)},{k:'Leader total',v:full(tot)}]);seg.append(d)});
+    wrap.append(seg);
+    rows.append(h('div',{class:'row'},[h('div',{class:'nm',text:lab}),h('div',{},wrap),h('div',{class:'val',text:money(tot)})]));
+  });
+  v.append(rows);v.append(legend(UN.map((u,i)=>({c:col(i),t:SH[u]}))));
+  const tot=L.reduce((s,[n])=>s+byName[n].a.reduce((a,b)=>a+b,0),0),lg=U.reduce((s,u)=>s+u.cats['Legislator'],0);
+  v.append(h('p',{class:'sub',style:'margin-top:18px',text:`Together: ${full(tot)}, ${pct(tot/lg)} of everything the five utilities gave to legislators.`}));
+  v.append(table(['Leader',...UN.map(u=>SH[u]),'Total'],L.map(([n,lab])=>[lab,...byName[n].a.map(full),full(byName[n].a.reduce((a,b)=>a+b,0))])));
+})();
+
+/* 5 top12 */
+(function(){
+  const v=$('#v-top12');const R=D.recipients;const max=R[0].amt;
+  const CC={'Legislator':'var(--s1)','Party / caucus':'var(--s2)','Trade / business PAC':'var(--s3)'};
+  const rows=h('div',{class:'rows',style:'gap:10px'});
+  R.forEach(r=>{
+    const seg=h('div',{class:'seg',style:`width:${r.amt/max*100}%;height:22px`});
+    const d=h('div',{style:`flex:1;background:var(--u1)`});bindTip(d,r.c,[{k:'Ameren Illinois, 2026',v:full(r.amt)},{k:'Type',v:r.cat==='Party / caucus'?'Party or caucus committee':'Legislator committee'}]);seg.append(d);
+    const nm=h('div',{class:'nm',text:short(r.c)});
+    if(r.cat==='Party / caucus')nm.style.fontWeight='800';
+    rows.append(h('div',{class:'row',style:'grid-template-columns:190px minmax(0,1fr) 70px'},[nm,seg,h('div',{class:'val',text:money(r.amt)})]));
+  });
+  v.append(rows);
+  v.append(h('p',{class:'sub',style:'margin-top:18px',text:'Bold names are party and caucus committees; the rest are legislators\' own committees.'}));
+  v.append(table(['Committee','Ameren 2026','Type'],R.map(r=>[r.c,full(r.amt),r.cat])));
+})();
+
+
+/* recent */
+(function(){
+  const v=$('#v-recent');const R=D.recent;const max=R[0].tot;const rows=h('div',{class:'rows',style:'gap:10px'});
+  R.forEach(r=>{
+    const wrap=h('div',{style:`width:${r.tot/max*100}%`});const seg=h('div',{class:'seg',style:'height:22px'});
+    r.a.forEach((a,i)=>{if(a<=0)return;const d=h('div',{style:`flex:${a} 1 0;background:${col(i)}`});bindTip(d,r.c,[{k:SH[UN[i]],v:full(a),c:col(i)},{k:'Total from utilities',v:full(r.tot)},...(r.rank?[{k:'Top-100 fundraiser rank',v:'#'+r.rank}]:[])]);seg.append(d)});
+    wrap.append(seg);
+    const nm=h('div',{class:'nm',style:'display:block'},[h('div',{text:short(r.c),style:r.cat==='Party / caucus'?'font-weight:800':''}),h('div',{style:'font:400 13px/1.2 var(--body);color:var(--muted)',text:r.rank?`#${r.rank} fundraiser, ${money(r.raised)} raised`:(r.cat==='Trade / business PAC'?'trade PAC':'not in top 100')})]);
+    rows.append(h('div',{class:'row',style:'grid-template-columns:210px minmax(0,1fr) 70px'},[nm,h('div',{},wrap),h('div',{class:'val',text:money(r.tot)})]));
+  });
+  v.append(rows);v.append(legend(UN.map((u,i)=>({c:col(i),t:SH[u]}))));
+  v.append(h('p',{class:'sub',style:'margin-top:16px',text:`These fifteen took ${pct(D.recent_top15_share)} of the ${full(D.recent_tot)} given in ${D.recent_n} contributions. Bold names are party and caucus committees.`}));
+  v.append(table(['Committee','Ameren','Nicor','Peoples','Ill. Am. Water','Constellation','Total','Top-100 rank'],R.map(r=>[r.c,...r.a.map(full),full(r.tot),r.rank?'#'+r.rank:''])));
+  const f=$('#v-fund10');const F=D.fund10;const fm=F[0].raised;const fr=h('div',{class:'rows',style:'gap:10px'});
+  F.forEach(r=>{const tot=r.a.reduce((a,b)=>a+b,0);
+    const bar=h('div',{class:'seg',style:`width:${r.raised/fm*100}%;height:20px`});const d=h('div',{style:'flex:1;background:var(--s3)'});bindTip(d,r.c,[{k:'Raised since Oct 3, 2025',v:full(r.raised)},{k:'From the five utilities',v:full(tot)},...r.a.map((a,i)=>({k:SH[UN[i]],v:full(a),c:col(i)})).filter(x=>x.v!=='$0')]);bar.append(d);
+    fr.append(h('div',{class:'row',style:'grid-template-columns:210px minmax(0,1fr) 90px'},[h('div',{class:'nm',style:'display:block'},[h('div',{text:`#${r.rank} ${short(r.c)}`}),h('div',{style:'font:400 13px/1.2 var(--body);color:var(--muted)',text:money(r.raised)+' raised'})]),bar,h('div',{class:'val',style:tot?'':'color:var(--muted);font-weight:400',text:tot?money(tot):'none'})]));
+  });
+  f.append(fr);
+  f.append(table(['Rank','Committee','Raised','From utilities'],F.map(r=>['#'+r.rank,r.c,full(r.raised),full(r.a.reduce((a,b)=>a+b,0))])));
+})();
+
+/* 6 coverage waffle */
+(function(){
+  const v=$('#v-coverage');
+  const G=[['House Democrats','House','D'],['House Republicans','House','R'],['Senate Democrats','Senate','D'],['Senate Republicans','Senate','R']];
+  const blocks=h('div',{class:'blocks'});
+  const rowsT=[];
+  G.forEach(([t,ch,p])=>{
+    let m=D.roster.filter(r=>r.ch===ch&&r.p===p);
+    const st=r=>r.a[0]>0?0:(r.a.some(x=>x>0)?1:2);
+    m.sort((a,b)=>st(a)-st(b)||b.a[0]-a.a[0]||(b.a.reduce((x,y)=>x+y,0)-a.a.reduce((x,y)=>x+y,0)));
+    const nA=m.filter(r=>st(r)===0).length,nP=m.filter(r=>st(r)===1).length,nN=m.filter(r=>st(r)===2).length;
+    rowsT.push([t,m.length,nA,pct(nA/m.length),nP,nN]);
+    const wf=h('div',{class:'wf'});
+    m.forEach(r=>{const b=h('button',{class:['a','p','n'][st(r)],'aria-label':r.n});const tot=r.a.reduce((x,y)=>x+y,0);
+      bindTip(b,r.n,[{k:(ch==='House'?'House':'Senate')+', '+(p==='D'?'Democrat':'Republican'),v:''},...r.a.map((a,i)=>({k:SH[UN[i]],v:full(a),c:`var(${UC[i]})`})).filter(x=>x.v!=='$0'),...(tot===0?[{k:'No money from the five utilities',v:''}]:[])]);wf.append(b)});
+    blocks.append(h('div',{class:'blk'},[h('h4',{text:t}),h('div',{class:'st',text:`Ameren funded ${nA} of ${m.length}; ${nN} got nothing`}),wf]));
+  });
+  v.append(blocks);
+  v.append(legend([{c:'var(--u1)',t:'Funded by Ameren in 2026'},{c:'var(--s3)',t:'Funded only by other utilities'},{c:'var(--hair2)',t:'Nothing from any of the five (outlined)'}]));
+  v.append(table(['Group','Members','Ameren funded','Share','Peers only','No utility money'],rowsT));
+})();
+
+/* 7 timing columns */
+(function(){
+  const v=$('#v-timing');const M=D.months;const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
+  const W=760,Hh=300,L=48,B=34,T=24,max=200000,bw=24;
+  const s=sv('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img','aria-label':'Ameren Illinois giving by month, 2026'});
+  [0,50000,100000,150000,200000].forEach(t=>{const y=T+(Hh-T-B)*(1-t/max);s.append(sv('line',{x1:L,x2:W,y1:y,y2:y,class:'grid-l'}));s.append(sv('text',{x:L-8,y:y+4,'text-anchor':'end',class:'tick',text:t?money(t):'$0'}))});
+  const step=(W-L)/M.length;
+  M.forEach((m,i)=>{const hh=(Hh-T-B)*m.amt/max,x=L+i*step+(step-bw)/2,y=Hh-B-hh;
+    const g=sv('g',{class:'col',tabindex:0});
+    g.append(sv('rect',{x:L+i*step,y:T,width:step,height:Hh-T-B,fill:'transparent'}));
+    g.append(sv('path',{class:'m',d:`M${x},${Hh-B}V${y+4}Q${x},${y} ${x+4},${y}H${x+bw-4}Q${x+bw},${y} ${x+bw},${y+4}V${Hh-B}Z`,fill:'var(--u1)',opacity:i===8?1:.55}));
+    s.append(g);
+    s.append(sv('text',{x:x+bw/2,y:Hh-12,'text-anchor':'middle',class:'tick',text:names[i]}));
+    const cum=M.slice(0,i+1).reduce((a,b)=>a+b.amt,0);
+    bindTip(g,names[i]+' 2026',[{k:'Ameren Illinois',v:full(m.amt)},{k:'Gifts',v:m.n},{k:'Year to date',v:full(cum)}]);
+    if(i===8||i===7)s.append(sv('text',{x:x+bw/2,y:y-8,'text-anchor':'middle',class:'lbl',text:money(m.amt)}));
+  });
+  s.append(sv('line',{x1:L,x2:W,y1:Hh-B,y2:Hh-B,stroke:'var(--hair2)'}));
+  v.append(s);
+  const tot=M.reduce((a,b)=>a+b.amt,0);
+  v.append(h('p',{class:'sub',style:'margin-top:14px',text:`Through June: ${full(M.slice(0,6).reduce((a,b)=>a+b.amt,0))}. September: ${full(M[8].amt)} in ${M[8].n} gifts, ${pct(M[8].amt/tot)} of the ${full(tot)} year to date. Fourth-quarter filings are not in this data.`}));
+  v.append(table(['Month','Ameren Illinois','Gifts'],M.map((m,i)=>[names[i],full(m.amt),m.n])));
+})();
+
+/* 8 scale */
+(function(){
+  const v=$('#v-years');const Y=D.years;
+  const W=760,Hh=260,L=48,B=34,T=24,max=800000,bw=24;
+  const s=sv('svg',{viewBox:`0 0 ${W} ${Hh}`,role:'img','aria-label':'Ameren Illinois giving per year'});
+  [0,200000,400000,600000,800000].forEach(t=>{const y=T+(Hh-T-B)*(1-t/max);s.append(sv('line',{x1:L,x2:W,y1:y,y2:y,class:'grid-l'}));s.append(sv('text',{x:L-8,y:y+4,'text-anchor':'end',class:'tick',text:t?money(t):'$0'}))});
+  const step=(W-L)/Y.length;
+  Y.forEach((r,i)=>{const hh=(Hh-T-B)*r.amt/max,x=L+i*step+(step-bw)/2,y=Hh-B-hh;const last=i===Y.length-1;
+    const g=sv('g',{class:'col'});g.append(sv('rect',{x:L+i*step,y:T,width:step,height:Hh-T-B,fill:'transparent'}));
+    g.append(sv('path',{class:'m',d:`M${x},${Hh-B}V${y+4}Q${x},${y} ${x+4},${y}H${x+bw-4}Q${x+bw},${y} ${x+bw},${y+4}V${Hh-B}Z`,fill:'var(--u1)',opacity:last?1:.55}));
+    s.append(g);s.append(sv('text',{x:x+bw/2,y:Hh-12,'text-anchor':'middle',class:'tick',text:last?'26 YTD':String(r.y).slice(2)}));
+    bindTip(g,r.y+(last?' (through Sep 30)':''),[{k:'Ameren Illinois',v:full(r.amt)}]);
+    if(last)s.append(sv('text',{x:x+bw/2,y:y-8,'text-anchor':'middle',class:'lbl',text:money(r.amt)}));
+  });
+  s.append(sv('line',{x1:L,x2:W,y1:Hh-B,y2:Hh-B,stroke:'var(--hair2)'}));
+  v.append(s);
+  v.append(table(['Year','Ameren Illinois'],Y.map(r=>[String(r.y)+(r.y===2026?' (through Sep 30)':''),full(r.amt)])));
+  const S=D.scale,sc=$('#v-scale');
+  sc.append(h('h3',{style:'font:800 22px/1.1 var(--head);font-stretch:85%;margin:0 0 6px',text:'Ameren to top-100 committees vs. what they raised'}));
+  sc.append(h('p',{class:'sub',style:'margin:0',text:`Full bar: ${money(S.top100)} raised by the top-100 committees since Oct 3, 2025. Orange sliver: ${full(S.ameren_top100)} from Ameren, ${pct(S.ameren_top100/S.top100,2)}.`}));
+  const bar=h('div',{class:'scalebar'});const sl=h('div',{class:'sl'});bar.append(sl);bindTip(bar,'Scale',[{k:'Top-100 committees, new funds',v:full(S.top100)},{k:'Ameren to those committees',v:full(S.ameren_top100)},{k:'Share',v:pct(S.ameren_top100/S.top100,2)}]);
+  sc.append(bar);
+  sc.append(h('div',{class:'callout'},[h('span',{},[h('b',{text:pct(S.ameren_top100/S.ameren_window)+' '}),document.createTextNode(`of Ameren's ${full(S.ameren_window)} since Oct 3, 2025 went to committees in the top 100.`)])]));
+})();
+
+/* 9 gaps */
+(function(){
+  const v=$('#v-gaps');const G=D.gap;const ch=h('div',{class:'chips'});
+  G.forEach(g=>{const c=h('span',{class:'chip'+(g.top100?' t':''),style:g.top100?'border-width:2px;border-color:var(--ink)':''});const dot=h('i');dot.style.background=g.p==='D'?'var(--dem)':'var(--rep)';c.append(dot,document.createTextNode(g.n+(g.late25>0?' •':'')),h('small',{text:money(g.peers)}));
+    bindTip(c,g.n,[{k:(g.ch==='House'?'House':'Senate')+', '+(g.p==='D'?'Democrat':'Republican'),v:''},{k:'From the other four utilities, 2026',v:full(g.peers)},{k:'From Ameren, 2026',v:'$0'},...(g.late25>0?[{k:'From Ameren, Oct-Dec 2025',v:full(g.late25)}]:[]),...(g.top100?[{k:'Committee in the top-100 list',v:''}]:[])]);ch.append(c)});
+  v.append(ch);
+  v.append(legend([{c:'var(--dem)',t:'Democrat'},{c:'var(--rep)',t:'Republican'}]));
+  v.append(table(['Legislator','Chamber','Party','Peers 2026','Ameren late 2025','In top 100'],G.map(g=>[g.n,g.ch,g.p,full(g.peers),full(g.late25),g.top100?'Yes':''])));
+})();
+
+/* end */
+(function(){
+  const v=$('#v-end');
+  [['Ameren is the largest and widest giver.','$482K to 101 legislators, versus $47K to $103K and 23 to 43 legislators for each peer.'],
+   ['Its giving is bipartisan; others are not.','57% Democratic and 43% Republican. Nicor is 98% Democratic; Constellation leans Republican.'],
+   ['Leaders get the biggest checks, caucus committees the biggest single ones.','Four leaders drew $140.6K across the five utilities; ISDF alone took $25K from Ameren.'],
+   ['Coverage gaps are mostly rank-and-file Democrats.','33 House Democrats and 14 Senate Democrats got nothing from any of the five utilities.'],
+   ['Dollars are small next to the committees\' war chests.','$274K from Ameren is 0.09% of what the top-100 committees raised.']
+  ].forEach(([a,b])=>v.append(h('div',{},[h('b',{style:'font:800 21px/1.2 var(--head);font-stretch:88%;display:block;margin-bottom:2px',text:a}),h('span',{style:'color:var(--ink2)',text:b})])));
+  $('#foot').textContent='Source: Illinois campaign-disclosure receipt exports for Ameren Illinois, Nicor, Peoples Gas, Illinois American Water and Constellation (Jan 1 to Sep 30, 2026; Ameren also back to 1998). Transfers to a utility\'s own PAC are excluded. Legislators are matched to committees by name against the 104th General Assembly roster, so a few members\' committees may be missed. Fourth-quarter 2026 filings are not included.';
+})();
+
+/* scripts */
+const SCRIPT={
+hero:{t:'The total',d:'About 40 seconds',p:[
+"Let's start with the big picture. Between January and the end of September, five utilities (Ameren Illinois, Constellation, Illinois American Water, Peoples Gas and Nicor) made 385 political contributions worth about $810,000.",
+"Look at the orange segment. Ameren Illinois alone is just under 60 percent of the total, $482,000, which is more than the other four combined. The average Ameren check is about $2,550, while Peoples Gas and Nicor average closer to $1,200 to $1,300.",
+"Three quarters of all the money, 77 percent, goes straight to legislators' own campaign committees, and the five utilities together reached 120 of the 177 members of the General Assembly."],cue:'Hover the bar to show each utility\'s total, share and average gift.'},
+where:{t:'Where the money goes',d:'About 40 seconds',p:[
+"Now, who receives it? Each bar is one utility's giving, sliced by type of recipient. The darkest slice is legislators' own committees: about 82 percent of Ameren's giving and 87 percent of Nicor's.",
+"Peoples Gas is the outlier. Only half of its giving goes to legislators, because 23 percent goes to Chicago aldermen and ward organizations, which none of the others fund.",
+"Constellation stands out for trade PACs, about 15 percent. Party and caucus committees, like ISDF or the House Republican Organization, take between 7 and 24 percent depending on the utility."],cue:'Hover a slice for the dollar amount and share.'},
+party:{t:'Party balance',d:'About 35 seconds',p:[
+"Is the giving partisan? Blue is Democrats, red is Republicans, counting only money that went to legislators' own committees.",
+"Ameren is the most balanced of the five: 57 percent Democratic, 43 percent Republican. Nicor is almost entirely Democratic, 98 percent. Constellation is the only one that tilts Republican, at 56 percent.",
+"Across all five utilities it is 59 percent Democratic. Democrats hold two thirds of the seats, so the giving is actually a little more Republican than the chamber makeup."],cue:'The vertical line marks an even 50-50 split.'},
+leaders:{t:'The four leaders',d:'About 35 seconds',p:[
+"The four legislative leaders (Speaker Welch, Senate President Harmon, House Republican Leader McCombie and Senate Republican Leader Curran) each received between $32,500 and $38,500 across the five utilities. That is about $140,000 together, 23 percent of everything given to legislators.",
+"Ameren is nearly even among them: $16,000 to Welch, $19,600 to Harmon, and $20,000 each to McCombie and Curran.",
+"Notice that Nicor's $10,000 went only to the Speaker's side, and Peoples Gas weights the Speaker heavily too. The Senate Republican Leader label for Curran is worth verifying before this goes outside the team."],cue:'Hover each segment to see which utility gave what.'},
+top12:{t:'Ameren\'s top twelve',d:'About 25 seconds',p:[
+"These are Ameren's twelve largest recipients. Bold names are party and caucus committees. ISDF is first at $25,000, then the Democratic Party of Illinois, Curran and McCombie at $20,000 each, and Harmon at $19,600.",
+"Welch, the House Republican Organization and the Senate Republican Victory Fund follow, and then three members: Representative Elizabeth Hernandez, Senator Koehler and Senator Doris Turner.",
+"The takeaway is that Ameren's largest checks go to leaders and caucuses, but the list also includes members who are not in leadership."],cue:'Hover a bar for the amount and the committee type.'},
+recent:{t:'Top recipients since October 2025',d:'About 50 seconds',p:[
+"Now widening the lens to October 2025 onward. Ameren counts from October 3, matching the top-100 fundraising window; the other four utilities' files only start in January 2026, so their totals are understated.",
+"Across all five, six committees took between $36,500 and $48,300 each: Senate President Harmon first at $48,300, then ISDF at $45,000, Leader Curran, Leader McCombie, the Democratic Party of Illinois, and Speaker Welch. The next tier is the Manufacturers PAC and the Senate Republican Victory Fund at $20,500 each.",
+"Those fifteen committees together took about 42 percent of the $984,000 given in this window. Now look at the ten biggest fundraisers. Four of them, Welch, the Democratic Party, Harmon and ISDF, are top utility recipients. But the Governor, the Secretary of State, Democrats for the Illinois House and the labor and super PAC committees in the top ten received nothing from these five utilities."],cue:'Hover a segment for the utility, then scroll to the grey bars for the ten biggest fundraisers.'},
+coverage:{t:'Coverage of the legislature',d:'About 50 seconds',p:[
+"Here is every member of the General Assembly as a square: 118 House members and 59 senators. Orange means Ameren gave to that member's committee this year. That is 101 of 177, or 57 percent.",
+"Gray means only the other utilities gave, and the outlined squares got nothing from any of the five.",
+"Ameren reaches Republicans more thoroughly: 29 of 40 House Republicans and 15 of 19 Senate Republicans, versus roughly half of Democrats. The outlined squares cluster among rank-and-file House Democrats: 33 of them got nothing from any utility, and 14 Senate Democrats."],cue:'Hover any square to see that member\'s amounts by utility.'},
+timing:{t:'Timing',d:'About 25 seconds',p:[
+"Ameren's giving is back-loaded. Through June it was about $154,000. September alone was $185,000, in 52 gifts, which is 38 percent of the year so far.",
+"That is the pre-election push. Fourth-quarter filings are not in this data yet, so the year is not finished."],cue:'The two labeled columns are August and September.'},
+scale:{t:'History and scale',d:'About 45 seconds',p:[
+"Two perspectives. First, history: Ameren's giving has run between about $490,000 and $690,000 a year since 2015, and 2026 year to date is already $482,000, with one quarter still to report.",
+"Second, scale. Since October 2025, Ameren gave about $274,000 to committees that rank among the top 100 fundraisers. That is 0.09 percent of the $293.6 million those committees raised, a sliver you can barely see in the bar.",
+"About 42 percent of Ameren's giving since October went to those top-100 committees, so the dollars are concentrated, but they are small next to the leaders' war chests."],cue:'Hover the bar to show the exact figures.'},
+gaps:{t:'The gaps',d:'About 40 seconds',p:[
+"Finally, the gaps. These 19 legislators received money from Nicor, Peoples Gas, Illinois American Water or Constellation this year, but nothing from Ameren in 2026.",
+"Five of them have committees in the top 100 by fundraising: Senators Feigenholtz and Lewis, and Representatives Hammond, Croke and Evans. They are outlined in the chart.",
+"A dot after a name means Ameren did fund them in late 2025, so for several of these it may be timing rather than a decision. This is the list to check before the next round of giving."],cue:'Hover a chip for the peer amounts and any late-2025 Ameren giving.'},
+end:{t:'Close',d:'About 25 seconds',p:[
+"To sum up: Ameren is the largest and widest giver, and the most balanced between parties. The biggest checks go to leaders and caucus committees. The coverage gaps are mostly rank-and-file Democrats. And in dollar terms, utility giving is small next to what these committees raise.",
+"Caveats: this covers January through September, matches legislators to committees by name, and excludes transfers to utilities' own PACs."],cue:'Close on the five takeaways.'}
+};
+Object.keys(SCRIPT).forEach(k=>{const s=SCRIPT[k],a=$('#s-'+k);if(!a)return;a.append(h('h3',{text:'Script: '+s.t}),h('div',{class:'dur',text:s.d}),...s.p.map(t=>h('p',{text:t})),h('p',{class:'cue',text:s.cue}))});
+$('#full').textContent=Object.keys(SCRIPT).map(k=>`${SCRIPT[k].t} (${SCRIPT[k].d})\n${SCRIPT[k].p.join('\n\n')}\n[${SCRIPT[k].cue}]`).join('\n\n------\n\n');
+$('#bCopy').addEventListener('click',async e=>{try{await navigator.clipboard.writeText($('#full').textContent);e.target.textContent='Copied'}catch(_){const r=document.createRange();r.selectNodeContents($('#full'));getSelection().removeAllRanges();getSelection().addRange(r);e.target.textContent='Selected, press copy'}setTimeout(()=>e.target.textContent='Copy script',1800)});
+/* controls */
+function toggle(btn,cls){btn.addEventListener('click',()=>{const on=document.body.classList.toggle(cls);btn.setAttribute('aria-pressed',on)})}
+toggle($('#bScript'),'show-script');toggle($('#bTables'),'show-tables');
+$('#bTheme').addEventListener('click',e=>{const dark=document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=dark?'light':'dark';e.target.textContent=dark?'Dark':'Light';e.target.setAttribute('aria-pressed',!dark)});
+(()=>{if(matchMedia('(prefers-color-scheme: dark)').matches){$('#bTheme').textContent='Light';$('#bTheme').setAttribute('aria-pressed','true')}})();
+</script>
+</body>
+</html>
