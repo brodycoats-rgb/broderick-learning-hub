@@ -158,6 +158,7 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
 .rel button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .rel .rd{font-family:var(--font-mono);font-size:.75rem;color:var(--muted);display:inline-block;min-width:3.6rem}
 .rel .rs{font-size:.72rem;color:var(--muted)}
+.lnk{background:none;border:0;padding:0;margin-left:.6rem;font:inherit;color:var(--accent,#2a78d6);text-decoration:underline;cursor:pointer}
 </style>
 
 <div class="wrap">
@@ -217,7 +218,7 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
           <li><b>Third op-ed</b> topic and author were not stated.</li>
         </ul>
       </section>
-      <p class="foot">Read only snapshot as of Oct 2, 2026. Departments marked inferred were read from meeting notes.</p>
+      <p class="foot">Snapshot as of Oct 2, 2026. Departments marked inferred were read from meeting notes. Status, date and note edits are saved in this browser only, so they stay on this device. <button type="button" id="expEdits" class="lnk">Download my edits</button> <button type="button" id="impEdits" class="lnk">Load edits from a file</button><input type="file" id="impFile" accept="application/json" hidden></p>
     </aside>
   </div>
 </div>
@@ -404,7 +405,8 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
       '<div class="grid2">'+fld("Department managing",esc(String(it.dept||"Not set").replace(" (inferred)",""))+(inf?' <span class="inf">(inferred)</span>':''))+fld("Owner",esc(it.owner||"Not set")+(it.mine?' (Rick)':''))+'</div>'+
       sec("Stakeholders",it.stakeholders)+sec("Context",it.context||it.detail)+sec("Next steps",it.next)+relSec(it)+
       '<div class="grid2">'+fld("Summary",esc(it.detail))+fld("Source",esc(it.src))+'</div>'+
-      '<div class="dlg-f"><span class="inf">Read only snapshot.</span></div>'+
+      '<div class="fld"><label for="fNotes">My notes</label>'+notes+'</div>'+
+      '<div class="dlg-f"><span class="inf" id="dSaved">Edits save in this browser only.</span></div>'+
       '</div>';
     if(!match(it)){state.view="all";state.ws="all";state.q="";state.who="all";state.done=true;$("q").value="";$("who").value="all";$("showDone").checked=true;}
     dlgEl=document.createElement("div");dlgEl.className="dlgwrap";dlgEl.innerHTML=h;
@@ -429,7 +431,8 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
     dlgEl=null;openId=null;
     var r=document.querySelector('.row[data-id="'+id+'"]');if(r){r.classList.remove("isopen");r.focus({preventScroll:true});}
   }
-  var chain={},dbh=null,lastSig='';
+  var EKEY="gr-dashboard-edits-v1";
+  function loadEdits(){try{return JSON.parse(localStorage.getItem(EKEY)||"{}")||{};}catch(e){return {};}}
   function save(id,patch){
     var it=ISS.filter(function(x){return x.id===id;})[0];
     var prev={};Object.keys(patch).forEach(function(k){prev[k]=it[k];it[k]=patch[k];});
@@ -437,12 +440,8 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
     if(openId===id){var p=$("dPill");if(p)p.innerHTML=pill(it);}
     function msg(t,bad){var s=$("dSaved");if(s&&openId===id){s.textContent=t;s.style.color=bad?"var(--crit)":"";}}
     msg("Saving");
-    chain[id]=(chain[id]||Promise.resolve()).then(function(){
-      return dbh.collection("issues").doc(id).update(patch);
-    }).then(function(){msg("Saved");},function(e){
-      Object.keys(prev).forEach(function(k){it[k]=prev[k];});prep(it);renderAll();
-      msg(e&&(e.code==="permission_denied"||e.code==="not_granted")?"Not saved. You only have view access.":"Not saved. Try again.",true);
-    });
+    try{var ed=loadEdits();ed[id]=Object.assign(ed[id]||{},patch);localStorage.setItem(EKEY,JSON.stringify(ed));msg("Saved on this device");}
+    catch(e){msg("Not saved. This browser blocked local storage.",true);}
   }
 
   document.addEventListener("click",function(e){
@@ -468,7 +467,12 @@ aside.rail{display:flex;flex-direction:column;gap:1rem;min-width:0}
   $("who").addEventListener("change",function(e){state.who=e.target.value;renderSections();placeDlg();});
   $("showDone").addEventListener("change",function(e){state.done=e.target.checked;renderSections();placeDlg();});
 
-  ISS=DATA.map(prep);loaded=true;canWrite=false;renderAll();
+  (function(){var ed=loadEdits();DATA.forEach(function(d){if(ed[d.id])Object.assign(d,ed[d.id]);});})();
+  ISS=DATA.map(prep);loaded=true;canWrite=true;renderAll();
+  var exp=$("expEdits"),imp=$("impEdits"),fil=$("impFile");
+  if(exp)exp.addEventListener("click",function(){var b=new Blob([JSON.stringify(loadEdits(),null,1)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="gr-dashboard-edits.json";document.body.appendChild(a);a.click();a.remove();});
+  if(imp)imp.addEventListener("click",function(){fil.click();});
+  if(fil)fil.addEventListener("change",function(){var f=fil.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var inc=JSON.parse(r.result);var ed=loadEdits();Object.keys(inc).forEach(function(k){ed[k]=Object.assign(ed[k]||{},inc[k]);});localStorage.setItem(EKEY,JSON.stringify(ed));location.reload();}catch(e){imp.textContent="That file could not be read";}};r.readAsText(f);});
 })();
 
 </script>
