@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broderick Learning Hub</title>
+<meta name="description" content="Energy policy, regulation and legislation: learn it, rehearse it, use it. Guides, dashboards and notes in one HTML knowledge hub.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#0f1a24;--mut:#5b6772;--line:#d5dde5;--navy:#12365a;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#8a5cd6;--tint:#eaf1f8;--hero1:#0b2540;--hero2:#12365a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--hero1:#07182a;--hero2:#0f2f52}}
+:root[data-theme="dark"]{--bg:#0e141b;--card:#161f29;--ink:#e8eef4;--mut:#9aa7b4;--line:#2a3643;--navy:#9cc4f2;--s1:#3987e5;--s2:#f08a5d;--s3:#34c28e;--s4:#a98aea;--tint:#1a2735;--hero1:#07182a;--hero2:#0f2f52}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--s1);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(1200px 500px at 85% -10%,#1f5aa0 0%,transparent 60%),linear-gradient(135deg,var(--hero1),var(--hero2));padding:56px 0 110px}
+.hero svg.net{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.net line{stroke:#6fa8ea;stroke-width:1.2;opacity:.55}
+.net .pulse{stroke:#ffb089;stroke-width:2.4;stroke-dasharray:14 190;opacity:.95;animation:flow 6s linear infinite}
+.net .p2{stroke:#5fe0b0;animation-duration:8s;animation-delay:-2s}.net .p3{stroke:#b69cf2;animation-duration:7s;animation-delay:-4s}
+@keyframes flow{to{stroke-dashoffset:-204}}
+.net circle{fill:#0b2540;stroke:#7fb6f5;stroke-width:2}.net circle.hot{stroke:#ff9a6b;fill:#ff9a6b;opacity:.9}
+@media (prefers-reduced-motion:reduce){.net .pulse{animation:none}}
+.top{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;margin-bottom:54px}
+.top b{font:700 15px "Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif,"IBM Plex Sans",system-ui,sans-serif;letter-spacing:.02em}
+.top button{font:inherit;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:5px 14px;cursor:pointer}
+.top button:hover{background:rgba(255,255,255,.26)}
+.hero .k{position:relative;letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:600;color:#9fc8f5}
+.hero h1{position:relative;color:#fff;font-size:clamp(38px,7vw,68px);font-weight:800;margin:10px 0 14px;max-width:820px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#ff9a6b,#ffd0b3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lede{position:relative;max-width:640px;font-size:19px;color:#dbe8f6;margin:0}
+.search{position:relative;margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search input{flex:1 1 260px;max-width:420px;font:inherit;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff}
+.search input::placeholder{color:#b9d2ee}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:inherit;font-size:14px;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:transparent;color:#e6f0fb;border-radius:999px;padding:6px 14px}
+.chip[aria-pressed="true"]{background:#fff;color:#0b2540;border-color:#fff;font-weight:600}
+.herobtn{position:relative;z-index:2;display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:#fff;color:#0b2540;font-weight:700;font-size:16px;text-decoration:none;border-radius:999px;padding:12px 22px;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .15s}.herobtn:hover{transform:translateY(-2px)}.herobtn small{font-weight:500;color:#5b6772;font-size:13px}
+/* featured */
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:-72px;position:relative}
+.fc{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 14px 34px rgba(8,28,52,.16);border-top:7px solid var(--c);transition:transform .15s}
+.fc:hover{transform:translateY(-3px)}
+.lab{font:700 11.5px/1 "IBM Plex Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.fc h2{font-size:28px;margin:10px 0 8px;color:var(--navy)}
+.fc p{margin:0 0 14px;color:var(--mut)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:auto 0 14px}
+.stat{background:var(--tint);border-radius:12px;padding:8px 12px;min-width:92px}.stat b{display:block;font:800 22px "Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;color:var(--c)}.stat span{font-size:12.5px;color:var(--mut)}
+.go{font-weight:600;color:var(--c)}
+.bars{display:flex;align-items:flex-end;gap:5px;height:46px;margin:auto 0 14px}.bars i{flex:1;border-radius:4px 4px 0 0;background:var(--c);opacity:.85}.bars i:nth-child(2n){background:var(--s2)}.bars i:nth-child(3n){background:#9aa1ad}
+/* sections */
+section.grp{margin:52px 0 0}
+.gh{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.gh .dot{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}
+.gh h3{font-size:24px;color:var(--navy)}.gh span{color:var(--mut);font-size:14.5px}
+.gh:after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--c),transparent);opacity:.5;border-radius:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.cd{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:18px 20px;transition:transform .15s,box-shadow .15s}
+.cd:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(8,28,52,.12)}
+.cd h4{font:700 19px/1.25 "Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif,"IBM Plex Sans",system-ui,sans-serif;margin:0 0 6px;color:var(--navy)}
+.cd p{margin:0 0 12px;color:var(--mut);font-size:14.5px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:auto 0 10px}.tg{font-size:11.5px;border-radius:999px;padding:2px 10px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c);font-weight:600}
+.cd .go{font-size:14.5px}
+.hide{display:none!important}
+.empty{display:none;color:var(--mut);padding:20px 0}
+/* rules */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:52px}
+.pan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.pan h3{font-size:22px;margin-bottom:10px;color:var(--navy)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}.pl{border:1px solid var(--line);background:var(--tint);border-radius:999px;padding:5px 14px;font-size:14px}
+.pl:nth-child(4n+1){border-color:var(--s1)}.pl:nth-child(4n+2){border-color:var(--s3)}.pl:nth-child(4n+3){border-color:var(--s2)}.pl:nth-child(4n+4){border-color:var(--s4)}
+.rules{border-left:6px solid var(--s2)}.rules ul{margin:0;padding-left:20px}.rules li{margin:5px 0;font-size:15px}
+footer{margin:56px 0 40px;padding-top:20px;border-top:1px solid var(--line);color:var(--mut);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<header class="hero">
+<svg class="net" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+ <g><line x1="80" y1="120" x2="260" y2="300"/><line x1="260" y1="300" x2="470" y2="170"/><line x1="470" y1="170" x2="700" y2="330"/><line x1="700" y1="330" x2="900" y2="150"/><line x1="900" y1="150" x2="1120" y2="290"/><line x1="260" y1="300" x2="330" y2="460"/><line x1="700" y1="330" x2="640" y2="490"/><line x1="470" y1="170" x2="520" y2="30"/><line x1="900" y1="150" x2="980" y2="20"/>
+ <line class="pulse" x1="80" y1="120" x2="260" y2="300"/><line class="pulse" x1="260" y1="300" x2="470" y2="170"/><line class="pulse p2" x1="470" y1="170" x2="700" y2="330"/><line class="pulse p2" x1="700" y1="330" x2="900" y2="150"/><line class="pulse p3" x1="900" y1="150" x2="1120" y2="290"/><line class="pulse p3" x1="700" y1="330" x2="640" y2="490"/></g>
+ <g><circle cx="80" cy="120" r="7"/><circle cx="260" cy="300" r="10" class="hot"/><circle cx="470" cy="170" r="8"/><circle cx="700" cy="330" r="11" class="hot"/><circle cx="900" cy="150" r="8"/><circle cx="1120" cy="290" r="7"/><circle cx="330" cy="460" r="6"/><circle cx="640" cy="490" r="6"/><circle cx="520" cy="30" r="5"/><circle cx="980" cy="20" r="5"/></g>
+</svg>
+<div class="wrap">
+ <div class="top"><b>⚡ Broderick Learning Hub</b><button id="theme" type="button" aria-label="Toggle dark mode">Light / dark</button></div>
+ <div class="k">Energy policy · Regulation · Legislation</div>
+ <h1>Learn it. Rehearse it. <em>Use it.</em></h1>
+ <p class="lede">Guides, dashboards and notes on Illinois energy, from the ICC docket to the General Assembly floor, in one place.</p>
+ <a class="herobtn" href="gr-dashboard.html">Government Relations Dashboard <small>Open issues and key dates →</small></a>
+ <div class="search">
+  <input id="q" type="search" placeholder="Search guides, topics, dashboards…" aria-label="Search the hub">
+  <div class="chips" role="group" aria-label="Filter by area">
+   <button class="chip" aria-pressed="true" data-f="all">All</button><button class="chip" aria-pressed="false" data-f="reg">Regulatory</button><button class="chip" aria-pressed="false" data-f="leg">Legislative</button><button class="chip" aria-pressed="false" data-f="lib">Library</button><button class="chip" aria-pressed="false" data-f="work">Workspace</button>
+  </div>
+ </div>
+</div>
+</header>
+
+<main class="wrap">
+ <div class="feat" id="feat">
+  <a class="fc" href="grid-plan.html" style="--c:var(--s2)" data-g="reg" data-t="grid plan myigp ameren icc docket knowledge center executive analysis flashcards quiz">
+   <div class="lab">Featured · Regulatory</div><h2>Grid Plan Knowledge Center</h2>
+   <p>Ameren Illinois’ 2028–2031 Multi-Year Integrated Grid Plan: a two-minute executive analysis, the full guide, flashcards and a 26-question knowledge check.</p>
+   <div class="stats"><div class="stat"><b>$2.68B</b><span>capital additions</span></div><div class="stat"><b>47%</b><span>modeled equity share</span></div><div class="stat"><b>Dec ’26</b><span>final order due</span></div></div>
+   <span class="go">Open the Grid Plan Knowledge Center →</span>
+  </a>
+  <a class="fc" href="rtc-dashboard.html" style="--c:var(--s1)" data-g="leg" data-t="rtc bill dashboard legislation tracker bills stance watchlist general assembly">
+   <div class="lab">Featured · Legislative</div><h2>RTC Bill Dashboard</h2>
+   <p>Stance mix, pipeline by stage, sponsors, a ranked watchlist and a searchable bill explorer. Weekly tracker of assigned Illinois bills, with position and meeting context. Load a new .xlsx in the page to refresh.</p>
+   <div class="bars" aria-hidden="true"><i style="height:90%"></i><i style="height:55%"></i><i style="height:70%"></i><i style="height:35%"></i><i style="height:80%"></i><i style="height:48%"></i><i style="height:62%"></i><i style="height:28%"></i></div>
+   <span class="go">Open the dashboard →</span>
+  </a>
+ </div>
+
+ <section class="grp" style="--c:var(--s1)" data-grp>
+  <div class="gh"><i class="dot"></i><h3>Regulatory and market</h3><span>Dockets, procurement and resource planning</span></div>
+  <div class="grid">
+   <a class="cd" href="illinois-irp-workshop-2026.html" data-g="reg" data-t="irp resource adequacy workshop september 24 modeling ceja extension zone 4 quiz">
+    <h4>Illinois IRP Workshop</h4><p>Understand the September 24 modeling, the Reference and CEJA Extension cases, Zone 4 implications, and the stakeholder discussion. Includes a practice quiz and plain-language debrief.</p><div class="tags"><span class="tg">Quiz</span><span class="tg">Debrief</span></div><span class="go">Open the IRP learning guide →</span></a>
+   <a class="cd" href="illinois-battery-storage-primer.html" data-g="reg" data-t="battery storage primer 3000 mw ipa auction crga mind map quiz glossary">
+    <h4>Illinois Battery Storage Primer</h4><p>A self-paced course for newcomers on why Illinois is buying 3,000 MW of grid batteries, how the first auction went, and what it means for Ameren Illinois. Includes mind maps, a 30-question quiz and a glossary.</p><div class="tags"><span class="tg">Course</span><span class="tg">Quiz</span></div><span class="go">Open the battery storage primer →</span></a>
+   <a class="cd" href="illinois-data-center-learning-center.html" data-g="reg" data-t="data center learning center tariff speaking scripts flashcards large load">
+    <h4>Illinois Data Center Learning Center</h4><p>Nine lessons, Ameren tariff walkthroughs, working-group guidance, practical speaking scripts, a project-cost scenario, flashcards and 25 multiple-choice questions with explanations.</p><div class="tags"><span class="tg">9 lessons</span><span class="tg">Flashcards</span></div><span class="go">Learn and practice →</span></a>
+  </div>
+ </section>
+
+ <section class="grp" style="--c:var(--s3)" data-grp>
+  <div class="gh"><i class="dot"></i><h3>Library</h3><span>Every guide and briefing, ready to read in the browser</span></div>
+  <div class="grid">
+   <a class="cd" href="ameren-illinois-energy-policy.html" data-g="lib" data-t="ameren illinois energy policy learning guide plain-language guide to illinois energy policy and what it means for ameren illinois."><h4>Ameren Illinois Energy Policy Learning Guide</h4><p>Plain-language guide to Illinois energy policy and what it means for Ameren Illinois.</p><div class="tags"><span class="tg">Guide</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="ameren-illinois-knowledge-center.html" data-g="lib" data-t="ameren illinois knowledge center the full ameren illinois knowledge guide."><h4>Ameren Illinois Knowledge Center</h4><p>The full Ameren Illinois knowledge guide.</p><div class="tags"><span class="tg">Guide</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="ameren-missouri-illinois-ctg.html" data-g="lib" data-t="ameren missouri and illinois ctg learning guide combustion turbine generation across ameren missouri and illinois."><h4>Ameren Missouri and Illinois CTG Learning Guide</h4><p>Combustion turbine generation across Ameren Missouri and Illinois.</p><div class="tags"><span class="tg">Guide</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="ameren-strategic-direction.html" data-g="lib" data-t="ameren strategic direction and gr executive briefing strategic direction and government relations executive briefing."><h4>Ameren Strategic Direction and GR Executive Briefing</h4><p>Strategic direction and government relations executive briefing.</p><div class="tags"><span class="tg">Briefing</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="icc-proceedings.html" data-g="lib" data-t="icc proceedings briefing grid planning, resource adequacy, future of gas, large loads and clean energy implementation, docket by docket."><h4>ICC Proceedings Briefing</h4><p>Grid planning, resource adequacy, Future of Gas, large loads and clean energy implementation, docket by docket.</p><div class="tags"><span class="tg">Briefing</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="miso-eras-business-acumen-playbook.html" data-g="lib" data-t="miso eras business acumen playbook how reliability need becomes accredited capacity: interconnection, resource adequacy and transmission-planning cycles."><h4>MISO ERAS Business Acumen Playbook</h4><p>How reliability need becomes accredited capacity: interconnection, resource adequacy and transmission-planning cycles.</p><div class="tags"><span class="tg">Playbook</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="data-centers-and-rtos-working-paper.html" data-g="lib" data-t="data centers and the regional grid how large computational loads are reshaping pjm and miso planning, reliability, markets and cost allocation."><h4>Data Centers and the Regional Grid</h4><p>How large computational loads are reshaping PJM and MISO planning, reliability, markets and cost allocation.</p><div class="tags"><span class="tg">Working paper</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="illinois-data-center-gr-playbook.html" data-g="lib" data-t="illinois data center gr playbook national arc, illinois policy landscape, ameren illinois positioning and stakeholder messaging."><h4>Illinois Data Center GR Playbook</h4><p>National arc, Illinois policy landscape, Ameren Illinois positioning and stakeholder messaging.</p><div class="tags"><span class="tg">Playbook</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="koehler-lunch-briefing.html" data-g="lib" data-t="senator koehler lunch briefing briefing for the october 5 lunch on the multi-year grid plan, with talk tracks, hard questions and a 54-question quiz."><h4>Senator Koehler Lunch Briefing</h4><p>Briefing for the October 5 lunch on the Multi-Year Grid Plan, with talk tracks, hard questions and a 54-question quiz.</p><div class="tags"><span class="tg">Briefing · Quiz</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="illinois-legislative-trends-2020-2026.html" data-g="lib" data-t="illinois legislative trend report, 2020–2026 792 bill-year records: volume, churn and top subject concentration."><h4>Illinois Legislative Trend Report, 2020–2026</h4><p>792 bill-year records: volume, churn and top subject concentration.</p><div class="tags"><span class="tg">Report</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="peoples-gas-benchmarked-knowledge-paper.html" data-g="lib" data-t="peoples gas benchmarked knowledge paper how peoples gas compares to illinois utility benchmarks on rate cases, grid plans, disallowances and affordability."><h4>Peoples Gas Benchmarked Knowledge Paper</h4><p>How Peoples Gas compares to Illinois utility benchmarks on rate cases, grid plans, disallowances and affordability.</p><div class="tags"><span class="tg">Paper</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="illinois-2026-election-briefing.html" data-g="lib" data-t="illinois 2026 election cycle briefing statewide congressional legislative chicago mayor races, follow the money, speaker welch, 2028 primer, momentum and early polls."><h4>Illinois 2026 Election Cycle Briefing</h4><p>Statewide, legislative and Chicago mayor races, follow the money, Speaker Welch, national races, and 2028 momentum and early polls.</p><div class="tags"><span class="tg">Briefing</span></div><span class="go">Read →</span></a>
+   <a class="cd" href="utility_giving_infographic.html" data-g="lib" data-t="follow the money utility giving infographic political contributions ameren nicor peoples gas illinois american water constellation legislators committees isbe"><h4>Follow the Money: Utility Giving</h4><p>Political contributions from five Illinois utilities in 2026: recipients, party split, leaders, and top committees since October 2025.</p><div class="tags"><span class="tg">Infographic</span><span class="tg">Script</span></div><span class="go">Open →</span></a>
+   <a class="cd" href="reports.html" data-g="lib" data-t="reports summaries source notes key findings follow-up questions">
+    <h4>Reports</h4><p>Store report summaries, source notes, key findings, and follow-up questions.</p><span class="go">Open Reports →</span></a>
+  </div>
+ </section>
+
+ <section class="grp" style="--c:var(--s4)" data-grp>
+  <div class="gh"><i class="dot"></i><h3>Workspace</h3><span>Where learning turns into a routine</span></div>
+  <div class="grid">
+   <a class="cd" href="notes.html" data-g="work" data-t="learning notes concepts definitions plain-language examples open questions"><h4>Learning Notes</h4><p>Capture concepts, definitions, plain-language explanations, examples, and open questions.</p><span class="go">Open Notes →</span></a>
+   <a class="cd" href="initiatives.html" data-g="work" data-t="initiatives personal professional academic learning next steps"><h4>Initiatives</h4><p>Track personal, professional, academic, and learning initiatives with next steps.</p><span class="go">Open Initiatives →</span></a>
+   <a class="cd" href="templates.html" data-g="work" data-t="templates briefings meeting summaries reports project tracking"><h4>Templates</h4><p>Keep reusable structures for briefings, meeting summaries, reports, and project tracking.</p><span class="go">Open Templates →</span></a>
+  </div>
+ </section>
+ <p class="empty" id="empty">Nothing matches that search. Try a shorter word, or choose All.</p>
+
+ <div class="two">
+  <div class="pan"><h3>Current focus areas</h3><div class="pills"><span class="pl">Government affairs and public policy</span><span class="pl">Energy reliability and utility strategy</span><span class="pl">Healthcare policy and hospital operations</span><span class="pl">Biostatistics and MPH coursework</span><span class="pl">Leadership and executive communication</span><span class="pl">Career development</span><span class="pl">HTML and knowledge management</span></div></div>
+  <div class="pan rules"><h3>Working rules</h3><ul><li>Use this repository for structured learning and non-confidential summaries.</li><li>Keep original reports separate from summaries when possible.</li><li>Write notes in plain language so they are useful later.</li><li>Do not upload confidential company documents, internal strategy materials, personal medical records, or sensitive third-party information.</li></ul></div>
+ </div>
+ <footer><span>Broderick Learning Hub · HTML knowledge repository</span><span>Non-confidential learning material only</span></footer>
+</main>
+<script>
+(function(){
+var q=document.getElementById('q'),f='all',chips=[].slice.call(document.querySelectorAll('.chip')),items=[].slice.call(document.querySelectorAll('[data-g]'));
+function run(){var t=q.value.trim().toLowerCase(),n=0;items.forEach(function(el){var ok=(f==='all'||el.dataset.g===f)&&(!t||(el.textContent+' '+el.dataset.t).toLowerCase().indexOf(t)>-1);el.classList.toggle('hide',!ok);if(ok)n++;});
+document.querySelectorAll('[data-grp]').forEach(function(g){g.classList.toggle('hide',!g.querySelector('[data-g]:not(.hide)'));});
+document.getElementById('feat').classList.toggle('hide',!document.querySelector('#feat [data-g]:not(.hide)'));
+document.getElementById('empty').style.display=n?'none':'block';}
+q.addEventListener('input',run);
+chips.forEach(function(c){c.addEventListener('click',function(){f=c.dataset.f;chips.forEach(function(x){x.setAttribute('aria-pressed',x===c)});run();});});
+document.getElementById('theme').addEventListener('click',function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark';});
+})();
+</script>
+</body>
+</html>
