@@ -156,6 +156,13 @@
 
 
   /* Quiz */
+  #quiz .q .opts li.pick { cursor: pointer; }
+  #quiz .q .opts li.pick:hover { border-color: var(--accent); background: var(--accent-soft); }
+  #quiz .q .opts li.pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  #quiz .q .opts li.right { border-color: var(--ok); background: var(--ok-soft); }
+  #quiz .q .opts li.wrong { border-color: var(--danger); background: var(--danger-soft); }
+  #quiz .q .opts li.locked { cursor: default; }
+  .qz-score { font-weight: 600; font-size: 15px; font-variant-numeric: tabular-nums; }
   .quiz-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 8px; }
   .btn { font: inherit; font-size: 14px; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--fg); cursor: pointer; }
   .btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -841,6 +848,8 @@
   <button type="button" class="btn" id="qz-open">Show all answers</button>
   <button type="button" class="btn" id="qz-close">Hide all answers</button>
   <label class="tog"><input type="checkbox" id="qz-pri"> Priority questions only</label>
+  <button type="button" class="btn" id="qz-reset">Reset quiz</button>
+  <span class="qz-score" id="qz-score" aria-live="polite"></span>
 </div>
 
 <div id="quiz">
@@ -990,6 +999,47 @@
       secs[i].hidden = e.target.checked && !secs[i].querySelector('.q.priority');
     }
   });
+  var qs = quiz.querySelectorAll('.q'), answered = 0, correct = 0;
+  function score() {
+    var el = document.getElementById('qz-score');
+    el.textContent = answered ? ('Score: ' + correct + ' of ' + answered + ' answered (' + qs.length + ' questions)') : 'Tap an answer to check it.';
+  }
+  function choose(q, li) {
+    if (q.dataset.done) return;
+    var lis = q.querySelectorAll('.opts li'), key = q.querySelector('.key b'), m = key && key.textContent.match(/Answer\s+([A-D])/);
+    if (!m) return;
+    var pick = li.querySelector('b').textContent.replace('.', '').trim();
+    q.dataset.done = '1'; answered++;
+    for (var i = 0; i < lis.length; i++) {
+      var L = lis[i].querySelector('b').textContent.replace('.', '').trim();
+      lis[i].classList.add('locked');
+      if (L === m[1]) lis[i].classList.add('right');
+    }
+    if (pick === m[1]) correct++; else li.classList.add('wrong');
+    var ad = q.querySelector('details.ad'); if (ad) ad.setAttribute('open', '');
+    score();
+  }
+  for (var k = 0; k < qs.length; k++) {
+    (function (q) {
+      var lis = q.querySelectorAll('.opts li');
+      for (var i = 0; i < lis.length; i++) {
+        lis[i].classList.add('pick'); lis[i].setAttribute('role', 'button'); lis[i].tabIndex = 0;
+        lis[i].addEventListener('click', function (e) { choose(q, e.currentTarget); });
+        lis[i].addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(q, e.currentTarget); } });
+      }
+    })(qs[k]);
+  }
+  document.getElementById('qz-reset').addEventListener('click', function () {
+    answered = 0; correct = 0;
+    for (var k = 0; k < qs.length; k++) {
+      delete qs[k].dataset.done;
+      var lis = qs[k].querySelectorAll('.opts li');
+      for (var i = 0; i < lis.length; i++) lis[i].classList.remove('right', 'wrong', 'locked');
+      var ad = qs[k].querySelector('details.ad'); if (ad) ad.removeAttribute('open');
+    }
+    score();
+  });
+  score();
   window.addEventListener('beforeprint', function () {
     var all = document.querySelectorAll('details.qa, details.ad');
     for (var i = 0; i < all.length; i++) all[i].setAttribute('open', '');
