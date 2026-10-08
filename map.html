@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Map | Data Center Desk</title><meta name="description" content="Interactive map of data centers by state with profiles and an Illinois close up.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("hub-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230b2e5c%27/%3E%3Cpath d=%27M18 4 8 18h7l-2 10 11-15h-7z%27 fill=%27%2316817f%27/%3E%3C/svg%3E"><link rel="stylesheet" href="assets/style.css"></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="index.html">Data Center <span>Desk</span></a>
+<button class="tbtn menu" id="menubtn" aria-expanded="false" aria-controls="nav">Menu</button>
+<nav class="nav" id="nav" aria-label="Main"><a href="index.html">Home</a><a href="ecosystem.html">Ecosystem</a><a href="map.html" aria-current="page">Map</a><a href="illinois.html">Illinois</a><a href="legislation.html">Legislation</a><a href="issues.html">Issues</a><a href="ameren.html">Ameren lens</a><a href="ben.html">Ben's project</a><a href="scripts.html">Scripts</a><a href="reference.html">Reference</a></nav>
+<button class="tbtn" id="themebtn" type="button" aria-label="Switch between light and dark">Light or dark</button></div></header>
+<section class="hero page-hero"><div class="wrap"><div class="eyebrow">Interactive map</div><h1>Data centers across the United States</h1><p>Click a state for its profile. Switch the map between counts and megawatts. Then open the Illinois close up.</p></div></section>
+<main id="main"><div class="wrap">
+<div class="ctl" id="metricbtns" role="group" aria-label="Choose what the map shows">
+<button class="chip" type="button" data-m="sites" aria-pressed="true">Number of sites</button>
+<button class="chip" type="button" data-m="pl" aria-pressed="false">Planned MW</button>
+<button class="chip" type="button" data-m="op" aria-pressed="false">Operating MW</button>
+<button class="chip" type="button" data-m="tot" aria-pressed="false">Operating plus planned MW</button></div>
+<div class="mapwrap">
+<div><div class="mapbox"><div id="usmap" role="region" aria-label="United States map"></div><div class="tip" id="maptip"></div>
+<div class="legend"><span id="maptitle"></span><span>low</span><i></i><span id="legmax"></span></div></div>
+<p class="src">Shading follows a square root scale so mid sized states do not disappear next to Virginia and Texas. Gray means megawatts were not available. Counts are from Data Center Map and megawatts from Cleanview, both retrieved October 8, 2026. They define a data center differently, so a state can rank high in one and low in the other. Utah shows it most, with a modest site count and a very large planned total.</p></div>
+<aside class="panel" id="panel" aria-live="polite"></aside></div>
+
+<h2>Every state in a table</h2>
+<div class="ctl"><input type="search" id="statesearch" placeholder="Filter states" aria-label="Filter states"><span class="small mut">Click a column heading to sort. Click a row to put it on the map.</span></div>
+<div class="tw" style="max-height:560px;overflow:auto"><table class="sortable" id="statetable"><thead><tr><th>State</th><th class="n">Sites</th><th class="n">Operating MW</th><th class="n">Planned MW</th><th>Grid</th></tr></thead><tbody></tbody></table></div>
+<p class="src">MW shows n/a where Cleanview has no usable state page figure (District of Columbia and Delaware). Cleanview's own state pages sometimes show a headline total that differs from operating plus planned. This site uses operating plus planned and treats the headline as a rounding or definition difference.</p>
+
+<h2 id="illinois-close">Illinois close up</h2>
+<p class="lede">Eighteen projects from Cleanview's lists of the largest operating and planned sites, plus five more from the playbook and internal reporting. It is a sample of the biggest sites and not a full inventory.</p>
+<div class="ctl" id="ilfilter" role="group" aria-label="Filter Illinois projects">
+<button class="chip" data-v="all" aria-pressed="true">All</button><button class="chip" data-v="op" aria-pressed="false">Operating</button><button class="chip" data-v="pl" aria-pressed="false">Planned</button><button class="chip" data-v="pj" aria-pressed="false">ComEd and PJM area</button><button class="chip" data-v="mi" aria-pressed="false">Ameren Illinois and MISO area</button></div>
+<div class="mapwrap two">
+<div class="mapbox" style="max-width:520px"><div id="ilmap"></div><div class="legend"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--blue)"></span>operating<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--gold);margin-left:10px"></span>planned</div></div>
+<aside class="panel" id="ilpanel" aria-live="polite"></aside></div>
+<h3>All projects on the map</h3>
+<div class="tw"><table class="sortable" id="iltable"><thead><tr><th>Project</th><th>Developer</th><th>Place</th><th class="n">MW</th><th>Status</th><th>Grid</th></tr></thead><tbody></tbody></table></div>
+<p class="src">Dots sit at the city, or at the county center when the city is not known. Dot area follows megawatts. Status wording follows each source. Cleanview labels both under construction and proposed projects as planned. Dot positions are approximate.</p>
+</div></main>
+<footer class="foot"><div class="wrap"><p>Data Center Desk. A working reference on data centers, power, and the Illinois legislative process. Last updated October 8, 2026. Numbers carry their source and date. Bill status and positions move fast, so check the official record before you rely on either. <a href="archive/index.html">Archive of older pages</a>. <a href="reference.html#sources">Sources</a>.</p></div></footer>
+<script src="assets/app.js"></script><script src="assets/geo.js"></script><script src="assets/data.js"></script><script src="assets/map.js"></script></body></html>
