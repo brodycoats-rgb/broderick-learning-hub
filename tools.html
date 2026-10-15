@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools | Illinois energy, Oct 13 and 14</title>
+<meta name="description" content="Eight calculators and models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem("blh-theme");if(t){document.documentElement.setAttribute("data-theme",JSON.parse(t))}}catch(e){}</script>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../index.html">Broderick Learning Hub</a><span class="sepv" aria-hidden="true"></span><a class="site" href="index.html">Illinois energy, Oct 13 and 14</a><button class="btn" id="themeBtn" type="button" aria-label="Switch between light and dark mode">Dark mode</button></div><nav class="nav" aria-label="Site"><a href="index.html">Start</a><a href="big-picture.html">Big picture</a><a href="index.html#subjects">Subjects</a><a href="issues.html">All issues</a><a href="tools.html" aria-current="page">Tools</a><a href="dates.html">Dates</a><a href="glossary.html">Glossary</a><a href="quiz.html">Quiz</a><a href="verify.html">Check before using</a></nav></header>
+<main class="page" id="top">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Learning Hub</a><span aria-hidden="true">/</span><span>Tools</span></nav>
+<header class="head"><h1>Tools</h1><p class="lede">Eight interactive models. Each one teaches an idea from the meetings. The numbers are teaching examples and not findings.</p></header><div class="chips2"><a href="#gapTool">Reliability gap</a><a href="#capTool">Price cap</a><a href="#billTool">Bill anatomy</a><a href="#raceTool">Race board</a><a href="#ownerTool">Bill lead sheet</a><a href="#preTool">Preemption</a><a href="#pippTool">PIPP calculator</a><a href="#ordTool">Order of credits</a></div><section class="sec" id="gapTool-s"><h2>Reliability gap</h2><p class="sub">Why installed megawatts and dependable megawatts differ. Belongs with <a href="topic-reliability.html">Reliability and retirements</a>.</p><div class="tool" id="gapTool">
+<span class="tl">Try it</span>
+<h4>Installed capacity is not dependable capacity</h4>
+<p>Move the sliders to see why counting megawatts is not the same as counting reliability. The starting percentages are placeholders to show the idea. Real accreditation values come from MISO or PJM.</p>
+<div class="ctrl"><label for="gAt">Generation set to retire (installed MW)</label><input id="gAt" max="6000" min="0" step="100" type="range" value="3000"/><output id="gAtO"></output></div>
+<div class="ctrl"><label for="gAc">How much of it counts as dependable</label><input id="gAc" max="100" min="40" step="5" type="range" value="90"/><output id="gAcO"></output></div>
+<div class="ctrl"><label for="gRep">Replacement built in time (installed MW)</label><input id="gRep" max="6000" min="0" step="100" type="range" value="3000"/><output id="gRepO"></output></div>
+<div class="ctrl"><label for="gRc">How much of the replacement counts as dependable</label><input id="gRc" max="100" min="5" step="5" type="range" value="35"/><output id="gRcO"></output></div>
+<div class="readout">
+<div class="stat"><div class="n" id="rInst">0</div><div class="l">Installed MW gap</div></div>
+<div class="stat"><div class="n i" id="rLost">0</div><div class="l">Dependable MW lost</div></div>
+<div class="stat"><div class="n a" id="rGot">0</div><div class="l">Dependable MW replaced</div></div>
+<div class="stat"><div class="n r" id="rGap">0</div><div class="l">Dependable MW gap</div></div>
+</div>
+<div style="margin-top:12px">
+<small>Dependable capacity lost</small><div aria-hidden="true" class="bar"><i id="bLost" style="background:var(--indigo)"></i></div>
+<small>Dependable capacity replaced</small><div aria-hidden="true" class="bar"><i id="bGot" style="background:var(--amber)"></i></div>
+</div>
+<p class="cap" id="gapMsg"></p>
+</div></section><section class="sec" id="capTool-s"><h2>Price cap</h2><p class="sub">What a cap does and does not do. Belongs with <a href="topic-markets.html">PJM, MISO, affordability</a>.</p><div class="tool" id="capTool">
+<span class="tl">Try it</span>
+<h4>What a price cap does and does not do</h4>
+<p>This is a stylized model. The index numbers are not dollars. Tighter supply pushes the auction price up. The cap limits what customers pay, and it also limits the price signal that encourages new building.</p>
+<div class="ctrl"><label for="cD">Demand growth</label><input id="cD" max="30" min="0" step="1" type="range" value="10"/><output id="cDO"></output></div>
+<div class="ctrl"><label for="cS">New supply added</label><input id="cS" max="30" min="0" step="1" type="range" value="3"/><output id="cSO"></output></div>
+<div class="ctrl"><label for="cR">Plants retired</label><input id="cR" max="20" min="0" step="1" type="range" value="4"/><output id="cRO"></output></div>
+<div class="ctrl"><label for="cC">Price cap</label><input id="cC" max="140" min="20" step="5" type="range" value="45"/><output id="cCO"></output></div>
+<div class="readout">
+<div class="stat"><div class="n a" id="cU">0</div><div class="l">Price index with no cap</div></div>
+<div class="stat"><div class="n" id="cP">0</div><div class="l">Price index paid with the cap</div></div>
+<div class="stat"><div class="n i" id="cSave">0</div><div class="l">Index points customers are spared</div></div>
+<div class="stat"><div class="n r" id="cSig">0</div><div class="l">Percent of the build signal kept</div></div>
+</div>
+<div style="margin-top:12px">
+<small>Price index with no cap</small><div aria-hidden="true" class="bar"><i id="cbU" style="background:var(--amber)"></i></div>
+<small>Price index paid with the cap</small><div aria-hidden="true" class="bar"><i id="cbP" style="background:var(--teal)"></i></div>
+</div>
+<p class="cap" id="capMsg"></p>
+</div></section><section class="sec" id="billTool-s"><h2>Bill anatomy</h2><p class="sub">What sits inside a bill. Belongs with <a href="topic-markets.html">PJM, MISO, affordability</a>.</p><div class="tool" id="billTool">
+<span class="tl">Try it</span>
+<h4>Anatomy of a bill</h4>
+<p>The meeting said utilities should not treat every increase as having one cause. Pick a piece to see what it covers.</p>
+<div aria-label="Bill components" class="seg chips" id="billSeg" role="group"></div>
+<div aria-live="polite" class="detail" id="billOut"></div>
+<p class="cap"><span class="tag bg">Background</span> The list of pieces comes from the meeting. The plain explanations are mine.</p>
+</div></section><section class="sec" id="raceTool-s"><h2>Race board</h2><p class="sub">The races discussed on October 14. Belongs with <a href="topic-elections.html">Elections</a>.</p><div class="tool" id="raceTool">
+<span class="tl">Try it</span>
+<h4>Race board, as the meeting saw it</h4>
+<p>Pick a chamber, then select a race to read the notes. Lanes show the meeting's assessment, not a validated forecast.</p>
+<div aria-label="Chamber filter" class="seg" id="raceSeg" role="group">
+<button aria-pressed="true" data-f="all" type="button">All races</button>
+<button aria-pressed="false" data-f="Senate" type="button">Senate</button>
+<button aria-pressed="false" data-f="House" type="button">House</button>
+</div>
+<div class="board" id="raceBoard" style="margin-top:12px"></div>
+<div aria-live="polite" class="detail" id="raceDetail">Select a race to see the notes.</div>
+</div></section><section class="sec" id="ownerTool-s"><h2>Bill lead sheet</h2><p class="sub">Who leads what, saved in your browser. Belongs with <a href="topic-strategy.html">Legislative strategy</a>.</p><div class="tool" id="ownerTool">
+<span class="tl">Try it</span>
+<h4>Issue owner sheet</h4>
+<p>The meeting asked for one clear lead on every issue. Only Brad is named in the notes, for Next Generation Highways. Fill in the others yourself. Entries stay in this browser only.</p>
+<div class="tscroll"><table id="ownerTable">
+<thead><tr><th>Issue</th><th>Lead</th><th>Next step or note</th></tr></thead>
+<tbody></tbody></table></div>
+</div></section><section class="sec" id="preTool-s"><h2>Preemption</h2><p class="sub">One set of state rules or county by county rules. Belongs with <a href="topic-renewables.html">Solar and siting</a>.</p><div class="tool" id="preTool">
+<span class="tl">Try it</span>
+<h4>What state preemption changes</h4>
+<p>Preemption means state law overrides certain local rules. Flip between the two worlds. The county rules shown are made up to show the idea.</p>
+<div aria-label="Siting world" class="seg" id="preSeg" role="group">
+<button aria-pressed="true" data-w="state" type="button">Statewide standard holds</button>
+<button aria-pressed="false" data-w="county" type="button">Courts limit the state</button>
+</div>
+<div id="preGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px"></div>
+<p class="cap" id="preMsg"></p>
+</div></section><section class="sec" id="pippTool-s"><h2>PIPP calculator</h2><p class="sub">A share of income payment example. Belongs with <a href="topic-assistance.html">LIHEAP and PIPP</a>.</p><div class="tool" id="pippTool">
+<span class="tl">Try it</span>
+<h4>PIPP payment calculator</h4>
+<p>Illustrative arithmetic only. Actual eligibility, credits, arrears treatment, and payments depend on adopted rules and filed tariffs.</p>
+<div class="ctrl"><label for="pI">Household income per month</label><input id="pI" max="5000" min="500" step="50" type="range" value="2000"/><output id="pIO"></output></div>
+<div class="ctrl" style="grid-template-columns:minmax(150px,230px) 1fr"><label for="pS">Services the household has</label>
+<select id="pS"><option value="both">Electric and gas</option><option value="e">Electric only</option><option value="g">Gas only</option></select></div>
+<div class="ctrl"><label for="pE">Electric share of income</label><input id="pE" max="8" min="1" step="0.5" type="range" value="3"/><output id="pEO"></output></div>
+<div class="ctrl"><label for="pG">Gas share of income</label><input id="pG" max="8" min="1" step="0.5" type="range" value="3"/><output id="pGO"></output></div>
+<div class="readout">
+<div class="stat"><div class="n" id="pEl">0</div><div class="l">Electric payment per month</div></div>
+<div class="stat"><div class="n i" id="pGa">0</div><div class="l">Gas payment per month</div></div>
+<div class="stat"><div class="n a" id="pT">0</div><div class="l">Total per month</div></div>
+<div class="stat"><div class="n r" id="pY">0</div><div class="l">Total per year</div></div>
+</div>
+<p class="cap" id="pMsg"></p>
+</div></section><section class="sec" id="ordTool-s"><h2>Order of credits</h2><p class="sub">Why the order of crediting LIHEAP matters. Belongs with <a href="topic-assistance.html">LIHEAP and PIPP</a>.</p><div class="tool" id="ordTool">
+<span class="tl">Try it</span>
+<h4>Follow one grant, why the order matters</h4>
+<p>The meeting said participants worried some methods would leave federal money unused. The notes do not give the formula, so this model uses simple assumptions I made up to show the idea. The household payment stays at 6 percent of income either way, so you can see only who else pays.</p>
+<div class="ctrl"><label for="oI">Household income per month</label><input id="oI" max="4000" min="800" step="50" type="range" value="2000"/><output id="oIO"></output></div>
+<div class="ctrl"><label for="oB">Combined electric and gas bill per year</label><input id="oB" max="6000" min="1200" step="100" type="range" value="2400"/><output id="oBO"></output></div>
+<div class="ctrl"><label for="oG">LIHEAP grant for the year</label><input id="oG" max="1500" min="0" step="50" type="range" value="600"/><output id="oGO"></output></div>
+<div class="two" style="margin-top:12px">
+<div><h5 style="margin:0 0 4px">Percentage plan first</h5><div aria-hidden="true" class="stk" id="oA"></div><div class="cap" id="oAt"></div></div>
+<div><h5 style="margin:0 0 4px">LIHEAP first</h5><div aria-hidden="true" class="stk" id="oB2"></div><div class="cap" id="oBt"></div></div>
+</div>
+<div class="key"><span><i class="k-cust"></i>Household pays</span><span><i class="k-fed"></i>Federal grant used</span><span><i class="k-oth"></i>Other funding covers</span></div>
+<p class="cap" id="oMsg"></p>
+</div></section>
+<footer class="site-foot"><p>Built October 14, 2026 from the October 13 and October 14 meeting summaries. Election predictions, internal legislative views, expected appointments and unconfirmed legal matters are meeting observations. The source notes say several names and figures look mistranscribed, and that suggested follow ups are not assigned tasks. Background items, my readings and the calculators are teaching aids I added, not findings from the meetings.</p><p>Personal and informal talk from both days is counted but not detailed. This site holds internal strategy, so keep it private. <a href="#top">Back to the top</a> or <a href="../index.html">return to the Learning Hub</a>.</p></footer>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>

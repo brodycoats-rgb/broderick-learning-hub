@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PJM, MISO, affordability | Illinois energy, Oct 13 and 14</title>
+<meta name="description" content="Electricity prices now worry both parties. The two grid operators have different problems, and a fix for one may not work in the other.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem("blh-theme");if(t){document.documentElement.setAttribute("data-theme",JSON.parse(t))}}catch(e){}</script>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../index.html">Broderick Learning Hub</a><span class="sepv" aria-hidden="true"></span><a class="site" href="index.html">Illinois energy, Oct 13 and 14</a><button class="btn" id="themeBtn" type="button" aria-label="Switch between light and dark mode">Dark mode</button></div><nav class="nav" aria-label="Site"><a href="index.html">Start</a><a href="big-picture.html">Big picture</a><a href="index.html#subjects">Subjects</a><a href="issues.html">All issues</a><a href="tools.html">Tools</a><a href="dates.html">Dates</a><a href="glossary.html">Glossary</a><a href="quiz.html">Quiz</a><a href="verify.html">Check before using</a></nav></header>
+<main class="page" id="top">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Learning Hub</a><span aria-hidden="true">/</span><a href="index.html#subjects">Subjects</a><span aria-hidden="true">/</span><span>PJM, MISO, affordability</span></nav>
+<header class="head"><div class="tags"><span class="tag o14">Oct 14</span><span data-subject-prog="14A-17"></span></div><h1>PJM, MISO, affordability</h1><p class="lede">Electricity prices now worry both parties. The two grid operators have different problems, and a fix for one may not work in the other.</p></header><div class="flow"><section class="sec" id="days"><h2>The two days in a line each</h2><div class="dayline"><span class="tag o13">Oct 13</span><p>PJM and MISO face different problems.</p></div><div class="dayline"><span class="tag o14">Oct 14</span><p>Price pressure on PJM, the Shapiro cap, commission turnover and public anger about bills.</p></div></section>
+<section class="sec" id="issues"><h2>Issues in this subject</h2><p class="sub">Each one has its own page with what was said, why it matters, a plain script, follow ups and open questions.</p><h3>October 14, 1 issue</h3><div class="icards"><a class="icard" href="issue-14A-17.html" data-iid="14A-17"><span class="ic-top"><span class="tag o14">Oct 14</span><span>9:05 AM meeting, topic 17 of 21</span></span><span class="ic-t">PJM, MISO, and affordability</span><span class="ic-m">Both parties pressure PJM and Governor Shapiro secured price caps. Commission seats and committee chair talk are unconfirmed.</span><span class="ic-c"><span class="st st-watch">Watch</span></span></a></div></section>
+<section class="sec" id="story"><h2>The story, pictures and models</h2><p class="sub">The two days in one flow, with October 13 first inside each part.</p><div class="said"><span class="tag o13">Oct 13</span><div>
+<p><strong>PJM and MISO face different problems.</strong> PJM leans on competitive generation and is worried about capacity costs. MISO has more regulated utilities and is worried about local reliability as thermal plants retire. A fix written for one market may not work in the other. The comparison table is in the reliability section above.</p></div></div>
+<div class="said"><span class="tag o14">Oct 14</span><div>
+<p><strong>High prices worry both parties.</strong> Republican officials may stress more generation and regulatory changes. Democratic officials may stress affordability steps, clean energy, and market reform. These are broad tendencies, not uniform positions. Both sides care about what customers pay.</p></div></div>
+<div class="said"><span class="tag o14">Oct 14</span><div>
+<p><strong>PJM runs a capacity market.</strong> Resources are paid to commit to being available, and those costs flow into supply charges. Data center demand, slow new generation, and retirements have pushed on it.</p></div></div>
+<div class="said"><span class="tag o14">Oct 14</span><div>
+<p><strong>Governor Shapiro negotiated limits on certain PJM auction prices.</strong> A cap holds down near term costs but can weaken the signal to build. Pennsylvania described its agreement as protecting consumers from higher auction costs. Participants wondered whether Illinois could apply similar pressure.</p></div></div>
+<div class="said"><span class="tag o14">Oct 14</span><div>
+<p><strong>States do not control every part of wholesale pricing.</strong> Key market rules generally sit with FERC. A PJM focused bill may not do the same thing in MISO.</p></div></div>
+<div class="said"><span class="tag o14">Oct 14</span><div>
+<p><strong>Customer frustration is growing.</strong> A public event with Rep. Ann Williams and clean energy advocates was cited, where a constituent criticized large corporations. The exchange was not verified. Participants also noted frustration among executive branch officials over how utilities respond. The advice was to explain which parts of a bill come from which cause.</p></div></div>
+<div class="tool" id="capTool">
+<span class="tl">Try it</span>
+<h4>What a price cap does and does not do</h4>
+<p>This is a stylized model. The index numbers are not dollars. Tighter supply pushes the auction price up. The cap limits what customers pay, and it also limits the price signal that encourages new building.</p>
+<div class="ctrl"><label for="cD">Demand growth</label><input id="cD" max="30" min="0" step="1" type="range" value="10"/><output id="cDO"></output></div>
+<div class="ctrl"><label for="cS">New supply added</label><input id="cS" max="30" min="0" step="1" type="range" value="3"/><output id="cSO"></output></div>
+<div class="ctrl"><label for="cR">Plants retired</label><input id="cR" max="20" min="0" step="1" type="range" value="4"/><output id="cRO"></output></div>
+<div class="ctrl"><label for="cC">Price cap</label><input id="cC" max="140" min="20" step="5" type="range" value="45"/><output id="cCO"></output></div>
+<div class="readout">
+<div class="stat"><div class="n a" id="cU">0</div><div class="l">Price index with no cap</div></div>
+<div class="stat"><div class="n" id="cP">0</div><div class="l">Price index paid with the cap</div></div>
+<div class="stat"><div class="n i" id="cSave">0</div><div class="l">Index points customers are spared</div></div>
+<div class="stat"><div class="n r" id="cSig">0</div><div class="l">Percent of the build signal kept</div></div>
+</div>
+<div style="margin-top:12px">
+<small>Price index with no cap</small><div aria-hidden="true" class="bar"><i id="cbU" style="background:var(--amber)"></i></div>
+<small>Price index paid with the cap</small><div aria-hidden="true" class="bar"><i id="cbP" style="background:var(--teal)"></i></div>
+</div>
+<p class="cap" id="capMsg"></p>
+</div>
+<div class="tscroll"><table>
+<caption class="cap" style="text-align:left;margin:0 0 6px"><span class="tag o14">Oct 14</span> PJM and MISO side by side</caption>
+<thead><tr><th>Issue</th><th>PJM and ComEd</th><th>MISO and Ameren Illinois</th></tr></thead>
+<tbody>
+<tr><td>Capacity buying</td><td>Forward capacity auctions</td><td>Resource adequacy rules and seasonal mechanisms</td></tr>
+<tr><td>Recent concern</td><td>High auction prices and big new loads</td><td>Supply adequacy, accreditation, retirements</td></tr>
+<tr><td>State policy focus</td><td>Cost protection, capacity investment, large load rules</td><td>Reliability, replacement generation, planning</td></tr>
+<tr><td>Main challenge</td><td>Balance prices against investment incentives</td><td>Enough dependable resources through the transition</td></tr>
+</tbody></table></div>
+<figure class="viz">
+<h4>Where the two parties overlap</h4>
+<div class="three">
+<div class="panel" style="border-top:4px solid var(--red)"><h5>Republican officials may stress</h5>More generation and changes to regulatory requirements.</div>
+<div class="panel" style="border-top:4px solid var(--ink)"><h5>Both sides share</h5>Concern about what customers pay for power.</div>
+<div class="panel" style="border-top:4px solid var(--indigo)"><h5>Democratic officials may stress</h5>Affordability steps, clean energy, and market reform.</div>
+</div>
+<figcaption>Broad tendencies from the meeting, not the position of every official.</figcaption>
+</figure>
+<div class="tool" id="billTool">
+<span class="tl">Try it</span>
+<h4>Anatomy of a bill</h4>
+<p>The meeting said utilities should not treat every increase as having one cause. Pick a piece to see what it covers.</p>
+<div aria-label="Bill components" class="seg chips" id="billSeg" role="group"></div>
+<div aria-live="polite" class="detail" id="billOut"></div>
+<p class="cap"><span class="tag bg">Background</span> The list of pieces comes from the meeting. The plain explanations are mine.</p>
+</div></section>
+<section class="sec" id="script"><h2>Say it in plain words</h2><div class="scriptbox" style="margin-bottom:34px"><div class="body">
+<p data-script="">Electricity prices have become a worry for both parties. On October 13 we heard that PJM and MISO have different problems. PJM is fighting high capacity costs, while MISO, where Ameren Illinois sits, is more worried about having enough dependable plants as old units retire. On October 14 the discussion turned to price caps. Pennsylvania's governor negotiated limits on certain PJM auction prices. A cap helps customers today, but it can also weaken the signal that tells developers to build. Illinois cannot simply copy that, because FERC oversees many of the market rules and a fix for PJM may not work in MISO. Customers are also frustrated, so we should explain bills piece by piece. Distribution, supply, transmission, capacity, and policy programs each tell a different story, and a single explanation will be incomplete.</p>
+<div class="acts"><button class="btn" data-copy="" type="button">Copy script</button><button class="btn" data-speak="" type="button">Read aloud</button></div>
+</div></div></section>
+<section class="sec" id="deeper"><h2>Go deeper</h2><details class="go"><summary>Go deeper, how capacity markets work</summary><div class="body">
+<p class="cap"><span class="tag bg">Background</span></p>
+<h5>Why a capacity market exists</h5>
+<p>Grid operators need enough resources lined up years ahead. A capacity market pays resources for being available, so owners keep plants running and developers build new ones.</p>
+<h5>Why price caps are a tradeoff</h5>
+<p>High prices raise bills but also pay for new supply. A cap protects bills in the short run and can slow new building if developers expect lower revenue. The simulator above shows that tension in a simple way.</p>
+<h5>Who regulates what</h5>
+<p>FERC oversees wholesale market rules. The Illinois Commerce Commission oversees retail utility rates and plans. State legislators can pass laws, but they cannot rewrite wholesale rules alone.</p>
+<h5>Questions to ask</h5>
+<ul class="clean"><li>Which part of a customer's bill is moving, and why?</li><li>Would this proposal work the same way in PJM and MISO?</li><li>What happens to new building if prices are capped?</li></ul>
+</div></details></section>
+<section class="sec" id="check"><h2>Check before using</h2><div class="flag"><b>Check before using</b><ul>
+<li>The Ann Williams event was not verified.</li>
+<li>Which Illinois levers actually exist to copy a price cap approach.</li></ul></div></section></div><nav class="pn" aria-label="Previous and next subject"><a href="topic-plans.html"><small>Previous subject</small><strong>Plans and regulation</strong></a><a class="nx" href="topic-datacenters.html"><small>Next subject</small><strong>Data centers</strong></a></nav>
+<footer class="site-foot"><p>Built October 14, 2026 from the October 13 and October 14 meeting summaries. Election predictions, internal legislative views, expected appointments and unconfirmed legal matters are meeting observations. The source notes say several names and figures look mistranscribed, and that suggested follow ups are not assigned tasks. Background items, my readings and the calculators are teaching aids I added, not findings from the meetings.</p><p>Personal and informal talk from both days is counted but not detailed. This site holds internal strategy, so keep it private. <a href="#top">Back to the top</a> or <a href="../index.html">return to the Learning Hub</a>.</p></footer>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>
