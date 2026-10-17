@@ -214,7 +214,12 @@ body{overflow-x:hidden;overflow-x:clip}
 .vid-on .vid{opacity:1}
 .vid-on .sky *,.vid-on .scene{visibility:hidden}
 @media (prefers-reduced-motion:no-preference){.vid{transition:opacity 1s}}
-.vid-dark video{object-position:center 80%}
+
+
+/* night: lighter tint so the footage shows, still dark enough behind the headline */
+html[data-theme="dark"] .vid::after{background:linear-gradient(to bottom,rgba(var(--scrim),.82) 0,rgba(var(--scrim),.6) 45%,rgba(var(--scrim),.12) 100%)}
+@media (prefers-color-scheme:dark){html:not([data-theme="light"]) .vid::after{background:linear-gradient(to bottom,rgba(var(--scrim),.82) 0,rgba(var(--scrim),.6) 45%,rgba(var(--scrim),.12) 100%)}}
+.vid-dark video{object-position:center 60%}
 
 </style>
 </head>
@@ -414,9 +419,14 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden&&Dat
 
 /* ---------- background video: clips rotate, with a cross-fade; day or night set follows the theme ---------- */
 var CLIPS={
- day:[{s:'hero-day.mp4',p:'hero-day.jpg',r:1},{s:'hero-lakefront.mp4',r:1},{s:'hero-timelapse.mp4',r:1}],
- night:[{s:'hero-night.mp4',p:'hero-night.jpg',r:3},{s:'hero-timelapse.mp4',r:1,end:7}]
+ day:[{s:'hero-day.mp4',p:'hero-day.jpg',r:1},{s:'hero-river.mp4',r:1},{s:'hero-lakefront.mp4',r:1},{s:'hero-timelapse.mp4',r:1}],
+ night:[{s:'hero-sunset.mp4',p:'hero-sunset.jpg',r:1},{s:'hero-night.mp4',p:'hero-night.jpg',r:2}]
 };
+/* Christmas clip: dark mode only, Nov 24 to Jan 6. Add ?xmas to the address to preview it any time. */
+(function(){
+ var t=new Date(),m=t.getMonth()+1,dd=t.getDate(),force=/[?&]xmas\b/.test(location.search);
+ if(force||m===12||(m===11&&dd>=24)||(m===1&&dd<=6))CLIPS.night.unshift({s:'hero-xmas.mp4',p:'hero-xmas.jpg',r:2});
+})();
 var vids=[document.getElementById('bgv'),document.getElementById('bgv2')],front=0,mode='',idx=0,plays=0,adv=false;
 function playEl(v){try{var p=v.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
 function startClip(first){
