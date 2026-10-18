@@ -252,6 +252,7 @@ var STAGES=[
  {k:"Stalled by deadline rule",c:"s-dead",l:"Re-referred after deadline"},
  {k:"Awaiting committee assignment",c:"s-none",l:"Not yet in committee"}];
 var SMAP={}; STAGES.forEach(function(s){SMAP[s.k]=s});
+function sm(k){return SMAP[k]||{k:k,c:"s-floor",l:k}}
 var STATS={"220 ILCS 5":"Public Utilities Act","20 ILCS 3855":"Illinois Power Agency Act","415 ILCS 5":"Environmental Protection Act","55 ILCS 5":"Counties Code","30 ILCS 105":"State Finance Act","20 ILCS 605":"Dept. of Commerce and Economic Opportunity Law","65 ILCS 5":"Illinois Municipal Code","30 ILCS 500":"Illinois Procurement Code","815 ILCS 505":"Consumer Fraud and Deceptive Business Practices Act","305 ILCS 20":"Energy Assistance Act","35 ILCS 5":"Illinois Income Tax Act","20 ILCS 3501":"Illinois Finance Authority Act","35 ILCS 200":"Property Tax Code","20 ILCS 730":"Energy Transition Act","220 ILCS 80":"Underground Utility Facilities Damage Prevention Act","625 ILCS 5":"Illinois Vehicle Code"};
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function pct(n,t){return t?Math.round(n/t*100):0}
@@ -260,7 +261,7 @@ function fmt(d){var p=d.split("-");return MON[+p[1]-1]+" "+(+p[2])+", "+p[0]}
 function person(n){return n.replace(/^Representative /,"Rep. ").replace(/^Senator /,"Sen. ")}
 function slug(c){return c.slug}
 function catBySlug(s){return D.cats.filter(function(c){return c.slug===s})[0]}
-function stageChip(b){var s=SMAP[b.stage];return '<span class="pill"><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}
+function stageChip(b){var s=sm(b.stage);return '<span class="pill"><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}
 function billBtn(id,txt){return '<button class="billref" data-open="'+esc(id)+'">'+esc(txt||id)+'</button>'}
 function setHash(h){if(location.hash!==h)history.pushState(null,"",h)}
 
@@ -371,7 +372,7 @@ function filtered(){
     if(k==="id"){x=a.type+("00000"+a.num).slice(-5);y=b.type+("00000"+b.num).slice(-5)}
     else if(k==="title"){x=a.title;y=b.title}
     else if(k==="sponsor"){x=a.sponsor;y=b.sponsor}
-    else if(k==="stage"){x=STAGES.indexOf(SMAP[a.stage]);y=STAGES.indexOf(SMAP[b.stage])}
+    else if(k==="stage"){x=STAGES.indexOf(sm(a.stage));y=STAGES.indexOf(sm(b.stage))}
     else if(k==="date"){x=a.lastDate;y=b.lastDate}
     else if(k==="cos"){x=a.nCos;y=b.nCos}
     return (x<y?-1:x>y?1:0)*d});
@@ -408,7 +409,7 @@ function renderTable2(){
 function learn(sub){
   var cs=counts(function(b){return b.stage});
   var h='<div class="card"><div class="card-head"><div><h2>How a bill becomes law in Illinois</h2><p class="sub">Select a step. Counts show where the tracked bills sit today.</p></div></div><div class="stepper" id="stepper">'+
-   D.process.map(function(p,i){var c=p.stage?(counts(function(b){return SMAP[b.stage].l},B)[p.stage]||0):null;
+   D.process.map(function(p,i){var c=p.stage?(counts(function(b){return sm(b.stage).l},B)[p.stage]||0):null;
     var st=null;STAGES.forEach(function(s){if(s.l===p.stage||(p.stage==="Referred to Rules or Assignments"))st=st});
     return '<button class="stp" data-step="'+i+'" aria-expanded="false"><span class="no">'+(i+1)+'</span><span><b>'+esc(p.t)+'</b><span class="d">'+esc(p.d)+'</span></span><span class="c">'+(c!=null?c+' bills':'')+'</span></button>'}).join("")+
    '</div><div class="note" style="margin-top:14px"><b>Where these bills go next.</b> The 104th General Assembly ends in January 2027. Bills that have not passed both houses by then expire. Remaining chances are the fall veto session and the lame duck days between the election and the new General Assembly.</div></div>';
