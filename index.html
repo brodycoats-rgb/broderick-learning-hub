@@ -246,7 +246,7 @@ html[data-theme="dark"] .vid::after{background:linear-gradient(to bottom,rgba(va
   <button class="motion" id="motion" type="button">Pause motion</button>
   <h1 class="sr">Broderick Learning Hub</h1>
   <p class="lede">Guides, dashboards and notes on Illinois energy, from the ICC docket to the General Assembly floor.</p>
-  <p class="resume" id="resume" hidden><a href="#"></a></p>
+  
   <div class="tabs" role="tablist" aria-label="Choose a group of pages"><a class="tab" role="tab" id="tab-learn" href="#learn" aria-controls="learn" aria-selected="true" tabindex="0">Learn it.</a><a class="tab" role="tab" id="tab-rehearse" href="#rehearse" aria-controls="rehearse" aria-selected="false" tabindex="-1">Rehearse it.</a><a class="tab" role="tab" id="tab-use" href="#use" aria-controls="use" aria-selected="false" tabindex="-1">Use it.</a></div>
  </section>
  <div class="find" id="find">
@@ -309,18 +309,6 @@ q.addEventListener('input',run);
 document.addEventListener('keydown',function(e){
  if(e.key==='/'&&!/input|textarea|select/i.test((document.activeElement||{}).tagName||'')&&!e.metaKey&&!e.ctrlKey){e.preventDefault();q.focus()}
 });
-
-/* continue where you left off */
-var KEY='hub-last',res=document.getElementById('resume'),rl=res.querySelector('a');
-document.addEventListener('click',function(e){
- var a=e.target.closest&&e.target.closest('.feed a');if(!a)return;
- try{localStorage.setItem(KEY,a.getAttribute('href'))}catch(x){}
-});
-try{
- var last=localStorage.getItem(KEY);
- if(last){var m=[].slice.call(document.querySelectorAll('.feed a')).filter(function(a){return a.getAttribute('href')===last})[0];
-  if(m){rl.setAttribute('href',last);rl.textContent='Continue with '+m.textContent;res.hidden=false}}
-}catch(e){}
 
 /* soft glow that follows the pointer (skipped for reduced motion) */
 try{
