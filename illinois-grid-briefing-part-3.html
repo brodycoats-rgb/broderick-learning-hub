@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Part 3, Markets, plans and big customers</title>
+<style>
+:root{--bg:#fbfaf7;--text:#1d2330;--muted:#5b6475;--card:#ffffff;--border:#e3ded3;--accent:#c9560a;--accent-soft:#fdebdc;--teal:#0f766e;--teal-soft:#dff3f0;--warn:#9a6700;--warn-soft:#fff4d6;--bad:#b42318;--bad-soft:#fde8e6;--good:#1a7f37;--good-soft:#e1f5e6;--shadow:0 1px 2px rgba(20,25,40,.06),0 4px 14px rgba(20,25,40,.05);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}}
+:root[data-theme="dark"]{--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;padding-bottom:70px}
+a{color:var(--teal)}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.topbar .row{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+.prog{flex:1;min-width:120px;height:10px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .4s}
+.progtxt{font-size:13px;color:var(--muted);white-space:nowrap}
+nav.parts{max-width:1100px;margin:0 auto;padding:0 16px 6px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.parts a{flex:0 0 auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:4px 10px;background:var(--bg)}
+nav.parts a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.chips{max-width:1100px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{flex:0 0 auto;font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:99px;padding:3px 10px;background:var(--bg)}
+nav.chips a.done{background:var(--good-soft);border-color:var(--good)}
+nav.chips a:hover,nav.parts a:hover{border-color:var(--accent)}
+.btn{font:inherit;font-size:14px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:10px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.sel{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:700}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+.hero{padding:26px 0 8px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:8px 0}
+.hero p.sub{color:var(--muted);font-size:18px;margin:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.twoway{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.threeway{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.twoway,.threeway{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 10px}
+.pill.o{background:var(--accent-soft);color:var(--accent)}
+.pill.t{background:var(--teal-soft);color:var(--teal)}
+.pill.b{background:var(--bad-soft);color:var(--bad)}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:0}
+h3{font-size:20px;margin:24px 0 6px}
+h4{font-size:17px;margin:16px 0 4px}
+.lesson{border-top:2px solid var(--border);margin-top:56px;padding-top:24px}
+.lesson:first-of-type{margin-top:28px}
+.lesson>header{display:flex;gap:14px;align-items:flex-start}
+.num{flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:22px;display:grid;place-items:center}
+.obj{color:var(--muted);margin:4px 0 0}
+.plain{border-left:6px solid var(--teal);background:var(--teal-soft)}
+.mix{border-left:6px solid var(--warn);background:var(--warn-soft)}
+.verify{border-left:6px solid var(--bad);background:var(--bad-soft)}
+.note{border-left:6px solid var(--accent);background:var(--accent-soft)}
+.card.plain h3,.card.mix h3,.card.verify h3,.card.note h3,.card.deeper h3{margin-bottom:4px;font-size:16px;text-transform:uppercase;letter-spacing:.05em}
+.card.deeper{border-left:6px solid var(--muted)}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+figure{margin:14px 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+svg{max-width:100%;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--text);font:14px -apple-system,Segoe UI,Arial,sans-serif}
+svg .t2{fill:var(--muted);font-size:12px}
+svg .tw{fill:#fff;font-weight:700}
+svg .box{fill:var(--card);stroke:var(--border);stroke-width:2}
+svg .boxo{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+svg .boxt{fill:var(--teal-soft);stroke:var(--teal);stroke-width:2}
+svg .boxb{fill:var(--bad-soft);stroke:var(--bad);stroke-width:2}
+svg .boxg{fill:var(--good-soft);stroke:var(--good);stroke-width:2}
+svg .boxw{fill:var(--warn-soft);stroke:var(--warn);stroke-width:2}
+svg .pole{stroke:var(--muted);stroke-width:6;stroke-linecap:round}
+svg .pole.strong{stroke:var(--teal);stroke-width:10}
+svg .pole.fell{stroke:var(--bad)}
+svg .ground{stroke:var(--border);stroke-width:3}
+svg .arrow{stroke:var(--text);stroke-width:3;fill:none}
+svg .arrowo{stroke:var(--accent);stroke-width:4;fill:none}
+svg .arrowb{stroke:var(--bad);stroke-width:4;fill:none}
+svg .arrowt{stroke:var(--teal);stroke-width:4;fill:none}
+svg .lineb{stroke:var(--bad);stroke-width:5;stroke-dasharray:8 5;fill:none}
+svg .linen{stroke:var(--muted);stroke-width:4;fill:none}
+svg .grid{stroke:var(--border);stroke-width:1}
+svg .curve{fill:none;stroke-width:3}
+svg .cl{stroke:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px;color:var(--accent);line-height:1.15}
+.stat span{font-size:13px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.step{flex:1 1 150px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 12px;position:relative}
+.step b{display:block;color:var(--accent)}
+.step small{color:var(--muted)}
+.flow.arrows .step:not(:last-child)::after{content:"\2192";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--accent);font-weight:800;z-index:2}
+@media(max-width:760px){.flow.arrows .step:not(:last-child)::after{content:"\2193";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto}
+/* model panels */
+.model{background:var(--card);border:2px solid var(--accent);border-radius:18px;margin:26px 0;overflow:hidden}
+.model>.mh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);padding:10px 16px;border-bottom:1px solid var(--border)}
+.model>.mh h3{margin:0;font-size:18px}
+.model>.mb{padding:14px 16px}
+.model>.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+.model>.mx>div{padding:12px 16px;font-size:15px;border-right:1px solid var(--border)}
+.model>.mx>div:last-child{border-right:0}
+.model>.mx b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+.model>.mx>.so{background:var(--teal-soft)}
+.model>.mx>.so b{color:var(--teal)}
+@media(max-width:760px){.model>.mx{grid-template-columns:1fr}.model>.mx>div{border-right:0;border-bottom:1px solid var(--border)}}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 18px;margin-bottom:10px}
+.ctl label{display:block;font-weight:600;font-size:15px;margin:0 0 2px}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl input[type=number],.ctl select,textarea,.search{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.out{margin-top:12px;padding:12px;border-radius:12px;background:var(--accent-soft)}
+.out b{color:var(--accent)}
+.out.bad{background:var(--bad-soft)}.out.bad b{color:var(--bad)}
+.out.good{background:var(--good-soft)}.out.good b{color:var(--good)}
+.bar{height:24px;background:var(--border);border-radius:8px;overflow:hidden;margin:6px 0;position:relative}
+.bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.bar.o>i{background:var(--accent)}
+.bar.r>i{background:var(--bad)}
+.bar>span{position:absolute;left:8px;top:0;line-height:24px;font-size:13px;font-weight:700;color:#fff;mix-blend-mode:normal;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.blocks{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.blocks i{width:28px;height:28px;border-radius:6px;background:var(--teal);opacity:.9}
+.blocks i.part{background:linear-gradient(90deg,var(--teal) var(--p,50%),var(--border) var(--p,50%))}
+.quiz{margin:26px 0}
+.quiz h3{margin-bottom:8px}
+.q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.why{display:none;margin-top:8px;font-size:15px;color:var(--muted)}
+.why.show{display:block}
+.score{font-weight:700;color:var(--teal)}
+.script{background:var(--card);border:2px solid var(--teal);border-radius:16px;padding:16px 18px;margin:24px 0}
+.script h3{margin:0 0 2px;color:var(--teal)}
+.script .len{font-size:13px;color:var(--muted);margin:0 0 8px}
+.script blockquote{margin:8px 0;padding:10px 14px;border-left:5px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0}
+.script .hall{border-left-color:var(--accent);background:var(--accent-soft)}
+.qa{display:grid;gap:6px;margin:10px 0}
+.qa div{padding:8px 12px;border-radius:10px}
+.qa .l{background:var(--bg);border:1px solid var(--border)}
+.qa .a{background:var(--teal-soft)}
+.qa b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;display:block;color:var(--muted)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;min-width:48px}
+.teach label{display:block;margin:4px 0}
+.notes textarea{min-height:90px}
+.markrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+details.find{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 14px;margin:8px 0}
+details.find summary{cursor:pointer;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fc{font:inherit;text-align:left;min-height:130px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer}
+.fc:hover{border-color:var(--accent)}
+.fc.flip{background:var(--teal-soft);border-color:var(--teal)}
+.fc small{display:block;color:var(--muted);margin-bottom:6px}
+.timeline{list-style:none;padding:0;margin:0 0 0 8px;border-left:4px solid var(--accent)}
+.timeline li{position:relative;margin:0 0 16px 0;padding-left:20px}
+.timeline li::before{content:"";position:absolute;left:-12px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:4px solid var(--accent)}
+.timeline b{color:var(--accent)}
+.checks label{display:block;padding:8px 0;border-bottom:1px solid var(--border)}
+.checks input{margin-right:8px;transform:scale(1.2)}
+.lessoncards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lc{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.lc:hover{border-color:var(--accent)}
+.lc b{display:block}
+.lc small{color:var(--muted)}
+.lc.done{background:var(--good-soft);border-color:var(--good)}
+.sorter .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sorter .row span.s{flex:1 1 260px}
+.sorter .res{font-size:14px;font-weight:700;min-width:70px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:40px 0 0;padding-top:18px;border-top:2px solid var(--border)}
+.pager a{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;flex:1 1 240px}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted)}
+.pager a.nx{text-align:right}
+footer{max-width:1000px;margin:0 auto;padding:12px 16px 60px;color:var(--muted);font-size:14px}
+@media print{.topbar,.tools,.markrow,.quiz,.model .ctl,.pager{display:none}body{background:#fff;color:#000}}
+
+</style>
+<script src="theme.js"></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to the content</a>
+<div class="topbar">
+  <div class="row">
+    <a class="brand" href="illinois-grid-briefing.html">Illinois Grid Briefing</a>
+    <div class="prog" role="progressbar" aria-label="Lessons completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progwrap"><i id="progbar"></i></div>
+    <span class="progtxt" id="progtxt">0 of 10 done</span>
+    <a class="progtxt" href="index.html">Hub home</a>
+  </div>
+  <nav class="parts" aria-label="Parts of the guide"><a href="illinois-grid-briefing.html">Home</a><a href="illinois-grid-briefing-part-1.html">1 Wires</a><a href="illinois-grid-briefing-part-2.html">2 Supply</a><a href="illinois-grid-briefing-part-3.html" class="cur" aria-current="page">3 Markets</a><a href="illinois-grid-briefing-part-4.html">4 Decisions</a></nav>
+  <nav class="chips" id="chips" aria-label="On this page"><a href="#s8" data-s="s8">8 Markets and plans</a><a href="#s9" data-s="s9">9 Large loads and bills</a></nav>
+</div>
+<main id="main">
+<section class="hero" id="start">
+  <span class="pill o">Part 3 of 4</span>
+  <h1>Markets, plans and big customers</h1>
+  <p class="sub">Two lessons about who decides and who pays. How Illinois's two regional markets differ, how three similar sounding plans fit together, and how to protect customers from the cost of very large new loads and confusing supplier bills.</p>
+  <div class="card note">
+    <h3>What this part is for</h3>
+    <p>Parts 1 and 2 were about physics and supply. Part 3 is about structure and money. Most legislative conversations get stuck here, because the same words (plan, market, rate) mean different things to different people. Learn which plan answers which question, and who carries which risk, and you can keep a conversation on track.</p>
+  </div>
+</section>
+
+<!-- LESSON 8 -->
+<section class="lesson" id="s8" data-s="s8">
+  <header><div class="num">8</div><div><h2>Markets, plans and who decides</h2><p class="obj">You will be able to explain why Illinois sits in two markets, why Illinois and Missouri differ, the argument for and against price caps, and which of three plans answers which question.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>Illinois is split between two regional grid operators. Missouri's utility builds and owns its generation. Ameren Illinois mostly delivers power that others make. That difference changes who takes the risk, who pays, and who builds. And on top of that, three different plans each answer a different question. Mixing them up is the fastest way to lose a legislator.</p></div>
+
+  <h3>Part A, Two markets and two business models</h3>
+  <div class="model" id="m81">
+    <div class="mh"><span class="pill o">Model 8.1</span><h3>One state, two grid operators</h3></div>
+    <div class="mb">
+      <div class="tools" id="m81tabs"></div>
+      <div id="m81svg" style="margin-top:10px"></div>
+      <div class="out" id="m81out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The state is drawn as two zones, not to scale. Tap MISO or PJM to see which part of Illinois it covers and what it does.</div>
+      <div><b>What it shows</b>The line between the two operators is a market boundary, not a county line you can see. Each side has its own market and capacity rules.</div>
+      <div class="so"><b>So what</b>A statewide Illinois policy lands differently north and south. When someone asks about "the Illinois market," ask which one.</div>
+    </div>
+  </div>
+  <p>A state study is looking at regional market arrangements. The presenter cautioned that moving Ameren Illinois from MISO to PJM would not be a simple change. He said transmission obligations would remain and costs would be very large, and that state law cannot override federal interconnection rules. Those are company views to label as such.</p>
+
+  <div class="model" id="m82">
+    <div class="mh"><span class="pill o">Model 8.2</span><h3>Who builds, who bears the risk</h3></div>
+    <div class="mb">
+      <div class="tools"><button class="btn sel" type="button" id="m82a">Vertically integrated (Missouri)</button><button class="btn" type="button" id="m82b">Restructured retail choice (Ameren Illinois)</button></div>
+      <div id="m82svg" style="margin-top:10px"></div>
+      <div class="out" id="m82out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Follow the arrows. Boxes are who acts. Arrows are where power or money moves. The red label is where the price risk lands.</div>
+      <div><b>What it shows</b>Neither model removes cost or guarantees reliability. They assign decisions and risk differently.</div>
+      <div class="so"><b>So what</b>A utility being a wires company is not a weakness or a strength by itself. It is a different job, with different tools for fixing a supply problem.</div>
+    </div>
+  </div>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Vertically integrated, such as Missouri</th><th>Restructured retail choice, such as Ameren Illinois</th></tr>
+    <tr><td>Who plans and builds generation</td><td>The regulated utility</td><td>Mostly the market and the state procurement process</td></tr>
+    <tr><td>Exposure to wholesale price spikes</td><td>Cushioned through regulated rates</td><td>More direct</td></tr>
+    <tr><td>Cost recovery</td><td>Through rates under regulatory review</td><td>Through market prices and procurements</td></tr>
+  </table></div>
+
+  <h4>The investment timing problem</h4>
+  <p>A power plant takes five to ten years to plan and build. Capacity auctions look one year ahead. That mismatch makes long lived investment hard to justify. The presenter argued that price caps hide the scarcity signal that would tell developers to build. The counterargument is real too. Prices with no ceiling can expose customers to extreme costs without guaranteeing a plant arrives in time. Good design has to protect investment and customers together. Auction figures cited, $332 per MW day and a hypothetical $750 to $777 uncapped, should be tied to the exact auction before use.</p>
+
+  <div class="model" id="m83">
+    <div class="mh"><span class="pill o">Model 8.3</span><h3>The time gap</h3></div>
+    <div class="mb">
+      <div class="ctl"><div><label for="m83y">Years to plan and build a new plant: <span id="m83yv"></span></label><input id="m83y" type="range" min="3" max="12" value="7"></div></div>
+      <div id="m83bars"></div>
+      <div class="out" id="m83out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The orange bar is the time to build. The teal bar is how far ahead a capacity auction looks, one year. The gap between them is the uncertainty a developer carries.</div>
+      <div><b>What it shows</b>A plant has to be committed years before the auction that would pay for it. A one year price signal is a thin basis for that bet.</div>
+      <div class="so"><b>So what</b>This is the root of the price cap debate. Both sides are trying to solve a timing mismatch, and they disagree about who should carry the risk.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m84">
+    <div class="mh"><span class="pill o">Model 8.4</span><h3>The price cap tradeoff</h3></div>
+    <div class="mb">
+      <p>A teaching model. Use the cited $332 per MW day as the starting price and $777 as the hypothetical uncapped price. The purchase is an imaginary 1,000 MW.</p>
+      <div class="ctl"><div><label for="m84c">Price ceiling: <span id="m84cv"></span></label><input id="m84c" type="range" min="332" max="777" step="5" value="332"></div></div>
+      <div><b>Signal to developers (higher means a stronger reason to build)</b><div class="bar"><i id="m84b1"></i><span id="m84t1"></span></div></div>
+      <div><b>Cost to customers for 1,000 MW for a year</b><div class="bar o"><i id="m84b2"></i><span id="m84t2"></span></div></div>
+      <div class="out" id="m84out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Slide the ceiling up. The top bar shows the stronger price signal. The bottom bar shows the matching cost to customers. Both rise together.</div>
+      <div><b>What it shows</b>There is no free lunch. A stronger signal to build costs customers more in the short term, and a lower ceiling protects customers while weakening the signal.</div>
+      <div class="so"><b>So what</b>The honest position is that design has to protect both. Anyone who says caps are all good or all bad is skipping half the argument.</div>
+    </div>
+  </div>
+
+  <h3>Part B, Three plans that get confused</h3>
+  <figure>
+    <div class="threeway">
+      <div class="card"><span class="pill o">IRP</span><h3>What supply is needed</h3><p>Generation, storage, imports, demand and adequacy.</p></div>
+      <div class="card"><span class="pill t">Multi-Year Integrated Grid Plan</span><h3>What network must be built</h3><p>Poles, wires, substations, automation, protection and capacity upgrades for 2028 through 2031.</p></div>
+      <div class="card"><span class="pill o">Multi-Year Rate Plan</span><h3>How it is funded</h3><p>Revenue, tariffs and customer rate effects. Filed the year after the Grid Plan decision.</p></div>
+    </div>
+  </figure>
+
+  <div class="model" id="m85">
+    <div class="mh"><span class="pill o">Model 8.5</span><h3>Which plan answers it?</h3></div>
+    <div class="mb"><p>Tap the plan that answers each question.</p><div class="sorter" id="m85q"></div></div>
+    <div class="mx">
+      <div><b>How to read it</b>Pick a plan for each question. The explanation shows why.</div>
+      <div><b>What it shows</b>The three plans are separate decisions in separate proceedings with separate timelines.</div>
+      <div class="so"><b>So what</b>Approval of a plan is not the same as approval of the rates to pay for it. Keep the three questions apart in every conversation.</div>
+    </div>
+  </div>
+
+  <p>The 2028 to 2031 Grid Plan was described as awaiting a final Commerce Commission decision in December 2026. Labor groups and the Clean Jobs Coalition gave testimony in support. That matters because grid modernization can unite groups that disagree on other energy topics. Reliable wires serve current customers and make room for more renewable energy.</p>
+
+  <div class="flow arrows">
+    <div class="step"><b>1 Grid Plan filed</b><small>Utility proposes network work for 2028 to 2031</small></div>
+    <div class="step"><b>2 Testimony</b><small>Labor, clean jobs groups and others weigh in</small></div>
+    <div class="step"><b>3 Proposed order</b><small>A judge recommends. Not final.</small></div>
+    <div class="step"><b>4 Final order</b><small>The Commission decides. Expected December 2026.</small></div>
+    <div class="step"><b>5 Rate Plan</b><small>Filed the year after, asks how to pay for it</small></div>
+  </div>
+
+  <h4>Evidence beats assertion</h4>
+  <p>The storm hardening dispute is a useful case study. The judge's proposed order did not support all the requested proactive hardening. A proposed order is not a final order. The way to make the case is with measures people can check.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Measure</th><th>What it shows</th></tr>
+    <tr><td>Outage frequency and duration</td><td>Whether customers actually have fewer and shorter outages (SAIFI and SAIDI from Part 1)</td></tr>
+    <tr><td>Storm exposure</td><td>How much of the system sits where storms hit hardest</td></tr>
+    <tr><td>Avoided repair cost</td><td>What a failure would cost compared with planned replacement</td></tr>
+    <tr><td>Restoration time</td><td>How quickly customers get power back</td></tr>
+    <tr><td>Effects on vulnerable and critical customers</td><td>Who is protected, such as hospitals and households that depend on power</td></tr>
+  </table></div>
+
+  <h4>The reliability and affordability trap</h4>
+  <p>One more lesson came from the president's remarks. If you are very reliable, people ask why bills are still high. If you have many outages, they complain less about price. Reliability and affordability pull against each other in the public mind, so you have to talk about both at once.</p>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Bills feel high</th><th>Bills feel fair</th></tr>
+    <tr><th>Service is very reliable</th><td>"Why am I paying so much for something that works?" Customers notice price because nothing else is wrong.</td><td>The goal, and the hardest to keep.</td></tr>
+    <tr><th>Service has frequent outages</th><td>Anger lands on both, and trust falls fast.</td><td>People complain about outages and talk less about price.</td></tr>
+  </table></div>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>A utility being a wires company is not a weakness or a strength by itself. It is a different job.</li><li>Capping prices protects customers short term and may weaken the signal to build. Removing caps does the reverse.</li><li>The Grid Plan is not the IRP. One is wires, the other is supply.</li><li>Approval of a plan is not the same as approval of rates to pay for it.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>The auction figures, and the Missouri build plan, since both 6 GW and 9 GW were mentioned. Reconcile capacity, project types and time horizons. Also the final decision timing. Describe the order as proposed until the Commission rules.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="grid-plan.html">Grid Plan Knowledge Center</a> teaches the plan with flashcards and a 26 question check. The <a href="grid-plan-proposed-order.html">proposed order page</a> covers the judge's recommendation. The <a href="primer-topic-markets.html">Primer markets subject</a> and the <a href="miso-eras-business-acumen-playbook.html">MISO ERAS Playbook</a> go further on markets.</p></div>
+
+  <div class="quiz" data-s="s8"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">Illinois is split between two regional grid operators, and Missouri works differently from us. There, the utility builds the power plants and the cost is spread through regulated rates. In central and southern Illinois, we deliver power that other companies make, and customers feel the wholesale market more directly. Plants take years to build, but the market looks one year ahead. Any fix has to give builders a reason to invest and protect customers from runaway prices at the same time.</blockquote>
+  <p class="len">Plans version, about 45 seconds</p>
+  <blockquote data-sec="45">There are three different plans, and each answers a different question. The resource plan asks what power the state needs. The grid plan asks what wires and equipment we have to build to deliver it. The rate plan asks how that gets paid for. Our grid plan covers 2028 to 2031, and labor and clean jobs groups testified in support of it, because a modern grid serves today's customers and makes room for tomorrow's renewable energy.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">Three plans, three questions. What power do we need, that is the resource plan. What wires do we build, that is the grid plan. How do we pay for it, that is the rate plan. Keep them apart and the conversation gets a lot easier.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>How do we know the spending is justified?</div>
+  <div class="a"><b>You say</b>By comparing the cost of planned replacement with what a failure would cost in outages, emergency repair and safety. We should show measurable results, like fewer and shorter outages.</div></div>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Why can't Illinois just do what Missouri does?</div>
+  <div class="a"><b>You say</b>Missouri's utility builds and owns generation and spreads the cost through regulated rates. Here the market and state procurement do much of that. Neither is risk free. They put the decisions and the risks in different places.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain MISO versus PJM in a sentence</label><label><input type="checkbox"> I can give both sides of price caps</label><label><input type="checkbox"> I can match each plan to its question</label><label><input type="checkbox"> I can explain proposed order versus final order</label><label><input type="checkbox"> I said the scripts out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s8" placeholder="Write it in your own words" aria-label="My notes for lesson 8"></textarea></div>
+</section>
+
+<!-- LESSON 9 -->
+<section class="lesson" id="s9" data-s="s9">
+  <header><div class="num">9</div><div><h2>Data centers, large loads and the one bill problem</h2><p class="obj">You will be able to explain cost causation, the greater of financial security formula, and why a letter of credit is not a payment. You will also be able to read a bill as supply plus delivery, explain purchase of receivables, and describe the reform options and their tradeoffs.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>Two cost fairness questions share this lesson. First, a data center can ask for hundreds of megawatts. Serving it may need expensive lines built years before it opens. If the project is cancelled, someone is left holding the cost. The tariff aims to make sure it is the developer, not everyone else's bills. Second, many customers get their power supply from a third party but still get a bill with Ameren's name on it. If the supply price surprises them, they call Ameren. The question is who should bill for, and carry the risk of, the supplier's charges.</p></div>
+
+  <h3>Part A, Data centers and the large load tariff</h3>
+  <h4>What the proposal does, step by step</h4>
+  <div class="flow arrows">
+    <div class="step"><b>1 Apply</b><small>Size, place, customer, schedule</small></div>
+    <div class="step"><b>2 Readiness review</b><small>Site control, end user, power plan</small></div>
+    <div class="step"><b>3 Study</b><small>What upgrades are needed</small></div>
+    <div class="step"><b>4 Security</b><small>A guarantee tied to the cost</small></div>
+    <div class="step"><b>5 Revenue protection</b><small>Extra charges if revenue falls short</small></div>
+  </div>
+  <ul>
+    <li>The proposal in the suspended docket used a 100 MW large load threshold, with a possible drop to 50 MW if a MISO order in November requires it.</li>
+    <li>Study deposits were proposed at $20,000 for smaller applicants, up from $10,000, and $200,000 for loads of 100 MW or more.</li>
+    <li>Projects would join a tiered queue based on site control, end user identity and energy supply plans. Existing industrial customers keep priority over speculative requests.</li>
+    <li>Financial security would be the greater of two amounts. One is the 20 year revenue requirement of the needed transmission facilities. The other is 80 percent of the expected ten year transmission revenue.</li>
+    <li>Large loads in neighboring cooperative territory would need transmission service agreements so no one can dodge the rules by crossing a boundary.</li>
+    <li>Ameren's direct testimony was expected in December, depending on the MISO order.</li>
+  </ul>
+  <p>Territory matters too. Leaders asked for room to fit Ameren's territory instead of copying a ComEd approach, because the geography, network and economic development goals differ. The message is not anti data center. It is separating serious, funded projects from speculative requests.</p>
+
+  <div class="model" id="m91">
+    <div class="mh"><span class="pill o">Model 9.1</span><h3>The greater of calculator</h3></div>
+    <div class="mb">
+      <p>These starting numbers are made up for practice. They are not any real project.</p>
+      <div class="ctl">
+        <div><label for="m91r">Expected ten year transmission revenue: $<span id="m91rv"></span> million</label><input id="m91r" type="range" min="0" max="800" step="10" value="320"></div>
+        <div><label for="m91q">Twenty year revenue requirement of the needed upgrades: $<span id="m91qv"></span> million</label><input id="m91q" type="range" min="0" max="800" step="10" value="150"></div>
+      </div>
+      <div class="tools"><button class="btn" type="button" id="m91p1">Example where the revenue test governs</button><button class="btn" type="button" id="m91p2">Example where the upgrade cost governs</button></div>
+      <div style="margin-top:10px"><b>80 percent of ten year revenue</b><div class="bar"><i id="m91b1"></i><span id="m91t1"></span></div></div>
+      <div><b>Twenty year revenue requirement</b><div class="bar"><i id="m91b2"></i><span id="m91t2"></span></div></div>
+      <div><b>Security required (the greater)</b><div class="bar o"><i id="m91b3"></i><span id="m91t3"></span></div></div>
+      <div class="out" id="m91out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The two teal bars are the two tests. The orange bar is whichever is larger. That one is what the developer must secure.</div>
+      <div><b>What it shows</b>Taking the greater of two measures means the guarantee cannot fall below either one. A project cannot dodge security by looking small on one test.</div>
+      <div class="so"><b>So what</b>A letter of credit is security held in reserve, not a payment on day one. Say that clearly, because "they must put up hundreds of millions" sounds like cash out the door.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m92">
+    <div class="mh"><span class="pill o">Model 9.2</span><h3>If the project never opens, who pays?</h3></div>
+    <div class="mb">
+      <p>Invented numbers again. A utility builds $200 million of upgrades for a data center that then cancels.</p>
+      <div class="tools"><button class="btn sel" type="button" id="m92a">With security in place</button><button class="btn" type="button" id="m92b">With no security</button></div>
+      <div class="ctl" style="margin-top:10px"><div><label for="m92s">Share of the upgrade cost covered by the developer's guarantee: <span id="m92sv"></span> percent</label><input id="m92s" type="range" min="0" max="100" step="5" value="100"></div></div>
+      <div><b>Paid by the developer</b><div class="bar"><i id="m92b1"></i><span id="m92t1"></span></div></div>
+      <div><b>Left for existing customers</b><div class="bar r"><i id="m92b2"></i><span id="m92t2"></span></div></div>
+      <div class="out" id="m92out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The teal bar is the part covered by the developer. The red bar is what lands on everyone else. Slide the guarantee to see the split.</div>
+      <div><b>What it shows</b>Cost causation in action. The customer who creates a cost pays for it, where the tariffs allow. Without a guarantee, the risk transfers silently to others.</div>
+      <div class="so"><b>So what</b>The tariff is not an obstacle to data centers. It is how serious projects show they are serious, and how everyone else avoids a surprise.</div>
+    </div>
+  </div>
+
+  <div class="card mix"><h3>Common mix-ups on large loads</h3><ul><li>A letter of credit is security held in reserve, not cash paid on day one.</li><li>The tariff is a proposal in a suspended docket. It is not approved.</li><li>Cost causation means the customer who creates the cost pays for it where the tariffs allow.</li></ul></div>
+
+  <h3>Part B, Retail suppliers and the one bill problem</h3>
+  <figure>
+    <svg viewBox="0 0 740 200" role="img" aria-label="A bill split into supply and delivery parts">
+      <rect class="boxo" x="40" y="30" width="300" height="70" rx="12"/><text x="190" y="62" text-anchor="middle">Supply</text><text class="t2" x="190" y="82" text-anchor="middle">The power itself. Default or third party</text>
+      <rect class="boxt" x="400" y="30" width="300" height="70" rx="12"/><text x="550" y="62" text-anchor="middle">Delivery</text><text class="t2" x="550" y="82" text-anchor="middle">Poles, wires, service. Regulated</text>
+      <path class="arrow" d="M190 100v28H370M550 100v28H370"/>
+      <rect class="box" x="220" y="130" width="300" height="50" rx="12"/><text x="370" y="161" text-anchor="middle">Total bill, plus fees and taxes</text>
+    </svg>
+    <figcaption>One bill, two very different parts. Only the supply part changes when a customer switches to a third party.</figcaption>
+  </figure>
+  <ul>
+    <li>Leaders cited about 441,000 customers, roughly 45 percent of the residential and small commercial base, taking supply from third parties.</li>
+    <li>They cited analyses showing these customers pay about 20 percent more than the state default rate on average, and said many callers did not know they had switched. Treat these as company reported claims.</li>
+    <li>Not every offer costs more. Fixed terms, promotions, renewable options and contract timing all affect a fair comparison.</li>
+  </ul>
+
+  <div class="model" id="m93">
+    <div class="mh"><span class="pill o">Model 9.3</span><h3>Read a bill</h3></div>
+    <div class="mb">
+      <p>An imaginary household. All prices here are invented teaching numbers, not any real rate.</p>
+      <div class="ctl">
+        <div><label for="m93u">Monthly use: <span id="m93uv"></span> kWh</label><input id="m93u" type="range" min="300" max="1500" step="50" value="700"></div>
+        <div><label for="m93d">Default supply price: <span id="m93dv"></span> cents per kWh</label><input id="m93d" type="range" min="5" max="12" step="0.5" value="8"></div>
+        <div><label for="m93s">Third party supply price: <span id="m93sv"></span> cents per kWh</label><input id="m93s" type="range" min="5" max="14" step="0.5" value="9.6"></div>
+        <div><label for="m93f">Delivery charge: <span id="m93fv"></span> dollars</label><input id="m93f" type="range" min="40" max="120" step="5" value="75"></div>
+      </div>
+      <div><b>Bill on default supply</b><div class="bar"><i id="m93b1"></i><span id="m93t1"></span></div></div>
+      <div><b>Bill on third party supply</b><div class="bar o"><i id="m93b2"></i><span id="m93t2"></span></div></div>
+      <div class="out" id="m93out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Each bill is supply plus delivery. Delivery stays the same either way. Only the supply part moves with the supplier's price.</div>
+      <div><b>What it shows</b>A supply price that is 20 percent higher is a smaller percent of the total bill, because delivery is unchanged. It is still real money for a household.</div>
+      <div class="so"><b>So what</b>Be precise about which percent you mean. "20 percent more on supply" and "20 percent more on the bill" are different claims.</div>
+    </div>
+  </div>
+
+  <p><b>Utility consolidated billing</b> means one bill carries both delivery and supplier charges. <b>Purchase of receivables</b> means the utility buys the supplier's customer balances, here described as about 90 days at a small discount, and under current rules the gains and losses flow back to regulated customers. Leaders argued this blurs who is accountable and takes real collection risk away from suppliers.</p>
+
+  <div class="model" id="m94">
+    <div class="mh"><span class="pill o">Model 9.4</span><h3>Who carries the unpaid balance?</h3></div>
+    <div class="mb">
+      <p>An imaginary supplier with $1,000,000 in customer balances. All percentages are invented.</p>
+      <div class="ctl">
+        <div><label for="m94d">Discount the utility takes when it buys the balances: <span id="m94dv"></span> percent</label><input id="m94d" type="range" min="0" max="5" step="0.5" value="1.5"></div>
+        <div><label for="m94u">Share of balances customers never pay: <span id="m94uv"></span> percent</label><input id="m94u" type="range" min="0" max="10" step="0.5" value="3"></div>
+      </div>
+      <div class="tools"><button class="btn sel" type="button" id="m94a">Purchase of receivables (current rules)</button><button class="btn" type="button" id="m94b">Supplier keeps its own receivables</button></div>
+      <div id="m94out" class="out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Under purchase of receivables the utility pays the supplier right away, less a small discount. If customers do not pay, the loss flows to regulated customers under current rules. In the other case the supplier carries it.</div>
+      <div><b>What it shows</b>The same unpaid balance lands on different people depending on the billing arrangement.</div>
+      <div class="so"><b>So what</b>This is the accountability argument. If a supplier does not bear its own collection risk, regulated customers can end up funding it.</div>
+    </div>
+  </div>
+
+  <div class="tablewrap"><table>
+    <tr><th>Option</th><th>Upside</th><th>Tradeoff</th></tr>
+    <tr><td>Better disclosure and price comparisons</td><td>Quick, low conflict</td><td>May not fix risk allocation</td></tr>
+    <tr><td>Supplier bills its own customers</td><td>Clear accountability</td><td>More bills and possible confusion</td></tr>
+    <tr><td>Dual letters during a change</td><td>Eases the transition</td><td>Needs design and testing</td></tr>
+  </table></div>
+  <p>Consumer advocates are wary of extra bills for households already confused by supply versus delivery. That concern is fair, so judge any reform by whether customers actually understand, not by how many pieces of paper they get. Utilities also operate under competitive neutrality rules, which limit what a service representative may say about a customer's deal. Expect organized opposition from suppliers and trade groups to any change in their billing arrangements.</p>
+
+  <div class="card mix"><h3>Common mix-ups on supplier billing</h3><ul><li>Ameren's name on the bill does not mean Ameren set the supply price.</li><li>A utility cannot simply tell customers to switch back. Neutrality rules apply.</li><li>A percent higher supply price is not a percent higher total bill.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>For the large load tariff, the docket status and every number. Project examples shown in the meeting were awaiting executive approval before wider sharing, so the practice numbers above are invented on purpose. For supplier billing, the 20 percent figure, who is counted, the time period, and how losses on purchased receivables are treated by regulators.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="data-centers-and-rtos-working-paper.html">Data Centers and RTOs working paper</a>, the <a href="illinois-data-center-gr-playbook.html">Data Center GR Playbook</a> and the <a href="dcd-index.html">Data Center Desk</a> cover large loads in depth. For the wider energy policy picture, see the <a href="ameren-illinois-energy-policy.html">energy policy learning guide</a>.</p></div>
+
+  <div class="quiz" data-s="s9"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Data centers, full version, about 45 seconds</p>
+  <blockquote data-sec="45">We want data centers and the jobs that come with them. But one large project can require major line upgrades before it is built. If it never opens, existing customers should not be stuck with that bill. So the proposal asks for study deposits, proof the project is real, and a financial guarantee sized to the cost it creates. The goal is not to discourage serious projects. It is to tell serious, funded ones from speculation and make sure the cost lands where it belongs.</blockquote>
+  <p class="len">Supplier billing, full version, about 45 seconds</p>
+  <blockquote data-sec="45">Your electric bill has two parts. Supply is the power itself, and delivery is the wires. Customers can buy supply from a third party, but the bill still shows Ameren's name. We have heard that many customers on third party supply pay more than the default rate and some do not realize they switched. We are not saying every offer is bad. We are asking whether customers get clear information, and whether suppliers should carry more of the billing responsibility themselves.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">Two fairness questions. If a data center cancels after we have built lines for it, who pays, and the answer should be the developer, through a guarantee. And on supplier bills, customers should know when they have switched and what they are paying. Neither is anti business. Both are about putting costs where they belong.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Why not use the same rules as ComEd?</div>
+  <div class="a"><b>You say</b>Our territory is different. We have different networks, different needs and we want to attract businesses. We support strong customer protection, but the solution should fit the territory.</div></div>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Why not just tell customers to switch back?</div>
+  <div class="a"><b>You say</b>Utility communications have to follow customer choice and competitive neutrality rules. What we can support is clear, understandable information that helps people compare their options.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain cost causation</label><label><input type="checkbox"> I can explain the greater of formula and why a letter of credit is not a payment</label><label><input type="checkbox"> I can explain supply versus delivery</label><label><input type="checkbox"> I can explain purchase of receivables simply</label><label><input type="checkbox"> I said the scripts out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s9" placeholder="Write it in your own words" aria-label="My notes for lesson 9"></textarea></div>
+</section>
+
+<div class="pager"><a href="illinois-grid-briefing-part-2.html"><small>Previous</small><b>Part 2, Enough power and what it costs</b></a><a class="nx" href="illinois-grid-briefing-part-4.html"><small>Next</small><b>Part 4, Gas, the Capitol and speaking up</b></a></div>
+</main>
+<footer>
+<p>Built from the October 15 and 16, 2026 briefing notes. Figures are as reported in the meetings and are marked where they need checking. Practice numbers inside models are invented for teaching and are labeled as such. This page leaves out internal positions, personnel talk, confidential project examples and informal side conversations. It asks search engines not to list it, but anyone with the link can still open it if it is hosted publicly.</p>
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function sget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jget(k,d){try{return JSON.parse(sget(k,""))||d}catch(e){return d}}
+var P="ilgrid.";
+var LESSONS=[
+{id:"s1",t:"Storms, aging poles and everyday reliability",f:"illinois-grid-briefing-part-1.html"},
+{id:"s2",t:"Why more solar can create local problems",f:"illinois-grid-briefing-part-1.html"},
+{id:"s3",t:"The N-1 emergency, the outage nobody saw",f:"illinois-grid-briefing-part-1.html"},
+{id:"s4",t:"Enough dependable power, and why megawatts differ",f:"illinois-grid-briefing-part-2.html"},
+{id:"s5",t:"Batteries, duration and what they cost",f:"illinois-grid-briefing-part-2.html"},
+{id:"s6",t:"Venice, CEJA and the five plant question",f:"illinois-grid-briefing-part-2.html"},
+{id:"s7",t:"The IRP and the modeled shortfalls",f:"illinois-grid-briefing-part-2.html"},
+{id:"s8",t:"Markets, plans and who decides",f:"illinois-grid-briefing-part-3.html"},
+{id:"s9",t:"Data centers, large loads and the one bill problem",f:"illinois-grid-briefing-part-3.html"},
+{id:"s10",t:"Gas, bills to watch and turning engineering into a decision",f:"illinois-grid-briefing-part-4.html"}
+];
+var Q={};
+function fmt(n){return Math.round(n).toLocaleString()}
+function svgEl(w,h,label,inner){return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+label+'">'+inner+'</svg>'}
+
+function sorter(boxId,labels,items){
+  var box=$(boxId);
+  items.forEach(function(it){
+    var d=document.createElement("div");d.className="row";
+    d.innerHTML='<span class="s">'+it[0]+'</span>'+labels.map(function(l,i){return '<button type="button" class="btn" data-i="'+i+'">'+l+'</button>'}).join("")+'<span class="res" aria-live="polite"></span>';
+    $$("button",d).forEach(function(b){b.addEventListener("click",function(){
+      var ok=+b.getAttribute("data-i")===it[1];
+      $$("button",d).forEach(function(x){x.classList.toggle("sel",x===b)});
+      var r=$(".res",d);r.style.color=ok?"var(--good)":"var(--bad)";r.textContent=ok?"Right. ":"Not quite. ";
+      var e=document.createElement("small");e.style.fontWeight="400";e.style.color="var(--muted)";e.textContent=it[2];r.appendChild(e);
+    })});
+    box.appendChild(d);
+  });
+}
+
+/* Model 8.1 two markets */
+(function(){
+  var cur="miso",tabs=$("#m81tabs");
+  var info={miso:["MISO","Covers most of central and southern Illinois, including Ameren Illinois. Runs wholesale markets, transmission coordination and resource adequacy for its region."],pjm:["PJM","Covers northern Illinois, including ComEd, with its own market and capacity rules."]};
+  Object.keys(info).forEach(function(k){var b=document.createElement("button");b.type="button";b.className="btn";b.textContent=info[k][0];b.setAttribute("data-k",k);b.addEventListener("click",function(){cur=k;draw()});tabs.appendChild(b)});
+  function draw(){
+    var s='<rect class="'+(cur==="pjm"?"boxo":"box")+'" x="140" y="10" width="360" height="85" rx="14"/><text x="320" y="46" text-anchor="middle" style="font-weight:700">Northern Illinois, PJM</text><text class="t2" x="320" y="68" text-anchor="middle">ComEd area</text>'+
+      '<rect class="'+(cur==="miso"?"boxt":"box")+'" x="140" y="105" width="360" height="110" rx="14"/><text x="320" y="150" text-anchor="middle" style="font-weight:700">Central and southern Illinois, MISO</text><text class="t2" x="320" y="172" text-anchor="middle">Ameren Illinois area</text>'+
+      '<text class="t2" x="320" y="238" text-anchor="middle">Schematic only. Not to scale and not a map of the boundary.</text>';
+    $("#m81svg").innerHTML=svgEl(640,250,"Illinois drawn as two zones, northern PJM and central and southern MISO",s);
+    $$("button",tabs).forEach(function(b){b.classList.toggle("sel",b.getAttribute("data-k")===cur)});
+    $("#m81out").innerHTML="<b>"+info[cur][0]+".</b> "+info[cur][1];
+  }
+  draw();
+})();
+
+/* Model 8.2 business models */
+(function(){
+  var cur="a";
+  function box(x,y,w,t,c){return '<rect class="'+(c||"box")+'" x="'+x+'" y="'+y+'" width="'+w+'" height="56" rx="12"/><text x="'+(x+w/2)+'" y="'+(y+34)+'" text-anchor="middle">'+t+'</text>'}
+  function arr(x1,x2,y){return '<path class="arrow" d="M'+x1+' '+y+'H'+x2+'"/><path class="arrow" d="M'+(x2-9)+' '+(y-7)+'l9 7-9 7"/>'}
+  function draw(){
+    var s,msg;
+    if(cur==="a"){
+      s=box(20,50,230,"Regulated utility","boxt")+'<text class="t2" x="135" y="125" text-anchor="middle">owns plants and wires</text>'+arr(250,330,78)+'<text class="t2" x="290" y="68" text-anchor="middle">rates</text>'+box(330,50,160,"Customers")+
+        '<text x="250" y="170" text-anchor="middle" style="fill:var(--bad);font-weight:700">Price risk is cushioned through regulated rates</text>';
+      msg="<b>Vertically integrated.</b> One regulated utility plans, builds and owns generation and wires. Costs flow through rates that regulators review. The utility can decide to build a plant."
+    }else{
+      s=box(10,20,170,"Generators","box")+arr(180,235,48)+box(235,20,170,"Wholesale market","boxo")+arr(405,455,48)+box(455,20,190,"Ameren Illinois","boxt")+'<text class="t2" x="550" y="95" text-anchor="middle">delivers power, owns wires</text>'+
+        '<path class="arrow" d="M550 76V120"/><path class="arrow" d="M543 111l7 9 7-9"/>'+box(455,120,190,"Customers")+box(10,120,230,"State procurements","box")+'<path class="arrow" d="M240 148H300"/><text class="t2" x="270" y="140" text-anchor="middle">help fill gaps</text>'+
+        '<text x="330" y="205" text-anchor="middle" style="fill:var(--bad);font-weight:700">Wholesale price moves are felt more directly</text>';
+      msg="<b>Restructured retail choice.</b> Generation is mostly built by others and sold in the market. The utility delivers power, and the market and state procurement fill supply needs. Customers feel wholesale prices more directly."
+    }
+    $("#m82svg").innerHTML=svgEl(660,225,"Diagram of the chosen utility business model",s);
+    $("#m82a").classList.toggle("sel",cur==="a");$("#m82b").classList.toggle("sel",cur==="b");
+    $("#m82out").innerHTML=msg;
+  }
+  $("#m82a").addEventListener("click",function(){cur="a";draw()});$("#m82b").addEventListener("click",function(){cur="b";draw()});draw();
+})();
+
+/* Model 8.3 time gap */
+(function(){
+  var y=$("#m83y");
+  function run(){
+    var n=+y.value;$("#m83yv").textContent=n;
+    $("#m83bars").innerHTML='<div><b>Time to plan and build a plant</b><div class="bar o"><i style="width:'+(n/12*100)+'%"></i><span>'+n+' years</span></div></div><div><b>How far ahead a capacity auction looks</b><div class="bar"><i style="width:'+(1/12*100)+'%"></i><span style="color:var(--text);text-shadow:none;left:calc('+(1/12*100)+'% + 8px)">1 year</span></div></div>';
+    $("#m83out").innerHTML="The auction looks ahead about <b>"+Math.round(1/n*100)+" percent</b> of the time it takes to build. A developer has to commit roughly <b>"+(n-1)+" years</b> before the auction that would pay for the plant can even be seen. The presenters cited five to ten years.";
+  }
+  y.addEventListener("input",run);run();
+})();
+
+/* Model 8.4 price cap */
+(function(){
+  var c=$("#m84c");
+  function run(){
+    var p=+c.value;$("#m84cv").textContent="$"+p+" per MW day";
+    var cost=p*1000*365/1e6;
+    $("#m84b1").style.width=(p/777*100)+"%";$("#m84t1").textContent="$"+p+" per MW day";
+    $("#m84b2").style.width=(cost/(777*1000*365/1e6)*100)+"%";$("#m84t2").textContent="$"+cost.toFixed(0)+" million";
+    $("#m84out").innerHTML="At a ceiling of <b>$"+p+"</b> the price signal is "+Math.round(p/332*100)+" percent of the $332 starting point, and 1,000 MW of capacity would cost about <b>$"+cost.toFixed(0)+" million</b> a year. Raising it strengthens the case to build and raises the bill together. "+(p<=340?"This is near the cited cleared price.":(p>=770?"This is near the hypothetical uncapped figure.":""));
+  }
+  c.addEventListener("input",run);run();
+})();
+
+/* Model 8.5 plan sorter */
+sorter("#m85q",["IRP","Grid Plan","Rate Plan"],[
+ ["How many megawatts of dependable supply will the state need in the 2040s?",0,"That is a supply question, which is what the IRP studies."],
+ ["Which poles, substations and wires get replaced from 2028 through 2031?",1,"That is the network, which is the Multi-Year Integrated Grid Plan."],
+ ["How will the cost of the work change what customers pay each month?",2,"That is funding and tariffs, which is the Multi-Year Rate Plan."],
+ ["Will Zone 4 need more storage or more imports?",0,"Storage, imports and adequacy belong to the IRP."],
+ ["How do we show with outage data that storm hardening is worth the money?",1,"Defending network spending with measurable results is part of the Grid Plan case."]
+]);
+
+/* Model 9.1 greater of */
+(function(){
+  var R=$("#m91r"),Q2=$("#m91q");
+  function run(){
+    var r=+R.value,q=+Q2.value,e=r*0.8,sec=Math.max(e,q);
+    $("#m91rv").textContent=fmt(r);$("#m91qv").textContent=fmt(q);
+    $("#m91b1").style.width=(e/800*100)+"%";$("#m91t1").textContent="$"+fmt(e)+" million";
+    $("#m91b2").style.width=(q/800*100)+"%";$("#m91t2").textContent="$"+fmt(q)+" million";
+    $("#m91b3").style.width=(sec/800*100)+"%";$("#m91t3").textContent="$"+fmt(sec)+" million";
+    $("#m91out").innerHTML="80 percent of ten year revenue is <b>$"+fmt(e)+" million</b>. The 20 year revenue requirement is <b>$"+fmt(q)+" million</b>. Security required is the greater, <b>$"+fmt(sec)+" million</b>, set by the "+(q>e?"upgrade cost":"80 percent revenue test")+". This is a security amount held in reserve, not a payment.";
+  }
+  R.addEventListener("input",run);Q2.addEventListener("input",run);
+  $("#m91p1").addEventListener("click",function(){R.value=500;Q2.value=150;run()});
+  $("#m91p2").addEventListener("click",function(){R.value=120;Q2.value=400;run()});
+  run();
+})();
+
+/* Model 9.2 who pays */
+(function(){
+  var S=$("#m92s");
+  function run(){
+    var s=+S.value,cost=200,dev=cost*s/100,oth=cost-dev;$("#m92sv").textContent=s;
+    $("#m92b1").style.width=(dev/cost*100)+"%";$("#m92t1").textContent="$"+fmt(dev)+" million";
+    $("#m92b2").style.width=(oth/cost*100)+"%";$("#m92t2").textContent="$"+fmt(oth)+" million";
+    $("#m92a").classList.toggle("sel",s===100);$("#m92b").classList.toggle("sel",s===0);
+    var o=$("#m92out");o.className="out"+(oth===0?" good":(oth>=100?" bad":""));
+    o.innerHTML=oth===0?"The developer's guarantee covers the full <b>$200 million</b>. Existing customers are left with nothing to pay.":"Of the <b>$200 million</b> of upgrades, the developer's guarantee covers <b>$"+fmt(dev)+" million</b>. The remaining <b>$"+fmt(oth)+" million</b> could land on existing customers.";
+  }
+  S.addEventListener("input",run);
+  $("#m92a").addEventListener("click",function(){S.value=100;run()});$("#m92b").addEventListener("click",function(){S.value=0;run()});
+  run();
+})();
+
+/* Model 9.3 bill */
+(function(){
+  var ids=["u","d","s","f"];
+  function run(){
+    var u=+$("#m93u").value,d=+$("#m93d").value,s=+$("#m93s").value,f=+$("#m93f").value;
+    $("#m93uv").textContent=fmt(u);$("#m93dv").textContent=d.toFixed(1);$("#m93sv").textContent=s.toFixed(1);$("#m93fv").textContent=f;
+    var b1=u*d/100+f,b2=u*s/100+f,sp=(s-d)/d*100,tp=(b2-b1)/b1*100,mx=Math.max(b1,b2,1);
+    $("#m93b1").style.width=(b1/mx*100)+"%";$("#m93t1").textContent="$"+b1.toFixed(2);
+    $("#m93b2").style.width=(b2/mx*100)+"%";$("#m93t2").textContent="$"+b2.toFixed(2);
+    $("#m93out").innerHTML="Supply is <b>"+(sp>=0?"+":"")+sp.toFixed(0)+" percent</b> different, but the total bill is only <b>"+(tp>=0?"+":"")+tp.toFixed(1)+" percent</b> different, because delivery of $"+f+" does not change. That is <b>$"+Math.abs(b2-b1).toFixed(2)+" a month</b> or about <b>$"+fmt(Math.abs(b2-b1)*12)+" a year</b> "+(b2>=b1?"more":"less")+".";
+  }
+  ids.forEach(function(i){$("#m93"+i).addEventListener("input",run)});run();
+})();
+
+/* Model 9.4 receivables */
+(function(){
+  var mode="a",D=$("#m94d"),U=$("#m94u"),bal=1000000;
+  function run(){
+    var d=+D.value,u=+U.value;$("#m94dv").textContent=d.toFixed(1);$("#m94uv").textContent=u.toFixed(1);
+    var sup,util,txt;
+    if(mode==="a"){
+      sup=bal*(1-d/100);util=bal*(d/100-u/100);
+      txt="The supplier gets <b>$"+fmt(sup)+"</b> right away, whatever customers do. The utility pays that, then collects <b>$"+fmt(bal*(1-u/100))+"</b>, so it nets <b>"+(util>=0?"+$"+fmt(util):"-$"+fmt(-util))+"</b>. Under current rules that "+(util>=0?"gain":"loss")+" flows to regulated customers. If customers fail to pay more than the discount covers, regulated customers fund the supplier's collection risk.";
+    }else{
+      sup=bal*(1-u/100);util=0;
+      txt="The supplier collects only what customers pay, <b>$"+fmt(sup)+"</b>, and carries the <b>$"+fmt(bal*u/100)+"</b> that goes unpaid. Regulated customers are not involved. The tradeoff is more separate bills for households and a different customer experience.";
+    }
+    var o=$("#m94out");o.className="out"+(mode==="a"&&util<0?" bad":"");o.innerHTML=txt;
+    $("#m94a").classList.toggle("sel",mode==="a");$("#m94b").classList.toggle("sel",mode==="b");
+  }
+  D.addEventListener("input",run);U.addEventListener("input",run);
+  $("#m94a").addEventListener("click",function(){mode="a";run()});$("#m94b").addEventListener("click",function(){mode="b";run()});run();
+})();
+
+Q.s8=[
+["Why do short capacity auctions make building plants hard?",["Plants take years to build and the market looks one year ahead","Plants are free","Auctions are too long"],0,"The timing mismatch. Model 8.3 shows how big the gap is."],
+["The honest counterargument to removing price caps is",["Higher prices always bring plants in time","Uncapped prices can expose customers to extreme costs without ensuring timely plants","Caps lower demand"],1,"Design must protect both investment and customers."],
+["In a vertically integrated state the utility",["Plans and builds generation under regulation","Only delivers power","Has no role"],0,"That is Missouri's model."],
+["Which plan answers what network must be built?",["IRP","Multi-Year Integrated Grid Plan","Multi-Year Rate Plan"],1,"IRP is supply. Rate plan is funding."],
+["A proposed order from a judge is",["A final decision","A recommendation the Commission can accept or change","Law"],1,"Describe it as proposed until the Commission rules."]];
+Q.s9=[
+["Financial security under the proposal is the",["Lesser of two formulas","Greater of the 20 year revenue requirement and 80 percent of ten year revenue","Fixed at $200,000"],1,"The greater amount governs."],
+["A letter of credit is",["Cash paid at signing","Security available if obligations are not met","A tax"],1,"It is protection, not a payment."],
+["Cost causation means",["Everyone shares equally","The customer who creates the cost pays for it where tariffs allow","Utilities pay all costs"],1,"It prevents cost shifting. Model 9.2 shows what happens without it."],
+["In Model 9.3, why is the percent difference on the total bill smaller than on supply?",["Delivery charges stay the same, so only part of the bill moves","The math is wrong","Taxes cancel it out"],0,"Be precise about which percent you mean."],
+["Purchase of receivables means the utility",["Sells power","Buys the supplier's customer balances at a discount","Sets supplier rates"],1,"Gains and losses flow back to regulated customers under current rules."]];
+
+/* quizzes */
+$$(".quiz").forEach(function(box){
+  var id=box.getAttribute("data-s"),items=Q[id]||[],answered=0,right=0,key=P+"quiz."+id;
+  var h='<h3>Check yourself</h3><p class="obj">Try to answer in your head before you tap. Pulling an answer out of memory is what makes it stick.</p>';
+  items.forEach(function(it,qi){
+    h+='<div class="q" data-qi="'+qi+'"><p>'+it[0]+'</p>';
+    it[1].forEach(function(o,oi){h+='<button type="button" class="opt" data-oi="'+oi+'">'+o+'</button>'});
+    h+='<div class="why" aria-live="polite">'+it[3]+'</div></div>';
+  });
+  h+='<p class="score" aria-live="polite"></p>';
+  box.innerHTML=h;
+  $$(".q",box).forEach(function(q){
+    var qi=+q.getAttribute("data-qi"),it=items[qi],done=false;
+    $$(".opt",q).forEach(function(b){
+      b.addEventListener("click",function(){
+        if(done)return;done=true;answered++;
+        var oi=+b.getAttribute("data-oi");
+        $$(".opt",q)[it[2]].classList.add("right");
+        if(oi===it[2]){right++}else{b.classList.add("wrong")}
+        $(".why",q).classList.add("show");
+        if(answered===items.length){
+          $(".score",box).textContent="You got "+right+" of "+items.length+(right===items.length?". Strong. Say the script out loud next.":". Reread the plain words box and the models, then try the script.");
+          sset(key,right+"/"+items.length);
+        }
+      });
+    });
+  });
+});
+
+/* progress across all pages */
+var done=jget(P+"done",{});
+function paint(){
+  var n=0;
+  LESSONS.forEach(function(l){
+    if(done[l.id])n++;
+    var c=$('#chips a[data-s="'+l.id+'"]');if(c)c.classList.toggle("done",!!done[l.id]);
+    var b=$("#mark-"+l.id);if(b){b.classList.toggle("done",!!done[l.id]);b.textContent=done[l.id]?"Completed. Tap to undo":"Mark this lesson complete"}
+    var lc=$('.lc[data-s="'+l.id+'"]');if(lc)lc.classList.toggle("done",!!done[l.id]);
+  });
+  var pct=Math.round(n/LESSONS.length*100),pb=$("#progbar");
+  if(pb){pb.style.width=pct+"%";$("#progtxt").textContent=n+" of "+LESSONS.length+" done";$("#progwrap").setAttribute("aria-valuenow",pct)}
+}
+$$(".lesson[data-s]").forEach(function(sec){
+  var id=sec.getAttribute("data-s"),row=document.createElement("div");row.className="markrow";
+  row.innerHTML='<button type="button" class="btn" id="mark-'+id+'">Mark this lesson complete</button><a href="#top">Back to top</a>';
+  sec.appendChild(row);
+  $("#mark-"+id).addEventListener("click",function(){done[id]=!done[id];sset(P+"done",JSON.stringify(done));paint()});
+});
+paint();
+
+/* notes and teach-back */
+$$("textarea[data-note]").forEach(function(t){
+  t.value=sget(P+"note."+t.getAttribute("data-note"),"");
+  t.addEventListener("input",function(){sset(P+"note."+t.getAttribute("data-note"),t.value)});
+});
+$$(".teach input").forEach(function(c,i){
+  var sec=c.closest(".lesson"),k=P+"teach."+(sec?sec.id:"x")+"."+i;
+  c.checked=sget(k,"")==="1";c.addEventListener("change",function(){sset(k,c.checked?"1":"")});
+});
+
+/* scripts: copy and practice timers */
+function copyText(t,btn){
+  function ok(){if(btn){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1400)}}
+  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else{fb()}
+}
+var tmr=null;
+$$(".script blockquote").forEach(function(bq){
+  var n=+bq.getAttribute("data-sec")||45,lab=bq.getAttribute("data-label")||"script";
+  var row=document.createElement("div");row.className="tools";
+  row.innerHTML='<button class="btn" type="button" data-copy>Copy</button><button class="btn" type="button" data-practice>Practice '+n+' seconds</button><span class="timer" aria-live="polite"></span>';
+  bq.parentNode.insertBefore(row,bq.nextSibling);
+  $("[data-copy]",row).addEventListener("click",function(){copyText(bq.textContent,this)});
+  $("[data-practice]",row).addEventListener("click",function(){
+    var out=$(".timer",row);
+    if(tmr){clearInterval(tmr);tmr=null}
+    var left=n;out.textContent=left+"s";
+    tmr=setInterval(function(){left--;out.textContent=left>0?left+"s":"Time";if(left<=0){clearInterval(tmr);tmr=null}},1000);
+  });
+});
+
+})();
+</script>
+</body>
+</html>

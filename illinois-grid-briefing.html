@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Illinois Grid Briefing</title>
+<style>
+:root{--bg:#fbfaf7;--text:#1d2330;--muted:#5b6475;--card:#ffffff;--border:#e3ded3;--accent:#c9560a;--accent-soft:#fdebdc;--teal:#0f766e;--teal-soft:#dff3f0;--warn:#9a6700;--warn-soft:#fff4d6;--bad:#b42318;--bad-soft:#fde8e6;--good:#1a7f37;--good-soft:#e1f5e6;--shadow:0 1px 2px rgba(20,25,40,.06),0 4px 14px rgba(20,25,40,.05);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}}
+:root[data-theme="dark"]{--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;padding-bottom:70px}
+a{color:var(--teal)}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.topbar .row{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+.prog{flex:1;min-width:120px;height:10px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .4s}
+.progtxt{font-size:13px;color:var(--muted);white-space:nowrap}
+nav.parts{max-width:1100px;margin:0 auto;padding:0 16px 6px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.parts a{flex:0 0 auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:4px 10px;background:var(--bg)}
+nav.parts a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.chips{max-width:1100px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{flex:0 0 auto;font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:99px;padding:3px 10px;background:var(--bg)}
+nav.chips a.done{background:var(--good-soft);border-color:var(--good)}
+nav.chips a:hover,nav.parts a:hover{border-color:var(--accent)}
+.btn{font:inherit;font-size:14px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:10px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.sel{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:700}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+.hero{padding:26px 0 8px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:8px 0}
+.hero p.sub{color:var(--muted);font-size:18px;margin:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.twoway{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.threeway{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.twoway,.threeway{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 10px}
+.pill.o{background:var(--accent-soft);color:var(--accent)}
+.pill.t{background:var(--teal-soft);color:var(--teal)}
+.pill.b{background:var(--bad-soft);color:var(--bad)}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:0}
+h3{font-size:20px;margin:24px 0 6px}
+h4{font-size:17px;margin:16px 0 4px}
+.lesson{border-top:2px solid var(--border);margin-top:56px;padding-top:24px}
+.lesson:first-of-type{margin-top:28px}
+.lesson>header{display:flex;gap:14px;align-items:flex-start}
+.num{flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:22px;display:grid;place-items:center}
+.obj{color:var(--muted);margin:4px 0 0}
+.plain{border-left:6px solid var(--teal);background:var(--teal-soft)}
+.mix{border-left:6px solid var(--warn);background:var(--warn-soft)}
+.verify{border-left:6px solid var(--bad);background:var(--bad-soft)}
+.note{border-left:6px solid var(--accent);background:var(--accent-soft)}
+.card.plain h3,.card.mix h3,.card.verify h3,.card.note h3,.card.deeper h3{margin-bottom:4px;font-size:16px;text-transform:uppercase;letter-spacing:.05em}
+.card.deeper{border-left:6px solid var(--muted)}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+figure{margin:14px 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+svg{max-width:100%;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--text);font:14px -apple-system,Segoe UI,Arial,sans-serif}
+svg .t2{fill:var(--muted);font-size:12px}
+svg .tw{fill:#fff;font-weight:700}
+svg .box{fill:var(--card);stroke:var(--border);stroke-width:2}
+svg .boxo{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+svg .boxt{fill:var(--teal-soft);stroke:var(--teal);stroke-width:2}
+svg .boxb{fill:var(--bad-soft);stroke:var(--bad);stroke-width:2}
+svg .boxg{fill:var(--good-soft);stroke:var(--good);stroke-width:2}
+svg .boxw{fill:var(--warn-soft);stroke:var(--warn);stroke-width:2}
+svg .pole{stroke:var(--muted);stroke-width:6;stroke-linecap:round}
+svg .pole.strong{stroke:var(--teal);stroke-width:10}
+svg .pole.fell{stroke:var(--bad)}
+svg .ground{stroke:var(--border);stroke-width:3}
+svg .arrow{stroke:var(--text);stroke-width:3;fill:none}
+svg .arrowo{stroke:var(--accent);stroke-width:4;fill:none}
+svg .arrowb{stroke:var(--bad);stroke-width:4;fill:none}
+svg .arrowt{stroke:var(--teal);stroke-width:4;fill:none}
+svg .lineb{stroke:var(--bad);stroke-width:5;stroke-dasharray:8 5;fill:none}
+svg .linen{stroke:var(--muted);stroke-width:4;fill:none}
+svg .grid{stroke:var(--border);stroke-width:1}
+svg .curve{fill:none;stroke-width:3}
+svg .cl{stroke:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px;color:var(--accent);line-height:1.15}
+.stat span{font-size:13px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.step{flex:1 1 150px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 12px;position:relative}
+.step b{display:block;color:var(--accent)}
+.step small{color:var(--muted)}
+.flow.arrows .step:not(:last-child)::after{content:"\2192";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--accent);font-weight:800;z-index:2}
+@media(max-width:760px){.flow.arrows .step:not(:last-child)::after{content:"\2193";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto}
+/* model panels */
+.model{background:var(--card);border:2px solid var(--accent);border-radius:18px;margin:26px 0;overflow:hidden}
+.model>.mh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);padding:10px 16px;border-bottom:1px solid var(--border)}
+.model>.mh h3{margin:0;font-size:18px}
+.model>.mb{padding:14px 16px}
+.model>.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+.model>.mx>div{padding:12px 16px;font-size:15px;border-right:1px solid var(--border)}
+.model>.mx>div:last-child{border-right:0}
+.model>.mx b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+.model>.mx>.so{background:var(--teal-soft)}
+.model>.mx>.so b{color:var(--teal)}
+@media(max-width:760px){.model>.mx{grid-template-columns:1fr}.model>.mx>div{border-right:0;border-bottom:1px solid var(--border)}}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 18px;margin-bottom:10px}
+.ctl label{display:block;font-weight:600;font-size:15px;margin:0 0 2px}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl input[type=number],.ctl select,textarea,.search{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.out{margin-top:12px;padding:12px;border-radius:12px;background:var(--accent-soft)}
+.out b{color:var(--accent)}
+.out.bad{background:var(--bad-soft)}.out.bad b{color:var(--bad)}
+.out.good{background:var(--good-soft)}.out.good b{color:var(--good)}
+.bar{height:24px;background:var(--border);border-radius:8px;overflow:hidden;margin:6px 0;position:relative}
+.bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.bar.o>i{background:var(--accent)}
+.bar.r>i{background:var(--bad)}
+.bar>span{position:absolute;left:8px;top:0;line-height:24px;font-size:13px;font-weight:700;color:#fff;mix-blend-mode:normal;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.blocks{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.blocks i{width:28px;height:28px;border-radius:6px;background:var(--teal);opacity:.9}
+.blocks i.part{background:linear-gradient(90deg,var(--teal) var(--p,50%),var(--border) var(--p,50%))}
+.quiz{margin:26px 0}
+.quiz h3{margin-bottom:8px}
+.q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.why{display:none;margin-top:8px;font-size:15px;color:var(--muted)}
+.why.show{display:block}
+.score{font-weight:700;color:var(--teal)}
+.script{background:var(--card);border:2px solid var(--teal);border-radius:16px;padding:16px 18px;margin:24px 0}
+.script h3{margin:0 0 2px;color:var(--teal)}
+.script .len{font-size:13px;color:var(--muted);margin:0 0 8px}
+.script blockquote{margin:8px 0;padding:10px 14px;border-left:5px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0}
+.script .hall{border-left-color:var(--accent);background:var(--accent-soft)}
+.qa{display:grid;gap:6px;margin:10px 0}
+.qa div{padding:8px 12px;border-radius:10px}
+.qa .l{background:var(--bg);border:1px solid var(--border)}
+.qa .a{background:var(--teal-soft)}
+.qa b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;display:block;color:var(--muted)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;min-width:48px}
+.teach label{display:block;margin:4px 0}
+.notes textarea{min-height:90px}
+.markrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+details.find{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 14px;margin:8px 0}
+details.find summary{cursor:pointer;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fc{font:inherit;text-align:left;min-height:130px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer}
+.fc:hover{border-color:var(--accent)}
+.fc.flip{background:var(--teal-soft);border-color:var(--teal)}
+.fc small{display:block;color:var(--muted);margin-bottom:6px}
+.timeline{list-style:none;padding:0;margin:0 0 0 8px;border-left:4px solid var(--accent)}
+.timeline li{position:relative;margin:0 0 16px 0;padding-left:20px}
+.timeline li::before{content:"";position:absolute;left:-12px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:4px solid var(--accent)}
+.timeline b{color:var(--accent)}
+.checks label{display:block;padding:8px 0;border-bottom:1px solid var(--border)}
+.checks input{margin-right:8px;transform:scale(1.2)}
+.lessoncards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lc{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.lc:hover{border-color:var(--accent)}
+.lc b{display:block}
+.lc small{color:var(--muted)}
+.lc.done{background:var(--good-soft);border-color:var(--good)}
+.sorter .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sorter .row span.s{flex:1 1 260px}
+.sorter .res{font-size:14px;font-weight:700;min-width:70px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:40px 0 0;padding-top:18px;border-top:2px solid var(--border)}
+.pager a{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;flex:1 1 240px}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted)}
+.pager a.nx{text-align:right}
+footer{max-width:1000px;margin:0 auto;padding:12px 16px 60px;color:var(--muted);font-size:14px}
+@media print{.topbar,.tools,.markrow,.quiz,.model .ctl,.pager{display:none}body{background:#fff;color:#000}}
+
+</style>
+<script src="theme.js"></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to the content</a>
+<div class="topbar">
+  <div class="row">
+    <a class="brand" href="illinois-grid-briefing.html">Illinois Grid Briefing</a>
+    <div class="prog" role="progressbar" aria-label="Lessons completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progwrap"><i id="progbar"></i></div>
+    <span class="progtxt" id="progtxt">0 of 10 done</span>
+    <a class="progtxt" href="index.html">Hub home</a>
+  </div>
+  <nav class="parts" aria-label="Parts of the guide"><a href="illinois-grid-briefing.html" class="cur" aria-current="page">Home</a><a href="illinois-grid-briefing-part-1.html">1 Wires</a><a href="illinois-grid-briefing-part-2.html">2 Supply</a><a href="illinois-grid-briefing-part-3.html">3 Markets</a><a href="illinois-grid-briefing-part-4.html">4 Decisions</a></nav>
+  <nav class="chips" id="chips" aria-label="On this page"><a href="#start">Start</a><a href="#map">Map</a><a href="#findings">Findings</a><a href="#review">Review</a><a href="#glossary">Glossary</a><a href="#verify">Verify</a></nav>
+</div>
+<main id="main">
+<section class="hero" id="start">
+  <span class="pill o">Study guide in four parts</span>
+  <h1>Illinois energy under stress</h1>
+  <p class="sub">A plain language guide to the October 15 and 16, 2026 briefings, with models you can move around, pictures with full explanations, practice questions and scripts you can say out loud. It is split into four short parts so you can take one at a time.</p>
+
+  <div class="card note">
+    <h3>The one idea to hold onto</h3>
+    <p>There are two electric systems to think about. One is the system Illinois wants to build over the next 20 years. The other is the system that has to run safely tomorrow morning, in a heat wave or a deep freeze. Almost every debate in these meetings comes from the gap between the two.</p>
+  </div>
+
+  <div class="twoway">
+    <div class="card">
+      <h3>How each lesson works</h3>
+      <ol>
+        <li><b>In plain words</b> gives you the short version first, so the details have somewhere to land.</li>
+        <li><b>Full explanation</b> builds the real understanding in small steps.</li>
+        <li><b>Models</b> let you change a number and watch what happens. Under each one, <i>how to read it</i>, <i>what it shows</i> and <i>so what</i> explain the picture and connect it to a real conversation.</li>
+        <li><b>Common mix-ups</b> clears up the ideas people confuse most.</li>
+        <li><b>Check yourself</b> asks questions before you move on, because pulling an answer out of memory is how it sticks.</li>
+        <li><b>Say it</b> gives a full script and a 30 second hallway version, with a practice timer. Speak it, do not just read it.</li>
+        <li><b>Teach it back</b> and <b>My notes</b> make you use your own words, which doubles the learning.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>A study plan that works</h3>
+      <p>Spacing your practice beats cramming. Check each step as you go.</p>
+      <div class="checks" id="plan"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Rate yourself, before and after</h3>
+    <p>Rate your confidence from 1 (not at all) to 5 (could teach it). Fill in the Before column now, and come back to fill in After when you finish. The change is your proof of learning.</p>
+    <div class="tablewrap"><table id="ptable"><tr><th>Topic</th><th>Before</th><th>After</th></tr></table></div>
+    <div class="out" id="pout" style="display:none"></div>
+  </div>
+</section>
+
+<section class="lesson" id="map">
+  <header><div class="num">M</div><div><h2>The map of the guide</h2><p class="obj">Four parts, ten lessons. Start at Part 1 and go in order, or jump to what you need. Your progress is saved in this browser.</p></div></header>
+
+  <h3>The complete picture, in one chain</h3>
+  <figure>
+    <svg viewBox="0 0 760 360" role="img" aria-label="Chain from the energy transition through supply, grid, flexibility and affordability to decisions and the goal">
+      <rect class="boxo" x="170" y="8" width="420" height="44" rx="12"/><text x="380" y="36" text-anchor="middle">Energy transition goals, CEJA, renewables, data centers, weather</text>
+      <path class="arrow" d="M380 52v18"/>
+      <rect class="box" x="170" y="70" width="420" height="44" rx="12"/><text x="380" y="98" text-anchor="middle">Supply. Retiring plants and growing demand</text>
+      <path class="arrow" d="M380 114v18"/>
+      <rect class="box" x="170" y="132" width="420" height="44" rx="12"/><text x="380" y="160" text-anchor="middle">Grid. Aging poles, circuit limits, transmission limits</text>
+      <path class="arrow" d="M380 176v18"/>
+      <rect class="box" x="170" y="194" width="420" height="44" rx="12"/><text x="380" y="222" text-anchor="middle">Flexibility. Solar swings, battery duration, power flow direction</text>
+      <path class="arrow" d="M380 238v18"/>
+      <rect class="box" x="170" y="256" width="420" height="44" rx="12"/><text x="380" y="284" text-anchor="middle">Affordability. Storage contracts, rates, supplier charges</text>
+      <path class="arrow" d="M380 300v18"/>
+      <rect class="boxt" x="120" y="318" width="520" height="38" rx="12"/><text x="380" y="342" text-anchor="middle">Decisions by ICC, General Assembly, IPA, IEPA, MISO, PJM, FERC</text>
+    </svg>
+    <figcaption><b>How to read it.</b> Read from top to bottom. Each box is a layer that pushes on the next one. <b>What it shows.</b> Adding renewable megawatts does not by itself fix transmission limits, bad weather reliability or the hours when the sun is down. Keeping fossil plants without addressing emissions and community impact is not a full answer either. <b>So what.</b> Every choice touches all of these layers, which is why a single slogan rarely holds up.</figcaption>
+  </figure>
+
+  <div id="partlist"></div>
+</section>
+
+<section class="lesson" id="findings">
+  <header><div class="num">F</div><div><h2>Ten findings, tap to open</h2><p class="obj">The short list of what the two days added up to. Each one links to the lesson that explains it.</p></div></header>
+  <div id="findlist"></div>
+</section>
+
+<section class="lesson" id="review">
+  <header><div class="num">R</div><div><h2>Review cards, timeline and the three short briefings</h2><p class="obj">Tap a card to see the answer. Try to say the answer first. Come back to this page on day two and day five, because spaced practice is what makes the learning stay.</p></div></header>
+
+  <h3>Review cards</h3>
+  <div class="cards" id="cards"></div>
+
+  <h3>Timeline of milestones</h3>
+  <ul class="timeline" id="timeline"></ul>
+  <p class="obj">Dates come from the meetings. Confirm each one before relying on it.</p>
+
+  <h3>Three ready to use briefings</h3>
+  <div class="script"><h3>General recap</h3><p class="len">About 90 seconds</p>
+  <blockquote data-sec="90">Over two days we heard a consistent message from Operations, Regulatory Affairs and leadership. Illinois is moving through a major energy transition, and we have some immediate reliability challenges to handle along the way. On the operations side we heard about more storms, an aging distribution system, and how complicated it is to connect a lot of solar. We also heard about a real situation where operators prepared for possible customer outages because of transmission limits. The Venice plant was a good example. It does not run every day, but it helped during a recent Metro East emergency, and it is scheduled to retire in 2030. The question is what will do that job after it is gone. The resource planning discussion added the limits of short duration batteries, the possible capacity shortfalls in downstate Illinois, and the cost of new resources. We also spent time on affordability, including protections against data center costs and concerns about third party supplier charges. Our next step is to make all of this understandable, so policymakers can see how reliable service, infrastructure investment, environmental goals and customer bills connect.</blockquote></div>
+
+  <div class="script"><h3>Venice and reliability</h3><p class="len">About 45 seconds</p>
+  <blockquote data-sec="45">One of the biggest issues was the future of the Venice plant. It is a gas peaker in the Metro East that does not run all the time, but it can start quickly when the grid is stressed. It helped stabilize a recent transmission emergency, and it is scheduled to retire in 2030 under state law. The concern is not about keeping an old plant open. It is about having a dependable replacement before we remove something that has proven its value, while also respecting the environmental and community impacts and the local tax effects.</blockquote></div>
+
+  <div class="script"><h3>Grid investment and renewables</h3><p class="len">About 45 seconds</p>
+  <blockquote data-sec="45">A key takeaway from operations is that adding renewable energy also takes investment in the grid. We have a lot of solar connected and much more waiting. Many projects sit on rural lines that were never built for power flowing backward. It is like plugging too many things into one outlet. The answer is not more electricity. It is a stronger circuit. Our job is to explain why studies, substations and stronger lines are needed to bring more renewable energy online without hurting service for current customers.</blockquote></div>
+
+  <h3>Keep learning on the hub</h3>
+  <div class="lessoncards">
+    <a class="lc" href="grid-plan.html"><b>Grid Plan Knowledge Center</b><small>The Multi-Year Integrated Grid Plan with flashcards and a 26 question check</small></a>
+    <a class="lc" href="illinois-battery-storage-primer.html"><b>Illinois Battery Storage Primer</b><small>Mind maps and a 30 question quiz</small></a>
+    <a class="lc" href="illinois-irp-workshop-2026.html"><b>Illinois IRP Workshop</b><small>The September 24 modeling cases and a debrief</small></a>
+    <a class="lc" href="future-of-gas.html"><b>Illinois Future of Gas</b><small>The ICC proceeding with scripts and two quizzes</small></a>
+    <a class="lc" href="primer.html"><b>Illinois Energy Policy Primer</b><small>Eleven subjects and seven models</small></a>
+    <a class="lc" href="miso-eras-business-acumen-playbook.html"><b>MISO ERAS Playbook</b><small>How need becomes accredited capacity</small></a>
+    <a class="lc" href="illinois-2026-election-briefing.html"><b>Illinois 2026 Election Briefing</b><small>The political backdrop for the spring session</small></a>
+    <a class="lc" href="dcd-index.html"><b>Data Center Desk</b><small>A public reference on data centers, power and Illinois</small></a>
+  </div>
+</section>
+
+<section class="lesson" id="glossary">
+  <header><div class="num">G</div><div><h2>Glossary</h2><p class="obj">Plain meanings for every term in the guide. Type to search.</p></div></header>
+  <input class="search" id="gsearch" type="search" placeholder="Search terms" aria-label="Search glossary">
+  <div class="tablewrap"><table id="gtable"><tr><th>Term</th><th>Plain meaning</th></tr></table></div>
+  <div class="card note"><h3>Export my notes</h3><p>Your notes and progress stay in this browser only. Download your notes as a text file to keep them.</p><div class="tools"><button class="btn primary" type="button" id="export">Download my notes</button> <button class="btn" type="button" id="reset">Reset my progress</button></div></div>
+</section>
+
+<section class="lesson" id="verify">
+  <header><div class="num">V</div><div><h2>Verify before sharing outside</h2><p class="obj">The meetings are useful for internal strategy. These items should be reconciled before they appear in testimony, handouts, newsletters or filings.</p></div></header>
+  <div class="card checks" id="vlist"></div>
+  <div class="card verify"><h3>Opinion versus finding</h3><p>The speakers have deep expertise, but their conclusions on contested policy are company perspectives. Label them that way. A participant's advocacy position is not an official technical finding.</p></div>
+</section>
+
+<div class="pager"><a class="nx" href="illinois-grid-briefing-part-1.html"><small>Next</small><b>Part 1, Reliability on the wires</b></a></div>
+</main>
+<footer>
+<p>Built from the October 15 and 16, 2026 briefing notes. Figures are as reported in the meetings and are marked where they need checking. Practice numbers inside models are invented for teaching and are labeled as such. This page leaves out internal positions, personnel talk, confidential project examples and informal side conversations. It asks search engines not to list it, but anyone with the link can still open it if it is hosted publicly.</p>
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function sget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jget(k,d){try{return JSON.parse(sget(k,""))||d}catch(e){return d}}
+var P="ilgrid.";
+var LESSONS=[
+{id:"s1",t:"Storms, aging poles and everyday reliability",f:"illinois-grid-briefing-part-1.html"},
+{id:"s2",t:"Why more solar can create local problems",f:"illinois-grid-briefing-part-1.html"},
+{id:"s3",t:"The N-1 emergency, the outage nobody saw",f:"illinois-grid-briefing-part-1.html"},
+{id:"s4",t:"Enough dependable power, and why megawatts differ",f:"illinois-grid-briefing-part-2.html"},
+{id:"s5",t:"Batteries, duration and what they cost",f:"illinois-grid-briefing-part-2.html"},
+{id:"s6",t:"Venice, CEJA and the five plant question",f:"illinois-grid-briefing-part-2.html"},
+{id:"s7",t:"The IRP and the modeled shortfalls",f:"illinois-grid-briefing-part-2.html"},
+{id:"s8",t:"Markets, plans and who decides",f:"illinois-grid-briefing-part-3.html"},
+{id:"s9",t:"Data centers, large loads and the one bill problem",f:"illinois-grid-briefing-part-3.html"},
+{id:"s10",t:"Gas, bills to watch and turning engineering into a decision",f:"illinois-grid-briefing-part-4.html"}
+];
+var Q={};
+function fmt(n){return Math.round(n).toLocaleString()}
+function svgEl(w,h,label,inner){return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+label+'">'+inner+'</svg>'}
+
+function lfile(id){var l=LESSONS.filter(function(x){return x.id===id})[0];return l.f+"#"+id}
+
+/* study plan */
+(function(){
+  var steps=["Day 1. Read Part 1 and say each script out loud once.","Day 2. Do the review cards below before rereading anything.","Day 3. Read Part 2 and try the models without looking at the notes.","Day 4. Read Parts 3 and 4.","Day 5. Teach one lesson out loud in two minutes. If you cannot, reread its plain words box.","Day 10. Redo the quizzes and fill in the After column above."];
+  var d=jget(P+"plan",{}),h="";
+  steps.forEach(function(s,i){h+='<label><input type="checkbox" data-p="'+i+'">'+s+'</label>'});
+  $("#plan").innerHTML=h;
+  $$("input[data-p]").forEach(function(c){c.checked=!!d[c.getAttribute("data-p")];c.addEventListener("change",function(){d[c.getAttribute("data-p")]=c.checked;sset(P+"plan",JSON.stringify(d))})});
+})();
+
+/* before and after */
+(function(){
+  var topics=["SAIFI, SAIDI and blue sky reliability","Solar and the local grid","N-1 and load shedding","Accredited capacity versus nameplate","Batteries, duration and storage cost","Venice, CEJA and retirements","The IRP and modeled shortfalls","MISO, PJM and the three plans","Large load tariff and supplier billing","Explaining an issue in five parts"];
+  var pre=jget(P+"pre2",{}),post=jget(P+"post2",{}),t=$("#ptable");
+  function sel(kind,i,v){var h='<select data-k="'+kind+'" data-i="'+i+'" aria-label="'+(kind==="pre"?"Before":"After")+' rating for '+topics[i]+'"><option value="">rate</option>';for(var n=1;n<=5;n++)h+='<option'+(String(v)===String(n)?' selected':'')+'>'+n+'</option>';return h+'</select>'}
+  topics.forEach(function(n,i){var r=t.insertRow();r.insertCell().textContent=n;r.insertCell().innerHTML=sel("pre",i,pre[i]);r.insertCell().innerHTML=sel("post",i,post[i])});
+  function sum(){
+    var a=0,b=0,c=0;topics.forEach(function(n,i){if(pre[i]&&post[i]){a+=+pre[i];b+=+post[i];c++}});
+    var o=$("#pout");if(c===0){o.style.display="none";return}
+    o.style.display="block";o.innerHTML="Across <b>"+c+"</b> topic"+(c===1?"":"s")+" rated both times, your confidence moved from an average of <b>"+(a/c).toFixed(1)+"</b> to <b>"+(b/c).toFixed(1)+"</b>.";
+  }
+  $$("select[data-k]").forEach(function(s){s.addEventListener("change",function(){var k=s.getAttribute("data-k"),i=s.getAttribute("data-i");(k==="pre"?pre:post)[i]=s.value;sset(P+(k==="pre"?"pre2":"post2"),JSON.stringify(k==="pre"?pre:post));sum()})});
+  sum();
+})();
+
+/* part and lesson list */
+(function(){
+  var parts=[
+   ["Part 1, Reliability on the wires","illinois-grid-briefing-part-1.html","Poles, storms, solar on the local grid and the near miss that nobody saw.",["s1","s2","s3"]],
+   ["Part 2, Enough power and what it costs","illinois-grid-briefing-part-2.html","What the grid can count on, what batteries can and cannot do, Venice and the planning scenarios.",["s4","s5","s6","s7"]],
+   ["Part 3, Markets, plans and big customers","illinois-grid-briefing-part-3.html","Two markets, three plans, large loads and the supplier bill.",["s8","s9"]],
+   ["Part 4, Gas, the Capitol and speaking up","illinois-grid-briefing-part-4.html","Winter gas, spring bills, alignment and a five part way to explain any issue.",["s10"]]
+  ],h="";
+  parts.forEach(function(p){
+    h+='<h3><a href="'+p[1]+'">'+p[0]+'</a></h3><p class="obj" style="margin-top:0">'+p[2]+'</p><div class="lessoncards">';
+    p[3].forEach(function(id){var l=LESSONS.filter(function(x){return x.id===id})[0],n=id.slice(1);h+='<a class="lc" data-s="'+id+'" href="'+l.f+'#'+id+'"><small>Lesson '+n+'</small><b>'+l.t+'</b></a>'});
+    h+='</div>';
+  });
+  $("#partlist").innerHTML=h;
+})();
+
+/* findings */
+(function(){
+  var F=[
+  ["Reliability risks are no longer hypothetical","Operators described a case where one more transmission loss could have meant disconnecting about 500 MW of load. Crews and switching plans were ready first.","s3"],
+  ["Venice is a significant 2030 reliability decision","The roughly 562 MW fast start plant is scheduled to retire under CEJA. Leaders called it critical in a recent Metro East emergency.","s6"],
+  ["Batteries are valuable but do not automatically replace gas peakers","Four hour storage moves energy between hours. It does not give the sustained run time of a fueled plant without more storage and charging.","s5"],
+  ["Renewables are arriving faster than parts of the local grid can take them","About 2 GW of distribution solar operates, about 3.5 GW is under signed agreements and about 10 GW is in the study queue.","s2"],
+  ["Severe weather changes the economics of grid investment","Hardening, automation and crew staging matter more, but approval is a hurdle.","s1"],
+  ["Modeling shows possible large shortfalls later","Scenarios of 7,000 to 8,000 MW of import dependence by the 2040s. These are projections, not current shortages.","s7"],
+  ["Storage costs will be an affordability debate","About $1.6 billion gross and about $890 million modeled net over 20 years for the 520 MW award. These are not immediate bills.","s5"],
+  ["Large data centers need stronger financial safeguards","Readiness tests, study deposits and guarantees to keep canceled projects from shifting costs.","s9"],
+  ["Supplier billing reform is a major 2027 topic","Concerns about overcharges, confusing bills and the utility's role in billing and purchasing receivables.","s9"],
+  ["The next 12 months are decisive","Mitigation plan, November IRP filing, December Grid Plan decision, large load proceedings and the 2027 session.","s7"]
+  ],h="";
+  F.forEach(function(f,i){h+='<details class="find"><summary>'+(i+1)+'. '+f[0]+'</summary><p>'+f[1]+' <a href="'+lfile(f[2])+'">Go to the lesson</a></p></details>'});
+  $("#findlist").innerHTML=h;
+})();
+
+/* flashcards */
+var C=[
+["What is SAIDI?","How long the average customer is without power. SAIFI is how often. CAIDI is the average length of one interruption."],
+["What is blue sky reliability?","Reliability on ordinary days, with major storm days left out. If it slips, the cause is everyday wear."],
+["What is a cascading failure?","One failed pole pulling down the next ones. Reinforced poles at intervals help stop it."],
+["Why can a rural line trip when the system has plenty of power?","Capacity is local. Too many solar projects on one line is like too many plugs in one outlet."],
+["Why does line strength matter for solar?","The same backward flow causes a bigger voltage rise on a weak line. Where a project connects can matter more than its size."],
+["Capacity versus output","Capacity is the rating. Output is what is produced at a given hour. 2 GW of solar is not 25 percent of supply at an evening peak."],
+["What does N-1 test?","Whether the system holds if one major line or generator is lost. It is a minimum standard."],
+["Why can plant location matter as much as size?","Generation near the load reduces what has to cross constrained lines."],
+["Three kinds of reliability","Distribution (local wires), resource adequacy (enough supply) and transmission security (carrying it where needed)."],
+["Nameplate versus accredited","Accredited equals nameplate times the credit factor the grid operator allows."],
+["MW versus MWh","MW is a rate, like a faucet. MWh is an amount, like water in the tub."],
+["Energy math","MWh equals MW times hours. 500 MW for 10 hours is 5,000 MWh."],
+["Blocks to cover 10 hours","Three four hour 500 MW battery blocks, since 10 divided by 4 is 2.5."],
+["Why does the next battery add less?","Once the evening window is covered, remaining risk is in longer stretches, so credit per MW falls."],
+["Gross versus net storage cost","About $1.6 billion gross exposure over 20 years, about $890 million modeled net, for 520 MW. Not a bill."],
+["Why Venice mattered in the emergency","Local fast start generation eased flows on constrained lines into the St. Louis area."],
+["Can a study change a retirement date?","No. It identifies a need. Changing a statutory date needs legal authority."],
+["Import requirement versus deficit","Import requirement means needing outside power. Deficit means credited resources fall below a requirement after imports."],
+["Why is building plants hard under short auctions?","A plant takes five to ten years to build and the auction looks one year ahead."],
+["Three plans","IRP is supply. Grid Plan is wires. Rate Plan is funding."],
+["Proposed versus final order","A proposed order is a recommendation. The Commission decides."],
+["Large load security formula","The greater of the 20 year revenue requirement and 80 percent of ten year transmission revenue."],
+["Letter of credit","Security held in reserve, not a payment."],
+["Purchase of receivables","The utility buys supplier customer balances at a discount, and gains and losses flow back to regulated customers."],
+["Why is a 20 percent higher supply price a smaller percent of the bill?","Delivery charges stay the same, so only the supply part of the bill moves."],
+["Gas storage in one line","Gas goes in during summer and comes out in winter, which softens price spikes."],
+["The winter peak concern","If many homes switch to electric heat, the new demand lands on the coldest hour, when the grid is already stretched."],
+["Why align before reopening language","A small ask can reopen a larger negotiated deal."],
+["The five part model","What is happening, why it matters, the evidence, the tradeoff, the decision."]
+];
+(function(){
+  var h="";C.forEach(function(c,i){h+='<button type="button" class="fc" data-i="'+i+'" aria-label="Flip card"><small>Card '+(i+1)+'</small><span>'+c[0]+'</span></button>'});
+  $("#cards").innerHTML=h;
+  $$(".fc").forEach(function(b){b.addEventListener("click",function(){
+    var i=+b.getAttribute("data-i"),f=b.classList.toggle("flip");
+    b.innerHTML='<small>Card '+(i+1)+(f?' answer':'')+'</small><span>'+(f?C[i][1]:C[i][0])+'</span>';
+  })});
+})();
+
+/* timeline */
+var T=[
+["Late October 2026","Joint mitigation plan draft expected","Agencies address reliability risks tied to retirement requirements. Confirm publication status."],
+["Early to mid November 2026","MISO large load order expected","May affect the suspended large load docket and the 100 MW versus 50 MW threshold."],
+["November 16, 2026","IRP filing due","Moved from the 15th because of the weekend."],
+["December 2026","Grid Plan decision and Future of Gas report expected","Also large load testimony, depending on the MISO order."],
+["January 2027","IRP implementation proceeding expected to open","Six months or more, possibly into November 2027."],
+["Spring 2027","Legislative session","Data centers, supplier billing and other items."],
+["Turn of 2029 into 2030","Venice retirement threshold","Unless a lawful change or exception is established. Confirm exact wording."]
+];
+$("#timeline").innerHTML=T.map(function(t){return '<li><b>'+t[0]+'</b> '+t[1]+'<br><span class="obj">'+t[2]+'</span></li>'}).join("");
+
+/* glossary */
+var G=[
+["SAIFI","How often the average customer loses power in a period."],
+["SAIDI","How long the average customer is without power in a period."],
+["CAIDI","The average length of one interruption. SAIDI divided by SAIFI."],
+["Blue sky reliability","Reliability on ordinary days, with major storm days left out."],
+["Cascading failure","One failure that triggers the next, such as one pole pulling down its neighbors."],
+["DER","Distributed energy resource. Small generation or storage connected to the local grid or behind a customer meter."],
+["Reverse flow","Power moving backward along a line, toward the substation, because of local generation such as solar."],
+["Short circuit ratio","A measure of grid strength where an inverter connects. Low means a weak spot."],
+["N-1","A test of whether the system holds after losing one major element."],
+["Controlled load shedding","Turning off selected customers on purpose to protect equipment, then restoring them."],
+["UFLS","Under frequency load shedding. An automatic system that drops load if frequency falls too low."],
+["Backfeeding","Restoring customers through a different path while repairs continue."],
+["Dispatchable","Can be told to raise or lower output within its limits."],
+["Resource adequacy","Having enough dependable supply when needed."],
+["Transmission security","The high voltage system can carry power where needed within its limits."],
+["Nameplate","The rating on the label. A resource's best day capacity."],
+["Accreditation","The capacity credit a grid operator gives a resource toward reliability. Nameplate times a credit factor."],
+["MW and MWh","MW is a rate of power. MWh is energy over time."],
+["Peaker","A plant that runs rarely, such as on peak days or in emergencies."],
+["CEJA","Illinois Climate and Equitable Jobs Act."],
+["IRP","Integrated Resource Plan. A long range supply plan."],
+["Import requirement","Needing qualifying power from outside a region. Not automatically a shortage."],
+["Capacity deficit","Credited resources fall below a planning requirement, after counting imports."],
+["RTO","Regional transmission organization, such as MISO or PJM."],
+["Vertically integrated","One utility owns generation, wires and service."],
+["Strike price","A contract benchmark price in a storage contract. Not a household rate."],
+["Energy arbitrage","Charging when power is cheap and discharging when it is worth more."],
+["Multi-Year Integrated Grid Plan","The plan for what network to build, such as poles, wires and substations."],
+["Proposed order","A judge's recommendation to the Commission. Not final."],
+["Large load","A customer with very high expected demand, proposed here at 100 MW or more."],
+["Letter of credit","Security that can be drawn on if obligations are not met."],
+["Cost causation","The customer who creates a cost pays for it where rules allow."],
+["ARES","Alternative retail electric supplier."],
+["Purchase of receivables","The utility buys a supplier's customer balances at a discount."],
+["Consolidated billing","One bill carries both delivery and supplier charges."],
+["Competitive neutrality","Rules that limit how a utility may speak about supplier offers."],
+["Winter peak","The highest demand of the winter, usually on the coldest hour."]
+];
+(function(){
+  var gt=$("#gtable");
+  G.forEach(function(g){var r=gt.insertRow();r.insertCell().innerHTML="<b>"+g[0]+"</b>";r.insertCell().textContent=g[1]});
+  $("#gsearch").addEventListener("input",function(){
+    var q=this.value.toLowerCase();
+    for(var i=1;i<gt.rows.length;i++){gt.rows[i].style.display=gt.rows[i].textContent.toLowerCase().indexOf(q)>-1?"":"none"}
+  });
+})();
+
+/* verify list */
+(function(){
+  var V=[
+  "Tornado counts, time periods and comparisons with other states",
+  "Pole count. 1.2 million versus about 900,000",
+  "Venice rating of 562 MW versus output of 500 to 526 MW, and the exact retirement wording",
+  "Venice annual operating limit, exceptions and remaining hours",
+  "All property tax figures. Some names and numbers in the notes were garbled",
+  "E3 shortfall figures. Metric, study year, season and geography",
+  "Battery and solar accreditation values against official MISO methods",
+  "Battery contract mechanics, offset assumptions and whether four or five projects were awarded",
+  "IRP, mitigation plan and implementation dates",
+  "Auction price figures tied to the exact auction",
+  "Missouri build plan. 6 GW versus 9 GW",
+  "Gas heating study and storage savings",
+  "Supplier overcharge figure, affected group and how receivable losses are treated",
+  "Every bill number, sponsor and current status",
+  "Large load tariff status and every number. Examples were pending approval for sharing",
+  "Which statements are company views and not official findings"
+  ];
+  var d=jget(P+"verify",{}),h="";
+  V.forEach(function(v,i){h+='<label><input type="checkbox" data-v="'+i+'">'+v+'</label>'});
+  $("#vlist").innerHTML=h;
+  $$("input[data-v]").forEach(function(c){c.checked=!!d[c.getAttribute("data-v")];c.addEventListener("change",function(){d[c.getAttribute("data-v")]=c.checked;sset(P+"verify",JSON.stringify(d))})});
+})();
+
+/* export and reset */
+$("#export").addEventListener("click",function(){
+  var out="My notes, Illinois Grid Briefing\n\n";
+  LESSONS.forEach(function(l){var n=sget(P+"note."+l.id,"").trim();if(n)out+="Lesson "+l.id.slice(1)+", "+l.t+"\n"+n+"\n\n"});
+  var b=sget(P+"builder.b1","")+" "+sget(P+"builder.b2","")+" "+sget(P+"builder.b3","")+" "+sget(P+"builder.b4","")+" "+sget(P+"builder.b5","");
+  if(b.trim())out+="My script\n"+b.trim()+"\n";
+  var blob=new Blob([out],{type:"text/plain"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="my-grid-briefing-notes.txt";document.body.appendChild(a);a.click();document.body.removeChild(a);
+});
+$("#reset").addEventListener("click",function(){
+  if(!window.confirm("Clear your progress, notes and answers on this device?"))return;
+  try{Object.keys(localStorage).forEach(function(k){if(k.indexOf(P)===0)localStorage.removeItem(k)})}catch(e){}
+  window.location.reload();
+});
+
+/* quizzes */
+$$(".quiz").forEach(function(box){
+  var id=box.getAttribute("data-s"),items=Q[id]||[],answered=0,right=0,key=P+"quiz."+id;
+  var h='<h3>Check yourself</h3><p class="obj">Try to answer in your head before you tap. Pulling an answer out of memory is what makes it stick.</p>';
+  items.forEach(function(it,qi){
+    h+='<div class="q" data-qi="'+qi+'"><p>'+it[0]+'</p>';
+    it[1].forEach(function(o,oi){h+='<button type="button" class="opt" data-oi="'+oi+'">'+o+'</button>'});
+    h+='<div class="why" aria-live="polite">'+it[3]+'</div></div>';
+  });
+  h+='<p class="score" aria-live="polite"></p>';
+  box.innerHTML=h;
+  $$(".q",box).forEach(function(q){
+    var qi=+q.getAttribute("data-qi"),it=items[qi],done=false;
+    $$(".opt",q).forEach(function(b){
+      b.addEventListener("click",function(){
+        if(done)return;done=true;answered++;
+        var oi=+b.getAttribute("data-oi");
+        $$(".opt",q)[it[2]].classList.add("right");
+        if(oi===it[2]){right++}else{b.classList.add("wrong")}
+        $(".why",q).classList.add("show");
+        if(answered===items.length){
+          $(".score",box).textContent="You got "+right+" of "+items.length+(right===items.length?". Strong. Say the script out loud next.":". Reread the plain words box and the models, then try the script.");
+          sset(key,right+"/"+items.length);
+        }
+      });
+    });
+  });
+});
+
+/* progress across all pages */
+var done=jget(P+"done",{});
+function paint(){
+  var n=0;
+  LESSONS.forEach(function(l){
+    if(done[l.id])n++;
+    var c=$('#chips a[data-s="'+l.id+'"]');if(c)c.classList.toggle("done",!!done[l.id]);
+    var b=$("#mark-"+l.id);if(b){b.classList.toggle("done",!!done[l.id]);b.textContent=done[l.id]?"Completed. Tap to undo":"Mark this lesson complete"}
+    var lc=$('.lc[data-s="'+l.id+'"]');if(lc)lc.classList.toggle("done",!!done[l.id]);
+  });
+  var pct=Math.round(n/LESSONS.length*100),pb=$("#progbar");
+  if(pb){pb.style.width=pct+"%";$("#progtxt").textContent=n+" of "+LESSONS.length+" done";$("#progwrap").setAttribute("aria-valuenow",pct)}
+}
+$$(".lesson[data-s]").forEach(function(sec){
+  var id=sec.getAttribute("data-s"),row=document.createElement("div");row.className="markrow";
+  row.innerHTML='<button type="button" class="btn" id="mark-'+id+'">Mark this lesson complete</button><a href="#top">Back to top</a>';
+  sec.appendChild(row);
+  $("#mark-"+id).addEventListener("click",function(){done[id]=!done[id];sset(P+"done",JSON.stringify(done));paint()});
+});
+paint();
+
+/* notes and teach-back */
+$$("textarea[data-note]").forEach(function(t){
+  t.value=sget(P+"note."+t.getAttribute("data-note"),"");
+  t.addEventListener("input",function(){sset(P+"note."+t.getAttribute("data-note"),t.value)});
+});
+$$(".teach input").forEach(function(c,i){
+  var sec=c.closest(".lesson"),k=P+"teach."+(sec?sec.id:"x")+"."+i;
+  c.checked=sget(k,"")==="1";c.addEventListener("change",function(){sset(k,c.checked?"1":"")});
+});
+
+/* scripts: copy and practice timers */
+function copyText(t,btn){
+  function ok(){if(btn){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1400)}}
+  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else{fb()}
+}
+var tmr=null;
+$$(".script blockquote").forEach(function(bq){
+  var n=+bq.getAttribute("data-sec")||45,lab=bq.getAttribute("data-label")||"script";
+  var row=document.createElement("div");row.className="tools";
+  row.innerHTML='<button class="btn" type="button" data-copy>Copy</button><button class="btn" type="button" data-practice>Practice '+n+' seconds</button><span class="timer" aria-live="polite"></span>';
+  bq.parentNode.insertBefore(row,bq.nextSibling);
+  $("[data-copy]",row).addEventListener("click",function(){copyText(bq.textContent,this)});
+  $("[data-practice]",row).addEventListener("click",function(){
+    var out=$(".timer",row);
+    if(tmr){clearInterval(tmr);tmr=null}
+    var left=n;out.textContent=left+"s";
+    tmr=setInterval(function(){left--;out.textContent=left>0?left+"s":"Time";if(left<=0){clearInterval(tmr);tmr=null}},1000);
+  });
+});
+
+})();
+</script>
+</body>
+</html>

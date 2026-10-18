@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Part 2, Enough power and what it costs</title>
+<style>
+:root{--bg:#fbfaf7;--text:#1d2330;--muted:#5b6475;--card:#ffffff;--border:#e3ded3;--accent:#c9560a;--accent-soft:#fdebdc;--teal:#0f766e;--teal-soft:#dff3f0;--warn:#9a6700;--warn-soft:#fff4d6;--bad:#b42318;--bad-soft:#fde8e6;--good:#1a7f37;--good-soft:#e1f5e6;--shadow:0 1px 2px rgba(20,25,40,.06),0 4px 14px rgba(20,25,40,.05);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}}
+:root[data-theme="dark"]{--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;padding-bottom:70px}
+a{color:var(--teal)}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.topbar .row{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+.prog{flex:1;min-width:120px;height:10px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .4s}
+.progtxt{font-size:13px;color:var(--muted);white-space:nowrap}
+nav.parts{max-width:1100px;margin:0 auto;padding:0 16px 6px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.parts a{flex:0 0 auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:4px 10px;background:var(--bg)}
+nav.parts a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.chips{max-width:1100px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{flex:0 0 auto;font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:99px;padding:3px 10px;background:var(--bg)}
+nav.chips a.done{background:var(--good-soft);border-color:var(--good)}
+nav.chips a:hover,nav.parts a:hover{border-color:var(--accent)}
+.btn{font:inherit;font-size:14px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:10px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.sel{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:700}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+.hero{padding:26px 0 8px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:8px 0}
+.hero p.sub{color:var(--muted);font-size:18px;margin:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.twoway{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.threeway{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.twoway,.threeway{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 10px}
+.pill.o{background:var(--accent-soft);color:var(--accent)}
+.pill.t{background:var(--teal-soft);color:var(--teal)}
+.pill.b{background:var(--bad-soft);color:var(--bad)}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:0}
+h3{font-size:20px;margin:24px 0 6px}
+h4{font-size:17px;margin:16px 0 4px}
+.lesson{border-top:2px solid var(--border);margin-top:56px;padding-top:24px}
+.lesson:first-of-type{margin-top:28px}
+.lesson>header{display:flex;gap:14px;align-items:flex-start}
+.num{flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:22px;display:grid;place-items:center}
+.obj{color:var(--muted);margin:4px 0 0}
+.plain{border-left:6px solid var(--teal);background:var(--teal-soft)}
+.mix{border-left:6px solid var(--warn);background:var(--warn-soft)}
+.verify{border-left:6px solid var(--bad);background:var(--bad-soft)}
+.note{border-left:6px solid var(--accent);background:var(--accent-soft)}
+.card.plain h3,.card.mix h3,.card.verify h3,.card.note h3,.card.deeper h3{margin-bottom:4px;font-size:16px;text-transform:uppercase;letter-spacing:.05em}
+.card.deeper{border-left:6px solid var(--muted)}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+figure{margin:14px 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+svg{max-width:100%;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--text);font:14px -apple-system,Segoe UI,Arial,sans-serif}
+svg .t2{fill:var(--muted);font-size:12px}
+svg .tw{fill:#fff;font-weight:700}
+svg .box{fill:var(--card);stroke:var(--border);stroke-width:2}
+svg .boxo{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+svg .boxt{fill:var(--teal-soft);stroke:var(--teal);stroke-width:2}
+svg .boxb{fill:var(--bad-soft);stroke:var(--bad);stroke-width:2}
+svg .boxg{fill:var(--good-soft);stroke:var(--good);stroke-width:2}
+svg .boxw{fill:var(--warn-soft);stroke:var(--warn);stroke-width:2}
+svg .pole{stroke:var(--muted);stroke-width:6;stroke-linecap:round}
+svg .pole.strong{stroke:var(--teal);stroke-width:10}
+svg .pole.fell{stroke:var(--bad)}
+svg .ground{stroke:var(--border);stroke-width:3}
+svg .arrow{stroke:var(--text);stroke-width:3;fill:none}
+svg .arrowo{stroke:var(--accent);stroke-width:4;fill:none}
+svg .arrowb{stroke:var(--bad);stroke-width:4;fill:none}
+svg .arrowt{stroke:var(--teal);stroke-width:4;fill:none}
+svg .lineb{stroke:var(--bad);stroke-width:5;stroke-dasharray:8 5;fill:none}
+svg .linen{stroke:var(--muted);stroke-width:4;fill:none}
+svg .grid{stroke:var(--border);stroke-width:1}
+svg .curve{fill:none;stroke-width:3}
+svg .cl{stroke:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px;color:var(--accent);line-height:1.15}
+.stat span{font-size:13px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.step{flex:1 1 150px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 12px;position:relative}
+.step b{display:block;color:var(--accent)}
+.step small{color:var(--muted)}
+.flow.arrows .step:not(:last-child)::after{content:"\2192";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--accent);font-weight:800;z-index:2}
+@media(max-width:760px){.flow.arrows .step:not(:last-child)::after{content:"\2193";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto}
+/* model panels */
+.model{background:var(--card);border:2px solid var(--accent);border-radius:18px;margin:26px 0;overflow:hidden}
+.model>.mh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);padding:10px 16px;border-bottom:1px solid var(--border)}
+.model>.mh h3{margin:0;font-size:18px}
+.model>.mb{padding:14px 16px}
+.model>.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+.model>.mx>div{padding:12px 16px;font-size:15px;border-right:1px solid var(--border)}
+.model>.mx>div:last-child{border-right:0}
+.model>.mx b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+.model>.mx>.so{background:var(--teal-soft)}
+.model>.mx>.so b{color:var(--teal)}
+@media(max-width:760px){.model>.mx{grid-template-columns:1fr}.model>.mx>div{border-right:0;border-bottom:1px solid var(--border)}}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 18px;margin-bottom:10px}
+.ctl label{display:block;font-weight:600;font-size:15px;margin:0 0 2px}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl input[type=number],.ctl select,textarea,.search{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.out{margin-top:12px;padding:12px;border-radius:12px;background:var(--accent-soft)}
+.out b{color:var(--accent)}
+.out.bad{background:var(--bad-soft)}.out.bad b{color:var(--bad)}
+.out.good{background:var(--good-soft)}.out.good b{color:var(--good)}
+.bar{height:24px;background:var(--border);border-radius:8px;overflow:hidden;margin:6px 0;position:relative}
+.bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.bar.o>i{background:var(--accent)}
+.bar.r>i{background:var(--bad)}
+.bar>span{position:absolute;left:8px;top:0;line-height:24px;font-size:13px;font-weight:700;color:#fff;mix-blend-mode:normal;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.blocks{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.blocks i{width:28px;height:28px;border-radius:6px;background:var(--teal);opacity:.9}
+.blocks i.part{background:linear-gradient(90deg,var(--teal) var(--p,50%),var(--border) var(--p,50%))}
+.quiz{margin:26px 0}
+.quiz h3{margin-bottom:8px}
+.q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.why{display:none;margin-top:8px;font-size:15px;color:var(--muted)}
+.why.show{display:block}
+.score{font-weight:700;color:var(--teal)}
+.script{background:var(--card);border:2px solid var(--teal);border-radius:16px;padding:16px 18px;margin:24px 0}
+.script h3{margin:0 0 2px;color:var(--teal)}
+.script .len{font-size:13px;color:var(--muted);margin:0 0 8px}
+.script blockquote{margin:8px 0;padding:10px 14px;border-left:5px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0}
+.script .hall{border-left-color:var(--accent);background:var(--accent-soft)}
+.qa{display:grid;gap:6px;margin:10px 0}
+.qa div{padding:8px 12px;border-radius:10px}
+.qa .l{background:var(--bg);border:1px solid var(--border)}
+.qa .a{background:var(--teal-soft)}
+.qa b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;display:block;color:var(--muted)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;min-width:48px}
+.teach label{display:block;margin:4px 0}
+.notes textarea{min-height:90px}
+.markrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+details.find{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 14px;margin:8px 0}
+details.find summary{cursor:pointer;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fc{font:inherit;text-align:left;min-height:130px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer}
+.fc:hover{border-color:var(--accent)}
+.fc.flip{background:var(--teal-soft);border-color:var(--teal)}
+.fc small{display:block;color:var(--muted);margin-bottom:6px}
+.timeline{list-style:none;padding:0;margin:0 0 0 8px;border-left:4px solid var(--accent)}
+.timeline li{position:relative;margin:0 0 16px 0;padding-left:20px}
+.timeline li::before{content:"";position:absolute;left:-12px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:4px solid var(--accent)}
+.timeline b{color:var(--accent)}
+.checks label{display:block;padding:8px 0;border-bottom:1px solid var(--border)}
+.checks input{margin-right:8px;transform:scale(1.2)}
+.lessoncards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lc{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.lc:hover{border-color:var(--accent)}
+.lc b{display:block}
+.lc small{color:var(--muted)}
+.lc.done{background:var(--good-soft);border-color:var(--good)}
+.sorter .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sorter .row span.s{flex:1 1 260px}
+.sorter .res{font-size:14px;font-weight:700;min-width:70px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:40px 0 0;padding-top:18px;border-top:2px solid var(--border)}
+.pager a{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;flex:1 1 240px}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted)}
+.pager a.nx{text-align:right}
+footer{max-width:1000px;margin:0 auto;padding:12px 16px 60px;color:var(--muted);font-size:14px}
+@media print{.topbar,.tools,.markrow,.quiz,.model .ctl,.pager{display:none}body{background:#fff;color:#000}}
+
+</style>
+<script src="theme.js"></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to the content</a>
+<div class="topbar">
+  <div class="row">
+    <a class="brand" href="illinois-grid-briefing.html">Illinois Grid Briefing</a>
+    <div class="prog" role="progressbar" aria-label="Lessons completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progwrap"><i id="progbar"></i></div>
+    <span class="progtxt" id="progtxt">0 of 10 done</span>
+    <a class="progtxt" href="index.html">Hub home</a>
+  </div>
+  <nav class="parts" aria-label="Parts of the guide"><a href="illinois-grid-briefing.html">Home</a><a href="illinois-grid-briefing-part-1.html">1 Wires</a><a href="illinois-grid-briefing-part-2.html" class="cur" aria-current="page">2 Supply</a><a href="illinois-grid-briefing-part-3.html">3 Markets</a><a href="illinois-grid-briefing-part-4.html">4 Decisions</a></nav>
+  <nav class="chips" id="chips" aria-label="On this page"><a href="#s4" data-s="s4">4 Adequacy</a><a href="#s5" data-s="s5">5 Batteries</a><a href="#s6" data-s="s6">6 Venice</a><a href="#s7" data-s="s7">7 IRP</a></nav>
+</div>
+<main id="main">
+<section class="hero" id="start">
+  <span class="pill o">Part 2 of 4</span>
+  <h1>Enough power, and what it costs</h1>
+  <p class="sub">Four lessons about supply. How the grid counts dependable power, what batteries can and cannot do, why a rarely used plant can matter, and how long range planning turns into headlines.</p>
+  <div class="card note">
+    <h3>What this part is for</h3>
+    <p>Part 1 was about getting power through the wires. Part 2 is about whether there will be enough power to send. The big idea is that a megawatt on a label and a megawatt you can count on in the hardest hour are different things. Once that clicks, the Venice debate, the battery numbers and the planning scenarios all start to make sense.</p>
+  </div>
+  <div class="card"><h3>Reminder, the three reliability questions</h3>
+    <div class="threeway">
+      <div><span class="pill t">Distribution</span><p>Can power reach the customer on local poles and wires? (Part 1)</p></div>
+      <div><span class="pill o">Resource adequacy</span><p>Is there enough dependable supply when it is needed? (This part)</p></div>
+      <div><span class="pill b">Transmission security</span><p>Can the high voltage system carry it where it is needed? (Parts 1 and 2)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON 4 -->
+<section class="lesson" id="s4" data-s="s4">
+  <header><div class="num">4</div><div><h2>Enough dependable power, and why megawatts differ</h2><p class="obj">You will be able to separate three kinds of reliability, and explain nameplate versus accredited capacity with a worked example.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>A power plant's label tells you its best day. The grid operator asks what you can count on in the hardest hours. Those can be very different numbers, especially for solar and short duration batteries.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>Three ideas that get blurred together</h4>
+  <p>People say "reliability" and mean three different things. All three have to work at once. A failure in any one of them can leave customers in the dark.</p>
+
+  <div class="model" id="m41">
+    <div class="mh"><span class="pill o">Model 4.1</span><h3>Where each kind of reliability lives</h3></div>
+    <div class="mb">
+      <div id="m41svg"></div>
+      <div class="tools" id="m41tabs"></div>
+      <div class="out" id="m41out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Power travels left to right, from where it is made to where it is used. Tap a button to light up one kind of reliability and see where a failure would sit.</div>
+      <div><b>What it shows</b>The same blackout can come from three different places, and each has a different fix. Poles and wires cannot fix a supply shortage. New plants cannot fix a fallen feeder.</div>
+      <div class="so"><b>So what</b>When a legislator says "reliability," ask which one. Naming the layer is the fastest way to get to the right solution.</div>
+    </div>
+  </div>
+
+  <div class="tablewrap"><table>
+    <tr><th>Idea</th><th>Question it asks</th><th>Example of a failure</th></tr>
+    <tr><td>Distribution reliability</td><td>Can power get to the customer on local poles, wires and transformers?</td><td>A fallen tree takes down a neighborhood feeder</td></tr>
+    <tr><td>Resource adequacy</td><td>Will enough dependable generation, storage, imports and demand response exist when needed?</td><td>A cold snap hits and there is not enough supply</td></tr>
+    <tr><td>Transmission security</td><td>Can the high voltage system carry power where it is needed within limits?</td><td>Lines overload even though supply exists somewhere</td></tr>
+  </table></div>
+
+  <h4>Two pressures at once</h4>
+  <p>Leaders said Illinois faces two pressures together. Dispatchable plants, which can be told to raise or lower output, are scheduled to retire under CEJA while new demand grows from data centers, manufacturing and electrification. Wind and solar depend on the weather. Batteries are controllable but limited by what is stored. Leaders also described a net swing of about 4 GW within two hours earlier that week as solar output and behind the meter solar changed. That is a lot for operators to balance in a short time.</p>
+
+  <h4>What accreditation means</h4>
+  <p><b>Accreditation</b> is the amount of capacity the grid operator credits toward reliability. It is the nameplate rating times a credit factor. The credit reflects how much a resource can be counted on in the hours when the system is most at risk. The speakers gave rounded numbers, below. These are speaker reported assumptions, not official MISO factors.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Resource</th><th>Credit as described</th></tr>
+    <tr><td>Nuclear</td><td>About 93 percent</td></tr>
+    <tr><td>Natural gas</td><td>About 85 percent</td></tr>
+    <tr><td>Battery storage</td><td>About 64 to 65 percent now, possibly falling toward 50 percent as more are added</td></tr>
+    <tr><td>Solar</td><td>About 40 to 50 percent in summer and 25 to 30 percent in winter now, possibly falling to about 5 percent by 2028 to 2029</td></tr>
+  </table></div>
+
+  <div class="model" id="m42">
+    <div class="mh"><span class="pill o">Model 4.2</span><h3>From the label to the count</h3></div>
+    <div class="mb">
+      <div class="ctl">
+        <div><label for="m42r">Resource</label>
+        <select id="m42r"><option value="85">Natural gas, 85 percent</option><option value="93">Nuclear, 93 percent</option><option value="65">Battery today, 65 percent</option><option value="50">Battery later, 50 percent</option><option value="45">Solar today in summer, 45 percent</option><option value="28">Solar today in winter, 28 percent</option><option value="5">Solar projected later, 5 percent</option></select></div>
+        <div><label for="m42m">Nameplate megawatts: <span id="m42mv"></span></label><input id="m42m" type="range" min="10" max="1000" step="10" value="100"></div>
+      </div>
+      <div><b>Nameplate (the label)</b><div class="bar o"><i id="m42b1" style="width:100%"></i><span id="m42t1"></span></div></div>
+      <div><b>Accredited (what the grid counts)</b><div class="bar"><i id="m42b2"></i><span id="m42t2"></span></div></div>
+      <div class="out" id="m42out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The top bar is always full. The bottom bar shows the share that counts toward reliability. The credit factors are the speaker reported values from the table above.</div>
+      <div><b>What it shows</b>Accredited equals nameplate times credit. A 100 MW gas plant counts about 85 MW. A 100 MW solar farm in the future case counts about 5 MW, even though it still makes plenty of clean energy.</div>
+      <div class="so"><b>So what</b>Adding megawatts and adding reliability are not the same thing. When you hear a big number of new megawatts, ask how many accredited megawatts it is.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m43">
+    <div class="mh"><span class="pill o">Model 4.3</span><h3>Build a portfolio, then count it</h3></div>
+    <div class="mb">
+      <p>Pick a mix of resources for an imaginary region. The hardest hour needs 1,000 accredited MW. These are invented teaching numbers.</p>
+      <div class="ctl">
+        <div><label for="m43g">Natural gas: <span id="m43gv"></span> MW</label><input id="m43g" type="range" min="0" max="1000" step="50" value="400"></div>
+        <div><label for="m43n">Nuclear: <span id="m43nv"></span> MW</label><input id="m43n" type="range" min="0" max="1000" step="50" value="200"></div>
+        <div><label for="m43b">Battery storage: <span id="m43bv"></span> MW</label><input id="m43b" type="range" min="0" max="1000" step="50" value="200"></div>
+        <div><label for="m43s">Solar: <span id="m43sv"></span> MW</label><input id="m43s" type="range" min="0" max="2000" step="50" value="600"></div>
+      </div>
+      <div class="tools"><button class="btn sel" type="button" id="m43now">Credit factors today</button><button class="btn" type="button" id="m43later">Credit factors later (battery 50, solar 5)</button></div>
+      <div><b>Nameplate total</b><div class="bar o"><i id="m43b1"></i><span id="m43t1"></span></div></div>
+      <div><b>Accredited total, against a need of 1,000</b><div class="bar"><i id="m43b2"></i><span id="m43t2"></span></div></div>
+      <div class="out" id="m43out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Both bars share a scale of 2,000 MW. The accredited bar turns red if it falls short of the 1,000 MW need. Switch to "later" credit factors and watch what happens.</div>
+      <div><b>What it shows</b>A region can have far more nameplate than it needs and still be short at the hardest hour, because the mix matters as much as the total.</div>
+      <div class="so"><b>So what</b>"We are building plenty of megawatts" and "we are short" can both be true. The honest question is how many accredited megawatts the mix provides.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m44">
+    <div class="mh"><span class="pill o">Model 4.4</span><h3>A rate is not an amount</h3></div>
+    <div class="mb">
+      <p>MW is how fast power flows, like a faucet. MWh is how much has flowed, like water in the tub. Set both and see the amount.</p>
+      <div class="ctl">
+        <div><label for="m44p">Power: <span id="m44pv"></span> MW</label><input id="m44p" type="range" min="50" max="1000" step="50" value="500"></div>
+        <div><label for="m44h">Running for: <span id="m44hv"></span> hours</label><input id="m44h" type="range" min="1" max="24" value="4"></div>
+      </div>
+      <div class="out" id="m44out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Energy in MWh equals power in MW times hours. The same MWh can come from a big rate for a short time or a small rate for a long time.</div>
+      <div><b>What it shows</b>A solar farm can make a lot of MWh over a year and still add little MW in the hours the system is most stretched.</div>
+      <div class="so"><b>So what</b>Clean energy totals (MWh) and reliability contribution (accredited MW) answer different questions. Say which one you mean.</div>
+    </div>
+  </div>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>A 5 percent credit does not mean solar makes only 5 percent of its energy. It means it contributes little in the riskiest hours.</li>
+  <li>MW is a rate. MWh is an amount. A plant can produce a lot of clean MWh and still help little at the worst hour.</li>
+  <li>Accreditation is not a judgment about whether a resource is good. It is a measure of how it helps in one specific job.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>The solar decline to 5 percent should be matched to the exact E3 scenario and MISO method. The study year and season matter.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="miso-eras-business-acumen-playbook.html">MISO ERAS Playbook</a> walks through how need becomes accredited capacity. The <a href="primer-topic-markets.html">Primer markets subject</a> covers the wholesale side.</p></div>
+
+  <div class="quiz" data-s="s4"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">There is a difference between how much power a plant can make on its best day and how much the grid can count on in its worst hour. Grid planners give each resource a credit for that. A gas plant gets a high credit. Solar gets a lower and falling one, because the hardest hours often come when the sun is down. That is why adding megawatts and adding reliability are not the same thing.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">A plant's label is its best day. The grid counts what it can rely on in the worst hour. A gas plant counts most of its label. Solar counts much less and falling, because the toughest hours are often after sunset. More megawatts is not always more reliability.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>We are adding thousands of megawatts. Why does anyone say we might be short?</div>
+  <div class="a"><b>You say</b>Because the megawatts on the label are not the ones the grid can count on in the hardest hour. Planners credit each resource for what it provides then, and for some resources that credit is much lower. The mix matters as much as the total.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can name the three kinds of reliability</label><label><input type="checkbox"> I can explain accreditation with a 100 MW example</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s4" placeholder="Write it in your own words" aria-label="My notes for lesson 4"></textarea></div>
+</section>
+
+<!-- LESSON 5 -->
+<section class="lesson" id="s5" data-s="s5">
+  <header><div class="num">5</div><div><h2>Batteries, duration and what they cost</h2><p class="obj">You will be able to do the battery duration math, read the storage cost numbers correctly, and describe batteries and peakers as partners, not rivals.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>A four hour battery is like a four hour tank. It is great for moving power around the day. It cannot keep running for ten hours on that tank. A gas plant keeps going as long as it has fuel. They solve related but different problems.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>The math first</h4>
+  <p>Energy equals power times time. A 500 MW battery with four hours of storage holds about 2,000 MWh. It could give 500 MW for four hours, 250 MW for eight hours or about 83 MW for 24 hours. Those are ideal numbers before losses and operating limits.</p>
+  <h4>Why duration matters in an emergency</h4>
+  <p>In a July emergency, a peaker at Venice ran about ten hours straight. To cover 10 hours at 500 MW without recharging, you would need about three four hour battery blocks. The speakers also described a peaker in PJM running 26 days in a row, which shows the limit of short duration storage in a long emergency. Missouri, by contrast, uses batteries to cover the 4 to 5 PM drop in solar while gas plants ramp up, which is a job batteries do well. And batteries cannot recharge on a summer evening without extra solar built to charge them during the day.</p>
+  <h4>Why battery credit can fall</h4>
+  <p>If the riskiest hours were 6 to 9 PM, the first batteries cover that window well. Once the window is covered, the remaining risk moves to longer stretches, so each new battery adds less. That is why the accreditation table in lesson 4 shows battery credit possibly falling toward 50 percent.</p>
+
+  <div class="model" id="m51">
+    <div class="mh"><span class="pill o">Model 5.1</span><h3>How many battery blocks?</h3></div>
+    <div class="mb">
+      <div class="ctl"><div><label for="m51h">Hours the plant must run at 500 MW: <span id="m51hv"></span></label><input id="m51h" type="range" min="1" max="72" value="10"></div></div>
+      <div class="out" id="m51out"></div>
+      <div class="blocks" id="m51blocks" aria-hidden="true"></div>
+      <p class="obj">Each square is one 500 MW, four hour block. Teaching model only. It ignores charging, efficiency, cost and grid limits.</p>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Every square is one 2,000 MWh tank. A partly filled square is a tank you only need part of.</div>
+      <div><b>What it shows</b>The number of blocks grows in a straight line with hours. Ten hours takes three. A multi day event takes dozens.</div>
+      <div class="so"><b>So what</b>Batteries are excellent for hours. Long events are a different problem, which is why "batteries or gas" is the wrong framing.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m52">
+    <div class="mh"><span class="pill o">Model 5.2</span><h3>The tank trade off</h3></div>
+    <div class="mb">
+      <p>For a fixed tank of stored energy, the longer you want it to run, the less power it can give at once.</p>
+      <div class="ctl">
+        <div><label for="m52e">Stored energy: <span id="m52ev"></span> MWh</label><input id="m52e" type="range" min="500" max="4000" step="250" value="2000"></div>
+        <div><label for="m52h">Run it for: <span id="m52hv"></span> hours</label><input id="m52h" type="range" min="1" max="24" value="4"></div>
+      </div>
+      <div id="m52svg"></div>
+      <div class="out" id="m52out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The curve shows the power the tank can deliver for each run time. The dot is your pick. Moving right means longer and lower.</div>
+      <div><b>What it shows</b>Power times hours stays the same. A battery rated for a big number of MW is not a promise of a long run.</div>
+      <div class="so"><b>So what</b>When someone quotes battery megawatts, the next question is always "for how many hours?"</div>
+    </div>
+  </div>
+
+  <div class="model" id="m53">
+    <div class="mh"><span class="pill o">Model 5.3</span><h3>Why the next battery adds less</h3></div>
+    <div class="mb">
+      <p>This is a shape, not a forecast. The first batteries cover the evening peak. Later ones chase a longer, flatter need.</p>
+      <div class="ctl"><div><label for="m53i">Batteries installed in the region: <span id="m53iv"></span> MW</label><input id="m53i" type="range" min="0" max="6000" step="250" value="1500"></div></div>
+      <div id="m53svg"></div>
+      <div class="out" id="m53out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The teal line is accredited MW. The dashed line is what you would get if every MW kept its full first-battery credit. The gap between them is the lost value.</div>
+      <div><b>What it shows</b>Credit per megawatt falls as more storage is added to the same system. The curve flattens.</div>
+      <div class="so"><b>So what</b>"Batteries have a high credit" is true for the first ones. Cost estimates that assume the credit holds can understate the gap, which is why the meeting said costs could be higher if credit falls.</div>
+    </div>
+  </div>
+
+  <h3>The storage cost numbers, kept straight</h3>
+  <ul>
+    <li>The average strike price discussed was about $106 per MWh. That is a contract benchmark, not a household rate.</li>
+    <li>Offsets come from energy arbitrage, which means charging cheap and discharging when power is worth more, and from capacity market value.</li>
+    <li>Procurement results. Ameren's area got 520 MW against a target near 450 MW. ComEd's area got 80 MW against 588 MW, which the meeting attributed to PJM's interconnection queue.</li>
+  </ul>
+
+  <div class="model" id="m54">
+    <div class="mh"><span class="pill o">Model 5.4</span><h3>Gross, offsets and net, two scenarios</h3></div>
+    <div class="mb">
+      <div class="tools"><button class="btn sel" type="button" id="m54a">520 MW award in Ameren's area</button><button class="btn" type="button" id="m54b">Full 3,000 MW target</button></div>
+      <div id="m54bars" style="margin-top:10px"></div>
+      <div class="out" id="m54out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Gross is the modeled contract exposure over 20 years. The offset is the arithmetic gap between two rounded meeting figures. Net is what is left after offsets. For the first case the offset is not a confirmed payment or forecast.</div>
+      <div><b>What it shows</b>Net cost is the number to debate, and it is far smaller than gross. It also rests on assumptions that can move.</div>
+      <div class="so"><b>So what</b>Say "gross contract exposure" or "modeled net cost over 20 years." Never say "customers will pay" a number from this table. None of it is a bill.</div>
+    </div>
+  </div>
+  <p class="obj">For the full 3,000 MW target, the meeting cited about $9.6 billion gross and about $5.6 billion net, and said it could be higher if credit falls. That is a scenario, not a bill. The net per MW figures are simple arithmetic on rounded numbers.</p>
+
+  <div class="model" id="m55">
+    <div class="mh"><span class="pill o">Model 5.5</span><h3>Awards against targets, by area</h3></div>
+    <div class="mb"><div id="m55bars"></div></div>
+    <div class="mx">
+      <div><b>How to read it</b>For each area, the solid bar is what was awarded and the shorter label is the target. Ameren's area cleared its target. ComEd's area did not.</div>
+      <div><b>What it shows</b>Where a project sits in the interconnection queue can decide whether storage actually gets built.</div>
+      <div class="so"><b>So what</b>The headline "Illinois bought 3,000 MW of storage" hides a big difference between regions and between awarded and operating.</div>
+    </div>
+  </div>
+
+  <h4>Partners, not rivals</h4>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Battery</th><th>Gas peaker</th></tr>
+    <tr><td>Best at</td><td>Moving energy across hours, fast response, covering a short drop in solar</td><td>Running as long as fuel lasts, covering long or extreme events</td></tr>
+    <tr><td>Limit</td><td>Fixed tank, needs to recharge, needs extra supply to charge</td><td>Fuel supply, emissions, legal run limits</td></tr>
+    <tr><td>Question it answers</td><td>How do we cover the evening ramp?</td><td>What if it lasts ten hours, or ten days?</td></tr>
+  </table></div>
+
+  <div class="card note"><h3>The fair way to frame it</h3>
+  <p>The honest question is not whether batteries are good or bad. It is how much storage the system needs, where, and what else must come with it for reliability at a reasonable cost.</p></div>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>Gross contract exposure is not what customers pay on day one.</li><li>Awarded megawatts are not operating megawatts.</li><li>A battery's megawatt rating says nothing about how long it can run.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>Contract settlement mechanics, the market offset assumptions, and whether four or five projects were awarded in Ameren's area, since the accounts differ. Many of these figures are company analysis.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="illinois-battery-storage-primer.html">Battery Storage Primer</a> has mind maps and a 30 question quiz. See also the <a href="ipa-battery-storage-procurement.html">IPA procurement page</a> and the <a href="illinois-battery-storage-knowledge-center.html">Battery Storage Knowledge Center</a>.</p></div>
+
+  <div class="quiz" data-s="s5"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">Batteries are valuable, and they do some jobs better than anything else. But a four hour battery has a four hour tank. When a peaker plant has to run ten hours in an emergency, you would need about three battery blocks to match it, and in a multi day event many more. So the right question is not batteries versus gas. It is how much of each the system needs, and what the total bill looks like once you count the contracts honestly.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">A four hour battery has a four hour tank. Great for the evening ramp. Not great when a plant has to run ten hours straight. We need both, and the real question is how much of each and what it costs.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Doesn't storage save customers money?</div>
+  <div class="a"><b>You say</b>It can create value by storing cheaper power and delivering it when power costs more. The question is whether that value covers the contract cost. In the figures presented to us, the first 520 megawatts still left about 890 million dollars in modeled net cost over 20 years. We need transparent modeling and updated assumptions.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can do the MW times hours math</label><label><input type="checkbox"> I can explain gross versus net cost</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s5" placeholder="Write it in your own words" aria-label="My notes for lesson 5"></textarea></div>
+</section>
+
+<!-- LESSON 6 -->
+<section class="lesson" id="s6" data-s="s6">
+  <header><div class="num">6</div><div><h2>Venice, CEJA and the five plant question</h2><p class="obj">You will be able to explain why a rarely used plant can matter, why a reliability finding does not change a law, and what a retirement means for a community.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>Venice is a fast starting gas plant near St. Louis that runs only some hours each year. Operators say it helped stabilize a recent emergency. State law schedules it to close. The honest question is what will do its job after that, and what legal path exists if the answer is nothing.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>The plant and the numbers</h4>
+  <p>Venice Energy Center is in Madison County in the Metro East area. It is described as a peaker with a rating of about 562 MW. Other figures in the meetings, about 500 to 526 MW, describe operating output, so keep rating and output apart. Under CEJA it faces an early retirement date because of its location in an Environmental Justice community, plus annual operating limits. The meetings gave the retirement date as 2030, and the first day's notes said the end of 2029. Those are consistent, since the plant would stop at the turn of the year, but confirm the exact statutory wording.</p>
+  <h4>The July emergency</h4>
+  <p>In the recent emergency, heavy west to east flows into St. Louis stressed regional lines. Operators started Venice to supply power locally. The account says that operators were also getting close to the plant's annual run limits, which is the tension in one picture. Reliability said run it. The law said it had a limited number of hours.</p>
+
+  <figure>
+    <svg viewBox="0 0 740 280" role="img" aria-label="Power flows from the west toward St. Louis along transmission lines. One line is overloaded. A local plant near St. Louis supplies power directly and eases the load on the lines.">
+      <rect class="box" x="20" y="100" width="150" height="60" rx="12"/><text x="95" y="128" text-anchor="middle">Generation</text><text class="t2" x="95" y="146" text-anchor="middle">to the west</text>
+      <rect class="boxo" x="570" y="100" width="150" height="60" rx="12"/><text x="645" y="128" text-anchor="middle">St. Louis area</text><text class="t2" x="645" y="146" text-anchor="middle">customers</text>
+      <path class="linen" d="M170 115h400"/><path class="lineb" d="M170 148h400"/>
+      <text x="370" y="104" text-anchor="middle" class="t2">transmission line</text>
+      <text x="370" y="176" text-anchor="middle" class="t2">overloaded line</text>
+      <rect class="boxt" x="400" y="210" width="150" height="52" rx="12"/><text x="475" y="233" text-anchor="middle">Venice plant</text><text class="t2" x="475" y="250" text-anchor="middle">local supply</text>
+      <path class="arrowt" d="M475 210V165"/><path class="arrowt" d="M465 175l10-10 10 10"/>
+      <text class="t2" x="370" y="30" text-anchor="middle">Conceptual picture, not a power flow study or a map</text>
+    </svg>
+    <figcaption>Power made close to demand reduces what has to squeeze through constrained lines. It can also give local voltage support. This is the same idea as Model 3.1 in Part 1.</figcaption>
+  </figure>
+
+  <div class="twoway">
+    <div class="card"><span class="pill t">Environmental objective</span><p>Cut emissions and address impacts on communities that have carried a heavy pollution burden. The group described Venice as close to homes and in an Environmental Justice area.</p></div>
+    <div class="card"><span class="pill o">Reliability objective</span><p>Keep enough fast, dependable capability to handle sudden shortages and transmission emergencies.</p></div>
+  </div>
+
+  <div class="model" id="m61">
+    <div class="mh"><span class="pill o">Model 6.1</span><h3>The four gates before a retirement</h3></div>
+    <div class="mb">
+      <p>Answer each question for a plant you are discussing. The model shows what posture the evidence supports. This is a thinking tool, not a legal opinion.</p>
+      <div class="sorter" id="m61q"></div>
+      <div class="out" id="m61out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Turn each switch to Yes or No. The message below changes. Notice how many Yes answers it takes before a request sounds credible.</div>
+      <div><b>What it shows</b>A credible position needs evidence of need, a lawful path, a replacement plan and a plan for the community. Missing any one weakens the whole.</div>
+      <div class="so"><b>So what</b>"Keep the plant" is a weak ask. "Prove the replacement first, through a lawful path, with community effects planned" is a strong one that people can say yes to.</div>
+    </div>
+  </div>
+
+  <div class="card note"><h3>The legal distinction to remember</h3>
+  <p>A study can find a need. It cannot by itself change a law. An IRP or a reliability finding may identify a risk, but extending a statutory retirement or relaxing a run limit needs actual legal authority, whether in the statute, in an agency process or in new legislation. A credible Venice plan names that authority, the evidence, and the environmental conditions that would come with any extension.</p></div>
+
+  <h3>What retirement actually involves</h3>
+  <p>It is more than turning the plant off. Retirement can involve notice to the grid operator, reliability review, regulatory compliance, decisions about the equipment and the site, employee planning, fuel and interconnection arrangements, and community coordination. Preparation may need to begin long before the date. The exact grid operator notice rules for gas plants were left as an open question.</p>
+
+  <div class="model" id="m62">
+    <div class="mh"><span class="pill o">Model 6.2</span><h3>The clock on the five plants</h3></div>
+    <div class="mb"><div id="m62svg"></div><div class="out" id="m62out"></div></div>
+    <div class="mx">
+      <div><b>How to read it</b>The line runs from this year to 2040. Each marker is a retirement timeframe discussed in the meetings. The red line is today.</div>
+      <div><b>What it shows</b>Venice is near. The other four are a decade or more away, but the planning and replacement work has long lead times.</div>
+      <div class="so"><b>So what</b>"There is plenty of time" and "we are already late" can both be argued. Lead times for replacement plants and transmission are the deciding fact.</div>
+    </div>
+  </div>
+
+  <h3>The community side</h3>
+  <p>Plants pay property taxes that support schools, fire protection and local government. When a plant closes, the assessed value falls and local budgets can fall with it. Venice's 2024 property tax payment was about $666,526, and about $10.1 million has been paid since 2006 as cited. The wider group looked at five plants, Venice, Goose Creek, Pinckneyville, Raccoon Creek and Kinmundy. A fair profile of each covers rating, accredited capacity, run hours, emergency runs, location limits, taxes, jobs, emissions, legal requirements and alternatives. Doing this respects Environmental Justice concerns instead of treating them as an obstacle.</p>
+
+  <div class="model" id="m63">
+    <div class="mh"><span class="pill o">Model 6.3</span><h3>What a closure does to a tax payment</h3></div>
+    <div class="mb">
+      <p>A simple proportional picture using the cited 2024 payment. Real tax effects depend on how local districts set rates, so treat this as a rough teaching view.</p>
+      <div class="ctl"><div><label for="m63a">Share of the plant's assessed value that disappears: <span id="m63av"></span> percent</label><input id="m63a" type="range" min="0" max="100" step="5" value="100"></div></div>
+      <div><b>Annual payment</b><div class="bar o"><i id="m63b"></i><span id="m63t"></span></div></div>
+      <div class="out" id="m63out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The bar is the yearly payment that remains. At 100 percent the payment drops to zero.</div>
+      <div><b>What it shows</b>The loss lands on specific local bodies, not on the state as a whole.</div>
+      <div class="so"><b>So what</b>This is why local officials care early. Planning for the revenue gap is part of a responsible transition, not an argument against it.</div>
+    </div>
+  </div>
+
+  <div class="tablewrap"><table>
+    <tr><th>Plant</th><th>Retirement timeframe discussed</th><th>What to profile</th></tr>
+    <tr><td>Venice</td><td>2030</td><td>Metro East transmission, emergency runs, emissions</td></tr>
+    <tr><td>Goose Creek</td><td>2040</td><td>Local reliability, run profile, community exposure</td></tr>
+    <tr><td>Pinckneyville</td><td>2040</td><td>Peaking capacity, taxes, transition effects</td></tr>
+    <tr><td>Raccoon Creek</td><td>2040</td><td>Dispatch history, system needs, replacements</td></tr>
+    <tr><td>Kinmundy</td><td>2040</td><td>Seasonal value, local economy, alternatives</td></tr>
+  </table></div>
+  <p class="obj">The 2040 dates come from the strategy context in the meetings, not a fresh legal review of each unit.</p>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>A peaker's value is not measured by hours run. It is measured by what it does in the hours that matter.</li><li>Rating, output and accredited capacity are three different numbers.</li><li>Saying keep the plant is weaker than saying prove the replacement first.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>The exact CEJA run limit and exceptions, remaining permitted hours, the rating versus output, and every property tax figure. Some names and numbers in the notes were garbled.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="ameren-missouri-illinois-ctg.html">CTG Learning Guide</a> covers combustion turbine generation across both states, and the <a href="ctg-fiscal-impact-analysis.html">CTG fiscal impact analysis</a> looks at the tax and local effects.</p></div>
+
+  <div class="quiz" data-s="s6"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 60 seconds</p>
+  <blockquote data-sec="60">Illinois has set important goals to cut power plant emissions, and the community near Venice has carried a real burden. At the same time, some older gas plants still help when the grid is under stress. Venice helped manage a recent Metro East emergency, and it is scheduled to close in 2030. Before that happens, we want confidence that something reliable can do the same job, that local tax and job effects are understood, and that any change fits state law. That is not about delaying the goals. It is about getting the transition right.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">The goals matter, and so does the community near Venice. The plant helped in a recent emergency and it is set to close in 2030. We just want to be sure something dependable can do that job first, and that the local effects are planned for. That is getting the transition right, not slowing it.</blockquote>
+  <div class="qa"><div class="l"><b>Local official asks</b>Are you asking us to choose jobs and taxes over cleaner air?</div>
+  <div class="a"><b>You say</b>No. Both matter. We want to understand the environmental impact, the reliability need and the effect on local services clearly, and look at responsible options well before the retirement date.</div></div>
+  <div class="qa"><div class="l"><b>Advocate asks</b>Isn't this just a way to keep a polluting plant open?</div>
+  <div class="a"><b>You say</b>We are asking for evidence and a lawful path before any change, and for the community effects to be part of the plan. If a dependable replacement is ready, that is a good outcome.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain why a rarely used plant matters</label><label><input type="checkbox"> I can explain why a study does not change a law</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s6" placeholder="Write it in your own words" aria-label="My notes for lesson 6"></textarea></div>
+</section>
+
+<!-- LESSON 7 -->
+<section class="lesson" id="s7" data-s="s7">
+  <header><div class="num">7</div><div><h2>The IRP and the modeled shortfalls</h2><p class="obj">You will be able to describe how an IRP works, and tell an import requirement from a capacity deficit.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>An IRP is a long range checkup. It asks what power the state will need, what will be available, and what has to be added. The headline numbers from it are scenarios, not today's shortages, so how you word them matters.</p></div>
+
+  <h3>Full explanation</h3>
+  <p>An IRP looks at several possible futures instead of one. It combines demand forecasts, existing and retiring plants, renewables, transmission, fuel costs, storage, reserve needs and environmental limits, then compares reliability, cost, emissions, deliverability and buildability.</p>
+  <div class="flow arrows">
+    <div class="step"><b>1 Forecast demand</b><small>Homes, industry, data centers, electrification</small></div>
+    <div class="step"><b>2 Count resources</b><small>Existing and retiring</small></div>
+    <div class="step"><b>3 Model futures</b><small>Normal, high demand, extreme weather</small></div>
+    <div class="step"><b>4 Weigh tradeoffs</b><small>Reliability, cost, emissions, feasibility</small></div>
+    <div class="step"><b>5 Name needs</b><small>New capacity, transmission, storage, timing</small></div>
+  </div>
+  <p>The E3 modeling discussed for MISO Zone 4, which is Ameren Illinois territory in the central and southern part of the state, showed two notable scenarios.</p>
+
+  <div class="model" id="m71">
+    <div class="mh"><span class="pill o">Model 7.1</span><h3>The two modeled scenarios, side by side</h3></div>
+    <div class="mb"><div id="m71bars"></div></div>
+    <div class="mx">
+      <div><b>How to read it</b>Each range is drawn as a lighter bar to the low end and a darker extension to the high end. Both are for Zone 4 and both are modeled scenarios.</div>
+      <div><b>What it shows</b>Even in the second case, where CEJA retirement dates are relaxed, a large gap remains because demand keeps growing. Relaxing dates alone does not close it.</div>
+      <div class="so"><b>So what</b>These numbers are why the topic is hard to settle by slogan. Both "keep the plants" and "retire on schedule" leave a question about what fills the gap.</div>
+    </div>
+  </div>
+  <div class="twoway">
+    <div class="stat"><b>7,000 to 8,000 MW</b><span>Reported import dependence or shortfall by the 2040s in a reference pathway, cited as 2045 in the notes</span></div>
+    <div class="stat"><b>2,500 to 3,000 MW</b><span>Reported deficit even if CEJA retirement dates are relaxed, because demand keeps growing</span></div>
+  </div>
+
+  <div class="model" id="m72">
+    <div class="mh"><span class="pill o">Model 7.2</span><h3>Import requirement or deficit?</h3></div>
+    <div class="mb">
+      <p>Invented teaching numbers for an imaginary zone. The same gap can be an import requirement, a deficit, or both, depending on how much power can actually be brought in.</p>
+      <div class="ctl">
+        <div><label for="m72n">Needed at the hardest hour (with reserves): <span id="m72nv"></span> MW</label><input id="m72n" type="range" min="8000" max="16000" step="250" value="12000"></div>
+        <div><label for="m72s">Accredited supply inside the zone today: <span id="m72sv"></span> MW</label><input id="m72s" type="range" min="4000" max="14000" step="250" value="9500"></div>
+        <div><label for="m72r">Retirements: <span id="m72rv"></span> MW accredited</label><input id="m72r" type="range" min="0" max="4000" step="250" value="1500"></div>
+        <div><label for="m72i">Power that can be imported and delivered: <span id="m72iv"></span> MW</label><input id="m72i" type="range" min="0" max="6000" step="250" value="1500"></div>
+      </div>
+      <div><b>Needed</b><div class="bar o"><i id="m72b1"></i><span id="m72t1"></span></div></div>
+      <div><b>Supply inside the zone after retirements</b><div class="bar"><i id="m72b2"></i><span id="m72t2"></span></div></div>
+      <div><b>Plus imports</b><div class="bar"><i id="m72b3"></i><span id="m72t3"></span></div></div>
+      <div class="out" id="m72out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The gap inside the zone is the import requirement. If imports can cover it, there is no deficit. If they cannot, what is left over is the deficit.</div>
+      <div><b>What it shows</b>The two words are not interchangeable. An import requirement is a dependence. A deficit is a shortfall after imports.</div>
+      <div class="so"><b>So what</b>If you say "deficit" when you mean "import requirement," someone will correct you, and you will lose the room. Say which one, and say it is a scenario.</div>
+    </div>
+  </div>
+
+  <div class="twoway">
+    <div class="card"><span class="pill t">Import requirement</span><p>A region needs qualifying power from outside its borders. Imports might be available if lines and neighboring supply allow. It is not automatically a shortage.</p></div>
+    <div class="card"><span class="pill o">Capacity deficit</span><p>Credited resources fall below a planning requirement. Do not use the two terms as if they mean the same thing.</p></div>
+  </div>
+
+  <div class="model" id="m73">
+    <div class="mh"><span class="pill o">Model 7.3</span><h3>Sort the statements</h3></div>
+    <div class="mb">
+      <p>Tap the best label for each statement. This is practice, and the answers explain themselves.</p>
+      <div class="sorter" id="m73q"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Pick a label for each line. A green result means you matched the idea.</div>
+      <div><b>What it shows</b>Careful words are part of credibility.</div>
+      <div class="so"><b>So what</b>Practice the vocabulary aloud until the difference is automatic.</div>
+    </div>
+  </div>
+
+  <p>The concern raised was that Illinois could retire plants inside its borders while buying power from plants in neighboring states. That may satisfy some state accounting, yet not cut regional emissions, and it leaves Illinois leaning on neighbors during the same weather. It can also move jobs and tax revenue out of state. The counterpoint to keep in mind is that regional trade has real benefits. The test is whether imports are dependable, deliverable, affordable and available under stress.</p>
+
+  <h3>The calendar after the filing</h3>
+  <ul class="timeline">
+    <li><b>Late October 2026</b> A joint mitigation plan by state agencies, following a December 2025 state finding of a reliability shortfall. A draft was expected near the end of October.</li>
+    <li><b>November 16, 2026</b> The IRP filing is due, moved a day because the 15th falls on a weekend.</li>
+    <li><b>January 2027</b> A docketed implementation proceeding was expected, taking six months or more, and could stretch toward November 2027.</li>
+  </ul>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>A scenario is not a forecast of what will happen, and not a current measurement.</li><li>An IRP finding does not by itself change a retirement date.</li><li>"Import dependence" and "deficit" are different words with different consequences.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>The study year, season, geography and exact metric for each number. Also confirm the filing dates and what follows each one.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="illinois-irp-workshop-2026.html">Illinois IRP Workshop page</a> covers the September 24 modeling cases and has its own quiz. The <a href="icc-proceedings.html">ICC Proceedings Briefing</a> tracks the dockets one by one.</p></div>
+
+  <div class="quiz" data-s="s7"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">The state's resource planning work looked at many possible futures, and in some of them central and southern Illinois ends up needing thousands of megawatts it does not have inside its own borders. Those are modeled scenarios, not today's measurements, and we are careful to say so. They do raise a fair question. If we retire plants here, will the power we buy from elsewhere be there, deliverable and affordable on the coldest night? That is the question this plan should answer with evidence.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">The state's planning models show scenarios where downstate Illinois would depend on thousands of megawatts from outside. Those are scenarios, not today's numbers. The fair question is whether that outside power will be there and affordable on the coldest night.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Is Illinois running out of power?</div>
+  <div class="a"><b>You say</b>Not today. The modeling shows scenarios for the 2040s where some regions would rely heavily on imports or fall short if nothing changes. The point of the plan is to decide now what to build and when.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain the five IRP steps</label><label><input type="checkbox"> I can explain import requirement versus deficit</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s7" placeholder="Write it in your own words" aria-label="My notes for lesson 7"></textarea></div>
+</section>
+
+<div class="pager"><a href="illinois-grid-briefing-part-1.html"><small>Previous</small><b>Part 1, Reliability on the wires</b></a><a class="nx" href="illinois-grid-briefing-part-3.html"><small>Next</small><b>Part 3, Markets, plans and big customers</b></a></div>
+</main>
+<footer>
+<p>Built from the October 15 and 16, 2026 briefing notes. Figures are as reported in the meetings and are marked where they need checking. Practice numbers inside models are invented for teaching and are labeled as such. This page leaves out internal positions, personnel talk, confidential project examples and informal side conversations. It asks search engines not to list it, but anyone with the link can still open it if it is hosted publicly.</p>
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function sget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jget(k,d){try{return JSON.parse(sget(k,""))||d}catch(e){return d}}
+var P="ilgrid.";
+var LESSONS=[
+{id:"s1",t:"Storms, aging poles and everyday reliability",f:"illinois-grid-briefing-part-1.html"},
+{id:"s2",t:"Why more solar can create local problems",f:"illinois-grid-briefing-part-1.html"},
+{id:"s3",t:"The N-1 emergency, the outage nobody saw",f:"illinois-grid-briefing-part-1.html"},
+{id:"s4",t:"Enough dependable power, and why megawatts differ",f:"illinois-grid-briefing-part-2.html"},
+{id:"s5",t:"Batteries, duration and what they cost",f:"illinois-grid-briefing-part-2.html"},
+{id:"s6",t:"Venice, CEJA and the five plant question",f:"illinois-grid-briefing-part-2.html"},
+{id:"s7",t:"The IRP and the modeled shortfalls",f:"illinois-grid-briefing-part-2.html"},
+{id:"s8",t:"Markets, plans and who decides",f:"illinois-grid-briefing-part-3.html"},
+{id:"s9",t:"Data centers, large loads and the one bill problem",f:"illinois-grid-briefing-part-3.html"},
+{id:"s10",t:"Gas, bills to watch and turning engineering into a decision",f:"illinois-grid-briefing-part-4.html"}
+];
+var Q={};
+function fmt(n){return Math.round(n).toLocaleString()}
+function svgEl(w,h,label,inner){return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+label+'">'+inner+'</svg>'}
+
+/* Model 4.1 layers */
+(function(){
+  var nodes=[["Generation","plants, wind, solar, storage",20],["Transmission","high voltage lines",205],["Distribution","local poles and wires",390],["Customers","homes, farms, businesses",575]];
+  var info={
+    adequacy:["Resource adequacy","Is there enough dependable supply to send? A failure here is a shortage. No line or pole fix will help, because the power simply is not there.","a"],
+    trans:["Transmission security","Can the high voltage system carry power to where it is needed within its limits? A failure here is overloaded lines even though supply exists somewhere else.","b"],
+    dist:["Distribution reliability","Can power reach the customer on the last miles of poles, wires and transformers? A failure here is a fallen feeder or a broken pole.","c"]
+  };
+  var cur="adequacy",tabs=$("#m41tabs");
+  Object.keys(info).forEach(function(k){var b=document.createElement("button");b.type="button";b.className="btn";b.textContent=info[k][0];b.addEventListener("click",function(){cur=k;draw()});b.setAttribute("data-k",k);tabs.appendChild(b)});
+  function draw(){
+    var hot={adequacy:0,trans:1,dist:2}[cur],s="";
+    nodes.forEach(function(n,i){
+      var on=(i===hot);
+      s+='<rect class="'+(on?'boxo':'box')+'" x="'+n[2]+'" y="40" width="150" height="70" rx="12"/><text x="'+(n[2]+75)+'" y="70" text-anchor="middle" style="font-weight:700">'+n[0]+'</text><text class="t2" x="'+(n[2]+75)+'" y="92" text-anchor="middle">'+n[1]+'</text>';
+      if(i<3)s+='<path class="arrow" d="M'+(n[2]+150)+' 75h35"/><path class="arrow" d="M'+(n[2]+178)+' 68l8 7-8 7"/>';
+    });
+    s+='<text x="'+(nodes[hot][2]+75)+'" y="140" text-anchor="middle" style="fill:var(--bad);font-weight:800">failure sits here</text>';
+    $("#m41svg").innerHTML=svgEl(745,155,"Four boxes showing power moving from generation to transmission to distribution to customers",s);
+    $$("button",tabs).forEach(function(b){b.classList.toggle("sel",b.getAttribute("data-k")===cur)});
+    $("#m41out").innerHTML="<b>"+info[cur][0]+".</b> "+info[cur][1];
+  }
+  draw();
+})();
+
+/* Model 4.2 accreditation */
+(function(){
+  var r=$("#m42r"),m=$("#m42m");
+  function run(){
+    var pc=+r.value,mw=+m.value;$("#m42mv").textContent=fmt(mw);
+    $("#m42t1").textContent=fmt(mw)+" MW";$("#m42b2").style.width=pc+"%";$("#m42t2").textContent=fmt(mw*pc/100)+" MW";
+    $("#m42out").innerHTML=fmt(mw)+" MW of nameplate times "+pc+" percent gives <b>"+fmt(mw*pc/100)+" MW accredited</b>. About <b>"+fmt(mw-mw*pc/100)+" MW</b> of the label does not count toward the hardest hour. Credit factors are speaker reported assumptions.";
+  }
+  r.addEventListener("change",run);m.addEventListener("input",run);run();
+})();
+
+/* Model 4.3 portfolio */
+(function(){
+  var ids=["g","n","b","s"],later=false;
+  var now={g:85,n:93,b:65,s:45},lat={g:85,n:93,b:50,s:5};
+  function run(){
+    var tot=0,acc=0,f=later?lat:now;
+    ids.forEach(function(i){var v=+$("#m43"+i).value;$("#m43"+i+"v").textContent=fmt(v);tot+=v;acc+=v*f[i]/100});
+    $("#m43b1").style.width=Math.min(100,tot/2000*100)+"%";$("#m43t1").textContent=fmt(tot)+" MW";
+    var ab=$("#m43b2");ab.style.width=Math.min(100,acc/2000*100)+"%";ab.parentNode.className="bar"+(acc<1000?" r":"");$("#m43t2").textContent=fmt(acc)+" MW";
+    var o=$("#m43out");
+    if(acc>=1000){o.className="out good";o.innerHTML="Nameplate <b>"+fmt(tot)+" MW</b>, accredited <b>"+fmt(acc)+" MW</b>. This mix meets the 1,000 MW need with <b>"+fmt(acc-1000)+" MW</b> to spare. Only "+Math.round(acc/Math.max(1,tot)*100)+" percent of the label counts."}
+    else{o.className="out bad";o.innerHTML="Nameplate <b>"+fmt(tot)+" MW</b>, accredited <b>"+fmt(acc)+" MW</b>. This mix is <b>"+fmt(1000-acc)+" MW short</b> of the 1,000 MW need, even though the label total is "+(tot>=1000?"above":"below")+" 1,000."}
+  }
+  ids.forEach(function(i){$("#m43"+i).addEventListener("input",run)});
+  $("#m43now").addEventListener("click",function(){later=false;this.classList.add("sel");$("#m43later").classList.remove("sel");run()});
+  $("#m43later").addEventListener("click",function(){later=true;this.classList.add("sel");$("#m43now").classList.remove("sel");run()});
+  run();
+})();
+
+/* Model 4.4 rate vs amount */
+(function(){
+  var p=$("#m44p"),h=$("#m44h");
+  function run(){var mw=+p.value,hr=+h.value;$("#m44pv").textContent=fmt(mw);$("#m44hv").textContent=hr;
+    $("#m44out").innerHTML=fmt(mw)+" MW for "+hr+" hours is <b>"+fmt(mw*hr)+" MWh</b>. Another way to get the same energy: <b>"+fmt(mw*hr/24)+" MW</b> running for a full day, or <b>"+fmt(mw*hr/2)+" MW</b> for two hours.";}
+  p.addEventListener("input",run);h.addEventListener("input",run);run();
+})();
+
+/* Model 5.1 blocks */
+(function(){
+  var bh=$("#m51h");
+  function run(){
+    var h=+bh.value;$("#m51hv").textContent=h;
+    var mwh=500*h,blocks=h/4,full=Math.floor(blocks),part=blocks-full;
+    $("#m51out").innerHTML="Energy needed is 500 MW times "+h+" hours, which is <b>"+fmt(mwh)+" MWh</b>. One block holds 2,000 MWh, so you need <b>"+Math.ceil(blocks)+" block"+(Math.ceil(blocks)===1?"":"s")+"</b> ("+blocks.toFixed(2)+" exactly).";
+    var s="";for(var i=0;i<full;i++)s+="<i></i>";
+    if(part>0.001)s+='<i class="part" style="--p:'+Math.round(part*100)+'%"></i>';
+    $("#m51blocks").innerHTML=s;
+  }
+  bh.addEventListener("input",run);run();
+})();
+
+/* Model 5.2 tradeoff */
+(function(){
+  var E=$("#m52e"),H=$("#m52h");
+  function run(){
+    var e=+E.value,h=+H.value;$("#m52ev").textContent=fmt(e);$("#m52hv").textContent=h;
+    var W=700,Ht=250,x0=60;
+    function X(t){return x0+(t-1)/23*(W-x0-20)}
+    function Y(v){return Ht-34-v/e*(Ht-60)}
+    var g="",v;
+    for(var k=0;k<=4;k++){v=e*k/4;g+='<line class="grid" x1="'+x0+'" y1="'+Y(v)+'" x2="'+(W-20)+'" y2="'+Y(v)+'"/><text class="t2" x="'+(x0-6)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+fmt(v)+'</text>'}
+    [1,4,8,12,16,20,24].forEach(function(t){g+='<text class="t2" x="'+X(t)+'" y="'+(Ht-12)+'" text-anchor="middle">'+t+' h</text>'});
+    var p="M",t;for(t=1;t<=24;t+=0.5){p+=X(t).toFixed(1)+" "+Y(e/t).toFixed(1)+(t<24?"L":"")}
+    var mw=e/h;
+    g+='<path class="curve" d="'+p+'" stroke="var(--teal)"/><circle cx="'+X(h)+'" cy="'+Y(mw)+'" r="7" fill="var(--accent)"/><text class="t2" x="'+(x0+4)+'" y="14">Power (MW) the tank can deliver, by hours of running</text>';
+    $("#m52svg").innerHTML=svgEl(W,Ht,"Curve of deliverable power against hours for a fixed stored energy",g);
+    $("#m52out").innerHTML=fmt(e)+" MWh run for "+h+" hours delivers about <b>"+fmt(mw)+" MW</b>. The same tank could instead give "+fmt(e/4)+" MW for 4 hours or "+fmt(e/10)+" MW for 10 hours.";
+  }
+  E.addEventListener("input",run);H.addEventListener("input",run);run();
+})();
+
+/* Model 5.3 diminishing credit */
+(function(){
+  var I=$("#m53i");
+  function cr(x){return 0.5+0.15*Math.exp(-x/2500)}
+  function run(){
+    var x=+I.value;$("#m53iv").textContent=fmt(x);
+    var W=700,Ht=250,x0=60,mx=6000,my=4000;
+    function X(v){return x0+v/mx*(W-x0-20)}
+    function Y(v){return Ht-34-v/my*(Ht-60)}
+    var g="",v;
+    for(var k=0;k<=4;k++){v=my*k/4;g+='<line class="grid" x1="'+x0+'" y1="'+Y(v)+'" x2="'+(W-20)+'" y2="'+Y(v)+'"/><text class="t2" x="'+(x0-6)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+fmt(v)+'</text>'}
+    [0,1500,3000,4500,6000].forEach(function(t){g+='<text class="t2" x="'+X(t)+'" y="'+(Ht-12)+'" text-anchor="middle">'+fmt(t)+'</text>'});
+    var p="M",d="M",t;for(t=0;t<=mx;t+=250){p+=X(t).toFixed(1)+" "+Y(t*cr(t)).toFixed(1)+(t<mx?"L":"");d+=X(t).toFixed(1)+" "+Y(t*0.65).toFixed(1)+(t<mx?"L":"")}
+    g+='<path class="curve" d="'+d+'" stroke="var(--muted)" stroke-dasharray="6 5"/><path class="curve" d="'+p+'" stroke="var(--teal)"/><circle cx="'+X(x)+'" cy="'+Y(x*cr(x))+'" r="7" fill="var(--accent)"/><text class="t2" x="'+(x0+4)+'" y="14">Accredited MW against MW of batteries installed. Illustrative shape only.</text>';
+    $("#m53svg").innerHTML=svgEl(W,Ht,"Accredited megawatts rising more slowly than installed battery megawatts",g);
+    var c=cr(x)*100,acc=x*cr(x),full=x*0.65;
+    $("#m53out").innerHTML="With "+fmt(x)+" MW installed, credit per MW has slipped to about <b>"+c.toFixed(0)+" percent</b> and the batteries count as about <b>"+fmt(acc)+" MW</b>. If the first-battery credit of 65 percent held, they would count as "+fmt(full)+" MW, so about <b>"+fmt(full-acc)+" MW</b> of expected reliability value would be missing.";
+  }
+  I.addEventListener("input",run);run();
+})();
+
+/* Model 5.4 cost bars */
+(function(){
+  var S={a:{mw:520,g:1600,n:890,lab:"520 MW award in Ameren's area"},b:{mw:3000,g:9600,n:5600,lab:"Full 3,000 MW target"}},cur="a";
+  function run(){
+    var s=S[cur],off=s.g-s.n;
+    function row(l,v,c){return '<div><b>'+l+'</b> about $'+fmt(v)+' million<div class="bar'+(c?' o':'')+'"><i style="width:'+(v/s.g*100)+'%"></i></div></div>'}
+    $("#m54bars").innerHTML=row("Gross modeled contract exposure, 20 years",s.g,true)+row("Implied market value offsets",off,false)+row("Remaining modeled net cost",s.n,true);
+    $("#m54a").classList.toggle("sel",cur==="a");$("#m54b").classList.toggle("sel",cur==="b");
+    $("#m54out").innerHTML="<b>"+s.lab+".</b> Offsets cover about <b>"+Math.round(off/s.g*100)+" percent</b> of gross. Net works out to about <b>$"+(s.n/s.mw).toFixed(2)+" million per MW</b> over 20 years. These are modeled figures, not bills, and they could be higher if battery credit falls.";
+  }
+  $("#m54a").addEventListener("click",function(){cur="a";run()});$("#m54b").addEventListener("click",function(){cur="b";run()});run();
+})();
+
+/* Model 5.5 awards */
+(function(){
+  var rows=[["Ameren's area",520,450],["ComEd's area",80,588]],h="";
+  rows.forEach(function(r){
+    h+='<div style="margin-bottom:10px"><b>'+r[0]+'</b><div class="bar"><i style="width:'+(r[1]/600*100)+'%"></i><span>Awarded '+r[1]+' MW</span></div><div class="bar o"><i style="width:'+(r[2]/600*100)+'%"></i><span>Target about '+r[2]+' MW</span></div></div>';
+  });
+  $("#m55bars").innerHTML=h;
+})();
+
+/* Model 6.1 gates */
+(function(){
+  var Qs=[["Is there documented evidence of a reliability need (an emergency record, a study)?","need"],["Is there a lawful path to any change (statute, agency process or new legislation)?","law"],["Is a dependable replacement identified, with a timeline?","rep"],["Is there a plan for the community, including tax, jobs and Environmental Justice effects?","com"]];
+  var ans={need:null,law:null,rep:null,com:null},box=$("#m61q");
+  Qs.forEach(function(q){
+    var d=document.createElement("div");d.className="row";
+    d.innerHTML='<span class="s">'+q[0]+'</span><button type="button" class="btn" data-v="1">Yes</button><button type="button" class="btn" data-v="0">No</button>';
+    $$("button",d).forEach(function(b){b.addEventListener("click",function(){ans[q[1]]=+b.getAttribute("data-v");$$("button",d).forEach(function(x){x.classList.toggle("sel",x===b)});run()})});
+    box.appendChild(d);
+  });
+  function run(){
+    var o=$("#m61out"),vals=Object.keys(ans).map(function(k){return ans[k]}),n=vals.filter(function(v){return v===1}).length,ans_=vals.filter(function(v){return v!==null}).length;
+    if(ans_<4){o.className="out";o.innerHTML="Answer all four to see the posture the evidence supports.";return}
+    var msg;
+    if(n===4){o.className="out good";msg="<b>A credible ask.</b> You can say: here is the evidence, here is the lawful path, here is the replacement and here is how we are protecting the community. That is a position people can say yes to."}
+    else if(!ans.law){o.className="out bad";msg="<b>Missing a lawful path.</b> A study can find a need but cannot change a law. Name the authority first, whether statute, agency process or legislation."}
+    else if(!ans.need){o.className="out bad";msg="<b>Missing evidence.</b> Without a documented need, the request sounds like a preference. Gather the emergency record or study first."}
+    else if(!ans.rep){o.className="out";msg="<b>Good case for caution.</b> The need and the path are real, but no replacement is identified. The strongest ask here is to prove the replacement before closure."}
+    else{o.className="out";msg="<b>Almost there.</b> Add a community plan. Tax, jobs and Environmental Justice effects should be part of the proposal, not an afterthought."}
+    o.innerHTML=msg+" <span class='obj'>("+n+" of 4 gates answered yes.)</span>";
+  }
+  run();
+})();
+
+/* Model 6.2 plant clock */
+(function(){
+  var yr=Math.max(2026,new Date().getFullYear()),end=2040,W=720,H=170,x0=30;
+  function X(y){return x0+(y-yr)/(end-yr)*(W-x0-30)}
+  var s='<line x1="'+x0+'" y1="90" x2="'+(W-20)+'" y2="90" stroke="var(--border)" stroke-width="4"/>';
+  for(var y=yr;y<=end;y+=2){s+='<text class="t2" x="'+X(y)+'" y="125" text-anchor="middle">'+y+'</text>'}
+  s+='<line x1="'+X(yr)+'" y1="60" x2="'+X(yr)+'" y2="105" stroke="var(--bad)" stroke-width="3"/><text class="t2" x="'+X(yr)+'" y="52" text-anchor="middle" style="fill:var(--bad)">today</text>';
+  s+='<circle cx="'+X(2030)+'" cy="90" r="9" fill="var(--accent)"/><text x="'+X(2030)+'" y="70" text-anchor="middle" style="font-weight:700">Venice, 2030</text>';
+  s+='<circle cx="'+X(2040)+'" cy="90" r="9" fill="var(--teal)"/><text x="'+(X(2040)-10)+'" y="70" text-anchor="end" style="font-weight:700">Four plants, 2040</text><text class="t2" x="'+(X(2040)-10)+'" y="148" text-anchor="end">Goose Creek, Pinckneyville, Raccoon Creek, Kinmundy</text>';
+  $("#m62svg").innerHTML=svgEl(W,H,"Timeline from today to 2040 with Venice marked at 2030 and four other plants at 2040",s);
+  var a=2030-yr,b=2040-yr;
+  $("#m62out").innerHTML="From "+yr+": Venice is about <b>"+(a>0?a+" years":"now or past")+"</b> away, and the other four are about <b>"+b+" years</b> away. The presenters noted that a new plant takes five to ten years to plan and build, so lead time is a real part of the question. The 2040 dates come from the strategy context in the meetings.";
+})();
+
+/* Model 6.3 tax */
+(function(){
+  var A=$("#m63a"),base=666526;
+  function run(){
+    var a=+A.value;$("#m63av").textContent=a;
+    var left=base*(1-a/100);
+    $("#m63b").style.width=(left/base*100)+"%";$("#m63t").textContent="$"+fmt(left)+" a year";
+    $("#m63out").innerHTML="From $"+fmt(base)+" (the cited 2024 payment) to <b>$"+fmt(left)+"</b>. That is <b>$"+fmt(base-left)+"</b> less each year, or about <b>$"+fmt((base-left)*10)+"</b> over ten years, spread across the local bodies that receive the taxes.";
+  }
+  A.addEventListener("input",run);run();
+})();
+
+/* Model 7.1 scenario bars */
+(function(){
+  var rows=[["Reference pathway, 2040s, import dependence or shortfall",7000,8000],["CEJA dates relaxed, still a deficit",2500,3000]],h="";
+  rows.forEach(function(r){
+    h+='<div style="margin-bottom:12px"><b>'+r[0]+'</b><div class="bar" style="height:30px"><i style="width:'+(r[2]/8000*100)+'%;background:var(--accent);opacity:.55"></i><i style="position:absolute;left:0;top:0;width:'+(r[1]/8000*100)+'%;background:var(--accent)"></i><span style="line-height:30px">'+fmt(r[1])+' to '+fmt(r[2])+' MW</span></div></div>';
+  });
+  $("#m71bars").innerHTML=h+'<p class="obj">Modeled scenarios for MISO Zone 4. Not forecasts and not today\'s measurements.</p>';
+})();
+
+/* Model 7.2 import vs deficit */
+(function(){
+  var ids=["n","s","r","i"];
+  function run(){
+    var n=+$("#m72n").value,s=+$("#m72s").value,r=+$("#m72r").value,im=+$("#m72i").value;
+    $("#m72nv").textContent=fmt(n);$("#m72sv").textContent=fmt(s);$("#m72rv").textContent=fmt(r);$("#m72iv").textContent=fmt(im);
+    var inside=Math.max(0,s-r),gap=Math.max(0,n-inside),def=Math.max(0,gap-im),sc=Math.max(n,inside+im,1);
+    $("#m72b1").style.width=(n/sc*100)+"%";$("#m72t1").textContent=fmt(n)+" MW";
+    $("#m72b2").style.width=(inside/sc*100)+"%";$("#m72t2").textContent=fmt(inside)+" MW";
+    $("#m72b3").style.width=((inside+im)/sc*100)+"%";$("#m72t3").textContent=fmt(inside+im)+" MW";
+    var o=$("#m72out");
+    if(gap===0){o.className="out good";o.innerHTML="Supply inside the zone covers the need. <b>No import requirement and no deficit.</b>"}
+    else if(def===0){o.className="out";o.innerHTML="Inside the zone you are short by <b>"+fmt(gap)+" MW</b>. That is an <b>import requirement</b>. Imports of up to "+fmt(im)+" MW can cover it, so there is <b>no deficit</b>, but the zone now depends on power from outside being available and deliverable under stress."}
+    else{o.className="out bad";o.innerHTML="Inside the zone you are short by <b>"+fmt(gap)+" MW</b>, an <b>import requirement</b>. Imports can cover only "+fmt(im)+" MW, so a <b>capacity deficit of "+fmt(def)+" MW</b> remains."}
+  }
+  ids.forEach(function(i){$("#m72"+i).addEventListener("input",run)});run();
+})();
+
+/* Model 7.3 sorter */
+(function(){
+  var L=["Import requirement","Capacity deficit"];
+  var items=[
+   ["The region relies on qualifying power from outside its borders.",0,"That describes needing outside power. It is a dependence, not automatically a shortage."],
+   ["After imports are counted, credited supply is still below what planners require.",1,"A shortfall that remains after imports is a deficit."],
+   ["Even with CEJA dates relaxed, 2,500 to 3,000 MW is still short.",1,"That was the second scenario, described as a deficit that remains because demand keeps growing."],
+   ["The state could retire plants here and buy power from neighbors.",0,"That is the import concern: leaning on power from outside, which may or may not be there under stress."]
+  ];
+  var box=$("#m73q");
+  items.forEach(function(it){
+    var d=document.createElement("div");d.className="row";
+    d.innerHTML='<span class="s">'+it[0]+'</span>'+L.map(function(l,i){return '<button type="button" class="btn" data-i="'+i+'">'+l+'</button>'}).join("")+'<span class="res" aria-live="polite"></span>';
+    $$("button",d).forEach(function(b){b.addEventListener("click",function(){
+      var ok=+b.getAttribute("data-i")===it[1];
+      $$("button",d).forEach(function(x){x.classList.toggle("sel",x===b)});
+      var r=$(".res",d);r.style.color=ok?"var(--good)":"var(--bad)";r.textContent=ok?"Right. ":"Not quite. ";
+      var e=document.createElement("small");e.style.fontWeight="400";e.style.color="var(--muted)";e.textContent=it[2];r.appendChild(e);
+    })});
+    box.appendChild(d);
+  });
+})();
+
+Q.s4=[
+["A 100 MW resource with an 85 percent credit gives how much accredited capacity?",["15 MW","85 MW","100 MW"],1,"Nameplate times credit factor."],
+["Which kind of reliability asks whether enough dependable supply exists in the hardest hours?",["Distribution reliability","Resource adequacy","Transmission security"],1,"Distribution is local wires. Adequacy is supply."],
+["A 5 percent solar credit means solar makes 5 percent of its possible energy.",["True","False, it describes contribution in the riskiest hours"],1,"MW of reliability and MWh of energy are different."],
+["In Model 4.3, why can a mix with lots of nameplate still be short?",["The mix and the credit factors matter, so accredited MW can be far below nameplate","The math is wrong","Solar is always free"],0,"Counting only the label hides how little some resources contribute in the worst hour."]];
+Q.s5=[
+["A 500 MW battery with four hours of storage holds about how much energy?",["500 MWh","2,000 MWh","20,000 MWh"],1,"500 times 4."],
+["How many four hour 500 MW blocks cover 10 hours at 500 MW without recharging?",["Two","Three","Ten"],1,"10 divided by 4 is 2.5, so three."],
+["The gross storage figure of about $1.6 billion is",["What customers pay in year one","Modeled contract exposure over 20 years before offsets","The cost of finished batteries"],1,"Net after modeled offsets was about $890 million."],
+["In Model 5.3, why does the teal line bend below the dashed line?",["Each added battery covers a risk that earlier ones already covered, so credit per MW falls","Batteries lose power","Solar interferes"],0,"Once the evening window is covered, remaining risk is in longer stretches."]];
+Q.s6=[
+["Can a reliability study by itself extend a statutory retirement date?",["Yes","No, a study identifies a need and changing the law needs legal authority"],1,"Know the authority, evidence and conditions."],
+["Which statement is strongest?",["Keep the plant open forever","Close it regardless","Show a dependable replacement and a lawful path before it closes"],2,"It asks for work the listener can agree to."],
+["Why mention local property taxes?",["Plants fund schools and services, so closure affects budgets","They decide reliability","They are irrelevant"],0,"Transition planning should start early."],
+["In Model 6.1, which missing gate makes a request sound like a preference rather than a case?",["Documented evidence of need","The color of the plant","The plant's age"],0,"Without a record of need, the ask has nothing to stand on."]];
+Q.s7=[
+["An import requirement means",["The state is missing that many megawatts today","The region needs qualifying power from outside, which is not automatically a shortage","Transmission has failed"],1,"Do not use it interchangeably with deficit."],
+["The 7,000 to 8,000 MW figure is",["A current measurement","A modeled scenario for the 2040s","An approved plan"],1,"Always say it is a scenario."],
+["In Model 7.2, when is there a deficit?",["Whenever plants retire","When the gap inside the zone is bigger than what imports can cover","Never"],1,"A deficit is the shortfall left after imports."],
+["What is a fair counterpoint to the concern about imports?",["Imports are always unreliable","Regional trade has benefits if imports are dependable, deliverable and affordable","Imports cost nothing"],1,"Test it with evidence."]];
+
+/* quizzes */
+$$(".quiz").forEach(function(box){
+  var id=box.getAttribute("data-s"),items=Q[id]||[],answered=0,right=0,key=P+"quiz."+id;
+  var h='<h3>Check yourself</h3><p class="obj">Try to answer in your head before you tap. Pulling an answer out of memory is what makes it stick.</p>';
+  items.forEach(function(it,qi){
+    h+='<div class="q" data-qi="'+qi+'"><p>'+it[0]+'</p>';
+    it[1].forEach(function(o,oi){h+='<button type="button" class="opt" data-oi="'+oi+'">'+o+'</button>'});
+    h+='<div class="why" aria-live="polite">'+it[3]+'</div></div>';
+  });
+  h+='<p class="score" aria-live="polite"></p>';
+  box.innerHTML=h;
+  $$(".q",box).forEach(function(q){
+    var qi=+q.getAttribute("data-qi"),it=items[qi],done=false;
+    $$(".opt",q).forEach(function(b){
+      b.addEventListener("click",function(){
+        if(done)return;done=true;answered++;
+        var oi=+b.getAttribute("data-oi");
+        $$(".opt",q)[it[2]].classList.add("right");
+        if(oi===it[2]){right++}else{b.classList.add("wrong")}
+        $(".why",q).classList.add("show");
+        if(answered===items.length){
+          $(".score",box).textContent="You got "+right+" of "+items.length+(right===items.length?". Strong. Say the script out loud next.":". Reread the plain words box and the models, then try the script.");
+          sset(key,right+"/"+items.length);
+        }
+      });
+    });
+  });
+});
+
+/* progress across all pages */
+var done=jget(P+"done",{});
+function paint(){
+  var n=0;
+  LESSONS.forEach(function(l){
+    if(done[l.id])n++;
+    var c=$('#chips a[data-s="'+l.id+'"]');if(c)c.classList.toggle("done",!!done[l.id]);
+    var b=$("#mark-"+l.id);if(b){b.classList.toggle("done",!!done[l.id]);b.textContent=done[l.id]?"Completed. Tap to undo":"Mark this lesson complete"}
+    var lc=$('.lc[data-s="'+l.id+'"]');if(lc)lc.classList.toggle("done",!!done[l.id]);
+  });
+  var pct=Math.round(n/LESSONS.length*100),pb=$("#progbar");
+  if(pb){pb.style.width=pct+"%";$("#progtxt").textContent=n+" of "+LESSONS.length+" done";$("#progwrap").setAttribute("aria-valuenow",pct)}
+}
+$$(".lesson[data-s]").forEach(function(sec){
+  var id=sec.getAttribute("data-s"),row=document.createElement("div");row.className="markrow";
+  row.innerHTML='<button type="button" class="btn" id="mark-'+id+'">Mark this lesson complete</button><a href="#top">Back to top</a>';
+  sec.appendChild(row);
+  $("#mark-"+id).addEventListener("click",function(){done[id]=!done[id];sset(P+"done",JSON.stringify(done));paint()});
+});
+paint();
+
+/* notes and teach-back */
+$$("textarea[data-note]").forEach(function(t){
+  t.value=sget(P+"note."+t.getAttribute("data-note"),"");
+  t.addEventListener("input",function(){sset(P+"note."+t.getAttribute("data-note"),t.value)});
+});
+$$(".teach input").forEach(function(c,i){
+  var sec=c.closest(".lesson"),k=P+"teach."+(sec?sec.id:"x")+"."+i;
+  c.checked=sget(k,"")==="1";c.addEventListener("change",function(){sset(k,c.checked?"1":"")});
+});
+
+/* scripts: copy and practice timers */
+function copyText(t,btn){
+  function ok(){if(btn){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1400)}}
+  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else{fb()}
+}
+var tmr=null;
+$$(".script blockquote").forEach(function(bq){
+  var n=+bq.getAttribute("data-sec")||45,lab=bq.getAttribute("data-label")||"script";
+  var row=document.createElement("div");row.className="tools";
+  row.innerHTML='<button class="btn" type="button" data-copy>Copy</button><button class="btn" type="button" data-practice>Practice '+n+' seconds</button><span class="timer" aria-live="polite"></span>';
+  bq.parentNode.insertBefore(row,bq.nextSibling);
+  $("[data-copy]",row).addEventListener("click",function(){copyText(bq.textContent,this)});
+  $("[data-practice]",row).addEventListener("click",function(){
+    var out=$(".timer",row);
+    if(tmr){clearInterval(tmr);tmr=null}
+    var left=n;out.textContent=left+"s";
+    tmr=setInterval(function(){left--;out.textContent=left>0?left+"s":"Time";if(left<=0){clearInterval(tmr);tmr=null}},1000);
+  });
+});
+
+})();
+</script>
+</body>
+</html>

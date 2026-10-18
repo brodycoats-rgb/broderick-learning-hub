@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Part 1, Reliability on the wires</title>
+<style>
+:root{--bg:#fbfaf7;--text:#1d2330;--muted:#5b6475;--card:#ffffff;--border:#e3ded3;--accent:#c9560a;--accent-soft:#fdebdc;--teal:#0f766e;--teal-soft:#dff3f0;--warn:#9a6700;--warn-soft:#fff4d6;--bad:#b42318;--bad-soft:#fde8e6;--good:#1a7f37;--good-soft:#e1f5e6;--shadow:0 1px 2px rgba(20,25,40,.06),0 4px 14px rgba(20,25,40,.05);color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}}
+:root[data-theme="dark"]{--bg:#11151e;--text:#e9e7e2;--muted:#a3abbb;--card:#1a2030;--border:#2c3550;--accent:#ff8a3d;--accent-soft:#3a2415;--teal:#4fd1c5;--teal-soft:#12302e;--warn:#f0c14b;--warn-soft:#352a0d;--bad:#ff8a80;--bad-soft:#3a1816;--good:#6fdc8c;--good-soft:#14301c;--shadow:none;}
+:root[data-theme="light"]{color-scheme:light}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;padding-bottom:70px}
+a{color:var(--teal)}
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+.topbar{position:sticky;top:0;z-index:50;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.topbar .row{max-width:1100px;margin:0 auto;padding:8px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px;color:var(--text);text-decoration:none}
+.prog{flex:1;min-width:120px;height:10px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .4s}
+.progtxt{font-size:13px;color:var(--muted);white-space:nowrap}
+nav.parts{max-width:1100px;margin:0 auto;padding:0 16px 6px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.parts a{flex:0 0 auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:4px 10px;background:var(--bg)}
+nav.parts a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+nav.chips{max-width:1100px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.chips a{flex:0 0 auto;font-size:13px;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:99px;padding:3px 10px;background:var(--bg)}
+nav.chips a.done{background:var(--good-soft);border-color:var(--good)}
+nav.chips a:hover,nav.parts a:hover{border-color:var(--accent)}
+.btn{font:inherit;font-size:14px;border:1px solid var(--border);background:var(--card);color:var(--text);padding:6px 12px;border-radius:10px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.done{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.sel{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);font-weight:700}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 40px}
+.hero{padding:26px 0 8px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:8px 0}
+.hero p.sub{color:var(--muted);font-size:18px;margin:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:16px 0;box-shadow:var(--shadow)}
+.card h3{margin-top:0}
+.twoway{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.threeway{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.twoway,.threeway{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:2px 10px}
+.pill.o{background:var(--accent-soft);color:var(--accent)}
+.pill.t{background:var(--teal-soft);color:var(--teal)}
+.pill.b{background:var(--bad-soft);color:var(--bad)}
+h2{font-size:clamp(24px,3.4vw,32px);line-height:1.2;margin:0}
+h3{font-size:20px;margin:24px 0 6px}
+h4{font-size:17px;margin:16px 0 4px}
+.lesson{border-top:2px solid var(--border);margin-top:56px;padding-top:24px}
+.lesson:first-of-type{margin-top:28px}
+.lesson>header{display:flex;gap:14px;align-items:flex-start}
+.num{flex:0 0 auto;width:46px;height:46px;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:22px;display:grid;place-items:center}
+.obj{color:var(--muted);margin:4px 0 0}
+.plain{border-left:6px solid var(--teal);background:var(--teal-soft)}
+.mix{border-left:6px solid var(--warn);background:var(--warn-soft)}
+.verify{border-left:6px solid var(--bad);background:var(--bad-soft)}
+.note{border-left:6px solid var(--accent);background:var(--accent-soft)}
+.card.plain h3,.card.mix h3,.card.verify h3,.card.note h3,.card.deeper h3{margin-bottom:4px;font-size:16px;text-transform:uppercase;letter-spacing:.05em}
+.card.deeper{border-left:6px solid var(--muted)}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+figure{margin:14px 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+svg{max-width:100%;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--text);font:14px -apple-system,Segoe UI,Arial,sans-serif}
+svg .t2{fill:var(--muted);font-size:12px}
+svg .tw{fill:#fff;font-weight:700}
+svg .box{fill:var(--card);stroke:var(--border);stroke-width:2}
+svg .boxo{fill:var(--accent-soft);stroke:var(--accent);stroke-width:2}
+svg .boxt{fill:var(--teal-soft);stroke:var(--teal);stroke-width:2}
+svg .boxb{fill:var(--bad-soft);stroke:var(--bad);stroke-width:2}
+svg .boxg{fill:var(--good-soft);stroke:var(--good);stroke-width:2}
+svg .boxw{fill:var(--warn-soft);stroke:var(--warn);stroke-width:2}
+svg .pole{stroke:var(--muted);stroke-width:6;stroke-linecap:round}
+svg .pole.strong{stroke:var(--teal);stroke-width:10}
+svg .pole.fell{stroke:var(--bad)}
+svg .ground{stroke:var(--border);stroke-width:3}
+svg .arrow{stroke:var(--text);stroke-width:3;fill:none}
+svg .arrowo{stroke:var(--accent);stroke-width:4;fill:none}
+svg .arrowb{stroke:var(--bad);stroke-width:4;fill:none}
+svg .arrowt{stroke:var(--teal);stroke-width:4;fill:none}
+svg .lineb{stroke:var(--bad);stroke-width:5;stroke-dasharray:8 5;fill:none}
+svg .linen{stroke:var(--muted);stroke-width:4;fill:none}
+svg .grid{stroke:var(--border);stroke-width:1}
+svg .curve{fill:none;stroke-width:3}
+svg .cl{stroke:var(--text)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:24px;color:var(--accent);line-height:1.15}
+.stat span{font-size:13px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0}
+.step{flex:1 1 150px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 12px;position:relative}
+.step b{display:block;color:var(--accent)}
+.step small{color:var(--muted)}
+.flow.arrows .step:not(:last-child)::after{content:"\2192";position:absolute;right:-15px;top:50%;transform:translateY(-50%);color:var(--accent);font-weight:800;z-index:2}
+@media(max-width:760px){.flow.arrows .step:not(:last-child)::after{content:"\2193";right:50%;top:auto;bottom:-17px;transform:translateX(50%)}}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto}
+/* model panels */
+.model{background:var(--card);border:2px solid var(--accent);border-radius:18px;margin:26px 0;overflow:hidden}
+.model>.mh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--accent-soft);padding:10px 16px;border-bottom:1px solid var(--border)}
+.model>.mh h3{margin:0;font-size:18px}
+.model>.mb{padding:14px 16px}
+.model>.mx{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border)}
+.model>.mx>div{padding:12px 16px;font-size:15px;border-right:1px solid var(--border)}
+.model>.mx>div:last-child{border-right:0}
+.model>.mx b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+.model>.mx>.so{background:var(--teal-soft)}
+.model>.mx>.so b{color:var(--teal)}
+@media(max-width:760px){.model>.mx{grid-template-columns:1fr}.model>.mx>div{border-right:0;border-bottom:1px solid var(--border)}}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px 18px;margin-bottom:10px}
+.ctl label{display:block;font-weight:600;font-size:15px;margin:0 0 2px}
+.ctl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctl input[type=number],.ctl select,textarea,.search{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text)}
+.out{margin-top:12px;padding:12px;border-radius:12px;background:var(--accent-soft)}
+.out b{color:var(--accent)}
+.out.bad{background:var(--bad-soft)}.out.bad b{color:var(--bad)}
+.out.good{background:var(--good-soft)}.out.good b{color:var(--good)}
+.bar{height:24px;background:var(--border);border-radius:8px;overflow:hidden;margin:6px 0;position:relative}
+.bar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.bar.o>i{background:var(--accent)}
+.bar.r>i{background:var(--bad)}
+.bar>span{position:absolute;left:8px;top:0;line-height:24px;font-size:13px;font-weight:700;color:#fff;mix-blend-mode:normal;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.blocks{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.blocks i{width:28px;height:28px;border-radius:6px;background:var(--teal);opacity:.9}
+.blocks i.part{background:linear-gradient(90deg,var(--teal) var(--p,50%),var(--border) var(--p,50%))}
+.quiz{margin:26px 0}
+.quiz h3{margin-bottom:8px}
+.q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.why{display:none;margin-top:8px;font-size:15px;color:var(--muted)}
+.why.show{display:block}
+.score{font-weight:700;color:var(--teal)}
+.script{background:var(--card);border:2px solid var(--teal);border-radius:16px;padding:16px 18px;margin:24px 0}
+.script h3{margin:0 0 2px;color:var(--teal)}
+.script .len{font-size:13px;color:var(--muted);margin:0 0 8px}
+.script blockquote{margin:8px 0;padding:10px 14px;border-left:5px solid var(--teal);background:var(--teal-soft);border-radius:0 10px 10px 0}
+.script .hall{border-left-color:var(--accent);background:var(--accent-soft)}
+.qa{display:grid;gap:6px;margin:10px 0}
+.qa div{padding:8px 12px;border-radius:10px}
+.qa .l{background:var(--bg);border:1px solid var(--border)}
+.qa .a{background:var(--teal-soft)}
+.qa b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;display:block;color:var(--muted)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.timer{font-variant-numeric:tabular-nums;font-weight:700;min-width:48px}
+.teach label{display:block;margin:4px 0}
+.notes textarea{min-height:90px}
+.markrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:16px}
+details.find{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 14px;margin:8px 0}
+details.find summary{cursor:pointer;font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fc{font:inherit;text-align:left;min-height:130px;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer}
+.fc:hover{border-color:var(--accent)}
+.fc.flip{background:var(--teal-soft);border-color:var(--teal)}
+.fc small{display:block;color:var(--muted);margin-bottom:6px}
+.timeline{list-style:none;padding:0;margin:0 0 0 8px;border-left:4px solid var(--accent)}
+.timeline li{position:relative;margin:0 0 16px 0;padding-left:20px}
+.timeline li::before{content:"";position:absolute;left:-12px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--card);border:4px solid var(--accent)}
+.timeline b{color:var(--accent)}
+.checks label{display:block;padding:8px 0;border-bottom:1px solid var(--border)}
+.checks input{margin-right:8px;transform:scale(1.2)}
+.lessoncards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lc{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.lc:hover{border-color:var(--accent)}
+.lc b{display:block}
+.lc small{color:var(--muted)}
+.lc.done{background:var(--good-soft);border-color:var(--good)}
+.sorter .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sorter .row span.s{flex:1 1 260px}
+.sorter .res{font-size:14px;font-weight:700;min-width:70px}
+.pager{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:40px 0 0;padding-top:18px;border-top:2px solid var(--border)}
+.pager a{display:block;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 16px;flex:1 1 240px}
+.pager a:hover{border-color:var(--accent)}
+.pager small{display:block;color:var(--muted)}
+.pager a.nx{text-align:right}
+footer{max-width:1000px;margin:0 auto;padding:12px 16px 60px;color:var(--muted);font-size:14px}
+@media print{.topbar,.tools,.markrow,.quiz,.model .ctl,.pager{display:none}body{background:#fff;color:#000}}
+
+</style>
+<script src="theme.js"></script>
+</head>
+<body id="top">
+<a class="skip" href="#main">Skip to the content</a>
+<div class="topbar">
+  <div class="row">
+    <a class="brand" href="illinois-grid-briefing.html">Illinois Grid Briefing</a>
+    <div class="prog" role="progressbar" aria-label="Lessons completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progwrap"><i id="progbar"></i></div>
+    <span class="progtxt" id="progtxt">0 of 10 done</span>
+    <a class="progtxt" href="index.html">Hub home</a>
+  </div>
+  <nav class="parts" aria-label="Parts of the guide"><a href="illinois-grid-briefing.html">Home</a><a href="illinois-grid-briefing-part-1.html" class="cur" aria-current="page">1 Wires</a><a href="illinois-grid-briefing-part-2.html">2 Supply</a><a href="illinois-grid-briefing-part-3.html">3 Markets</a><a href="illinois-grid-briefing-part-4.html">4 Decisions</a></nav>
+  <nav class="chips" id="chips" aria-label="On this page"><a href="#s1" data-s="s1">1 Weather</a><a href="#s2" data-s="s2">2 Solar</a><a href="#s3" data-s="s3">3 N-1</a></nav>
+</div>
+<main id="main">
+<section class="hero" id="start">
+  <span class="pill o">Part 1 of 4</span>
+  <h1>Reliability on the wires</h1>
+  <p class="sub">Three lessons about the poles, wires and emergency planning that keep the lights on. Each one starts with a plain picture, then gives you models you can move around, then a script you can say out loud.</p>
+  <div class="card note">
+    <h3>What this part is for</h3>
+    <p>Before anyone argues about plants, batteries or markets, there is a simpler question. Does power get from the system to the customer on a bad day? Part 1 gives you the vocabulary (SAIFI, SAIDI, blue sky, reverse flow, N-1) and, more important, the pictures that let you explain it to someone who has never thought about it.</p>
+  </div>
+  <div class="card">
+    <h3>How each lesson works</h3>
+    <ol>
+      <li><b>In plain words</b> gives the short version first, so the details have somewhere to land.</li>
+      <li><b>Full explanation</b> builds the real understanding in small steps.</li>
+      <li><b>Models</b> let you change a number and watch what happens. Each model has three notes under it. <i>How to read it</i> tells you where to look. <i>What it shows</i> names the idea. <i>So what</i> connects it to a real conversation.</li>
+      <li><b>Common mix-ups</b> clears up the ideas people confuse most.</li>
+      <li><b>Check yourself</b> asks questions before you move on.</li>
+      <li><b>Say it</b> gives a full script and a 30 second hallway version, with a practice timer.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- LESSON 1 -->
+<section class="lesson" id="s1" data-s="s1">
+  <header><div class="num">1</div><div><h2>Storms, aging poles and everyday reliability</h2><p class="obj">You will be able to explain SAIFI and SAIDI, why one failure can cascade, what blue sky reliability means, and why a grid that is already built still needs steady investment.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>Most of the grid hangs outdoors, so weather hits it directly. Poles get old. Leaders told the group that tornado activity is up, that everyday reliability slipped after a period of improvement, and that steady replacement is how you turn that around. Think of keeping a grid healthy the way you think of keeping up roads and bridges. It is never finished, and the cost of stopping shows up later.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>Three pressures at once</h4>
+  <p>Operations leaders described three pressures at the same time. Weather is more severe, equipment is aging, and customers expect power to stay on more than ever. They cited about 50 Illinois tornadoes a year in an earlier period, about 150 a year recently, and 210 to 212 so far in 2026. Treat those as figures from the meeting, not weather service statistics.</p>
+  <h4>Why one failure becomes many</h4>
+  <p>Distribution poles are strung in a line, with wire pulling on each one. When one pole falls it can pull on the next, and the next. That chain reaction is called a <b>cascading failure</b>. One answer discussed was setting a stronger composite pole at regular spacing, about every fifth pole, so a falling line has something solid to stop against. Leaders also discussed raising the wind design standard from about 60 to 70 mph, using stronger materials, and staging crews and trailers before a storm arrives. None of this makes a grid storm proof. The goal is fewer failed assets and faster restoration.</p>
+  <h4>Two scorecards, and why "blue sky" matters</h4>
+  <p><b>SAIFI</b> counts how often the average customer loses power. <b>SAIDI</b> adds up how long. Together they answer "how often" and "how long." Utilities usually report them two ways. One includes everything. The other, called <b>blue sky</b> reliability, leaves out the major storm days. The meeting focused on blue sky because it reveals the everyday health of the system. If blue sky numbers slip, the cause is routine wear and tear, not just the big storms everyone remembers.</p>
+  <h4>The history that explains the tone</h4>
+  <p>A 2011 smart grid law gave investment predictability, and reliability improved. Later, the first multi-year grid plan was rejected and a scaled back plan followed. The current effort is called Reversing the Trend. Think of reliability like a muscle. It takes a long time to build and shows up quickly when you stop training.</p>
+
+  <div class="flow arrows">
+    <div class="step"><b>2011</b><small>Smart grid law gives investment predictability</small></div>
+    <div class="step"><b>Years of gains</b><small>Reliability improves</small></div>
+    <div class="step"><b>First plan rejected</b><small>Scaled back plan follows</small></div>
+    <div class="step"><b>Slippage</b><small>Everyday reliability dips</small></div>
+    <div class="step"><b>Reversing the Trend</b><small>The current effort</small></div>
+  </div>
+
+  <div class="model" id="m11">
+    <div class="mh"><span class="pill o">Model 1.1</span><h3>The domino pole simulator</h3></div>
+    <div class="mb">
+      <p>Twenty poles stand in a row. Pick where the first one fails and how often a reinforced pole is set in the line. Then see how far the fall travels.</p>
+      <div class="ctl">
+        <div><label for="m11s">Reinforced pole every <span id="m11sv"></span> poles</label>
+        <select id="m11s"><option value="0">No reinforced poles</option><option value="10">Every 10th pole</option><option value="5" selected>Every 5th pole</option><option value="3">Every 3rd pole</option></select></div>
+        <div><label for="m11p">First pole to fail is number <span id="m11pv">3</span></label>
+        <input id="m11p" type="range" min="1" max="20" value="3"></div>
+      </div>
+      <div id="m11svg"></div>
+      <div class="out" id="m11out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Gray poles stand. Red poles are down. Thick teal poles are reinforced. The fall stops at the first teal pole after the one that fails.</div>
+      <div><b>What it shows</b>Where the weak points are set, and how often, decides how far a single failure can travel. It is cheaper to stop a chain than to rebuild one.</div>
+      <div class="so"><b>So what</b>"Replace aging poles" sounds like a maintenance line item. This model turns it into a result a legislator can picture: a smaller footprint when a storm hits.</div>
+    </div>
+  </div>
+  <p class="obj">The meeting described cascades of about 30 poles being reduced to about 4 with this approach. Treat that as an operations estimate. The model above is a conceptual picture, not an engineering design.</p>
+
+  <div class="model" id="m12">
+    <div class="mh"><span class="pill o">Model 1.2</span><h3>SAIFI, SAIDI and the blue sky split</h3></div>
+    <div class="mb">
+      <p>These are invented teaching numbers for a small imaginary utility. They are not Ameren Illinois results. Change the inputs, then switch the big storm on and off.</p>
+      <div class="ctl">
+        <div><label for="m12c">Customers served: <span id="m12cv"></span></label><input id="m12c" type="range" min="50000" max="500000" step="10000" value="100000"></div>
+        <div><label for="m12e">Ordinary outage events in the year: <span id="m12ev"></span></label><input id="m12e" type="range" min="50" max="600" step="10" value="300"></div>
+        <div><label for="m12a">Average customers hit per ordinary event: <span id="m12av"></span></label><input id="m12a" type="range" min="100" max="1500" step="50" value="400"></div>
+        <div><label for="m12m">Average minutes to restore an ordinary event: <span id="m12mv"></span></label><input id="m12m" type="range" min="30" max="240" step="5" value="90"></div>
+      </div>
+      <div class="tools"><button class="btn" type="button" id="m12btn">Add one major storm day</button><span class="obj" id="m12lab"></span></div>
+      <div class="twoway">
+        <div><b>Blue sky (storm day removed)</b><div class="bar"><i id="m12b1"></i><span id="m12t1"></span></div></div>
+        <div><b>All events (as customers experience it)</b><div class="bar o"><i id="m12b2"></i><span id="m12t2"></span></div></div>
+      </div>
+      <div class="out" id="m12out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>SAIFI is customer interruptions divided by customers served. SAIDI is customer minutes lost divided by customers served. CAIDI is SAIDI divided by SAIFI, the average length of one interruption.</div>
+      <div><b>What it shows</b>One huge storm can swamp a year of ordinary performance. That is why leaders watch blue sky separately. It shows what routine reliability looks like when the headlines are quiet.</div>
+      <div class="so"><b>So what</b>If someone says "reliability is fine, look at the average," ask which average. A single storm can hide a slow slide in everyday service, or make a good year look bad.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m13">
+    <div class="mh"><span class="pill o">Model 1.3</span><h3>The reliability muscle</h3></div>
+    <div class="mb">
+      <p>Slide the investment level below and watch where the reliability trend heads over ten years. The shape is the point. The numbers are not data.</p>
+      <div class="ctl"><div><label for="m13i">Investment compared with what the grid needs: <span id="m13iv"></span> percent</label><input id="m13i" type="range" min="40" max="140" step="5" value="70"></div></div>
+      <div id="m13svg"></div>
+      <div class="out" id="m13out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The line is a stand-in for everyday reliability. It stays flat for about two years even when investment drops, then bends. The dashed line is "just keeping up."</div>
+      <div><b>What it shows</b>Cutting back is nearly invisible at first and expensive to reverse. Investing is slow to pay off and quick to show once you stop.</div>
+      <div class="so"><b>So what</b>This is why a reasonable person can look at a good year and say "why spend more?" The delay between cause and effect is the whole argument.</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>SAIFI</b><span>How often. Example 1.2 outages per customer per year</span></div>
+    <div class="stat"><b>SAIDI</b><span>How long. Example 120 minutes per customer per year</span></div>
+    <div class="stat"><b>Blue sky</b><span>Ordinary days, major storms removed</span></div>
+  </div>
+  <p class="obj">Those examples are teaching numbers, not Ameren Illinois results.</p>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>More investment does not promise zero outages. It promises fewer routine ones and faster recovery.</li>
+  <li>A pole replaced ten years ago may be fine. The point is the thousands that are not.</li>
+  <li>SAIFI and SAIDI are averages across all customers. Your street can have a very different experience than the average.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>Tornado counts and time periods, and the pole count. One presentation said 1.2 million poles and another conversation said about 900,000.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>For the full case for grid investment, see the <a href="grid-plan.html">Grid Plan Knowledge Center</a>. For plain language background on reliability, see the <a href="primer-topic-reliability.html">Primer reliability subject</a>.</p></div>
+
+  <div class="quiz" data-s="s1"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">Most of the electric grid is outdoors, so weather hits it first. Storms in Illinois have been getting worse, and a lot of our poles are old. When one pole fails it can pull others down with it. The fix is steady replacement, stronger poles in key places, and getting crews ready before a storm. The goal is not a grid that never fails. It is fewer outages and faster restoration, and we should be measured on exactly that.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">Think of a row of dominoes. One old pole goes down and takes the next one with it. Stronger poles in the right places stop the chain. That is what steady investment buys, fewer outages and faster restoration when a storm hits.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>If Ameren has invested for a decade, why keep investing?</div>
+  <div class="a"><b>You say</b>Because the grid keeps aging. A pole replaced ten years ago may be fine, but thousands of others keep wearing out. It is like maintaining roads and bridges. The benefit to customers is fewer routine outages, faster restoration and a stronger system in big storms, and that should be measured against cost.</div></div>
+  <div class="qa"><div class="l"><b>Reporter asks</b>Are outages getting worse because of storms or because of old equipment?</div>
+  <div class="a"><b>You say</b>Both matter, and that is why we look at the ordinary days separately. If the everyday numbers slip, that points at wear and tear, not just the big storms.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain SAIFI and SAIDI without notes</label><label><input type="checkbox"> I can say what blue sky means and why it is tracked</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s1" placeholder="Write it in your own words" aria-label="My notes for lesson 1"></textarea></div>
+</section>
+
+<!-- LESSON 2 -->
+<section class="lesson" id="s2" data-s="s2">
+  <header><div class="num">2</div><div><h2>Why more solar can create local problems</h2><p class="obj">You will be able to explain reverse power flow, why one line can be full while the system has plenty of power, and the difference between capacity and output.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>Think of one wall outlet with too many plugs. The house has plenty of electricity, but that one circuit trips. Solar projects that cluster on the same rural line can do the same thing to that line. The answer is often a stronger line, not more power.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>The wires were built for a one way street</h4>
+  <p>The distribution grid was built to send power one way, from a substation out to homes and businesses. Distributed energy resources (DER), such as community solar, rooftop solar and small batteries, can push power the other way. On a long rural feeder with several large projects, that reverse flow can cause voltage swings, flicker, overloaded equipment, changed fault currents and protection equipment that no longer coordinates.</p>
+  <h4>Strong spots and weak spots</h4>
+  <p>Leaders also raised <b>short circuit ratio</b>. In plain terms it is a measure of how strong the grid is at the spot where a solar inverter connects. A weak spot reacts badly to inverters. A 5 MW project on a long rural line can be harder to connect than the same project beside a strong substation. Illinois has rich incentives and cheap farmland, which pulls projects into the same places.</p>
+  <h4>Why studies take time, and how to talk about it fairly</h4>
+  <p>Each flagged project gets an engineering study, described as six to eight weeks, and the group said there is a national shortage of the engineers who do this work. Developers feel the wait. Leaders said they get painted as the bad guys while trying to keep the grid safe. The fair way to hold both truths is this. Engineering review is necessary, and so are clear queues, enough staff, consistent methods and reasonable timelines.</p>
+
+  <figure>
+    <svg viewBox="0 0 740 260" role="img" aria-label="Top row shows one way power flow from plant to substation to customers. Bottom row shows solar at the end of a feeder pushing power back toward the substation.">
+      <text x="10" y="22">Traditional grid, one direction</text>
+      <rect class="box" x="30" y="40" width="150" height="50" rx="10"/><text x="105" y="70" text-anchor="middle">Power plant</text>
+      <rect class="box" x="300" y="40" width="150" height="50" rx="10"/><text x="375" y="70" text-anchor="middle">Substation</text>
+      <rect class="box" x="570" y="40" width="150" height="50" rx="10"/><text x="645" y="70" text-anchor="middle">Customers</text>
+      <path class="arrowo" d="M180 65h118M450 65h118"/><path class="arrowo" d="M290 58l10 7-10 7M558 58l10 7-10 7"/>
+      <text x="10" y="142">Grid with solar on a rural feeder, power can flow both ways</text>
+      <rect class="box" x="30" y="160" width="150" height="50" rx="10"/><text x="105" y="190" text-anchor="middle">Substation</text>
+      <rect class="boxb" x="300" y="160" width="150" height="50" rx="10"/><text x="375" y="190" text-anchor="middle">Weak rural line</text>
+      <rect class="boxo" x="570" y="160" width="150" height="50" rx="10"/><text x="645" y="190" text-anchor="middle">Clustered solar</text>
+      <path class="arrowo" d="M180 175h118"/><path class="arrowt" d="M570 195h-118M298 195h-118"/><path class="arrowt" d="M190 188l-10 7 10 7"/>
+      <text class="t2" x="375" y="240" text-anchor="middle">Result can be voltage swings, flicker and protection problems at the weak spot</text>
+    </svg>
+    <figcaption>Top: the traditional picture. Bottom: the same kind of line once solar sits at the far end. Orange arrows are power flowing out to customers. Teal arrows are power flowing back.</figcaption>
+  </figure>
+
+  <div class="model" id="m21">
+    <div class="mh"><span class="pill o">Model 2.1</span><h3>One feeder at midday</h3></div>
+    <div class="mb">
+      <p>A rural feeder serves farms and small towns. These are invented teaching numbers. Add solar and watch the direction of flow, and then how line strength changes the voltage swing.</p>
+      <div class="ctl">
+        <div><label for="m21l">Customer load on the feeder at midday: <span id="m21lv"></span> MW</label><input id="m21l" type="range" min="1" max="6" step="0.5" value="2"></div>
+        <div><label for="m21s">Solar connected on the feeder: <span id="m21sv"></span> MW</label><input id="m21s" type="range" min="0" max="12" step="0.5" value="5"></div>
+        <div><label for="m21k">Line strength where solar connects</label><select id="m21k"><option value="3">Weak (rural, long line)</option><option value="6" selected>Medium</option><option value="12">Strong (near a substation)</option></select></div>
+      </div>
+      <div id="m21svg"></div>
+      <div class="out" id="m21out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Net flow equals load minus solar. When it is negative, power is flowing backward toward the substation. The voltage rise estimate grows with backward flow and shrinks as the line gets stronger.</div>
+      <div><b>What it shows</b>The same 5 MW can be easy on a strong line and a problem on a weak one. Where a project connects can matter more than how big it is.</div>
+      <div class="so"><b>So what</b>"We support solar, we study where it connects" is not a delay tactic. It is the difference between a project that works and one that makes a neighbor's lights flicker.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m22">
+    <div class="mh"><span class="pill o">Model 2.2</span><h3>A day of demand and a day of sun</h3></div>
+    <div class="mb">
+      <p>The meeting figures were about 8 GW of peak distribution demand and about 2 GW of distribution solar operating. Slide the hour to see what that solar supplies. The curve shapes are simplified.</p>
+      <div class="ctl">
+        <div><label for="m22h">Hour of the day: <span id="m22hv"></span></label><input id="m22h" type="range" min="0" max="23" value="19"></div>
+        <div><label for="m22g">Distribution solar installed: <span id="m22gv"></span> GW</label><input id="m22g" type="range" min="0" max="6" step="0.5" value="2"></div>
+      </div>
+      <div id="m22svg"></div>
+      <div class="out" id="m22out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>The orange curve is customer demand through the day. The teal curve is solar output. The vertical line marks the hour you picked. Where the teal line is high and the orange line is low, solar is flowing backward on the wires.</div>
+      <div><b>What it shows</b>Capacity is the rating on the label. Output is what comes out at a given hour. Two gigawatts of solar looks like a quarter of an 8 gigawatt peak, but at an evening peak the sun may be down and the share may be near zero.</div>
+      <div class="so"><b>So what</b>Midday is where the wires are stressed by solar. Evening is where the system needs supply. They are two different problems with two different fixes.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m23">
+    <div class="mh"><span class="pill o">Model 2.3</span><h3>The solar pipeline, as reported</h3></div>
+    <div class="mb">
+      <div id="m23bars"></div>
+      <p class="obj">These are meeting figures. Signed and queued projects may overlap or withdraw, so do not simply add them.</p>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Each bar is a stage. Operating is built and running. Signed means an interconnection agreement exists. In the queue means the engineering studies are still ahead.</div>
+      <div><b>What it shows</b>The amount waiting to connect is several times what is operating. The studies and upgrades are the bottleneck, not the supply of projects.</div>
+      <div class="so"><b>So what</b>When someone asks "why is it taking so long," the honest answer is a big pipeline moving through a small number of engineers and a set of lines that need upgrades.</div>
+    </div>
+  </div>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>2 GW of solar equals 25 percent of 8 GW in rating only. At the evening peak the sun may be down, so its share could be near zero.</li>
+  <li>Holding a project for study is not the same as opposing renewables. The question is where and how it connects.</li>
+  <li>A strong system overall can still have a weak spot. Local limits are not the same as total supply.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>The exact definition used for short circuit ratio, and whether the signed and queued figures are counted the same way.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="primer-topic-renewables.html">Primer renewables subject</a> covers incentives and how projects get built. The <a href="illinois-battery-storage-primer.html">Battery Storage Primer</a> picks up where this lesson ends, with what to do about the evening gap.</p></div>
+
+  <div class="quiz" data-s="s2"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">Picture a house with too many plugs in one outlet. The house has plenty of electricity, but that outlet trips. A rural power line works the same way. When several big solar projects connect to one line, they can overload it, even though the overall system has plenty of power. We support new renewable energy. We just need to study where it connects and build the stronger lines that let it connect safely.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">It is the outlet problem. The house has plenty of power, but too many plugs on one outlet and it trips. Rural lines work like that. We are not against solar. We study where it plugs in so the line can handle it.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Why not connect the projects now and fix problems later?</div>
+  <div class="a"><b>You say</b>Because the problems could land on existing customers and could raise safety risks. We study first so we know which upgrades are needed. The faster we can fund line capacity and engineering staff, the faster projects can connect.</div></div>
+  <div class="qa"><div class="l"><b>Developer asks</b>Why is my study taking so long?</div>
+  <div class="a"><b>You say</b>Each project gets an engineering review, and there is a national shortage of the engineers who do that work. Clear queues and enough staff are fair things to ask for, and we agree they matter.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain reverse power flow</label><label><input type="checkbox"> I can explain the outlet picture and why line strength matters</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s2" placeholder="Write it in your own words" aria-label="My notes for lesson 2"></textarea></div>
+</section>
+
+<!-- LESSON 3 -->
+<section class="lesson" id="s3" data-s="s3">
+  <header><div class="num">3</div><div><h2>The N-1 emergency, the outage nobody saw</h2><p class="obj">You will be able to explain N-1, what load shedding is, and why preventing an outage is real work that customers never see.</p></div></header>
+
+  <div class="card plain"><h3>In plain words</h3>
+  <p>N-1 asks one question. If the next important line or generator fails right now, can the system still hold? On one afternoon the answer was almost no. About 500 MW of customer load could have had to be shut off. Crews were ready, and the lights stayed on.</p></div>
+
+  <h3>Full explanation</h3>
+  <h4>The test operators run all day</h4>
+  <p>Operators run a program that constantly tests what happens if any single major element is lost. That test is called <b>N-1</b>, which means "all N elements in service, minus one." On the day described, power was moving heavily across a river crossing, some expected generation did not show up, and the loss of one more line could have overloaded the system. The affected area was local, not the whole regional grid.</p>
+  <h4>What preparation looked like</h4>
+  <p>The Distribution Control Office identified which breakers might need to open and which critical customers, such as hospitals, had to be protected and restored first. Relay and substation technicians were sent to sites in case remote control failed. Operators also checked how their plan fit with <b>under frequency load shedding</b> (UFLS), a separate automatic system that drops load when frequency falls, so the two would not double up. Controlled load shedding means turning off selected customers on purpose to protect equipment and prevent a wider failure, then restoring them as soon as it is safe.</p>
+  <h4>A lesson about location</h4>
+  <p>The Venice plant ran during this event. That points to a lesson about where generation sits. Generation near the load can reduce how much power has to squeeze through constrained lines. Where a plant sits can matter as much as how many megawatts it makes.</p>
+
+  <div class="model" id="m31">
+    <div class="mh"><span class="pill o">Model 3.1</span><h3>The river crossing</h3></div>
+    <div class="mb">
+      <p>Three lines carry power across a river into a load pocket. Each can safely carry 350 MW. These are invented teaching numbers that follow the shape of the event, not the real figures. Press the button to lose one line and see whether the system still holds.</p>
+      <div class="ctl">
+        <div><label for="m31d">Demand in the pocket: <span id="m31dv"></span> MW</label><input id="m31d" type="range" min="400" max="1100" step="25" value="1000"></div>
+        <div><label for="m31g">Local generation running in the pocket: <span id="m31gv"></span> MW</label><input id="m31g" type="range" min="0" max="400" step="25" value="100"></div>
+      </div>
+      <div class="tools"><button class="btn" type="button" id="m31b">Lose one line</button><span class="obj" id="m31l"></span></div>
+      <div id="m31svg"></div>
+      <div class="out" id="m31out"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Power that must cross the river equals demand minus local generation. The lines can carry 350 MW each, so three carry 1,050 and two carry 700. If what must cross is more than the lines left can carry, the difference is load at risk.</div>
+      <div><b>What it shows</b>The system passes N-1 only if it holds after losing any single line. Adding local generation lowers what has to cross. Try 300 MW of local generation at the default demand.</div>
+      <div class="so"><b>So what</b>A system can look fine on a normal day and be one failure from shedding load. A nearby plant is not just a megawatt number. It is relief for the lines.</div>
+    </div>
+  </div>
+
+  <div class="model" id="m32">
+    <div class="mh"><span class="pill o">Model 3.2</span><h3>The five moves, one at a time</h3></div>
+    <div class="mb">
+      <div class="tools" id="m32tabs"></div>
+      <div class="card" id="m32card" style="margin-top:10px"></div>
+    </div>
+    <div class="mx">
+      <div><b>How to read it</b>Tap each step. They run in order, and most of the work happens before step 5 is ever needed.</div>
+      <div><b>What it shows</b>Reliability work is mostly preparation and prevention. Step 5 is the last resort.</div>
+      <div class="so"><b>So what</b>"Nothing happened" and "nothing was done" are different statements. The near miss was handled by work customers never saw.</div>
+    </div>
+  </div>
+
+  <h4>Two things that sound alike</h4>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Controlled load shedding</th><th>Under frequency load shedding (UFLS)</th></tr>
+    <tr><td>What triggers it</td><td>Operators decide, based on a studied risk</td><td>Automatic relays, when system frequency falls too far</td></tr>
+    <tr><td>Who chooses the customers</td><td>Planned in advance, with critical customers protected</td><td>Preset blocks of load on automatic schemes</td></tr>
+    <tr><td>Purpose</td><td>Protect equipment and keep a local problem from spreading</td><td>Stop a regional frequency collapse</td></tr>
+  </table></div>
+
+  <div class="card note"><h3>Why this matters for Government Relations</h3>
+  <p>Legislators naturally look at outages that happened. Operators also have to invest to prevent outages that almost happened. Your job is to make a near miss feel real without sounding alarmist.</p></div>
+
+  <div class="card mix"><h3>Common mix-ups</h3>
+  <ul><li>No blackout happened. Saying one did would be wrong. Saying nothing happened would also be wrong.</li>
+  <li>N-1 is about losing one thing. It is a minimum standard, not a worst case.</li>
+  <li>Controlled load shedding and under frequency load shedding are different tools that operators coordinate.</li></ul></div>
+  <div class="card verify"><h3>Check before using outside</h3><p>Which lines were involved, which generators did not show up and why, and the date. Those questions were left open in the notes.</p></div>
+  <div class="card deeper"><h3>Go deeper on the hub</h3><p>The <a href="primer-topic-reliability.html">Primer reliability subject</a> explains how reliability is measured. The <a href="miso-eras-business-acumen-playbook.html">MISO ERAS Playbook</a> shows how reliability need turns into accredited capacity.</p></div>
+
+  <div class="quiz" data-s="s3"></div>
+
+  <div class="script"><h3>Say it</h3>
+  <p class="len">Full version, about 45 seconds</p>
+  <blockquote data-sec="45">Operators told us about a recent afternoon when the system was one failure away from a serious local problem. About 500 megawatts of customers could have been switched off to protect the grid. Crews were staged and the plan was ready, and in the end the lights stayed on. That is the point. Good operations often means preventing the emergency that customers never see, and it shows how close we sometimes run to the limit.</blockquote>
+  <p class="len">Hallway version, about 30 seconds</p>
+  <blockquote class="hall" data-sec="30">Recently, operators were one failure away from switching off about 500 megawatts of customers to protect the grid. They had crews and a plan ready, and the lights stayed on. The best outage is the one nobody sees.</blockquote>
+  <div class="qa"><div class="l"><b>Legislator asks</b>Was there actually a blackout?</div>
+  <div class="a"><b>You say</b>No. Operators managed conditions before another failure could happen. But they had identified exactly which equipment and customers might need to be disconnected if things got worse. The goal is to prevent emergencies, not only respond to them.</div></div>
+  <div class="qa"><div class="l"><b>Reporter asks</b>Is the grid about to fail?</div>
+  <div class="a"><b>You say</b>No. The system did what it is designed to do. The point is that margins can be thin on hard days, which is why planning and investment matter.</div></div></div>
+
+  <div class="teach card"><h3>Teach it back</h3><label><input type="checkbox"> I can explain N-1 in one sentence</label><label><input type="checkbox"> I can explain load shedding and restoration</label><label><input type="checkbox"> I said the script out loud once</label></div>
+  <div class="notes card"><h3>My notes</h3><textarea data-note="s3" placeholder="Write it in your own words" aria-label="My notes for lesson 3"></textarea></div>
+</section>
+
+<div class="pager"><a href="illinois-grid-briefing.html"><small>Previous</small><b>Illinois Grid Briefing</b></a><a class="nx" href="illinois-grid-briefing-part-2.html"><small>Next</small><b>Part 2, Enough power and what it costs</b></a></div>
+</main>
+<footer>
+<p>Built from the October 15 and 16, 2026 briefing notes. Figures are as reported in the meetings and are marked where they need checking. Practice numbers inside models are invented for teaching and are labeled as such. This page leaves out internal positions, personnel talk, confidential project examples and informal side conversations. It asks search engines not to list it, but anyone with the link can still open it if it is hosted publicly.</p>
+</footer>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function sget(k,d){try{var v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function jget(k,d){try{return JSON.parse(sget(k,""))||d}catch(e){return d}}
+var P="ilgrid.";
+var LESSONS=[
+{id:"s1",t:"Storms, aging poles and everyday reliability",f:"illinois-grid-briefing-part-1.html"},
+{id:"s2",t:"Why more solar can create local problems",f:"illinois-grid-briefing-part-1.html"},
+{id:"s3",t:"The N-1 emergency, the outage nobody saw",f:"illinois-grid-briefing-part-1.html"},
+{id:"s4",t:"Enough dependable power, and why megawatts differ",f:"illinois-grid-briefing-part-2.html"},
+{id:"s5",t:"Batteries, duration and what they cost",f:"illinois-grid-briefing-part-2.html"},
+{id:"s6",t:"Venice, CEJA and the five plant question",f:"illinois-grid-briefing-part-2.html"},
+{id:"s7",t:"The IRP and the modeled shortfalls",f:"illinois-grid-briefing-part-2.html"},
+{id:"s8",t:"Markets, plans and who decides",f:"illinois-grid-briefing-part-3.html"},
+{id:"s9",t:"Data centers, large loads and the one bill problem",f:"illinois-grid-briefing-part-3.html"},
+{id:"s10",t:"Gas, bills to watch and turning engineering into a decision",f:"illinois-grid-briefing-part-4.html"}
+];
+var Q={};
+function fmt(n){return Math.round(n).toLocaleString()}
+function svgEl(w,h,label,inner){return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+label+'">'+inner+'</svg>'}
+
+/* Model 1.1 domino poles */
+(function(){
+  var sel=$("#m11s"),pr=$("#m11p");
+  function run(){
+    var k=+sel.value,p=+pr.value,N=20;$("#m11pv").textContent=p;$("#m11sv").textContent=k?k:"none";
+    var down={},i;down[p]=true;
+    for(i=p+1;i<=N;i++){if(k&&i%k===0)break;down[i]=true}
+    for(i=p-1;i>=1;i--){if(k&&i%k===0)break;down[i]=true}
+    var cnt=Object.keys(down).length,s="",tops=[];
+    for(i=1;i<=N;i++){
+      var x=30+(i-1)*36,a=0,fell=!!down[i],strong=k&&i%k===0;
+      if(fell){a=(i<p?-72:72)}
+      var tx=x+90*Math.sin(a*Math.PI/180),ty=150-90*Math.cos(a*Math.PI/180);
+      tops.push([tx,ty]);
+      s+='<line class="pole'+(strong?' strong':'')+(fell?' fell':'')+'" x1="'+x+'" y1="150" x2="'+tx.toFixed(1)+'" y2="'+ty.toFixed(1)+'"/>';
+      s+='<text class="t2" x="'+x+'" y="172" text-anchor="middle">'+i+'</text>';
+    }
+    var w="M"+tops.map(function(t){return t[0].toFixed(1)+" "+t[1].toFixed(1)}).join("L");
+    var svg='<line class="ground" x1="10" y1="150" x2="750" y2="150"/><path d="'+w+'" fill="none" stroke="var(--muted)" stroke-width="2"/>'+s;
+    $("#m11svg").innerHTML=svgEl(760,185,"Twenty utility poles in a row, with fallen poles shown tilted",svg);
+    $("#m11out").innerHTML="<b>"+cnt+" of 20 poles down.</b> "+(k?"Without reinforced poles the same failure would take down all 20. Reinforced poles cut the footprint by "+Math.round((20-cnt)/20*100)+" percent in this picture.":"With no reinforced poles the failure travels the whole line.");
+  }
+  sel.addEventListener("change",run);pr.addEventListener("input",run);run();
+})();
+
+/* Model 1.2 SAIFI SAIDI */
+(function(){
+  var ids=["c","e","a","m"],storm=false;
+  function run(){
+    var C=+$("#m12c").value,E=+$("#m12e").value,A=+$("#m12a").value,M=+$("#m12m").value;
+    $("#m12cv").textContent=fmt(C);$("#m12ev").textContent=E;$("#m12av").textContent=A;$("#m12mv").textContent=M;
+    var ci=E*A,saifi=ci/C,saidi=ci*M/C;
+    var sCI=0.3*C,sMin=600,saifiA=saifi+sCI/C,saidiA=saidi+sCI*sMin/C;
+    var sh=storm?saidiA:saidi;
+    $("#m12b1").style.width=Math.min(100,saidi/6)+"%";$("#m12t1").textContent="SAIDI "+fmt(saidi)+" min";
+    $("#m12b2").style.width=Math.min(100,sh/6)+"%";$("#m12t2").textContent="SAIDI "+fmt(sh)+" min";
+    $("#m12lab").textContent=storm?"A storm day is included: 30 percent of customers out for 600 minutes.":"No major storm in this year.";
+    $("#m12btn").textContent=storm?"Remove the major storm day":"Add one major storm day";
+    $("#m12out").innerHTML="Blue sky: <b>SAIFI "+saifi.toFixed(2)+"</b> interruptions per customer, <b>SAIDI "+fmt(saidi)+"</b> minutes per customer, <b>CAIDI "+(saidi/saifi).toFixed(0)+"</b> minutes per interruption."+(storm?" With the storm included: <b>SAIFI "+saifiA.toFixed(2)+"</b> and <b>SAIDI "+fmt(saidiA)+"</b>. The one storm day added "+fmt(saidiA-saidi)+" minutes per customer, "+(saidiA/saidi).toFixed(1)+" times the ordinary total.":"");
+  }
+  ids.forEach(function(i){$("#m12"+i).addEventListener("input",run)});
+  $("#m12btn").addEventListener("click",function(){storm=!storm;run()});run();
+})();
+
+/* Model 1.3 muscle */
+(function(){
+  var r=$("#m13i");
+  function run(){
+    var inv=+r.value;$("#m13iv").textContent=inv;
+    var s=(inv-100)/100,pts=[],t,R,W=700,H=240,x0=50,y0=20;
+    function X(t){return x0+t/10*(W-x0-20)}
+    function Y(v){return H-30-(v-40)/100*(H-60)}
+    for(t=0;t<=10;t++){R=100;if(t>2)R=100+(s>0?6:12)*s*(t-2);R=Math.max(40,Math.min(140,R));pts.push([X(t),Y(R),R])}
+    var grid="",v;for(v=40;v<=140;v+=20){grid+='<line class="grid" x1="'+x0+'" y1="'+Y(v)+'" x2="'+(W-20)+'" y2="'+Y(v)+'"/><text class="t2" x="'+(x0-8)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'</text>'}
+    for(t=0;t<=10;t+=2){grid+='<text class="t2" x="'+X(t)+'" y="'+(H-10)+'" text-anchor="middle">Year '+t+'</text>'}
+    var base='<line x1="'+x0+'" y1="'+Y(100)+'" x2="'+(W-20)+'" y2="'+Y(100)+'" stroke="var(--muted)" stroke-width="2" stroke-dasharray="6 5"/>';
+    var path="M"+pts.map(function(p){return p[0].toFixed(1)+" "+p[1].toFixed(1)}).join("L");
+    var col=inv<100?"var(--bad)":(inv>100?"var(--good)":"var(--accent)");
+    $("#m13svg").innerHTML=svgEl(W,H,"Reliability index over ten years under the chosen investment level",grid+base+'<path class="curve" d="'+path+'" stroke="'+col+'"/>'+'<text class="t2" x="'+(W-24)+'" y="'+(Y(100)-6)+'" text-anchor="end">Keeping up (index 100)</text>');
+    var end=pts[10][2];
+    $("#m13out").innerHTML=inv===100?"<b>Holding steady.</b> Investing at the level the grid needs keeps the index flat at 100.":(inv<100?"<b>Index ends near "+Math.round(end)+".</b> For the first two years nothing looks wrong. After that the everyday numbers slip each year, and winning that ground back costs more than keeping it would have.":"<b>Index ends near "+Math.round(end)+".</b> Gains are slow to arrive. The payoff comes years after the spending.");
+  }
+  r.addEventListener("input",run);run();
+})();
+
+/* Model 2.1 feeder */
+(function(){
+  var L=$("#m21l"),S=$("#m21s"),K=$("#m21k");
+  function run(){
+    var l=+L.value,s=+S.value,k=+K.value;$("#m21lv").textContent=l;$("#m21sv").textContent=s;
+    var net=l-s,rev=Math.max(0,s-l),rise=rev*10/k;
+    var arrow,label;
+    if(net>0){arrow='<path class="arrowo" d="M200 90h280"/><path class="arrowo" d="M470 80l12 10-12 10"/>';label=net.toFixed(1)+" MW flowing out to customers"}
+    else if(net<0){arrow='<path class="arrowt" d="M480 90H208"/><path class="arrowt" d="M218 80l-12 10 12 10"/>';label=rev.toFixed(1)+" MW flowing BACK toward the substation"}
+    else{arrow="";label="Load and solar balance. No net flow."}
+    var lineCls=rise>5?"lineb":"linen";
+    var svg='<rect class="box" x="30" y="60" width="170" height="60" rx="10"/><text x="115" y="95" text-anchor="middle">Substation</text>'+
+      '<path class="'+lineCls+'" d="M200 90H480" style="opacity:'+(arrow?0.5:1)+'"/>'+arrow+
+      '<rect class="boxo" x="480" y="40" width="130" height="40" rx="10"/><text x="545" y="65" text-anchor="middle">Solar '+s+' MW</text>'+
+      '<rect class="box" x="480" y="100" width="130" height="40" rx="10"/><text x="545" y="125" text-anchor="middle">Load '+l+' MW</text>'+
+      '<text class="t2" x="340" y="150" text-anchor="middle">'+label+'</text>';
+    $("#m21svg").innerHTML=svgEl(660,165,"A rural feeder with load and solar at the far end",svg);
+    var verdict,cls;
+    if(rev===0){verdict="No backward flow, so no voltage rise from solar at this moment.";cls=""}
+    else if(rise>5){verdict="Estimated voltage rise is above the 5 percent comfort level. A study would likely call for a stronger line, a regulator or limits on output.";cls=" bad"}
+    else if(rise>3){verdict="Estimated voltage rise is getting close to the limit. Expect a closer look and possibly smaller upgrades.";cls=""}
+    else{verdict="Estimated voltage rise is small. This connection would likely be straightforward.";cls=" good"}
+    var o=$("#m21out");o.className="out"+cls;
+    o.innerHTML="Net flow: <b>"+(net>=0?"+":"")+net.toFixed(1)+" MW</b> ("+(net>=0?"toward customers":"backward")+"). Backward flow: <b>"+rev.toFixed(1)+" MW</b>. Estimated voltage rise: <b>"+rise.toFixed(1)+" percent</b>. "+verdict;
+  }
+  [L,S].forEach(function(e){e.addEventListener("input",run)});K.addEventListener("change",run);run();
+})();
+
+/* Model 2.2 day curves */
+(function(){
+  var H=$("#m22h"),G=$("#m22g");
+  var raw=[],h;
+  function dem(h){return 4.2+3.8*Math.exp(-Math.pow(h-18.5,2)/(2*3.2*3.2))+0.8*Math.exp(-Math.pow(h-8,2)/(2*2*2))}
+  var mx=0;for(h=0;h<24;h++){raw[h]=dem(h);if(raw[h]>mx)mx=raw[h]}
+  var D=raw.map(function(v){return v/mx*8});
+  function sol(h,g){var d=Math.abs(h-12.5);return d>=6.5?0:g*0.85*Math.pow(Math.cos(d/6.5*Math.PI/2),1.5)}
+  function run(){
+    var hr=+H.value,g=+G.value;$("#m22hv").textContent=(hr%12===0?12:hr%12)+(hr<12?" AM":" PM");$("#m22gv").textContent=g;
+    var W=700,Ht=250,x0=44;
+    function X(t){return x0+t/23*(W-x0-16)}
+    function Y(v){return Ht-34-v/9*(Ht-56)}
+    var grid="",v,t;
+    for(v=0;v<=8;v+=2){grid+='<line class="grid" x1="'+x0+'" y1="'+Y(v)+'" x2="'+(W-16)+'" y2="'+Y(v)+'"/><text class="t2" x="'+(x0-6)+'" y="'+(Y(v)+4)+'" text-anchor="end">'+v+'</text>'}
+    [0,6,12,18,23].forEach(function(t){grid+='<text class="t2" x="'+X(t)+'" y="'+(Ht-12)+'" text-anchor="middle">'+(t===0?"12 AM":t===6?"6 AM":t===12?"Noon":t===18?"6 PM":"11 PM")+'</text>'});
+    var pd="M",ps="M",pn="M",net;
+    for(t=0;t<24;t++){var sv=sol(t,g);pd+=X(t).toFixed(1)+" "+Y(D[t]).toFixed(1)+(t<23?"L":"");ps+=X(t).toFixed(1)+" "+Y(sv).toFixed(1)+(t<23?"L":"");net=Math.max(0,D[t]-sv);pn+=X(t).toFixed(1)+" "+Y(net).toFixed(1)+(t<23?"L":"")}
+    var svg=grid+'<path class="curve" d="'+pd+'" stroke="var(--accent)"/><path class="curve" d="'+ps+'" stroke="var(--teal)"/><path class="curve" d="'+pn+'" stroke="var(--text)" stroke-dasharray="6 5" style="opacity:.7"/>'+
+      '<line x1="'+X(hr)+'" y1="'+Y(9)+'" x2="'+X(hr)+'" y2="'+Y(0)+'" stroke="var(--bad)" stroke-width="2"/>'+
+      '<text class="t2" x="'+(x0+4)+'" y="14">Orange: demand. Teal: solar output. Dashed: demand left for other supply. Units: GW</text>';
+    $("#m22svg").innerHTML=svgEl(W,Ht,"Daily demand and solar output curves with a marker at the chosen hour",svg);
+    var d=D[hr],s=sol(hr,g),share=s/d*100,rate=g/8*100;
+    $("#m22out").innerHTML="At this hour demand is about <b>"+d.toFixed(1)+" GW</b> and solar supplies about <b>"+s.toFixed(2)+" GW</b>, which is <b>"+share.toFixed(0)+" percent</b> of demand. The rating alone suggests "+rate.toFixed(0)+" percent. Demand left for everything else: <b>"+Math.max(0,d-s).toFixed(1)+" GW</b>.";
+  }
+  H.addEventListener("input",run);G.addEventListener("input",run);run();
+})();
+
+/* Model 2.3 pipeline bars */
+(function(){
+  var rows=[["Peak distribution demand (reference)",8,false],["Distribution solar operating",2,true],["Signed interconnection agreements",3.5,true],["In the study queue",10,true]];
+  var h="";rows.forEach(function(r){h+='<div><b>'+r[0]+'</b> about '+r[1]+' GW<div class="bar'+(r[2]?' o':'')+'"><i style="width:'+(r[1]/10*100)+'%"></i></div></div>'});
+  $("#m23bars").innerHTML=h;
+})();
+
+/* Model 3.1 river crossing */
+(function(){
+  var D=$("#m31d"),G=$("#m31g"),lost=false;
+  function run(){
+    var d=+D.value,g=+G.value;$("#m31dv").textContent=fmt(d);$("#m31gv").textContent=g;
+    var need=Math.max(0,d-g),lines=lost?2:3,cap=lines*350,per=need/lines;
+    var risk=Math.max(0,need-cap),n1=Math.max(0,need-700);
+    var s='<rect class="box" x="10" y="40" width="130" height="140" rx="12"/><text x="75" y="105" text-anchor="middle">West side</text><text class="t2" x="75" y="125" text-anchor="middle">generation</text>'+
+      '<rect class="boxo" x="560" y="40" width="130" height="140" rx="12"/><text x="625" y="95" text-anchor="middle">Load pocket</text><text class="t2" x="625" y="115" text-anchor="middle">demand '+fmt(d)+' MW</text><text class="t2" x="625" y="133" text-anchor="middle">local gen '+g+' MW</text>'+
+      '<rect x="330" y="20" width="40" height="170" rx="6" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1" opacity=".6"/><text class="t2" x="350" y="14" text-anchor="middle">river</text>';
+    for(var i=0;i<3;i++){
+      var y=70+i*40,gone=lost&&i===1,over=!gone&&per>350;
+      s+='<path class="'+(gone?'linen':(over?'lineb':'linen'))+'" d="M140 '+y+'H560" style="'+(gone?'opacity:.25;stroke-dasharray:3 9':'')+'"/>';
+      if(gone)s+='<text x="350" y="'+(y+6)+'" text-anchor="middle" style="fill:var(--bad);font-weight:800;font-size:22px">X</text>';
+      else s+='<text class="t2" x="230" y="'+(y-6)+'" text-anchor="middle">'+Math.round(per)+' MW of 350</text>';
+    }
+    $("#m31svg").innerHTML=svgEl(700,200,"Three transmission lines across a river into a load pocket, one of which can be lost",s);
+    $("#m31l").textContent=lost?"One line is out.":"All three lines are in service.";
+    $("#m31b").textContent=lost?"Restore the line":"Lose one line";
+    var o=$("#m31out"),msg="What must cross the river: <b>"+fmt(need)+" MW</b>. Lines in service carry up to <b>"+fmt(cap)+" MW</b>. ";
+    if(risk>0){o.className="out bad";msg+=lost?"<b>"+fmt(risk)+" MW of load is at risk right now</b> and would have to be shed to protect the lines.":"The lines are already over their limit with nothing lost."}
+    else{o.className="out"+(n1>0?"":" good");msg+=n1>0?"Fine for now. <b>But the N-1 test fails.</b> If any one line were lost, about <b>"+fmt(n1)+" MW</b> of load would be at risk. This is the situation operators prepare for.":"Fine for now, <b>and the N-1 test passes.</b> Even with one line lost the remaining two can carry the load."}
+    o.innerHTML=msg;
+  }
+  D.addEventListener("input",run);G.addEventListener("input",run);
+  $("#m31b").addEventListener("click",function(){lost=!lost;run()});run();
+})();
+
+/* Model 3.2 stepper */
+(function(){
+  var S=[
+   ["1 Normal","Power flows on the generators and lines that are available. Everything looks fine to a customer.","Operators watch flows, weather and which generators are actually running."],
+   ["2 Test","A program keeps asking: what if any single major line or generator failed right now? This is the N-1 test.","It runs continuously, because conditions change by the hour."],
+   ["3 Risk found","The answer on this afternoon was not comfortable. About 500 MW of customer load could have been at risk if one more thing failed.","Heavy flow across a river crossing, plus expected generation that did not show up."],
+   ["4 Prepare","Operators redispatch generation, plan switching, stage crews and map critical customers such as hospitals.","Relay and substation technicians were sent to sites in case remote control failed. The plan was checked against automatic load shedding so the two would not double up."],
+   ["5 If needed","Controlled load shedding. Selected customers are turned off on purpose to protect equipment, then restored as soon as it is safe.","It did not come to this. Preventing step 5 was the work."]
+  ];
+  var tabs=$("#m32tabs"),card=$("#m32card");
+  S.forEach(function(s,i){var b=document.createElement("button");b.type="button";b.className="btn";b.textContent=s[0];b.addEventListener("click",function(){show(i)});tabs.appendChild(b)});
+  function show(i){$$("button",tabs).forEach(function(b,j){b.classList.toggle("sel",i===j)});card.innerHTML="<h4 style='margin-top:0'>"+S[i][0]+"</h4><p>"+S[i][1]+"</p><p class='obj'>"+S[i][2]+"</p>"}
+  show(0);
+})();
+
+Q.s1=[
+["What does SAIDI measure?",["How often the average customer loses power","How long the average customer is without power","The age of the average pole"],1,"SAIFI is frequency and SAIDI is duration. CAIDI is the average length of one interruption."],
+["Why does blue sky reliability matter?",["It excludes major storm days, so a decline points to everyday weakness","It only counts sunny days","It measures solar output"],0,"If the ordinary days get worse, the cause is routine wear, not just big storms."],
+["In Model 1.1, what stops a cascading failure?",["A reinforced pole in the line","More wire","A longer storm"],0,"A strong pole gives the falling line something to stop against, so the chain ends there."],
+["A utility's average looks fine this year because there was no big storm. What is the best follow-up question?",["Nothing, good news is good news","Which average is this, and what does blue sky look like over several years?","Why not stop investing?"],1,"A single storm can hide or exaggerate everyday trends, and the effect of cutting back arrives with a delay."]];
+Q.s2=[
+["Why can an overloaded rural line exist when the system has plenty of power?",["Capacity is local, so a specific line or transformer can be full","Solar produces too little","Transmission is always empty"],0,"Same as one outlet tripping in a house with lots of electricity."],
+["2 GW of solar against an 8 GW peak means solar supplies 25 percent at the peak hour.",["True","False, that compares ratings and the sun may be down at peak"],1,"Capacity and output at a given hour are different measurements. Model 2.2 shows the evening gap."],
+["In Model 2.1, what changes the voltage rise for the same amount of backward flow?",["The strength of the line where solar connects","The color of the panels","The month"],0,"A weak spot reacts more to the same backward flow. That is why location matters."],
+["Which is a fair view of study delays?",["All delays are justified","No delays are justified","Review is necessary, and clear queues and enough staff are fair expectations"],2,"Hold both truths."]];
+Q.s3=[
+["What does N-1 test?",["Whether the system holds if one major element is lost","Whether one customer is out","One year of load growth"],0,"It is a minimum standard."],
+["Why is it fair to call the event serious even though no one lost power?",["It was not serious","Operators were one failure from shedding load and prepared accordingly","The media covered it"],1,"Preventing the emergency is the work."],
+["In Model 3.1, what happens to the N-1 result when you add local generation?",["Nothing, it only matters how many lines you have","Less power must cross the river, so the system can pass the test","The lines get stronger"],1,"Generation near the load takes pressure off the lines. Where a plant sits can matter as much as its size."],
+["Controlled load shedding differs from under frequency load shedding because",["It is chosen by operators for a studied local risk, while the other is automatic when frequency falls","They are the same thing","One only happens in winter"],0,"Operators coordinate the two so they do not double up."]];
+
+/* quizzes */
+$$(".quiz").forEach(function(box){
+  var id=box.getAttribute("data-s"),items=Q[id]||[],answered=0,right=0,key=P+"quiz."+id;
+  var h='<h3>Check yourself</h3><p class="obj">Try to answer in your head before you tap. Pulling an answer out of memory is what makes it stick.</p>';
+  items.forEach(function(it,qi){
+    h+='<div class="q" data-qi="'+qi+'"><p>'+it[0]+'</p>';
+    it[1].forEach(function(o,oi){h+='<button type="button" class="opt" data-oi="'+oi+'">'+o+'</button>'});
+    h+='<div class="why" aria-live="polite">'+it[3]+'</div></div>';
+  });
+  h+='<p class="score" aria-live="polite"></p>';
+  box.innerHTML=h;
+  $$(".q",box).forEach(function(q){
+    var qi=+q.getAttribute("data-qi"),it=items[qi],done=false;
+    $$(".opt",q).forEach(function(b){
+      b.addEventListener("click",function(){
+        if(done)return;done=true;answered++;
+        var oi=+b.getAttribute("data-oi");
+        $$(".opt",q)[it[2]].classList.add("right");
+        if(oi===it[2]){right++}else{b.classList.add("wrong")}
+        $(".why",q).classList.add("show");
+        if(answered===items.length){
+          $(".score",box).textContent="You got "+right+" of "+items.length+(right===items.length?". Strong. Say the script out loud next.":". Reread the plain words box and the models, then try the script.");
+          sset(key,right+"/"+items.length);
+        }
+      });
+    });
+  });
+});
+
+/* progress across all pages */
+var done=jget(P+"done",{});
+function paint(){
+  var n=0;
+  LESSONS.forEach(function(l){
+    if(done[l.id])n++;
+    var c=$('#chips a[data-s="'+l.id+'"]');if(c)c.classList.toggle("done",!!done[l.id]);
+    var b=$("#mark-"+l.id);if(b){b.classList.toggle("done",!!done[l.id]);b.textContent=done[l.id]?"Completed. Tap to undo":"Mark this lesson complete"}
+    var lc=$('.lc[data-s="'+l.id+'"]');if(lc)lc.classList.toggle("done",!!done[l.id]);
+  });
+  var pct=Math.round(n/LESSONS.length*100),pb=$("#progbar");
+  if(pb){pb.style.width=pct+"%";$("#progtxt").textContent=n+" of "+LESSONS.length+" done";$("#progwrap").setAttribute("aria-valuenow",pct)}
+}
+$$(".lesson[data-s]").forEach(function(sec){
+  var id=sec.getAttribute("data-s"),row=document.createElement("div");row.className="markrow";
+  row.innerHTML='<button type="button" class="btn" id="mark-'+id+'">Mark this lesson complete</button><a href="#top">Back to top</a>';
+  sec.appendChild(row);
+  $("#mark-"+id).addEventListener("click",function(){done[id]=!done[id];sset(P+"done",JSON.stringify(done));paint()});
+});
+paint();
+
+/* notes and teach-back */
+$$("textarea[data-note]").forEach(function(t){
+  t.value=sget(P+"note."+t.getAttribute("data-note"),"");
+  t.addEventListener("input",function(){sset(P+"note."+t.getAttribute("data-note"),t.value)});
+});
+$$(".teach input").forEach(function(c,i){
+  var sec=c.closest(".lesson"),k=P+"teach."+(sec?sec.id:"x")+"."+i;
+  c.checked=sget(k,"")==="1";c.addEventListener("change",function(){sset(k,c.checked?"1":"")});
+});
+
+/* scripts: copy and practice timers */
+function copyText(t,btn){
+  function ok(){if(btn){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1400)}}
+  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else{fb()}
+}
+var tmr=null;
+$$(".script blockquote").forEach(function(bq){
+  var n=+bq.getAttribute("data-sec")||45,lab=bq.getAttribute("data-label")||"script";
+  var row=document.createElement("div");row.className="tools";
+  row.innerHTML='<button class="btn" type="button" data-copy>Copy</button><button class="btn" type="button" data-practice>Practice '+n+' seconds</button><span class="timer" aria-live="polite"></span>';
+  bq.parentNode.insertBefore(row,bq.nextSibling);
+  $("[data-copy]",row).addEventListener("click",function(){copyText(bq.textContent,this)});
+  $("[data-practice]",row).addEventListener("click",function(){
+    var out=$(".timer",row);
+    if(tmr){clearInterval(tmr);tmr=null}
+    var left=n;out.textContent=left+"s";
+    tmr=setInterval(function(){left--;out.textContent=left>0?left+"s":"Time";if(left<=0){clearInterval(tmr);tmr=null}},1000);
+  });
+});
+
+})();
+</script>
+</body>
+</html>
