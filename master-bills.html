@@ -1,0 +1,492 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Master Bill Dashboard | Broderick Learning Hub</title>
+<script src="theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#f1f3f6; --surface:#ffffff; --surface-2:#f6f7f9;
+  --ink:#12161d; --ink-2:#465061; --ink-3:#667085;
+  --line:#e2e5ea; --line-2:#c9ced6;
+  --accent:#1f63bd; --accent-ink:#ffffff; --accent-wash:#e7eefa;
+  --st-pass:#2a8a5c; --st-floor:#2a78d6; --st-dead:#8b94a3; --st-none:#eda100;
+  --warn-wash:#fdf3dc; --warn-ink:#7a5200; --shadow:0 12px 40px rgba(16,24,40,.22);
+  --serif:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1116; --surface:#161a21; --surface-2:#1b2029;
+    --ink:#eef1f5; --ink-2:#b3bbc8; --ink-3:#8b94a3;
+    --line:#262c36; --line-2:#363d4a;
+    --accent:#6da7ec; --accent-ink:#0e1116; --accent-wash:#1a2740;
+    --st-pass:#4fb985; --st-floor:#5a9fe8; --st-dead:#6b7585; --st-none:#d9a21f;
+    --warn-wash:#2c2310; --warn-ink:#f0c46a; --shadow:0 12px 40px rgba(0,0,0,.6);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1116; --surface:#161a21; --surface-2:#1b2029;
+  --ink:#eef1f5; --ink-2:#b3bbc8; --ink-3:#8b94a3;
+  --line:#262c36; --line-2:#363d4a;
+  --accent:#6da7ec; --accent-ink:#0e1116; --accent-wash:#1a2740;
+  --st-pass:#4fb985; --st-floor:#5a9fe8; --st-dead:#6b7585; --st-none:#d9a21f;
+  --warn-wash:#2c2310; --warn-ink:#f0c46a; --shadow:0 12px 40px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,ul{margin:0}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.hubbar{padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-size:14px}
+.hubbar b{font-family:var(--serif);color:var(--accent)}
+.wrap{max-width:1240px;margin-inline:auto;padding:20px 16px 72px;display:flex;flex-direction:column;gap:16px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--serif);font-weight:700;font-size:32px;line-height:1.15;letter-spacing:-.01em;margin-top:4px;text-wrap:balance}
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:7px 12px;font-weight:600;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.small{padding:4px 9px;font-size:13px}
+.fresh{display:inline-flex;align-items:center;gap:8px;background:var(--warn-wash);color:var(--warn-ink);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600}
+.fresh::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--st-none)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-2);position:sticky;top:0;background:var(--bg);z-index:5;padding-top:6px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:3px solid transparent;padding:10px 16px;font-weight:600;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px;min-width:0}
+.card h2{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.25}
+.card .sub{color:var(--ink-3);font-size:13px;margin-top:2px}
+.card-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline;margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:2px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;cursor:pointer}
+.tile:hover{border-color:var(--accent)}
+.tile .k{font-size:13px;color:var(--ink-2);font-weight:600}
+.tile .v{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
+.tile .v small{font-size:15px;font-weight:600;color:var(--ink-3);margin-left:6px}
+.tile .d{font-size:13px;color:var(--ink-3)}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:250px minmax(0,1fr) 40px;gap:12px;align-items:center;min-height:26px}
+.row .lbl{font-size:13px;color:var(--ink-2);text-align:left;background:none;border:0;padding:0;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .lbl:hover{color:var(--accent);text-decoration:underline}
+.row .n{font-size:13px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.bar{display:flex;gap:2px;height:18px}
+.bar .seg{border-radius:2px;min-width:3px}
+.bar .seg:last-child{border-radius:2px 4px 4px 2px}
+.bar.one .seg{background:var(--accent)}
+.s-pass{background:var(--st-pass)} .s-floor{background:var(--st-floor)} .s-dead{background:var(--st-dead)} .s-none{background:var(--st-none)} .s-spons{background:var(--line-2)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:600;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.chip .sw{width:8px;height:8px;border-radius:50%}
+.chip.rtc{background:var(--accent-wash);border-color:transparent;color:var(--accent)}
+.note{background:var(--warn-wash);color:var(--warn-ink);border-radius:8px;padding:10px 14px;font-size:13px}
+.big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.big b{font-size:48px;font-family:var(--serif);line-height:1}
+.cols{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line-2);padding:0 2px}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;min-width:0}
+.col i{display:block;width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px}
+.col span{font-size:11px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.collab{display:flex;gap:6px;padding:4px 2px 0}
+.collab span{flex:1;text-align:center;font-size:11px;color:var(--ink-3)}
+.cat-card{display:flex;flex-direction:column;gap:8px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;cursor:pointer}
+.cat-card:hover{border-color:var(--accent)}
+.cat-card h3{font-family:var(--serif);font-size:17px;font-weight:600}
+.cat-card p{color:var(--ink-2);font-size:13px}
+.cat-card .cnt{font-size:12px;color:var(--ink-3);font-weight:600}
+.billref{border:0;background:none;padding:0;color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:2px}
+.billref:hover{text-decoration-color:currentColor}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.filters input,.filters select{background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:6px 10px;min-width:0}
+.filters input[type=search]{flex:1 1 220px}
+.count{color:var(--ink-3);font-size:13px;margin:4px 0 8px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);padding:8px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+th button{background:none;border:0;padding:0;font:inherit;text-transform:inherit;letter-spacing:inherit;color:inherit;cursor:pointer}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+td.id{font-weight:700;white-space:nowrap}
+.ttl{background:none;border:0;padding:0;text-align:left;color:var(--ink);font-weight:600;cursor:pointer}
+.ttl:hover{color:var(--accent);text-decoration:underline}
+.hl{color:var(--ink-3);font-size:13px;margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600}
+.pill .sw{border-radius:50%}
+.issue{border-top:1px solid var(--line);padding:12px 0}
+.issue:first-child{border-top:0}
+.issue h4{font-size:15px;font-weight:600}
+.issue .bl{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chipbtn{border:1px solid var(--line-2);background:var(--surface-2);border-radius:999px;padding:2px 10px;font-weight:600;font-size:12px;cursor:pointer;color:var(--accent)}
+.chipbtn:hover{border-color:var(--accent)}
+.back{margin-bottom:6px}
+/* drawer */
+#overlay{position:fixed;inset:0;background:rgba(10,14,20,.55);z-index:50;display:none;justify-content:flex-end}
+#overlay.on{display:flex}
+.drawer{background:var(--surface);width:min(760px,100%);height:100%;overflow-y:auto;box-shadow:var(--shadow);padding:0}
+.dhead{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;gap:8px;align-items:center;justify-content:space-between;z-index:2}
+.dbody{padding:18px 22px 60px;display:flex;flex-direction:column;gap:18px}
+.dbody h2{font-family:var(--serif);font-size:25px;line-height:1.2;font-weight:700}
+.dbody h3{font-family:var(--serif);font-size:16px;font-weight:600;margin-bottom:6px}
+.dbody p,.dbody li{color:var(--ink-2);font-size:14.5px}
+.dbody ul{padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.sec{border-top:1px solid var(--line);padding-top:14px}
+.lead{background:var(--accent-wash);border-radius:8px;padding:14px 16px;color:var(--ink)!important;font-size:15.5px!important}
+.kv{display:grid;grid-template-columns:130px minmax(0,1fr);gap:4px 12px;font-size:14px}
+.kv dt{color:var(--ink-3);font-weight:600} .kv dd{margin:0;color:var(--ink-2)}
+.track{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.step{font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;border:1px solid var(--line-2);color:var(--ink-3)}
+.step.done{background:var(--accent-wash);border-color:transparent;color:var(--accent)}
+.step.cur{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+details summary{cursor:pointer;font-weight:600;color:var(--accent)}
+details[open] summary{margin-bottom:8px}
+.legal{font-size:12.5px;color:var(--ink-3)}
+.stepper{display:flex;flex-direction:column;gap:6px}
+.stp{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:start;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px 14px;cursor:pointer;width:100%}
+.stp:hover,.stp[aria-expanded=true]{border-color:var(--accent)}
+.stp .no{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.stp b{display:block;font-weight:600}
+.stp .d{display:none;color:var(--ink-2);margin-top:4px;font-size:13.5px}
+.stp[aria-expanded=true] .d{display:block}
+.stp .c{font-size:12px;color:var(--ink-3);font-weight:600;white-space:nowrap}
+.glos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.glos div{border-top:1px solid var(--line);padding-top:8px}
+.glos b{display:block;font-weight:600}
+.glos span{color:var(--ink-2);font-size:13.5px}
+.foot{color:var(--ink-3);font-size:12.5px}
+@media (max-width:900px){
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2,.grid3,.glos{grid-template-columns:minmax(0,1fr)}
+  .row{grid-template-columns:minmax(0,1fr) 36px;gap:4px 8px}
+  .row .lbl{grid-column:1 / span 2} .row .bar{grid-column:1} .row .n{grid-column:2}
+  h1{font-size:26px}
+  .kv{grid-template-columns:100px minmax(0,1fr)}
+}
+@media (prefers-reduced-motion: no-preference){.tile,.btn,.cat-card{transition:border-color .12s,color .12s}}
+</style></head><body>
+<nav class="hubbar" aria-label="Hub"><b>&#9889; Broderick Learning Hub</b> &middot; <a href="index.html">Home</a> &middot; <a href="rtc-dashboard.html">RTC Bill Dashboard</a> &middot; <a href="glossary.html">Glossary</a> &middot; <a href="reports.html">Reports</a></nav>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1>Illinois Master Bill Dashboard</h1>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <span class="fresh" id="fresh"></span>
+      <a class="btn" href="rtc-dashboard.html">Open RTC Bill Dashboard</a>
+    </div>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Sections" id="tabs">
+    <button class="tab" role="tab" data-tab="overview">Overview</button>
+    <button class="tab" role="tab" data-tab="cats">Categories</button>
+    <button class="tab" role="tab" data-tab="bills">All bills</button>
+    <button class="tab" role="tab" data-tab="learn">Learn</button>
+  </div>
+  <main id="view"></main>
+  <p class="foot" id="foot"></p>
+</div>
+<div id="overlay" aria-hidden="true"><div class="drawer" role="dialog" aria-modal="true" aria-label="Bill detail" id="drawer"></div></div>
+<script src="bills-data.js"></script>
+<script>
+(function(){
+"use strict";
+var D=window.MB;
+if(!D){document.getElementById("view").innerHTML='<div class="note">The data file <b>bills-data.js</b> did not load. Upload it to the same folder as this page on GitHub, then reload. In a single file preview it will not appear.</div>';document.getElementById("tabs").style.display="none";return}
+var B=D.bills, BY={}; B.forEach(function(b){BY[b.id]=b});
+var CATN={}; D.cats.forEach(function(c){CATN[c.name]=c});
+var STAGES=[
+ {k:"Passed both houses",c:"s-pass",l:"Passed both houses"},
+ {k:"Floor action",c:"s-floor",l:"Floor action"},
+ {k:"Sponsor change",c:"s-spons",l:"Sponsor changed"},
+ {k:"Stalled by deadline rule",c:"s-dead",l:"Re-referred after deadline"},
+ {k:"Awaiting committee assignment",c:"s-none",l:"Not yet in committee"}];
+var SMAP={}; STAGES.forEach(function(s){SMAP[s.k]=s});
+var STATS={"220 ILCS 5":"Public Utilities Act","20 ILCS 3855":"Illinois Power Agency Act","415 ILCS 5":"Environmental Protection Act","55 ILCS 5":"Counties Code","30 ILCS 105":"State Finance Act","20 ILCS 605":"Dept. of Commerce and Economic Opportunity Law","65 ILCS 5":"Illinois Municipal Code","30 ILCS 500":"Illinois Procurement Code","815 ILCS 505":"Consumer Fraud and Deceptive Business Practices Act","305 ILCS 20":"Energy Assistance Act","35 ILCS 5":"Illinois Income Tax Act","20 ILCS 3501":"Illinois Finance Authority Act","35 ILCS 200":"Property Tax Code","20 ILCS 730":"Energy Transition Act","220 ILCS 80":"Underground Utility Facilities Damage Prevention Act","625 ILCS 5":"Illinois Vehicle Code"};
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function pct(n,t){return t?Math.round(n/t*100):0}
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmt(d){var p=d.split("-");return MON[+p[1]-1]+" "+(+p[2])+", "+p[0]}
+function person(n){return n.replace(/^Representative /,"Rep. ").replace(/^Senator /,"Sen. ")}
+function slug(c){return c.slug}
+function catBySlug(s){return D.cats.filter(function(c){return c.slug===s})[0]}
+function stageChip(b){var s=SMAP[b.stage];return '<span class="pill"><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}
+function billBtn(id,txt){return '<button class="billref" data-open="'+esc(id)+'">'+esc(txt||id)+'</button>'}
+function setHash(h){if(location.hash!==h)history.pushState(null,"",h)}
+
+/* state */
+var F={q:"",cat:"",chamber:"",stage:"",party:"",bip:"",rtc:"",sort:"id",dir:1};
+var lastList=B.map(function(b){return b.id});
+
+/* ---------------- overview ---------------- */
+function counts(fn,list){var m={};(list||B).forEach(function(b){var k=fn(b);m[k]=(m[k]||0)+1});return m}
+function stageBar(list){
+  var c=counts(function(b){return b.stage},list);
+  return '<div class="bar">'+STAGES.filter(function(s){return c[s.k]}).map(function(s){return '<div class="seg '+s.c+'" style="flex:'+c[s.k]+'" title="'+esc(s.l)+' '+c[s.k]+'"></div>'}).join("")+'</div>';
+}
+function legend(){return '<div class="legend">'+STAGES.map(function(s){return '<span><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}).join("")+'</div>'}
+function overview(){
+  var n=B.length, cs=counts(function(b){return b.stage});
+  var pass=cs["Passed both houses"]||0, dead=cs["Stalled by deadline rule"]||0, none=cs["Awaiting committee assignment"]||0;
+  var bip=B.filter(function(b){return b.bip}).length, nocos=B.filter(function(b){return b.nCos===0}).length;
+  var pairs=0,seen={};B.forEach(function(b){if(b.pair.length&&!seen[b.issue]){seen[b.issue]=1;pairs++}});
+  var h='';
+  h+='<div class="note" style="margin-bottom:16px">Snapshot of the Trackbill master list as of <b>'+fmt(D.meta.asOf)+'</b>. Stage and last action reflect the end of the spring session. Facts only on this page. Briefs are drafted study notes, not a company position or legal advice.</div>';
+  h+='<div class="tiles">'+
+   tile("All bills",n,"Senate "+counts(function(b){return b.chamber})["Senate"]+" and House "+counts(function(b){return b.chamber})["House"],"bills")+
+   tile("Passed both houses",pass,pct(pass,n)+"% of the list","bills|stage=Passed both houses")+
+   tile("Re-referred after deadline",dead,pct(dead,n)+"% of the list","bills|stage=Stalled by deadline rule")+
+   tile("Never sent to committee",none,pct(none,n)+"% of the list","bills|stage=Awaiting committee assignment")+'</div>';
+  h+='<div class="grid2" style="margin-top:16px">';
+  h+='<div class="card"><div class="card-head"><div><h2>Where the bills stand</h2><p class="sub">Last recorded action. Select a row to see those bills.</p></div></div><div class="rows">'+
+    STAGES.map(function(s){var c=cs[s.k]||0;return '<div class="row"><button class="lbl" data-go="bills|stage='+esc(s.k)+'">'+esc(s.l)+'</button><div class="bar"><div class="seg '+s.c+'" style="flex:0 0 '+Math.max(pct(c,n),1)+'%"></div></div><div class="n">'+c+'</div></div>'}).join("")+'</div></div>';
+  h+='<div class="card"><div class="card-head"><div><h2>What passed both houses</h2><p class="sub">'+pass+' bills cleared both chambers by June 1</p></div></div><div class="rows">'+
+    B.filter(function(b){return b.passed}).map(function(b){return '<div style="display:flex;gap:10px;align-items:baseline">'+billBtn(b.id)+'<span style="color:var(--ink-2)">'+esc(b.title)+'</span></div>'}).join("")+'</div></div>';
+  h+='</div>';
+  /* themes */
+  var ct=counts(function(b){return b.theme});
+  var order=D.cats.map(function(c){return c.name}).sort(function(a,b){return (ct[b]||0)-(ct[a]||0)});
+  var max=ct[order[0]];
+  h+='<div class="card" style="margin-top:16px"><div class="card-head"><div><h2>Bills by category</h2><p class="sub">Bar shows stage mix. Select a category for its primer and bills.</p></div></div><div class="rows">'+
+   order.map(function(k){var c=CATN[k],list=B.filter(function(b){return b.theme===k});return '<div class="row"><button class="lbl" data-go="cat|'+c.slug+'">'+esc(c.short)+'</button><div style="width:'+Math.round(ct[k]/max*100)+'%">'+stageBar(list)+'</div><div class="n">'+ct[k]+'</div></div>'}).join("")+'</div>'+legend()+'</div>';
+  /* chamber party, cosponsors, activity */
+  var rep=B.filter(function(b){return b.party==="R"}).length;
+  var bins=[["None",0,0],["1 to 3",1,3],["4 to 9",4,9],["10 to 19",10,19],["20 or more",20,999]];
+  var bc=bins.map(function(x){return B.filter(function(b){return b.nCos>=x[1]&&b.nCos<=x[2]}).length});
+  var bmax=Math.max.apply(null,bc);
+  h+='<div class="grid2" style="margin-top:16px">';
+  h+='<div class="card"><div class="card-head"><div><h2>Sponsors and support</h2><p class="sub">Chief sponsors by party and how many cosponsors each bill drew</p></div></div>'+
+    '<div class="big"><b>'+pct(rep,n)+'%</b><span style="color:var(--ink-2)">of chief sponsors are Republican ('+rep+' of '+n+'). Democrats chief sponsor '+(n-rep)+'.</span></div>'+
+    '<div class="rows" style="margin-top:14px">'+bins.map(function(x,i){return '<div class="row" style="grid-template-columns:150px minmax(0,1fr) 40px"><span class="lbl" style="cursor:default">'+x[0]+' cosponsors</span><div class="bar one"><div class="seg" style="flex:0 0 '+Math.max(Math.round(bc[i]/bmax*100),2)+'%"></div></div><div class="n">'+bc[i]+'</div></div>'}).join("")+'</div>'+
+    '<p class="sub" style="margin-top:12px">'+nocos+' bills ('+pct(nocos,n)+'%) have no cosponsors. Only '+bip+' bills have both Democratic and Republican names attached, and '+B.filter(function(b){return b.bip&&b.passed}).length+' of them passed both houses.</p></div>';
+  var m=D.monthly,keys=Object.keys(m).sort(),mm=Math.max.apply(null,keys.map(function(k){return m[k]}));
+  h+='<div class="card"><div class="card-head"><div><h2>When the last action happened</h2><p class="sub">Bills by month of last recorded action</p></div></div>'+
+    '<div class="cols">'+keys.map(function(k){return '<div class="col"><span>'+m[k]+'</span><i style="height:'+Math.round(m[k]/mm*100)+'%"></i></div>'}).join("")+'</div>'+
+    '<div class="collab">'+keys.map(function(k){var p=k.split("-");return '<span>'+MON[+p[1]-1]+(p[0]!=="2026"?" "+p[0].slice(2):"")+'</span>'}).join("")+'</div>'+
+    '<p class="sub" style="margin-top:12px">Spikes in March mark the committee deadline re-referrals. May is the end of session push. One snapshot cannot show change over time, so trend lines start building as new exports are added.</p></div>';
+  h+='</div>';
+  /* statutes */
+  var sc={};B.forEach(function(b){var seen={};b.statutes.forEach(function(s){var mt=s.match(/^(\d+ ILCS \d+)/);if(mt&&!seen[mt[1]]){seen[mt[1]]=1;sc[mt[1]]=(sc[mt[1]]||0)+1}})});
+  var sk=Object.keys(sc).filter(function(k){return STATS[k]}).sort(function(a,b){return sc[b]-sc[a]}).slice(0,10), smax=sc[sk[0]];
+  h+='<div class="grid2" style="margin-top:16px"><div class="card"><div class="card-head"><div><h2>Which laws the bills change</h2><p class="sub">Number of bills amending each statute</p></div></div><div class="rows">'+
+    sk.map(function(k){return '<div class="row"><span class="lbl" style="cursor:default" title="'+esc(k)+'">'+esc(STATS[k])+'</span><div class="bar one"><div class="seg" style="flex:0 0 '+Math.round(sc[k]/smax*100)+'%"></div></div><div class="n">'+sc[k]+'</div></div>'}).join("")+'</div><p class="sub" style="margin-top:10px">The Public Utilities Act is the center of gravity. About '+pct(sc["220 ILCS 5"],n)+' percent of all bills amend it.</p></div>';
+  h+='<div class="card"><div class="card-head"><div><h2>Start here</h2><p class="sub">A short path for learning the core issues</p></div></div><div class="rows" style="gap:12px">'+
+    path("1. Learn how a bill moves","See the nine steps and what each stage means.","learn")+
+    path("2. Pick a category","Read the primer, then the issue briefs inside it.","cats")+
+    path("3. Open any bill title","Each bill has the core issue, background, implications and questions to ask.","bills")+
+    path("4. Check the glossary","Terms such as shell bill, concurrence and heat rate.","learn|gloss")+
+    '</div><p class="sub" style="margin-top:12px">'+pairs+' topics appear in more than one bill, usually a House and Senate pair. Open one and the related versions are linked.</p></div></div>';
+  return h;
+}
+function tile(k,v,d,go){return '<button class="tile" data-go="'+esc(go||"bills")+'"><span class="k">'+esc(k)+'</span><span class="v">'+v+'</span><span class="d">'+esc(d)+'</span></button>'}
+function path(t,d,go){return '<button class="cat-card" data-go="'+go+'"><h3>'+esc(t)+'</h3><p>'+esc(d)+'</p></button>'}
+
+/* ---------------- categories ---------------- */
+function cats(){
+  var h='<div class="grid3">'+D.cats.map(function(c){var list=B.filter(function(b){return b.theme===c.name});
+   return '<button class="cat-card" data-go="cat|'+c.slug+'"><h3>'+esc(c.short)+'</h3><p>'+esc(c.blurb)+'</p>'+stageBar(list)+'<span class="cnt">'+list.length+' bills &middot; '+list.filter(function(b){return b.passed}).length+' passed both houses</span></button>'}).join("")+'</div>'+legend();
+  return h;
+}
+function catView(s){
+  var c=catBySlug(s); if(!c) return cats();
+  var list=B.filter(function(b){return b.theme===c.name}), also=B.filter(function(b){return b.also.indexOf(c.name)>-1&&b.theme!==c.name});
+  var byIssue={};list.forEach(function(b){(byIssue[b.issue]=byIssue[b.issue]||[]).push(b)});
+  var keys=Object.keys(byIssue).sort(function(a,b){return byIssue[b].length-byIssue[a].length||(byIssue[a][0].num-byIssue[b][0].num)});
+  var h='<button class="btn small back" data-go="cats">&larr; All categories</button>';
+  h+='<div class="card"><div class="card-head"><div><h2>'+esc(c.short)+'</h2><p class="sub">'+list.length+' bills, '+keys.length+' issues</p></div></div>'+stageBar(list)+legend()+
+    '<div class="sec" style="margin-top:14px"><p style="color:var(--ink-2);font-size:14.5px">'+esc(c.primer)+'</p>'+
+    '<dl class="kv" style="margin-top:12px"><dt>What to watch</dt><dd>'+esc(c.watch)+'</dd><dt>Main laws touched</dt><dd>'+esc(c.stat)+'</dd>'+
+    (c.go.length?'<dt>Go deeper</dt><dd>'+hubLinks(c.go)+'</dd>':'')+'</dl></div></div>';
+  h+='<div class="card" style="margin-top:16px"><div class="card-head"><div><h2>Issues in this category</h2><p class="sub">Each issue groups companion bills. Select a bill for the full brief.</p></div></div>'+
+    keys.map(function(k){var is=D.issues[k],bl=byIssue[k];return '<div class="issue"><h4>'+esc(is.headline)+'</h4><div class="hl">'+esc(is.bg.split(". ")[0])+'.</div><div class="bl">'+bl.map(function(b){return '<button class="chipbtn" data-open="'+b.id+'" data-list="cat:'+c.slug+'">'+b.id+'</button>'}).join("")+'</div></div>'}).join("")+'</div>';
+  if(also.length) h+='<div class="card" style="margin-top:16px"><div class="card-head"><div><h2>Also touches this topic</h2><p class="sub">Filed in another category but relevant here</p></div></div>'+also.map(function(b){return '<div class="issue"><h4>'+billBtn(b.id)+' <span style="font-weight:600">'+esc(b.title)+'</span></h4><div class="hl">'+esc(D.issues[b.issue].headline)+'</div></div>'}).join("")+'</div>';
+  return h;
+}
+function hubLinks(keys){var out=[],seen={};keys.forEach(function(k){(D.hub[k]||[]).forEach(function(l){if(!seen[l.u]){seen[l.u]=1;out.push('<a href="'+esc(l.u)+'">'+esc(l.t)+'</a>')}})});return out.join(" &middot; ")}
+
+/* ---------------- bills ---------------- */
+function filtered(){
+  var q=F.q.trim().toLowerCase();
+  var l=B.filter(function(b){
+    if(F.cat&&b.theme!==F.cat) return false;
+    if(F.chamber&&b.chamber!==F.chamber) return false;
+    if(F.stage&&b.stage!==F.stage) return false;
+    if(F.party&&b.party!==F.party) return false;
+    if(F.bip==="yes"&&!b.bip) return false;
+    if(F.rtc==="yes"&&!b.rtc) return false;
+    if(q){var hay=(b.id+" "+b.title+" "+b.sponsor+" "+b.summary+" "+D.issues[b.issue].headline+" "+D.issues[b.issue].bg).toLowerCase();if(hay.indexOf(q)<0)return false}
+    return true});
+  var k=F.sort,d=F.dir;
+  l.sort(function(a,b){var x,y;
+    if(k==="id"){x=a.type+("00000"+a.num).slice(-5);y=b.type+("00000"+b.num).slice(-5)}
+    else if(k==="title"){x=a.title;y=b.title}
+    else if(k==="sponsor"){x=a.sponsor;y=b.sponsor}
+    else if(k==="stage"){x=STAGES.indexOf(SMAP[a.stage]);y=STAGES.indexOf(SMAP[b.stage])}
+    else if(k==="date"){x=a.lastDate;y=b.lastDate}
+    else if(k==="cos"){x=a.nCos;y=b.nCos}
+    return (x<y?-1:x>y?1:0)*d});
+  return l;
+}
+function opt(v,l,cur){return '<option value="'+esc(v)+'"'+(cur===v?" selected":"")+'>'+esc(l)+'</option>'}
+function billsView(){
+  var h='<div class="card"><div class="card-head"><div><h2>All bills</h2><p class="sub">Select a bill title to read the core issue, background, implications and questions to ask.</p></div></div>';
+  h+='<div class="filters" id="filters">'+
+   '<input type="search" id="fq" placeholder="Search bills, sponsors, topics" value="'+esc(F.q)+'" aria-label="Search">'+
+   '<select id="fcat" aria-label="Category"><option value="">All categories</option>'+D.cats.map(function(c){return opt(c.name,c.short,F.cat)}).join("")+'</select>'+
+   '<select id="fch" aria-label="Chamber">'+opt("","Both chambers",F.chamber)+opt("House","House",F.chamber)+opt("Senate","Senate",F.chamber)+'</select>'+
+   '<select id="fst" aria-label="Stage"><option value="">All stages</option>'+STAGES.map(function(s){return opt(s.k,s.l,F.stage)}).join("")+'</select>'+
+   '<select id="fpa" aria-label="Sponsor party">'+opt("","Any sponsor party",F.party)+opt("D","Democratic sponsor",F.party)+opt("R","Republican sponsor",F.party)+'</select>'+
+   '<select id="fbi" aria-label="Bipartisan">'+opt("","Any support",F.bip)+opt("yes","Both parties on bill",F.bip)+'</select>'+
+   '<select id="frt" aria-label="RTC">'+opt("","All bills",F.rtc)+opt("yes","Also in RTC dashboard",F.rtc)+'</select>'+
+   '<button class="btn small" id="freset">Reset</button></div>';
+  h+='<div class="count" id="cnt"></div><div class="tablewrap"><table id="tbl"></table></div></div>';
+  return h;
+}
+function renderTable(){
+  var l=filtered(); lastList=l.map(function(b){return b.id});
+  document.getElementById("cnt").textContent=l.length+" of "+B.length+" bills";
+  function th(k,t){var on=F.sort===k;return '<th aria-sort="'+(on?(F.dir>0?"ascending":"descending"):"none")+'"><button data-sort="'+k+'">'+t+(on?(F.dir>0?" &#9650;":" &#9660;"):"")+'</button></th>'}
+  var h='<thead><tr>'+th("id","Bill")+th("title","Title and core issue")+th("sponsor","Chief sponsor")+th("stage","Stage")+th("date","Last action")+th("cos","Cosponsors")+'</tr></thead><tbody>';
+  h+=l.map(function(b){var is=D.issues[b.issue];
+    return '<tr><td class="id">'+esc(b.id)+'</td><td><button class="ttl" data-open="'+b.id+'" data-list="bills">'+esc(b.title)+'</button> '+(b.rtc?'<span class="chip rtc">RTC</span>':'')+'<div class="hl">'+esc(is.headline)+'</div></td><td>'+esc(b.sponsor)+' ('+b.party+')</td><td>'+stageChip(b)+'</td><td style="white-space:nowrap">'+fmt(b.lastDate)+'</td><td>'+b.nCos+(b.bip?' <span class="chip">both parties</span>':'')+'</td></tr>'}).join("");
+  h+='</tbody>';
+  document.getElementById("tbl").innerHTML=h;
+}
+
+/* ---------------- learn ---------------- */
+function learn(sub){
+  var cs=counts(function(b){return b.stage});
+  var h='<div class="card"><div class="card-head"><div><h2>How a bill becomes law in Illinois</h2><p class="sub">Select a step. Counts show where the tracked bills sit today.</p></div></div><div class="stepper" id="stepper">'+
+   D.process.map(function(p,i){var c=p.stage?(counts(function(b){return SMAP[b.stage].l},B)[p.stage]||0):null;
+    var st=null;STAGES.forEach(function(s){if(s.l===p.stage||(p.stage==="Referred to Rules or Assignments"))st=st});
+    return '<button class="stp" data-step="'+i+'" aria-expanded="false"><span class="no">'+(i+1)+'</span><span><b>'+esc(p.t)+'</b><span class="d">'+esc(p.d)+'</span></span><span class="c">'+(c!=null?c+' bills':'')+'</span></button>'}).join("")+
+   '</div><div class="note" style="margin-top:14px"><b>Where these bills go next.</b> The 104th General Assembly ends in January 2027. Bills that have not passed both houses by then expire. Remaining chances are the fall veto session and the lame duck days between the election and the new General Assembly.</div></div>';
+  h+='<div class="card" style="margin-top:16px" id="gloss"><div class="card-head"><div><h2>Glossary</h2><p class="sub">Terms used across the bill briefs</p></div><input type="search" id="gq" placeholder="Filter terms" aria-label="Filter terms" style="background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:6px 10px"></div><div class="glos" id="glos"></div></div>';
+  h+='<div class="card" style="margin-top:16px"><div class="card-head"><div><h2>Key laws behind the bills</h2><p class="sub">What the most frequently amended statutes do</p></div></div><div class="glos">'+
+   [["Public Utilities Act (220 ILCS 5)","The main law governing ICC regulated utilities. Covers rates, service, net metering, interconnection, supplier rules and the Multi Year Integrated Grid Plan process."],
+    ["Illinois Power Agency Act (20 ILCS 3855)","Creates the IPA and sets how it plans and buys energy and renewable credits, including the Adjustable Block solar program and community solar."],
+    ["Environmental Protection Act (415 ILCS 5)","Illinois' core pollution law. CEJA added greenhouse gas deadlines for fossil plants here."],
+    ["Counties Code (55 ILCS 5)","Gives counties power over zoning and siting of wind, solar and storage facilities."],
+    ["Illinois Municipal Code (65 ILCS 5)","The equivalent powers for cities and villages, including utility franchise and audit rights."],
+    ["CEJA, Public Act 102-662","The 2021 Climate and Equitable Jobs Act. Many 2026 bills extend, loosen or tighten its terms."]].map(function(x){return '<div><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div>'}).join("")+'</div></div>';
+  return h;
+}
+function drawGlos(){
+  var q=(document.getElementById("gq")||{value:""}).value.toLowerCase();
+  var el=document.getElementById("glos"); if(!el)return;
+  el.innerHTML=D.glossary.filter(function(g){return !q||(g.t+" "+g.d).toLowerCase().indexOf(q)>-1}).map(function(g){return '<div><b>'+esc(g.t)+'</b><span>'+esc(g.d)+'</span></div>'}).join("");
+}
+
+/* ---------------- drawer ---------------- */
+var curId=null, lastFocus=null;
+function stepIndex(b){var s=b.stage;return s==="Passed both houses"?6:s==="Floor action"?4:s==="Stalled by deadline rule"?3:0}
+function openBill(id,listKey,noPush){
+  var b=BY[id]; if(!b) return;
+  curId=id; lastFocus=document.activeElement;
+  if(listKey==="bills") lastList=filtered().map(function(x){return x.id});
+  else if(listKey&&listKey.indexOf("cat:")===0){var c=catBySlug(listKey.slice(4));lastList=B.filter(function(x){return x.theme===c.name}).map(function(x){return x.id})}
+  var is=D.issues[b.issue], ix=lastList.indexOf(id);
+  var steps=D.process.map(function(p){return p.t}), cur=stepIndex(b);
+  var h='<div class="dhead"><div style="display:flex;gap:6px"><button class="btn small" id="dprev" '+(ix<=0?"disabled":"")+' aria-label="Previous bill">&larr;</button><button class="btn small" id="dnext" '+(ix<0||ix>=lastList.length-1?"disabled":"")+' aria-label="Next bill">&rarr;</button></div><span class="eyebrow">'+(ix>-1?(ix+1)+" of "+lastList.length:"")+'</span><button class="btn small" id="dclose" aria-label="Close">Close</button></div><div class="dbody">';
+  h+='<div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"><span class="chip">'+esc(b.id)+'</span><span class="chip">'+esc(CATN[b.theme].short)+'</span>'+stageChip(b)+(b.rtc?'<a class="chip rtc" href="rtc-dashboard.html" style="text-decoration:none">Also in RTC dashboard</a>':'')+'</div><h2>'+esc(b.title)+'</h2></div>';
+  h+='<p class="lead"><b>The core issue.</b> '+esc(is.headline)+'</p>';
+  h+='<div class="sec"><h3>Background</h3><p>'+esc(is.bg)+'</p></div>';
+  h+='<div class="sec"><h3>Why it matters and likely implications</h3><p>'+esc(is.why)+'</p></div>';
+  h+='<div class="sec"><h3>Questions worth asking</h3><ul>'+is.q.map(function(q){return '<li>'+esc(q)+'?</li>'}).join("")+'</ul></div>';
+  h+='<div class="sec"><h3>What the bill says</h3><p>'+esc(b.summary.length>700?b.summary.slice(0,700).replace(/\s\S*$/,"")+" ...":b.summary)+'</p>'+(b.summary.length>700?'<details style="margin-top:8px"><summary>Read the full official summary</summary><p>'+esc(b.summary)+'</p></details>':'')+'<p class="legal" style="margin-top:6px">Official synopsis text from the legislative record.</p></div>';
+  h+='<div class="sec"><h3>Where it stands</h3><div class="track">'+steps.map(function(s,i){return '<span class="step '+(i<cur?"done":i===cur?"cur":"")+'">'+esc(s)+'</span>'}).join("")+'</div><p><b>'+esc(b.last)+'</b> on '+fmt(b.lastDate)+(b.lastChamber?' in the '+esc(b.lastChamber):'')+'. '+esc(b.stageNote)+'.</p><p class="legal">Position on the path is inferred from the last action as of '+fmt(D.meta.asOf)+'.</p></div>';
+  h+='<div class="sec"><h3>Who is behind it</h3><dl class="kv"><dt>Chief sponsor</dt><dd>'+esc(b.sponsor)+' ('+b.party+'), '+esc(b.chamber)+'</dd><dt>Cosponsors</dt><dd>'+b.nCos+(b.bip?', both parties represented':'')+'</dd></dl>'+(b.cos.length?'<details style="margin-top:8px"><summary>Show cosponsors</summary><p>'+b.cos.map(person).map(esc).join("; ")+'</p></details>':'')+'</div>';
+  h+='<div class="sec"><h3>Law and process</h3><dl class="kv"><dt>Statutes amended</dt><dd>'+(b.statutes.length?esc(b.statutes.slice(0,12).join("; "))+(b.nStat>12?" and "+(b.nStat-12)+" more":""):"None listed")+'</dd><dt>Committees</dt><dd>'+(b.committees.length?esc(b.committees.join("; ")):"None listed")+'</dd><dt>Amendments</dt><dd>'+(b.amend.length?esc(b.amend.join("; ")):"None proposed")+'</dd></dl></div>';
+  var rel=B.filter(function(x){return x.issue===b.issue&&x.id!==b.id});
+  if(rel.length) h+='<div class="sec"><h3>Companion and related bills</h3><div style="display:flex;flex-wrap:wrap;gap:6px">'+rel.map(function(x){return '<button class="chipbtn" data-open="'+x.id+'">'+x.id+' '+esc(x.title)+'</button>'}).join("")+'</div></div>';
+  var same=B.filter(function(x){return x.theme===b.theme&&x.issue!==b.issue}).slice(0,0);
+  if(is.go.length) h+='<div class="sec"><h3>Go deeper on this hub</h3><p>'+hubLinks(is.go)+'</p></div>';
+  h+='</div>';
+  var dr=document.getElementById("drawer"); dr.innerHTML=h;
+  var ov=document.getElementById("overlay"); ov.classList.add("on"); ov.setAttribute("aria-hidden","false"); dr.scrollTop=0;
+  document.body.style.overflow="hidden";
+  var cl=document.getElementById("dclose"); cl.focus();
+  if(!noPush) setHash("#bill="+id);
+}
+function closeBill(noPush){
+  var ov=document.getElementById("overlay"); ov.classList.remove("on"); ov.setAttribute("aria-hidden","true");
+  document.body.style.overflow=""; curId=null;
+  if(!noPush) setHash("#"+tab+(sub?"="+sub:""));
+  if(lastFocus&&lastFocus.focus&&document.contains(lastFocus)) try{lastFocus.focus()}catch(e){}
+}
+function step(d){var ix=lastList.indexOf(curId)+d;if(ix>=0&&ix<lastList.length)openBill(lastList[ix])}
+
+/* ---------------- routing ---------------- */
+var tab="overview", sub="";
+function render(){
+  var v=document.getElementById("view"), h="";
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){t.setAttribute("aria-selected",String(t.getAttribute("data-tab")===tab))});
+  if(tab==="overview") h=overview();
+  else if(tab==="cats") h=sub?catView(sub):cats();
+  else if(tab==="bills") h=billsView();
+  else if(tab==="learn") h=learn(sub);
+  v.innerHTML=h;
+  if(tab==="bills") renderTable();
+  if(tab==="learn"){drawGlos(); if(sub==="gloss"){var g=document.getElementById("gloss");if(g)g.scrollIntoView()}}
+}
+function go(spec,noPush){
+  var p=spec.split("|"), t=p[0];
+  if(t==="cat"){tab="cats";sub=p[1]||""}
+  else{tab=t;sub=""; if(t==="learn"&&p[1])sub=p[1]}
+  if(t==="bills"){F={q:"",cat:"",chamber:"",stage:"",party:"",bip:"",rtc:"",sort:"id",dir:1};if(p[1]){var kv=p[1].split("=");F[kv[0]]=kv[1]}}
+  if(!noPush) setHash("#"+(tab==="cats"&&sub?"cat="+sub:tab+(sub?"="+sub:"")));
+  render(); window.scrollTo(0,0);
+}
+function fromHash(){
+  var h=location.hash.replace(/^#/,"");
+  if(h.indexOf("bill=")===0){ if(!document.getElementById("view").innerHTML){tab="overview";render()} openBill(h.slice(5),null,true); return }
+  if(curId) closeBill(true);
+  var m=h.match(/^(overview|cats|bills|learn)(?:=(.*))?$/), c=h.match(/^cat=(.*)$/);
+  if(c){tab="cats";sub=c[1]} else if(m){tab=m[1];sub=m[2]||""} else {tab="overview";sub=""}
+  render();
+}
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-open],[data-go],[data-tab],[data-sort],[data-step],#dclose,#dprev,#dnext,#freset,#overlay");
+  if(!t) return;
+  if(t.id==="overlay"){ if(e.target===t) closeBill(); return }
+  if(t.id==="dclose") return closeBill();
+  if(t.id==="dprev") return step(-1);
+  if(t.id==="dnext") return step(1);
+  if(t.id==="freset"){F={q:"",cat:"",chamber:"",stage:"",party:"",bip:"",rtc:"",sort:"id",dir:1};return render()}
+  if(t.hasAttribute("data-open")) return openBill(t.getAttribute("data-open"),t.getAttribute("data-list"));
+  if(t.hasAttribute("data-go")) return go(t.getAttribute("data-go"));
+  if(t.hasAttribute("data-tab")) return go(t.getAttribute("data-tab"));
+  if(t.hasAttribute("data-sort")){var k=t.getAttribute("data-sort");if(F.sort===k)F.dir*=-1;else{F.sort=k;F.dir=1}return renderTable()}
+  if(t.hasAttribute("data-step")){var on=t.getAttribute("aria-expanded")==="true";t.setAttribute("aria-expanded",String(!on))}
+});
+document.addEventListener("input",function(e){
+  if(e.target.id==="fq"){F.q=e.target.value;renderTable()}
+  if(e.target.id==="gq")drawGlos();
+});
+document.addEventListener("change",function(e){
+  var m={fcat:"cat",fch:"chamber",fst:"stage",fpa:"party",fbi:"bip",frt:"rtc"}[e.target.id];
+  if(m){F[m]=e.target.value;renderTable()}
+});
+document.addEventListener("keydown",function(e){
+  if(!curId) return;
+  if(e.key==="Escape") closeBill();
+  else if(e.key==="ArrowLeft"&&!/INPUT|SELECT/.test(document.activeElement.tagName)) step(-1);
+  else if(e.key==="ArrowRight"&&!/INPUT|SELECT/.test(document.activeElement.tagName)) step(1);
+  else if(e.key==="Tab"){
+    var f=document.getElementById("drawer").querySelectorAll("button:not([disabled]),a[href],summary");
+    if(!f.length) return; var a=f[0],z=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+    else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+  }
+});
+window.addEventListener("popstate",fromHash);
+document.getElementById("eyebrow").textContent="104th General Assembly · 2026 session · "+B.length+" bills";
+document.getElementById("fresh").textContent="Snapshot "+fmt(D.meta.asOf);
+document.getElementById("foot").textContent="Source "+D.meta.source+". "+D.meta.note+" Generated "+fmt(D.meta.generated)+".";
+fromHash();
+})();
+</script>
+</body></html>
