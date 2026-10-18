@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capacity, Retirements and the IRP</title><style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--muted:#566174;--card:#ffffff;--line:#e3e0d8;--accent:#d9531e;--accent2:#1f6f8b;--soft:#f3efe6;--good:#2f7d4f;--warn:#b7791f}
+[data-theme=dark]{--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 Georgia,'Times New Roman',serif}
+header{border-bottom:1px solid var(--line);background:var(--card)}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:12px 0;font:14px system-ui,sans-serif}
+nav a{color:var(--accent2);text-decoration:none}
+nav a:hover{text-decoration:underline}
+nav button{margin-left:auto;background:var(--soft);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:13px system-ui,sans-serif;cursor:pointer}
+h1{font-size:2rem;line-height:1.2;margin:28px 0 6px}
+h2{font-size:1.4rem;margin:40px 0 10px;border-bottom:2px solid var(--accent);padding-bottom:4px;display:inline-block}
+h3{font-size:1.1rem;margin:22px 0 6px;color:var(--accent2);font-family:system-ui,sans-serif}
+.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.pill{display:inline-block;font:12px system-ui,sans-serif;padding:2px 10px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted);margin-right:6px}
+.hot{background:var(--accent);color:#fff;border-color:var(--accent)}
+.note{border-left:4px solid var(--warn);background:var(--soft);padding:10px 14px;border-radius:6px;font-size:15px}
+ul{padding-left:22px}li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font:600 15px system-ui,sans-serif}
+.script{background:var(--soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:6px;margin:10px 0}
+.model label{display:block;font:14px system-ui,sans-serif;margin:10px 0 2px}
+.model input[type=range]{width:100%}
+.model input[type=number],.model select{font:15px system-ui,sans-serif;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);width:100%}
+.out{font:600 18px system-ui,sans-serif;margin-top:12px;padding:10px;background:var(--soft);border-radius:8px}
+svg text{fill:var(--fg);font-family:system-ui,sans-serif}
+.bar{height:22px;border-radius:5px;background:var(--accent)}
+footer{color:var(--muted);font:13px system-ui,sans-serif;padding:30px 0 50px}
+.big{font:700 2.2rem system-ui,sans-serif;color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><nav><a href="index.html">Learning Hub home</a><a href="oct-meetings-hub.html">Oct 13-14 hub</a><a href="oct-capacity-reliability.html">Capacity and reliability</a><a href="oct-data-centers-large-load.html">Data centers</a><a href="oct-grid-plan-and-gas.html">Grid plan and gas</a><a href="oct-session-outlook.html">Session outlook</a><a href="oct-bills-watch.html">Bills watch</a><a href="oct-elections.html">Elections</a><button id="tg" type="button">Light / Dark</button></nav></div></header>
+<main class="wrap"><h1>Capacity, Retirements and the IRP</h1><p class="sub">Why the supply picture is the most pressing issue</p>
+<h2>Why it matters</h2>
+<p>Illinois sits in two grid markets. The northern part is in PJM and the southern part is in MISO. Both are tightening at once. State clean energy law sets retirement dates for some plants, while demand from data centers is rising. If supply leaves faster than replacement arrives, prices rise first and reliability risk follows.</p>
+<div class="card"><span class="big">~3 GW</span><br>retiring without immediate replacement, as one participant described it. Think of it as roughly the output of several large plants.</div>
+
+<h2>What the meetings said</h2>
+<ul>
+<li><strong>Plants at risk.</strong> Several gas fueled peaking plants face retirement deadlines under the state clean energy law. One plant in an environmental justice zone was described as the most immediate concern.</li>
+<li><strong>Owner willingness.</strong> A recurring worry is that even if the state wants a plant to stay, the owner may not be willing to keep it running. One example described a plant that owners might not agree to keep operating for three more years.</li>
+<li><strong>The letter process.</strong> After session ended, the Illinois EPA issued a letter saying RTOs have independent authority under existing state law to extend the life of needed plants. PJM extended several facilities, including dual fuel units. MISO has been slower to join, taking the view that resource adequacy in vertically integrated markets is a state job.</li>
+<li><strong>Coal timelines.</strong> As summarized, one coal plant secured an extension through the letter process, remaining units at two plants are scheduled to close by the end of 2027, and two others received extensions through 2045. A university pilot is testing carbon capture at one of them. Verify these dates before quoting them.</li>
+<li><strong>IRP numbers.</strong> The state plan appears to count about 800 MW of upgrades at an existing nuclear fleet. PJM reportedly says most of those megawatts are already committed. Models also showed out of state imports growing three to four times over five to ten years.</li>
+<li><strong>Timing.</strong> The IRP and mitigation plan are expected the day before veto session, with no preview for working groups and no immediate legislative action expected.</li>
+<li><strong>PJM backstop.</strong> A backstop procurement is expected in roughly five to six months, with large cost allocations to big Illinois consumers.</li>
+<li><strong>Local impact.</strong> Retirements remove property tax base for towns and school districts, especially in southern Illinois. A summer max gen event on October 13 was cited as proof that peakers still matter.</li>
+<li><strong>Public understanding.</strong> One participant predicted the public will not feel this until prices rise and power is hard to get.</li>
+</ul>
+
+<h2>Worked example, the 800 MW question</h2>
+<div class="card">
+<p>Say a state plan counts 800 MW of new capacity from upgrades. The grid operator then says 700 MW of that is already promised to other buyers. The plan has double counted 700 MW, and the true new supply is only 100 MW.</p>
+<p>That is why one number can turn a comfortable looking plan into a shortfall. The first question to ask of any plan is whether each megawatt is counted once.</p>
+</div>
+
+<h2>Model, adjust the scenario</h2>
+<div class="card model">
+<p>This is an illustration with sliders, not a forecast. Start with retirements and see how replacement, imports and a double counted block change the gap.</p>
+<label>Retirements (GW) <span id="v1">3.0</span></label><input id="s1" type="range" min="0" max="6" step="0.1" value="3">
+<label>New replacement supply (GW) <span id="v2">0.5</span></label><input id="s2" type="range" min="0" max="6" step="0.1" value="0.5">
+<label>Extra usable imports (GW) <span id="v3">0.3</span></label><input id="s3" type="range" min="0" max="4" step="0.1" value="0.3">
+<label><input id="c1" type="checkbox" checked> Remove an 0.8 GW double counted block from replacement credit</label>
+<div class="out" id="o1"></div>
+</div>
+
+<h2>Infographic, the retirement ladder</h2>
+<svg viewBox="0 0 800 190" width="100%" role="img" aria-label="Timeline of reported retirement and extension dates">
+<line x1="40" y1="95" x2="760" y2="95" stroke="var(--line)" stroke-width="4"/>
+<g><circle cx="90" cy="95" r="9" fill="var(--accent)"/><text x="90" y="70" text-anchor="middle" font-size="13">Oct 2026</text><text x="90" y="125" text-anchor="middle" font-size="12">IRP expected</text><text x="90" y="141" text-anchor="middle" font-size="12">day before veto</text></g>
+<g><circle cx="250" cy="95" r="9" fill="var(--accent2)"/><text x="250" y="70" text-anchor="middle" font-size="13">Dec 2026</text><text x="250" y="125" text-anchor="middle" font-size="12">Grid plan orders</text></g>
+<g><circle cx="410" cy="95" r="9" fill="var(--accent)"/><text x="410" y="70" text-anchor="middle" font-size="13">Mar-Apr 2027</text><text x="410" y="125" text-anchor="middle" font-size="12">PJM backstop</text></g>
+<g><circle cx="570" cy="95" r="9" fill="var(--accent2)"/><text x="570" y="70" text-anchor="middle" font-size="13">End of 2027</text><text x="570" y="125" text-anchor="middle" font-size="12">Coal units retire</text><text x="570" y="141" text-anchor="middle" font-size="12">(verify)</text></g>
+<g><circle cx="730" cy="95" r="9" fill="var(--accent)"/><text x="730" y="70" text-anchor="middle" font-size="13">2045</text><text x="730" y="125" text-anchor="middle" font-size="12">Extensions end</text><text x="730" y="141" text-anchor="middle" font-size="12">(verify)</text></g>
+</svg>
+
+<h2>Scripts</h2>
+<h3>Thirty seconds</h3>
+<div class="script">Illinois is losing firm generation faster than it is adding it. About three gigawatts are scheduled to leave without a clear replacement, and demand from data centers is climbing. Before anyone votes on anything, we should make sure every megawatt in the state plan is counted once and that the owners of key plants are actually willing to keep them running.</div>
+<h3>Two minutes</h3>
+<div class="script">Let me give you the short version. Under current law, several plants have retirement dates. Some owners have already spent years planning those closures, so a late change in the law may not change what they do. PJM has used a letter process to extend plants it needs, and the Illinois EPA has said RTOs have that authority. MISO has been more cautious and says supply adequacy is a state matter.<br><br>The state plan is expected the day before veto session, which leaves almost no time to read it. One early concern is about 800 megawatts of upgrades that may be counted by the state while the grid operator says they are already committed elsewhere. If that holds, the gap is larger than the plan suggests.<br><br>The people who feel this first are local. Towns and school districts that depend on plant property taxes lose revenue when a plant closes. So my ask is simple. Let us look at the numbers together, count each megawatt once, and talk about timelines that protect reliability and local budgets.</div>
+<h3>Questions you may get</h3>
+<details><summary>Why not just build new plants?</summary><p>New supply takes years to permit, finance and connect. One participant said replacement inventory may not be fully built until about 2035. The near term question is how to bridge the gap.</p></details><details><summary>Will a change in administration or law save the plants?</summary><p>Not necessarily. Several owners have already executed closure plans and may retire units regardless. Plan on the law as written today.</p></details><details><summary>Is this a utility problem?</summary><p>It is a system problem that touches customers, local governments and the grid. A policy designed years ago now meets new demand, and the two need to be reconciled.</p></details><details><summary>What should legislators ask for first?</summary><p>The underlying data, with each megawatt counted once, and a clear view of who has authority to extend a plant and who pays.</p></details>
+<h2>Verify before using</h2>
+<ul><li>Exact retirement dates and extension terms for each coal plant.</li><li>The 800 MW figure and which entity counted it.</li><li>The veto session date and the IRP release date.</li><li>The backstop procurement schedule and cost allocation method.</li></ul>
+
+<footer>Study notes built from industry meeting summaries on October 13 and 14, 2026. Summaries were machine generated and can contain transcription errors, so items marked verify should be checked against primary sources before anyone relies on them. These pages describe issues in general terms and carry no organization position.</footer></main>
+<script>
+(function(){var r=document.documentElement;try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s);}catch(e){}
+document.getElementById('tg').onclick=function(){var cur=r.getAttribute('data-theme');if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+var n=cur==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}};})();
+
+function u(){var r=+s1.value,n=+s2.value,i=+s3.value,d=c1.checked?0.8:0;
+v1.textContent=r.toFixed(1);v2.textContent=n.toFixed(1);v3.textContent=i.toFixed(1);
+var covered=Math.max(0,n+i-d),gap=Math.max(0,r-covered);
+o1.textContent='Covered '+covered.toFixed(1)+' GW of '+r.toFixed(1)+' GW. Remaining gap '+gap.toFixed(1)+' GW.';}
+['s1','s2','s3','c1'].forEach(function(x){document.getElementById(x).oninput=u;document.getElementById(x).onchange=u;});u();
+
+</script></body></html>
