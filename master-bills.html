@@ -79,7 +79,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:32px;line-height:1.15;lett
 .bar .seg{border-radius:2px;min-width:3px}
 .bar .seg:last-child{border-radius:2px 4px 4px 2px}
 .bar.one .seg{background:var(--accent)}
-.s-pass{background:var(--st-pass)} .s-floor{background:var(--st-floor)} .s-dead{background:var(--st-dead)} .s-none{background:var(--st-none)} .s-spons{background:var(--line-2)}
+.s-law{background:var(--st-pass)} .s-pass{background:var(--st-floor);opacity:.75} .s-floor{background:var(--st-floor)} .s-dead{background:var(--st-dead)} .s-none{background:var(--st-none)} .s-spons{background:var(--line-2)}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:13px;color:var(--ink-2)}
 .legend span{display:inline-flex;align-items:center;gap:6px}
 .sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:none}
@@ -136,6 +136,25 @@ td.id{font-weight:700;white-space:nowrap}
 .dbody ul{padding-left:20px;display:flex;flex-direction:column;gap:4px}
 .sec{border-top:1px solid var(--line);padding-top:14px}
 
+
+.say{margin:0;background:var(--accent-wash);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;font-size:15px;line-height:1.6;color:var(--ink);font-style:normal}
+.ill{margin:0}.ill svg{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px;color:var(--ink)}
+.ill figcaption{font-size:12px;color:var(--ink-3);margin-top:4px}
+.ill text{font-family:var(--sans)}
+.model{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.model h4{margin:0 0 8px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.mi{display:grid;grid-template-columns:minmax(120px,38%) 1fr auto;gap:10px;align-items:center;font-size:13px;color:var(--ink-2);margin:6px 0}
+.mi input{width:100%;accent-color:var(--accent)}.mi output{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;min-width:70px;text-align:right}
+.mout{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--ink-2);font-size:14px}
+.mout .big{font-family:var(--serif);font-size:26px;color:var(--accent)}
+.pill{display:inline-block;border-radius:999px;padding:2px 10px;font-weight:600;font-size:13px}
+.pill.on{background:var(--accent-wash);color:var(--accent)}.pill.off{background:var(--warn-wash);color:var(--warn-ink)}
+@media (max-width:640px){.mi{grid-template-columns:1fr auto}.mi input{grid-column:1/-1}}
+
+.lawbox{background:var(--accent-wash);border:1px solid var(--accent);border-radius:10px;padding:12px 14px}
+.lawbox .lawh{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.lawbox p{margin:6px 0;font-size:14px;color:var(--ink)} .lawbox .lawm{color:var(--ink-2)}
+.lawbox a{color:var(--accent)} .lawwarn{background:var(--warn-wash);color:var(--warn-ink)!important;border-radius:6px;padding:6px 10px}
 .plain p{font-size:15px;color:var(--ink);margin:0 0 10px}
 .ex{background:var(--surface-2);border-left:3px solid var(--accent);border-radius:6px;padding:10px 14px;font-size:14px;color:var(--ink-2)}
 .ex b{color:var(--ink)}
@@ -226,6 +245,7 @@ if(!D){document.getElementById("view").innerHTML='<div class="note">The data fil
 var B=D.bills, BY={}; B.forEach(function(b){BY[b.id]=b});
 var CATN={}; D.cats.forEach(function(c){CATN[c.name]=c});
 var STAGES=[
+ {k:"Signed into law",c:"s-law",l:"Signed into law"},
  {k:"Passed both houses",c:"s-pass",l:"Passed both houses"},
  {k:"Floor action",c:"s-floor",l:"Floor action"},
  {k:"Sponsor change",c:"s-spons",l:"Sponsor changed"},
@@ -254,24 +274,24 @@ function stageBar(list){
   var c=counts(function(b){return b.stage},list);
   return '<div class="bar">'+STAGES.filter(function(s){return c[s.k]}).map(function(s){return '<div class="seg '+s.c+'" style="flex:'+c[s.k]+'" title="'+esc(s.l)+' '+c[s.k]+'"></div>'}).join("")+'</div>';
 }
-function legend(){return '<div class="legend">'+STAGES.map(function(s){return '<span><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}).join("")+'</div>'}
+function legend(){return '<div class="legend">'+STAGES.filter(function(s){return s.k!=="Passed both houses"}).map(function(s){return '<span><i class="sw '+s.c+'"></i>'+esc(s.l)+'</span>'}).join("")+'</div>'}
 function overview(){
   var n=B.length, cs=counts(function(b){return b.stage});
-  var pass=cs["Passed both houses"]||0, dead=cs["Stalled by deadline rule"]||0, none=cs["Awaiting committee assignment"]||0;
+  var pass=(cs["Signed into law"]||0)+(cs["Passed both houses"]||0), law=cs["Signed into law"]||0, dead=cs["Stalled by deadline rule"]||0, none=cs["Awaiting committee assignment"]||0;
   var bip=B.filter(function(b){return b.bip}).length, nocos=B.filter(function(b){return b.nCos===0}).length;
   var pairs=0,seen={};B.forEach(function(b){if(b.pair.length&&!seen[b.issue]){seen[b.issue]=1;pairs++}});
   var h='';
-  h+='<div class="note" style="margin-bottom:16px">Snapshot of the Trackbill master list as of <b>'+fmt(D.meta.asOf)+'</b>. Stage and last action reflect the end of the spring session. Facts only on this page. Briefs are drafted study notes, not a company position or legal advice.</div>';
+  h+='<div class="note" style="margin-bottom:16px">Snapshot of the Trackbill master list as of <b>'+fmt(D.meta.asOf)+'</b>. Stage and last action reflect the end of the spring session, and Governor action on the bills that passed is updated through <b>'+fmt(D.meta.lawAsOf)+'</b>. Facts only on this page. Briefs are drafted study notes, not a company position or legal advice.</div>';
   h+='<div class="tiles">'+
    tile("All bills",n,"Senate "+counts(function(b){return b.chamber})["Senate"]+" and House "+counts(function(b){return b.chamber})["House"],"bills")+
-   tile("Passed both houses",pass,pct(pass,n)+"% of the list","bills|stage=Passed both houses")+
+   tile("Signed into law",law,"none vetoed, "+(pass-law)+" still awaiting action","bills|stage=Signed into law")+
    tile("Re-referred after deadline",dead,pct(dead,n)+"% of the list","bills|stage=Stalled by deadline rule")+
    tile("Never sent to committee",none,pct(none,n)+"% of the list","bills|stage=Awaiting committee assignment")+'</div>';
   h+='<div class="grid2" style="margin-top:16px">';
   h+='<div class="card"><div class="card-head"><div><h2>Where the bills stand</h2><p class="sub">Last recorded action. Select a row to see those bills.</p></div></div><div class="rows">'+
-    STAGES.map(function(s){var c=cs[s.k]||0;return '<div class="row"><button class="lbl" data-go="bills|stage='+esc(s.k)+'">'+esc(s.l)+'</button><div class="bar"><div class="seg '+s.c+'" style="flex:0 0 '+Math.max(pct(c,n),1)+'%"></div></div><div class="n">'+c+'</div></div>'}).join("")+'</div></div>';
-  h+='<div class="card"><div class="card-head"><div><h2>What passed both houses</h2><p class="sub">'+pass+' bills cleared both chambers by June 1</p></div></div><div class="rows">'+
-    B.filter(function(b){return b.passed}).map(function(b){return '<div style="display:flex;gap:10px;align-items:baseline">'+billBtn(b.id)+'<span style="color:var(--ink-2)">'+esc(b.title)+'</span></div>'}).join("")+'</div></div>';
+    STAGES.filter(function(s){return s.k!=="Passed both houses"||cs[s.k]}).map(function(s){var c=cs[s.k]||0;return '<div class="row"><button class="lbl" data-go="bills|stage='+esc(s.k)+'">'+esc(s.l)+'</button><div class="bar"><div class="seg '+s.c+'" style="flex:0 0 '+Math.max(pct(c,n),1)+'%"></div></div><div class="n">'+c+'</div></div>'}).join("")+'</div></div>';
+  h+='<div class="card"><div class="card-head"><div><h2>What became law</h2><p class="sub">'+law+' of the '+pass+' bills that cleared both chambers were signed. Governor action checked through '+fmt(D.meta.lawAsOf)+'.</p></div></div><div class="rows">'+
+    B.filter(function(b){return b.law}).sort(function(x,y){return x.law.signed<y.law.signed?-1:1}).map(function(b){return '<div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">'+billBtn(b.id)+'<span style="color:var(--ink-2);flex:1;min-width:160px">'+esc(b.title)+'</span><span class="chip">Signed '+fmt(b.law.signed)+'</span>'+(b.rtc?'<span class="chip rtc">RTC</span>':'')+'</div>'}).join("")+'</div></div>';
   h+='</div>';
   /* themes */
   var ct=counts(function(b){return b.theme});
@@ -314,7 +334,7 @@ function path(t,d,go){return '<button class="cat-card" data-go="'+go+'"><h3>'+es
 /* ---------------- categories ---------------- */
 function cats(){
   var h='<div class="grid3">'+D.cats.map(function(c){var list=B.filter(function(b){return b.theme===c.name});
-   return '<button class="cat-card" data-go="cat|'+c.slug+'"><h3>'+esc(c.short)+'</h3><p>'+esc(c.blurb)+'</p>'+stageBar(list)+'<span class="cnt">'+list.length+' bills &middot; '+list.filter(function(b){return b.passed}).length+' passed both houses</span></button>'}).join("")+'</div>'+legend();
+   return '<button class="cat-card" data-go="cat|'+c.slug+'"><h3>'+esc(c.short)+'</h3><p>'+esc(c.blurb)+'</p>'+stageBar(list)+'<span class="cnt">'+list.length+' bills &middot; '+list.filter(function(b){return b.law}).length+' signed into law</span></button>'}).join("")+'</div>'+legend();
   return h;
 }
 function catView(s){
@@ -369,10 +389,11 @@ function billsView(){
    '<select id="fbi" aria-label="Bipartisan">'+opt("","Any support",F.bip)+opt("yes","Both parties on bill",F.bip)+'</select>'+
    '<select id="frt" aria-label="RTC">'+opt("","All bills",F.rtc)+opt("yes","Also in RTC dashboard",F.rtc)+'</select>'+
    '<button class="btn small" id="freset">Reset</button></div>';
-  h+='<div class="count" id="cnt"></div><div class="tablewrap"><table id="tbl"></table></div></div>';
+  h+='<div class="count" id="cnt"></div><div class="tablewrap" id="tbl"></div></div>';
   return h;
 }
-function renderTable(){
+function renderTable(){try{renderTable2()}catch(e){document.getElementById("tbl").innerHTML='<div class="note">The bill list hit an error: '+esc(String(e&&e.message))+'. Do a hard refresh, and make sure bills-data.js was replaced too.</div>'}}
+function renderTable2(){
   var l=filtered(); lastList=l.map(function(b){return b.id});
   document.getElementById("cnt").textContent=l.length+" of "+B.length+" bills";
   function th(k,t){var on=F.sort===k;return '<th aria-sort="'+(on?(F.dir>0?"ascending":"descending"):"none")+'"><button data-sort="'+k+'">'+t+(on?(F.dir>0?" &#9650;":" &#9660;"):"")+'</button></th>'}
@@ -380,7 +401,7 @@ function renderTable(){
   h+=l.map(function(b){var is=D.issues[b.issue];
     return '<tr><td class="id">'+esc(b.id)+'</td><td><button class="ttl" data-open="'+b.id+'" data-list="bills">'+esc(b.title)+'</button> '+(b.rtc?'<span class="chip rtc">RTC</span>':'')+'<div class="hl">'+esc(is.headline)+'</div></td><td>'+esc(b.sponsor)+' ('+b.party+')</td><td>'+stageChip(b)+'</td><td style="white-space:nowrap">'+fmt(b.lastDate)+'</td><td>'+b.nCos+(b.bip?' <span class="chip">both parties</span>':'')+'</td></tr>'}).join("");
   h+='</tbody>';
-  document.getElementById("tbl").innerHTML=h;
+  document.getElementById("tbl").innerHTML='<table>'+h+'</table>';
 }
 
 /* ---------------- learn ---------------- */
@@ -424,11 +445,14 @@ function vizHtml(v){
   return h+'</div>';
 }
 function pairsHtml(a){return '<div class="who">'+a.map(function(p){return '<div><b>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></div>'}).join("")+'</div>'}
-function enrichTop(is){
+function enrichTop(is,id){
   if(!is.plain) return "";
   var h='<div class="sec plain"><h3>In plain language</h3>'+is.plain.map(function(p){return '<p>'+esc(p)+'</p>'}).join("")+'</div>';
+  h+=scriptHtml(is);
   if(is.ex) h+='<div class="sec"><h3>A simple example</h3><div class="ex"><b>Picture this. </b>'+esc(is.ex)+'</div></div>';
+  if(ILL[id]) h+='<div class="sec"><h3>Illustration</h3>'+ILL[id]()+'</div>';
   if(is.viz) h+='<div class="sec"><h3>The picture</h3>'+vizHtml(is.viz)+'</div>';
+  h+=modelHtml(id);
   return h;
 }
 function enrichBottom(is){
@@ -438,8 +462,166 @@ function enrichBottom(is){
   if(is.news&&is.news.length) h+='<div class="sec"><h3>In the news</h3><div class="newsl">'+is.news.map(function(n){return '<a href="'+esc(n.u)+'" target="_blank" rel="noopener"><b>'+esc(n.t)+'</b><small>'+esc(n.src)+(n.d?' &middot; '+esc(n.d):'')+'</small></a>'}).join("")+'</div></div>';
   return h;
 }
+/* ---------------- illustrations and models ---------------- */
+var SV={
+ wrap:function(label,body,cap){return '<figure class="ill"><svg viewBox="0 0 360 160" role="img" aria-label="'+label+'" preserveAspectRatio="xMidYMid meet"><rect x="0" y="0" width="360" height="160" rx="8" fill="var(--surface)"/>'+body+'</svg><figcaption>'+cap+'</figcaption></figure>'},
+ corridor:function(){return SV.wrap('Route priority for new power lines',
+  '<rect x="10" y="10" width="340" height="140" rx="6" fill="var(--surface-2)"/>'+
+  '<rect x="20" y="16" width="100" height="26" fill="var(--line)" opacity=".6"/><rect x="140" y="16" width="90" height="26" fill="var(--line)" opacity=".6"/><rect x="250" y="16" width="90" height="26" fill="var(--line)" opacity=".6"/>'+
+  '<path d="M14 58 H346" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="2 4"/>'+
+  [40,110,180,250,320].map(function(x){return '<path d="M'+x+' 66 V50 M'+(x-7)+' 54 H'+(x+7)+'" stroke="var(--ink-2)" stroke-width="2"/>'}).join("")+
+  '<text x="20" y="78" font-size="10" fill="var(--ink-2)">1  Existing utility corridor, use first</text>'+
+  '<rect x="10" y="86" width="340" height="12" fill="var(--ink-3)" opacity=".5"/><path d="M14 92 H346" stroke="var(--surface)" stroke-width="1.5" stroke-dasharray="10 8"/>'+
+  '<text x="20" y="114" font-size="10" fill="var(--ink-2)">2  Highway edge, use second (IDOT must agree)</text>'+
+  '<path d="M14 126 C80 118 120 134 190 126 S300 118 346 128" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 4" fill="none"/>'+
+  '<text x="20" y="148" font-size="10" fill="var(--accent)">3  New corridor across farmland, last resort</text>','Illustration of the route order in the bills. Not to scale.')},
+ heatloop:function(l){l=l||['Data center','Heat exchanger','Homes and offices'];return SV.wrap('Heat reuse loop',
+  '<rect x="14" y="70" width="80" height="60" rx="4" fill="var(--surface-2)" stroke="var(--ink-3)"/><text x="54" y="105" font-size="10" text-anchor="middle" fill="var(--ink)">'+l[0]+'</text>'+
+  [30,54,78].map(function(x){return '<path d="M'+x+' 64 q-6 -8 0 -14 q6 -6 0 -14" stroke="var(--st-none)" stroke-width="2" fill="none"/>'}).join("")+
+  '<circle cx="150" cy="100" r="22" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/><text x="150" y="103" font-size="9" text-anchor="middle" fill="var(--ink)">'+l[1].split(' ')[0]+'</text><text x="150" y="133" font-size="9" text-anchor="middle" fill="var(--ink-2)">'+l[1]+'</text>'+
+  '<path d="M94 100 H128 M172 100 H214 V60 H250 M214 100 H250 M214 100 V140 H250" stroke="var(--st-none)" stroke-width="3" fill="none"/>'+
+  [48,92,132].map(function(y){return '<path d="M250 '+(y-12)+' l22 -14 l22 14 v22 h-44z" fill="var(--surface-2)" stroke="var(--ink-3)"/>'}).join("")+
+  '<text x="272" y="156" font-size="10" fill="var(--ink-2)" text-anchor="middle">'+l[2]+'</text>','Server heat moves into water, then through pipes to nearby buildings. Only works if buildings are close.')},
+ tile:function(){return SV.wrap('Drain tile cut by construction',
+  '<rect x="0" y="52" width="360" height="108" fill="var(--line)" opacity=".7"/><path d="M0 52 H360" stroke="var(--st-pass)" stroke-width="3"/>'+
+  [20,60,100,140,230,270,310].map(function(x){return '<path d="M'+x+' 52 v-14 M'+x+' 46 l-5 -5 M'+x+' 46 l5 -5" stroke="var(--st-pass)" stroke-width="2" fill="none"/>'}).join("")+
+  '<rect x="0" y="108" width="165" height="10" rx="5" fill="var(--surface)" stroke="var(--ink-3)"/><rect x="195" y="108" width="165" height="10" rx="5" fill="var(--surface)" stroke="var(--ink-3)"/>'+
+  '<rect x="165" y="52" width="30" height="108" fill="var(--surface)" stroke="var(--ink-3)" stroke-dasharray="3 3"/>'+
+  '<ellipse cx="90" cy="76" rx="70" ry="14" fill="var(--accent)" opacity=".35"/><text x="90" y="80" font-size="10" text-anchor="middle" fill="var(--ink)">Water backs up</text>'+
+  '<text x="180" y="30" font-size="10" text-anchor="middle" fill="var(--ink)">Construction trench</text><text x="260" y="140" font-size="10" text-anchor="middle" fill="var(--ink-2)">Drain tile, buried pipe</text>'+
+  '<text x="30" y="145" font-size="10" fill="var(--warn-ink)">Repair duty, from the bill</text>','Cross section. Cutting a tile line can flood a field until it is fixed.')},
+ balcony:function(){return SV.wrap('Plug in solar on a balcony',
+  '<rect x="20" y="14" width="150" height="136" fill="var(--surface-2)" stroke="var(--ink-3)"/>'+
+  '<rect x="34" y="28" width="38" height="44" fill="var(--accent-wash)" stroke="var(--ink-3)"/><rect x="100" y="28" width="38" height="44" fill="var(--accent-wash)" stroke="var(--ink-3)"/>'+
+  '<rect x="20" y="104" width="150" height="6" fill="var(--ink-2)"/><path d="M28 110 V146 M60 110 V146 M92 110 V146 M124 110 V146 M156 110 V146" stroke="var(--ink-3)" stroke-width="2"/>'+
+  '<path d="M60 100 l70 -26 v22 l-70 24z" fill="var(--accent)" opacity=".85"/><path d="M70 96 l50 -18 M80 100 l50 -18" stroke="var(--accent-ink)" stroke-width="1" opacity=".6"/>'+
+  '<path d="M96 108 C96 128 190 124 214 110" stroke="var(--ink-2)" stroke-width="2" fill="none"/>'+
+  '<rect x="214" y="96" width="26" height="30" rx="4" fill="var(--surface)" stroke="var(--ink-2)"/><circle cx="222" cy="108" r="2" fill="var(--ink-2)"/><circle cx="232" cy="108" r="2" fill="var(--ink-2)"/>'+
+  '<text x="250" y="100" font-size="10" fill="var(--ink)">Standard outlet</text><text x="250" y="114" font-size="10" fill="var(--ink-2)">No utility paperwork</text>'+
+  '<text x="190" y="40" font-size="10" fill="var(--ink)">Up to 1,200 watts</text><text x="190" y="54" font-size="10" fill="var(--ink-2)">Shuts off in an outage</text>','A small movable panel runs part of the home on sunny days. Not to scale.')},
+ ashpond:function(){return SV.wrap('Ash pond near Lake Michigan',
+  '<rect x="240" y="0" width="120" height="160" fill="var(--accent)" opacity=".3"/><path d="M240 20 q10 -6 20 0 t20 0 t20 0 t20 0 M240 60 q10 -6 20 0 t20 0 t20 0 t20 0 M240 100 q10 -6 20 0 t20 0 t20 0 t20 0" stroke="var(--accent)" fill="none" stroke-width="2"/>'+
+  '<text x="300" y="150" font-size="10" text-anchor="middle" fill="var(--ink)">Lake Michigan</text>'+
+  '<rect x="30" y="50" width="70" height="40" rx="6" fill="var(--st-dead)" opacity=".7"/><text x="65" y="74" font-size="10" text-anchor="middle" fill="var(--ink)">Ash pond</text>'+
+  '<path d="M100 70 H240" stroke="var(--warn-ink)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M104 66 l-6 4 l6 4 M236 66 l6 4 l-6 4" stroke="var(--warn-ink)" fill="none"/>'+
+  '<text x="170" y="62" font-size="10" text-anchor="middle" fill="var(--warn-ink)">within 4,000 feet</text>'+
+  '<text x="30" y="118" font-size="10" fill="var(--ink-2)">SB1436, close by removal.</text><text x="30" y="132" font-size="10" fill="var(--ink-2)">Dig it out, haul it away.</text>','Illustration of the distance rule in SB1436. Not to scale.')},
+ vpp:function(){var h=[30,90,150,210];return SV.wrap('Virtual power plant',
+  h.map(function(x){return '<path d="M'+x+' 104 l20 -16 l20 16 v18 h-40z" fill="var(--surface-2)" stroke="var(--ink-3)"/><rect x="'+(x+12)+'" y="108" width="16" height="12" rx="2" fill="var(--st-pass)"/><path d="M'+(x+20)+' 88 V56 H180" stroke="var(--ink-3)" stroke-dasharray="3 3" fill="none"/>'}).join("")+
+  '<circle cx="180" cy="40" r="28" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2"/><text x="180" y="43" font-size="9" text-anchor="middle" fill="var(--ink)">Aggregator</text>'+
+  '<path d="M208 40 H300 M300 52 V28 M290 36 H310 M292 46 H308" stroke="var(--ink-2)" stroke-width="2" fill="none"/><text x="300" y="70" font-size="10" text-anchor="middle" fill="var(--ink-2)">Utility calls at peak</text>'+
+  '<text x="130" y="146" font-size="10" text-anchor="middle" fill="var(--ink-2)">Home batteries act as one plant, owners get paid</text>','Many small batteries respond together when the grid is strained.')},
+ townhouse:function(){return SV.wrap('Shared roof townhouses',
+  '<path d="M20 70 L180 20 L340 70 Z" fill="var(--surface-2)" stroke="var(--ink-3)"/>'+
+  '<rect x="20" y="70" width="320" height="70" fill="var(--surface-2)" stroke="var(--ink-3)"/>'+
+  '<path d="M127 70 V140 M233 70 V140" stroke="var(--ink-3)" stroke-width="2"/>'+
+  '<path d="M127 70 L180 54 L233 70 Z" fill="var(--accent)" opacity=".85"/><path d="M142 66 l38 -12 M156 68 l32 -10 M170 70 l26 -8" stroke="var(--accent-ink)" opacity=".6"/>'+
+  [60,170,280].map(function(x){return '<rect x="'+(x-12)+'" y="92" width="24" height="26" fill="var(--surface)" stroke="var(--ink-3)"/>'}).join("")+
+  '<text x="180" y="154" font-size="10" text-anchor="middle" fill="var(--ink)">Panels entirely over one owner section, or all owners agree</text>','HB5402. One roof, three owners.')},
+ ring:function(l){l=l||['Source','1,000 feet'];return SV.wrap('Distance ring',
+  '<circle cx="180" cy="72" r="52" fill="var(--accent-wash)" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>'+
+  '<rect x="170" y="60" width="20" height="20" fill="var(--ink-2)"/><text x="180" y="96" font-size="9" text-anchor="middle" fill="var(--ink)">'+l[0]+'</text>'+
+  [[142,44],[222,48],[226,84],[134,84]].map(function(p){return '<path d="M'+(p[0]-8)+' '+(p[1]+7)+' l8 -8 l8 8 v8 h-16z" fill="var(--st-none)"/>'}).join("")+
+  [[40,40],[70,126],[310,34],[300,126],[330,80]].map(function(p){return '<path d="M'+(p[0]-8)+' '+(p[1]+7)+' l8 -8 l8 8 v8 h-16z" fill="var(--st-dead)"/>'}).join("")+
+  '<text x="180" y="152" font-size="10" text-anchor="middle" fill="var(--ink-2)">Orange homes are inside the '+l[1]+'. Gray homes are outside.</text>','Illustration of a distance rule. Not to scale.')},
+ gasvent:function(){return SV.wrap('Vented and unvented gas appliances',
+  '<text x="90" y="16" font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="600">Vented</text><text x="270" y="16" font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="600">Unvented</text>'+
+  '<rect x="30" y="100" width="70" height="30" rx="3" fill="var(--surface-2)" stroke="var(--ink-3)"/><path d="M52 100 q-4 -10 0 -14 q4 4 0 14 M70 100 q-4 -10 0 -14 q4 4 0 14" fill="var(--st-none)"/>'+
+  '<path d="M45 78 H95 L85 60 H55z" fill="var(--surface-2)" stroke="var(--ink-3)"/><path d="M70 60 V34 H110 V22" stroke="var(--st-pass)" stroke-width="3" fill="none"/><text x="120" y="28" font-size="9" fill="var(--st-pass)">out of the house</text>'+
+  '<rect x="215" y="100" width="70" height="30" rx="3" fill="var(--surface-2)" stroke="var(--ink-3)"/><path d="M237 100 q-4 -10 0 -14 q4 4 0 14 M255 100 q-4 -10 0 -14 q4 4 0 14" fill="var(--st-none)"/>'+
+  '<path d="M230 84 q10 -16 -4 -30 M250 84 q14 -18 0 -38 M270 84 q10 -14 -2 -28" stroke="var(--warn-ink)" stroke-width="2" fill="none" stroke-dasharray="3 3"/><text x="270" y="44" font-size="9" text-anchor="middle" fill="var(--warn-ink)">exhaust stays in the room</text>'+
+  '<text x="180" y="152" font-size="10" text-anchor="middle" fill="var(--ink-2)">The bills require a warning label on unvented appliances</text>','Illustration. The bills cover appliances made on or after January 1, 2027.')},
+ sponge:function(){return SV.wrap('Wetlands as a sponge',
+  '<ellipse cx="110" cy="100" rx="90" ry="26" fill="var(--st-pass)" opacity=".5"/><text x="110" y="104" font-size="10" text-anchor="middle" fill="var(--ink)">Wetland soaks up rain</text>'+
+  [60,100,140,180].map(function(x){return '<path d="M'+x+' 20 v10 M'+(x+6)+' 34 v10" stroke="var(--accent)" stroke-width="2"/>'}).join("")+
+  '<path d="M215 100 H250" stroke="var(--accent)" stroke-width="2" stroke-dasharray="3 3"/>'+
+  [265,300,335].map(function(x){return '<path d="M'+(x-10)+' 118 l10 -10 l10 10 v12 h-20z" fill="var(--surface-2)" stroke="var(--ink-3)"/>'}).join("")+
+  '<text x="300" y="146" font-size="10" text-anchor="middle" fill="var(--ink-2)">Fill it in and the water goes here</text>','Wetlands that lose federal protection can be filled without a federal permit.')},
+ billbars:function(){return SV.wrap('Parts of an electric bill',
+  '<rect x="20" y="50" width="150" height="34" fill="var(--accent)" opacity=".8"/><rect x="170" y="50" width="130" height="34" fill="var(--st-floor)" opacity=".7"/><rect x="300" y="50" width="40" height="34" fill="var(--st-none)"/>'+
+  '<text x="95" y="72" font-size="11" text-anchor="middle" fill="var(--accent-ink)">Supply</text><text x="235" y="72" font-size="11" text-anchor="middle" fill="var(--accent-ink)">Delivery</text><text x="320" y="72" font-size="9" text-anchor="middle" fill="var(--ink)">Other</text>'+
+  '<path d="M320 90 V112 H250" stroke="var(--st-none)" stroke-width="1.5" fill="none"/><text x="20" y="116" font-size="10" fill="var(--ink)">Riders, fees and taxes. The lists on this page</text><text x="20" y="130" font-size="10" fill="var(--ink-2)">are about who pays this slice and who sees it.</text>'+
+  '<text x="180" y="26" font-size="10" text-anchor="middle" fill="var(--ink-3)">Illustrative proportions, not a real bill</text>','Delivery and supply are the two big parts. Other charges are the small slice.')},
+ pipeline:function(){return SV.wrap('Pipeline route and holdouts',
+  '<rect x="20" y="20" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="90" y="20" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="160" y="20" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="230" y="20" width="60" height="50" fill="var(--line)" opacity=".7"/>'+
+  '<rect x="20" y="80" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="90" y="80" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="160" y="80" width="60" height="50" fill="var(--line)" opacity=".7"/><rect x="230" y="80" width="60" height="50" fill="var(--line)" opacity=".7"/>'+
+  '<path d="M10 75 H350" stroke="var(--accent)" stroke-width="3"/>'+
+  '<path d="M190 100 l8 8 M198 100 l-8 8" stroke="var(--warn-ink)" stroke-width="3"/><text x="190" y="146" font-size="10" text-anchor="middle" fill="var(--warn-ink)">A holdout parcel</text>'+
+  '<text x="322" y="68" font-size="9" text-anchor="middle" fill="var(--ink)">Planned route</text>'+
+  '<text x="180" y="12" font-size="10" text-anchor="middle" fill="var(--ink-2)">Without eminent domain, one holdout can stop the straight route</text>','Illustration. SB2842 would bar certified CO2 pipelines from using eminent domain.')},
+ light:function(){return SV.wrap('Shielded and unshielded light',
+  '<text x="90" y="16" font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="600">Unshielded</text><text x="270" y="16" font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="600">Shielded</text>'+
+  '<path d="M90 40 V140 M60 40 H90" stroke="var(--ink-2)" stroke-width="3"/><path d="M60 40 L20 20 M60 40 L10 40 M60 40 L20 60 M60 40 L40 90 M60 40 L80 90 M60 40 L110 20" stroke="var(--st-none)" stroke-width="2"/>'+
+  '<path d="M270 40 V140 M240 40 H270" stroke="var(--ink-2)" stroke-width="3"/><path d="M232 34 H262 L252 44 H240z" fill="var(--ink-2)"/><path d="M247 44 L215 140 M247 44 L279 140" stroke="var(--st-none)" stroke-width="2"/><path d="M215 140 H279" stroke="var(--st-none)" stroke-width="3"/>'+
+  '<text x="180" y="156" font-size="10" text-anchor="middle" fill="var(--ink-2)">Same street, less glare and less sky glow</text>','SB3037. State funded lights would need to be shielded and efficient.')},
+ hourly:function(){var pts=[],solar=[];for(var h=0;h<=24;h++){var x=30+h*13,s=Math.max(0,Math.sin((h-6)/12*Math.PI)),y=130-s*80;pts.push(x+' '+y.toFixed(1))}
+  return SV.wrap('Annual vs hourly matching',
+  '<path d="M30 130 L'+pts.join(' L')+' L342 130Z" fill="var(--st-pass)" opacity=".55"/><path d="M30 70 H342" stroke="var(--accent)" stroke-width="2.5"/>'+
+  '<path d="M30 130 H342" stroke="var(--ink-3)"/><text x="30" y="146" font-size="9" fill="var(--ink-3)">midnight</text><text x="160" y="146" font-size="9" fill="var(--ink-3)">noon</text><text x="300" y="146" font-size="9" fill="var(--ink-3)">midnight</text>'+
+  '<text x="36" y="62" font-size="10" fill="var(--accent)">Data center load</text><text x="150" y="108" font-size="10" fill="var(--ink)">Solar</text>'+
+  '<text x="36" y="104" font-size="9" fill="var(--warn-ink)">Not covered</text><text x="276" y="104" font-size="9" fill="var(--warn-ink)">Not covered</text>','Shape only. Hourly matching counts the gap at night even if midday has extra solar.')},
+ gauge:function(){return SV.wrap('Battery share gauge',
+  '<rect x="30" y="60" width="150" height="26" fill="var(--st-none)" opacity=".7"/><rect x="180" y="60" width="150" height="26" fill="var(--st-pass)" opacity=".7"/>'+
+  '<path d="M180 50 V96" stroke="var(--ink)" stroke-width="3"/><text x="180" y="44" font-size="11" text-anchor="middle" fill="var(--ink)" font-weight="600">10 percent of installed capacity</text>'+
+  '<text x="105" y="78" font-size="10" text-anchor="middle" fill="var(--ink)">Below 10</text><text x="255" y="78" font-size="10" text-anchor="middle" fill="var(--ink)">10 or more</text>'+
+  '<text x="105" y="112" font-size="10" text-anchor="middle" fill="var(--ink-2)">Illinois EPA delays some controls</text><text x="255" y="112" font-size="10" text-anchor="middle" fill="var(--ink-2)">No variances allowed</text>'+
+  '<text x="30" y="140" font-size="9" fill="var(--ink-3)">0 percent</text><text x="300" y="140" font-size="9" fill="var(--ink-3)">20 percent</text>','Battery share of Illinois installed capacity decides which rule applies.')},
+ timeline:function(items){var x0=40,x1=330,y0=2025,y1=2065;function X(y){return x0+(y-y0)/(y1-y0)*(x1-x0)}
+  var b='<path d="M'+x0+' 135 H'+x1+'" stroke="var(--ink-3)"/>'+[2030,2040,2050,2060].map(function(y){return '<path d="M'+X(y)+' 131 v8" stroke="var(--ink-3)"/><text x="'+X(y)+'" y="151" font-size="9" text-anchor="middle" fill="var(--ink-3)">'+y+'</text>'}).join("");
+  items.forEach(function(it,i){var y=36+i*44;b+='<text x="'+x0+'" y="'+(y-10)+'" font-size="10" fill="var(--ink)">'+it[0]+'</text><circle cx="'+X(it[1])+'" cy="'+y+'" r="6" fill="var(--ink-3)"/><path d="M'+(X(it[1])+7)+' '+y+' H'+(X(it[2])-8)+'" stroke="var(--accent)" stroke-width="2.5"/><path d="M'+(X(it[2])-8)+' '+(y-5)+' l8 5 l-8 5z" fill="var(--accent)"/><circle cx="'+X(it[2])+'" cy="'+y+'" r="6" fill="var(--accent)"/><text x="'+X(it[1])+'" y="'+(y+20)+'" font-size="9" text-anchor="middle" fill="var(--ink-2)">'+it[1]+'</text><text x="'+X(it[2])+'" y="'+(y+20)+'" font-size="9" text-anchor="middle" fill="var(--accent)">'+it[2]+'</text>'});
+  return SV.wrap('Deadline timeline',b,'The bill moves each date later. Dates shown are the bill text or examples.')},
+ trucks:function(){return SV.wrap('Warehouse truck traffic',
+  '<rect x="20" y="40" width="110" height="70" fill="var(--surface-2)" stroke="var(--ink-3)"/><text x="75" y="80" font-size="10" text-anchor="middle" fill="var(--ink)">Warehouse</text>'+
+  '<rect x="130" y="112" width="220" height="14" fill="var(--ink-3)" opacity=".5"/><path d="M134 119 H346" stroke="var(--surface)" stroke-dasharray="10 8"/>'+
+  [170,250].map(function(x){return '<rect x="'+x+'" y="98" width="34" height="14" fill="var(--ink-2)"/><rect x="'+(x+34)+'" y="102" width="12" height="10" fill="var(--ink-2)"/><circle cx="'+(x+8)+'" cy="114" r="3" fill="var(--ink)"/><circle cx="'+(x+38)+'" cy="114" r="3" fill="var(--ink)"/><path d="M'+(x-2)+' 100 q-8 -4 -14 -10" stroke="var(--st-dead)" stroke-width="3" fill="none"/>'}).join("")+
+  [200,260,320].map(function(x){return '<path d="M'+(x-9)+' 70 l9 -9 l9 9 v10 h-18z" fill="var(--st-none)"/>'}).join("")+
+  '<text x="260" y="52" font-size="10" text-anchor="middle" fill="var(--ink-2)">Nearby homes breathe the exhaust</text><text x="180" y="150" font-size="10" text-anchor="middle" fill="var(--ink-2)">The bill uses a points menu of fixes to cut it</text>','Illustration of the issue behind HB5600.')}
+};
+var ILL={'tx-siting':function(){return SV.corridor()},'tx-highway':function(){return SV.corridor()},
+ 'dc-heat':function(){return SV.heatloop()},'district-energy':function(){return SV.heatloop(['Central plant','Thermal loop','Many buildings'])},
+ 'storage-farmland':function(){return SV.tile()},'drainage':function(){return SV.tile()},
+ 'plugin-solar':function(){return SV.balcony()},'portable-solar':function(){return SV.balcony()},
+ 'ccr':function(){return SV.ashpond()},'vpp':function(){return SV.vpp()},'shared-roof':function(){return SV.townhouse()},
+ 'dc-property':function(){return SV.ring(['Data center','1,000 feet'])},'air-setbacks':function(){return SV.ring(['Pollution source','required setback'])},
+ 'gas-label':function(){return SV.gasvent()},'wetlands':function(){return SV.sponge()},
+ 'charge-website':function(){return SV.billbars()},'recoverable':function(){return SV.billbars()},'charge-freeze':function(){return SV.billbars()},
+ 'co2-eminent':function(){return SV.pipeline()},'dark-sky':function(){return SV.light()},'dc-clean-match':function(){return SV.hourly()},
+ 'battery-variance':function(){return SV.gauge()},'ghg-emergency':function(){return SV.gauge()},
+ 'ghg-delay':function(){return SV.timeline([['Example gas plant deadline',2035,2045]])},
+ 'goal-extension':function(){return SV.timeline([['Clean energy goal',2050,2060],['Coal and oil zero emissions',2030,2040]])},
+ 'warehouse':function(){return SV.trucks()}};
+function usd(n){return '$'+Math.round(n).toLocaleString()}
+function thr(o){return {t:o.t,inputs:[{k:'x',l:o.l,min:o.min,max:o.max,step:o.step,v:o.v,u:o.u}],out:function(v){var hit=o.le?v.x<=o.lim:v.x>=o.lim;return '<span class="pill '+(hit?'on':'off')+'">'+(hit?o.yes:o.no)+'</span>'}}}
+var MODELS={
+ 'ag-land-fee':{t:'Farmland conversion fee',inputs:[{k:'ac',l:'Acres of farmland converted',min:10,max:2000,step:10,v:500,u:' acres'}],out:function(v){return '<b class="big">'+usd(v.ac*275)+'</b> owed at $275 per acre, starting January 1, 2027'}},
+ 'ares-disclosure':{t:'The 25 percent cap',inputs:[{k:'u',l:'Utility supply price',min:4,max:16,step:.5,v:9,u:' cents per kWh'},{k:'s',l:'Supplier price',min:4,max:24,step:.5,v:13,u:' cents per kWh'},{k:'k',l:'Monthly use',min:300,max:1500,step:50,v:750,u:' kWh'}],out:function(v){var cap=v.u*1.25,ok=v.s<=cap,d=(v.s-v.u)*v.k/100;return 'Cap is <b>'+cap.toFixed(2)+'</b> cents. <span class="pill '+(ok?'on':'off')+'">'+(ok?'Under the cap':'Over the cap')+'</span> A month at this supplier price costs '+(d>=0?usd(d)+' more':usd(-d)+' less')+' than the utility. Made up prices.'}},
+ 'heat-rate':{t:'Does the unit have to cut emissions',inputs:[{k:'h',l:'Heat rate',min:5000,max:14000,step:100,v:9000,u:' Btu per kWh'},{k:'e',l:'2034 emissions',min:100,max:2000,step:50,v:1000,u:' thousand tons'}],out:function(v){var c=v.h>=7000;return '<span class="pill '+(c?'on':'off')+'">'+(c?'Covered, 7,000 or higher':'Not covered, under 7,000')+'</span>'+(c?' It must be at or below <b>'+Math.round(v.e/2).toLocaleString()+'</b> thousand tons by January 1, 2035.':'')}},
+ 'energy-choice-credit':{t:'The 20 percent wage credit',inputs:[{k:'w',l:'Wages of qualified workers',min:1,max:200,step:1,v:50,u:' million dollars a year'}],out:function(v){return '<b class="big">'+usd(v.w*.2*1e6)+'</b> credit at 20 percent of wages. Eligibility needs a material hit from the CEJA phaseouts.'}},
+ 'prevailing-multi':{t:'Highest rate for the whole day',inputs:[{k:'lr',l:'Lower title rate',min:20,max:100,step:1,v:45,u:' dollars per hour'},{k:'hr',l:'Higher title rate',min:20,max:120,step:1,v:70,u:' dollars per hour'},{k:'lh',l:'Hours at the lower title',min:0,max:8,step:1,v:2,u:' hours'}],out:function(v){var hh=8-v.lh,a=v.lr*v.lh+v.hr*hh,b=Math.max(v.lr,v.hr)*8;return 'Paid by title hours <b>'+usd(a)+'</b>. Under HB4938 all 8 hours at the higher rate <b>'+usd(b)+'</b>. Difference '+usd(b-a)+'. Made up rates.'}},
+ 'vpp':{t:'Minimum upfront payment',inputs:[{k:'kw',l:'Battery size',min:5,max:30,step:1,v:10,u:' kWh'}],out:function(v){return '<b class="big">'+usd(v.kw*250)+'</b> at $250 per kWh for a system that forgoes a storage rebate. Other minimums and the performance payment are in the bill text.'}},
+ 'plugin-solar':{t:'What a plug in system might make',inputs:[{k:'w',l:'Panel size',min:100,max:1200,step:50,v:800,u:' watts'},{k:'s',l:'Full sun hours a day, assumption',min:2.5,max:5.5,step:.5,v:4,u:' hours'},{k:'p',l:'Electric price, assumption',min:8,max:30,step:1,v:16,u:' cents per kWh'}],out:function(v){var k=v.w*v.s*365*0.8/1000;return '<b class="big">'+Math.round(k).toLocaleString()+' kWh</b> a year, about <b>'+usd(k*v.p/100)+'</b> in avoided purchases, assuming 80 percent system efficiency. '+(v.w<=391?'At 391 watts or less the reported HOA and landlord protection applies. ':'')+(v.w>1200?'Over the 1,200 watt limit. ':'')+'Estimate only.'}},
+ 'takings':{t:'The 80 percent line',inputs:[{k:'a',l:'Share of depreciated asset value a mandate would take',min:0,max:100,step:5,v:60,u:' percent'}],out:function(v){var hit=v.a>=80;return '<span class="pill '+(hit?'off':'on')+'">'+(hit?'At or over 80 percent, mandate could not be approved':'Under 80 percent, review continues')+'</span>'}},
+ 'dc-property':thr({t:'Are you in range',l:'Distance from the data center',u:' feet',min:0,max:3000,step:50,v:800,lim:1000,le:true,yes:'Inside 1,000 feet. Could seek compensation if harm is measurable.',no:'Beyond 1,000 feet. Not covered.'}),
+ 'battery-variance':thr({t:'Which rule applies',l:'Battery share of installed capacity',u:' percent',min:0,max:20,step:1,v:7,lim:10,le:false,yes:'10 percent or more. No variances available.',no:'Below 10 percent. Illinois EPA delays enforcement and gas units may exceed limits in emergency hours.'}),
+ 'ghg-emergency':thr({t:'Which rule applies',l:'Battery share of installed capacity',u:' percent',min:0,max:20,step:1,v:7,lim:10,le:false,yes:'10 percent or more. No variances or adjusted standards.',no:'Below 10 percent. Illinois EPA delays enforcement of some controls.'}),
+ 'peaker':thr({t:'Are peaker limits lifted',l:'New utility scale renewables built',u:' MW',min:0,max:25000,step:500,v:8000,lim:21000,le:false,yes:'21,000 MW reached. Limits return 30 days after the Illinois EPA posts it.',no:'Below 21,000 MW. Peakers could run continuously under the bill.'}),
+ 'ui-prefile':thr({t:'Is the employer covered',l:'Illinois employees',u:' workers',min:10,max:300,step:5,v:60,lim:75,le:false,yes:'75 or more. Must submit claim information for laid off workers.',no:'Under 75. Not covered.'}),
+ 'equal-pay-scale':thr({t:'Is the employer covered',l:'Employees',u:' workers',min:1,max:60,step:1,v:10,lim:15,le:false,yes:'15 or more. Must post base and variable pay ranges.',no:'Under 15. Not covered.'}),
+ 'data-privacy':thr({t:'Is the business covered',l:'Consumers whose data it handles',u:' consumers',min:10000,max:300000,step:10000,v:60000,lim:100000,le:false,yes:'100,000 or more. Covered by the bills.',no:'Under 100,000. Below the starting threshold.'}),
+ 'solar-permitting':thr({t:'Must the city adopt automated permits',l:'City or county population',u:' residents',min:1000,max:50000,step:1000,v:8000,lim:10001,le:false,yes:'Over 10,000. Must adopt by July 1, 2027.',no:'10,000 or fewer. Not required.'}),
+ 'water-termination':thr({t:'Can water be shut off',l:'Lowest temperature in the six day forecast',u:' degrees F',min:-10,max:60,step:1,v:28,lim:32,le:true,yes:'32 or below. Shutoff for nonpayment is barred that day.',no:'Above 32. The cold rule does not apply. The bill also has heat criteria.'}),
+};
+function modelHtml(id){var m=MODELS[id];if(!m)return "";
+ return '<div class="sec"><h3>Try it yourself</h3><div class="model" data-m="'+id+'"><h4>'+esc(m.t)+'</h4>'+m.inputs.map(function(i){return '<label class="mi"><span>'+esc(i.l)+'</span><input type="range" data-k="'+i.k+'" min="'+i.min+'" max="'+i.max+'" step="'+i.step+'" value="'+i.v+'" aria-label="'+esc(i.l)+'"><output data-o="'+i.k+'">'+i.v.toLocaleString()+esc(i.u)+'</output></label>'}).join("")+'<div class="mout"></div></div></div>'}
+function wireModels(root){Array.prototype.forEach.call(root.querySelectorAll(".model"),function(el){var m=MODELS[el.getAttribute("data-m")];function upd(){var v={};m.inputs.forEach(function(i){var inp=el.querySelector('[data-k="'+i.k+'"]');v[i.k]=parseFloat(inp.value);el.querySelector('[data-o="'+i.k+'"]').textContent=v[i.k].toLocaleString()+i.u});el.querySelector(".mout").innerHTML=m.out(v)}
+ el.addEventListener("input",upd);upd()})}
+function scriptHtml(is){if(!is.say) return "";return '<div class="sec"><h3>The plain language script</h3><blockquote class="say">'+esc(is.say)+'</blockquote><p class="legal">A one breath way to explain the bill out loud. It describes what the bill does and takes no position.</p></div>'}
+
+function effTxt(l){return l.eff==="immediate"?"Effective immediately":l.eff?"Effective "+fmt(l.eff):"Effective date not confirmed"}
+function lawHtml(b){var l=b.law;if(!l) return "";
+  return '<div class="lawbox"><div class="lawh"><span class="pill on">Signed into law</span><b>Signed by the Governor '+fmt(l.signed)+'</b></div><p class="lawm">'+esc(effTxt(l))+(l.pa?'. Public Act '+esc(l.pa):'. Public Act number not confirmed here')+'.</p><p><b>What the signed version does.</b> '+esc(l.final)+'</p>'+(l.differs?'<p class="lawwarn">The signed text differs from the June 1 snapshot, so the official summary further down describes an earlier version.</p>':'')+'<p class="legal">Sources. '+l.src.map(function(x){return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener">'+esc(x.t)+'</a>'}).join(" &middot; ")+'</p></div>'}
 var curId=null, lastFocus=null;
-function stepIndex(b){var s=b.stage;return s==="Passed both houses"?6:s==="Floor action"?4:s==="Stalled by deadline rule"?3:0}
+function stepIndex(b){var s=b.stage;return s==="Signed into law"?8:s==="Passed both houses"?6:s==="Floor action"?4:s==="Stalled by deadline rule"?3:0}
 function openBill(id,listKey,noPush){
   var b=BY[id]; if(!b) return;
   curId=id; lastFocus=document.activeElement;
@@ -449,14 +631,15 @@ function openBill(id,listKey,noPush){
   var steps=D.process.map(function(p){return p.t}), cur=stepIndex(b);
   var h='<div class="dhead"><div style="display:flex;gap:6px"><button class="btn small" id="dprev" '+(ix<=0?"disabled":"")+' aria-label="Previous bill">&larr;</button><button class="btn small" id="dnext" '+(ix<0||ix>=lastList.length-1?"disabled":"")+' aria-label="Next bill">&rarr;</button></div><span class="eyebrow">'+(ix>-1?(ix+1)+" of "+lastList.length:"")+'</span><button class="btn small" id="dclose" aria-label="Close">Close</button></div><div class="dbody">';
   h+='<div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"><span class="chip">'+esc(b.id)+'</span><span class="chip">'+esc(CATN[b.theme].short)+'</span>'+stageChip(b)+(b.rtc?'<a class="chip rtc" href="rtc-dashboard.html#bill='+encodeURIComponent(b.id)+'" style="text-decoration:none">Open in RTC dashboard</a>':'')+'</div><h2>'+esc(b.title)+'</h2></div>';
+  h+=lawHtml(b);
   h+='<p class="lead"><b>The core issue.</b> '+esc(is.headline)+'</p>';
-  h+=enrichTop(is);
+  h+=enrichTop(is,b.issue);
   h+='<div class="sec"><h3>Background</h3><p>'+esc(is.bg)+'</p></div>';
   h+='<div class="sec"><h3>Why it matters and likely implications</h3><p>'+esc(is.why)+'</p></div>';
   h+=enrichBottom(is);
   h+='<div class="sec"><h3>Questions worth asking</h3><ul>'+is.q.map(function(q){return '<li>'+esc(q)+'?</li>'}).join("")+'</ul></div>';
-  h+='<div class="sec"><h3>What the bill says</h3><p>'+esc(b.summary.length>700?b.summary.slice(0,700).replace(/\s\S*$/,"")+" ...":b.summary)+'</p>'+(b.summary.length>700?'<details style="margin-top:8px"><summary>Read the full official summary</summary><p>'+esc(b.summary)+'</p></details>':'')+'<p class="legal" style="margin-top:6px">Official synopsis text from the legislative record.</p></div>';
-  h+='<div class="sec"><h3>Where it stands</h3><div class="track">'+steps.map(function(s,i){return '<span class="step '+(i<cur?"done":i===cur?"cur":"")+'">'+esc(s)+'</span>'}).join("")+'</div><p><b>'+esc(b.last)+'</b> on '+fmt(b.lastDate)+(b.lastChamber?' in the '+esc(b.lastChamber):'')+'. '+esc(b.stageNote)+'.</p><p class="legal">Position on the path is inferred from the last action as of '+fmt(D.meta.asOf)+'.</p></div>';
+  h+='<div class="sec"><h3>'+(b.law?'Official summary at the June 1 snapshot':'What the bill says')+'</h3><p>'+esc(b.summary.length>700?b.summary.slice(0,700).replace(/\s\S*$/,"")+" ...":b.summary)+'</p>'+(b.summary.length>700?'<details style="margin-top:8px"><summary>Read the full official summary</summary><p>'+esc(b.summary)+'</p></details>':'')+'<p class="legal" style="margin-top:6px">Official synopsis text from the legislative record.</p></div>';
+  h+='<div class="sec"><h3>Where it stands</h3><div class="track">'+steps.map(function(s,i){return '<span class="step '+(i<cur?"done":i===cur?"cur":"")+'">'+esc(s)+'</span>'}).join("")+'</div><p><b>'+esc(b.last)+'</b> on '+fmt(b.lastDate)+(b.lastChamber?' in the '+esc(b.lastChamber):'')+'. '+esc(b.stageNote)+'.</p><p class="legal">'+(b.law?'The last action shown is from the June 1 snapshot. Signing is from the Governor\'s bill action releases and news reports.':'Position on the path is inferred from the last action as of '+fmt(D.meta.asOf)+'.')+'</p></div>';
   h+='<div class="sec"><h3>Who is behind it</h3><dl class="kv"><dt>Chief sponsor</dt><dd>'+esc(b.sponsor)+' ('+b.party+'), '+esc(b.chamber)+'</dd><dt>Cosponsors</dt><dd>'+b.nCos+(b.bip?', both parties represented':'')+'</dd></dl>'+(b.cos.length?'<details style="margin-top:8px"><summary>Show cosponsors</summary><p>'+b.cos.map(person).map(esc).join("; ")+'</p></details>':'')+'</div>';
   h+='<div class="sec"><h3>Law and process</h3><dl class="kv"><dt>Statutes amended</dt><dd>'+(b.statutes.length?esc(b.statutes.slice(0,12).join("; "))+(b.nStat>12?" and "+(b.nStat-12)+" more":""):"None listed")+'</dd><dt>Committees</dt><dd>'+(b.committees.length?esc(b.committees.join("; ")):"None listed")+'</dd><dt>Amendments</dt><dd>'+(b.amend.length?esc(b.amend.join("; ")):"None proposed")+'</dd></dl></div>';
   var rel=B.filter(function(x){return x.issue===b.issue&&x.id!==b.id});
@@ -464,7 +647,7 @@ function openBill(id,listKey,noPush){
   var same=B.filter(function(x){return x.theme===b.theme&&x.issue!==b.issue}).slice(0,0);
   if(is.go.length) h+='<div class="sec"><h3>Go deeper on this hub</h3><p>'+hubLinks(is.go)+'</p></div>';
   h+='</div>';
-  var dr=document.getElementById("drawer"); dr.innerHTML=h;
+  var dr=document.getElementById("drawer"); dr.innerHTML=h; wireModels(dr);
   var ov=document.getElementById("overlay"); ov.classList.add("on"); ov.setAttribute("aria-hidden","false"); dr.scrollTop=0;
   document.body.style.overflow="hidden";
   var cl=document.getElementById("dclose"); cl.focus();
