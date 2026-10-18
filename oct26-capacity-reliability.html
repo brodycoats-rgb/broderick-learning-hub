@@ -1,0 +1,221 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capacity, Retirements and the IRP Study Guide</title><style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--muted:#566174;--card:#ffffff;--line:#e3e0d8;--accent:#d9531e;--accent2:#1f6f8b;--soft:#f3efe6;--good:#2f7d4f;--warn:#b7791f}
+[data-theme=dark]{--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 Georgia,'Times New Roman',serif}
+header{border-bottom:1px solid var(--line);background:var(--card)}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:12px 0;font:14px system-ui,sans-serif}
+nav a{color:var(--accent2);text-decoration:none}
+nav a:hover{text-decoration:underline}
+nav button{margin-left:auto;background:var(--soft);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:13px system-ui,sans-serif;cursor:pointer}
+h1{font-size:2rem;line-height:1.2;margin:28px 0 6px}
+h2{font-size:1.4rem;margin:40px 0 10px;border-bottom:2px solid var(--accent);padding-bottom:4px;display:inline-block}
+h3{font-size:1.1rem;margin:22px 0 6px;color:var(--accent2);font-family:system-ui,sans-serif}
+.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.pill{display:inline-block;font:12px system-ui,sans-serif;padding:2px 10px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted);margin-right:6px}
+.hot{background:var(--accent);color:#fff;border-color:var(--accent)}
+.note{border-left:4px solid var(--warn);background:var(--soft);padding:10px 14px;border-radius:6px;font-size:15px}
+ul{padding-left:22px}li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font:600 15px system-ui,sans-serif}
+.script{background:var(--soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:6px;margin:10px 0}
+.model label{display:block;font:14px system-ui,sans-serif;margin:10px 0 2px}
+.model input[type=range]{width:100%}
+.model input[type=number],.model select{font:15px system-ui,sans-serif;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);width:100%}
+.out{font:600 18px system-ui,sans-serif;margin-top:12px;padding:10px;background:var(--soft);border-radius:8px}
+svg text{fill:var(--fg);font-family:system-ui,sans-serif}
+.bar{height:22px;border-radius:5px;background:var(--accent)}
+footer{color:var(--muted);font:13px system-ui,sans-serif;padding:30px 0 50px}
+.big{font:700 2.2rem system-ui,sans-serif;color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><nav><a href="index.html">Learning Hub home</a><a href="oct26-meetings-hub.html">Oct 13-14 hub</a><a href="oct26-capacity-reliability.html">Capacity and reliability</a><a href="oct26-data-centers-large-load.html">Data centers</a><a href="oct26-grid-plan-and-gas.html">Grid plan and gas</a><a href="oct26-session-outlook.html">Session outlook</a><a href="oct26-bills-watch.html">Bills watch</a><a href="oct26-elections.html">Elections</a><button id="tg" type="button">Light / Dark</button></nav></div></header>
+<main class="wrap"><h1>Capacity, Retirements and the IRP Study Guide</h1><p class="sub">Why the supply picture is the most pressing issue</p>
+<h2>Why it matters</h2>
+<p>Illinois sits in two grid markets. The northern part is in PJM and the southern part is in MISO. Both are tightening at once. State clean energy law sets retirement dates for some plants, while demand from data centers is rising. If supply leaves faster than replacement arrives, prices rise first and reliability risk follows.</p>
+<div class="card"><span class="big">~3 GW</span><br>retiring without immediate replacement, as one participant described it. Think of it as roughly the output of several large plants.</div>
+
+<h2>What the meetings said</h2>
+<ul>
+<li><strong>Plants at risk.</strong> Several gas fueled peaking plants face retirement deadlines under the state clean energy law. One plant in an environmental justice zone was described as the most immediate concern.</li>
+<li><strong>Owner willingness.</strong> A recurring worry is that even if the state wants a plant to stay, the owner may not be willing to keep it running. One example described a plant that owners might not agree to keep operating for three more years.</li>
+<li><strong>The letter process.</strong> After session ended, the Illinois EPA issued a letter saying RTOs have independent authority under existing state law to extend the life of needed plants. PJM extended several facilities, including dual fuel units. MISO has been slower to join, taking the view that resource adequacy in vertically integrated markets is a state job.</li>
+<li><strong>Coal timelines.</strong> As summarized, one coal plant secured an extension through the letter process, remaining units at two plants are scheduled to close by the end of 2027, and two others received extensions through 2045. A university pilot is testing carbon capture at one of them. Verify these dates before quoting them.</li>
+<li><strong>IRP numbers.</strong> The state plan appears to count about 800 MW of upgrades at an existing nuclear fleet. PJM reportedly says most of those megawatts are already committed. Models also showed out of state imports growing three to four times over five to ten years.</li>
+<li><strong>Timing.</strong> The IRP and mitigation plan are expected the day before veto session, with no preview for working groups and no immediate legislative action expected.</li>
+<li><strong>PJM backstop.</strong> A backstop procurement is expected in roughly five to six months, with large cost allocations to big Illinois consumers.</li>
+<li><strong>Local impact.</strong> Retirements remove property tax base for towns and school districts, especially in southern Illinois. A summer max gen event on October 13 was cited as proof that peakers still matter.</li>
+<li><strong>Public understanding.</strong> One participant predicted the public will not feel this until prices rise and power is hard to get.</li>
+</ul>
+
+<h2>Worked example, the 800 MW question</h2>
+<div class="card">
+<p>Say a state plan counts 800 MW of new capacity from upgrades. The grid operator then says 700 MW of that is already promised to other buyers. The plan has double counted 700 MW, and the true new supply is only 100 MW.</p>
+<p>That is why one number can turn a comfortable looking plan into a shortfall. The first question to ask of any plan is whether each megawatt is counted once.</p>
+</div>
+
+<h2>Model, adjust the scenario</h2>
+<div class="card model">
+<p>This is an illustration with sliders, not a forecast. Start with retirements and see how replacement, imports and a double counted block change the gap.</p>
+<label>Retirements (GW) <span id="v1">3.0</span></label><input id="s1" type="range" min="0" max="6" step="0.1" value="3">
+<label>New replacement supply (GW) <span id="v2">0.5</span></label><input id="s2" type="range" min="0" max="6" step="0.1" value="0.5">
+<label>Extra usable imports (GW) <span id="v3">0.3</span></label><input id="s3" type="range" min="0" max="4" step="0.1" value="0.3">
+<label><input id="c1" type="checkbox" checked> Remove an 0.8 GW double counted block from replacement credit</label>
+<div class="out" id="o1"></div>
+</div>
+
+<h2>Infographic, the retirement ladder</h2>
+<svg viewBox="0 0 800 190" width="100%" role="img" aria-label="Timeline of reported retirement and extension dates">
+<line x1="40" y1="95" x2="760" y2="95" stroke="var(--line)" stroke-width="4"/>
+<g><circle cx="90" cy="95" r="9" fill="var(--accent)"/><text x="90" y="70" text-anchor="middle" font-size="13">Oct 2026</text><text x="90" y="125" text-anchor="middle" font-size="12">IRP expected</text><text x="90" y="141" text-anchor="middle" font-size="12">day before veto</text></g>
+<g><circle cx="250" cy="95" r="9" fill="var(--accent2)"/><text x="250" y="70" text-anchor="middle" font-size="13">Dec 2026</text><text x="250" y="125" text-anchor="middle" font-size="12">Grid plan orders</text></g>
+<g><circle cx="410" cy="95" r="9" fill="var(--accent)"/><text x="410" y="70" text-anchor="middle" font-size="13">Mar-Apr 2027</text><text x="410" y="125" text-anchor="middle" font-size="12">PJM backstop</text></g>
+<g><circle cx="570" cy="95" r="9" fill="var(--accent2)"/><text x="570" y="70" text-anchor="middle" font-size="13">End of 2027</text><text x="570" y="125" text-anchor="middle" font-size="12">Coal units retire</text><text x="570" y="141" text-anchor="middle" font-size="12">(verify)</text></g>
+<g><circle cx="730" cy="95" r="9" fill="var(--accent)"/><text x="730" y="70" text-anchor="middle" font-size="13">2045</text><text x="730" y="125" text-anchor="middle" font-size="12">Extensions end</text><text x="730" y="141" text-anchor="middle" font-size="12">(verify)</text></g>
+</svg>
+
+<h2>Scripts</h2>
+<h3>Thirty seconds</h3>
+<div class="script">Illinois is losing firm generation faster than it is adding it. About three gigawatts are scheduled to leave without a clear replacement, and demand from data centers is climbing. Before anyone votes on anything, we should make sure every megawatt in the state plan is counted once and that the owners of key plants are actually willing to keep them running.</div>
+<h3>Two minutes</h3>
+<div class="script">Let me give you the short version. Under current law, several plants have retirement dates. Some owners have already spent years planning those closures, so a late change in the law may not change what they do. PJM has used a letter process to extend plants it needs, and the Illinois EPA has said RTOs have that authority. MISO has been more cautious and says supply adequacy is a state matter.<br><br>The state plan is expected the day before veto session, which leaves almost no time to read it. One early concern is about 800 megawatts of upgrades that may be counted by the state while the grid operator says they are already committed elsewhere. If that holds, the gap is larger than the plan suggests.<br><br>The people who feel this first are local. Towns and school districts that depend on plant property taxes lose revenue when a plant closes. So my ask is simple. Let us look at the numbers together, count each megawatt once, and talk about timelines that protect reliability and local budgets.</div>
+<h3>Questions you may get</h3>
+<details><summary>Why not just build new plants?</summary><p>New supply takes years to permit, finance and connect. One participant said replacement inventory may not be fully built until about 2035. The near term question is how to bridge the gap.</p></details><details><summary>Will a change in administration or law save the plants?</summary><p>Not necessarily. Several owners have already executed closure plans and may retire units regardless. Plan on the law as written today.</p></details><details><summary>Is this a utility problem?</summary><p>It is a system problem that touches customers, local governments and the grid. A policy designed years ago now meets new demand, and the two need to be reconciled.</p></details><details><summary>What should legislators ask for first?</summary><p>The underlying data, with each megawatt counted once, and a clear view of who has authority to extend a plant and who pays.</p></details>
+
+<h2>Background, the vocabulary of supply</h2>
+<table><tr><th>Term</th><th>Plain meaning</th></tr>
+<tr><td>Capacity</td><td>The amount of power a plant can be counted on to deliver at the moment the grid needs it most. It is a promise about availability, not a measure of total electricity made over a year.</td></tr>
+<tr><td>Energy</td><td>The actual electricity delivered over time. A plant can produce lots of energy and still count for little capacity, or the reverse.</td></tr>
+<tr><td>Resource adequacy</td><td>Whether there is enough capacity, in the right places, to keep the lights on during the worst hours. This is the central worry in the meetings.</td></tr>
+<tr><td>Accreditation</td><td>The rating that decides how many megawatts a resource gets credit for. A plant is not always credited at its full nameplate size.</td></tr>
+<tr><td>Peaker</td><td>A plant built to run only during the highest demand hours. It may run rarely, but when it is needed there is no substitute on short notice.</td></tr>
+<tr><td>Black start</td><td>A unit that can restart itself without outside power and help bring the grid back after a blackout. One speaker warned the region is down to few of these.</td></tr>
+<tr><td>RTO</td><td>Regional transmission organization. PJM and MISO are the two that matter in Illinois.</td></tr>
+<tr><td>Backstop procurement</td><td>An emergency purchase of capacity when normal markets have not produced enough. The meetings said one is expected in roughly five to six months and that cost allocation to large Illinois customers could be heavy.</td></tr>
+</table>
+
+<h2>Why Illinois sits in two markets</h2>
+<p>Northern Illinois, including the Chicago area, is in PJM. Central and southern Illinois, including the Ameren Illinois service area, is in MISO. The two markets run on different rules, and the meetings described their attitudes toward state involvement as quite different.</p>
+<table><tr><th></th><th>PJM</th><th>MISO</th></tr>
+<tr><td>Planning window</td><td>Looks ahead about three years and was described as caught up on its forward procurement</td><td>Facing capacity challenges and rule revisions in its next procurement</td></tr>
+<tr><td>Fleet</td><td>Mix of gas, nuclear, coal and renewables</td><td>Thermal fleet in Illinois is mostly coal, with very few gas assets</td></tr>
+<tr><td>Willingness to work with states</td><td>Used the letter process with the state, and extended the life of several plants, including dual fuel units</td><td>Described as reluctant, taking the view that adequacy in vertically integrated states is a state responsibility</td></tr>
+<tr><td>Political heat</td><td>Under pressure from both federal and state officials over prices</td><td>Without the price cap tools that were described in the PJM region</td></tr>
+</table>
+
+<h2>The legal path that keeps plants open</h2>
+<p>The summary describes a letter process. After the spring session the Illinois EPA issued a letter affirming that an RTO has its own authority under existing state law to extend the operating life of plants that are needed. PJM then extended several facilities. The takeaway is that a plant's retirement date in statute is not always the last word if the grid operator formally says the plant is needed. MISO had been slower to join that process, which is why the southern part of the state draws the most concern.</p>
+<ol>
+<li>The statute sets a retirement or emissions path for a plant.</li>
+<li>The RTO studies whether the plant is needed for reliability.</li>
+<li>If it is, the RTO and the state exchange letters that extend the plant's life.</li>
+<li>The owner decides whether it will actually keep operating. This is the weak link, because owners that have already planned a closure may decline.</li>
+</ol>
+<div class="note">One speaker put the owner's side bluntly. If you are not going to force us to stay open, we are closing. A plant can be allowed to run without anyone being able to make it run. Study that gap, because it is the core of the Baldwin question below.</div>
+
+<h2>The retirement picture plant by plant, as summarized</h2>
+<table><tr><th>Facility</th><th>Status in the meetings</th><th>Verify</th></tr>
+<tr><td>Venice (peaker)</td><td>Called the most immediate concern because it sits in an environmental justice zone. Described as a buffer supply for the MISO Zone 4 area, and cited as helping the grid during a maximum generation event on October 13.</td><td>Retirement date, owner, size</td></tr>
+<tr><td>Baldwin</td><td>Scenario raised in which the state needs it for three more years but the owner is not willing. The question was what authority exists to compel operation.</td><td>Owner position and date</td></tr>
+<tr><td>Powerton</td><td>Reported as having secured an extension through the formal letter process</td><td>Length of extension</td></tr>
+<tr><td>E. D. Edwards and Elwood</td><td>Remaining units scheduled to retire by December 31, 2027</td><td>Which units, spelling of names</td></tr>
+<tr><td>Prairie State</td><td>Extended through 2045 as summarized. A university pilot is testing carbon capture on site, capturing and then releasing rather than storing deep underground.</td><td>Extension basis, pilot results</td></tr>
+<tr><td>Dallman (Springfield CWLP)</td><td>Extended through 2045 as summarized</td><td>Extension basis</td></tr>
+</table>
+<p>The summary also says five plants in total were in the discussion, with Venice first in line. Treat the list above as study scaffolding, not a registry.</p>
+
+<h2>Combined cycle and simple cycle owners are organizing</h2>
+<p>Combined cycle gas plants face less direct pressure before 2040 but their operators are preparing input to the integrated resource plan. The summary mentions a renewable energy company's gas assets and a Japanese owned plant where a sovereign fund bought a controlling interest while the original owner kept operating it. It also notes a cooperative that acquired simple cycle units in northern Illinois. Ownership shifts matter because they change who makes long term capital decisions about Illinois plants, and where those decisions get made. A working group of combined cycle operators was proposed to prepare testimony.</p>
+
+<h2>Local fallout, the tax base question</h2>
+<p>When a plant closes, the town and school district lose a large property tax payer. The meetings called this severe for southern Illinois. It is also a human story. Parks, police, fire and schools all draw on that revenue. This is one of the few angles that resonates with people who do not follow grid policy at all. The model below shows how big the hit can look relative to a small district budget.</p>
+<div class="card model">
+<label>Annual property tax paid by the plant (million dollars)</label><input id="xc1" type="range" min="0.5" max="30" step="0.5" value="8"><span id="xc1v"></span>
+<label>Share that goes to the school district (percent)</label><input id="xc2" type="range" min="10" max="80" value="45"><span id="xc2v"></span>
+<label>School district operating budget (million dollars)</label><input id="xc3" type="range" min="5" max="120" value="30"><span id="xc3v"></span>
+<div class="out" id="xco"></div>
+<p style="font-size:14px">Illustration only. The inputs are placeholders. Pull plant specific figures before using any of this in a meeting, which is also one of the follow ups the summary recorded.</p>
+</div>
+
+<h2>Model, how dependent is the state on imports</h2>
+<p>The summary says one set of model forecasts showed out of state imports growing by three to four times over a five to ten year horizon. That is the kind of number that deserves a sanity check. The model below shows what that multiplier does to a starting share.</p>
+<div class="card model">
+<label>Share of peak demand met by imports today (percent)</label><input id="xd1" type="range" min="2" max="30" value="8"><span id="xd1v"></span>
+<label>Growth multiplier in the forecast</label><select id="xd2"><option value="3">3 times</option><option value="4">4 times</option></select>
+<label>Peak demand growth over the period (percent)</label><input id="xd3" type="range" min="0" max="40" value="10"><span id="xd3v"></span>
+<div class="out" id="xdo"></div>
+<p style="font-size:14px">Illustration only. The starting share is a placeholder. The question to ask of any real forecast is whether neighboring regions will have power to sell during the same hot or cold hours when Illinois needs it, which was a worry raised in the meetings.</p>
+</div>
+
+<h2>Storms are a reliability story too</h2>
+<p>Illinois has seen record tornado counts, described as more than double a historical baseline of roughly 20 to 35 a year. Restoration speed after storm damage has become a legislative talking point. The recommended framing is to treat severe weather as the new normal, not a rare event, so that grid hardening and restoration spending are explained as steady needs. Messaging should stay consistent across utilities so lawmakers hear the same facts. Whether the legislature will propose formal hardening mandates is an open question.</p>
+
+<h2>Cybersecurity belongs next to reliability</h2>
+<p>A state cybersecurity hearing was held on October 14 and one of the group's members was assigned to follow the tone and standards. The concern raised was that AI driven threats against generation plants and water systems may grow quickly by 2027. For a general audience, the link is simple. A plant that is allowed to run is only useful if it can be kept running safely.</p>
+
+<h2>What would change the picture</h2>
+<table><tr><th>Event</th><th>Effect</th></tr>
+<tr><td>The IRP and mitigation plan signal extensions</td><td>Shrinks the gap, eases the near term worry, may shift focus to cost</td></tr>
+<tr><td>Owners decline to run extended plants</td><td>Gap persists even with legal extensions</td></tr>
+<tr><td>Large new load arrives faster than replacement supply</td><td>Gap widens, backstop costs rise</td></tr>
+<tr><td>A severe weather event strains supply</td><td>Political urgency jumps overnight</td></tr>
+<tr><td>Imports fall short in a shared heat wave</td><td>Prices spike and reliability tools get used</td></tr>
+</table>
+<p>One sobering remark in the meetings was that the public will not feel the problem until prices rise and power is hard to get at the same time. Another recalled a view that regulators rarely act on fixes before a failure. The study question is how to explain a problem before it happens without sounding alarmist.</p>
+
+<h2>More scripts</h2>
+<h3>Fifteen seconds</h3>
+<div class="script">About three gigawatts of dependable generation are scheduled to leave and there is no firm replacement yet. That is why keeping needed plants available while new supply is built is a reliability issue, not a political one.</div>
+<h3>One minute, to a legislator</h3>
+<div class="script">The state asked for the retirements and is now asking how to keep the lights on afterward. The grid operators say some plants are still needed, and the letters from the state environmental agency show the law allows extensions. The remaining gap is practical. Some owners will not run a plant that is already being wound down. We would like to work with you on a path that keeps needed capacity available and tells your constituents plainly what it costs.</div>
+<h3>One minute, to a local official in a plant community</h3>
+<div class="script">When a large plant closes, the property tax it pays goes away. In many small towns that is a big share of the budget for schools, police and fire. We want you to hear it from us early, with real numbers, so you can plan and so you can speak up about timing if you think it should change.</div>
+<h3>One minute, to a business audience</h3>
+<div class="script">Manufacturers need firm power and predictable prices. As old plants retire and new demand arrives, the region is buying capacity in emergency auctions, and large customers can be asked to pay a big share. Knowing the schedule and the rules helps you plan, and getting involved before the next auction is cheaper than reacting after it.</div>
+
+<h2>More questions you may get</h2>
+<details><summary>Is this about keeping coal alive?</summary><p>No. Several of the plants in the discussion are gas fired peakers. The question is reliability during the highest demand hours and who pays for the transition.</p></details><details><summary>Why not just build replacements?</summary><p>Replacements are being built, including storage, but the schedule is slower than the retirements. One reported estimate was that enough replacement inventory would not be built until about 2035.</p></details><details><summary>What is the difference between PJM and MISO in Illinois?</summary><p>PJM covers northern Illinois. MISO covers central and southern Illinois. They have different rules, and MISO was described as more reluctant to take part in state letter processes.</p></details><details><summary>What is the 800 MW issue?</summary><p>The state counted about 800 MW of upgrades at a nuclear plant, while the market operator found most of that capacity already committed. If both are true, the state may be counting the same megawatts twice. Treat the numbers as a flagged question.</p></details><details><summary>Who decides if a plant must keep running?</summary><p>The RTO can say a plant is needed. The state can support that through letters. The owner decides whether to operate. That gap is why the question of compulsion keeps coming up.</p></details><details><summary>How much will it cost?</summary><p>No single figure was given. The meetings said backstop procurement costs could fall heavily on large Illinois customers, and that the amount is hard to predict.</p></details><details><summary>What does environmental justice have to do with it?</summary><p>Venice sits in a designated environmental justice area, which is part of why it was named for closure first and why the community discussion is sensitive.</p></details><details><summary>Why mention the property tax so often?</summary><p>It is the most direct local effect, and it is a concrete way to explain the issue to people who do not follow grid policy.</p></details><h2>Self check</h2><details><summary>What is the difference between capacity and energy?</summary><p>Capacity is the amount you can count on at the peak. Energy is the total electricity delivered over time.</p></details><details><summary>Which Illinois regions fall in PJM and which in MISO?</summary><p>Northern Illinois in PJM, central and southern in MISO.</p></details><details><summary>How can a plant's retirement date change without new legislation?</summary><p>If the RTO finds it needed and the state exchanges letters that extend its operating life.</p></details><details><summary>Why is owner willingness the weak link?</summary><p>An extension lets a plant run but does not make an owner run it.</p></details><details><summary>What reliability role does Venice play, as summarized?</summary><p>A peaker that acts as a buffer supply for the MISO Zone 4 area, credited with helping during a maximum generation event on October 13.</p></details><details><summary>What does the 800 MW discrepancy suggest?</summary><p>Possible double counting of upgraded capacity between the state's plan and the market operator's view.</p></details><details><summary>What is the local fiscal effect of a plant closing?</summary><p>Loss of a major property tax payer that funds schools, parks, police and fire.</p></details><details><summary>When is the PJM backstop procurement expected?</summary><p>Roughly March to April 2027, about five to six months after the meeting.</p></details><h2>Verify before using</h2>
+<ul><li>Exact retirement dates and extension terms for each coal plant.</li><li>The 800 MW figure and which entity counted it.</li><li>The veto session date and the IRP release date.</li><li>The backstop procurement schedule and cost allocation method.</li></ul>
+
+<footer>Study notes built from industry meeting summaries on October 13 and 14, 2026. Summaries were machine generated and can contain transcription errors, so items marked verify should be checked against primary sources before anyone relies on them. These pages describe issues in general terms and carry no organization position.</footer></main>
+<script>
+(function(){var r=document.documentElement;try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s);}catch(e){}
+document.getElementById('tg').onclick=function(){var cur=r.getAttribute('data-theme');if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+var n=cur==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}};})();
+
+function u(){var r=+s1.value,n=+s2.value,i=+s3.value,d=c1.checked?0.8:0;
+v1.textContent=r.toFixed(1);v2.textContent=n.toFixed(1);v3.textContent=i.toFixed(1);
+var covered=Math.max(0,n+i-d),gap=Math.max(0,r-covered);
+o1.textContent='Covered '+covered.toFixed(1)+' GW of '+r.toFixed(1)+' GW. Remaining gap '+gap.toFixed(1)+' GW.';}
+['s1','s2','s3','c1'].forEach(function(x){document.getElementById(x).oninput=u;document.getElementById(x).onchange=u;});u();
+
+
+(function(){
+var g=function(i){return document.getElementById(i)};
+function f1(n){return Math.round(n*10)/10}
+function c(){
+ var t=+g('xc1').value,s=+g('xc2').value/100,b=+g('xc3').value;
+ g('xc1v').textContent=' '+t+' million';g('xc2v').textContent=' '+Math.round(s*100)+' percent';g('xc3v').textContent=' '+b+' million';
+ var sd=t*s,pct=sd/b*100;
+ g('xco').innerHTML='School district loses about '+f1(sd)+' million a year, or '+f1(pct)+' percent of its budget. The rest, '+f1(t-sd)+' million, comes from other local governments such as the town, county and fire district.';
+}
+function d(){
+ var s=+g('xd1').value,m=+g('xd2').value,gr=+g('xd3').value/100;
+ g('xd1v').textContent=' '+s+' percent';g('xd3v').textContent=' '+Math.round(gr*100)+' percent';
+ var imp=s*m/(1+gr);
+ g('xdo').innerHTML='Imports would supply about '+f1(imp)+' percent of peak in the forecast year. '+(imp>40?'That is a large dependence on neighbors.':imp>25?'That is a meaningful dependence on neighbors.':'That is modest, but still depends on neighbors having surplus at the same hour.');
+}
+['xc1','xc2','xc3'].forEach(function(i){g(i).oninput=c});
+['xd1','xd3'].forEach(function(i){g(i).oninput=d});g('xd2').onchange=d;
+c();d();
+})();
+
+</script></body></html>

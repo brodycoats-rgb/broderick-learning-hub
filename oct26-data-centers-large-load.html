@@ -1,0 +1,272 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Centers and Large Load Tariffs Study Guide</title><style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--muted:#566174;--card:#ffffff;--line:#e3e0d8;--accent:#d9531e;--accent2:#1f6f8b;--soft:#f3efe6;--good:#2f7d4f;--warn:#b7791f}
+[data-theme=dark]{--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12161d;--fg:#e8ecf2;--muted:#9aa6b8;--card:#1a212b;--line:#2b3441;--accent:#ff8a57;--accent2:#5cc0e0;--soft:#202938;--good:#5fd08a;--warn:#f0b64a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 Georgia,'Times New Roman',serif}
+header{border-bottom:1px solid var(--line);background:var(--card)}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+nav{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding:12px 0;font:14px system-ui,sans-serif}
+nav a{color:var(--accent2);text-decoration:none}
+nav a:hover{text-decoration:underline}
+nav button{margin-left:auto;background:var(--soft);color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font:13px system-ui,sans-serif;cursor:pointer}
+h1{font-size:2rem;line-height:1.2;margin:28px 0 6px}
+h2{font-size:1.4rem;margin:40px 0 10px;border-bottom:2px solid var(--accent);padding-bottom:4px;display:inline-block}
+h3{font-size:1.1rem;margin:22px 0 6px;color:var(--accent2);font-family:system-ui,sans-serif}
+.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.pill{display:inline-block;font:12px system-ui,sans-serif;padding:2px 10px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--muted);margin-right:6px}
+.hot{background:var(--accent);color:#fff;border-color:var(--accent)}
+.note{border-left:4px solid var(--warn);background:var(--soft);padding:10px 14px;border-radius:6px;font-size:15px}
+ul{padding-left:22px}li{margin:4px 0}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{cursor:pointer;font:600 15px system-ui,sans-serif}
+.script{background:var(--soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:6px;margin:10px 0}
+.model label{display:block;font:14px system-ui,sans-serif;margin:10px 0 2px}
+.model input[type=range]{width:100%}
+.model input[type=number],.model select{font:15px system-ui,sans-serif;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg);width:100%}
+.out{font:600 18px system-ui,sans-serif;margin-top:12px;padding:10px;background:var(--soft);border-radius:8px}
+svg text{fill:var(--fg);font-family:system-ui,sans-serif}
+.bar{height:22px;border-radius:5px;background:var(--accent)}
+footer{color:var(--muted);font:13px system-ui,sans-serif;padding:30px 0 50px}
+.big{font:700 2.2rem system-ui,sans-serif;color:var(--accent)}
+</style></head><body>
+<header><div class="wrap"><nav><a href="index.html">Learning Hub home</a><a href="oct26-meetings-hub.html">Oct 13-14 hub</a><a href="oct26-capacity-reliability.html">Capacity and reliability</a><a href="oct26-data-centers-large-load.html">Data centers</a><a href="oct26-grid-plan-and-gas.html">Grid plan and gas</a><a href="oct26-session-outlook.html">Session outlook</a><a href="oct26-bills-watch.html">Bills watch</a><a href="oct26-elections.html">Elections</a><button id="tg" type="button">Light / Dark</button></nav></div></header>
+<main class="wrap"><h1>Data Centers and Large Load Tariffs Study Guide</h1><p class="sub">Interruptibility, bundling and public opinion</p>
+<h2>Why it matters</h2>
+<p>A data center can ask for as much power as a small city. That changes planning for generation, wires and rates all at once. Lawmakers want the jobs and investment, but they also want bills kept down and the lights kept on.</p>
+
+<h2>What the meetings said</h2>
+<ul>
+<li><strong>Large load tariffs.</strong> The ICC asked both Ameren Illinois and ComEd to file large load tariffs. The purpose is to treat very large industrial and data center customers as their own class and set up interruptibility, so load can be reduced during grid stress.</li>
+<li><strong>Voluntary or involuntary.</strong> A key design question is whether curtailment is voluntary or ordered. One view was that voluntary programs are better and that anyone curtailed involuntarily should be paid. Another was that regulators may want broad participation.</li>
+<li><strong>Bundling.</strong> Senate leadership reportedly advised holding small, technical utility measures and attaching them to one broad data center energy bill when the climate improves.</li>
+<li><strong>Generator view.</strong> One generator described three parts to deals with large tech buyers. The first is plant upgrades paid for by the buyer (roughly 600 MW was cited). The second is a financial load following supply (2,700 MW was cited). The third is new clean or nuclear generation. Treat those figures as one company's description and verify them.</li>
+<li><strong>Behind the meter.</strong> Hyperscalers see on site generation as a short term way to get power fast, not a long term answer, because they care about reliability.</li>
+<li><strong>Roadblocks.</strong> Transmission service agreements, security deposits, upfront costs and labor politics slow projects. Competing states such as Texas, Utah and Arizona are courting the same projects.</li>
+<li><strong>Public opinion.</strong> Renaming data centers as server farms reportedly lifted favorability by 25 points to 55 percent, which shows how loosely held the views are. Data centers also rank below one percent as a top issue while inflation ranks near the top. Local benefits such as tax relief can flip a community. Concern about AI and surveillance is a separate driver.</li>
+<li><strong>Ethics.</strong> One legislator conversation noted that members who hold data center interests on statements of economic interests may face constraints on carrying a bill.</li>
+</ul>
+
+<h2>Worked example, an interruptible customer</h2>
+<div class="card"><p>A 100 MW data center agrees to curtail during up to 40 hours of grid emergency per year. If the program pays 300 dollars per MWh, one full year of events pays 100 x 40 x 300, or 1.2 million dollars. The customer gets a lower cost of connecting sooner. The grid gets a reserve it can call on. Whether that is a good trade depends on the price and on how often events happen.</p></div>
+
+<h2>Model, curtailment payment estimator</h2>
+<div class="card model">
+<label>Curtailable load (MW)</label><input id="m1" type="number" value="100">
+<label>Event hours per year</label><input id="m2" type="number" value="40">
+<label>Payment ($ per MWh)</label><input id="m3" type="number" value="300">
+<label>Program type</label><select id="m4"><option value="1">Voluntary, paid at the base rate</option><option value="1.5">Involuntary, paid at a premium (1.5x)</option><option value="0">Involuntary, unpaid</option></select>
+<div class="out" id="o2"></div>
+<p style="font-size:14px">Illustration only. The multiplier is a teaching choice, not a figure from the meetings.</p>
+</div>
+
+<h2>Infographic, who decides what</h2>
+<svg viewBox="0 0 800 210" width="100%" role="img" aria-label="Decision flow for large load policy">
+<rect x="20" y="20" width="170" height="60" rx="10" fill="var(--soft)" stroke="var(--line)"/><text x="105" y="48" text-anchor="middle" font-size="14">Legislature</text><text x="105" y="66" text-anchor="middle" font-size="12">Sets the framework</text>
+<rect x="230" y="20" width="170" height="60" rx="10" fill="var(--soft)" stroke="var(--line)"/><text x="315" y="48" text-anchor="middle" font-size="14">ICC</text><text x="315" y="66" text-anchor="middle" font-size="12">Approves tariffs</text>
+<rect x="440" y="20" width="170" height="60" rx="10" fill="var(--soft)" stroke="var(--line)"/><text x="525" y="48" text-anchor="middle" font-size="14">Utilities</text><text x="525" y="66" text-anchor="middle" font-size="12">File and operate</text>
+<rect x="650" y="20" width="130" height="60" rx="10" fill="var(--soft)" stroke="var(--line)"/><text x="715" y="48" text-anchor="middle" font-size="14">Customers</text><text x="715" y="66" text-anchor="middle" font-size="12">Sign up or curtail</text>
+<path d="M190 50 H230 M400 50 H440 M610 50 H650" stroke="var(--accent)" stroke-width="3"/>
+<rect x="120" y="120" width="560" height="70" rx="10" fill="var(--accent)" opacity="0.15"/><text x="400" y="150" text-anchor="middle" font-size="14">Open question for each step</text><text x="400" y="170" text-anchor="middle" font-size="13">Who pays, who gets cut first, and who decides when an event is real?</text>
+</svg>
+
+<h2>Scripts</h2>
+<h3>Thirty seconds</h3>
+<div class="script">Illinois wants data center investment, and it also needs to protect other customers and keep the grid reliable. A large load tariff sets clear rules for the biggest customers, including when they can be asked to reduce use and how they are paid. Rules first, then growth.</div>
+<h3>Two minutes</h3>
+<div class="script">The ICC has asked for large load tariffs, and that is a good first step. Very large customers are a different kind of load, so they need their own terms. The hard part is interruptibility. If the grid is stressed, who gets reduced first? A voluntary program that pays participants is easier to defend than an order. If curtailment is ever required, paying customers for it is a principle most people can accept.<br><br>On the legislative side, the advice is to avoid a pile of small bills and build one comprehensive data center energy bill, then attach the technical items. That gives members a single vote they can explain at home.<br><br>On public opinion, people say they do not like data centers, but it is rarely their top issue. What moves communities is visible local benefit and clear answers about power and water use. So the story we tell should be about reliability, fairness to other customers and local value.</div>
+<h3>Questions you may get</h3>
+<details><summary>Will data centers raise my bill?</summary><p>The goal of a large load tariff is that large customers pay the costs they cause. Whether that holds depends on tariff design, which is why the ICC process matters.</p></details><details><summary>Why not let them bring their own power?</summary><p>On site generation can speed things up, but buyers say it is an interim step because they need grid reliability over the long run.</p></details><details><summary>Can the state shut data centers off?</summary><p>That is the purpose of interruptibility rules. The open questions are voluntary versus ordered, the trigger, and the payment.</p></details><details><summary>Why wait to pass the small fixes?</summary><p>Leadership advice is that a larger data center bill will carry them better than they would carry themselves.</p></details>
+
+<h2>Background, what a data center is in grid terms</h2>
+<p>Think of a data center as a very large, very steady factory that never closes. Most factories ramp up and down with shifts and seasons. A data center runs close to its peak all day, every day, because the computers are always on and the cooling never stops. That flat demand is what makes it different from almost every other customer a utility serves.</p>
+<div class="grid">
+<div class="card"><strong>Scale</strong><br>A hyperscale campus is often planned in blocks of 100 MW or more, and a single site can ask for several hundred. As a rough rule, an average home uses about 1.2 kW over the year, so 100 MW is on the order of 80,000 homes. That is a rule of thumb, not a meeting figure.</div>
+<div class="card"><strong>Speed</strong><br>Buyers want power in two to three years. New generation and new high voltage lines usually take longer. That gap is why on site generation, plant upgrades and load following deals keep coming up.</div>
+<div class="card"><strong>Certainty</strong><br>A data center owner will not sign a long commitment unless the power is dependable. That is why the meetings kept saying buyers see behind the meter generation as a bridge, not a destination.</div>
+<div class="card"><strong>Cost shifting risk</strong><br>If wires and plants are built for a customer who later leaves or shrinks, other customers can be left paying. Large load tariffs exist mainly to prevent that.</div>
+</div>
+
+<h2>Plain language glossary</h2>
+<table><tr><th>Term</th><th>What it means</th></tr>
+<tr><td>Large load tariff</td><td>A separate rate schedule and set of rules for very large customers. It usually covers how the customer pays for new facilities, how long it must stay, and what it owes if it leaves early.</td></tr>
+<tr><td>Interruptibility</td><td>The ability to reduce or cut a customer's power during grid stress. The customer is not guaranteed firm service at every hour.</td></tr>
+<tr><td>Curtailment</td><td>The act of reducing use. It can be voluntary (the customer opts in and is paid) or involuntary (ordered).</td></tr>
+<tr><td>Behind the meter</td><td>Generation built on the customer's side of the meter, such as on site turbines or batteries.</td></tr>
+<tr><td>Load following</td><td>A supply arrangement where the amount delivered tracks the customer's actual use hour by hour. The meetings described a financial version of this.</td></tr>
+<tr><td>Hyperscaler</td><td>A very large cloud or technology company that builds and operates data centers at scale.</td></tr>
+<tr><td>TSA</td><td>Transmission service agreement, the contract that lets a customer or generator use the high voltage grid. The meetings listed these, along with security deposits, among the roadblocks.</td></tr>
+<tr><td>Speed to power</td><td>How fast a project can get energized. For developers it can matter more than price.</td></tr>
+<tr><td>Cost causation</td><td>The principle that whoever causes a cost should pay it. It is the legal and political anchor for most large load rules.</td></tr>
+</table>
+
+<h2>How a large customer request moves, step by step</h2>
+<ol>
+<li><strong>The ask.</strong> A developer tells a utility or the RTO it wants a large block of power at a named site.</li>
+<li><strong>The study.</strong> Engineers test whether the local wires, substations and regional supply can carry it, and what would have to be built.</li>
+<li><strong>The agreements.</strong> The customer signs service and transmission agreements, posts security, and agrees to a minimum term or minimum bill.</li>
+<li><strong>The build.</strong> Facilities are built. This is usually the slowest step and the one that makes buyers consider their own generation.</li>
+<li><strong>The operating rules.</strong> If a large load tariff applies, it sets what happens during emergencies, including whether the customer can be curtailed and whether it is paid.</li>
+<li><strong>The review.</strong> The ICC reviews tariffs and, over time, the question of who ended up paying for what.</li>
+</ol>
+
+<h2>What each group wants</h2>
+<p>These are broad positions drawn from the meetings and from how these debates usually run. They are not statements by any named organization.</p>
+<table><tr><th>Group</th><th>Likely priority</th><th>What worries them</th></tr>
+<tr><td>Legislators</td><td>Jobs and investment without higher bills or blackouts</td><td>A vote that looks like a giveaway, or a vote that drives a project to another state</td></tr>
+<tr><td>ICC</td><td>Clear rules, fair allocation, reliability</td><td>Cost shifting to other customers, rushed tariffs</td></tr>
+<tr><td>Utilities</td><td>Serve growth, recover prudent costs, keep the grid reliable</td><td>Stranded costs if a customer leaves, unclear curtailment authority</td></tr>
+<tr><td>Generators</td><td>Long term buyers for new and upgraded plants</td><td>Rules that block bilateral deals or underprice capacity</td></tr>
+<tr><td>Data center buyers</td><td>Fast, dependable power at a predictable price</td><td>Upfront costs, deposits, being curtailed without pay</td></tr>
+<tr><td>Other large industrial customers</td><td>Stable rates and firm service</td><td>Paying backstop procurement costs created by new load</td></tr>
+<tr><td>Local governments</td><td>Tax base, jobs, community benefits</td><td>Water and power use, noise, and a project that gives little back</td></tr>
+<tr><td>Consumer advocates</td><td>Protect household bills</td><td>Residential customers subsidizing the largest users</td></tr>
+</table>
+
+<h2>The generator side deal, three parts</h2>
+<p>One generator in the October 13 meeting described how deals with large technology buyers are being built. The pieces are useful as a template for what a supply answer to data center growth can look like. The numbers are one company's description and should be verified.</p>
+<svg viewBox="0 0 800 250" width="100%" role="img" aria-label="Three part deal structure with reported megawatts">
+<text x="20" y="24" font-size="15" font-weight="700">Reported deal pieces (MW, one company's description)</text>
+<text x="20" y="68" font-size="13">1. Plant upgrades paid by buyers</text>
+<rect x="260" y="50" width="53" height="26" rx="5" fill="var(--accent2)"/><text x="322" y="69" font-size="13">about 600</text>
+<text x="20" y="118" font-size="13">2. Financial load following supply</text>
+<rect x="260" y="100" width="240" height="26" rx="5" fill="var(--accent)"/><text x="510" y="119" font-size="13">2,700</text>
+<text x="20" y="168" font-size="13">3. New clean or nuclear generation</text>
+<rect x="260" y="150" width="120" height="26" rx="5" fill="var(--good)" opacity="0.6"/><text x="390" y="169" font-size="13">gigawatts sought, no figure given</text>
+<text x="20" y="218" font-size="12">Of the 600 MW, the summary mentions about 490 MW tied to one technology buyer and about 30 MW to a retailer. Bars are to scale for items 1 and 2 only.</text>
+</svg>
+
+<h2>Worked example, who pays for the wires</h2>
+<div class="card"><p>Say a new 200 MW campus needs a substation and line upgrades that cost 60 million dollars. If the large load tariff makes the customer pay for all of it up front, other customers pay nothing for those facilities. If the utility builds it and recovers it through general rates, and the customer leaves after four years, the remaining 45 million dollars or so lands on everyone else. A minimum term, a minimum bill and an exit fee are the three tools that close that gap. The model below lets you move those pieces.</p></div>
+
+<h2>Model, cost shifting risk</h2>
+<div class="card model">
+<label>Upgrade cost for the new load (million dollars)</label><input id="xa1" type="range" min="10" max="300" value="60"><span id="xa1v"></span>
+<label>Share paid directly by the customer up front (percent)</label><input id="xa2" type="range" min="0" max="100" value="50"><span id="xa2v"></span>
+<label>Contract term the customer commits to (years)</label><input id="xa3" type="range" min="1" max="20" value="10"><span id="xa3v"></span>
+<label>Years the customer actually stays</label><input id="xa4" type="range" min="1" max="30" value="4"><span id="xa4v"></span>
+<label>Customers who would share any leftover cost (thousands)</label><input id="xa5" type="range" min="50" max="1200" value="600"><span id="xa5v"></span>
+<div class="out" id="xao"></div>
+<p style="font-size:14px">Teaching illustration only. It assumes the utility-financed part is recovered evenly over the committed term, and that an early exit leaves the unrecovered balance with other customers unless an exit fee covers it. None of these numbers come from the meetings.</p>
+</div>
+
+<h2>Model, how much relief does interruptibility provide</h2>
+<div class="card model">
+<label>Grid shortfall during an emergency (MW)</label><input id="xb1" type="range" min="100" max="3000" value="900"><span id="xb1v"></span>
+<label>Large load enrolled as interruptible (MW)</label><input id="xb2" type="range" min="0" max="3000" value="1000"><span id="xb2v"></span>
+<label>Share that actually responds when called (percent)</label><input id="xb3" type="range" min="0" max="100" value="80"><span id="xb3v"></span>
+<div class="out" id="xbo"></div>
+<p style="font-size:14px">The point of the model is the third slider. A program only helps by the amount that really responds, which is why design details such as pay, penalties and notice time matter as much as the headline megawatts.</p>
+</div>
+
+<h2>Voluntary or involuntary, the design choice in one table</h2>
+<table><tr><th>Question</th><th>Voluntary program</th><th>Ordered curtailment</th></tr>
+<tr><td>Who decides</td><td>The customer opts in ahead of time</td><td>The grid operator or regulator decides during an event</td></tr>
+<tr><td>Payment</td><td>Paid for availability and for use</td><td>The view in the meetings was that anyone cut involuntarily should be paid</td></tr>
+<tr><td>Reliability certainty</td><td>Lower, depends on sign up and response</td><td>Higher on paper, but more legal and political risk</td></tr>
+<tr><td>Political risk</td><td>Low</td><td>High, because it forces choices about who loses power first</td></tr>
+<tr><td>Fit with attracting investment</td><td>Good, it can be marketed as a benefit</td><td>Harder, buyers will ask what they are agreeing to</td></tr>
+</table>
+<p>The meetings noted that regulators reportedly told one group they want broad participation, and that emergency ideas may become more involuntary if a real event gets close. One speaker also said they had opposed separate tariffs for interruptibility and for basic facilities. Treat that as one view, since the summary does not say which organization it came from.</p>
+
+<h2>Authority, who can require what</h2>
+<p>A recurring question was which body can mandate procurement, set tariffs or force curtailment. The meeting summary records a view that an RTO cannot order a state's customers to buy power from particular sources, that a state commission clearly can decline or stop a request in front of it, and that it is unclear whether an integrated resource plan gives anyone authority to go further. The summary flags the statutory source as an open question and lists a legal memo as a follow up. For study purposes, treat authority as the unresolved piece and keep asking which statute supports each proposed step.</p>
+
+<h2>Why bundling is the legislative strategy</h2>
+<p>Senate leadership reportedly advised holding small technical utility items and attaching them to one broad data center energy bill. The logic is simple. A narrow technical bill has no constituency and draws amendments. A data center bill has attention, deadlines and sponsors with reasons to move it. Attaching technical language gives it a ride. The risks are that the vehicle stalls, or that the technical items become hostages to a fight over data centers themselves.</p>
+<table><tr><th>Scenario</th><th>What happens</th><th>What to do</th></tr>
+<tr><td>Bundled bill moves in spring</td><td>Technical items ride along and pass with it</td><td>Have drafted language ready before March</td></tr>
+<tr><td>Bundled bill stalls</td><td>Technical items stall too</td><td>Keep a fallback path through ICC proceedings and agency rules</td></tr>
+<tr><td>ICC tariffs finish first</td><td>Rules exist before the bill, which shapes what the bill needs to say</td><td>Track ICC filings so the bill does not conflict with them</td></tr>
+</table>
+<p>Two practical constraints came up. Members who hold data center interests on their statements of economic interest may be limited in carrying a bill, so the list of possible sponsors is shorter than it looks. And one participant questioned whether a data center bill will happen at all, noting how much personal capital a key member would have to commit.</p>
+
+<h2>Public opinion, what moves it</h2>
+<svg viewBox="0 0 800 250" width="100%" role="img" aria-label="Public opinion signals about data centers">
+<text x="20" y="24" font-size="15" font-weight="700">What the meetings said about public opinion</text>
+<text x="20" y="66" font-size="13">Favorable when called "server farms" (reported)</text>
+<rect x="330" y="48" width="220" height="24" rx="5" fill="var(--good)" opacity="0.7"/><text x="560" y="66" font-size="13">55 percent</text>
+<text x="20" y="110" font-size="13">Implied before the rename (55 minus 25 points)</text>
+<rect x="330" y="92" width="120" height="24" rx="5" fill="var(--warn)" opacity="0.7"/><text x="460" y="110" font-size="13">about 30 percent</text>
+<text x="20" y="154" font-size="13">Named data centers as a top issue (reported)</text>
+<rect x="330" y="136" width="4" height="24" fill="var(--accent)"/><text x="345" y="154" font-size="13">under 1 percent</text>
+<text x="20" y="198" font-size="13">Inflation as the top issue (reported)</text>
+<rect x="330" y="180" width="440" height="24" rx="5" fill="var(--accent2)" opacity="0.6"/><text x="500" y="198" font-size="13">near the top, no figure given</text>
+<text x="20" y="238" font-size="12">The 30 percent bar is arithmetic from the reported 25 point change, not a stated number. Verify the poll before quoting.</text>
+</svg>
+<ul>
+<li><strong>Opinion is loose.</strong> A new name moved favorability by about 25 points. That tells you people are reacting to a word, not to facts.</li>
+<li><strong>Salience is low.</strong> Few voters rank data centers as a top issue. The cost of living ranks far higher. That is room for a message about bills.</li>
+<li><strong>Local benefits can flip a community.</strong> One example in the meetings was a large local tax reduction that would make a whole community want the project.</li>
+<li><strong>A second driver is not about energy.</strong> Some objections are about what AI does to daily life and about surveillance. A power and water answer will not settle those.</li>
+<li><strong>Some places stay opposed.</strong> A few communities were named where developers meet resistance no matter what they offer.</li>
+</ul>
+
+<h2>Competition from other states</h2>
+<p>The meetings named Texas, Utah and Arizona as states courting the same projects. The point for Illinois is that data center buyers choose among places. A state with fast power, clear rules and a stable bill picture has an edge. One quoted slogan, in spirit, was to bring your company here and we will keep the lights on. That makes reliability the economic development message as well as the engineering one.</p>
+
+<h2>How this connects to the other pages</h2>
+<ul>
+<li><a href="oct26-capacity-reliability.html">Capacity and reliability</a> covers the supply side. New load makes every retirement more expensive.</li>
+<li>The PJM backstop procurement, expected around March and April 2027, was described as likely to push heavy costs onto large Illinois customers. That is one reason industrial users watch large load rules closely.</li>
+<li>A one time procurement option of about 6 GW, with a figure of 13 percent for one zone, came up in the summary but is garbled. Check it against a primary source before using it.</li>
+<li><a href="oct26-grid-plan-and-gas.html">Grid plan and gas</a> covers the December orders that will set the ground rules for wires spending.</li>
+<li><a href="oct26-session-outlook.html">Session outlook</a> covers the calendar a bundled bill has to fit inside.</li>
+</ul>
+
+<h2>More scripts</h2>
+<h3>Fifteen seconds, hallway</h3>
+<div class="script">Data centers can be good for Illinois if the rules make sure they pay for what they cause and the lights stay on for everyone else. That is what a large load tariff is for.</div>
+<h3>One minute, to a legislator who wants the investment</h3>
+<div class="script">You want the jobs and the tax base, and so do we. The risk is that a project this large gets built and the costs of serving it end up on neighbors. A good large load rule fixes that with three things. The customer pays its share up front, it commits to a minimum term, and it agrees to be called on during emergencies, with pay when it is called. If you hold a bill until the broader data center package moves, we can attach the technical language so you have one vote to explain.</div>
+<h3>One minute, to a skeptical resident</h3>
+<div class="script">You are right to ask who pays. The rule we support is that the biggest customers cover the cost of the facilities built for them, so your bill does not carry it. We also want the grid to stay reliable during extreme weather, which means very large users can be asked to reduce use when needed, and they should be paid for that.</div>
+<h3>One minute, to an economic development audience</h3>
+<div class="script">Buyers choose among states. They want speed, certainty and a predictable price. The way to compete is clear rules, a fair share of costs, and a reliability story. Texas, Utah and Arizona are pitching the same companies, so a state that can show firm supply and clear tariff terms has a real edge.</div>
+<h3>One minute, to a reporter</h3>
+<div class="script">The question is not whether to host data centers. It is how to host them without shifting costs or weakening the grid. Regulators have asked for large load tariffs and the details, including whether curtailment is voluntary and whether participants are paid, are still being worked out. We favor voluntary programs, and payment if anyone is required to cut back.</div>
+
+<h2>More questions you may get</h2>
+<details><summary>What is the difference between a large load tariff and an interruptible rate?</summary><p>A large load tariff is the full set of rules for a very large customer. An interruptible rate is one feature that can sit inside it, where the customer agrees to be reduced during stress in exchange for a lower price or payment.</p></details><details><summary>Does curtailment mean the data center goes dark?</summary><p>Not necessarily. It usually means reducing use by a set amount for a set number of hours. Many facilities can shift work or run backup generation. The design question is how deep, how long and how often.</p></details><details><summary>Why would a data center agree to be interruptible?</summary><p>Because it can connect sooner and pay less. In a tight system, a customer that agrees to be reduced at peak can be served when a firm customer could not.</p></details><details><summary>What stops a data center from leaving after the utility builds for it?</summary><p>Minimum terms, minimum bills, security deposits and exit fees. Those are the tools a tariff uses to protect other customers. The strength of those tools is the main thing to read in any tariff.</p></details><details><summary>Why do generators care about this?</summary><p>Large buyers are the most likely source of long term contracts for upgraded and new plants. Tariff rules that allow or block those deals change whether plants stay open or get built.</p></details><details><summary>What is the risk of waiting for one big bill?</summary><p>The vehicle can stall and take the technical items with it. That is why the advice is to have language ready and keep a second path through ICC proceedings.</p></details><details><summary>Is the 25 point poll swing reliable?</summary><p>Treat it as a talking point from a meeting, not a verified poll. The useful lesson is that wording moves opinion a lot, which means opinion is soft.</p></details><details><summary>Who can sponsor a data center bill?</summary><p>Members with data center interests listed on their statements of economic interests may face limits, so the pool is narrower. A sponsor also needs real committee influence, which was questioned in the meetings.</p></details><details><summary>Why do industrial customers care?</summary><p>Backstop procurement and capacity costs can be spread to large users. New data center load can raise those costs, so existing industrial customers want the cost causation rules to be tight.</p></details><details><summary>What would a good outcome look like?</summary><p>Large customers pay for the facilities built for them, commit to a term, help the grid in emergencies and get paid when they do, and the state keeps winning projects against Texas, Utah and Arizona.</p></details><h2>Self check</h2><details><summary>Name the three parts of the generator side deal and the reported megawatts.</summary><p>Plant upgrades paid by buyers, about 600 MW. Financial load following supply, 2,700 MW. New clean or nuclear generation, gigawatts, no figure. Verify all numbers.</p></details><details><summary>What is cost causation?</summary><p>The principle that whoever causes a cost should pay for it. It is the main argument for large load tariffs.</p></details><details><summary>Give two tools a tariff uses to stop cost shifting.</summary><p>Any two of minimum term, minimum bill, up front payment for facilities, security deposit, exit fee.</p></details><details><summary>Why can an interruptible program fall short of its headline megawatts?</summary><p>Only the share that actually responds helps. Pay, penalties and notice time drive response.</p></details><details><summary>Why did Senate leadership reportedly advise bundling?</summary><p>A broad data center bill has attention and a deadline, so technical items can ride on it instead of dying alone.</p></details><details><summary>What is the weakness of the bundling plan?</summary><p>If the broad bill stalls, the attached items stall too, and they can become hostages in a bigger fight.</p></details><details><summary>Which states were named as competitors for projects?</summary><p>Texas, Utah and Arizona.</p></details><details><summary>What did the meetings say about where data centers rank as an issue?</summary><p>Under one percent as a top issue, far below inflation.</p></details><h2>Verify before using</h2>
+<ul><li>Filing dates and scope of the large load tariffs for each utility.</li><li>The generator deal figures (600 MW, 2,700 MW, and named buyers).</li><li>The poll figures on the server farm wording.</li></ul>
+
+<footer>Study notes built from industry meeting summaries on October 13 and 14, 2026. Summaries were machine generated and can contain transcription errors, so items marked verify should be checked against primary sources before anyone relies on them. These pages describe issues in general terms and carry no organization position.</footer></main>
+<script>
+(function(){var r=document.documentElement;try{var s=localStorage.getItem('theme');if(s)r.setAttribute('data-theme',s);}catch(e){}
+document.getElementById('tg').onclick=function(){var cur=r.getAttribute('data-theme');if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+var n=cur==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('theme',n);}catch(e){}};})();
+
+function u(){var m=(+m1.value)*(+m2.value)*(+m3.value)*(+m4.value);
+o2.textContent='Estimated annual payment $'+m.toLocaleString(undefined,{maximumFractionDigits:0});}
+['m1','m2','m3','m4'].forEach(function(x){document.getElementById(x).oninput=u;document.getElementById(x).onchange=u;});u();
+
+
+(function(){
+var g=function(i){return document.getElementById(i)};
+function fmt(n){return Math.round(n*10)/10}
+function a(){
+ var cost=+g('xa1').value,share=+g('xa2').value/100,term=+g('xa3').value,stay=+g('xa4').value,cust=+g('xa5').value*1000;
+ g('xa1v').textContent=' '+cost+' million dollars';g('xa2v').textContent=' '+Math.round(share*100)+' percent';g('xa3v').textContent=' '+term+' years';g('xa4v').textContent=' '+stay+' years';g('xa5v').textContent=' '+(cust/1000)+' thousand customers';
+ var fin=cost*(1-share),rec=Math.min(stay,term)/term*fin,left=Math.max(0,fin-rec);
+ var per=left*1e6/cust;
+ g('xao').innerHTML='Utility financed part, '+fmt(fin)+' million. Recovered before exit, '+fmt(rec)+' million. Left for other customers, '+fmt(left)+' million, or about '+fmt(per)+' dollars per customer in total. '+(left===0?'No cost shift in this case.':'A larger up front share, a longer term or an exit fee would shrink this.');
+}
+function b(){
+ var s=+g('xb1').value,e=+g('xb2').value,r=+g('xb3').value/100;
+ g('xb1v').textContent=' '+s+' MW';g('xb2v').textContent=' '+e+' MW';g('xb3v').textContent=' '+Math.round(r*100)+' percent';
+ var relief=e*r,left=Math.max(0,s-relief);
+ g('xbo').innerHTML='Relief delivered, '+Math.round(relief)+' MW. Shortfall left, '+Math.round(left)+' MW. '+(left>0?'Other measures are still needed for the remainder.':'The program covers the shortfall in this case.');
+}
+['xa1','xa2','xa3','xa4','xa5'].forEach(function(i){g(i).oninput=a});
+['xb1','xb2','xb3'].forEach(function(i){g(i).oninput=b});
+a();b();
+})();
+
+</script></body></html>
