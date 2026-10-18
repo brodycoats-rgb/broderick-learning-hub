@@ -1,0 +1,205 @@
+name: Refresh news and markets
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-news
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch headlines and market quotes
+        run: |
+          mkdir -p work && cd work
+          curl -fsS "https://raw.githubusercontent.com/${{ github.repository }}/data/news.json" -o prev.json || echo "{}" > prev.json
+          cat > fetch_news.py <<'PYEOF'
+          import json, sys, re, html, urllib.request, urllib.parse
+          from datetime import datetime, timezone, timedelta
+          from email.utils import parsedate_to_datetime
+          import xml.etree.ElementTree as ET
+
+          UA = "Mozilla/5.0 (compatible; BroderickLearningHub/1.0)"
+          FEEDS = {
+              "energy": [
+                  ("Utility Dive", "https://www.utilitydive.com/feeds/news/"),
+                  ("EIA Today in Energy", "https://www.eia.gov/rss/todayinenergy.xml"),
+                  ("Energy News Network", "https://energynews.us/feed/"),
+                  ("Canary Media", "https://www.canarymedia.com/rss.rss"),
+              ],
+              "illinois": [
+                  ("Capitol News Illinois", "https://capitolnewsillinois.com/feed/"),
+                  ("Chicago Sun-Times", "https://chicago.suntimes.com/rss/index.xml"),
+                  ("WBEZ", "https://www.wbez.org/rss/index.xml"),
+              ],
+              "top": [
+                  ("NPR", "https://feeds.npr.org/1001/rss.xml"),
+                  ("BBC News", "https://feeds.bbci.co.uk/news/rss.xml"),
+                  ("CBS News", "https://www.cbsnews.com/latest/rss/main"),
+              ],
+          }
+          # (name shown on page, Yahoo symbol, Stooq symbol)
+          MARKETS = [
+              ("Dow", "^DJI", "^dji"),
+              ("S&P 500", "^GSPC", "^spx"),
+              ("Natural gas", "NG=F", "ng.f"),
+              ("Oil (WTI)", "CL=F", "cl.f"),
+          ]
+          PER_FEED, PER_GROUP, MAX_AGE_DAYS = 3, 8, 14
+
+
+          def get(url, timeout=20):
+              req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
+              with urllib.request.urlopen(req, timeout=timeout) as r:
+                  return r.read()
+
+
+          def clean(s, n=170):
+              s = html.unescape(re.sub(r"<[^>]+>", " ", s or ""))
+              s = re.sub(r"\s+", " ", s).strip()
+              return s if len(s) <= n else s[: n - 1].rstrip() + "…"
+
+
+          def when(s):
+              if not s:
+                  return None
+              s = s.strip()
+              try:
+                  d = parsedate_to_datetime(s)
+              except Exception:
+                  try:
+                      d = datetime.fromisoformat(s.replace("Z", "+00:00"))
+                  except Exception:
+                      return None
+              if d.tzinfo is None:
+                  d = d.replace(tzinfo=timezone.utc)
+              return d.astimezone(timezone.utc)
+
+
+          def parse_feed(xml_bytes, source):
+              root = ET.fromstring(xml_bytes)
+              out = []
+              for el in root.iter():
+                  tag = el.tag.split("}")[-1]
+                  if tag not in ("item", "entry"):
+                      continue
+                  t = l = d = None
+                  for c in el:
+                      ct = c.tag.split("}")[-1]
+                      if ct == "title":
+                          t = clean("".join(c.itertext()))
+                      elif ct == "link":
+                          l = (c.get("href") or (c.text or "")).strip() if (c.get("href") or c.text) else l
+                          if c.get("href") and c.get("rel") not in (None, "alternate"):
+                              l = l if l and l != c.get("href") else None
+                      elif ct in ("pubDate", "published", "updated", "date") and not d:
+                          d = when(c.text)
+                  if t and l and l.startswith(("http://", "https://")):
+                      out.append({"title": t, "link": l, "source": source, "published": d.isoformat() if d else None})
+              return out
+
+
+          def news():
+              result, now = {}, datetime.now(timezone.utc)
+              for group, feeds in FEEDS.items():
+                  items, seen = [], set()
+                  for source, url in feeds:
+                      try:
+                          got = parse_feed(get(url), source)
+                      except Exception as e:
+                          print("feed failed:", source, e, file=sys.stderr)
+                          continue
+                      fresh = [i for i in got if not i["published"] or datetime.fromisoformat(i["published"]) > now - timedelta(days=MAX_AGE_DAYS)]
+                      items += fresh[:PER_FEED]
+                  items.sort(key=lambda i: i["published"] or "", reverse=True)
+                  uniq = []
+                  for i in items:
+                      k = re.sub(r"\W+", "", i["title"].lower())
+                      if k not in seen:
+                          seen.add(k)
+                          uniq.append(i)
+                  result[group] = uniq[:PER_GROUP]
+              return result
+
+
+          def yahoo(sym):
+              last = None
+              for host in ("query1", "query2"):
+                  try:
+                      u = "https://%s.finance.yahoo.com/v8/finance/chart/%s?interval=1d&range=5d" % (host, urllib.parse.quote(sym))
+                      r = json.loads(get(u))["chart"]["result"][0]
+                      closes = [c for c in r["indicators"]["quote"][0]["close"] if c is not None]
+                      price = r["meta"]["regularMarketPrice"]
+                      prev = closes[-2] if len(closes) >= 2 else r["meta"].get("chartPreviousClose")
+                      t = r["meta"].get("regularMarketTime")
+                      return price, prev, datetime.fromtimestamp(t, timezone.utc).isoformat() if t else None
+                  except Exception as e:
+                      last = e
+              raise last
+
+
+          def stooq(sym):
+              rows = get("https://stooq.com/q/d/l/?s=%s&i=d" % urllib.parse.quote(sym)).decode().strip().splitlines()
+              data = [r.split(",") for r in rows[1:] if r.count(",") >= 4]
+              price, prev = float(data[-1][4]), float(data[-2][4])
+              return price, prev, datetime.fromisoformat(data[-1][0]).replace(tzinfo=timezone.utc).isoformat()
+
+
+          def markets():
+              out = []
+              for name, ys, ss in MARKETS:
+                  got = None
+                  for fn, sym in ((yahoo, ys), (stooq, ss)):
+                      try:
+                          got = fn(sym)
+                          break
+                      except Exception as e:
+                          print("quote failed:", name, fn.__name__, e, file=sys.stderr)
+                  if got and got[0] and got[1]:
+                      price, prev, asof = got
+                      out.append({"id": ys, "name": name, "price": round(price, 2), "change": round(price - prev, 2),
+                                  "pct": round((price - prev) / prev * 100, 2), "asof": asof})
+              return out
+
+
+          def main(path, prev_path=None):
+              prev = {}
+              if prev_path:
+                  try:
+                      prev = json.load(open(prev_path))
+                  except Exception:
+                      prev = {}
+              n, m = news(), markets()
+              pn = prev.get("news", {})
+              for g in FEEDS:
+                  if not n.get(g):
+                      n[g] = pn.get(g, [])
+              if not m:
+                  m = prev.get("markets", [])
+              if not any(n.values()) and not m:
+                  sys.exit("nothing fetched; keeping previous data")
+              json.dump({"updated": datetime.now(timezone.utc).isoformat(), "markets": m, "news": n}, open(path, "w"), indent=1)
+              print("ok:", {g: len(v) for g, v in n.items()}, "markets:", len(m))
+
+
+          if __name__ == "__main__":
+              main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+          PYEOF
+          python3 fetch_news.py news.json prev.json
+
+      - name: Publish to the data branch
+        run: |
+          cd work && mkdir -p pub && cp news.json pub/ && cd pub
+          git init -q -b data
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add news.json
+          git commit -qm "Refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" data
