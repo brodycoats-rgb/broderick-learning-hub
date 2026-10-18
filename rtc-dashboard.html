@@ -383,6 +383,7 @@ function compute(rows){
 /* ---------- state ---------- */
 var source={name:DEFAULT_SOURCE.name};
 var bills=compute(RAW);
+var MASTER={};"HB1802 HB2789 HB3596 HB4172 HB4272 HB4313 HB4319 HB4355 HB4371 HB4419 HB4456 HB4514 HB4516 HB4524 HB4538 HB4564 HB4595 HB4661 HB4692 HB4725 HB4731 HB4751 HB4769 HB4773 HB4781 HB4798 HB4803 HB4805 HB4823 HB4830 HB4858 HB4876 HB4887 HB4910 HB4921 HB4938 HB4940 HB4942 HB4956 HB4989 HB4994 HB4995 HB4996 HB5049 HB5070 HB5194 HB5195 HB5221 HB5275 HB5366 HB5374 HB5388 HB5402 HB5429 HB5438 HB5440 HB5453 HB5459 HB5470 HB5477 HB5479 HB5482 HB5513 HB5524 HB5529 HB5538 HB5593 HB5600 HB5607 HR744 SB1436 SB2401 SB2570 SB2727 SB2736 SB2752 SB2753 SB2768 SB2785 SB2789 SB2791 SB2808 SB2842 SB2875 SB2886 SB2907 SB2958 SB2979 SB2981 SB2995 SB3037 SB3078 SB3093 SB3104 SB3113 SB3183 SB3234 SB3245 SB3246 SB3268 SB3272 SB3273 SB3324 SB3332 SB3393 SB3409 SB3437 SB3443 SB3450 SB3465 SB3488 SB3497 SB3529 SB3548 SB3571 SB3573 SB3578 SB3579 SB3580 SB3581 SB3583 SB3584 SB3586 SB3593 SB3606 SB3613 SB3629 SB3652 SB3664 SB3665 SB3693 SB3705 SB3711 SB3717 SB3761 SB3772 SB3794 SB3822 SB3830 SB3838 SB3839 SB3856 SB3890 SB3922 SB3927 SB3929 SB3930 SB3970 SB3973 SB3974 SB3975 SB3979 SB3980 SB4003 SB4016 SB4020 SB4028 SB4039".split(" ").forEach(function(i){MASTER[i]=1}); /* bills that have a plain language brief in master-bills.html */
 var prevSnapshot=null, changes=null;
 var F={q:"",stance:"",industry:"",stage:"",chamber:"",flag:"",sponsor:"",sort:"stage",dir:-1};
 var FILTER_KEYS=["q","stance","industry","stage","chamber","flag","sponsor"];
@@ -672,7 +673,8 @@ function openBill(id){
    (b.drift?'<div class="note-box">The SME feedback reads <b>'+esc(b.lean)+'</b>, but the tracker tag is <b>'+esc(b.tag)+'</b>. Confirm which is current.</div>':'')+
    '<div><h4>SME feedback</h4>'+txt(b.sme,"No SME feedback on file.")+'</div>'+
    '<div><h4>GR position considerations</h4>'+txt(b.gr,"None recorded.")+'</div>'+
-   '<div><h4>Meeting script</h4>'+txt(b.script,"None recorded.")+'</div></div></aside>';
+   '<div><h4>Meeting script</h4>'+txt(b.script,"None recorded.")+'</div>'+
+   (MASTER[b.bill]?'<div><h4>Plain language brief</h4><a class="btn small" style="text-decoration:none;display:inline-block;color:inherit" href="master-bills.html#bill='+encodeURIComponent(b.bill)+'">Read what '+esc(b.bill)+' says, with examples, other states and news</a></div>':'')+'</div></aside>';
   document.getElementById("overlay").innerHTML=h;
   var cb=document.getElementById("closeBtn"); if(cb) cb.focus();
 }
@@ -760,5 +762,6 @@ function renderAll(){
 }
 renderAll();
 window.__bills=bills; /* inspection aid */
+try{var hm=/^#bill=([A-Za-z0-9]+)$/.exec(location.hash||"");if(hm)openBill(hm[1])}catch(e){}
 })();
 </script>

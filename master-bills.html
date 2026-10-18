@@ -135,6 +135,33 @@ td.id{font-weight:700;white-space:nowrap}
 .dbody p,.dbody li{color:var(--ink-2);font-size:14.5px}
 .dbody ul{padding-left:20px;display:flex;flex-direction:column;gap:4px}
 .sec{border-top:1px solid var(--line);padding-top:14px}
+
+.plain p{font-size:15px;color:var(--ink);margin:0 0 10px}
+.ex{background:var(--surface-2);border-left:3px solid var(--accent);border-radius:6px;padding:10px 14px;font-size:14px;color:var(--ink-2)}
+.ex b{color:var(--ink)}
+.viz{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.viz h4{margin:0 0 10px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.vflow{display:flex;flex-direction:column;gap:0}
+.vflow .vs1{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13.5px;color:var(--ink);display:flex;gap:10px;align-items:center}
+.vflow .vs1 i{font-style:normal;flex:none;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:700;display:grid;place-items:center}
+.vflow .varrow{height:12px;margin-left:21px;border-left:2px solid var(--line-2)}
+.vvs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vvs>div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.vvs h5{margin:0 0 6px;font-size:13px;color:var(--accent)}
+.vvs ul{margin:0;padding-left:18px;font-size:13px;color:var(--ink-2)}
+.vbars .vb{display:grid;grid-template-columns:minmax(120px,40%) 1fr auto;gap:8px;align-items:center;font-size:13px;margin:5px 0;color:var(--ink-2)}
+.vbars .vt{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.vbars .vt span{display:block;height:100%;background:var(--accent);border-radius:6px}
+.vbars .vn{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600}
+.vunit{font-size:11.5px;color:var(--ink-3);margin-top:6px}
+.who{display:grid;gap:8px}
+.who div{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--surface)}
+.who b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:2px}
+.who span{color:var(--ink-2);font-size:13.5px}
+.newsl a{display:block;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--surface);margin-bottom:8px;color:var(--ink)}
+.newsl a:hover{border-color:var(--accent)}
+.newsl small{display:block;color:var(--ink-3)}
+@media (max-width:640px){.vvs{grid-template-columns:1fr}.vbars .vb{grid-template-columns:1fr auto}.vbars .vt{grid-column:1/-1}}
 .lead{background:var(--accent-wash);border-radius:8px;padding:14px 16px;color:var(--ink)!important;font-size:15.5px!important}
 .kv{display:grid;grid-template-columns:130px minmax(0,1fr);gap:4px 12px;font-size:14px}
 .kv dt{color:var(--ink-3);font-weight:600} .kv dd{margin:0;color:var(--ink-2)}
@@ -381,6 +408,36 @@ function drawGlos(){
 }
 
 /* ---------------- drawer ---------------- */
+
+function vizHtml(v){
+  if(!v) return "";
+  var h='<div class="viz"><h4>'+esc(v.title)+'</h4>';
+  if(v.kind==="flow"){
+    h+='<div class="vflow">'+v.steps.map(function(t,i){return (i?'<div class="varrow"></div>':'')+'<div class="vs1"><i>'+(i+1)+'</i><span>'+esc(t)+'</span></div>'}).join("")+'</div>';
+  } else if(v.kind==="vs"){
+    h+='<div class="vvs">'+v.sides.map(function(sd){return '<div><h5>'+esc(sd.h)+'</h5><ul>'+sd.items.map(function(i){return '<li>'+esc(i)+'</li>'}).join("")+'</ul></div>'}).join("")+'</div>';
+  } else if(v.kind==="bars"){
+    if(v.rows.length===1){var r0=v.rows[0];return h+'<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-family:var(--serif);font-size:34px;font-weight:700;color:var(--accent)">'+(r0[1]||0).toLocaleString()+'</span><span style="color:var(--ink-2)">'+esc(r0[0])+(v.unit?' ('+esc(v.unit)+')':'')+'</span></div></div>'}
+    var mx=Math.max.apply(null,v.rows.map(function(r){return r[1]||0}))||1;
+    h+='<div class="vbars">'+v.rows.map(function(r){var n=r[1]||0;return '<div class="vb"><span>'+esc(r[0])+'</span><div class="vt"><span style="width:'+Math.max(2,Math.round(n/mx*100))+'%"></span></div><span class="vn">'+n.toLocaleString()+'</span></div>'}).join("")+'</div>'+(v.unit?'<div class="vunit">'+esc(v.unit)+'</div>':'');
+  }
+  return h+'</div>';
+}
+function pairsHtml(a){return '<div class="who">'+a.map(function(p){return '<div><b>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></div>'}).join("")+'</div>'}
+function enrichTop(is){
+  if(!is.plain) return "";
+  var h='<div class="sec plain"><h3>In plain language</h3>'+is.plain.map(function(p){return '<p>'+esc(p)+'</p>'}).join("")+'</div>';
+  if(is.ex) h+='<div class="sec"><h3>A simple example</h3><div class="ex"><b>Picture this. </b>'+esc(is.ex)+'</div></div>';
+  if(is.viz) h+='<div class="sec"><h3>The picture</h3>'+vizHtml(is.viz)+'</div>';
+  return h;
+}
+function enrichBottom(is){
+  var h="";
+  if(is.states&&is.states.length) h+='<div class="sec"><h3>What other states are doing</h3>'+pairsHtml(is.states)+'<p class="legal" style="margin-top:6px">Summaries to orient you. Confirm current law in the primary source before quoting.</p></div>';
+  if(is.places&&is.places.length) h+='<div class="sec"><h3>Where this is playing out</h3>'+pairsHtml(is.places)+'</div>';
+  if(is.news&&is.news.length) h+='<div class="sec"><h3>In the news</h3><div class="newsl">'+is.news.map(function(n){return '<a href="'+esc(n.u)+'" target="_blank" rel="noopener"><b>'+esc(n.t)+'</b><small>'+esc(n.src)+(n.d?' &middot; '+esc(n.d):'')+'</small></a>'}).join("")+'</div></div>';
+  return h;
+}
 var curId=null, lastFocus=null;
 function stepIndex(b){var s=b.stage;return s==="Passed both houses"?6:s==="Floor action"?4:s==="Stalled by deadline rule"?3:0}
 function openBill(id,listKey,noPush){
@@ -391,10 +448,12 @@ function openBill(id,listKey,noPush){
   var is=D.issues[b.issue], ix=lastList.indexOf(id);
   var steps=D.process.map(function(p){return p.t}), cur=stepIndex(b);
   var h='<div class="dhead"><div style="display:flex;gap:6px"><button class="btn small" id="dprev" '+(ix<=0?"disabled":"")+' aria-label="Previous bill">&larr;</button><button class="btn small" id="dnext" '+(ix<0||ix>=lastList.length-1?"disabled":"")+' aria-label="Next bill">&rarr;</button></div><span class="eyebrow">'+(ix>-1?(ix+1)+" of "+lastList.length:"")+'</span><button class="btn small" id="dclose" aria-label="Close">Close</button></div><div class="dbody">';
-  h+='<div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"><span class="chip">'+esc(b.id)+'</span><span class="chip">'+esc(CATN[b.theme].short)+'</span>'+stageChip(b)+(b.rtc?'<a class="chip rtc" href="rtc-dashboard.html" style="text-decoration:none">Also in RTC dashboard</a>':'')+'</div><h2>'+esc(b.title)+'</h2></div>';
+  h+='<div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"><span class="chip">'+esc(b.id)+'</span><span class="chip">'+esc(CATN[b.theme].short)+'</span>'+stageChip(b)+(b.rtc?'<a class="chip rtc" href="rtc-dashboard.html#bill='+encodeURIComponent(b.id)+'" style="text-decoration:none">Open in RTC dashboard</a>':'')+'</div><h2>'+esc(b.title)+'</h2></div>';
   h+='<p class="lead"><b>The core issue.</b> '+esc(is.headline)+'</p>';
+  h+=enrichTop(is);
   h+='<div class="sec"><h3>Background</h3><p>'+esc(is.bg)+'</p></div>';
   h+='<div class="sec"><h3>Why it matters and likely implications</h3><p>'+esc(is.why)+'</p></div>';
+  h+=enrichBottom(is);
   h+='<div class="sec"><h3>Questions worth asking</h3><ul>'+is.q.map(function(q){return '<li>'+esc(q)+'?</li>'}).join("")+'</ul></div>';
   h+='<div class="sec"><h3>What the bill says</h3><p>'+esc(b.summary.length>700?b.summary.slice(0,700).replace(/\s\S*$/,"")+" ...":b.summary)+'</p>'+(b.summary.length>700?'<details style="margin-top:8px"><summary>Read the full official summary</summary><p>'+esc(b.summary)+'</p></details>':'')+'<p class="legal" style="margin-top:6px">Official synopsis text from the legislative record.</p></div>';
   h+='<div class="sec"><h3>Where it stands</h3><div class="track">'+steps.map(function(s,i){return '<span class="step '+(i<cur?"done":i===cur?"cur":"")+'">'+esc(s)+'</span>'}).join("")+'</div><p><b>'+esc(b.last)+'</b> on '+fmt(b.lastDate)+(b.lastChamber?' in the '+esc(b.lastChamber):'')+'. '+esc(b.stageNote)+'.</p><p class="legal">Position on the path is inferred from the last action as of '+fmt(D.meta.asOf)+'.</p></div>';
