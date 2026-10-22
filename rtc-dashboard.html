@@ -213,7 +213,7 @@ td .sub2{display:block;color:var(--ink-3);font-size:12px}
 </style>
 
 <style>.hubbar{padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--line);font-family:var(--sans);font-size:14px}.hubbar b{font-family:var(--serif);color:var(--accent)}.privtag{background:#fde8e6;color:#8f1d12;border-left:5px solid #b42318;padding:8px 14px;border-radius:0 8px 8px 0;font-size:13.5px}@media (prefers-color-scheme:dark){.privtag{background:#35191a;color:#f6b1aa}}</style>
-<nav class="hubbar" aria-label="Hub"><b>⚡ Broderick Learning Hub</b> · <a href="index.html">Home</a> · <a href="grid-plan.html">Grid Plan</a> · <a href="reports.html">Reports</a> · <a href="data-center-deep-dive.html">Data Center Deep Dive</a></nav>
+<nav class="hubbar" aria-label="Hub"><b>⚡ Broderick Learning Hub</b> · <a href="index.html">Home</a> · <a href="grid-plan.html">Grid Plan</a> · <a href="reports.html">Reports</a> · <a href="data-center-deep-dive.html">Data Center Deep Dive</a> · <a href="bill-primer.html">Bill Primer</a> · <a href="data-center-primer.html">Data Center Primer</a></nav>
 <div class="wrap" id="app">
   <div class="top">
     <div>
@@ -224,6 +224,8 @@ td .sub2{display:block;color:var(--ink-3);font-size:12px}
       <span class="fresh" id="fresh" hidden></span>
       <input type="file" id="file" accept=".xlsx,.xls,.csv" hidden>
       <a class="btn" style="text-decoration:none;display:inline-block;color:inherit" href="data-center-deep-dive.html">Data center deep dive</a>
+      <a class="btn" style="text-decoration:none;display:inline-block;color:inherit" href="bill-primer.html">Bill primer</a>
+      <a class="btn" style="text-decoration:none;display:inline-block;color:inherit" href="data-center-primer.html">Data center primer</a>
       <button class="btn primary" data-act="upload" id="uploadBtn">Load updated tracker</button>
     </div>
   </div>
@@ -696,6 +698,7 @@ function openBill(id){
    '<div><h4>SME feedback</h4>'+txt(b.sme,"No SME feedback on file.")+'</div>'+
    '<div><h4>GR position considerations</h4>'+txt(b.gr,"None recorded.")+'</div>'+
    (DCSET.indexOf(b.bill)>-1?'<div><h4>Data center deep dive</h4><a class="btn small" style="text-decoration:none;display:inline-block;color:inherit" href="data-center-deep-dive.html#bill-'+encodeURIComponent(b.bill)+'">See the full analysis, pros and cons, and a 30 second script</a></div>':'')+
+   '<div><h4>Bill primer</h4><a class="btn small" style="text-decoration:none;display:inline-block;color:inherit" href="bill-primer.html#bill-'+encodeURIComponent(b.bill)+'">What this bill does, what a yes vote means, and questions to ask</a></div>'+
    '<div><h4>Meeting script</h4>'+txt(b.script,"None recorded.")+'</div>'+
    (MASTER[b.bill]?'<div><h4>Plain language brief</h4><a class="btn small" style="text-decoration:none;display:inline-block;color:inherit" href="master-bills.html#bill='+encodeURIComponent(b.bill)+'">Read what '+esc(b.bill)+' says, with examples, other states and news</a></div>':'')+'</div></aside>';
   document.getElementById("overlay").innerHTML=h;
