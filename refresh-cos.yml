@@ -1,0 +1,244 @@
+name: Refresh strategy desk feeds
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-cos
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch strategy desk news and quotes
+        run: |
+          mkdir -p work && cd work
+          curl -fsS "https://raw.githubusercontent.com/${{ github.repository }}/data-cos/cos.json" -o prev.json || echo "{}" > prev.json
+          cat > fetch_cos.py <<'PYEOF'
+          import json, sys, re, html, urllib.request, urllib.parse
+          from datetime import datetime, timezone, timedelta
+          from email.utils import parsedate_to_datetime
+          import xml.etree.ElementTree as ET
+
+          UA = "Mozilla/5.0 (compatible; BroderickLearningHub/1.0; +https://brodycoats-rgb.github.io)"
+          SEC_UA = "BroderickLearningHub research feed contact brodycoats-rgb@users.noreply.github.com"
+          MAX_AGE_DAYS, PER_QUERY, PER_GROUP = 10, 6, 14
+
+          def gn(q):
+              return "https://news.google.com/rss/search?q=%s&hl=en-US&gl=US&ceid=US:en" % urllib.parse.quote(q + " when:10d")
+
+          # group -> label, list of (source label, url)
+          GROUPS = {
+            "ameren": ("Ameren and investor relations", [
+                ("Google News: Ameren", gn("Ameren")),
+                ("Google News: Ameren Illinois", gn("\"Ameren Illinois\"")),
+                ("Google News: Ameren Missouri", gn("\"Ameren Missouri\"")),
+                ("Google News: AEE stock", gn("Ameren AEE stock analyst")),
+                ("SEC filings", "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001002910&type=&dateb=&owner=include&count=15&output=atom"),
+            ]),
+            "peers": ("Sister utilities", [
+                ("Google News: peers A", gn("Exelon OR ComEd OR \"WEC Energy\" OR \"DTE Energy\" OR \"CMS Energy\"")),
+                ("Google News: peers B", gn("\"American Electric Power\" OR \"Xcel Energy\" OR Evergy OR \"Duke Energy\" OR \"Southern Company\" OR Dominion")),
+                ("Google News: utility earnings", gn("utility earnings capital plan rate base data center")),
+            ]),
+            "datacenters": ("Data centers and large load", [
+                ("Google News: Illinois data centers", gn("Illinois data center power")),
+                ("Google News: Missouri data centers", gn("Missouri data center power")),
+                ("Google News: data center utilities", gn("data center electricity demand utilities tariff")),
+                ("Utility Dive", "https://www.utilitydive.com/feeds/news/"),
+            ]),
+            "grid": ("Grid, capacity and interconnection", [
+                ("Google News: MISO", gn("MISO capacity OR interconnection OR transmission")),
+                ("Google News: PJM", gn("PJM capacity auction OR interconnection")),
+                ("Google News: FERC", gn("FERC large load OR interconnection OR order")),
+                ("EIA Today in Energy", "https://www.eia.gov/rss/todayinenergy.xml"),
+            ]),
+            "illinois": ("Illinois policy and politics", [
+                ("Google News: ICC", gn("\"Illinois Commerce Commission\"")),
+                ("Google News: Illinois energy", gn("Illinois energy legislation OR utility OR ratepayers")),
+                ("Capitol News Illinois", "https://capitolnewsillinois.com/feed/"),
+                ("WBEZ", "https://www.wbez.org/rss/index.xml"),
+            ]),
+            "missouri": ("Missouri policy and politics", [
+                ("Google News: Missouri PSC", gn("\"Missouri Public Service Commission\" OR \"Missouri utilities\"")),
+                ("Google News: Missouri energy", gn("Missouri energy legislation OR electric rates OR Ameren")),
+                ("Missouri Independent", "https://missouriindependent.com/feed/"),
+            ]),
+            "elections": ("Election news", [
+                ("Google News: Illinois election", gn("Illinois 2026 election governor legislature energy")),
+                ("Google News: Missouri election", gn("Missouri 2026 election")),
+                ("Google News: midterms energy", gn("midterm elections 2026 electricity prices")),
+            ]),
+            "federal": ("Federal energy news", [
+                ("Google News: DOE and FERC", gn("Department of Energy OR FERC grid reliability data centers")),
+                ("Google News: EPA power", gn("EPA power plant rule OR Congress electricity prices")),
+                ("Canary Media", "https://www.canarymedia.com/rss.rss"),
+            ]),
+            "tech": ("Energy technology", [
+                ("Google News: grid tech", gn("grid technology storage OR reconductoring OR \"virtual power plant\" utility")),
+                ("Google News: nuclear and gas", gn("small modular reactor OR gas turbine shortage utility")),
+                ("Energy News Network", "https://energynews.us/feed/"),
+            ]),
+            "ops": ("Operations and storms", [
+                ("Google News: outages", gn("Ameren outage OR storm restoration OR utility outage Illinois Missouri")),
+                ("Google News: reliability", gn("utility grid reliability winter OR summer outlook MISO")),
+            ]),
+          }
+
+          PEERS = [
+            ("AEE", "Ameren", "self"), ("EXC", "Exelon (ComEd)", "midwest"), ("WEC", "WEC Energy", "midwest"),
+            ("DTE", "DTE Energy", "midwest"), ("CMS", "CMS Energy", "midwest"), ("AEP", "American Electric Power", "midwest"),
+            ("XEL", "Xcel Energy", "midwest"), ("EVRG", "Evergy", "midwest"), ("DUK", "Duke Energy", "national"),
+            ("SO", "Southern Company", "national"), ("D", "Dominion Energy", "national"), ("NEE", "NextEra Energy", "national"),
+          ]
+          INDEX = [("^DJI", "Dow", "^dji"), ("^GSPC", "S&P 500", "^spx"), ("^IXIC", "Nasdaq", "^ndq"), ("NG=F", "Natural gas", "ng.f"), ("CL=F", "Oil (WTI)", "cl.f"), ("XLU", "Utilities ETF", "xlu.us")]
+
+          def get(url, ua=UA, timeout=25):
+              req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept": "*/*"})
+              with urllib.request.urlopen(req, timeout=timeout) as r:
+                  return r.read()
+
+          def clean(s, n=190):
+              s = html.unescape(re.sub(r"<[^>]+>", " ", s or ""))
+              s = re.sub(r"\s+", " ", s).strip()
+              return s if len(s) <= n else s[: n - 1].rstrip() + "..."
+
+          def when(s):
+              if not s: return None
+              s = s.strip()
+              try: d = parsedate_to_datetime(s)
+              except Exception:
+                  try: d = datetime.fromisoformat(s.replace("Z", "+00:00"))
+                  except Exception: return None
+              if d.tzinfo is None: d = d.replace(tzinfo=timezone.utc)
+              return d.astimezone(timezone.utc)
+
+          def parse_feed(b, label):
+              root = ET.fromstring(b)
+              out = []
+              for el in root.iter():
+                  tag = el.tag.split("}")[-1]
+                  if tag not in ("item", "entry"): continue
+                  t = l = d = src = None
+                  for c in el:
+                      ct = c.tag.split("}")[-1]
+                      if ct == "title": t = clean("".join(c.itertext()))
+                      elif ct == "link":
+                          l = (c.get("href") or c.text or "").strip() or l
+                      elif ct in ("pubDate", "published", "updated", "date") and not d: d = when(c.text)
+                      elif ct == "source": src = clean("".join(c.itertext()), 60)
+                  if src and t and t.endswith(" - " + src): t = t[: -len(src) - 3]
+                  if t and l and l.startswith(("http://", "https://")):
+                      out.append({"title": t, "link": l, "source": src or label.replace("Google News: ", ""), "published": d.isoformat() if d else None})
+              return out
+
+          def collect():
+              now = datetime.now(timezone.utc)
+              res, status = {}, []
+              for g, (glabel, feeds) in GROUPS.items():
+                  items, seen = [], set()
+                  for label, url in feeds:
+                      try:
+                          ua = SEC_UA if "sec.gov" in url else UA
+                          got = parse_feed(get(url, ua), label)
+                          status.append({"group": g, "feed": label, "ok": True, "n": len(got)})
+                      except Exception as e:
+                          status.append({"group": g, "feed": label, "ok": False, "err": str(e)[:80]})
+                          print("feed failed:", label, e, file=sys.stderr)
+                          continue
+                      fresh = [i for i in got if (not i["published"]) or datetime.fromisoformat(i["published"]) > now - timedelta(days=MAX_AGE_DAYS)]
+                      fresh.sort(key=lambda i: i["published"] or "", reverse=True)
+                      items += fresh[:PER_QUERY]
+                  items.sort(key=lambda i: i["published"] or "", reverse=True)
+                  uniq = []
+                  for i in items:
+                      k = re.sub(r"\W+", "", i["title"].lower())[:70]
+                      if k not in seen:
+                          seen.add(k); uniq.append(i)
+                  res[g] = {"label": glabel, "items": uniq[:PER_GROUP]}
+              return res, status
+
+          def yahoo(sym):
+              last = None
+              for host in ("query1", "query2"):
+                  try:
+                      u = "https://%s.finance.yahoo.com/v8/finance/chart/%s?interval=1d&range=1mo" % (host, urllib.parse.quote(sym))
+                      r = json.loads(get(u))["chart"]["result"][0]
+                      closes = [c for c in r["indicators"]["quote"][0]["close"] if c is not None]
+                      m = r["meta"]
+                      price = m["regularMarketPrice"]
+                      prev = closes[-2] if len(closes) >= 2 else m.get("chartPreviousClose")
+                      first = closes[0] if closes else None
+                      t = m.get("regularMarketTime")
+                      return dict(price=price, prev=prev, first=first, hi=m.get("fiftyTwoWeekHigh"), lo=m.get("fiftyTwoWeekLow"),
+                                  asof=datetime.fromtimestamp(t, timezone.utc).isoformat() if t else None)
+                  except Exception as e:
+                      last = e
+              raise last
+
+          def stooq(sym):
+              rows = get("https://stooq.com/q/d/l/?s=%s&i=d" % urllib.parse.quote(sym)).decode().strip().splitlines()
+              data = [r.split(",") for r in rows[1:] if r.count(",") >= 4]
+              return dict(price=float(data[-1][4]), prev=float(data[-2][4]), first=float(data[max(0, len(data)-22)][4]), hi=None, lo=None,
+                          asof=datetime.fromisoformat(data[-1][0]).replace(tzinfo=timezone.utc).isoformat())
+
+          def quote(ys, ss):
+              for fn, sym in ((yahoo, ys), (stooq, ss)):
+                  try:
+                      q = fn(sym)
+                      if q["price"] and q["prev"]: return q
+                  except Exception as e:
+                      print("quote failed:", ys, fn.__name__, e, file=sys.stderr)
+              return None
+
+          def markets():
+              out = []
+              for sym, name, grp in [(p[0], p[1], p[2]) for p in PEERS]:
+                  q = quote(sym, sym.lower() + ".us")
+                  if q: out.append(shape(sym, name, grp, q))
+              for sym, name, ss in INDEX:
+                  q = quote(sym, ss)
+                  if q: out.append(shape(sym, name, "index", q))
+              return out
+
+          def shape(sym, name, grp, q):
+              d = {"id": sym, "name": name, "group": grp, "price": round(q["price"], 2),
+                   "pct": round((q["price"] - q["prev"]) / q["prev"] * 100, 2), "asof": q["asof"]}
+              if q.get("first"): d["pct1m"] = round((q["price"] - q["first"]) / q["first"] * 100, 1)
+              if q.get("hi") and q.get("lo"): d["hi"], d["lo"] = round(q["hi"], 2), round(q["lo"], 2)
+              return d
+
+          def main(path, prev_path):
+              try: prev = json.load(open(prev_path))
+              except Exception: prev = {}
+              news, status = collect()
+              mk = markets()
+              pn = prev.get("news", {})
+              for g in GROUPS:
+                  if not news[g]["items"] and g in pn: news[g] = pn[g]
+              if not mk: mk = prev.get("markets", [])
+              if not any(v["items"] for v in news.values()) and not mk:
+                  sys.exit("nothing fetched; keeping previous data")
+              json.dump({"updated": datetime.now(timezone.utc).isoformat(), "markets": mk, "news": news, "status": status}, open(path, "w"), indent=1)
+              print("ok:", {g: len(v["items"]) for g, v in news.items()}, "quotes:", len(mk))
+
+          if __name__ == "__main__":
+              main(sys.argv[1], sys.argv[2])
+          PYEOF
+          python3 fetch_cos.py cos.json prev.json
+
+      - name: Publish to the data-cos branch
+        run: |
+          cd work && mkdir -p pub && cp cos.json pub/ && cd pub
+          git init -q -b data-cos
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add cos.json
+          git commit -qm "Refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" data-cos
