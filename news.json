@@ -1,0 +1,189 @@
+{
+ "updated": "2026-10-24T14:40:54.659484+00:00",
+ "markets": [
+  {
+   "id": "^DJI",
+   "name": "Dow",
+   "price": 52215.16,
+   "change": -652.82,
+   "pct": -1.23,
+   "asof": "2026-10-23T20:42:55+00:00"
+  },
+  {
+   "id": "^GSPC",
+   "name": "S&P 500",
+   "price": 7623.68,
+   "change": -39.75,
+   "pct": -0.52,
+   "asof": "2026-10-23T20:38:21+00:00"
+  },
+  {
+   "id": "NG=F",
+   "name": "Natural gas",
+   "price": 3.05,
+   "change": 0.25,
+   "pct": 9.08,
+   "asof": "2026-10-23T21:00:00+00:00"
+  },
+  {
+   "id": "CL=F",
+   "name": "Oil (WTI)",
+   "price": 103.27,
+   "change": 3.8,
+   "pct": 3.82,
+   "asof": "2026-10-23T20:59:58+00:00"
+  }
+ ],
+ "news": {
+  "energy": [
+   {
+    "title": "The permitting deal collides with Trump\u2019s war on offshore wind",
+    "link": "https://www.canarymedia.com/articles/politics/permitting-bill-offshore-wind",
+    "source": "Canary Media",
+    "published": "2026-10-23T16:37:00+00:00"
+   },
+   {
+    "title": "PG&E needs wildfire policy reform to manage tail risk, CEO says",
+    "link": "https://www.utilitydive.com/news/pge-needs-wildfire-policy-reform-to-manage-tail-risk-ceo-says/833845/",
+    "source": "Utility Dive",
+    "published": "2026-10-23T14:43:56+00:00"
+   },
+   {
+    "title": "NextEra Energy secures $5.7B to support federal energy \u2018hub\u2019 projects",
+    "link": "https://www.utilitydive.com/news/nextera-energy-secures-57b-to-support-federal-energy-hub-projects/833810/",
+    "source": "Utility Dive",
+    "published": "2026-10-23T12:00:00+00:00"
+   },
+   {
+    "title": "As US grid batteries surge, risk of fires plummets",
+    "link": "https://www.canarymedia.com/articles/batteries/us-grid-batteries-fire-risk",
+    "source": "Canary Media",
+    "published": "2026-10-23T07:30:00+00:00"
+   },
+   {
+    "title": "What kind of virtual power plant would you choose?",
+    "link": "https://www.canarymedia.com/articles/virtual-power-plants/what-virtual-power-plant-would-you-choose",
+    "source": "Canary Media",
+    "published": "2026-10-22T16:30:00+00:00"
+   },
+   {
+    "title": "Utilities turn to AI to manage rising power demand \u2014 from AI",
+    "link": "https://www.utilitydive.com/news/utilities-turn-to-ai-to-manage-rising-power-demand-from-ai/833627/",
+    "source": "Utility Dive",
+    "published": "2026-10-22T16:15:17+00:00"
+   },
+   {
+    "title": "U.S. refineries have been running at very high rates in 2026",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68344",
+    "source": "EIA Today in Energy",
+    "published": "2026-10-22T14:00:00+00:00"
+   },
+   {
+    "title": "Hybrid sales rise while battery electric sales remain lower after tax credit expiration",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68325",
+    "source": "EIA Today in Energy",
+    "published": "2026-10-19T14:00:00+00:00"
+   }
+  ],
+  "illinois": [
+   {
+    "title": "Bears QB Caleb Williams kept making major strides in fundamentals in sparkling performance to beat Patriots",
+    "link": "https://chicago.suntimes.com/bears/2026/10/24/bears-qb-caleb-williams-kept-making-major-strides-in-fundamentals-in-sparkling-performance-to-beat-patriots",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-24T12:00:00+00:00"
+   },
+   {
+    "title": "Is the Magnificent Mile's long-awaited revival here?",
+    "link": "https://chicago.suntimes.com/money/2026/10/24/magnificent-mile-michigan-ave-retail-revival",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-24T11:00:00+00:00"
+   },
+   {
+    "title": "How we photographed the new baby penguins at Brookfield Zoo",
+    "link": "https://chicago.suntimes.com/photography/2026/10/24/how-we-photographed-the-new-baby-penguins-at-brookfield-zoo",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-24T11:00:00+00:00"
+   },
+   {
+    "title": "The Rundown: A traffic nightmare on the Kennedy Expressway",
+    "link": "https://www.wbez.org/2026/10/23/the-rundown-a-traffic-nightmare-on-the-kennedy-expressway",
+    "source": "WBEZ",
+    "published": "2026-10-23T20:45:00+00:00"
+   },
+   {
+    "title": "Statewide races: Little-known GOP slate faces uphill battle against mostly incumbent Dems",
+    "link": "https://capitolnewsillinois.com/news/statewide-races-little-known-gop-slate-faces-uphill-battle-against-mostly-incumbent-dems/",
+    "source": "Capitol News Illinois",
+    "published": "2026-10-23T12:00:26+00:00"
+   },
+   {
+    "title": "3 years after Kennedy Expressway rehab, traffic is still a nightmare",
+    "link": "https://www.wbez.org/transportation/2026/10/23/kennedy-expressway-construction-commuters-illinois-department-transportation-pritzker",
+    "source": "WBEZ",
+    "published": "2026-10-23T11:34:40.553000+00:00"
+   },
+   {
+    "title": "Review: \u2018Mud Row\u2019 at Theater Wit",
+    "link": "https://www.wbez.org/theater-stages/2026/10/23/review-in-mud-row-remy-bumppo-theatre-company-theater-wit",
+    "source": "WBEZ",
+    "published": "2026-10-23T10:35:00+00:00"
+   },
+   {
+    "title": "Proposed closing of 4 low-level prison facilities draws sharp rebuke in Du Quoin",
+    "link": "https://capitolnewsillinois.com/news/proposed-closing-of-4-low-level-prison-facilities-draws-sharp-rebuke-in-du-quoin/",
+    "source": "Capitol News Illinois",
+    "published": "2026-10-22T22:30:47+00:00"
+   }
+  ],
+  "top": [
+   {
+    "title": "The Detective and the Chewing Gum Sting | Post Mortem",
+    "link": "https://www.cbsnews.com/video/102426-48-hours-post-mortem/",
+    "source": "CBS News",
+    "published": "2026-10-24T23:00:00+00:00"
+   },
+   {
+    "title": "This week on \"Sunday Morning\" (Oct. 25)",
+    "link": "https://www.cbsnews.com/news/this-week-on-sunday-morning-oct-25-2026/",
+    "source": "CBS News",
+    "published": "2026-10-24T14:31:00+00:00"
+   },
+   {
+    "title": "Iran says U.S. military not allowed in Gulf \"under any circumstance\"",
+    "link": "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/",
+    "source": "CBS News",
+    "published": "2026-10-24T14:28:35+00:00"
+   },
+   {
+    "title": "Met Police says letter with claims about Meghan's father not shared with other law enforcement",
+    "link": "https://www.bbc.co.uk/news/articles/c39wz740e0nyo?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-10-24T12:59:49+00:00"
+   },
+   {
+    "title": "Perspective: The next James Bond",
+    "link": "https://www.npr.org/2026/10/24/nx-s1-6004258/perspective-the-next-james-bond",
+    "source": "NPR",
+    "published": "2026-10-24T12:00:00+00:00"
+   },
+   {
+    "title": "Gunmen open fire at a church during a funeral in Jordan, killing 7 and wounding 40",
+    "link": "https://www.npr.org/2026/10/24/nx-s1-6015414/shooting-church-jordan",
+    "source": "NPR",
+    "published": "2026-10-24T11:59:08+00:00"
+   },
+   {
+    "title": "Between quick wins and big dreams lies Burnham's biggest test",
+    "link": "https://www.bbc.co.uk/news/articles/cwq6n09qpy90o?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-10-24T11:03:57+00:00"
+   },
+   {
+    "title": "Plan for Northern Olympics to get \u00a37m in Healey's Budget",
+    "link": "https://www.bbc.co.uk/news/articles/cv98z92ekg9zo?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-10-24T11:00:48+00:00"
+   }
+  ]
+ }
+}
