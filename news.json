@@ -1,0 +1,189 @@
+{
+ "updated": "2026-10-31T19:56:01.501869+00:00",
+ "markets": [
+  {
+   "id": "^DJI",
+   "name": "Dow",
+   "price": 51770.31,
+   "change": -572.25,
+   "pct": -1.09,
+   "asof": "2026-10-30T20:47:53+00:00"
+  },
+  {
+   "id": "^GSPC",
+   "name": "S&P 500",
+   "price": 7580.07,
+   "change": -140.32,
+   "pct": -1.82,
+   "asof": "2026-10-30T20:47:43+00:00"
+  },
+  {
+   "id": "NG=F",
+   "name": "Natural gas",
+   "price": 2.9,
+   "change": -0.05,
+   "pct": -1.83,
+   "asof": "2026-10-30T20:59:59+00:00"
+  },
+  {
+   "id": "CL=F",
+   "name": "Oil (WTI)",
+   "price": 104.12,
+   "change": 2.12,
+   "pct": 2.08,
+   "asof": "2026-10-30T20:59:59+00:00"
+  }
+ ],
+ "news": {
+  "energy": [
+   {
+    "title": "Meta strikes deal to help bring a low-carbon cement plant to Missouri",
+    "link": "https://www.canarymedia.com/articles/clean-industry/meta-fortera-deal-cement-plant-missouri",
+    "source": "Canary Media",
+    "published": "2026-10-30T20:00:00+00:00"
+   },
+   {
+    "title": "5 ballot proposals that could drive or derail clean energy",
+    "link": "https://www.canarymedia.com/articles/politics/ballot-proposals-clean-energy",
+    "source": "Canary Media",
+    "published": "2026-10-30T15:52:00+00:00"
+   },
+   {
+    "title": "Hitachi\u2019s nuclear revenue rises as SMR delivery date approaches",
+    "link": "https://www.utilitydive.com/news/hitachi-sees-rise-in-nuclear-revenue-as-smr-delivery-date-approaches/873327/",
+    "source": "Utility Dive",
+    "published": "2026-10-30T15:39:42+00:00"
+   },
+   {
+    "title": "Lack of wildfire reform is having \u2018dire and escalating impacts\u2019: SCE",
+    "link": "https://www.utilitydive.com/news/wildfire-reform-sce-edison-international-earnings/873322/",
+    "source": "Utility Dive",
+    "published": "2026-10-30T15:10:33+00:00"
+   },
+   {
+    "title": "States must take a critical eye to gas plants proposed over clean energy",
+    "link": "https://www.utilitydive.com/news/utilities-want-fossil-plants-more-expensive-clean-energy-regulators/833301/",
+    "source": "Utility Dive",
+    "published": "2026-10-30T15:00:00+00:00"
+   },
+   {
+    "title": "The share of solar generation with co-located battery storage is increasing",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68384",
+    "source": "EIA Today in Energy",
+    "published": "2026-10-30T14:00:00+00:00"
+   },
+   {
+    "title": "Here's how much Trump's Iran war has added to Americans' fuel costs",
+    "link": "https://www.canarymedia.com/articles/fossil-fuels/trump-iran-war-american-fuel-costs",
+    "source": "Canary Media",
+    "published": "2026-10-30T07:30:00+00:00"
+   },
+   {
+    "title": "LNG imports make up increasing share of Colombia's natural gas supply",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68364",
+    "source": "EIA Today in Energy",
+    "published": "2026-10-29T14:00:00+00:00"
+   }
+  ],
+  "illinois": [
+   {
+    "title": "Bears report: TE Colston Loveland good to go vs. Seahawks despite neck injury",
+    "link": "https://chicago.suntimes.com/bears/2026/10/31/bears-report-te-colston-loveland-good-to-go-vs-seahawks-despite-neck-injury",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-31T18:55:48.120000+00:00"
+   },
+   {
+    "title": "Pope Leo tells Villanova and Notre Dame basketball teams he is neutral. Prevost has other ideas",
+    "link": "https://chicago.suntimes.com/pope-leo-xiv/2026/10/31/pope-leo-tells-villanova-and-notre-dame-basketball-teams-he-is-neutral-prevost-has-other-ideas",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-31T15:59:51.201000+00:00"
+   },
+   {
+    "title": "15-year-old boy among 2 critically wounded in Grand Boulevard shooting",
+    "link": "https://chicago.suntimes.com/crime/2026/10/31/15-year-old-among-2-critically-wounded-grand-boulevard",
+    "source": "Chicago Sun-Times",
+    "published": "2026-10-31T14:22:33.165000+00:00"
+   },
+   {
+    "title": "Massage parlor where woman died in fire tied to prostitution",
+    "link": "https://capitolnewsillinois.com/news/massage-parlor-where-woman-died-in-fire-tied-to-prostitution/",
+    "source": "Capitol News Illinois",
+    "published": "2026-10-30T22:36:06+00:00"
+   },
+   {
+    "title": "2 sentenced in southern Illinois massage prostitution ring",
+    "link": "https://capitolnewsillinois.com/news/2-sentenced-in-southern-illinois-massage-prostitution-ring/",
+    "source": "Capitol News Illinois",
+    "published": "2026-10-30T21:29:23+00:00"
+   },
+   {
+    "title": "The Rundown: The Chicago area\u2019s haunted history",
+    "link": "https://www.wbez.org/wbez-newsletter/2026/10/30/the-rundown-the-chicago-areas-haunted-history",
+    "source": "WBEZ",
+    "published": "2026-10-30T20:45:00+00:00"
+   },
+   {
+    "title": "Is expert criticism dead? Our new \u2018Green Room\u2019 video podcast weighs the question",
+    "link": "https://www.wbez.org/arts-culture/2026/10/30/is-criticism-dead-green-room-podcast",
+    "source": "WBEZ",
+    "published": "2026-10-30T19:55:44.239000+00:00"
+   },
+   {
+    "title": "Housing mobility programs help low-income renters move on up",
+    "link": "https://www.wbez.org/housing/2026/10/30/housing-mobility-programs-help-low-income-renters-move-on-up",
+    "source": "WBEZ",
+    "published": "2026-10-30T12:09:55.452000+00:00"
+   }
+  ],
+  "top": [
+   {
+    "title": "Judge orders DOJ to stop trying to \"intimidate\" California election officials",
+    "link": "https://www.cbsnews.com/news/judge-orders-doj-stop-threaten-intimidate-california-election-officials/",
+    "source": "CBS News",
+    "published": "2026-10-31T19:48:38+00:00"
+   },
+   {
+    "title": "France seethes again as youth-led protests sweep Europe",
+    "link": "https://www.npr.org/2026/10/31/g-s1-151121/france-seethes-again-as-youth-led-protests-sweep-europe",
+    "source": "NPR",
+    "published": "2026-10-31T19:30:19+00:00"
+   },
+   {
+    "title": "'We came back from hell', say Ukrainians after years in Russia-occupied frontline city",
+    "link": "https://www.bbc.co.uk/news/articles/cqglw3k7djp1o?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-10-31T19:22:26+00:00"
+   },
+   {
+    "title": "Daylight saving time is almost over. Here's what to know.",
+    "link": "https://www.cbsnews.com/news/daylight-savings-time-ends-2026/",
+    "source": "CBS News",
+    "published": "2026-10-31T19:00:23+00:00"
+   },
+   {
+    "title": "Iran's supreme leader warns U.S., Israel against new attacks",
+    "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/",
+    "source": "CBS News",
+    "published": "2026-10-31T19:00:18+00:00"
+   },
+   {
+    "title": "Anti-corruption and party discipline: takeaways from from this week's key political meeting in Beijing",
+    "link": "https://www.npr.org/2026/10/31/nx-s1-6024695/political-meeting-beijing-takeaways",
+    "source": "NPR",
+    "published": "2026-10-31T18:42:33+00:00"
+   },
+   {
+    "title": "A simple explainer of the massive $6.3 billion crypto heist at Binance",
+    "link": "https://www.npr.org/2026/10/31/nx-s1-6024426/binance-crypto-heist-cyber-criminals-north-korea",
+    "source": "NPR",
+    "published": "2026-10-31T18:11:02+00:00"
+   },
+   {
+    "title": "Laura Kuenssberg: Healey risks breaking minimum wage promise for younger workers",
+    "link": "https://www.bbc.co.uk/news/articles/cv369266644lo?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-10-31T17:26:29+00:00"
+   }
+  ]
+ }
+}
