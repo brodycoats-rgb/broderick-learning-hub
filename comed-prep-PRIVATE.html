@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ComEd Interview Prep</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ef; --surface:#ffffff; --surface2:#efece4; --ink:#1b2230; --muted:#5b6374; --line:#dcd7cb;
+  --accent:#e2611b; --accent-ink:#ffffff; --accent-soft:#fbe6d9; --navy:#1d3557; --navy-soft:#e3e9f2;
+  --good:#1f7a4a; --good-soft:#dff1e6; --warn:#a15c00; --warn-soft:#fbefd9; --bad:#b3261e; --bad-soft:#f9dedc;
+  --shadow:0 1px 2px rgba(20,25,35,.06),0 6px 20px rgba(20,25,35,.06); --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141b; --surface:#1a1f29; --surface2:#222835; --ink:#eceef3; --muted:#a2a9b8; --line:#2f3644;
+    --accent:#ff8a4c; --accent-ink:#1a1206; --accent-soft:#3a2416; --navy:#9fbbe6; --navy-soft:#1f2a3d;
+    --good:#6fd39b; --good-soft:#163024; --warn:#f2b866; --warn-soft:#352914; --bad:#ff8f86; --bad-soft:#3a1c1a;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11141b; --surface:#1a1f29; --surface2:#222835; --ink:#eceef3; --muted:#a2a9b8; --line:#2f3644;
+  --accent:#ff8a4c; --accent-ink:#1a1206; --accent-soft:#3a2416; --navy:#9fbbe6; --navy-soft:#1f2a3d;
+  --good:#6fd39b; --good-soft:#163024; --warn:#f2b866; --warn-soft:#352914; --bad:#ff8f86; --bad-soft:#3a1c1a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(1.7rem,3.2vw,2.5rem)} h2{font-size:1.55rem} h3{font-size:1.15rem}
+p{margin:0 0 .85em} a{color:var(--navy)} button{font:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 16px}
+.brand{font-family:Fraunces,serif;font-weight:700;font-size:1.1rem;white-space:nowrap}
+.brand small{display:block;font-family:Inter;font-weight:500;font-size:.72rem;color:var(--muted)}
+.pill{white-space:nowrap;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.88rem}
+.pill:hover{border-color:var(--accent)}
+.spacer{flex:1}
+.privbadge{background:var(--bad-soft);color:var(--bad);font-weight:700;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.flow{height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);background-size:40% 100%;background-repeat:no-repeat;animation:flow 3.6s linear infinite}
+@keyframes flow{from{background-position:-40% 0}to{background-position:140% 0}}
+@media (prefers-reduced-motion:reduce){.flow{animation:none;background-size:100% 100%;opacity:.5}}
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:20px 16px 60px}
+nav.side{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;gap:2px}
+nav.side a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);padding:8px 12px;border-radius:10px;font-weight:500;font-size:.95rem}
+nav.side a:hover{background:var(--surface2)}
+nav.side a.on{background:var(--accent-soft);color:var(--ink);box-shadow:inset 3px 0 0 var(--accent)}
+nav.side .grp{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:14px 12px 4px}
+main{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g3{grid-template-columns:repeat(3,minmax(0,1fr))} .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:stretch;margin-bottom:20px}
+.hero .card:first-child{background:linear-gradient(135deg,var(--navy-soft),var(--surface) 60%)}
+.kicker{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:6px}
+.muted{color:var(--muted)} .small{font-size:.86rem}
+.stat{padding:16px}
+.stat b{display:block;font-family:Fraunces,serif;font-size:1.7rem;line-height:1.1}
+.stat span{font-size:.82rem;color:var(--muted)}
+.ring{--p:0;width:120px;height:120px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface2) 0);display:grid;place-items:center;margin:4px auto 10px}
+.ring::before{content:"";width:92px;height:92px;border-radius:50%;background:var(--surface);grid-area:1/1}
+.ring b{grid-area:1/1;font-family:Fraunces,serif;font-size:1.6rem;position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;background:var(--accent);color:var(--accent-ink);font-weight:600;border-radius:10px;padding:10px 16px;cursor:pointer;min-height:42px}
+.btn:hover{filter:brightness(1.05)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.btn.sm{padding:6px 12px;min-height:34px;font-size:.88rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.tag{display:inline-block;font-size:.74rem;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--surface2);color:var(--muted);margin:2px 4px 2px 0}
+.tag.acc{background:var(--accent-soft);color:var(--ink)}
+.tag.nav{background:var(--navy-soft);color:var(--navy)}
+.qcard{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface);margin-bottom:10px}
+.qcard summary{cursor:pointer;font-weight:600;list-style:none;display:flex;gap:10px;align-items:flex-start}
+.qcard summary::-webkit-details-marker{display:none}
+.qcard summary .chev{transition:transform .2s;color:var(--muted);flex:none;margin-top:2px}
+.qcard[open] summary .chev{transform:rotate(90deg)}
+.qcard .done{color:var(--good);flex:none}
+ul.clean{margin:.3em 0 .8em;padding-left:1.15em} ul.clean li{margin:.25em 0}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 14px;border-radius:8px;margin:12px 0}
+.callout.priv{border-color:var(--bad);background:var(--bad-soft)}
+.callout.navy{border-color:var(--navy);background:var(--navy-soft)}
+.star{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.star div{border-radius:12px;padding:14px;background:var(--surface2);border-top:4px solid var(--accent)}
+.star div b{font-family:Fraunces,serif;font-size:2rem;color:var(--accent);display:block;line-height:1}
+.bar{display:flex;height:16px;border-radius:999px;overflow:hidden;margin:6px 0 14px;border:1px solid var(--line)}
+.bar span{display:block;height:100%}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:500}
+.tabs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.timer{font-family:Fraunces,serif;font-size:3rem;font-variant-numeric:tabular-nums;text-align:center;margin:8px 0}
+.timer.warn{color:var(--warn)} .timer.over{color:var(--bad)}
+textarea,input[type=text],input[type=date],select{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:90px;resize:vertical}
+textarea:focus,input:focus,select:focus,button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+label.lab{font-weight:600;font-size:.88rem;display:flex;justify-content:space-between;margin:10px 0 4px}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt.right{background:var(--good-soft);border-color:var(--good)} .opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.flash{perspective:1000px;height:300px;cursor:pointer}
+.flash-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:center;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);overflow:auto}
+.face.back{transform:rotateY(180deg);background:var(--navy-soft)}
+.face h3{font-size:1.35rem}
+.timeline{border-left:2px solid var(--line);margin-left:8px;padding-left:18px}
+.timeline .ev{position:relative;margin-bottom:16px}
+.timeline .ev::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.script{white-space:pre-wrap;background:var(--surface2);border-radius:10px;padding:14px;font-size:.95rem}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent);flex:none}
+.leader{display:flex;flex-direction:column;gap:6px}
+.leader .ini{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--surface);display:grid;place-items:center;font-weight:700;font-family:Fraunces,serif}
+.mobnav{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.fb{margin-top:10px;padding:12px;border-radius:10px;background:var(--surface2)}
+.meter{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--accent)}
+table.t{width:100%;border-collapse:collapse;font-size:.92rem}
+table.t th,table.t td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;padding-top:8px}
+  nav.side{display:none}
+  .mobnav{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .mobnav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.86rem}
+  .mobnav a.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .hero,.g2,.g3,.g4{grid-template-columns:1fr}
+  .star{grid-template-columns:1fr 1fr}
+  .brand small{display:none}
+}
+@media print{.topbar,nav.side,.mobnav,.btn{display:none}.shell{display:block}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">ComEd Interview Prep<small>Private edition. Keep off GitHub.</small></div>
+    <div class="spacer"></div>
+    <span class="privbadge">Private</span>
+    <button class="pill" id="themeBtn" aria-label="Switch light or dark mode">◐ Theme</button>
+  </div>
+  <div class="flow" aria-hidden="true"></div>
+  <nav class="mobnav" id="mobnav" aria-label="Sections"></nav>
+</header>
+<div class="shell">
+  <nav class="side" id="sidenav" aria-label="Sections"></nav>
+  <main id="app" tabindex="-1"></main>
+</div>
+<script>
+// Public content.
+var PREP = window.PREP = window.PREP || {};
+
+PREP.meta = {
+  title: "Behavioral Interview Lab",
+  subtitle: "STAR practice for a utility government affairs director role, with a ComEd and Exelon company briefing",
+  updated: "November 1, 2026"
+};
+
+PREP.categories = [
+  {id:"lead", name:"Leadership and team management", blurb:"Leading people, contract lobbyists and cross-functional teams, including without formal authority."},
+  {id:"influence", name:"Influence and persuasion", blurb:"Moving a legislator, a sponsor or an internal leader from no to yes."},
+  {id:"coalition", name:"Stakeholders and coalitions", blurb:"Working with peers, competitors, labor, advocates and the administration."},
+  {id:"ethics", name:"Ethics and integrity", blurb:"Gray areas, pressure, compliance and doing the right thing when nobody is watching. Expect extra weight here."},
+  {id:"strategy", name:"Strategic thinking", blurb:"Seeing around corners, aligning GR to business goals, long-range planning."},
+  {id:"crisis", name:"Crisis and adversity", blurb:"A session going sideways, a storm, a bad news cycle."},
+  {id:"conflict", name:"Conflict and disagreement", blurb:"Disagreeing with leadership, resolving internal fights over positions."},
+  {id:"data", name:"Data and analysis", blurb:"Turning numbers into a policy case people remember."},
+  {id:"process", name:"Process improvement", blurb:"Making the function work better and proving the value."},
+  {id:"current", name:"Current issues", blurb:"Data centers, affordability, interconnection and defending the company's record."},
+  {id:"fit", name:"Motivation and fit", blurb:"Why this company, why this role, why now."},
+  {id:"curve", name:"Curveballs", blurb:"Questions designed to see how you think under pressure."}
+];
+
+// Each question: id, cat, q, probe (what the panel is listening for), shows (what a strong answer includes), stories (private story ids that fit)
+PREP.questions = [
+  // Leadership
+  {id:"q1", cat:"lead", q:"Tell me about a time you led a team to a result when you did not have formal authority over the people involved.", probe:"Can you lead peers and senior leaders through influence, clarity and follow-through rather than title?", shows:["A named goal and why it mattered to the business","How you set roles, cadence and decision rights without a reporting line","One moment where someone resisted and how you brought them along","A measurable result and what the team said afterward"], stories:["datacenter","org","sme"]},
+  {id:"q2", cat:"lead", q:"Describe a time you directed outside lobbyists or consultants. How did you hold them accountable?", probe:"A director manages contract lobbyists. They want to know you set expectations, track work and protect the company's name.", shows:["Clear assignments and reporting expectations","How you measured their contribution","A time you corrected course or redirected effort","Compliance awareness, including registration and reporting"], stories:["lobbyists","ethics"]},
+  {id:"q3", cat:"lead", q:"Tell me about a time you developed someone on your team or helped a colleague grow.", probe:"Supervisory readiness. Do you invest in people or just use them?", shows:["The person's starting point and goal","Specific coaching, stretch assignments or feedback you gave","How you measured growth","What you learned about your own leadership"], stories:["southwest","lobbyists"]},
+  {id:"q4", cat:"lead", q:"Describe a time you had to deal with an underperforming team member or partner.", probe:"Do you address problems directly and fairly, and do you document and follow up?", shows:["The facts of the performance gap, not personality","A private, direct conversation with clear expectations","Support offered and a timeline","The outcome, whether improvement or a harder decision"], stories:["southwest","lobbyists"]},
+  {id:"q5", cat:"lead", q:"Give an example of how you have built trust with a new senior leader.", probe:"You will report into an SVP and work with a CEO. Can you earn their confidence quickly?", shows:["Learning their priorities before pitching your own","Early, reliable delivery on something small","Candor when news was bad","How the relationship changed over time"], stories:["polrd","datacenter","governor"]},
+
+  // Influence
+  {id:"q6", cat:"influence", q:"Tell me about a time you changed a legislator's mind.", probe:"The core skill of the job. They want your method, not just the outcome.", shows:["Where the legislator started and why","How you learned what they cared about","The evidence or local impact you brought","The ask, the response and what happened to the bill or vote"], stories:["harmful","org","koehler"]},
+  {id:"q7", cat:"influence", q:"Describe a time you had to persuade senior leaders inside your company to change a position.", probe:"GR directors often have to tell executives what they do not want to hear.", shows:["The original position and the risk you saw","How you framed the case in business terms","Allies or SMEs you brought in","What leadership decided and why"], stories:["polrd","org","datacenter"]},
+  {id:"q8", cat:"influence", q:"Tell me about a time you explained a complex technical or regulatory issue to a non-expert audience.", probe:"Can you translate rate design, capacity markets or grid plans for a legislator with five minutes?", shows:["Who the audience was and what they needed","The one or two ideas you led with","A visual, analogy or local example","Evidence they understood and used it"], stories:["koehler","econ","org"]},
+  {id:"q9", cat:"influence", q:"Describe a situation where you got a meeting or result with a decision-maker who was hard to reach.", probe:"Relationship-building and persistence without burning bridges.", shows:["Why access was hard","The path you used, such as staff, allies or local officials","How you made the meeting worth their time","What it led to"], stories:["governor","koehler","harmful"]},
+
+  // Coalition
+  {id:"q10", cat:"coalition", q:"Tell me about a time you built a coalition around a shared legislative goal.", probe:"Energy bills pass through coalitions. They want to see you assemble and hold one together.", shows:["The common goal and the different interests at the table","How you found overlap","How you handled a partner who wanted to defect","The legislative outcome"], stories:["crga","eima","harmful"]},
+  {id:"q11", cat:"coalition", q:"Describe a time you worked with a competitor or industry peer whose interests only partly matched yours.", probe:"Utilities are often peers, sometimes on the same side. Can you collaborate without giving away your company's interests?", shows:["Where interests overlapped and where they split","Ground rules you set","How you protected your company's position","What the collaboration produced"], stories:["harmful","crga","eima"]},
+  {id:"q12", cat:"coalition", q:"Give an example of working with the Governor's office or a state agency on an issue.", probe:"Executive branch relationships matter as much as legislative ones.", shows:["The issue and who you engaged","How you kept the relationship two-way","How you handled disagreement","The result"], stories:["governor","crga"]},
+  {id:"q13", cat:"coalition", q:"Tell me about a time you had to work with an advocacy group that was critical of your company.", probe:"Consumer and environmental groups are frequent opponents. Can you engage respectfully and find common ground?", shows:["Their concern stated fairly","What you listened for","Any common ground found","How the relationship or outcome changed"], stories:["crga","koehler"]},
+
+  // Ethics
+  {id:"q14", cat:"ethics", q:"Tell me about a time you were asked to do something that did not feel right. What did you do?", probe:"For this company in particular, the panel needs to hear that you stop, ask and escalate.", shows:["The request and why it raised a flag","Who you consulted, such as ethics, legal or compliance","What you did, even if it cost you something","What you would do the same or differently"], stories:["ethics"]},
+  {id:"q15", cat:"ethics", q:"How do you make sure political fundraising and lobbying activity stays within the rules?", probe:"Specific knowledge of compliance processes, not just good intentions.", shows:["The rules you work within, such as registration, gift and contribution limits, and company policy","Your personal checklist or process","A time you caught or prevented a problem","How you keep records"], stories:["ethics","lobbyists"]},
+  {id:"q16", cat:"ethics", q:"Describe a time you had to deliver an honest message that was unpopular.", probe:"Integrity includes telling leadership or a legislator the truth.", shows:["The message and the audience","Why it mattered to say it","How you said it","The reaction and the result"], stories:["polrd","org"]},
+  {id:"q17", cat:"ethics", q:"How would you handle a legislator or staff member asking for a favor, such as a job referral for someone they know?", probe:"This is the exact pattern behind the company's past. They want a clear, calm, policy-based answer.", shows:["A polite, immediate redirect to the standard public process","No promises and no side channels","Documenting the contact and informing compliance","Keeping the relationship intact"], stories:["ethics"]},
+
+  // Strategy
+  {id:"q18", cat:"strategy", q:"Tell me about a time you anticipated a legislative or regulatory issue before it became a problem.", probe:"Foresight is what separates a director from a tracker.", shows:["The early signal you noticed","How you validated it","What you did before it surfaced","What happened and what it saved"], stories:["polrd","org","datacenter"]},
+  {id:"q19", cat:"strategy", q:"How have you aligned a government relations plan with your company's business strategy?", probe:"GR serves the business. Can you connect a bill to earnings, customers or operations?", shows:["The business goal","The legislative or regulatory lever","How you measured alignment","The outcome for the business"], stories:["org","datacenter","econ"]},
+  {id:"q20", cat:"strategy", q:"Describe a multi-year campaign you led or helped lead.", probe:"Director-level work is long horizon. They want to see planning, stamina and adjustment.", shows:["The end goal and timeline","Phases and milestones","A pivot when conditions changed","Where it stands and what you learned"], stories:["org","crga","eima"]},
+  {id:"q21", cat:"strategy", q:"Tell me about a time you tested an idea and decided not to pursue it.", probe:"Judgment and intellectual honesty. Can you kill your own idea?", shows:["The idea and why you believed in it","How you tested it","The evidence that changed your mind","What you recommended instead"], stories:["polrd"]},
+
+  // Crisis
+  {id:"q22", cat:"crisis", q:"Tell me about a time a legislative session went sideways at the last minute.", probe:"Composure and speed. How do you decide what to do with hours left?", shows:["What changed and when","How you got facts fast","Who you mobilized","The outcome and what you changed afterward"], stories:["harmful","crga"]},
+  {id:"q23", cat:"crisis", q:"Describe how you kept elected officials informed during a major outage or emergency.", probe:"Storm communication is a core GR duty at an electric utility.", shows:["The event and the scale","Your role in the enterprise response","The cadence and content of updates","Feedback from officials"], stories:["storm"]},
+  {id:"q24", cat:"crisis", q:"Tell me about a time your company was under public criticism and you had to represent it.", probe:"Can you defend the company honestly without spin?", shows:["The criticism and whether it had merit","What you acknowledged","The facts and actions you shared","How the relationship recovered"], stories:["storm","koehler"]},
+
+  // Conflict
+  {id:"q25", cat:"conflict", q:"Tell me about a time you disagreed with your manager or a senior leader.", probe:"Can you disagree respectfully, then commit?", shows:["The disagreement in neutral terms","How you raised it","What you did after the decision","The relationship afterward"], stories:["polrd","org"]},
+  {id:"q26", cat:"conflict", q:"Describe a time two internal departments disagreed on a position on a bill. How did you resolve it?", probe:"Internal alignment is half the job.", shows:["Each side's interest","How you got the right people in the room","The process you used to reach a position","The final position and buy-in"], stories:["sme","datacenter","org"]},
+  {id:"q27", cat:"conflict", q:"Tell me about a difficult working relationship and how you managed it.", probe:"Self-awareness and maturity.", shows:["The behavior, not the person","What you did to understand them","What changed","What you learned"], stories:["lobbyists","southwest"]},
+
+  // Data
+  {id:"q28", cat:"data", q:"Tell me about a time you used data to win an argument.", probe:"The posting asks for analyzing and presenting data. Show it.", shows:["The question you needed to answer","Where the data came from","How you made it simple","The decision it changed"], stories:["econ","org"]},
+  {id:"q29", cat:"data", q:"Describe a time the data did not support the position you wanted to take.", probe:"Honesty with numbers.", shows:["What you expected","What the data showed","How you adjusted the message or the position","The result"], stories:["polrd","econ"]},
+  {id:"q30", cat:"data", q:"How do you measure the success of a government relations function?", probe:"Directors are expected to show value beyond bills passed.", shows:["Outcome measures, such as bills passed, amended or stopped","Relationship and access measures","Internal measures, such as speed and quality of positions","An example of reporting results to leadership"], stories:["sme","polrd"]},
+
+  // Process
+  {id:"q31", cat:"process", q:"Tell me about a process you improved and the value it created.", probe:"Directly from the posting's minimum qualifications.", shows:["The old process and its cost","What you built or changed","Adoption by others","A measured result, such as time saved or errors avoided"], stories:["sme","polrd"]},
+  {id:"q32", cat:"process", q:"Describe how you manage a high volume of bills during session.", probe:"Organization under pressure.", shows:["Your intake and triage method","How you route to subject matter experts","How positions are approved and tracked","How you report up"], stories:["sme"]},
+  {id:"q33", cat:"process", q:"Tell me about a time you introduced a new tool or method your colleagues adopted.", probe:"Change leadership at a small scale.", shows:["The gap","The tool","How you got people to use it","Evidence of adoption"], stories:["sme","org"]},
+
+  // Current issues
+  {id:"q34", cat:"current", q:"Data center demand is surging. How would you approach legislation on who pays for the grid upgrades they need?", probe:"Do you understand the company's stated position that large loads should carry their own risk, and can you build a coalition around it?", shows:["The core tension between growth and affordability","Tools such as deposits, collateral, transmission security agreements and large-load tariffs","Who the allies and opponents are","How you would sequence the work in Springfield"], stories:["datacenter","econ"]},
+  {id:"q35", cat:"current", q:"Customers are angry about their bills. How do you defend investment to a legislator hearing from constituents?", probe:"Affordability is the top political issue. They want empathy plus facts.", shows:["Acknowledge the pain first","Separate supply costs from delivery costs","Point to bill assistance and what the company controls","Bring local reliability and jobs data"], stories:["koehler","econ"]},
+  {id:"q36", cat:"current", q:"How would you explain PJM capacity prices to a freshman legislator?", probe:"Can you teach a hard topic quickly and fairly?", shows:["A plain definition of capacity","Why prices rose","What the utility does and does not control","What state policy can and cannot do"], stories:["org","koehler"]},
+  {id:"q37", cat:"current", q:"What do you see as the biggest legislative risks and opportunities for an electric utility in Illinois over the next two years?", probe:"Command of the landscape and a point of view.", shows:["Two or three specific issues","Why each matters to the business","A first move on each","Awareness of the political calendar"], stories:["datacenter","crga","polrd"]},
+  {id:"q38", cat:"current", q:"How should a utility work with lawmakers on grid plan and rate case issues while the regulator is deciding?", probe:"Knowing the line between legislative advocacy and a pending regulatory proceeding.", shows:["Respect for the regulatory process","Education, not lobbying on the merits of a pending case","Coordination with regulatory and legal teams","Consistent messages across audiences"], stories:["koehler"]},
+  {id:"q39", cat:"current", q:"Interconnection queues are long for both generation and large loads. What role should state policy play?", probe:"Federal and state jurisdiction, and practical options.", shows:["What FERC and PJM control","What the state and the ICC control","Options such as cost allocation and readiness requirements","A balanced view"], stories:["datacenter","org"]},
+
+  // Fit
+  {id:"q40", cat:"fit", q:"Why do you want this role?", probe:"Specific to the company and the moment, not generic.", shows:["What draws you to the company now","How your experience fits the role's core duties","What you want to build","Why now in your career"], stories:[]},
+  {id:"q41", cat:"fit", q:"Tell me about yourself.", probe:"A two-minute story that ends at why you are in the room.", shows:["Where you are now","Two or three proof points","The through-line of your career","Why this role is the logical next step"], stories:[]},
+  {id:"q42", cat:"fit", q:"What would your first 90 days look like?", probe:"Do you have a plan and humility?", shows:["Listening tour of the team, executives and key legislators","Learning the agenda and pending proceedings","Early win","Setting team priorities with the SVP"], stories:[]},
+  {id:"q43", cat:"fit", q:"How would your current colleagues describe you?", probe:"Self-awareness and reputation.", shows:["Three words with evidence","One honest growth area","A quote or feedback you received"], stories:[]},
+  {id:"q44", cat:"fit", q:"What kind of leader do you want to be for this team?", probe:"Leadership philosophy.", shows:["Your principles","An example of living them","How you would build the team's capability"], stories:["southwest","lobbyists"]},
+
+  // Curveballs
+  {id:"q45", cat:"curve", q:"Tell me about a time you failed.", probe:"Ownership and learning.", shows:["A real failure, not a disguised strength","Your part in it","What you did next","What you do differently now"], stories:["setback","polrd"]},
+  {id:"q46", cat:"curve", q:"What is your biggest weakness?", probe:"Honesty and a plan.", shows:["A real, relevant weakness","Evidence you are working on it","Progress so far"], stories:[]},
+  {id:"q47", cat:"curve", q:"What do you know about our company's past that concerns you?", probe:"Can you address the history directly and calmly?", shows:["Name it plainly and briefly","Recognize the reforms and the people who rebuilt trust","Explain what you personally bring to keep it that way","Turn to the future"], stories:["ethics"]},
+  {id:"q48", cat:"curve", q:"Tell me about a time you made a decision without all the information you wanted.", probe:"Judgment under uncertainty.", shows:["What you knew and did not know","How you weighed risk","The decision","How you checked it afterward"], stories:["harmful","storm"]},
+  {id:"q49", cat:"curve", q:"Tell me about a time you had to say no to a powerful person.", probe:"Backbone with tact.", shows:["Who and what","Why the answer was no","How you said it","How you kept the relationship"], stories:["ethics","lobbyists"]},
+  {id:"q50", cat:"curve", q:"Describe a time you received tough feedback. What did you do with it?", probe:"Coachability.", shows:["The feedback","Your first reaction","What you changed","Evidence it worked"], stories:["polrd"]},
+  {id:"q51", cat:"lead", q:"How do you prepare an executive for testimony or a legislator meeting?", probe:"Directors prep the CEO and SVP. Show your briefing discipline.", shows:["Briefing memo structure","Anticipated questions and answers","Rehearsal","Debrief and follow-up"], stories:["org","datacenter"]},
+  {id:"q52", cat:"strategy", q:"How do you decide which bills to fight, which to amend and which to let go?", probe:"Prioritization and political capital.", shows:["Impact on customers and the business","Likelihood of passage","Cost in relationships","Who else is fighting it"], stories:["harmful","sme"]},
+  {id:"q53", cat:"coalition", q:"Tell me about a relationship with an elected official you built over many years.", probe:"Long-term relationship stewardship.", shows:["How it started","How you kept it useful to them, not just you","A time it mattered","How you keep it appropriate"], stories:["koehler"]},
+  {id:"q54", cat:"crisis", q:"Tell me about a time you had to manage several urgent priorities at once.", probe:"Session weeks are chaos. How do you triage?", shows:["The competing demands","How you ranked them","What you delegated","The outcome"], stories:["sme","storm"]},
+  {id:"q55", cat:"current", q:"How would you rebuild or strengthen trust between a utility and the General Assembly after a scandal?", probe:"A direct test of how you think about this company's history.", shows:["Transparency and consistency","Relationships built on information, not favors","Strong compliance partnership","Patience and measurable behavior over time"], stories:["ethics","koehler"]}
+];
+
+PREP.star = {
+  parts: [
+    {k:"S", name:"Situation", pct:15, tip:"Two or three sentences. Where, when, what was at stake. Skip background the panel does not need."},
+    {k:"T", name:"Task", pct:10, tip:"Your specific responsibility. Say what you owned, not what the team owned."},
+    {k:"A", name:"Action", pct:50, tip:"The heart of the answer. Three to five concrete steps, in order, in the first person. Say I, not we."},
+    {k:"R", name:"Result", pct:25, tip:"What happened, with a number when you have one. Then one line on what you learned or would repeat."}
+  ],
+  mistakes: [
+    "Spending a minute on background before the panel knows why it matters",
+    "Saying we for the whole answer so the panel cannot tell what you did",
+    "Ending at the action with no result",
+    "A result with no number, date or concrete change",
+    "Picking a story that answers a different question than the one asked",
+    "Running past three minutes. Aim for ninety seconds to two minutes, then stop and let them ask follow-ups"
+  ],
+  example: {
+    q:"Tell me about a time you used data to win an argument.",
+    weak:"We had a bill that would have hurt us, so we put together some numbers and showed legislators. It went well and the bill didn't pass. Data is really important in this job.",
+    good:"Last session a bill would have capped a fee we rely on to fund local safety work. My job was to show legislators the effect in their districts. I pulled the spending by county and built a one-page leave-behind for each member. Several members cited the numbers in committee and the cap was amended.",
+    strong:"Last session a bill would have capped a fee that funds local system safety work, and leadership asked me to make the local cost real for legislators. I owned the analysis and the leave-behinds. I pulled five years of spending by county, matched it to each member's district, and converted it into projects and jobs so a member could repeat it in one sentence. I tested the one-pagers with two friendly staffers, cut each to three numbers, and briefed the committee chair before the hearing. Members used the figures in committee, and the cap was amended to protect the safety work. What I took away is that a number only works if a legislator can say it back to a constituent."
+  },
+  timing: "Target ninety seconds to two minutes. A rough split is Situation fifteen percent, Task ten, Action fifty, Result twenty-five. Add one closing line on what you learned. This is sometimes called STAR plus L and it lands well at director level."
+};
+
+PREP.company = {
+  snapshot: [
+    {label:"Customers", value:"4M+", note:"Electric customers across northern Illinois, about nine million people"},
+    {label:"Parent", value:"Exelon", note:"Six regulated utilities, nearly 11 million customers"},
+    {label:"Market", value:"PJM", note:"ComEd delivers power; supply comes through the PJM market"},
+    {label:"Reliability", value:"Top decile", note:"Exelon reported ComEd in the top decile in Q1 2026"},
+    {label:"Grid plan 2", value:"$15.3B", note:"Proposed 2028 to 2031 investment; ICC order expected by mid December 2026"},
+    {label:"Large-load pipeline", value:"28,000+ MW", note:"More than 75 projects per the ICC's March 2026 order, versus a record peak near 24,000 MW"}
+  ],
+  sections: [
+    {id:"overview", title:"ComEd at a glance", body:[
+      "ComEd is the electric delivery utility for northern Illinois and the state's largest utility, serving more than four million customers, or about nine million people, including Chicago. It owns and operates wires and transmission but buys power for default customers through the PJM market, so supply prices move with PJM results while ComEd earns on its delivery and transmission investment.",
+      "ComEd says reliability has improved 57 percent since 2012, helping customers avoid about 24.7 million outages. Exelon reported that all of its utilities were top quartile for reliability in the first quarter of 2026, with ComEd in the top decile.",
+      "Gil Quiniones has been president and CEO since November 2021. He previously led the New York Power Authority for ten years."
+    ]},
+    {id:"exelon", title:"Parent company: Exelon", body:[
+      "Exelon is a utility holding company with six reporting utilities. These are ComEd, PECO in Philadelphia, BGE in Baltimore, and Pepco, Delmarva Power and Atlantic City Electric under Pepco Holdings. Together they serve nearly 11 million customers. In February 2022 Exelon spun off its generation business as Constellation, so Exelon is now a pure transmission and distribution company. That matters because Exelon now argues for policies that help customers on supply costs rather than defending a fleet of power plants.",
+      "Calvin Butler is president and CEO. He chaired the Edison Electric Institute for a year that ended in June 2026. Jeanne Jones is executive vice president and CFO.",
+      "In February 2026 Exelon launched the Exelon Promise, a public campaign on affordability that argues large energy users such as data centers should pay their fair share and carry the risk of the grid investment needed to serve them. It also advocates extending PJM's capacity price collar. Exelon has also published research arguing for utility-owned generation in some PJM states."
+    ]},
+    {id:"strengths", title:"What ComEd does well", body:[
+      "Reliability. A decade of grid modernization following EIMA produced some of the best reliability among large U.S. utilities, and ComEd leans on that record in every regulatory filing.",
+      "Energy efficiency. ComEd reports that business customers have saved nearly five billion dollars through its efficiency programs since 2008, and it has won national recognition for program delivery.",
+      "Clean energy integration. ComEd says it has connected more than one gigawatt of distributed generation, and its Wilton Center substation expansion is meant to interconnect the largest cluster of utility-scale wind and solar in its territory.",
+      "Workforce development. More than 2,100 residents have taken part in its clean energy workforce programs. Power Up Academy won the Center for Energy Workforce Development's 2025 Community Partner Award, and the CONSTRUCT Infrastructure Academy has trained more than 900 people."
+    ]},
+    {id:"problems", title:"Problems and criticism", body:[
+      "Affordability. Supply prices tied to PJM capacity costs jumped sharply. The Citizens Utility Board reported ComEd's October 2025 to May 2026 supply price was up about 47 percent from a year earlier. ComEd's own grid plan projects average residential electricity costs rising as a share of household income through 2031.",
+      "Regulatory pushback. In December 2023 the ICC rejected ComEd's first multi-year grid plan as not meeting CEJA standards. A revised plan was approved in December 2024 with a four-year increase of about $606 million, roughly 11 percent below the request. In December 2025 the ICC struck $25.4 million from ComEd's 2024 reconciliation, mostly overruns tied to its customer billing system rollout.",
+      "Grid strain. Heat waves in summer 2026 led ComEd to ask some Chicago neighborhoods to cut use, and July 3 storms cut power to more than 55,000 customers.",
+      "Reputation. The bribery scheme that surfaced in 2020 still shapes how lawmakers, reporters and advocates view ComEd's lobbying. See the ethics section."
+    ]},
+    {id:"ethics", title:"Ethics history and reforms", body:[
+      "In July 2020 ComEd entered a deferred prosecution agreement with federal prosecutors, paid a $200 million fine and admitted it arranged about $1.3 million in jobs, contracts and payments for associates of then House Speaker Michael Madigan from 2011 through 2019 to influence him.",
+      "In May 2023 a federal jury convicted the so-called ComEd Four on all counts. They were former CEO Anne Pramaggiore, former lobbyist and Madigan confidant Michael McClain, retired executive John Hooker and consultant Jay Doherty. Sentencing came in summer 2025. Hooker received 18 months, Pramaggiore 24 months and a $750,000 fine, McClain 24 months and Doherty a year and a day. Later rulings threw out some convictions for two defendants, so check the current status before your interview.",
+      "Madigan was tried separately, convicted on bribery and other charges, and sentenced in June 2025 to seven and a half years and a $2.5 million fine.",
+      "Since 2020 ComEd and Exelon have rebuilt their lobbying and compliance programs under the agreement, and leadership in government affairs has turned over. The current team's credibility depends on transparent, process-driven advocacy."
+    ], callout:"How to handle it if it comes up. Acknowledge it in one sentence, credit the people who rebuilt trust, and pivot to what you bring. For example: \"It was a serious breach, and I respect the work ComEd has done since to rebuild trust. My approach has always been relationships built on information and follow-through, never favors, and close partnership with compliance. I would bring that every day.\" Do not speculate about individuals, and do not bring it up yourself."},
+    {id:"community", title:"What ComEd supports locally", body:[
+      "Power for Good grants. ComEd offered $515,000 through three grant programs in 2026 and says these programs have delivered nearly six million dollars over time. They are Green Region with Openlands, Powering Safe Communities with the Metropolitan Mayors Caucus, and Powering the Arts with the League of Chicago Theatres.",
+      "Powering Safe Communities awarded more than $170,000 to 24 communities in August 2026, and Melissa Washington was quoted on the announcement.",
+      "Customer assistance. A new income-based Low-Income Discount, bill support and arrearage programs, $803 million in customer credits in 2026, and $2.5 million in relief for small businesses facing PJM supply costs.",
+      "Electrification. About $70 million in EV rebates in 2026 and an ICC-approved second Beneficial Electrification plan of about $168 million for 2026 to 2028.",
+      "Workforce. Power Up Academy, CONSTRUCT and Craft Academy, run with community groups, labor and colleges."
+    ]},
+    {id:"investors", title:"Investor relations snapshot", body:[
+      "Third quarter 2026, reported October 30. Exelon's adjusted operating earnings rose to $0.87 per share from $0.86, helped by higher distribution and transmission rates at ComEd and other utilities. ComEd's quarterly net income rose to $406 million from $373 million, and to $965 million for the first nine months.",
+      "Guidance. Exelon affirmed 2026 adjusted operating earnings of $2.81 to $2.91 per share and growth near the top of five to seven percent a year through 2029.",
+      "Capital plan. About $41.7 billion over 2026 to 2029, producing about 7.9 percent annual rate base growth, from $64.6 billion in 2025 to about $87.4 billion in 2029. Transmission is the fastest-growing piece, at roughly 16 percent rate base growth, and Exelon has flagged $12 to 17 billion of further transmission opportunity.",
+      "Data center pipeline. In July Exelon trimmed its data center estimate after culling speculative projects. It now cites about 11 GW of high-probability load, including about 4 GW backed by signed transmission security agreements and about $1 billion of collateral.",
+      "Target returns. A consolidated operating return on equity of nine to ten percent and a dividend payout around 60 percent."
+    ]},
+    {id:"growth", title:"Forward-looking growth plans", body:[
+      "Long-Range Strategy. Released in November 2025 and organized around People, Power and Progress, it frames the grid needed for data centers, electrification and severe weather.",
+      "Grid Plan 2. Filed January 16, 2026, it proposes about $15.3 billion of investment for 2028 through 2031 aligned with CEJA and CRGA. Hearings were held in August and the ICC order is expected by mid December 2026. ComEd plans a rate filing in early 2027.",
+      "Transmission. Most of Exelon's incremental capital is transmission, much of it tied to load growth and PJM reliability projects.",
+      "Large-load customers. Higher deposits approved by the ICC in March 2026 and transmission security agreements with collateral, meant to keep existing customers from paying for projects that never materialize."
+    ]},
+    {id:"challenges", title:"Upcoming challenges", body:[
+      "The ICC decision on Grid Plan 2 this December and the 2027 rate filing that follows, both under heavy affordability scrutiny.",
+      "PJM capacity prices. The 2026/27 and 2027/28 auctions cleared at the cap, and the 2028/29 auction in July 2026 again hit the cap with cleared capacity short of the reliability target. Trade analysis suggests the ComEd zone would have priced far higher without it.",
+      "Data center cost allocation. Who pays for the transmission and substations, and how to avoid stranded costs.",
+      "CRGA implementation. New integrated resource planning at the ICC, a three gigawatt battery storage target, virtual power plants and time-of-use programs.",
+      "The 2027 spring session. Expect follow-up bills on data centers, affordability and CRGA cleanup, plus continued scrutiny of utility profits.",
+      "Federal action. FERC's large-load interconnection rulemaking and PJM market reforms."
+    ]},
+    {id:"crga", title:"Illinois policy backdrop: CEJA and CRGA", body:[
+      "CEJA, the Climate and Equitable Jobs Act of 2021, created performance-based multi-year grid plans and carbon-free goals, and set the retirement path for fossil generation.",
+      "CRGA, the Clean and Reliable Grid Affordability Act, Senate Bill 25, was signed January 8, 2026 as Public Act 104-0458 and took effect June 1, 2026. It sets a three gigawatt grid battery storage target, lifts the moratorium on new large nuclear plants, creates virtual power plant and time-of-use programs, expands efficiency, and gives the ICC integrated resource planning authority.",
+      "The Illinois Power Agency estimated CRGA saves consumers about $13.4 billion over 20 years, including about $1.46 to $2.03 a month for average ComEd residential customers by 2031. Republicans argued it weakens consumer protections and adds costs."
+    ]}
+  ],
+  topics: [
+    {id:"datacenters", title:"Data centers", points:[
+      "Scale. The ICC's March 2026 order said ComEd's pipeline held more than 75 large-load projects totaling over 28,000 MW, about 1.2 times ComEd's highest-ever peak of roughly 24,000 MW.",
+      "New deposits. ComEd previously required a flat $1 million deposit. Under the revised tariff, deposits start at $1 million for 50 to 200 MW and rise $500,000 for each additional 100 MW. Existing data centers are not affected. The ICC also opened a broader investigation into consumer protections.",
+      "Exelon's reset. In July Exelon culled speculative projects and now cites about 7 GW in advanced design and 4 GW backed by transmission security agreements across its footprint.",
+      "Policy stance. Exelon's message is that data centers and large users should carry the risk, not families. Expect that framing in any data center bill ComEd supports.",
+      "Economic case. Data centers bring construction, tax base and jobs. A University of Illinois and Illinois Economic Policy Institute study projected large GDP gains from data center build-out statewide."
+    ]},
+    {id:"interconnection", title:"Interconnection news and challenges", points:[
+      "Load queues. A September 2026 industry report put ComEd's large-load queue at roughly 30 to 36 months from application to service for projects without signed agreements. Treat this as a trade estimate.",
+      "Generation queues. PJM's backlog of proposed generation delays new supply, which feeds high capacity prices.",
+      "FERC. FERC pressed grid operators on large-load interconnection rules and committed to act on its rulemaking in June 2026. Follow the outcome and PJM's compliance.",
+      "PJM forecast. Nearly all of the 5,250 MW increase in PJM's 2027/28 peak forecast came from data centers.",
+      "State role. The ICC controls retail tariffs, deposits and cost allocation for distribution; FERC and PJM control transmission service and wholesale markets. A strong answer knows the line."
+    ]},
+    {id:"affordability", title:"Affordability", points:[
+      "Supply shock. PJM capacity prices hit record highs three auctions running, driving ComEd's supply price up about 47 percent year over year in fall 2025.",
+      "Capacity cap. The 2026/27 auction cleared at $329.17 per MW-day and 2027/28 at $333.44, both at the cap. Without the cap, PJM estimated 2027/28 would have cleared near $530.",
+      "Relief. $803 million in credits in 2026, the Low-Income Discount, LIHEAP-linked arrearage help and small business relief.",
+      "Delivery side. Grid Plan 2 projects residential electricity costs rising from about 1.23 percent of household income in 2026 to about 1.41 percent in 2028 per Capitol News Illinois.",
+      "Political frame. Affordability is campaign fodder in PJM states, and some advocates now target utility profit levels. Expect a question on how to defend investment."
+    ]}
+  ]
+};
+
+PREP.leaders = [
+  {name:"Calvin Butler", role:"President and CEO, Exelon", facts:["Former CEO of Exelon Utilities and interim CEO of ComEd in fall 2021","Chaired the Edison Electric Institute for a year ending June 2026","Public face of the Exelon Promise on affordability and the message that large users should carry the risk"]},
+  {name:"Jeanne Jones", role:"EVP and CFO, Exelon", facts:["Leads earnings calls with Butler","Explained the July 2026 data center pipeline reset as weeding out speculative projects"]},
+  {name:"Gil Quiniones", role:"President and CEO, ComEd", facts:["CEO since November 2021","Led the New York Power Authority for ten years and earlier advised New York City on energy","Public voice of the Long-Range Strategy and Grid Plan 2"]},
+  {name:"Melissa Washington", role:"SVP, Governmental, Regulatory and External Affairs, ComEd", facts:["Took the role September 1, 2025, succeeding Louie Binswanger","Previously SVP of Customer Operations and Strategic Initiatives, leading customer experience and billing tools","At ComEd in leadership roles since 2003; earlier led legislative and external affairs, large customer services and economic development"]},
+  {name:"Keisha Parker", role:"VP, External Affairs, ComEd", facts:["Confirm current title and whether the director role reports to her or to the SVP"]},
+  {name:"David Perez", role:"Chief Operating Officer, ComEd", facts:["Leads operations, storm response and reliability"]},
+  {name:"Josh Levin", role:"SVP, CFO and Treasurer, ComEd", facts:["Promoted in 2023 after leading Exelon corporate financial planning","Owns the numbers behind rate filings and the grid plan"]},
+  {name:"Derek Lesko", role:"Chief of Staff to the CEO, ComEd", facts:["Coordinates the CEO's priorities and executive agenda"]}
+];
+
+PREP.news = [
+  {date:"2026-10-30", tag:"Earnings", text:"Exelon reports Q3 2026. Adjusted operating EPS $0.87. ComEd quarterly net income $406M, up from $373M."},
+  {date:"2026-08-12", tag:"Community", text:"ComEd and the Metropolitan Mayors Caucus award more than $170,000 to 24 communities through Powering Safe Communities."},
+  {date:"2026-08", tag:"Regulatory", text:"ICC hearings on ComEd Grid Plan 2. Order expected by mid December."},
+  {date:"2026-07-30", tag:"Data centers", text:"Exelon trims data center estimates after culling speculative projects. About 11 GW high-probability, 4 GW backed by TSAs."},
+  {date:"2026-07-14", tag:"PJM", text:"PJM releases the 2028/29 capacity auction. Prices stay at the cap and cleared capacity falls short of the reliability target."},
+  {date:"2026-07-03", tag:"Operations", text:"Storms knock out power to more than 55,000 ComEd customers; heat-related conservation requests follow."},
+  {date:"2026-06", tag:"Industry", text:"Calvin Butler ends his year as EEI chair amid national debate on affordability and data centers."},
+  {date:"2026-06-01", tag:"Policy", text:"CRGA takes effect."},
+  {date:"2026-03-19", tag:"Data centers", text:"ICC approves ComEd's higher large-load deposits and opens a broader consumer protection inquiry."},
+  {date:"2026-02-17", tag:"Affordability", text:"Exelon launches the Exelon Promise affordability campaign."},
+  {date:"2026-01-16", tag:"Regulatory", text:"ComEd files Grid Plan 2, about $15.3B for 2028 to 2031."},
+  {date:"2026-01-08", tag:"Policy", text:"Governor Pritzker signs CRGA, SB 25, at Joliet Junior College."},
+  {date:"2025-12-18", tag:"Regulatory", text:"ICC strikes $25.4M from ComEd's 2024 reconciliation, mostly billing system overruns."},
+  {date:"2025-12-17", tag:"PJM", text:"PJM 2027/28 auction clears at the $333.44 cap."},
+  {date:"2025-11-13", tag:"Strategy", text:"ComEd unveils its Long-Range Strategy, People, Power and Progress."},
+  {date:"2025-09-01", tag:"Leadership", text:"Melissa Washington becomes SVP of Governmental, Regulatory and External Affairs."},
+  {date:"2025-07", tag:"Ethics", text:"ComEd Four sentencings. Madigan sentenced in June to 7.5 years."}
+];
+
+PREP.ask = [
+  {theme:"The business", items:[
+    "How has the government affairs agenda shifted as affordability became the top issue?",
+    "Where do you see the biggest gap between how lawmakers understand data center costs and how ComEd sees them?",
+    "How does the team coordinate with regulatory affairs while Grid Plan 2 is before the ICC?",
+    "Which issues do you expect to define the 2027 spring session for ComEd?"
+  ]},
+  {theme:"The role", items:[
+    "What would success look like for this director at the end of the first session?",
+    "How is the team structured, and how much of the contract lobbying team does this role direct?",
+    "What does this role own versus what stays with the vice president or the SVP?",
+    "What is the one relationship or issue you most want the new director to strengthen?"
+  ]},
+  {theme:"The team and culture", items:[
+    "How would you describe the team's working style during session?",
+    "How do government affairs and compliance work together day to day?",
+    "How does ComEd coordinate with Exelon's federal and state affairs teams?",
+    "What has made past directors successful here, and what has tripped people up?"
+  ]},
+  {theme:"Closing", items:[
+    "Is there anything about my background you would like me to expand on?",
+    "What are the next steps and the timeline?"
+  ]}
+];
+
+PREP.dayof = {
+  checklist:[
+    "Reread the leadership profiles and the last two weeks of news",
+    "Check for any ICC Grid Plan 2 decision or PJM news since this page was updated",
+    "Rehearse the opening, three anchor stories and the closing out loud",
+    "Print two copies of your resume and a short list of your questions",
+    "Plan arrival fifteen minutes early, or test video, camera, light and sound",
+    "Have water, a pen and a notepad. Write the panel's names as they introduce themselves",
+    "Send thank-you notes within 24 hours"
+  ],
+  thankyou:"Dear [Name],\n\nThank you for the time today and for the conversation about [specific topic they raised]. It reinforced my interest in the role and in helping ComEd [connect to their priority].\n\nI especially appreciated [one detail]. I am confident my experience with [one or two strengths] would help the team from day one.\n\nPlease let me know if there is anything else I can provide.\n\nBest regards,\n[Your name]",
+  close:"Close by restating three things in under 45 seconds. Why this company now, what you bring that is hard to find, and that you want the job."
+};
+
+PREP.mcq = [
+  // Scenario judgment
+  {id:"m1", kind:"Judgment", q:"A legislator's staffer asks if you can help a relative get an interview at the company. What is the strongest response?", opts:["Say you will pass the resume to HR personally and let them know how it goes","Politely point them to the public careers site, make no promises, and log the contact with compliance","Say you cannot discuss it and end the conversation","Ask the staffer what the legislator needs this session first"], a:1, why:"Redirect to the standard process, make no promises and document it. That is exactly the safeguard the company built after 2020, and it keeps the relationship intact."},
+  {id:"m2", kind:"Judgment", q:"In a STAR answer, which part should take the most time?", opts:["Situation","Task","Action","Result"], a:2, why:"About half your time belongs in Action, told in the first person."},
+  {id:"m3", kind:"Judgment", q:"Your answer has run past three minutes and you have not reached the result. Best move?", opts:["Keep going, details show depth","Stop and ask if they want more background","Jump to the result in one or two sentences and stop","Apologize and start over with a different story"], a:2, why:"Land the result fast and let them ask follow-ups. Long answers cost you more than short ones."},
+  {id:"m4", kind:"Judgment", q:"Which closing line best fits STAR plus L?", opts:["So that is the story","What I took away is that a number only works if a legislator can repeat it to a constituent","I think it went really well overall","We all worked very hard on it"], a:1, why:"A one-line lesson shows reflection and gives the panel something to remember."},
+  {id:"m5", kind:"Judgment", q:"A panelist asks what concerns you about the company's past. Strongest approach?", opts:["Say you would rather not get into it","Walk through the trial details to show you did your research","Acknowledge it briefly, credit the reforms, explain what you bring, and look forward","Say every utility has problems like that"], a:2, why:"Brief, respectful, forward-looking. Never speculate about individuals."},
+  {id:"m6", kind:"Judgment", q:"A legislator is angry about constituent bills going up. What should come first?", opts:["Explain that supply costs come from PJM, not the utility","Acknowledge the pain constituents are feeling","Share the company's reliability ranking","Offer a meeting with the CEO"], a:1, why:"Empathy first. Then separate supply from delivery and point to assistance programs."},
+  {id:"m7", kind:"Judgment", q:"While Grid Plan 2 is pending at the ICC, a legislator asks you to explain why the plan should be approved. Best approach?", opts:["Make the full case for approval","Decline to talk about the grid plan at all","Educate on what the plan covers and the process, coordinate with regulatory, and avoid lobbying on the merits of a pending case","Refer them to the CUB"], a:2, why:"Respect the regulatory process while staying helpful."},
+  {id:"m8", kind:"Judgment", q:"Which word should you use most when describing your actions?", opts:["We","The team","I","Leadership"], a:2, why:"The panel needs to know what you did. Use we for context and I for actions."},
+  {id:"m9", kind:"Judgment", q:"Two departments disagree on the company position on a bill. Your first step?", opts:["Pick the position that best protects revenue","Escalate to the CEO","Get each side's interest on the table with the right decision-maker and a deadline","Let the bill pass without a position"], a:2, why:"Surface interests, convene the right people, and set a decision date before session forces one."},
+  {id:"m10", kind:"Judgment", q:"How long should a typical behavioral answer run?", opts:["Thirty seconds","Ninety seconds to two minutes","Four to five minutes","As long as needed"], a:1, why:"Long enough for a full STAR, short enough to invite follow-ups."},
+  // Company facts
+  {id:"m11", kind:"Company", q:"Who is president and CEO of ComEd?", opts:["Calvin Butler","Gil Quiniones","Jeanne Jones","Terry Donnelly"], a:1, why:"Quiniones became CEO in November 2021 after leading NYPA."},
+  {id:"m12", kind:"Company", q:"Who is president and CEO of Exelon?", opts:["Calvin Butler","Anne Pramaggiore","Gil Quiniones","Chris Crane"], a:0, why:"Butler also chaired EEI for a year ending June 2026."},
+  {id:"m13", kind:"Company", q:"Melissa Washington's current title is", opts:["SVP, Customer Operations","SVP, Governmental, Regulatory and External Affairs","VP, Legislative Affairs","Chief of Staff"], a:1, why:"She took GREA on September 1, 2025."},
+  {id:"m14", kind:"Company", q:"Whom did Melissa Washington succeed as SVP of GREA?", opts:["Louie Binswanger","Jan Hickman","Terry Donnelly","Josh Levin"], a:0, why:"Binswanger became senior advisor to the CEO before retiring."},
+  {id:"m15", kind:"Company", q:"Exelon's six reporting utilities are ComEd, PECO, BGE and", opts:["Duquesne, PPL and Pepco","Pepco, Delmarva Power and Atlantic City Electric","Nicor, Peoples Gas and Pepco","Constellation, Pepco and BGE Gas"], a:1, why:"Pepco, DPL and ACE sit under Pepco Holdings."},
+  {id:"m16", kind:"Company", q:"What did Exelon spin off in 2022?", opts:["PECO","Its generation business, Constellation","Its gas utilities","Its transmission business"], a:1, why:"Exelon became a pure transmission and distribution company."},
+  {id:"m17", kind:"Company", q:"How much did ComEd agree to pay under its July 2020 deferred prosecution agreement?", opts:["$20 million","$75 million","$200 million","$1.3 million"], a:2, why:"$200 million. The $1.3 million is the payments to Madigan associates."},
+  {id:"m18", kind:"Company", q:"ComEd's Grid Plan 2 proposes about how much investment for 2028 to 2031?", opts:["$2 billion","$6.5 billion","$15.3 billion","$41.7 billion"], a:2, why:"$41.7B is Exelon's whole four-year capital plan."},
+  {id:"m19", kind:"Company", q:"When is the ICC expected to rule on Grid Plan 2?", opts:["June 2026","By mid December 2026","Spring 2027","2028"], a:1, why:"An order is expected by December 15, with a rate filing in early 2027."},
+  {id:"m20", kind:"Company", q:"What did the ICC approve for ComEd in March 2026?", opts:["A data center moratorium","Higher, size-based security deposits for large-load projects","A new rate case","A time-of-use mandate"], a:1, why:"Deposits start at $1 million for 50 to 200 MW and rise $500,000 per additional 100 MW."},
+  {id:"m21", kind:"Company", q:"Per the ICC, ComEd's large-load pipeline equals about how many times its all-time peak?", opts:["0.5","1.2","3","10"], a:1, why:"More than 28,000 MW of requests against a peak near 24,000 MW."},
+  {id:"m22", kind:"Company", q:"What is the Exelon Promise?", opts:["A dividend commitment","An affordability campaign launched in 2026","An ethics pledge for lobbyists","A data center partnership"], a:1, why:"It argues large users should carry the risk and backs extending PJM's price collar."},
+  {id:"m23", kind:"Company", q:"Where did PJM's 2027/28 capacity auction clear?", opts:["$28.92 per MW-day","$269.92 per MW-day","$333.44 per MW-day, the cap","$555 per MW-day"], a:2, why:"The cap bound for a second straight auction. Uncapped would have been near $530."},
+  {id:"m24", kind:"Company", q:"CRGA was signed on", opts:["October 31, 2025","January 8, 2026","June 1, 2026","September 15, 2021"], a:1, why:"Signed January 8 at Joliet Junior College; effective June 1, 2026."},
+  {id:"m25", kind:"Company", q:"CRGA's battery storage target is", opts:["1 GW by 2030","3 GW","6 GW by 2035","No target"], a:1, why:"Three gigawatts of grid-scale storage, plus virtual power plants and lifting the large nuclear moratorium."},
+  {id:"m26", kind:"Company", q:"Exelon's projected annual rate base growth through 2029 is about", opts:["3 percent","5 percent","7.9 percent","12 percent"], a:2, why:"From about $64.6B in 2025 to about $87.4B in 2029."},
+  {id:"m27", kind:"Company", q:"What was Exelon's adjusted operating EPS for Q3 2026?", opts:["$0.70","$0.87","$0.91","$2.86"], a:1, why:"GAAP was $0.70; adjusted was $0.87."},
+  {id:"m28", kind:"Company", q:"What did ComEd's Long-Range Strategy organize around?", opts:["Safety, Speed, Savings","People, Power and Progress","Reliability, Resilience, Renewables","Customers First"], a:1, why:"Released November 2025."},
+  {id:"m29", kind:"Company", q:"Which program partners ComEd with the Metropolitan Mayors Caucus?", opts:["Green Region","Powering Safe Communities","Powering the Arts","Power Up Academy"], a:1, why:"Green Region is with Openlands; Powering the Arts with the League of Chicago Theatres."},
+  {id:"m30", kind:"Company", q:"In December 2025 the ICC struck $25.4M from ComEd's reconciliation mainly because of", opts:["Storm costs","Overruns on its customer billing system rollout","Data center deposits","Executive pay"], a:1, why:"The ICC found ComEd had not proven those costs prudent."},
+  {id:"m31", kind:"Company", q:"How did Exelon describe its July 2026 data center pipeline change?", opts:["It doubled","It weeded out speculative projects","It paused all new requests","It sold the pipeline to Constellation"], a:1, why:"About 11 GW high-probability, including 4 GW backed by signed TSAs."},
+  {id:"m32", kind:"Company", q:"What was Madigan's sentence?", opts:["Probation","Two years","Seven and a half years and a $2.5M fine","Twelve years"], a:2, why:"Sentenced in June 2025."},
+  {id:"m33", kind:"Company", q:"Which ComEd workforce program won CEWD's 2025 Community Partner Award?", opts:["CONSTRUCT","Craft Academy","Power Up Academy","Icebox Derby"], a:2, why:"Launched in 2023 for adult learners entering technical roles."},
+  {id:"m34", kind:"Company", q:"About what share of Exelon's incremental capital in its 2026 plan update was driven by transmission?", opts:["None","About a quarter","Most of it","Exactly half"], a:2, why:"Exelon said transmission drove most or all incremental capital in its 2026 updates."}
+];
+
+PREP.sources = [
+  ["Gil C. Quiniones Named CEO of ComEd (Business Wire)","https://www.businesswire.com/news/home/20211014005378/en/Gil-C.-Quiniones-Named-CEO-of-ComEd"],
+  ["ComEd appoints Melissa Washington as SVP of GREA","https://quantisnow.com/insight/comed-appoints-melissa-washington-as-svp-of-governmental-regulatory-and-6092810"],
+  ["ComEd executive team (ZoomInfo)","https://www.zoominfo.com/executives/commonwealth-edison-co/13518672"],
+  ["Josh Levin promoted to ComEd CFO","https://www.businesswire.com/news/home/20230804466391/en/Josh-Levin-Promoted-to-Senior-Vice-President-Chief-Financial-Officer-and-Treasurer-of-ComEd"],
+  ["E&E News Q&A with Calvin Butler","https://www.eenews.net/articles/qa-exelon-ceo-talks-pjm-electric-affordability-and-utility-profits/"],
+  ["Exelon Launches the Exelon Promise","https://www.businesswire.com/news/home/20260217771924/en/Exelon-Launches-the-Exelon-Promise-to-Fight-Out-of-Control-Energy-Costs"],
+  ["Exelon weeds out data center pipeline (T&D World)","https://www.tdworld.com/utility-business/news/55395407/exelon-weeds-out-data-center-pipeline"],
+  ["Exelon Q3 2026 earnings release (SEC 8-K)","https://www.sec.gov/Archives/edgar/data/0001109357/000110935726000092/exc-20261030ex991.htm"],
+  ["Exelon Q3 2026 10-Q (SEC)","https://www.sec.gov/Archives/edgar/data/0001109357/000110935726000095/exc-20260930.htm"],
+  ["Exelon Q1 2026 investor slides (SEC)","https://www.sec.gov/Archives/edgar/data/0001109357/000110935726000061/exc-20260506ex992.htm"],
+  ["Exelon Q2 2026 call highlights (MarketBeat)","https://www.marketbeat.com/instant-alerts/exelon-q2-earnings-call-highlights-2026-07-30/"],
+  ["Exelon earnings summary (24/7 Wall St.)","https://247wallst.com/companies/exc/earnings/"],
+  ["ComEd Long-Range Strategy","https://business.mammothtimes.com/mammothtimes/article/bizwire-2025-11-13-comed-unveils-long-range-strategy-to-power-illinois-clean-energy-future"],
+  ["ComEd files Grid Plan 2 (T&D World)","https://www.tdworld.com/utility-business/news/55352375/comed-submits-four-year-grid-plan-to-illinois-commerce-commission"],
+  ["ComEd files $15.3B grid plan (Capitol News Illinois)","https://capitolnewsillinois.com/news/comed-files-15-3-billion-grid-plan-proposal-addressing-rising-demand/"],
+  ["ICC OKs higher large-load deposits (Capitol News Illinois)","https://capitolnewsillinois.com/news/regulators-ok-comeds-plan-to-increase-deposit-costs-for-large-load-projects-like-data-centers/"],
+  ["ICC decision on ComEd reconciliation, Dec 2025","https://www.illinois.gov/content/dam/soi/en/web/illinois/iisnewsattachments/32031-121825-12.18.25-comed-reconciliation.pdf.pdf"],
+  ["ICC approves revised grid plan, $606M (WGN)","https://wgntv.com/news/illinois/606m-rate-increase-approved-for-comeds-revised-energy-plan-by-state-regulators/amp"],
+  ["ComEd fall 2025 price release (CUB)","https://www.citizensutilityboard.org/wp-content/uploads/2025/09/20251001-ComEd-Fall-Price-News-Release-Final.pdf"],
+  ["PJM 2027/28 auction results","https://insidelines.pjm.com/pjm-auction-procures-134479-mw-of-generation-resources/"],
+  ["PJM 2028/29 auction analysis (Modo Energy)","https://modoenergy.com/research/en/pjm-capacity-auction-2028-2029-reliability-price-cap-elcc"],
+  ["Chicago data center market and ComEd queue (Datacentres.com)","https://www.datacentres.com/news/chicago-data-centre-market-1-480-mw-live-as-pjm-capacity-prices-and-comed-queue--slot2-2026-09-01"],
+  ["CRGA signing (Governor's office)","https://gov-pritzker-newsroom.prezly.com/gov-pritzker-signs-historic-clean-and-reliable-grid-affordability-act"],
+  ["CRGA provisions (National Law Review)","https://natlawreview.com/article/what-illinois-clean-and-reliable-grid-affordability-act-means-project-developers"],
+  ["CRGA bill impacts and GOP response","https://www.yahoo.com/news/articles/gov-jb-pritzker-signs-sweeping-021100954.html"],
+  ["ComEd Four sentencings (WTTW)","https://news.wttw.com/2025/07/24/madigan-ally-confidant-michael-mcclain-gets-2-years-prison-following-comed-bribery"],
+  ["Doherty sentenced (ABC7)","https://abc7chicago.com/post/jay-doherty-last-member-called-comed-expected-sentenced-tuesday-bribery-case-linked-mike-madigan/17441709/"],
+  ["Retrial status for two defendants (WTTW)","https://news.wttw.com/node/54696"],
+  ["ComEd Power for Good grants 2026","https://www.businesswire.com/news/home/20260112237039/en/ComEd-Offering-515000-in-Grants-to-Support-Community-Programs-Across-Northern-Illinois/"],
+  ["Powering Safe Communities 2026 (Mayors Caucus)","https://mayorscaucus.org/?p=18233"],
+  ["Power Up Academy award","https://www.businesswire.com/news/home/20251124496633/en"],
+  ["ComEd July 2026 storm outages","https://briefglance.com/companies/commonwealth-edison-company/pulses/52636"],
+  ["NBC Chicago ComEd coverage","https://www.nbcchicago.com/tag/comed/"]
+];
+
+// PRIVATE content. Keep this file off GitHub. It holds your scripted stories, Ameren figures and strategy notes.
+var PREP = window.PREP = window.PREP || {};
+PREP.isPrivate = true;
+
+PREP.meta.title = "ComEd Interview Prep";
+PREP.meta.subtitle = "Private edition with your story bank, scripts and strategy notes. Do not upload this file to GitHub.";
+
+// Bracketed text marks details only you can fill in or confirm.
+PREP.stories = [
+  {id:"org", title:"Operation Resilient Grid", tags:["strategy","data","influence","lead"],
+   hook:"ComEd faces the same capacity shortfall in PJM. This shows you can build a multi-year reliability case with hard local numbers.",
+   numbers:["2,092 MW across five gas combustion turbine sites","Venice, Goose Creek, Pinckneyville, Raccoon Creek, Kinmundy","About $2.93M a year in local property taxes, $45.3M+ cumulative","Weekly cross-functional coordination calls","Senate Energy and Public Utilities briefing, July 2026"],
+   s:"CEJA set retirement dates for five of Ameren Illinois's natural gas combustion turbine plants, 2,092 megawatts in all, at the same time MISO and PJM were warning about capacity shortfalls.",
+   t:"I was asked to help build the internal campaign to make the case for keeping those units available, which we called Operation Resilient Grid, and to own the legislative analysis and materials.",
+   a:"First I built a tracker, the RREST document, so every team was working from the same facts, and I ran a weekly cross-functional call to keep operations, regulatory, communications and GR aligned. Second, I built the local case. I pulled the property tax each plant paid to schools and local governments, about $2.93 million a year and more than $45 million over time, and converted it into job equivalents for leave-behinds. Third, I built a power matrix of the 104th General Assembly to decide who to see first. Fourth, I prepared the legislative briefing on the Venice Energy Center for the Senate Energy and Public Utilities Committee in July 2026.",
+   r:"[State the current outcome: e.g., legislative interest, any bill language, leadership decisions.] The campaign gave leadership a single source of truth and a set of district-level numbers legislators could repeat. It also became the proof case for how I think GR should work, which is analysis first, then relationships.",
+   l:"A reliability argument lands when you tie megawatts to a school district a legislator represents.",
+   short:"CEJA set retirement dates for five of our gas peaking plants, 2,092 megawatts, just as the grid operators warned about shortfalls. I helped build the campaign to keep them available. I ran a weekly cross-functional call, built a single tracker, converted each plant's property taxes into district-level leave-behinds, about $45 million over time, and briefed the Senate Energy committee. Legislators had numbers they could repeat, and leadership had one source of truth.",
+   follow:["What was the outcome?","Who pushed back internally?","How did you decide which legislators to see first?","What would you do differently?"],
+   verify:["Current status or outcome of the campaign","Comfort sharing the $45M and 2,092 MW figures outside Ameren"]},
+
+  {id:"datacenter", title:"Leading data center, storage and decarbonization bills", tags:["lead","current","coalition","strategy"],
+   hook:"Data centers are ComEd's biggest growth and affordability issue. You already lead this work for Ameren's GR department.",
+   numbers:["GR department lead on data center, battery storage and decarbonization bills","Cross-functional group with Economic Development and Clean Energy Transition, first met October 8, 2026"],
+   s:"Data center and large-load bills multiplied in Springfield, and they touch economic development, transmission, rates and clean energy goals at once. Ameren had several teams with a stake and no single coordinating point in GR.",
+   t:"I became the Government Relations lead on data center, battery storage and decarbonization bills, responsible for coordinating internal positions, communications and advocacy, without a formal reporting line over any of the teams.",
+   a:"I set up a cross-functional group with Economic Development and Clean Energy Transition. At our first meeting on October 8, 2026, I walked the group through veto session process and how GR routes and analyzes bills, so everyone understood the timeline we were working against. I built and maintain a data center legislation knowledge center for the team, prepared bill analyses for Senate and House hearings, and made sure a colleague from Economic Development could report out to the broader group so information did not stall with me. [Add a specific bill and what the group decided.]",
+   r:"[Add result: e.g., unified company position on X bill, testimony delivered, amendment secured.] The group now has one calendar, one set of facts and a clear process for taking positions before session pressure forces them.",
+   l:"When you lead without authority, the first thing to give people is a shared timeline.",
+   short:"I'm GR's lead on data center, battery storage and decarbonization bills, which cut across economic development, transmission, rates and clean energy. I pulled those teams into one working group, started by teaching the veto session process so we shared a timeline, built a knowledge center and hearing analyses, and set up report-outs so information flowed. [Result.]",
+   follow:["What is Ameren's position on who pays for data center load?","How did you handle disagreement between Economic Development and Clean Energy?","What did you learn about data centers that surprised you?"],
+   verify:["One specific bill and outcome","Anything here that is confidential company strategy"]},
+
+  {id:"crga", title:"CEJA and CRGA negotiations", tags:["coalition","strategy","current"],
+   hook:"You and ComEd's team worked the same two landmark bills. It is your strongest shared reference with the panel.",
+   numbers:["CRGA signed January 8, 2026, effective June 1, 2026","3 GW battery storage target","IPA estimate of $13.4B in consumer savings over 20 years","IPA estimate of $4.49 to $10.59 a month savings for average Ameren residential customers by 2031"],
+   s:"CRGA was a thousand-page energy bill negotiated across many months with labor, environmental groups, consumer advocates, generators and both utilities. Battery storage, one of my issue areas, was central.",
+   t:"My role was [specify: GR lead on storage provisions, coordinating Ameren SMEs on positions, tracking language changes, briefing members].",
+   a:"[Walk through three or four concrete actions. Examples to adapt: I routed each draft section to the right internal experts and turned their input into a position within [timeframe]; I briefed members in our territory on what the storage provisions meant for their districts; I worked with industry peers where our interests overlapped; I flagged language that created risk and proposed alternatives.]",
+   r:"The Governor signed CRGA on January 8, 2026. [Name a provision you influenced or protected.] The IPA estimates it will save Ameren residential customers roughly $4.49 to $10.59 a month by 2031.",
+   l:"[Your lesson, e.g., large omnibus bills reward the team that can turn around a position fastest.]",
+   short:"[60 second version after you fill in the role and actions.]",
+   follow:["What part of CRGA did you personally shape?","Where did Ameren and ComEd agree and disagree?","What would you change about the final law?"],
+   verify:["Your specific role and actions","Which provisions you influenced"]},
+
+  {id:"eima", title:"EIMA passage and the 2013 President's Award", tags:["coalition","strategy","influence"],
+   hook:"EIMA built the grid modernization era ComEd's reliability record rests on.",
+   numbers:["EIMA, 2011","President's Award, 2013, for legislative support of passage"],
+   s:"In 2011 Illinois utilities pursued the Energy Infrastructure Modernization Act to fund grid modernization through performance-based formula rates. It was contentious and required a veto override.",
+   t:"I supported Ameren's legislative effort on EIMA, specifically [your role].",
+   a:"[Three or four concrete actions you took, such as member meetings in Ameren territory, vote counts, coordinating with labor or peers, preparing materials.]",
+   r:"EIMA became law and funded a decade of grid modernization. My work was recognized with Ameren's President's Award in 2013.",
+   l:"[Lesson.]",
+   short:"[60 second version.]",
+   follow:["What did you personally do?","What did EIMA get right and wrong?"],
+   verify:["Your role and actions","Note that 2011 falls inside the period covered by ComEd's deferred prosecution agreement. Tell it through your own work and Ameren's coalition, and do not comment on ComEd's conduct."]},
+
+  {id:"harmful", title:"Stopping or amending a harmful bill", tags:["influence","coalition","crisis"],
+   hook:"Defeating or modifying harmful legislation is a primary duty in the ComEd posting.",
+   numbers:["[Bill number, session]","[What it would have cost customers or the company]"],
+   s:"[Bill number] would have [describe the harm] for Ameren customers.",
+   t:"I was responsible for [leading or supporting] Ameren's effort to stop or change it.",
+   a:"My approach followed the method I use for any harmful bill. I identified industry peers with overlapping concerns and coordinated so we spoke with one voice. I met directly with the chief sponsor to understand what problem they were trying to solve. I brought [data or alternative language] that addressed their goal without the harm. I mobilized [allies] to weigh in with members on the committee.",
+   r:"[The bill was held, amended or narrowed. Name the change.]",
+   l:"Most sponsors have a real problem in mind. Solve their problem and you can usually remove the harm.",
+   short:"[60 second version.]",
+   follow:["How did you keep peers aligned?","What did the sponsor say?","What would you have done if the sponsor refused?"],
+   verify:["Pick one real bill you can name, even in general terms"]},
+
+  {id:"koehler", title:"Grid plan outreach with a long-time senator", tags:["influence","coalition","current"],
+   hook:"ComEd's Grid Plan 2 is before the ICC now. This shows you can educate members on a grid plan without lobbying the merits of a pending case.",
+   numbers:["Relationship with Senator Koehler of Peoria, about 16 years","Grid Outreach Legislator Conversation Guide"],
+   s:"Ameren Illinois was rolling out its Multi-Year Grid Plan, and legislators were hearing about rates without much context on what the investment bought.",
+   t:"I was asked to start legislator outreach and test a new conversation guide I helped develop.",
+   a:"I chose Senator Koehler for the first conversation because I have known him for about 16 years and trusted him to give honest feedback. I set it up as an informational lunch in Peoria with no ask, walked through what the plan meant for his district, and asked what was missing from our explanation. [Add what he told you and what you changed in the guide.]",
+   r:"[Result: guide revised, follow-up meetings set, his feedback used with other members.]",
+   l:"The best first test of a message is a friendly expert who will tell you what does not work.",
+   short:"[60 second version.]",
+   follow:["What did he push back on?","How do you keep a long relationship appropriate?"],
+   verify:["What came out of the lunch"]},
+
+  {id:"polrd", title:"Political R&D: testing an idea and changing course", tags:["strategy","process","influence","ethics","curve"],
+   hook:"Shows judgment and intellectual honesty, and it gives you a ready answer for questions about failure or tough feedback.",
+   numbers:["385-bill dataset across 20 subject areas, 2020 to 2026","300+ tracked bills across six sessions analyzed","Recommendation: quarterly internal listening check-ins and a statutory deadline calendar"],
+   s:"I believed Ameren GR could benefit from a formal legislative foresight function, which I called Political R&D, scanning five to ten years out.",
+   t:"I took it on myself to test whether that function was worth building before asking leadership to invest in it.",
+   a:"I built a 385-bill dataset across 20 subject areas from 2020 to 2026 and analyzed more than 300 tracked bills across six sessions to see whether issues were predictable. I took the idea to a mentor, Ameren's VP of Clean Energy Transition, and got coaching on how to socialize it. I tested several framings against the company's strategic project criteria. The evidence showed that the pre-filing period in Illinois is opaque by design and that early warning comes from relationships, which GR already does well.",
+   r:"I concluded a formal function was not needed and changed my recommendation to small, practical tweaks, quarterly internal listening check-ins with business units and a statutory deadline calendar, presented to the Ameren Illinois president as a one-page infographic. [Add his response if known.]",
+   l:"Testing your own idea hard is a better use of leadership's time than pitching it hard.",
+   short:"I thought Ameren needed a formal legislative foresight function. Before asking for resources, I tested it. I built a 385-bill dataset and analyzed six sessions of tracked bills. The data showed early warning in Illinois comes from relationships, which we already do well. So I dropped the big pitch and recommended two small fixes, quarterly listening check-ins with business units and a statutory deadline calendar.",
+   follow:["Was it hard to walk away from your own idea?","What did your mentor tell you?","How did leadership react?"],
+   verify:["Leadership's reaction to the final recommendation"]},
+
+  {id:"sme", title:"Building the SME routing tool", tags:["process","lead","conflict"],
+   hook:"The posting asks for process enhancements that create value. This is a tool you built and finished.",
+   numbers:["GR Issue x SME Finder workbook, built October 2026","Earlier routing tool: 109 topics across 25 sections","Average of about 60 assigned bills a session"],
+   s:"During session GR has to send each bill to the right internal expert fast. We relied on memory and an outdated partner list, so bills sometimes went to the wrong person or sat waiting.",
+   t:"I set out to build a tool any GR colleague could use to find the right leader, department or cross-functional team for a bill in minutes.",
+   a:"I combined the master bill list, the December 2025 Internal Business Partner List and an all-inclusive Illinois bill topic file. I broadened the topics to cover every part of an electric and gas utility, including Ameren Missouri and ATXI experts where Illinois bills reach them. I built it as an Excel workbook with suggested subject tags that colleagues confirm from the bill summary, and I flagged open entries for verification rather than guessing.",
+   r:"The tool was built by October 31, 2026. [Add adoption and time saved, e.g., routing time cut from X to Y.]",
+   l:"A process tool succeeds when it fits how people already work. Suggested tags plus human judgment beat a perfect taxonomy nobody uses.",
+   short:"Bills were getting routed to experts by memory and an old list. I built a workbook that maps every utility topic to the right leader or team, using our bill list, the latest partner list and a full topic file. Colleagues confirm suggested tags from the bill summary. [Result.]",
+   follow:["How did you get colleagues to use it?","How do you keep it current?"],
+   verify:["Adoption and time saved"]},
+
+  {id:"econ", title:"Powering Illinois: utilities and the state economy", tags:["data","influence","current"],
+   hook:"This analysis covers ComEd and Ameren together. It shows you can make the economic case for grid investment, which ComEd needs on affordability.",
+   numbers:["Counties served by ComEd and Ameren Illinois produce roughly 95 percent of state GDP (provisional)","ComEd about 4.2M customers, Ameren Illinois about 1.2M","BEA 2024 county GDP data","Data center study: 6.5 GW projected statewide 2026 to 2035, $56.6B investment"],
+   s:"Legislators were hearing about utility costs but rarely about what utility investment supports in the state economy.",
+   t:"I set out to build an economic development case for why utility investment matters, usable with legislators, the ICC and internal leadership.",
+   a:"I worked from Bureau of Economic Analysis county GDP data and assigned Illinois's 102 counties to ComEd and Ameren Illinois territories. I found that the areas the two utilities serve produce roughly 95 percent of state GDP, a provisional figure until official territory lists are applied. I paired that with findings from a University of Illinois and Illinois Economic Policy Institute data center study and built a white paper and a one-page legislator flyer. When my first drafts read like a regulatory brief, I reset to a simpler economic development story.",
+   r:"[Add how it was used and the response.]",
+   l:"Pick the one number that changes how someone sees the issue, then build everything around it.",
+   short:"I wanted legislators to see utilities as the backbone of the state economy, not just a bill. I mapped BEA county GDP to ComEd and Ameren territories and found the areas we serve produce about 95 percent of state GDP. I turned that into a white paper and a one-page flyer. [Result.]",
+   follow:["How solid is the 95 percent figure?","Served versus contributed, what is the difference?"],
+   verify:["Say provisional when citing 95 percent","How it was used"]},
+
+  {id:"storm", title:"Storm response and legislator updates", tags:["crisis","influence"],
+   hook:"ComEd had major storm outages in July 2026. GR's storm role is identical at both utilities.",
+   numbers:["[Storm, date, customers out]"],
+   s:"[Storm, date, scale.]",
+   t:"Like everyone in GR, I work with Ameren's integrated enterprise storm response group from before a storm hits. My job was keeping affected legislators informed.",
+   a:"[Actions: pre-storm briefings, damage assessment updates, restoration estimates, responding to constituent cases, cadence of updates.]",
+   r:"[Result: feedback from legislators, constituent cases resolved.]",
+   l:"During an outage, legislators want to hear from you before their constituents call them.",
+   short:"[60 second version.]",
+   follow:["How did you handle a legislator who was angry about restoration time?"],
+   verify:["Pick one storm"]},
+
+  {id:"governor", title:"Working with the Governor's office", tags:["coalition","influence"],
+   hook:"Energy policy in Illinois runs through the Governor's office as much as the General Assembly.",
+   numbers:["Engagement with one of the Governor's deputies on energy matters"],
+   s:"[Issue.]",
+   t:"I engage one of the Governor's deputies on energy matters, raising Ameren's issues with the administration and responding to issues the administration brings to us.",
+   a:"[Actions: how you raised the issue, the data you brought, how you kept it two-way.]",
+   r:"[Result.]",
+   l:"[Lesson.]",
+   short:"[60 second version.]",
+   follow:["How do you handle it when the administration's priority conflicts with the company's?"],
+   verify:["Do not name the deputy in the interview unless it helps"]},
+
+  {id:"ethics", title:"Political fundraising within the rules", tags:["ethics","curve"],
+   hook:"For ComEd, nothing matters more than showing you handle political activity by the book.",
+   numbers:["Coordinated political fundraising events since 2017, about 3 to 4 a year, more than 30 in all","Familiar with Ameren PAC bylaws, investment strategy and ethics"],
+   s:"Since 2017 I have coordinated about three or four political fundraising events a year for Ameren, more than 30 in all.",
+   t:"My responsibility is to make sure every event complies with state law and company policy.",
+   a:"[Describe your actual process: approvals, compliance review, contribution limits, record-keeping. Then describe one moment you caught or prevented a problem: e.g., an invitation or request that did not fit the rules and how you handled it.]",
+   r:"[No compliance issues across more than 30 events, if true.]",
+   l:"Process protects people. When the rules are clear and followed every time, nobody is put in a position they should not be in.",
+   short:"[60 second version.]",
+   follow:["Has anyone ever asked you to bend a rule?","What would you do if a senior leader asked for something questionable?"],
+   verify:["Your exact process","One concrete moment"]},
+
+  {id:"lobbyists", title:"Directing contract lobbyists", tags:["lead","ethics","conflict"],
+   hook:"The director manages ComEd's contract lobbyists, the exact relationship at the center of the 2020 scandal. Show structure and accountability.",
+   numbers:["Work with and sometimes direct contract lobbyists and inside counsel"],
+   s:"[Session and issue where you directed contract lobbyists.]",
+   t:"I was responsible for [assigning coverage, setting priorities, tracking contacts].",
+   a:"[Actions: clear assignments, check-ins, what you asked them to report, how you corrected course.]",
+   r:"[Result.]",
+   l:"[Lesson.]",
+   short:"[60 second version.]",
+   follow:["How do you know a contract lobbyist is actually adding value?","How do you make sure they follow company policy?"],
+   verify:["One concrete example"]},
+
+  {id:"southwest", title:"Leading a team at Southwest Benefit Program", tags:["lead"],
+   hook:"Addresses the five-year supervisory requirement directly.",
+   numbers:["Program Director, 1996 to 2003","Team of 7","Board, outside legal counsel and accountants","About 25,000 union members"],
+   s:"From 1996 to 2003 I was Program Director at Southwest Benefit Program, which served about 25,000 union members.",
+   t:"I led a team of seven, managed outside legal counsel and accountants, and worked directly with the board.",
+   a:"[Pick one leadership moment: a hire, a performance issue, a new process, a board challenge. Walk through what you did.]",
+   r:"[Result.]",
+   l:"[Lesson you still use at Ameren.]",
+   short:"Before Ameren I ran a benefit program for about 25,000 union members, leading a team of seven and managing outside counsel, accountants and a board. [One example and result.]",
+   follow:["That was a while ago. How have you led people since?"],
+   verify:["Pick one moment"],
+   bridge:"Answer to the follow-up: Since then I lead through influence every day, directing contract lobbyists, running cross-functional groups and serving as GR lead on data center, storage and decarbonization bills."},
+
+  {id:"setback", title:"A setback or failure (you supply this)", tags:["curve"],
+   hook:"Every panel asks some version of this.",
+   numbers:[],
+   s:"[A real setback: a bill that passed despite your effort, a relationship misjudged, a deadline missed.]",
+   t:"[Your responsibility.]",
+   a:"[What you did when it went wrong.]",
+   r:"[What happened.]",
+   l:"[What you do differently now.]",
+   short:"[60 second version.]",
+   follow:["What would you do differently?"],
+   verify:["Choose a story with real ownership. The Political R&D story can serve as a backup."]}
+];
+
+PREP.scripts = {
+  tmay60:"I'm Rick Coats, a senior government relations representative at Ameren Illinois, where I've represented the company before the General Assembly for 18 years, from the 95th through the 104th General Assembly and under four governors. Right now I'm GR's lead on data center, battery storage and decarbonization bills, and I worked CEJA and CRGA, the same bills your team worked. Before Ameren I ran a benefit program for 25,000 union members and led a team of seven. I'm here because this role brings together what I do best, legislative strategy, coalitions and leading people, at the company at the center of Illinois energy policy.",
+  tmay90:"I'm Rick Coats. For 18 years I've represented Ameren Illinois before the General Assembly, the administration and state agencies, across ten General Assemblies and four governors. My work runs from EIMA in 2011, where I earned Ameren's President's Award, through FEJA, CEJA and CRGA. Today I'm GR's lead on data center, battery storage and decarbonization bills, I direct contract lobbyists on my issues, and I build the internal positions with experts across the company. Two recent examples are a multi-year campaign to keep 2,092 megawatts of gas peaking capacity available, and an economic analysis showing the counties our two utilities serve produce about 95 percent of state GDP. Before Ameren I led a team of seven running a benefit program for 25,000 union members. I want this role because ComEd is where the biggest questions in Illinois energy are being decided, data centers, affordability and the grid we need, and I'm ready to lead a team doing that work.",
+  why:"Three reasons. First, the issues. Data centers, affordability and capacity are the defining questions in Illinois energy, and ComEd is at the center of every one. Second, the moment. ComEd has rebuilt how it does government affairs, and I want to be part of a team whose credibility comes from information and follow-through. Third, the role. I've led through influence for years. This is the chance to lead a team directly and bring everything I've learned to a bigger platform.",
+  whyleave:"I've had a great career at Ameren and I'm proud of it. I'm not running from anything. This is about the scope of the work and the chance to lead a team at the center of the state's biggest energy decisions. Keep it positive, never criticize Ameren, and do not discuss Ameren's confidential positions.",
+  closing:"Thank you for your time. I want to leave you with three things. I know Springfield and the issues ComEd is facing, from data centers to affordability. I've spent 18 years building relationships on information and follow-through, which is how this team works today. And I'm ready to lead people again and help this team win. I want this job, and I'd welcome the chance to do it.",
+  plan90:"First 30 days, listen. Meet each team member, the SVP, regulatory, legal and compliance, and the contract lobbyists. Meet key members and staff on the energy committees. Learn the agenda, pending ICC matters and the compliance framework. Days 31 to 60, align. Agree on session priorities with the SVP, set the team's coverage and reporting rhythm, and identify one quick win. Days 61 to 90, deliver. Run the pre-session plan, brief executives, and show the first measurable result."
+};
+
+PREP.leaderNotes = {
+  "Calvin Butler":"Your EEI engagement is a natural bridge. His message is that large users should carry the risk, not families. Echo it if data centers come up.",
+  "Gil Quiniones":"Public power background at NYPA. He values reliability, equity and affordability language. The Long-Range Strategy is his framework, so use People, Power and Progress.",
+  "Melissa Washington":"You know her. She came from customer operations, so affordability, bill support and customer experience matter to her. Reach her directly per your outreach plan. Thank her by name for any introduction.",
+  "Keisha Parker":"You have already discussed your interest with her, and she is reportedly not part of the hiring decision. She testified as a witness at the 2023 ComEd Four trial while VP of External Affairs. That is public record. Never raise it, never reference it, and treat her with the same warmth as anyone else. Confirm whether the director reports to her or to Melissa.",
+  "David Perez":"Storm response and reliability. Your storm GR story connects here.",
+  "Josh Levin":"Rate filings and grid plan numbers. Your data and economic analysis stories connect here.",
+  "Derek Lesko":"Gatekeeper for the CEO's agenda. Be easy to work with."
+};
+
+PREP.privateNotes = [
+  "The current director, Michael Henry, leaves June 30, 2027. Do not mention this in the interview unless they raise it.",
+  "A ComEd lobbyist who is well regarded by Melissa encouraged you to apply. Keep that relationship light so it does not look orchestrated.",
+  "Decide when to tell your Ameren supervisor before any reference check.",
+  "Confirm whether the role reports to the VP or the SVP. It changes who you should prepare most for.",
+  "Never share Ameren confidential positions or strategy in interviews. Talk about your role and methods, and use public facts."
+];
+
+</script>
+<script>
+(function(){
+"use strict";
+var P = window.PREP;
+var PRIV = !!P.isPrivate;
+var KEY = PRIV ? "interviewlab_private_v1" : "interviewlab_public_v1";
+
+/* ---------- storage ---------- */
+var S = {practiced:{}, mastered:{}, quizBest:0, quizRuns:0, mocks:[], essays:{}, notes:{}, date:"", checks:{}};
+try{ var raw = localStorage.getItem(KEY); if(raw){ var o = JSON.parse(raw); for(var k in o) S[k]=o[k]; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ---------- theme ---------- */
+var root = document.documentElement;
+try{ var th = localStorage.getItem("interviewlab_theme"); if(th) root.setAttribute("data-theme", th); }catch(e){}
+document.getElementById("themeBtn").onclick = function(){
+  var cur = root.getAttribute("data-theme");
+  var dark = cur ? cur==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = dark ? "light" : "dark";
+  root.setAttribute("data-theme", next);
+  try{ localStorage.setItem("interviewlab_theme", next); }catch(e){}
+};
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
+function hl(s){ return esc(s).replace(/\[([^\]]+)\]/g,'<mark style="background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:0 3px">[$1]</mark>'); }
+function $(sel,el){ return (el||document).querySelector(sel); }
+function $$(sel,el){ return Array.prototype.slice.call((el||document).querySelectorAll(sel)); }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function catName(id){ for(var i=0;i<P.categories.length;i++) if(P.categories[i].id===id) return P.categories[i].name; return id; }
+function story(id){ if(!P.stories) return null; for(var i=0;i<P.stories.length;i++) if(P.stories[i].id===id) return P.stories[i]; return null; }
+function qById(id){ for(var i=0;i<P.questions.length;i++) if(P.questions[i].id===id) return P.questions[i]; return null; }
+function fmt(sec){ var m=Math.floor(Math.abs(sec)/60), s=Math.abs(sec)%60; return (sec<0?"-":"")+m+":"+(s<10?"0":"")+s; }
+function words(s){ s=(s||"").trim(); return s? s.split(/\s+/).length : 0; }
+var timers=[];
+function clearTimers(){ timers.forEach(function(t){clearInterval(t);}); timers=[]; stopRec(); }
+
+/* ---------- nav ---------- */
+var NAV = [
+  {grp:"Start"},
+  {id:"home", label:"Dashboard", ic:"⌂"},
+  {id:"star", label:"STAR method", ic:"★"},
+  {grp:"Prepare"},
+  {id:"stories", label:"Story bank", ic:"✎", priv:true},
+  {id:"questions", label:"Question bank", ic:"?"},
+  {id:"scripts", label:"Scripts", ic:"❝", priv:true},
+  {grp:"Practice"},
+  {id:"verbal", label:"Speak it", ic:"🎙"},
+  {id:"essay", label:"Write it", ic:"✍"},
+  {id:"quiz", label:"Multiple choice", ic:"◉"},
+  {id:"flash", label:"Flashcards", ic:"▤"},
+  {id:"recall", label:"Recall drill", ic:"⚡", priv:true},
+  {id:"mock", label:"Mock interview", ic:"▶"},
+  {grp:"The company"},
+  {id:"company", label:"ComEd and Exelon", ic:"⚑"},
+  {id:"issues", label:"Hot issues", ic:"⚠"},
+  {id:"leaders", label:"Leadership", ic:"☺"},
+  {id:"news", label:"News tracker", ic:"◷"},
+  {grp:"Interview day"},
+  {id:"ask", label:"Questions to ask", ic:"↩"},
+  {id:"dayof", label:"Day-of toolkit", ic:"✓"},
+  {id:"sources", label:"Sources", ic:"§"}
+].filter(function(n){ return !n.priv || PRIV; });
+
+function buildNav(cur){
+  var side="", mob="";
+  NAV.forEach(function(n){
+    if(n.grp){ side += '<div class="grp">'+esc(n.grp)+'</div>'; return; }
+    var on = n.id===cur ? ' class="on" aria-current="page"' : '';
+    side += '<a href="#'+n.id+'"'+on+'><span aria-hidden="true">'+n.ic+'</span>'+esc(n.label)+'</a>';
+    mob += '<a href="#'+n.id+'"'+on+'>'+esc(n.label)+'</a>';
+  });
+  $("#sidenav").innerHTML = side; $("#mobnav").innerHTML = mob;
+  var a = $("#mobnav a.on"); if(a && a.scrollIntoView) a.scrollIntoView({inline:"center",block:"nearest"});
+}
+
+/* ---------- readiness ---------- */
+function readiness(){
+  var qDone = Object.keys(S.practiced).length / P.questions.length;
+  var st = PRIV && P.stories ? Object.keys(S.mastered).length / P.stories.length : null;
+  var quiz = S.quizBest/100;
+  var mock = Math.min(S.mocks.length,3)/3;
+  var parts = st===null ? [[qDone,.4],[quiz,.35],[mock,.25]] : [[qDone,.3],[st,.3],[quiz,.2],[mock,.2]];
+  var v=0; parts.forEach(function(p){ v+=Math.min(1,p[0])*p[1]; });
+  return Math.round(v*100);
+}
+
+/* ---------- views ---------- */
+var V = {};
+
+V.home = function(el){
+  var r = readiness();
+  var days = "";
+  if(S.date){ var d = Math.ceil((new Date(S.date+"T09:00:00") - new Date())/86400000); days = d>=0 ? d+" days" : "Done"; }
+  var q = P.questions[Math.floor(Math.random()*P.questions.length)];
+  var f = P.mcq.filter(function(m){return m.kind==="Company";}); f = f[Math.floor(Math.random()*f.length)];
+  var st = PRIV ? P.stories[Math.floor(Math.random()*(P.stories.length-1))] : null;
+  el.innerHTML =
+  '<div class="hero">'+
+    '<div class="card"><div class="kicker">'+(PRIV?'Private edition':'Behavioral interview lab')+'</div>'+
+      '<h1>'+esc(P.meta.title)+'</h1><p class="muted">'+esc(P.meta.subtitle)+'</p>'+
+      '<p>Build answers with STAR, rehearse them out loud and in writing, test what you know about the company, then run a timed mock interview.</p>'+
+      '<div class="row"><a class="btn" href="#mock">Start a mock interview</a><a class="btn ghost" href="#star">Review STAR</a></div>'+
+      '<p class="small muted" style="margin-top:12px">Updated '+esc(P.meta.updated)+'. Progress saves in this browser only.</p></div>'+
+    '<div class="card" style="text-align:center"><div class="kicker">Readiness</div><div class="ring" style="--p:'+r+'"><b>'+r+'%</b></div>'+
+      '<label class="lab" for="idate"><span>Interview date</span><span class="muted">'+esc(days)+'</span></label><input type="date" id="idate" value="'+esc(S.date)+'"></div>'+
+  '</div>'+
+  '<div class="grid g4" style="margin-bottom:20px">'+
+    stat(Object.keys(S.practiced).length+" / "+P.questions.length,"Questions practiced")+
+    (PRIV? stat(Object.keys(S.mastered).length+" / "+P.stories.length,"Stories mastered") : stat(P.categories.length,"Competency areas"))+
+    stat(S.quizBest+"%","Best quiz score")+
+    stat(S.mocks.length,"Mock interviews")+
+  '</div>'+
+  '<h2>Today\'s drill</h2>'+
+  '<div class="grid g3">'+
+    '<div class="card"><div class="kicker">Question</div><p><b>'+esc(q.q)+'</b></p><p class="small muted">'+esc(catName(q.cat))+'</p><a class="btn sm" href="#verbal" data-q="'+q.id+'" id="drillQ">Practice it</a></div>'+
+    '<div class="card"><div class="kicker">Company fact</div><p><b>'+esc(f.q)+'</b></p><details><summary class="small">Show answer</summary><p>'+esc(f.opts[f.a])+'</p><p class="small muted">'+esc(f.why)+'</p></details></div>'+
+    (st? '<div class="card"><div class="kicker">Story to recall</div><p><b>'+esc(st.title)+'</b></p><p class="small muted">Say the 60-second version out loud before you open it.</p><a class="btn sm ghost" href="#stories" data-s="'+st.id+'" id="drillS">Open story</a></div>'
+       : '<div class="card"><div class="kicker">Hot issue</div><p><b>'+esc(P.company.topics[0].title)+'</b></p><p class="small">'+esc(P.company.topics[0].points[0])+'</p><a class="btn sm ghost" href="#issues">Read more</a></div>')+
+  '</div>'+
+  (PRIV? '<h2 style="margin-top:24px">Private notes</h2><div class="callout priv"><ul class="clean">'+P.privateNotes.map(function(n){return '<li>'+esc(n)+'</li>';}).join("")+'</ul></div>' : '')+
+  '<div class="row" style="margin-top:20px"><button class="btn ghost sm" id="resetAll">Reset all progress</button></div>';
+  $("#idate").onchange=function(){ S.date=this.value; save(); route(); };
+  $("#drillQ").onclick=function(){ pendingQ=this.getAttribute("data-q"); };
+  var ds=$("#drillS"); if(ds) ds.onclick=function(){ pendingS=this.getAttribute("data-s"); };
+  $("#resetAll").onclick=function(){ if(confirm("Reset all saved progress in this browser?")){ S={practiced:{},mastered:{},quizBest:0,quizRuns:0,mocks:[],essays:{},notes:{},date:"",checks:{}}; save(); route(); } };
+};
+function stat(v,l){ return '<div class="card stat"><b>'+esc(v)+'</b><span>'+esc(l)+'</span></div>'; }
+
+V.star = function(el){
+  var s=P.star, colors=["var(--navy)","#7a8aa6","var(--accent)","var(--good)"];
+  el.innerHTML = '<h1>The STAR method</h1><p class="muted">ComEd interviews use STAR. Every behavioral answer should move through these four parts.</p>'+
+  '<div class="star">'+s.parts.map(function(p){return '<div><b>'+p.k+'</b><h3>'+esc(p.name)+'</h3><p class="small">'+esc(p.tip)+'</p><span class="tag acc">~'+p.pct+'% of time</span></div>';}).join("")+'</div>'+
+  '<div class="card"><h3>Timing</h3><div class="bar" role="img" aria-label="Time split Situation 15, Task 10, Action 50, Result 25 percent">'+s.parts.map(function(p,i){return '<span style="width:'+p.pct+'%;background:'+colors[i]+'" title="'+esc(p.name)+'"></span>';}).join("")+'</div><p>'+esc(s.timing)+'</p></div>'+
+  '<div class="grid g2" style="margin-top:16px"><div class="card"><h3>Common mistakes</h3><ul class="clean">'+s.mistakes.map(function(m){return '<li>'+esc(m)+'</li>';}).join("")+'</ul></div>'+
+  '<div class="card"><h3>The I versus we test</h3><p>Use we to set context. Use I for every action. If a panelist cannot tell what you personally did, the answer does not count.</p><h3>Before you answer</h3><ul class="clean"><li>Pause two seconds and pick the story</li><li>Say the headline result first if it is strong</li><li>Stop after the lesson and let them ask follow-ups</li></ul></div></div>'+
+  '<h2 style="margin-top:24px">Same question, three answers</h2><p><b>'+esc(s.example.q)+'</b></p>'+
+  '<div class="tabs" id="exTabs"><button class="on" data-k="weak">Weak</button><button data-k="good">Good</button><button data-k="strong">Strong</button></div>'+
+  '<div class="card" id="exBody"></div>';
+  var notes={weak:"No situation, no personal action, no number, and a generic closing line.",good:"Clear STAR but thin on actions and no lesson.",strong:"Specific stakes, first-person actions in order, a concrete result and a one-line lesson. About ninety seconds spoken."};
+  function show(k){ $$("#exTabs button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-k")===k);}); $("#exBody").innerHTML='<p>'+esc(s.example[k])+'</p><p class="small muted">'+esc(notes[k])+'</p>'; }
+  $$("#exTabs button").forEach(function(b){ b.onclick=function(){show(b.getAttribute("data-k"));}; }); show("weak");
+};
+
+var pendingS=null, pendingQ=null;
+V.stories = function(el){
+  var filter="all";
+  el.innerHTML='<h1>Story bank</h1><p class="muted">Your experiences, scripted in STAR. Highlighted brackets are details only you can fill in. Mark a story mastered once you can tell it without looking.</p>'+
+  '<div class="tabs" id="stTabs"></div><div id="stList"></div>';
+  var tags=[["all","All"]].concat(P.categories.map(function(c){return [c.id,c.name.split(" ")[0]];}));
+  function draw(){
+    $("#stTabs").innerHTML=tags.filter(function(t){return t[0]==="all"||P.stories.some(function(s){return s.tags.indexOf(t[0])>=0;});}).map(function(t){return '<button class="'+(filter===t[0]?'on':'')+'" data-f="'+t[0]+'">'+esc(t[1])+'</button>';}).join("");
+    $$("#stTabs button").forEach(function(b){b.onclick=function(){filter=b.getAttribute("data-f");draw();};});
+    $("#stList").innerHTML=P.stories.filter(function(s){return filter==="all"||s.tags.indexOf(filter)>=0;}).map(storyCard).join("");
+    $$("[data-master]").forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-master"); if(S.mastered[id]) delete S.mastered[id]; else S.mastered[id]=1; save(); draw();};});
+    $$("[data-view]").forEach(function(b){b.onclick=function(){var id=b.getAttribute("data-view"),k=b.getAttribute("data-k"); $$('[data-view="'+id+'"]').forEach(function(x){x.classList.toggle("on",x===b);}); $("#body-"+id).innerHTML=storyBody(story(id),k);};});
+    if(pendingS){ var d=$("#st-"+pendingS); if(d){ d.open=true; d.scrollIntoView({block:"start"}); } pendingS=null; }
+  }
+  draw();
+};
+function storyCard(s){
+  var qs=P.questions.filter(function(q){return q.stories.indexOf(s.id)>=0;});
+  return '<details class="qcard" id="st-'+s.id+'"><summary><span class="chev">▸</span><span style="flex:1">'+esc(s.title)+'<br>'+s.tags.map(function(t){return '<span class="tag">'+esc(catName(t))+'</span>';}).join("")+'</span>'+(S.mastered[s.id]?'<span class="done" title="Mastered">✔</span>':'')+'</summary>'+
+  '<div style="margin-top:12px"><div class="callout navy"><b>ComEd hook.</b> '+esc(s.hook)+'</div>'+
+  (s.numbers.length?'<p><b>Key numbers</b></p><ul class="clean">'+s.numbers.map(function(n){return '<li>'+hl(n)+'</li>';}).join("")+'</ul>':'')+
+  '<div class="tabs"><button class="on" data-view="'+s.id+'" data-k="full">Full STAR</button><button data-view="'+s.id+'" data-k="short">60 seconds</button><button data-view="'+s.id+'" data-k="follow">Follow-ups</button></div>'+
+  '<div id="body-'+s.id+'">'+storyBody(s,"full")+'</div>'+
+  (qs.length?'<p class="small muted" style="margin-top:10px">Answers: '+qs.map(function(q){return esc(q.q);}).join(" · ")+'</p>':'')+
+  '<div class="row" style="margin-top:10px"><button class="btn sm '+(S.mastered[s.id]?'ghost':'')+'" data-master="'+s.id+'">'+(S.mastered[s.id]?'Unmark mastered':'Mark mastered')+'</button></div></div></details>';
+}
+function storyBody(s,k){
+  if(k==="short") return '<div class="script">'+hl(s.short)+'</div>';
+  if(k==="follow") return '<p><b>Likely follow-ups</b></p><ul class="clean">'+s.follow.map(function(f){return '<li>'+esc(f)+'</li>';}).join("")+'</ul>'+(s.bridge?'<div class="callout">'+esc(s.bridge)+'</div>':'')+(s.verify.length?'<p><b>Confirm before the interview</b></p><ul class="clean">'+s.verify.map(function(f){return '<li>'+esc(f)+'</li>';}).join("")+'</ul>':'');
+  return [["S","Situation",s.s],["T","Task",s.t],["A","Action",s.a],["R","Result",s.r],["L","Lesson",s.l]].map(function(p){return '<p><span class="tag acc">'+p[0]+'</span> <b>'+p[1]+'.</b> '+hl(p[2])+'</p>';}).join("");
+}
+
+V.questions = function(el){
+  var filter="all", term="";
+  el.innerHTML='<h1>Question bank</h1><p class="muted">'+P.questions.length+' behavioral questions across '+P.categories.length+' competencies. Each shows what the panel is listening for'+(PRIV?' and which of your stories fits':'')+'.</p>'+
+  '<input type="text" id="qsearch" placeholder="Search questions" aria-label="Search questions" style="margin-bottom:12px"><div class="tabs" id="qTabs"></div><div id="qCatBlurb" class="small muted" style="margin-bottom:10px"></div><div id="qList"></div>';
+  function draw(){
+    $("#qTabs").innerHTML=[["all","All"]].concat(P.categories.map(function(c){return [c.id,c.name];})).map(function(t){return '<button class="'+(filter===t[0]?'on':'')+'" data-f="'+t[0]+'">'+esc(t[1])+'</button>';}).join("");
+    $$("#qTabs button").forEach(function(b){b.onclick=function(){filter=b.getAttribute("data-f");draw();};});
+    var c=P.categories.filter(function(c){return c.id===filter;})[0]; $("#qCatBlurb").textContent=c?c.blurb:"";
+    var list=P.questions.filter(function(q){return (filter==="all"||q.cat===filter)&&(!term||q.q.toLowerCase().indexOf(term)>=0);});
+    $("#qList").innerHTML=list.map(function(q){
+      var sts=PRIV?q.stories.map(story).filter(Boolean):[];
+      return '<details class="qcard"><summary><span class="chev">▸</span><span style="flex:1">'+esc(q.q)+'<br><span class="tag">'+esc(catName(q.cat))+'</span></span>'+(S.practiced[q.id]?'<span class="done" title="Practiced">✔</span>':'')+'</summary><div style="margin-top:10px">'+
+      '<p><b>What they are listening for.</b> '+esc(q.probe)+'</p><p><b>A strong answer shows</b></p><ul class="clean">'+q.shows.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>'+
+      (sts.length?'<p><b>Your best stories</b> '+sts.map(function(s){return '<a href="#stories" class="tag nav" data-s="'+s.id+'">'+esc(s.title)+'</a>';}).join(" ")+'</p>':'')+
+      (PRIV&&!q.stories.length&&q.cat==="fit"?'<p class="small"><a href="#scripts">See your scripts</a></p>':'')+
+      '<div class="row"><a class="btn sm" href="#verbal" data-q="'+q.id+'">Speak it</a><a class="btn sm ghost" href="#essay" data-q="'+q.id+'">Write it</a></div></div></details>';
+    }).join("")||'<p class="muted">No matches.</p>';
+    $$("#qList [data-q]").forEach(function(a){a.onclick=function(){pendingQ=a.getAttribute("data-q");};});
+    $$("#qList [data-s]").forEach(function(a){a.onclick=function(){pendingS=a.getAttribute("data-s");};});
+  }
+  $("#qsearch").oninput=function(){term=this.value.toLowerCase();draw();};
+  draw();
+};
+
+V.scripts = function(el){
+  var sc=P.scripts;
+  function blk(t,txt,sec){ return '<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(t)+'</h3>'+(sec?'<span class="tag acc">~'+sec+'</span>':'')+'</div><div class="script" style="margin-top:10px">'+hl(txt)+'</div></div>'; }
+  el.innerHTML='<h1>Scripts</h1><p class="muted">Openers, fit answers and your close. Learn the shape, not the exact words.</p>'+
+  blk("Tell me about yourself, 60 seconds",sc.tmay60,"60s")+blk("Tell me about yourself, 90 seconds",sc.tmay90,"90s")+blk("Why ComEd, why this role",sc.why,"60s")+blk("Why leave your current company",sc.whyleave)+blk("First 90 days",sc.plan90,"60s")+blk("Closing statement",sc.closing,"45s");
+};
+
+/* ---------- recording ---------- */
+var rec=null, recChunks=[], recStream=null;
+function stopRec(){ try{ if(rec&&rec.state!=="inactive") rec.stop(); }catch(e){} if(recStream){ recStream.getTracks().forEach(function(t){t.stop();}); recStream=null; } }
+function canRec(){ return !!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder); }
+
+V.verbal = function(el){
+  var pool=P.questions, cur=pendingQ?qById(pendingQ):null; pendingQ=null;
+  var cat="all";
+  el.innerHTML='<h1>Speak it</h1><p class="muted">Answer out loud against the clock. Aim for ninety seconds to two minutes. Record yourself if you like, then score your answer honestly.</p>'+
+  '<div class="row" style="margin-bottom:12px"><select id="vcat" aria-label="Category" style="max-width:320px"><option value="all">Any category</option>'+P.categories.map(function(c){return '<option value="'+c.id+'">'+esc(c.name)+'</option>';}).join("")+'</select><button class="btn ghost" id="vnext">New question</button></div>'+
+  '<div class="card"><div class="kicker" id="vcatl"></div><h2 id="vq"></h2><div id="vhint"></div><div class="timer" id="vt">0:00</div>'+
+  '<div class="row" style="justify-content:center"><button class="btn" id="vstart">Start</button><button class="btn ghost" id="vstop">Stop</button>'+(canRec()?'<button class="btn ghost" id="vrec">● Record</button>':'')+'</div><div id="vplay" style="margin-top:12px;text-align:center"></div></div>'+
+  '<div class="card" style="margin-top:16px"><h3>Score your answer</h3><div id="vchecks"></div><div class="row" style="margin-top:10px"><button class="btn" id="vsave">Save score</button><span id="vres" class="muted"></span></div></div>';
+  var checks=["Situation in three sentences or fewer","Clear statement of my task","Three or more specific actions in the first person","A concrete result with a number or date","A one-line lesson","Finished between 1:30 and 2:30"];
+  $("#vchecks").innerHTML=checks.map(function(c,i){return '<label class="check"><input type="checkbox" data-i="'+i+'"><span>'+esc(c)+'</span></label>';}).join("");
+  var t=0, iv=null;
+  function pick(){ var list=pool.filter(function(q){return cat==="all"||q.cat===cat;}); cur=list[Math.floor(Math.random()*list.length)]; showQ(); }
+  function showQ(){ $("#vq").textContent=cur.q; $("#vcatl").textContent=catName(cur.cat);
+    var sts=PRIV?cur.stories.map(story).filter(Boolean):[];
+    $("#vhint").innerHTML='<details><summary class="small">Hint</summary><p class="small">'+esc(cur.probe)+'</p>'+(sts.length?'<p class="small">Try: '+sts.map(function(s){return esc(s.title);}).join(", ")+'</p>':'')+'</details>';
+    reset(); $$("#vchecks input").forEach(function(i){i.checked=false;}); $("#vres").textContent=""; $("#vplay").innerHTML=""; }
+  function reset(){ clearInterval(iv); iv=null; t=0; draw(); }
+  function draw(){ var e=$("#vt"); e.textContent=fmt(t); e.className="timer"+(t>150?" over":t>=90?" warn":""); }
+  $("#vcat").onchange=function(){cat=this.value;pick();};
+  $("#vnext").onclick=pick;
+  $("#vstart").onclick=function(){ if(iv) return; iv=setInterval(function(){t++;draw();},1000); timers.push(iv); };
+  $("#vstop").onclick=function(){ clearInterval(iv); iv=null; stopRec(); var b=$("#vrec"); if(b) b.textContent="● Record"; };
+  var rb=$("#vrec");
+  if(rb) rb.onclick=function(){
+    if(rec&&rec.state==="recording"){ stopRec(); rb.textContent="● Record"; return; }
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){
+      recStream=st; recChunks=[]; rec=new MediaRecorder(st);
+      rec.ondataavailable=function(e){ if(e.data&&e.data.size) recChunks.push(e.data); };
+      rec.onstop=function(){ var blob=new Blob(recChunks,{type:rec.mimeType||"audio/mp4"}); $("#vplay").innerHTML='<audio controls src="'+URL.createObjectURL(blob)+'"></audio><p class="small muted">Recording stays on this device. Nothing is uploaded.</p>'; };
+      rec.start(); rb.textContent="■ Stop recording"; if(!iv) $("#vstart").click();
+    }).catch(function(){ $("#vplay").innerHTML='<p class="small muted">Microphone access was not allowed. You can still practice with the timer.</p>'; });
+  };
+  $("#vsave").onclick=function(){ var n=$$("#vchecks input:checked").length; S.practiced[cur.id]=Math.max(S.practiced[cur.id]||0,n); save(); $("#vres").textContent="Saved "+n+" of 6."+(n>=5?" Strong.":n>=3?" Solid, tighten the gaps.":" Rework this one."); };
+  if(cur) showQ(); else pick();
+};
+
+V.essay = function(el){
+  var cur=pendingQ?qById(pendingQ):P.questions[Math.floor(Math.random()*P.questions.length)]; pendingQ=null;
+  el.innerHTML='<h1>Write it</h1><p class="muted">Draft a full STAR answer in writing. The balance meter compares your split to the target. Drafts save in this browser.</p>'+
+  '<div class="row" style="margin-bottom:12px"><select id="eq" aria-label="Question">'+P.questions.map(function(q){return '<option value="'+q.id+'"'+(q.id===cur.id?' selected':'')+'>'+esc(q.q)+'</option>';}).join("")+'</select></div>'+
+  '<div class="card"><h2 id="eqt"></h2>'+P.star.parts.map(function(p){return '<label class="lab" for="e'+p.k+'"><span>'+p.k+' · '+esc(p.name)+'</span><span class="muted" id="w'+p.k+'">0 words</span></label><textarea id="e'+p.k+'" placeholder="'+esc(p.tip)+'"></textarea>';}).join("")+
+  '<label class="lab" for="eL"><span>L · Lesson (optional)</span></label><textarea id="eL" style="min-height:50px"></textarea>'+
+  '<p class="small" style="margin-top:12px"><b>Balance</b></p><div class="bar" id="ebar"></div><div class="small muted" id="etot"></div>'+
+  '<div class="row" style="margin-top:12px"><button class="btn" id="echeck">Check my answer</button><button class="btn ghost" id="emodel">Show model</button></div><div id="efb"></div></div>';
+  var colors=["var(--navy)","#7a8aa6","var(--accent)","var(--good)"];
+  function load(){ $("#eqt").textContent=cur.q; var d=S.essays[cur.id]||{}; ["S","T","A","R","L"].forEach(function(k){ $("#e"+k).value=d[k]||""; }); upd(); $("#efb").innerHTML=""; }
+  function upd(){ var d={},tot=0,c=[]; ["S","T","A","R","L"].forEach(function(k){ d[k]=$("#e"+k).value; });
+    P.star.parts.forEach(function(p){ var w=words(d[p.k]); c.push(w); tot+=w; $("#w"+p.k).textContent=w+" words, target ~"+p.pct+"%"; });
+    $("#ebar").innerHTML=P.star.parts.map(function(p,i){ return '<span style="width:'+(tot?c[i]/tot*100:25)+'%;background:'+colors[i]+';opacity:'+(tot?1:.25)+'"></span>'; }).join("");
+    var sec=Math.round(tot/150*60); $("#etot").textContent=tot+" words, about "+fmt(sec)+" spoken. Target 220 to 320 words.";
+    S.essays[cur.id]=d; save(); }
+  ["S","T","A","R","L"].forEach(function(k){ $("#e"+k).oninput=upd; });
+  $("#eq").onchange=function(){ cur=qById(this.value); load(); };
+  $("#echeck").onclick=function(){
+    var d=S.essays[cur.id]||{}, fb=[], all=["S","T","A","R"].map(function(k){return d[k]||"";}).join(" "), tot=words(all);
+    ["S","T","A","R"].forEach(function(k,i){ if(!words(d[k])) fb.push(["bad","The "+P.star.parts[i].name+" box is empty."]); });
+    var aw=words(d.A); if(tot&&aw/tot<.35) fb.push(["warn","Action is only "+Math.round(aw/tot*100)+"% of your answer. Aim for about half."]);
+    var sw=words(d.S); if(tot&&sw/tot>.3) fb.push(["warn","Situation runs long. Cut it to two or three sentences."]);
+    var I=(all.match(/\bI\b|\bI'm\b|\bI've\b|\bmy\b/g)||[]).length, we=(all.match(/\b[Ww]e\b|\bour\b|\b[Tt]he team\b/g)||[]).length;
+    if(we>I) fb.push(["warn","You used we or our "+we+" times and I or my "+I+" times. Make your own actions clear."]); else if(tot) fb.push(["good","First person is clear, "+I+" uses of I or my."]);
+    if(!/\d/.test(d.R||"")) fb.push(["warn","Your result has no number, date or amount. Add one if you can."]); else fb.push(["good","Your result includes a concrete figure."]);
+    if(tot&&tot<150) fb.push(["warn","Under 150 words. You may be leaving out actions."]);
+    if(tot>380) fb.push(["warn","Over 380 words. That is more than three minutes spoken."]);
+    if(!words(d.L)) fb.push(["warn","Add a one-line lesson to finish strong."]);
+    if(fb.filter(function(f){return f[0]!=="good";}).length===0) fb.push(["good","This hits every STAR check."]);
+    if(tot>=120){ S.practiced[cur.id]=Math.max(S.practiced[cur.id]||0,4); save(); }
+    $("#efb").innerHTML='<div class="fb">'+fb.map(function(f){var c=f[0]==="good"?"var(--good)":f[0]==="bad"?"var(--bad)":"var(--warn)";return '<p style="margin:.3em 0"><span style="color:'+c+';font-weight:700">'+(f[0]==="good"?"✔":"●")+'</span> '+esc(f[1])+'</p>';}).join("")+'</div>';
+  };
+  $("#emodel").onclick=function(){
+    var sts=PRIV?cur.stories.map(story).filter(Boolean):[], h='<div class="fb"><p><b>What the panel wants.</b> '+esc(cur.probe)+'</p><ul class="clean">'+cur.shows.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>';
+    if(sts.length) h+='<p><b>Model from your story bank: '+esc(sts[0].title)+'</b></p>'+storyBody(sts[0],"full");
+    $("#efb").innerHTML=h+'</div>';
+  };
+  load();
+};
+
+V.quiz = function(el){
+  var mode="all", items=[], i=0, score=0, answered=false;
+  el.innerHTML='<h1>Multiple choice</h1><p class="muted">Judgment scenarios and company facts. Your best score feeds the readiness meter.</p>'+
+  '<div class="tabs" id="qzTabs"><button class="on" data-m="all">Mixed</button><button data-m="Judgment">Judgment</button><button data-m="Company">Company facts</button></div><div class="card" id="qz"></div>';
+  function start(){ items=shuffle(P.mcq.filter(function(m){return mode==="all"||m.kind===mode;})).slice(0,mode==="all"?15:items.length||99); i=0; score=0; show(); }
+  function show(){
+    if(i>=items.length){ var pct=Math.round(score/items.length*100); S.quizRuns++; if(pct>S.quizBest) S.quizBest=pct; save();
+      $("#qz").innerHTML='<h2>'+score+' of '+items.length+'</h2><div class="meter"><span style="width:'+pct+'%"></span></div><p style="margin-top:10px">'+(pct>=85?"Excellent. You know this cold.":pct>=65?"Good. Review the misses in the company section.":"Keep going. Read the company and issues pages, then retry.")+'</p><button class="btn" id="qzag">Try again</button>';
+      $("#qzag").onclick=start; return; }
+    var m=items[i]; answered=false;
+    var order=shuffle(m.opts.map(function(o,k){return k;}));
+    $("#qz").innerHTML='<div class="row" style="justify-content:space-between"><span class="tag acc">'+esc(m.kind)+'</span><span class="small muted">'+(i+1)+' of '+items.length+' · score '+score+'</span></div><div class="meter" style="margin:10px 0"><span style="width:'+(i/items.length*100)+'%"></span></div><h3>'+esc(m.q)+'</h3>'+
+      order.map(function(k){return '<button class="opt" data-k="'+k+'">'+esc(m.opts[k])+'</button>';}).join("")+'<div id="qzfb"></div>';
+    $$("#qz .opt").forEach(function(b){ b.onclick=function(){
+      if(answered) return; answered=true; var k=+b.getAttribute("data-k");
+      if(k===m.a){ score++; b.classList.add("right"); } else { b.classList.add("wrong"); $$("#qz .opt").forEach(function(x){ if(+x.getAttribute("data-k")===m.a) x.classList.add("right"); }); }
+      $("#qzfb").innerHTML='<div class="fb"><b>'+(k===m.a?"Right.":"Not quite.")+'</b> '+esc(m.why)+'</div><div class="row" style="margin-top:10px"><button class="btn" id="qznext">Next</button></div>';
+      $("#qznext").onclick=function(){ i++; show(); }; $("#qznext").focus();
+    }; });
+  }
+  $$("#qzTabs button").forEach(function(b){ b.onclick=function(){ mode=b.getAttribute("data-m"); $$("#qzTabs button").forEach(function(x){x.classList.toggle("on",x===b);}); items=[]; start(); }; });
+  start();
+};
+
+V.flash = function(el){
+  var decks={
+    company:{name:"Company facts", cards:P.mcq.filter(function(m){return m.kind==="Company";}).map(function(m){return {f:m.q, b:m.opts[m.a], n:m.why};})},
+    leaders:{name:"Leadership", cards:P.leaders.map(function(l){return {f:l.name, b:l.role, n:l.facts.join(" ")+(PRIV&&P.leaderNotes[l.name]?" · "+P.leaderNotes[l.name]:"")};})},
+    star:{name:"Question to strong answer", cards:P.questions.map(function(q){return {f:q.q, b:"Strong answer shows", n:q.shows.join(" · ")};})}
+  };
+  if(PRIV){ decks.stories={name:"Your stories", cards:P.stories.filter(function(s){return s.id!=="setback";}).map(function(s){return {f:s.title, b:"Key numbers", n:(s.numbers.join(" · ")||"")+" · Lesson: "+s.l};})};
+    decks.numbers={name:"Your key numbers", cards:[].concat.apply([],P.stories.map(function(s){return s.numbers.filter(function(n){return /\d/.test(n)&&n.indexOf("[")<0;}).map(function(n){return {f:"Which story uses this number?", b:s.title, n:n};});}))}; }
+  var dk=PRIV?"stories":"company", order=[], i=0;
+  el.innerHTML='<h1>Flashcards</h1><p class="muted">Tap or press space to flip. Arrow keys move between cards.</p><div class="tabs" id="fTabs"></div><div class="flash" id="fc" tabindex="0" role="button" aria-label="Flashcard, press to flip"><div class="flash-in"><div class="face front" id="ff"></div><div class="face back" id="fb"></div></div></div>'+
+  '<div class="row" style="justify-content:center;margin-top:14px"><button class="btn ghost" id="fprev">← Prev</button><span class="muted" id="fpos"></span><button class="btn ghost" id="fnext">Next →</button><button class="btn ghost" id="fshuf">Shuffle</button></div>';
+  function tabs(){ $("#fTabs").innerHTML=Object.keys(decks).map(function(k){return '<button class="'+(k===dk?'on':'')+'" data-d="'+k+'">'+esc(decks[k].name)+'</button>';}).join(""); $$("#fTabs button").forEach(function(b){b.onclick=function(){dk=b.getAttribute("data-d");order=decks[dk].cards.map(function(c,j){return j;});i=0;tabs();draw();};}); }
+  function draw(){ var c=decks[dk].cards[order[i]]; $("#fc").classList.remove("flip"); $("#ff").innerHTML='<div class="kicker">'+esc(decks[dk].name)+'</div><h3>'+esc(c.f)+'</h3>'; $("#fb").innerHTML='<h3>'+esc(c.b)+'</h3><p>'+esc(c.n)+'</p>'; $("#fpos").textContent=(i+1)+" / "+order.length; }
+  $("#fc").onclick=function(){ this.classList.toggle("flip"); };
+  $("#fc").onkeydown=function(e){ if(e.key===" "||e.key==="Enter"){e.preventDefault();this.classList.toggle("flip");} if(e.key==="ArrowRight") $("#fnext").click(); if(e.key==="ArrowLeft") $("#fprev").click(); };
+  $("#fnext").onclick=function(){ i=(i+1)%order.length; draw(); };
+  $("#fprev").onclick=function(){ i=(i-1+order.length)%order.length; draw(); };
+  $("#fshuf").onclick=function(){ order=shuffle(order); i=0; draw(); };
+  order=decks[dk].cards.map(function(c,j){return j;}); tabs(); draw();
+};
+
+V.recall = function(el){
+  var qs=P.questions.filter(function(q){return q.stories.some(function(id){return story(id);});}), cur, t, iv, n=0, ok=0, done=false;
+  el.innerHTML='<h1>Recall drill</h1><p class="muted">A question appears. Pick the best story within ten seconds. Speed matters because in the room you need to choose fast.</p><div class="card" id="rc"></div>';
+  function next(){
+    clearInterval(iv); done=false; cur=qs[Math.floor(Math.random()*qs.length)];
+    var right=story(cur.stories[0]), wrong=shuffle(P.stories.filter(function(s){return cur.stories.indexOf(s.id)<0&&s.id!=="setback";})).slice(0,3), opts=shuffle([right].concat(wrong));
+    t=10; $("#rc").innerHTML='<div class="row" style="justify-content:space-between"><span class="tag acc">'+esc(catName(cur.cat))+'</span><span class="small muted">'+ok+' of '+n+' correct</span></div><h3 style="margin-top:10px">'+esc(cur.q)+'</h3><div class="timer" id="rt">10</div>'+opts.map(function(s){return '<button class="opt" data-s="'+s.id+'">'+esc(s.title)+'</button>';}).join("")+'<div id="rfb"></div>';
+    iv=setInterval(function(){ t--; var e=$("#rt"); if(!e){clearInterval(iv);return;} e.textContent=t; e.className="timer"+(t<=3?" over":t<=6?" warn":""); if(t<=0){ clearInterval(iv); finish(null); } },1000); timers.push(iv);
+    $$("#rc .opt").forEach(function(b){ b.onclick=function(){ finish(b.getAttribute("data-s")); }; });
+  }
+  function finish(id){ if(done) return; done=true; clearInterval(iv); n++; var good=id&&cur.stories.indexOf(id)>=0; if(good) ok++;
+    $$("#rc .opt").forEach(function(b){ var s=b.getAttribute("data-s"); if(cur.stories.indexOf(s)>=0) b.classList.add("right"); else if(s===id) b.classList.add("wrong"); });
+    $("#rfb").innerHTML='<div class="fb"><b>'+(good?"Yes.":id?"Better fit shown in green.":"Time.")+'</b> Any of these work: '+cur.stories.map(story).filter(Boolean).map(function(s){return esc(s.title);}).join(", ")+'.</div><div class="row" style="margin-top:10px"><button class="btn" id="rnext">Next</button></div>';
+    $("#rnext").onclick=next; $("#rnext").focus(); }
+  next();
+};
+
+V.mock = function(el){
+  var set=[], i=0, t=0, iv=null, ratings=[];
+  el.innerHTML='<h1>Mock interview</h1><p class="muted">Eight questions in a row, like the real panel. Answer each out loud, rate yourself, and move on. The clock turns amber at 1:30 and red at 2:30.</p><div class="card" id="mk"></div>';
+  function intro(){
+    $("#mk").innerHTML='<h2>Ready?</h2><p>The set mixes one fit question, one ethics question, one current-issues question and five others. Sit up, speak to the screen as if it were the panel, and do not pause the clock.</p>'+
+    (S.mocks.length?'<p class="small muted">Past sessions: '+S.mocks.slice(-5).map(function(m){return m.d+" ("+m.avg+"/5)";}).join(", ")+'</p>':'')+'<button class="btn" id="mkgo">Begin</button>';
+    $("#mkgo").onclick=begin;
+  }
+  function begin(){
+    var by=function(c){return shuffle(P.questions.filter(function(q){return q.cat===c;}))[0];};
+    var core=[by("fit"),by("ethics"),by("current")], ids=core.map(function(q){return q.id;});
+    var rest=shuffle(P.questions.filter(function(q){return ids.indexOf(q.id)<0&&q.cat!=="fit";})).slice(0,5);
+    set=[core[0]].concat(shuffle(rest.concat(core.slice(1)))); i=0; ratings=[]; ask();
+  }
+  function ask(){
+    clearInterval(iv); t=0; var q=set[i];
+    $("#mk").innerHTML='<div class="row" style="justify-content:space-between"><span class="tag acc">Question '+(i+1)+' of '+set.length+'</span><span class="tag">'+esc(catName(q.cat))+'</span></div><div class="meter" style="margin:10px 0"><span style="width:'+(i/set.length*100)+'%"></span></div><h2>'+esc(q.q)+'</h2><div class="timer" id="mt">0:00</div>'+
+    '<p class="small"><b>Rate this answer</b></p><div class="row" id="mrate">'+[1,2,3,4,5].map(function(n){return '<button class="btn ghost sm" data-r="'+n+'">'+n+'</button>';}).join("")+'</div><p class="small muted">1 rambled or no result · 3 solid STAR · 5 crisp, specific, memorable</p>';
+    iv=setInterval(function(){ t++; var e=$("#mt"); if(!e){clearInterval(iv);return;} e.textContent=fmt(t); e.className="timer"+(t>150?" over":t>=90?" warn":""); },1000); timers.push(iv);
+    $$("#mrate button").forEach(function(b){ b.onclick=function(){ ratings.push({q:q,r:+b.getAttribute("data-r"),t:t}); S.practiced[q.id]=Math.max(S.practiced[q.id]||0,+b.getAttribute("data-r")); i++; if(i<set.length) ask(); else end(); }; });
+  }
+  function end(){
+    clearInterval(iv); var sum=0,tt=0; ratings.forEach(function(r){sum+=r.r;tt+=r.t;}); var avg=(sum/ratings.length).toFixed(1);
+    S.mocks.push({d:new Date().toLocaleDateString(),avg:avg}); save();
+    var weak=ratings.filter(function(r){return r.r<=3||r.t>150||r.t<60;});
+    $("#mk").innerHTML='<h2>Session complete</h2><div class="grid g3">'+stat(avg+" / 5","Average rating")+stat(fmt(Math.round(tt/ratings.length)),"Average length")+stat(weak.length,"Answers to rework")+'</div>'+
+    '<table class="t" style="margin-top:16px"><thead><tr><th>Question</th><th>Time</th><th>Rating</th></tr></thead><tbody>'+ratings.map(function(r){return '<tr><td>'+esc(r.q.q)+'</td><td>'+fmt(r.t)+'</td><td>'+r.r+'</td></tr>';}).join("")+'</tbody></table>'+
+    (weak.length?'<div class="callout" style="margin-top:14px"><b>Next step.</b> Rework these in Write it, then run another mock.</div>':'<div class="callout navy" style="margin-top:14px">Every answer landed in range. Try another set.</div>')+
+    '<div class="row" style="margin-top:12px"><button class="btn" id="mkag">Run another</button><a class="btn ghost" href="#essay">Go to Write it</a></div>';
+    $("#mkag").onclick=begin;
+  }
+  intro();
+};
+
+V.company = function(el){
+  var C=P.company, sel=C.sections[0].id;
+  el.innerHTML='<h1>ComEd and Exelon</h1><p class="muted">What the company is, what it does well, where it struggles and where it is headed. Facts as of '+esc(P.meta.updated)+'; check the news tracker before your interview.</p>'+
+  '<div class="grid g3" style="margin-bottom:18px">'+C.snapshot.map(function(s){return '<div class="card stat"><span>'+esc(s.label)+'</span><b>'+esc(s.value)+'</b><span>'+esc(s.note)+'</span></div>';}).join("")+'</div>'+
+  '<div class="tabs" id="cTabs"></div><div class="card" id="cBody"></div>';
+  function draw(){
+    $("#cTabs").innerHTML=C.sections.map(function(s){return '<button class="'+(s.id===sel?'on':'')+'" data-c="'+s.id+'">'+esc(s.title)+'</button>';}).join("");
+    $$("#cTabs button").forEach(function(b){b.onclick=function(){sel=b.getAttribute("data-c");draw();};});
+    var s=C.sections.filter(function(x){return x.id===sel;})[0];
+    $("#cBody").innerHTML='<h2>'+esc(s.title)+'</h2>'+s.body.map(function(p){return '<p>'+esc(p)+'</p>';}).join("")+(s.callout?'<div class="callout">'+esc(s.callout)+'</div>':'');
+  }
+  draw();
+};
+
+V.issues = function(el){
+  el.innerHTML='<h1>Hot issues</h1><p class="muted">The three topics most likely to come up, with the points you should be able to make without notes.</p>'+
+  P.company.topics.map(function(t){return '<div class="card" style="margin-bottom:16px"><h2>'+esc(t.title)+'</h2><ul class="clean">'+t.points.map(function(p){var i=p.indexOf(". ");return '<li>'+(i>0&&i<40?'<b>'+esc(p.slice(0,i+1))+'</b>'+esc(p.slice(i+1)):esc(p))+'</li>';}).join("")+'</ul></div>';}).join("")+
+  '<div class="card"><h3>Practice these</h3><p>'+P.questions.filter(function(q){return q.cat==="current";}).map(function(q){return '<a href="#verbal" class="tag nav" data-q="'+q.id+'">'+esc(q.q)+'</a>';}).join(" ")+'</p></div>';
+  $$("[data-q]",el).forEach(function(a){a.onclick=function(){pendingQ=a.getAttribute("data-q");};});
+};
+
+V.leaders = function(el){
+  el.innerHTML='<h1>Leadership</h1><p class="muted">Who you may meet or hear referenced. Confirm titles before the interview, since roles change.</p>'+
+  (PRIV?'<div class="callout priv"><b>Private.</b> Your notes on each leader appear in red boxes. Keep this edition off GitHub.</div>':'')+
+  '<div class="grid g2">'+P.leaders.map(function(l){var ini=l.name.split(" ").map(function(w){return w[0];}).join("");
+    return '<div class="card leader"><div class="row"><div class="ini" aria-hidden="true">'+esc(ini)+'</div><div><h3 style="margin:0">'+esc(l.name)+'</h3><div class="small muted">'+esc(l.role)+'</div></div></div><ul class="clean">'+l.facts.map(function(f){return '<li>'+esc(f)+'</li>';}).join("")+'</ul>'+(PRIV&&P.leaderNotes[l.name]?'<div class="callout priv small">'+esc(P.leaderNotes[l.name])+'</div>':'')+'</div>';}).join("")+'</div>'+
+  '<div class="card" style="margin-top:16px"><h3>Reporting line for this role</h3><p>Director of government affairs → Vice President, External Affairs or directly → SVP, Governmental, Regulatory and External Affairs → President and CEO, ComEd → Exelon. Confirm which before your interview.</p></div>';
+};
+
+V.news = function(el){
+  el.innerHTML='<h1>News tracker</h1><p class="muted">Newest first. Add your own entries as things happen; they save in this browser.</p>'+
+  '<div class="card" style="margin-bottom:16px"><div class="grid g3"><div><label class="lab" for="nd">Date</label><input type="date" id="nd"></div><div><label class="lab" for="ntg">Tag</label><input type="text" id="ntg" placeholder="e.g. Regulatory"></div><div><label class="lab" for="ntx">What happened</label><input type="text" id="ntx"></div></div><div class="row" style="margin-top:10px"><button class="btn sm" id="nadd">Add entry</button></div></div>'+
+  '<div class="timeline" id="tl"></div>';
+  function draw(){
+    var mine=(S.notes.news||[]).map(function(n,ix){return {date:n.date,tag:n.tag,text:n.text,mine:ix};});
+    var all=P.news.concat(mine).sort(function(a,b){return a.date<b.date?1:-1;});
+    $("#tl").innerHTML=all.map(function(n){return '<div class="ev"><div class="small muted">'+esc(n.date)+' <span class="tag">'+esc(n.tag||"Note")+'</span>'+(n.mine!=null?' <button class="btn ghost sm" data-del="'+n.mine+'">Remove</button>':'')+'</div><div>'+esc(n.text)+'</div></div>';}).join("");
+    $$("[data-del]").forEach(function(b){b.onclick=function(){S.notes.news.splice(+b.getAttribute("data-del"),1);save();draw();};});
+  }
+  $("#nadd").onclick=function(){ var t=$("#ntx").value.trim(); if(!t) return; S.notes.news=S.notes.news||[]; S.notes.news.push({date:$("#nd").value||new Date().toISOString().slice(0,10),tag:$("#ntg").value.trim(),text:t}); save(); $("#ntx").value=""; draw(); };
+  draw();
+};
+
+V.ask = function(el){
+  el.innerHTML='<h1>Questions to ask them</h1><p class="muted">Pick two or three that you genuinely want answered. Star the ones you will use.</p>'+
+  P.ask.map(function(g,gi){return '<div class="card" style="margin-bottom:14px"><h3>'+esc(g.theme)+'</h3>'+g.items.map(function(it,ii){var k="a"+gi+"_"+ii;return '<label class="check"><input type="checkbox" data-k="'+k+'"'+(S.checks[k]?' checked':'')+'><span>'+esc(it)+'</span></label>';}).join("")+'</div>';}).join("");
+  $$("[data-k]",el).forEach(function(c){c.onchange=function(){S.checks[c.getAttribute("data-k")]=c.checked;save();};});
+};
+
+V.dayof = function(el){
+  var d=P.dayof;
+  el.innerHTML='<h1>Day-of toolkit</h1><div class="grid g2"><div class="card"><h3>Checklist</h3>'+d.checklist.map(function(c,i){var k="d"+i;return '<label class="check"><input type="checkbox" data-k="'+k+'"'+(S.checks[k]?' checked':'')+'><span>'+esc(c)+'</span></label>';}).join("")+'</div>'+
+  '<div class="card"><h3>Your close</h3><p>'+esc(d.close)+'</p>'+(PRIV?'<div class="script">'+esc(P.scripts.closing)+'</div>':'')+'<h3 style="margin-top:16px">Top ten numbers to know</h3><ul class="clean small">'+
+  ["4M+ customers, about 9 million people","Exelon: six utilities, nearly 11M customers","Grid Plan 2: about $15.3B, 2028 to 2031, ICC order by mid December","Large-load pipeline over 28,000 MW vs. a peak near 24,000 MW","PJM 2027/28 capacity: $333.44 per MW-day, at the cap","Exelon capital plan: about $41.7B, 2026 to 2029","Rate base growth about 7.9% a year","Q3 2026 adjusted EPS $0.87","CRGA: signed Jan 8, 2026, 3 GW storage target","2020 deferred prosecution agreement: $200M"].map(function(n){return '<li>'+esc(n)+'</li>';}).join("")+'</ul></div></div>'+
+  '<div class="card" style="margin-top:16px"><div class="row" style="justify-content:space-between"><h3 style="margin:0">Thank-you note</h3><button class="btn sm ghost" id="cpy">Copy</button></div><div class="script" id="ty" style="margin-top:10px">'+esc(d.thankyou)+'</div></div>';
+  $$("[data-k]",el).forEach(function(c){c.onchange=function(){S.checks[c.getAttribute("data-k")]=c.checked;save();};});
+  $("#cpy").onclick=function(){ var b=this; try{ navigator.clipboard.writeText(d.thankyou).then(function(){b.textContent="Copied";}); }catch(e){} };
+};
+
+V.sources = function(el){
+  el.innerHTML='<h1>Sources</h1><p class="muted">Every company fact on this site traces to one of these. Recheck anything time-sensitive before the interview.</p><div class="card"><ol>'+P.sources.map(function(s){return '<li style="margin:.35em 0"><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a></li>';}).join("")+'</ol></div>';
+};
+
+/* ---------- router ---------- */
+function route(){
+  clearTimers();
+  var id=(location.hash||"#home").slice(1);
+  if(!V[id] || NAV.every(function(n){return n.id!==id;})) id="home";
+  buildNav(id);
+  var el=$("#app"); el.innerHTML=""; V[id](el);
+  window.scrollTo(0,0);
+  if(document.activeElement && document.activeElement.tagName==="A") el.focus({preventScroll:true});
+}
+window.addEventListener("hashchange",route);
+document.addEventListener("click",function(e){ var a=e.target.closest&&e.target.closest("a[data-q],a[data-s]"); if(a){ if(a.getAttribute("data-q")) pendingQ=a.getAttribute("data-q"); if(a.getAttribute("data-s")) pendingS=a.getAttribute("data-s"); } },true);
+route();
+})();
+
+</script>
+</body>
+</html>
