@@ -803,6 +803,35 @@ PREP.privateNotes = [
   "Never share Ameren confidential positions or strategy in interviews. Talk about your role and methods, and use public facts."
 ];
 
+// Memory joggers for the "harmful bill" story. From the RTC tracker, 2026 bills tagged Oppose. Confirm your role before using any of them.
+PREP.joggers = {
+  note:"These eight 2026 bills were tagged Oppose in your RTC tracker, and none moved past Rules or Assignments. Pick one where you remember doing something specific, such as an analysis, a sponsor meeting, coordination with peers or a hearing. Earlier sessions count too.",
+  prompts:[
+    "A bill where you met the sponsor and they changed or held it",
+    "A bill where industry peers coordinated and you carried part of the work",
+    "A late amendment you caught and helped get pulled",
+    "A bill you wrote the analysis or talking points for that others used",
+    "A bill where you found a compromise that let the company move to neutral",
+    "Look at the Political R&D 385-bill dataset or the legislative trends report for 2020 to 2025 bills"
+  ],
+  bills:[
+    {bill:"HB4172", title:"Utility project cost recovery", sponsor:"Rep. Dave Vella", what:"Barred utilities from requiring deposits, letters of credit or other security from large-load customers such as data centers.", why:"Shifts the risk of stranded grid investment onto existing customers.", hook:"Strongest ComEd link. The ICC approved ComEd's size-based large-load deposits in March 2026, the exact protection this bill would have banned.", last:"Referred to House Rules"},
+    {bill:"SB3830", title:"Data centers, various", sponsor:"Sen. Rachel Ventura", what:"New data center tariff with tripled renewable and storage charges, a 90-day rate design filing and new reporting.", why:"Rushed rate design and new compliance burden.", hook:"Had hearings in the Senate Executive Subcommittee on AI and Social Media on April 9 and 10. If you prepared materials or attended, it is a strong candidate.", last:"Committee deadline passed, Senate"},
+    {bill:"HB4319", title:"Data center property rights", sponsor:"Rep. Jed Davis", what:"Compensation claims for property owners within 1,000 feet of a data center.", why:"Part of the cumulative cost and uncertainty industry opposed across all data center bills.", hook:"Shows industry coalition work on data centers.", last:"Referred to House Rules"},
+    {bill:"HB4996", title:"Utilities, various (VPP)", sponsor:"Rep. Robyn Gabel", what:"Storage compensation floor in the VPP program, community solar size changes and data sharing mandates.", why:"Unclear interconnection and data sharing requirements.", hook:"Ties to CRGA implementation and virtual power plants.", last:"Re-referred to House Rules"},
+    {bill:"HB5440", title:"Energy storage revenue bonds", sponsor:"Rep. Ryan Spain", what:"Required storage projects to use Illinois Finance Authority bonds to qualify for procurement.", why:"Would have constrained storage procurement and cost recovery.", hook:"You are GR lead on battery storage.", last:"Referred to House Rules"},
+    {bill:"HB4272 / SB3974", title:"Gas appliance labeling", sponsor:"Rep. Michael Crawford, Sen. Graciela Guzman", what:"Warning labels on unvented gas appliances such as stoves.", why:"Targets gas stoves on contested science.", hook:"Gas policy experience.", last:"Rules and Assignments"},
+    {bill:"HB5221", title:"Consumer data privacy act", sponsor:"Rep. Edgar Gonzalez, Jr.", what:"Broad new consumer data rights applying to utilities.", why:"Compliance burden on customer data systems.", hook:"Less relevant to ComEd's agenda.", last:"Re-referred to House Rules"}
+  ]
+};
+
+PREP.scripts.objections = [
+  {q:"You've spent your career at a competitor. Why should we trust your loyalty?", a:"I'd ask you to judge me the way Springfield does, by how I handle information. For eighteen years I've kept confidences and followed through, and I'll bring that same discipline here. I won't bring Ameren's confidential positions with me, and I wouldn't want anyone on this team who would. What I bring is how I work, the relationships, and knowledge of the issues, which are public. On most big issues ComEd and Ameren have been on the same side, from CEJA to CRGA, so I already know how this team thinks."},
+  {q:"Ameren is mostly downstate. Chicago politics are different.", a:"That's true, and I'd invest there first. Much of the energy agenda runs through statewide leaders and committee chairs I've worked with for years, and on CEJA and CRGA I worked alongside the Chicago-area coalitions. My first 30 days would include meetings with the Chicago and suburban members on the energy committees and the city's key leaders. I'd also lean on the team members who already have those relationships. That's what a director should do."},
+  {q:"Why would you leave Ameren now?", a:"I'm proud of my career at Ameren, and I'm not running from anything. This is about the work and the chance to lead a team at the center of the state's biggest energy decisions. Data centers, affordability and capacity all run through ComEd. Keep it positive, never criticize Ameren, and don't discuss Ameren's internal positions."},
+  {q:"ComEd's history with lobbying is a sensitive subject. How do you think about it?", a:"It was a serious breach, and I respect the work ComEd has done to rebuild trust. My approach has always been relationships built on information and follow-through, never favors, and a close partnership with compliance. I've coordinated political fundraising events for years within strict ethics rules, so I know the process side well. I'd want this team known as the most trusted source of facts in Springfield."}
+];
+
 </script>
 <script>
 (function(){
@@ -863,6 +892,7 @@ var NAV = [
   {id:"star", label:"STAR method", ic:"★"},
   {grp:"Prepare"},
   {id:"stories", label:"Story bank", ic:"✎", priv:true},
+  {id:"builder", label:"Story builder", ic:"⚒", priv:true},
   {id:"questions", label:"Question bank", ic:"?"},
   {id:"scripts", label:"Scripts", ic:"❝", priv:true},
   {grp:"Practice"},
@@ -944,7 +974,7 @@ V.home = function(el){
   $("#idate").onchange=function(){ S.date=this.value; save(); route(); };
   $("#drillQ").onclick=function(){ pendingQ=this.getAttribute("data-q"); };
   var ds=$("#drillS"); if(ds) ds.onclick=function(){ pendingS=this.getAttribute("data-s"); };
-  $("#resetAll").onclick=function(){ if(confirm("Reset all saved progress in this browser?")){ S={practiced:{},mastered:{},quizBest:0,quizRuns:0,mocks:[],essays:{},notes:{},date:"",checks:{}}; save(); route(); } };
+  $("#resetAll").onclick=function(){ if(confirm("Reset all saved progress in this browser?")){ var keep=S.builder; S={practiced:{},mastered:{},quizBest:0,quizRuns:0,mocks:[],essays:{},notes:{},date:"",checks:{},builder:keep}; save(); route(); } };
 };
 function stat(v,l){ return '<div class="card stat"><b>'+esc(v)+'</b><span>'+esc(l)+'</span></div>'; }
 
@@ -967,6 +997,7 @@ var pendingS=null, pendingQ=null;
 V.stories = function(el){
   var filter="all";
   el.innerHTML='<h1>Story bank</h1><p class="muted">Your experiences, scripted in STAR. Highlighted brackets are details only you can fill in. Mark a story mastered once you can tell it without looking.</p>'+
+  '<div class="row" style="margin-bottom:12px"><a class="btn sm" href="#builder">Build or strengthen a story</a></div>'+
   '<div class="tabs" id="stTabs"></div><div id="stList"></div>';
   var tags=[["all","All"]].concat(P.categories.map(function(c){return [c.id,c.name.split(" ")[0]];}));
   function draw(){
@@ -1024,6 +1055,7 @@ V.scripts = function(el){
   function blk(t,txt,sec){ return '<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(t)+'</h3>'+(sec?'<span class="tag acc">~'+sec+'</span>':'')+'</div><div class="script" style="margin-top:10px">'+hl(txt)+'</div></div>'; }
   el.innerHTML='<h1>Scripts</h1><p class="muted">Openers, fit answers and your close. Learn the shape, not the exact words.</p>'+
   blk("Tell me about yourself, 60 seconds",sc.tmay60,"60s")+blk("Tell me about yourself, 90 seconds",sc.tmay90,"90s")+blk("Why ComEd, why this role",sc.why,"60s")+blk("Why leave your current company",sc.whyleave)+blk("First 90 days",sc.plan90,"60s")+blk("Closing statement",sc.closing,"45s");
+  if(sc.objections) el.innerHTML+='<h2 style="margin-top:24px">ComEd-specific hard questions</h2><p class="muted">Kept here, not on the public hub. For general objection practice see <a href="https://brodycoats-rgb.github.io/broderick-learning-hub/leading-at-scale.html">Leading at Scale</a>.</p>'+sc.objections.map(function(o){return blk(o.q,o.a);}).join("");
 };
 
 /* ---------- recording ---------- */
@@ -1267,6 +1299,230 @@ V.sources = function(el){
   el.innerHTML='<h1>Sources</h1><p class="muted">Every company fact on this site traces to one of these. Recheck anything time-sensitive before the interview.</p><div class="card"><ol>'+P.sources.map(function(s){return '<li style="margin:.35em 0"><a href="'+esc(s[1])+'" target="_blank" rel="noopener">'+esc(s[0])+'</a></li>';}).join("")+'</ol></div>';
 };
 
+/* ---------- story builder (private only) ---------- */
+var B_STEPS=["Subject","Specifics","Outcome","Numbers","Shape","Map","Pressure test"];
+var LADDER=[
+  ["hard","Hard result","Bill passed, killed or amended. Dollars saved or protected. Megawatts retained."],
+  ["counter","Counterfactual","What would have happened without you. For example, without the amendment customers would have paid about X."],
+  ["process","Process result","Positions approved before the hearing, turnaround cut, a tool the team adopted."],
+  ["relationship","Relationship result","A member called you first, invited you back, or used your numbers in committee."],
+  ["recognition","Recognition","An award, a request to brief executives, a bigger portfolio."]
+];
+var PRESSURE=["What exactly was your role, as opposed to the team's?","How do you know it worked?","What would you do differently?","Who disagreed with you, and how did you handle it?"];
+function bStore(){ S.builder=S.builder||{items:{},order:[],cur:null,step:0}; return S.builder; }
+function newItem(seed){
+  var b=bStore(), id="b"+Date.now().toString(36);
+  b.items[id]={id:id,title:seed&&seed.title||"New story",cats:seed&&seed.cats||[],hook:seed&&seed.hook||"",
+    issue:seed&&seed.issue||"",session:seed&&seed.session||"",sponsor:seed&&seed.sponsor||"",what:seed&&seed.what||"",
+    stakes:"",ifnot:"",allies:"",opponents:"",internal:"",deciders:"",owned:"",teamOwned:"",decided:"",
+    obstacle:"",move:"",paper:"",vouch:"",
+    outcomes:{},partial:false,partialText:"",
+    nums:[{fig:"",plain:"",src:"",share:"public"}],
+    headline:"",short:"",star:"",lesson:"",proof:"",follow:[{q:"",a:""},{q:"",a:""},{q:"",a:""}],
+    qs:[],pressure:["","","",""],ready:false,updated:new Date().toISOString().slice(0,10)};
+  b.order.unshift(id); b.cur=id; b.step=0; save(); return b.items[id];
+}
+function getPath(o,p){ return p.split(".").reduce(function(x,k){return x==null?x:x[k];},o); }
+function setPath(o,p,v){ var ks=p.split("."), last=ks.pop(), t=ks.reduce(function(x,k){return x[k];},o); t[last]=v; }
+function strength(it){
+  var pts=0, why=[];
+  if(it.outcomes.hard&&it.outcomes.hard.on&&it.outcomes.hard.text) pts+=3; else why.push("No hard result yet");
+  if(it.outcomes.counter&&it.outcomes.counter.on&&it.outcomes.counter.text) pts+=1;
+  var rungs=LADDER.filter(function(l){var o=it.outcomes[l[0]];return o&&o.on&&o.text;}).length; if(rungs>=2) pts+=1; else why.push("Only one outcome type");
+  if(it.nums.some(function(n){return n.fig&&n.src;})) pts+=2; else why.push("No sourced number");
+  if(it.owned&&it.decided) pts+=1; else why.push("Your role is unclear");
+  if(it.move) pts+=1; else why.push("No turning-point move");
+  if(it.pressure.filter(function(x){return x.trim();}).length===4) pts+=1; else why.push("Pressure test incomplete");
+  var lvl=pts>=8?"Strong":pts>=5?"Developing":"Thin";
+  return {pts:pts,lvl:lvl,why:why};
+}
+function outcomeLines(it){ return LADDER.filter(function(l){var o=it.outcomes[l[0]];return o&&o.on&&o.text;}).map(function(l){return it.outcomes[l[0]].text.trim();}); }
+function draftFrom(it){
+  var oc=outcomeLines(it), num=it.nums.filter(function(n){return n.fig&&n.share!=="internal";});
+  var res=oc.join(" ")+(it.partial&&it.partialText?" "+it.partialText:"");
+  var lc=function(x){return x?x.charAt(0).toLowerCase()+x.slice(1):x;}, cap=function(x){return x?x.charAt(0).toUpperCase()+x.slice(1):x;};
+  var sit=it.issue?("On "+it.issue+(it.session?" in the "+it.session+" session":"")+", "+(it.what?"a bill that would have "+lc(it.what).replace(/^would have /,""):"")).trim():cap(it.what||"");
+  sit=[sit.replace(/,\s*$/,"."), it.stakes].filter(Boolean).join(" ");
+  var task=[it.owned&&("I owned "+it.owned.replace(/^I owned /i,"")+"."), it.teamOwned&&("The broader team handled "+it.teamOwned+".")].filter(Boolean).join(" ");
+  var act=[it.decided, it.obstacle&&("The hardest part was "+it.obstacle.replace(/\.$/,"")+"."), it.move].filter(Boolean).join(" ");
+  return {
+    headline: oc[0]||"",
+    short: [sit, it.owned&&("My job was "+it.owned.replace(/\.$/,"")+"."), it.move, res].filter(Boolean).join(" "),
+    star: "Situation. "+(sit||"[situation]")+"\n\nTask. "+(task||"[your responsibility]")+"\n\nAction. "+(act||"[three to five things you did, in order]")+"\n\nResult. "+(res||"[outcome]")+(num.filter(function(n){return n.plain;}).length?" "+num.filter(function(n){return n.plain;}).map(function(n){return cap(n.plain).replace(/\.$/,"");}).join(". ")+".":"")+(it.lesson?"\n\nLesson. "+it.lesson:"")
+  };
+}
+function internalLeaks(it){
+  var txt=[it.headline,it.short,it.star,it.proof].join(" ").toLowerCase();
+  return it.nums.filter(function(n){ return n.share==="internal" && n.fig && txt.indexOf(n.fig.toLowerCase().trim())>=0; }).map(function(n){return n.fig;});
+}
+function storyText(it){
+  var L=[], oc=LADDER.filter(function(l){var o=it.outcomes[l[0]];return o&&o.on&&o.text;});
+  L.push(it.title.toUpperCase(),"");
+  L.push("Competencies: "+it.cats.map(catName).join(", "));
+  if(it.hook) L.push("ComEd connection: "+it.hook);
+  L.push("","ISSUE SPECIFICS");
+  [["Bill or docket",it.issue],["Session",it.session],["Sponsor",it.sponsor],["What it would do",it.what],["Stakes",it.stakes],["If nobody acted",it.ifnot],["Allies",it.allies],["Opponents",it.opponents],["Internal teams",it.internal],["Decision makers",it.deciders],["I owned",it.owned],["Team owned",it.teamOwned],["Decisions I made",it.decided],["Obstacle",it.obstacle],["My move",it.move],["Paper trail",it.paper],["Who could vouch",it.vouch]].forEach(function(x){ if(x[1]) L.push(x[0]+": "+x[1]); });
+  L.push("","OUTCOMES"); oc.forEach(function(l){ L.push(l[1]+": "+it.outcomes[l[0]].text); }); if(it.partial&&it.partialText) L.push("Partial win framing: "+it.partialText);
+  L.push("","NUMBERS"); it.nums.filter(function(n){return n.fig;}).forEach(function(n){ L.push("- "+n.fig+(n.plain?" ("+n.plain+")":"")+" | Source: "+(n.src||"none")+" | Sharing: "+n.share); });
+  L.push("","HEADLINE",it.headline,"","60 SECONDS",it.short,"","FULL STAR",it.star,"","LESSON",it.lesson,"","RESUME PROOF POINT",it.proof,"","FOLLOW-UPS");
+  it.follow.forEach(function(f){ if(f.q) L.push("Q: "+f.q,"A: "+f.a); });
+  L.push("","PRESSURE TEST"); PRESSURE.forEach(function(q,i){ L.push("Q: "+q,"A: "+(it.pressure[i]||"")); });
+  var st=strength(it); L.push("","Strength: "+st.lvl+(st.why.length?" ("+st.why.join("; ")+")":""));
+  return L.join("\n");
+}
+function download(name,type,body){
+  try{ var a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([body],{type:type})); a.download=name; document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500); }catch(e){ alert("Download failed in this browser. Use Copy instead."); }
+}
+function wordDoc(it){
+  var t=esc(storyText(it)).replace(/\n/g,"<br>");
+  return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><title>'+esc(it.title)+'</title></head><body style="font-family:Calibri,Arial;font-size:11pt;line-height:1.4">'+t+'</body></html>';
+}
+function slug(s){ return (s||"story").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40); }
+
+/* merge ready builder stories into the story bank */
+function mergeBuilder(){
+  if(!PRIV) return;
+  var b=bStore();
+  P.stories=P.stories.filter(function(s){return !s.fromBuilder;});
+  P.questions.forEach(function(q){ q.stories=q.stories.filter(function(id){return id.charAt(0)!=="b"||!/^b[a-z0-9]{6,}$/.test(id);}); });
+  b.order.forEach(function(id){
+    var it=b.items[id]; if(!it||!it.ready) return;
+    var st=it.star||"", grab=function(k){ var m=st.match(new RegExp(k+"\\.\\s*([\\s\\S]*?)(?=\\n\\n[A-Z][a-z]+\\.|$)")); return m?m[1].trim():""; };
+    P.stories.splice(P.stories.length-1,0,{id:id,fromBuilder:true,title:it.title,tags:it.cats.length?it.cats:["influence"],hook:it.hook||"Built in Story builder.",
+      numbers:it.nums.filter(function(n){return n.fig;}).map(function(n){return n.fig+(n.plain?", "+n.plain:"")+(n.share==="internal"?" (internal, do not say)":"");}),
+      s:grab("Situation"),t:grab("Task"),a:grab("Action"),r:grab("Result"),l:it.lesson||grab("Lesson"),short:it.short||it.headline,
+      follow:it.follow.filter(function(f){return f.q;}).map(function(f){return f.q+(f.a?" → "+f.a:"");}),verify:strength(it).why});
+    it.qs.forEach(function(qid){ var q=qById(qid); if(q&&q.stories.indexOf(id)<0) q.stories.unshift(id); });
+  });
+}
+
+V.builder = function(el){
+  var b=bStore();
+  if(!b.cur||!b.items[b.cur]) return builderHome(el);
+  builderEdit(el,b.items[b.cur]);
+};
+
+function gapCounts(){
+  var counts={};
+  P.categories.forEach(function(c){counts[c.id]={strong:0,dev:0,thin:0};});
+  P.stories.forEach(function(s){
+    if(s.fromBuilder) return;
+    var filled=!/\[/.test(s.a+s.r); s.tags.forEach(function(t){ if(counts[t]) counts[t][filled?"dev":"thin"]++; });
+  });
+  var b=bStore(); b.order.forEach(function(id){ var it=b.items[id]; if(!it) return; var lv=strength(it).lvl; it.cats.forEach(function(t){ if(counts[t]) counts[t][lv==="Strong"?"strong":lv==="Developing"?"dev":"thin"]++; }); });
+  return counts;
+}
+function gapChart(){
+  var c=gapCounts();
+  return '<div style="overflow-x:auto"><table class="t"><thead><tr><th>Competency</th><th>Strong</th><th>Dev.</th><th>Thin</th><th></th></tr></thead><tbody>'+P.categories.map(function(cat){var x=c[cat.id], flag=x.strong?'<span class="tag" style="background:var(--good-soft);color:var(--good)">Covered</span>':x.dev?'<span class="tag" style="background:var(--warn-soft);color:var(--warn)">Needs a number</span>':'<span class="tag" style="background:var(--bad-soft);color:var(--bad)">Gap</span>';
+    return '<tr><td>'+esc(cat.name)+'</td><td>'+x.strong+'</td><td>'+x.dev+'</td><td>'+x.thin+'</td><td>'+flag+'</td></tr>';}).join("")+'</tbody></table></div><p class="small muted">Developing counts existing story bank entries that have no open brackets. Thin counts entries still waiting on your details. Strong requires a builder story with a hard result, a sourced number and a full pressure test.</p>';
+}
+
+function builderHome(el){
+  var b=bStore(), J=P.joggers;
+  el.innerHTML='<h1>Story builder</h1><p class="muted">Pick a subject, capture the specifics, find the outcome, then shape the answer. Everything saves in this browser. Export a backup after each session, since Safari can clear site data.</p>'+
+  '<div class="callout navy"><b>The seven steps.</b> '+B_STEPS.map(function(s,i){return (i+1)+". "+s;}).join(" · ")+'</div>'+
+  '<h2>Start a story</h2><div class="grid g2"><div class="card"><h3>From one of your subjects</h3><select id="bseed"><option value="">Choose a subject</option>'+P.stories.filter(function(s){return !s.fromBuilder;}).map(function(s){return '<option value="'+s.id+'">'+esc(s.title)+'</option>';}).join("")+'</select><div class="row" style="margin-top:10px"><button class="btn sm" id="bgo">Start</button></div></div>'+
+  '<div class="card"><h3>New subject</h3><input type="text" id="bnew" placeholder="e.g. Storm response, May 2025 derecho"><div class="row" style="margin-top:10px"><button class="btn sm" id="bgo2">Start</button></div></div></div>'+
+  (b.order.length?'<h2 style="margin-top:24px">Your stories in progress</h2>'+b.order.map(function(id){var it=b.items[id]; if(!it) return ""; var st=strength(it), col=st.lvl==="Strong"?"good":st.lvl==="Developing"?"warn":"bad";
+    return '<div class="qcard row" style="justify-content:space-between"><div><b>'+esc(it.title)+'</b><br><span class="tag" style="background:var(--'+col+'-soft);color:var(--'+col+')">'+st.lvl+'</span>'+(it.ready?'<span class="tag nav">In story bank</span>':'')+'<span class="small muted"> Updated '+esc(it.updated)+'</span></div><div class="row"><button class="btn sm" data-open="'+id+'">Open</button><button class="btn sm ghost" data-del="'+id+'">Delete</button></div></div>';}).join(""):'')+
+  '<h2 style="margin-top:24px">Can\'t remember the tough bill?</h2><div class="card"><p>'+esc(J.note)+'</p><p><b>Ask yourself about</b></p><ul class="clean">'+J.prompts.map(function(p){return '<li>'+esc(p)+'</li>';}).join("")+'</ul></div>'+
+  '<div class="grid g2" style="margin-top:14px">'+J.bills.map(function(x,i){return '<div class="card"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(x.bill)+'</h3><span class="tag">'+esc(x.last)+'</span></div><p class="small muted">'+esc(x.title)+' · '+esc(x.sponsor)+'</p><p class="small"><b>Would have</b> '+esc(x.what)+'</p><p class="small"><b>Concern</b> '+esc(x.why)+'</p><div class="callout navy small">'+esc(x.hook)+'</div><button class="btn sm" data-jog="'+i+'">Start a story from this bill</button></div>';}).join("")+'</div>'+
+  '<h2 style="margin-top:24px">Gap check</h2><div class="card">'+gapChart()+'</div>'+
+  '<h2 style="margin-top:24px">Backup</h2><div class="card"><p class="small">Saves every builder story to one file you can reload on any browser.</p><div class="row"><button class="btn sm" id="bexp">Export all (backup file)</button><label class="btn sm ghost" style="cursor:pointer">Import backup<input type="file" id="bimp" accept=".json,application/json" class="sr"></label><span id="bmsg" class="small muted"></span></div></div>';
+  $("#bgo").onclick=function(){ var s=story($("#bseed").value); if(!s) return; newItem({title:s.title,cats:s.tags.slice(),hook:s.hook}); route(); };
+  $("#bgo2").onclick=function(){ var t=$("#bnew").value.trim(); if(!t) return; newItem({title:t}); route(); };
+  $$("[data-jog]",el).forEach(function(btn){ btn.onclick=function(){ var x=J.bills[+btn.getAttribute("data-jog")]; newItem({title:"Stopping "+x.bill+", "+x.title,cats:["influence","coalition","current"],hook:x.hook,issue:x.bill,session:"2026 spring",sponsor:x.sponsor,what:x.what}); route(); }; });
+  $$("[data-open]",el).forEach(function(btn){ btn.onclick=function(){ b.cur=btn.getAttribute("data-open"); b.step=0; save(); route(); }; });
+  $$("[data-del]",el).forEach(function(btn){ btn.onclick=function(){ var id=btn.getAttribute("data-del"); if(!confirm("Delete this story? Export a backup first if you might want it.")) return; delete b.items[id]; b.order=b.order.filter(function(x){return x!==id;}); save(); mergeBuilder(); route(); }; });
+  $("#bexp").onclick=function(){ download("story-builder-backup-"+new Date().toISOString().slice(0,10)+".json","application/json",JSON.stringify(b,null,1)); };
+  $("#bimp").onchange=function(){ var f=this.files[0]; if(!f) return; var r=new FileReader(); r.onload=function(){ try{ var o=JSON.parse(r.result); if(!o.items) throw 0; Object.keys(o.items).forEach(function(k){ b.items[k]=o.items[k]; if(b.order.indexOf(k)<0) b.order.push(k); }); save(); mergeBuilder(); route(); }catch(e){ $("#bmsg").textContent="That file is not a builder backup."; } }; r.readAsText(f); };
+}
+
+function fld(label,path,it,opt){
+  opt=opt||{}; var v=getPath(it,path)||"";
+  var ph=opt.ph?' placeholder="'+esc(opt.ph)+'"':"";
+  return '<label class="lab"><span>'+esc(label)+'</span>'+(opt.hint?'<span class="muted" style="font-weight:400">'+esc(opt.hint)+'</span>':'')+'</label>'+
+    (opt.line?'<input type="text" data-f="'+path+'" value="'+esc(v)+'"'+ph+'>':'<textarea data-f="'+path+'"'+ph+(opt.tall?' style="min-height:140px"':'')+'>'+esc(v)+'</textarea>');
+}
+
+function builderEdit(el,it){
+  var b=bStore(), step=b.step||0;
+  var st=strength(it), col=st.lvl==="Strong"?"good":st.lvl==="Developing"?"warn":"bad";
+  el.innerHTML='<div class="row" style="justify-content:space-between"><button class="btn sm ghost" id="bback">← All stories</button><span class="tag" style="background:var(--'+col+'-soft);color:var(--'+col+')" id="bstr">'+st.lvl+'</span></div>'+
+  '<h1 style="margin-top:12px" id="btitle">'+esc(it.title)+'</h1>'+
+  '<div class="tabs" id="bsteps">'+B_STEPS.map(function(s,i){return '<button class="'+(i===step?'on':'')+'" data-step="'+i+'">'+(i+1)+'. '+esc(s)+'</button>';}).join("")+'</div>'+
+  '<div class="card" id="bbody"></div>'+
+  '<div class="row" style="margin-top:14px;justify-content:space-between"><button class="btn ghost" id="bprev"'+(step===0?' disabled':'')+'>← Back</button><span class="small muted">Saves as you type</span><button class="btn" id="bnext">'+(step===B_STEPS.length-1?'Finish':'Next →')+'</button></div>';
+  var body=$("#bbody"), h="";
+  if(step===0){
+    h='<h2>Pick the subject</h2>'+fld("Story title","title",it,{line:true})+
+    '<label class="lab"><span>Which competencies can this story cover?</span></label><div class="row">'+P.categories.map(function(c){return '<label class="tag" style="cursor:pointer;padding:6px 10px"><input type="checkbox" data-cat="'+c.id+'"'+(it.cats.indexOf(c.id)>=0?' checked':'')+'> '+esc(c.name)+'</label>';}).join("")+'</div>'+
+    fld("ComEd connection","hook",it,{hint:"Why this story matters to ComEd now",ph:"e.g. ComEd won ICC approval for large-load deposits, the exact protection this bill would have banned"});
+  } else if(step===1){
+    h='<h2>Capture the issue specifics</h2><p class="muted small">Raw facts first. Do not polish yet. Write whatever you remember, even fragments.</p>'+
+    '<div class="grid g3">'+'<div>'+fld("Bill or docket","issue",it,{line:true,ph:"HB4172"})+'</div><div>'+fld("Session","session",it,{line:true,ph:"2026 spring"})+'</div><div>'+fld("Sponsor","sponsor",it,{line:true})+'</div></div>'+
+    fld("What it would have done","what",it)+
+    '<h3 style="margin-top:18px">The stakes</h3>'+fld("Dollars, megawatts, customers, districts, jobs, deadlines","stakes",it)+fld("What happens if nobody acts?","ifnot",it)+
+    '<h3 style="margin-top:18px">The players</h3><div class="grid g2"><div>'+fld("Allies","allies",it)+'</div><div>'+fld("Opponents","opponents",it)+'</div><div>'+fld("Internal teams","internal",it)+'</div><div>'+fld("Decision makers","deciders",it)+'</div></div>'+
+    '<h3 style="margin-top:18px">Your role</h3>'+fld("What you owned","owned",it,{ph:"The analysis, the sponsor meeting, coordinating peers…"})+fld("What the team owned","teamOwned",it)+fld("Decisions you made yourself","decided",it,{hint:"Use I"})+
+    '<h3 style="margin-top:18px">The turning point</h3>'+fld("The obstacle","obstacle",it)+fld("The specific move you made that changed things","move",it)+
+    '<h3 style="margin-top:18px">Proof</h3><div class="grid g2"><div>'+fld("Paper trail","paper",it,{ph:"Memo, testimony, leave-behind, emails, vote record"})+'</div><div>'+fld("Who could vouch","vouch",it)+'</div></div>';
+  } else if(step===2){
+    h='<h2>Find the outcome</h2><p class="muted small">Check every rung that applies. Most stories have two or three. Strongest first.</p>'+
+    LADDER.map(function(l){var o=it.outcomes[l[0]]||{}; return '<div class="qcard"><label class="check" style="border:none;padding:0"><input type="checkbox" data-oc="'+l[0]+'"'+(o.on?' checked':'')+'><span><b>'+esc(l[1])+'</b><br><span class="small muted">'+esc(l[2])+'</span></span></label><textarea data-ot="'+l[0]+'" placeholder="Describe it in one or two sentences" style="margin-top:8px;'+(o.on?'':'display:none')+'">'+esc(o.text||"")+'</textarea></div>';}).join("")+
+    '<div class="qcard"><label class="check" style="border:none;padding:0"><input type="checkbox" id="bpartial"'+(it.partial?' checked':'')+'><span><b>This was a partial win</b><br><span class="small muted">Frame it honestly. "We didn\'t stop it, but we removed the two provisions that cost customers the most."</span></span></label><textarea data-f="partialText" style="margin-top:8px;'+(it.partial?'':'display:none')+'" id="bpt">'+esc(it.partialText)+'</textarea></div>';
+  } else if(step===3){
+    h='<h2>Make the numbers work</h2><p class="muted small">Every number needs a source and a sharing level. Internal numbers never get said in the room. The builder warns you if one shows up in a draft.</p>'+
+    '<div id="bnums">'+it.nums.map(function(n,i){return '<div class="qcard"><div class="grid g2"><div><label class="lab">Figure</label><input type="text" data-n="'+i+'.fig" value="'+esc(n.fig)+'" placeholder="$45.3M cumulative property tax"></div><div><label class="lab">What it means in plain terms</label><input type="text" data-n="'+i+'.plain" value="'+esc(n.plain)+'" placeholder="about $580K a year per school district"></div><div><label class="lab">Source</label><input type="text" data-n="'+i+'.src" value="'+esc(n.src)+'" placeholder="County treasurer records, 2015-2025"></div><div><label class="lab">Sharing level</label><select data-n="'+i+'.share"><option value="public"'+(n.share==="public"?' selected':'')+'>Public</option><option value="general"'+(n.share==="general"?' selected':'')+'>OK to say generally</option><option value="internal"'+(n.share==="internal"?' selected':'')+'>Internal only, never say</option></select></div></div><div class="row" style="margin-top:8px"><button class="btn sm ghost" data-rm="'+i+'">Remove</button></div></div>';}).join("")+'</div>'+
+    '<button class="btn sm" id="baddn">Add a number</button>'+
+    '<div class="card" style="margin-top:16px;background:var(--surface2)"><h3>Converter</h3><p class="small muted">Turn a big total into something a panel remembers.</p><div class="grid g3"><div><label class="lab">Total</label><input type="text" id="cvA" placeholder="45300000"></div><div><label class="lab">Divide by</label><input type="text" id="cvB" placeholder="customers, districts, years"></div><div><label class="lab">Unit</label><input type="text" id="cvU" placeholder="per year"></div></div><p id="cvR" style="margin-top:10px;font-weight:600"></p></div>';
+  } else if(step===4){
+    var leaks=internalLeaks(it);
+    h='<h2>Shape the answer</h2><div class="row"><button class="btn sm" id="bgen">Draft from my notes</button><span class="small muted">Overwrites the three drafts below with a fresh assembly. Then edit freely.</span></div>'+
+    (leaks.length?'<div class="callout priv" style="margin-top:12px"><b>Internal number in your draft.</b> '+leaks.map(esc).join(", ")+'. Remove it or change its sharing level.</div>':'')+
+    fld("Headline result, one sentence to open with","headline",it,{line:true})+fld("60-second version","short",it,{tall:true})+fld("Full STAR, about 2 minutes","star",it,{tall:true,hint:"Keep the Situation, Task, Action, Result labels so it flows into your story bank"})+
+    '<p class="small muted" id="bwc"></p>'+fld("One-line lesson","lesson",it,{line:true})+fld("Resume proof point","proof",it,{line:true,ph:"Led industry effort that held HB4172 in Rules, protecting large-load deposit authority"})+
+    '<h3 style="margin-top:18px">Likely follow-ups</h3>'+it.follow.map(function(f,i){return '<div class="grid g2"><div>'+fld("Question "+(i+1),"follow."+i+".q",it,{line:true})+'</div><div>'+fld("Your answer","follow."+i+".a",it,{line:true})+'</div></div>';}).join("");
+  } else if(step===5){
+    var qs=P.questions.filter(function(q){return it.cats.indexOf(q.cat)>=0;});
+    h='<h2>Map it to questions</h2><p class="muted small">Check the questions this story should answer. When you mark the story ready, it appears in your story bank, the recall drill, flashcards and under these questions.</p>'+
+    (qs.length?qs.map(function(q){return '<label class="check"><input type="checkbox" data-q="'+q.id+'"'+(it.qs.indexOf(q.id)>=0?' checked':'')+'><span>'+esc(q.q)+' <span class="tag">'+esc(catName(q.cat))+'</span></span></label>';}).join(""):'<p>Pick competencies in step 1 first.</p>')+
+    '<h3 style="margin-top:20px">Gap check</h3>'+gapChart();
+  } else {
+    h='<h2>Pressure-test it</h2><p class="muted small">Panels use these to test whether a story is real. If you cannot answer one, go back to Specifics.</p>'+
+    PRESSURE.map(function(q,i){return fld(q,"pressure."+i,it);}).join("")+
+    '<div class="callout '+(st.lvl==="Strong"?'navy':'')+'" style="margin-top:14px"><b>Strength: '+st.lvl+'.</b> '+(st.why.length?'To strengthen: '+st.why.join("; ")+'.':'Every check passes.')+'</div>'+
+    '<label class="check"><input type="checkbox" id="bready"'+(it.ready?' checked':'')+'><span><b>Ready.</b> Add to my story bank, drills and mapped questions</span></label>'+
+    '<h3 style="margin-top:18px">Export</h3><div class="row"><button class="btn sm" id="bword">Download Word file</button><button class="btn sm ghost" id="btxt">Download text</button><button class="btn sm ghost" id="bcopy">Copy for Claude to polish</button><span id="bcm" class="small muted"></span></div>';
+  }
+  body.innerHTML=h;
+
+  function touch(){ it.updated=new Date().toISOString().slice(0,10); save(); var s2=strength(it), c2=s2.lvl==="Strong"?"good":s2.lvl==="Developing"?"warn":"bad", e=$("#bstr"); if(e){ e.textContent=s2.lvl; e.style.background="var(--"+c2+"-soft)"; e.style.color="var(--"+c2+")"; } }
+  $$("[data-f]",body).forEach(function(inp){ inp.oninput=function(){ setPath(it,inp.getAttribute("data-f"),inp.value); if(inp.getAttribute("data-f")==="title") $("#btitle").textContent=inp.value; wc(); touch(); }; });
+  $$("[data-cat]",body).forEach(function(c){ c.onchange=function(){ var id=c.getAttribute("data-cat"); it.cats=it.cats.filter(function(x){return x!==id;}); if(c.checked) it.cats.push(id); touch(); }; });
+  $$("[data-oc]",body).forEach(function(c){ c.onchange=function(){ var k=c.getAttribute("data-oc"); it.outcomes[k]=it.outcomes[k]||{text:""}; it.outcomes[k].on=c.checked; $('[data-ot="'+k+'"]',body).style.display=c.checked?"":"none"; touch(); }; });
+  $$("[data-ot]",body).forEach(function(t){ t.oninput=function(){ var k=t.getAttribute("data-ot"); it.outcomes[k]=it.outcomes[k]||{on:true}; it.outcomes[k].text=t.value; touch(); }; });
+  var bp=$("#bpartial"); if(bp) bp.onchange=function(){ it.partial=bp.checked; $("#bpt").style.display=bp.checked?"":"none"; touch(); };
+  $$("[data-n]",body).forEach(function(inp){ var h2=function(){ var p=inp.getAttribute("data-n").split("."); it.nums[+p[0]][p[1]]=inp.value; touch(); }; inp.oninput=h2; inp.onchange=h2; });
+  $$("[data-rm]",body).forEach(function(btn){ btn.onclick=function(){ it.nums.splice(+btn.getAttribute("data-rm"),1); if(!it.nums.length) it.nums.push({fig:"",plain:"",src:"",share:"public"}); touch(); route(); }; });
+  var an=$("#baddn"); if(an) an.onclick=function(){ it.nums.push({fig:"",plain:"",src:"",share:"public"}); touch(); route(); };
+  var cv=function(){ var a=parseFloat(($("#cvA").value||"").replace(/[$,]/g,"")), d=parseFloat(($("#cvB").value||"").replace(/[$,]/g,"")); if(a&&d){ var r=a/d, s=r>=1e6?"$"+(r/1e6).toFixed(1)+"M":r>=1e3?"$"+Math.round(r).toLocaleString():r>=10?Math.round(r).toLocaleString():r.toFixed(2); $("#cvR").textContent="= "+s+" "+($("#cvU").value||""); } else $("#cvR").textContent=""; };
+  if($("#cvA")) ["#cvA","#cvB","#cvU"].forEach(function(s){ $(s).oninput=cv; });
+  function wc(){ var e=$("#bwc"); if(!e) return; var w=words(it.star); e.textContent=w+" words in the full STAR, about "+fmt(Math.round(w/150*60))+" spoken. Target 220 to 320."; }
+  wc();
+  var g=$("#bgen"); if(g) g.onclick=function(){ if((it.short||it.star)&&!confirm("Replace your current drafts with a fresh assembly from your notes?")) return; var d=draftFrom(it); it.headline=d.headline; it.short=d.short; it.star=d.star; if(!it.follow[0].q){ it.follow[0].q="What exactly did you do versus the team?"; it.follow[1].q="How do you know your work made the difference?"; it.follow[2].q="What would you do differently?"; } touch(); route(); };
+  $$("[data-q]",body).forEach(function(c){ c.onchange=function(){ var id=c.getAttribute("data-q"); it.qs=it.qs.filter(function(x){return x!==id;}); if(c.checked) it.qs.push(id); touch(); mergeBuilder(); }; });
+  var rd=$("#bready"); if(rd) rd.onchange=function(){ it.ready=rd.checked; touch(); mergeBuilder(); };
+  var bw=$("#bword"); if(bw) bw.onclick=function(){ download(slug(it.title)+".doc","application/msword",wordDoc(it)); };
+  var bt=$("#btxt"); if(bt) bt.onclick=function(){ download(slug(it.title)+".txt","text/plain",storyText(it)); };
+  var bc=$("#bcopy"); if(bc) bc.onclick=function(){ var txt="Please polish this interview story for my ComEd prep. Keep my facts, flag any gaps, and tighten the 60-second and full STAR versions. Do not use internal-only numbers.\n\n"+storyText(it); try{ navigator.clipboard.writeText(txt).then(function(){ $("#bcm").textContent="Copied. Paste it into a chat with Claude."; },function(){ $("#bcm").textContent="Copy blocked. Use Download text instead."; }); }catch(e){ $("#bcm").textContent="Copy blocked. Use Download text instead."; } };
+  $$("#bsteps button").forEach(function(btn){ btn.onclick=function(){ b.step=+btn.getAttribute("data-step"); save(); route(); }; });
+  $("#bprev").onclick=function(){ if(b.step>0){ b.step--; save(); route(); } };
+  $("#bnext").onclick=function(){ if(b.step<B_STEPS.length-1){ b.step++; save(); route(); } else { b.cur=null; save(); mergeBuilder(); route(); } };
+  $("#bback").onclick=function(){ b.cur=null; save(); mergeBuilder(); route(); };
+}
+
 /* ---------- router ---------- */
 function route(){
   clearTimers();
@@ -1277,6 +1533,7 @@ function route(){
   window.scrollTo(0,0);
   if(document.activeElement && document.activeElement.tagName==="A") el.focus({preventScroll:true});
 }
+if(PRIV) mergeBuilder();
 window.addEventListener("hashchange",route);
 document.addEventListener("click",function(e){ var a=e.target.closest&&e.target.closest("a[data-q],a[data-s]"); if(a){ if(a.getAttribute("data-q")) pendingQ=a.getAttribute("data-q"); if(a.getAttribute("data-s")) pendingS=a.getAttribute("data-s"); } },true);
 route();
