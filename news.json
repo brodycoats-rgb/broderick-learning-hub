@@ -1,0 +1,189 @@
+{
+ "updated": "2026-11-07T14:27:34.385337+00:00",
+ "markets": [
+  {
+   "id": "^DJI",
+   "name": "Dow",
+   "price": 51285.73,
+   "change": -237.33,
+   "pct": -0.46,
+   "asof": "2026-11-06T21:37:12+00:00"
+  },
+  {
+   "id": "^GSPC",
+   "name": "S&P 500",
+   "price": 7376.86,
+   "change": 23.13,
+   "pct": 0.31,
+   "asof": "2026-11-06T21:37:09+00:00"
+  },
+  {
+   "id": "NG=F",
+   "name": "Natural gas",
+   "price": 3.0,
+   "change": 0.05,
+   "pct": 1.73,
+   "asof": "2026-11-06T21:59:58+00:00"
+  },
+  {
+   "id": "CL=F",
+   "name": "Oil (WTI)",
+   "price": 90.83,
+   "change": 0.31,
+   "pct": 0.34,
+   "asof": "2026-11-06T21:59:58+00:00"
+  }
+ ],
+ "news": {
+  "energy": [
+   {
+    "title": "Duke Energy to stay course on data center-fueled growth plan after \u2018historic\u2019 election",
+    "link": "https://www.utilitydive.com/news/historic-election-night-wont-change-growth-focus-at-duke-energy-executi/873965/",
+    "source": "Utility Dive",
+    "published": "2026-11-06T18:00:00+00:00"
+   },
+   {
+    "title": "Voters gave a big middle finger to data centers",
+    "link": "https://www.canarymedia.com/articles/data-centers/data-center-voters-election-day",
+    "source": "Canary Media",
+    "published": "2026-11-06T17:19:00+00:00"
+   },
+   {
+    "title": "Sempra expects 20% increase to Oncor\u2019s capex plan, driven by load growth",
+    "link": "https://www.utilitydive.com/news/sempra-expects-20-increase-oncors-capex-plan-load-growth/874010/",
+    "source": "Utility Dive",
+    "published": "2026-11-06T16:10:36+00:00"
+   },
+   {
+    "title": "Data centers don\u2019t need special treatment to get power faster",
+    "link": "https://www.utilitydive.com/news/data-centers-grid-flexibility-tariffs-ercot-spp-pjm/833678/",
+    "source": "Utility Dive",
+    "published": "2026-11-06T15:27:12+00:00"
+   },
+   {
+    "title": "U.S. crude oil imports from Venezuela in July were highest since 2017",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68425",
+    "source": "EIA Today in Energy",
+    "published": "2026-11-06T14:00:00+00:00"
+   },
+   {
+    "title": "The wins and weak spots in America's solar supply chain",
+    "link": "https://www.canarymedia.com/articles/clean-energy-manufacturing/us-domestic-solar-supply-chain",
+    "source": "Canary Media",
+    "published": "2026-11-06T08:30:00+00:00"
+   },
+   {
+    "title": "Democrats' state wins open the door for major clean energy progress",
+    "link": "https://www.canarymedia.com/articles/politics/democrat-state-wins-clean-energy-progress",
+    "source": "Canary Media",
+    "published": "2026-11-06T00:30:00+00:00"
+   },
+   {
+    "title": "Refineries have shifted production away from gasoline to middle distillates",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68424",
+    "source": "EIA Today in Energy",
+    "published": "2026-11-05T14:00:00+00:00"
+   }
+  ],
+  "illinois": [
+   {
+    "title": "Honoring Huerta includes protecting, removing barriers for naturalized citizens",
+    "link": "https://chicago.suntimes.com/letters-to-the-editor/2026/11/07/dolores-huerta-naturalized-citizens-perioperative-nurses-school-funding-church-reporting-downspouts",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-07T12:00:00+00:00"
+   },
+   {
+    "title": "How we photographed U.S. Sen.-elect Juliana Stratton making 'her-story'",
+    "link": "https://chicago.suntimes.com/photography/2026/11/07/how-we-photographed-u-s-sen-elect-juliana-stratton",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-07T12:00:00+00:00"
+   },
+   {
+    "title": "Remembering my teacher, Mrs. Dukes, who gave me a better sense of myself, Black community",
+    "link": "https://chicago.suntimes.com/columnists/2026/11/07/african-american-literature-history-foster-rose-marie-dukes-alden-loury",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-07T12:00:00+00:00"
+   },
+   {
+    "title": "Pritzker appeals FEMA\u2019s decision to deny Illinois disaster aid",
+    "link": "https://capitolnewsillinois.com/news/pritzker-appeals-femas-decision-to-deny-illinois-disaster-aid/",
+    "source": "Capitol News Illinois",
+    "published": "2026-11-06T22:11:11+00:00"
+   },
+   {
+    "title": "The Rundown: Downtown \u2018Cultural Stadium\u2019 gains traction",
+    "link": "https://www.wbez.org/wbez-newsletter/2026/11/06/the-rundown-downtown-cultural-stadium-gains-traction",
+    "source": "WBEZ",
+    "published": "2026-11-06T21:45:00+00:00"
+   },
+   {
+    "title": "Q&A With Khalid Jones, CEO of Allwyn North America, Operator of the Illinois Lottery",
+    "link": "https://capitolnewsillinois.com/news/qa-with-khalid-jones-ceo-of-allwyn-north-america-operator-of-the-illinois-lottery/",
+    "source": "Capitol News Illinois",
+    "published": "2026-11-06T12:00:38+00:00"
+   },
+   {
+    "title": "Downtown and Near North Side District 6a Chicago School Board race too close to call",
+    "link": "https://www.wbez.org/education/2026/11/03/chicago-school-board-district-6a-results",
+    "source": "WBEZ",
+    "published": "2026-11-06T01:59:00+00:00"
+   },
+   {
+    "title": "Missing Election Day results holding up race calls in two Chicago School Board districts",
+    "link": "https://www.wbez.org/education/2026/11/05/missing-election-day-results-holding-up-race-calls-in-two-chicago-school-board-districts",
+    "source": "WBEZ",
+    "published": "2026-11-06T01:04:57.299000+00:00"
+   }
+  ],
+  "top": [
+   {
+    "title": "Jade Benning's Final Call | Post Mortem",
+    "link": "https://www.cbsnews.com/video/110726-48-hours-post-mortem-episode-3/",
+    "source": "CBS News",
+    "published": "2026-11-08T00:00:00+00:00"
+   },
+   {
+    "title": "U.S. offers $20 million for information on Iran's nuclear program",
+    "link": "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/",
+    "source": "CBS News",
+    "published": "2026-11-07T14:26:57+00:00"
+   },
+   {
+    "title": "Zelenskyy says Russia is stepping up attacks ahead of U.S. talks",
+    "link": "https://www.cbsnews.com/news/zelenskyy-russia-attacks-us-talks/",
+    "source": "CBS News",
+    "published": "2026-11-07T14:20:25+00:00"
+   },
+   {
+    "title": "Democrats plan to widen their probes of fatal ICE shootings",
+    "link": "https://www.npr.org/2026/11/07/nx-s1-6029659/democrats-investigate-fatal-ice-shootings",
+    "source": "NPR",
+    "published": "2026-11-07T13:19:09+00:00"
+   },
+   {
+    "title": "UK cannot 'cherry pick' EU single market deal, Barnier tells BBC",
+    "link": "https://www.bbc.co.uk/news/articles/c9kgjj206nzpo?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-11-07T13:02:21+00:00"
+   },
+   {
+    "title": "Perspective: Simon Winchester was here to tell a story",
+    "link": "https://www.npr.org/2026/11/07/nx-s1-6023225/perspective-simon-winchester-was-here-to-tell-a-story",
+    "source": "NPR",
+    "published": "2026-11-07T13:00:00+00:00"
+   },
+   {
+    "title": "This teen boy set out to get people talking about periods. He's now a Diana honoree",
+    "link": "https://www.npr.org/2026/11/07/g-s1-152225/princess-diana-honor-menstruation-stigma",
+    "source": "NPR",
+    "published": "2026-11-07T11:50:21+00:00"
+   },
+   {
+    "title": "Victims in rape cases must not feel like they are on trial, Burnham says",
+    "link": "https://www.bbc.co.uk/news/articles/crgj99j8y998o?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-11-07T11:04:28+00:00"
+   }
+  ]
+ }
+}
