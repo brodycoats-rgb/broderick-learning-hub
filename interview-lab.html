@@ -585,6 +585,76 @@ q54:{s:"In one week during session I had a hearing, a storm and an executive bri
 q55:{model:"Trust comes back slowly and through behavior, not statements. I would start by making transparency the default. Share data openly, disclose what we are supposed to, and make sure members get the same answer from us in public and in private. Relationships should be built on information and follow-through, never favors. I would build a close partnership with compliance so everyone on the team knows the rules and checks when unsure. And I would be patient, measuring progress by whether members call us first when they want facts."}
 };
 
+// Follow-up probes, written the way government affairs, legal and executive panelists dig for specifics.
+// Prefix: G = government relations leader, L = legal or compliance leader, E = business executive.
+var PREP = window.PREP = window.PREP || {};
+PREP.followWho = {G:"Government affairs", L:"Legal and compliance", E:"Executive"};
+PREP.followGuide = [
+  "Follow-ups mean they are interested. They want the specific detail behind your summary.",
+  "Answer in two or three sentences, then stop. A follow-up does not need a second full STAR.",
+  "Government affairs leaders probe the mechanics: the vote count, the sponsor, the committee, the bill language, the timeline.",
+  "Legal leaders probe risk: who reviewed it, what was disclosed, what was documented, and where the line was.",
+  "Executives probe value: what it was worth, what it cost, and what changed for the business.",
+  "If you do not know a figure, say so and say how you would confirm it. Never guess on a legal or compliance point."
+];
+PREP.followups = {
+q1:["G|Which of those teams had the most at stake in the bill language, and how did you keep them from going around you to the sponsor?","L|How did you make sure every team's input went through legal review before it reached a legislator?","E|What decision rights did you set, and who had the final say on the company position?","G|What happened to the bill, and did the group's position change between committee and the floor?"],
+q2:["L|How did you confirm each contract lobbyist's registration and expenditure reports were accurate and on time?","G|How did you divide coverage among them, by caucus, committee or issue, and why?","L|What did the contracts say about subcontracting, contingent fees and disclosure?","E|How did you decide whether a contract lobbyist was worth renewing?"],
+q3:["G|What was the first meeting you let them lead with a member, and how did you prepare them?","L|How did you train them on gift ban and disclosure rules before they started meeting officials?","G|What would that person say was the most useful thing you taught them about Springfield?"],
+q4:["L|What did you document, and did you involve HR or legal before the conversation?","G|What was the impact on legislative coverage while the problem was unresolved?","E|What was your decision point for ending the engagement if things didn't improve?"],
+q5:["E|What did that leader need from government affairs that they weren't getting before?","G|How did you prepare them for their first meeting with a legislative leader?","L|How did you brief them on the political activity and ethics rules that applied to them personally?"],
+q6:["G|What was the bill number, the committee, and where was the vote count when you started?","G|What did the sponsor's staff tell you was really driving the bill?","L|Did any of the data you shared come from a pending ICC proceeding, and how did you handle that?","G|Did that member vote with you on a later issue, and do you attribute that to this meeting?"],
+q7:["E|What was the financial exposure you were weighing against the relationship risk?","G|What did your vote count show, and how confident were you in it?","L|Did legal agree with your read of the bill's impact, or did you have to reconcile different interpretations?"],
+q8:["G|What was the specific misconception the member had, and how did you correct it without making them feel wrong?","L|How did you make sure your simplified explanation was still accurate for the record?","G|Did that member later use your explanation in committee or with constituents?"],
+q9:["G|Why couldn't you get the meeting directly, and whose relationship did you use?","L|Did bringing in a third party, like a contractor or local official, raise any disclosure or registration issue?","G|What did you ask for in the meeting, and what did they commit to?"],
+q10:["G|Which partner was most likely to cut a separate deal with the sponsor, and what did they need to stay?","E|What did your company give up to keep the coalition together, and was it worth it?","L|How did you handle antitrust or coordination concerns when working with other utilities?","G|Was the coalition's language in the final bill, and where specifically?"],
+q11:["L|What ground rules did you set about sharing information with a competitor?","G|On the issue where you split, how did you keep members from playing the two companies against each other?","E|How did you keep your leadership informed about what you were and weren't coordinating on?"],
+q12:["G|Who in the administration did you work with, and at what level, deputy governor, agency director or staff?","G|How did you handle it when the administration's priority conflicted with your company's position on the bill?","L|Were any of those conversations about matters pending before the ICC, and how did you handle that?"],
+q13:["G|What did the advocates actually want, and what did you tell them you couldn't do?","L|Did anything you committed to require regulatory approval or a tariff change?","E|What did the company change as a result, and what did it cost?"],
+q14:["L|Who did you go to, when, and what did you put in writing?","L|What specific rule or policy did the request run up against?","G|How did you preserve the relationship with the colleague and the official involved?"],
+q15:["L|Walk me through the approvals for one event, from invitation to filing.","L|How do you keep fundraising out of session days and the day before session under the 2021 changes?","L|How do you separate official meetings from political events when the same legislator is involved in both?","G|Have you ever pulled the company out of an event? What happened?"],
+q16:["E|What was the business consequence of the bad news, and how did you quantify it?","G|What options did you put in front of leadership along with the bad news?","L|Did legal need to weigh in before you delivered it?"],
+q17:["L|What if the legislator chairs the committee handling your top priority bill this week?","L|Where would you document the contact, and who in compliance would you notify?","G|How would you handle it if the request came through one of your contract lobbyists instead of the member?","L|What if the person is genuinely qualified and applies on their own? What's your role then?"],
+q18:["G|What was the specific signal, a bill in another state, a staff conversation or an operational issue?","E|How did you get resources committed before anything was actually filed?","G|When the bill came, what did your early work let you do that you couldn't have done otherwise?"],
+q19:["E|Which line in the business plan did the legislative work protect or move, and by how much?","G|Which committee or legislative leader was most important to that outcome?","L|How did you coordinate the legislative strategy with the regulatory filings so the messages matched?"],
+q20:["G|What were the phases, and how did the legislative calendar shape them?","E|What did the campaign cost in time and resources, and how did you justify it each year?","L|How did you make sure the campaign's public materials didn't conflict with positions taken at the ICC?","G|Where does it stand today, and what's the next decision point?"],
+q21:["E|What resources would the original proposal have required?","G|What did your research show about how early warning actually reaches a GR team?","E|How did leadership respond when you changed the recommendation?"],
+q22:["G|Which amendment, what time did it surface, and how many hours did you have before the floor vote?","L|How did you get a legal read on the language that fast, and how confident were you in it?","G|Which legislative leaders did you go to first, and what did you ask them to do?","E|What process did you change afterward so late language gets reviewed faster?"],
+q23:["G|What was in a typical legislator update, and how often did it go out?","L|How did you make sure restoration estimates you shared were accurate and didn't create liability?","G|How did you handle a member who went to the press about restoration in their district?"],
+q24:["L|What did you acknowledge, and did legal review the wording before you said it?","G|Which members did you call first, and why those?","E|What did the company do to fix the underlying problem, and how did you show legislators the proof?"],
+q25:["G|What specifically did you disagree about, the strategy, the timing or the message?","E|After the decision, what did you personally do to make it succeed?","G|Looking back, who was right?"],
+q26:["L|Did the internal disagreement involve any legal or regulatory constraint, like a pending ICC case?","E|Who made the final call, and did both teams accept it?","G|How did the position you reached affect your standing with the sponsor?"],
+q27:["E|What was the cost to the work while the relationship was strained?","G|What did you change in your own approach first?","L|Did the situation ever require escalation to HR or a manager?"],
+q28:["L|Where did the data come from, and was any of it confidential or from a pending proceeding?","G|Which member or committee used it, and how?","G|Did opponents challenge the numbers, and how did you respond?"],
+q29:["E|Who did you tell first when the data didn't support your position?","G|How did you change the argument without losing credibility with members who'd heard the first version?","L|Was there any risk that earlier materials were now inaccurate, and how did you correct the record?"],
+q30:["E|Which of those measures would you report to the CEO after the first session?","G|How would you measure a defensive session where the win was that nothing passed?","L|How would compliance measures fit into the scorecard?"],
+q31:["E|What was the before and after, in hours or days?","G|How many colleagues use it during session, and how did you get them to adopt it?","L|Does the tool track who reviewed each bill and when, in a way that would hold up if questioned later?","G|How do you keep it current when people change roles?"],
+q32:["G|How many bills a session, and how many did you rate as act now?","G|What's your average time from filing to approved position?","L|Who signs off on a company position before you share it with a member?"],
+q33:["E|How did you know executives were actually reading it?","G|What did you cut to get it to one page?","L|Did anything sensitive need to stay out of the written version?"],
+q34:["G|Which committee chairs and leaders would you brief first, and in what order?","L|What's the difference between what the legislature can require and what has to go through an ICC tariff proceeding?","E|What would you concede to get a deal, and what is non-negotiable?","G|How would you answer economic development allies who say protections will scare data centers away?"],
+q35:["G|What if the member says the delivery side is still too high and cites the last rate increase?","L|How would you talk about a pending rate or grid plan case without lobbying on the merits?","G|Which assistance programs would you name, and how would you get constituents enrolled?"],
+q36:["G|What can the General Assembly actually do about capacity prices, and what can't it?","L|Where does FERC jurisdiction end and state authority begin on resource adequacy?","G|How would you answer a member who says utilities should absorb the cost?"],
+q37:["G|Which of those would you put at the top of the agenda for the spring session, and why?","G|Who are the three legislators who matter most on each?","E|What would success look like at sine die?"],
+q38:["L|Under the ex parte rules, what exactly can and can't you discuss with a legislator who calls the commissioners?","L|What if a legislator wants to send a letter to the ICC on your case? What's your advice?","G|How would you coordinate with regulatory and legal before any member meeting on the plan?"],
+q39:["L|What does FERC control in large-load interconnection that the state cannot touch?","G|What would you propose the state do first, and which committee would hear it?","E|How does interconnection timing affect the company's growth and capital plan?"],
+q40:["G|What do you understand this team's top three priorities to be for the coming session?","E|What would you bring that the team doesn't have today?","G|Which relationships in Springfield would you strengthen first?"],
+q41:["G|Which bill or negotiation best shows how you work?","E|What's the accomplishment you'd want our CEO to know about?","G|What's one thing about Springfield you understand better than most people in this role?"],
+q42:["G|Name the first five people outside this company you'd meet.","L|When in the first 90 days would you sit down with compliance and legal, and what would you ask?","E|What would your first report to the SVP include?"],
+q43:["G|What would a legislator who disagrees with you on policy say about working with you?","L|What would your compliance colleagues say about you?","E|What would an executive who received your briefings say?"],
+q44:["G|How would you handle a high performer with great relationships who cut a compliance corner?","E|How would you develop the next director from within the team?","L|How would you build ethics into the team's day-to-day work rather than an annual training?"],
+q45:["E|What did it cost the company, in money, position or relationships?","G|When did you tell your manager, and what exactly did you say?","L|Did anything need to be corrected on the record?","G|What specific practice do you follow now because of it?"],
+q46:["G|Give me a session example where it showed up.","E|What would we see if it were getting in your way in this role?","G|Who on your team would you rely on to cover that gap?"],
+q47:["L|What reforms do you understand were put in place, and how would you reinforce them?","G|How would you talk about the history with a legislator who brings it up?","L|What would you do if you saw something that reminded you of those practices?"],
+q48:["G|What did you know, what didn't you know, and how much time did you have?","L|Did the decision create any commitment the company would be held to?","E|How did you check afterward whether it was the right call?"],
+q49:["G|Who was it, by role, and what was at stake for them?","G|What did you offer instead of what they asked for?","E|How did your leadership react when you told them you'd said no?"],
+q50:["E|What exactly was the feedback, and who gave it?","G|How did it change the way you brief executives or members?","G|Who gives you candid feedback now?"],
+q51:["G|What's in your briefing memo, section by section?","L|How do you prepare an executive for testimony so it's consistent with positions taken at the ICC?","G|What's the hardest question you've prepped an executive for, and how did they handle it?","E|What does your post-meeting follow-up look like, and who owns it?"],
+q52:["G|Give me a bill you chose to let go. What happened to it?","E|Who has the final call on fight, amend or let go?","G|How do you explain that choice to an executive who wants to fight?"],
+q53:["L|How do you keep the relationship within the gift ban and disclosure rules?","G|What do you give that legislator that isn't an ask?","G|How has that relationship helped on a specific issue, and how did you avoid overusing it?"],
+q54:["G|What did you delegate, and to whom?","E|What dropped, and how did you recover?","G|How do you plan around the end-of-session crunch now?"],
+q55:["L|What compliance practices would you put in place on day one?","G|How would you measure whether trust is improving with members?","G|What would you stop doing that utilities have traditionally done in Springfield?"]
+};
+
 </script>
 <script>
 (function(){
@@ -638,6 +708,12 @@ function exampleHTML(q){
   return h;
 }
 
+function fuParse(x){ var m=/^([GLE])\|(.*)$/.exec(x||""); return m?{who:m[1],q:m[2]}:{who:"",q:x}; }
+function fuTag(w){ var n=P.followWho&&P.followWho[w]; if(!n) return ""; var c=w==="L"?'style="background:var(--bad-soft);color:var(--bad)"':w==="E"?'style="background:var(--good-soft);color:var(--good)"':'class="tag nav"'; return '<span class="tag'+(w==="G"?' nav"':'" '+c)+'>'+esc(n)+'</span>'; }
+function followHTML(q,open){
+  var f=P.followups&&P.followups[q.id]; if(!f||!f.length) return "";
+  return '<div class="callout" style="margin-top:12px"><div class="kicker">Likely follow-ups</div><p class="small" style="margin:.2em 0 .4em">Who would ask it, and what they want: mechanics from government affairs, risk from legal, value from executives. Have a short, precise answer ready for each.</p><ol style="margin:.2em 0 0;padding-left:1.2em">'+f.map(function(x){var p=fuParse(x);return '<li style="margin:.35em 0">'+fuTag(p.who)+' '+esc(p.q)+'</li>';}).join("")+'</ol></div>';
+}
 /* ---------- nav ---------- */
 var NAV = [
   {grp:"Start"},
@@ -645,6 +721,7 @@ var NAV = [
   {id:"star", label:"STAR method", ic:"★"},
   {grp:"Prepare"},
   {id:"stories", label:"Story bank", ic:"✎", priv:true},
+  {id:"builder", label:"Story builder", ic:"⚒", priv:true},
   {id:"questions", label:"Question bank", ic:"?"},
   {id:"scripts", label:"Scripts", ic:"❝", priv:true},
   {grp:"Practice"},
@@ -726,7 +803,7 @@ V.home = function(el){
   $("#idate").onchange=function(){ S.date=this.value; save(); route(); };
   $("#drillQ").onclick=function(){ pendingQ=this.getAttribute("data-q"); };
   var ds=$("#drillS"); if(ds) ds.onclick=function(){ pendingS=this.getAttribute("data-s"); };
-  $("#resetAll").onclick=function(){ if(confirm("Reset all saved progress in this browser?")){ S={practiced:{},mastered:{},quizBest:0,quizRuns:0,mocks:[],essays:{},notes:{},date:"",checks:{}}; save(); route(); } };
+  $("#resetAll").onclick=function(){ if(confirm("Reset all saved progress in this browser?")){ var keep=S.builder; S={practiced:{},mastered:{},quizBest:0,quizRuns:0,mocks:[],essays:{},notes:{},date:"",checks:{},builder:keep}; save(); route(); } };
 };
 function stat(v,l){ return '<div class="card stat"><b>'+esc(v)+'</b><span>'+esc(l)+'</span></div>'; }
 
@@ -737,6 +814,7 @@ V.star = function(el){
   '<div class="card"><h3>Timing</h3><div class="bar" role="img" aria-label="Time split Situation 15, Task 10, Action 50, Result 25 percent">'+s.parts.map(function(p,i){return '<span style="width:'+p.pct+'%;background:'+colors[i]+'" title="'+esc(p.name)+'"></span>';}).join("")+'</div><p>'+esc(s.timing)+'</p></div>'+
   '<div class="grid g2" style="margin-top:16px"><div class="card"><h3>Common mistakes</h3><ul class="clean">'+s.mistakes.map(function(m){return '<li>'+esc(m)+'</li>';}).join("")+'</ul></div>'+
   '<div class="card"><h3>The I versus we test</h3><p>Use we to set context. Use I for every action. If a panelist cannot tell what you personally did, the answer does not count.</p><h3>Before you answer</h3><ul class="clean"><li>Pause two seconds and pick the story</li><li>Say the headline result first if it is strong</li><li>Stop after the lesson and let them ask follow-ups</li></ul></div></div>'+
+  '<div class="card" style="margin-top:16px"><h3>Handling follow-up questions</h3><ul class="clean">'+(P.followGuide||[]).map(function(g){return '<li>'+esc(g)+'</li>';}).join("")+'</ul></div>'+
   '<h2 style="margin-top:24px">Same question, three answers</h2><p><b>'+esc(s.example.q)+'</b></p>'+
   '<div class="tabs" id="exTabs"><button class="on" data-k="weak">Weak</button><button data-k="good">Good</button><button data-k="strong">Strong</button></div>'+
   '<div class="card" id="exBody"></div>';
@@ -749,6 +827,7 @@ var pendingS=null, pendingQ=null;
 V.stories = function(el){
   var filter="all";
   el.innerHTML='<h1>Story bank</h1><p class="muted">Your experiences, scripted in STAR. Highlighted brackets are details only you can fill in. Mark a story mastered once you can tell it without looking.</p>'+
+  '<div class="row" style="margin-bottom:12px"><a class="btn sm" href="#builder">Build or strengthen a story</a></div>'+
   '<div class="tabs" id="stTabs"></div><div id="stList"></div>';
   var tags=[["all","All"]].concat(P.categories.map(function(c){return [c.id,c.name.split(" ")[0]];}));
   function draw(){
@@ -779,7 +858,7 @@ function storyBody(s,k){
 
 V.questions = function(el){
   var filter="all", term="";
-  el.innerHTML='<h1>Question bank</h1><p class="muted">'+P.questions.length+' behavioral questions across '+P.categories.length+' competencies. Each shows what the panel is listening for, an example answer'+(PRIV?' and your matching story':'')+'.</p>'+
+  el.innerHTML='<h1>Question bank</h1><p class="muted">'+P.questions.length+' behavioral questions across '+P.categories.length+' competencies. Each shows what the panel is listening for, an example answer, likely follow-ups'+(PRIV?' and your matching story':'')+'.</p>'+
   '<input type="text" id="qsearch" placeholder="Search questions" aria-label="Search questions" style="margin-bottom:12px"><div class="tabs" id="qTabs"></div><div id="qCatBlurb" class="small muted" style="margin-bottom:10px"></div><div id="qList"></div>';
   function draw(){
     $("#qTabs").innerHTML=[["all","All"]].concat(P.categories.map(function(c){return [c.id,c.name];})).map(function(t){return '<button class="'+(filter===t[0]?'on':'')+'" data-f="'+t[0]+'">'+esc(t[1])+'</button>';}).join("");
@@ -790,7 +869,7 @@ V.questions = function(el){
       var sts=PRIV?q.stories.map(story).filter(Boolean):[];
       return '<details class="qcard"><summary><span class="chev">▸</span><span style="flex:1">'+esc(q.q)+'<br><span class="tag">'+esc(catName(q.cat))+'</span></span>'+(S.practiced[q.id]?'<span class="done" title="Practiced">✔</span>':'')+'</summary><div style="margin-top:10px">'+
       '<p><b>What they are listening for.</b> '+esc(q.probe)+'</p><p><b>A strong answer shows</b></p><ul class="clean">'+q.shows.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul>'+
-      exampleHTML(q)+(sts.length?'<p><b>Your best stories</b> '+sts.map(function(s){return '<a href="#stories" class="tag nav" data-s="'+s.id+'">'+esc(s.title)+'</a>';}).join(" ")+'</p>':'')+
+      exampleHTML(q)+followHTML(q)+(sts.length?'<p><b>Your best stories</b> '+sts.map(function(s){return '<a href="#stories" class="tag nav" data-s="'+s.id+'">'+esc(s.title)+'</a>';}).join(" ")+'</p>':'')+
       (PRIV&&!q.stories.length&&q.cat==="fit"?'<p class="small"><a href="#scripts">See your scripts</a></p>':'')+
       '<div class="row"><a class="btn sm" href="#verbal" data-q="'+q.id+'">Speak it</a><a class="btn sm ghost" href="#essay" data-q="'+q.id+'">Write it</a></div></div></details>';
     }).join("")||'<p class="muted">No matches.</p>';
@@ -806,6 +885,7 @@ V.scripts = function(el){
   function blk(t,txt,sec){ return '<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(t)+'</h3>'+(sec?'<span class="tag acc">~'+sec+'</span>':'')+'</div><div class="script" style="margin-top:10px">'+hl(txt)+'</div></div>'; }
   el.innerHTML='<h1>Scripts</h1><p class="muted">Openers, fit answers and your close. Learn the shape, not the exact words.</p>'+
   blk("Tell me about yourself, 60 seconds",sc.tmay60,"60s")+blk("Tell me about yourself, 90 seconds",sc.tmay90,"90s")+blk("Why ComEd, why this role",sc.why,"60s")+blk("Why leave your current company",sc.whyleave)+blk("First 90 days",sc.plan90,"60s")+blk("Closing statement",sc.closing,"45s");
+  if(sc.objections) el.innerHTML+='<h2 style="margin-top:24px">ComEd-specific hard questions</h2><p class="muted">Kept here, not on the public hub. For general objection practice see <a href="https://brodycoats-rgb.github.io/broderick-learning-hub/leading-at-scale.html">Leading at Scale</a>.</p>'+sc.objections.map(function(o){return blk(o.q,o.a);}).join("");
 };
 
 /* ---------- recording ---------- */
@@ -819,22 +899,28 @@ V.verbal = function(el){
   el.innerHTML='<h1>Speak it</h1><p class="muted">Answer out loud against the clock. Aim for ninety seconds to two minutes. Record yourself if you like, then score your answer honestly.</p>'+
   '<div class="row" style="margin-bottom:12px"><select id="vcat" aria-label="Category" style="max-width:320px"><option value="all">Any category</option>'+P.categories.map(function(c){return '<option value="'+c.id+'">'+esc(c.name)+'</option>';}).join("")+'</select><button class="btn ghost" id="vnext">New question</button></div>'+
   '<div class="card"><div class="kicker" id="vcatl"></div><h2 id="vq"></h2><div id="vhint"></div><div class="timer" id="vt">0:00</div>'+
-  '<div class="row" style="justify-content:center"><button class="btn" id="vstart">Start</button><button class="btn ghost" id="vstop">Stop</button>'+(canRec()?'<button class="btn ghost" id="vrec">● Record</button>':'')+'</div><div id="vplay" style="margin-top:12px;text-align:center"></div></div>'+
+  '<div class="row" style="justify-content:center"><button class="btn" id="vstart">Start</button><button class="btn ghost" id="vstop">Stop</button>'+(canRec()?'<button class="btn ghost" id="vrec">● Record</button>':'')+'</div><div id="vplay" style="margin-top:12px;text-align:center"></div><div id="vfu" style="margin-top:12px"></div></div>'+
   '<div class="card" style="margin-top:16px"><h3>Score your answer</h3><div id="vchecks"></div><div class="row" style="margin-top:10px"><button class="btn" id="vsave">Save score</button><span id="vres" class="muted"></span></div></div>';
   var checks=["Situation in three sentences or fewer","Clear statement of my task","Three or more specific actions in the first person","A concrete result with a number or date","A one-line lesson","Finished between 1:30 and 2:30"];
   $("#vchecks").innerHTML=checks.map(function(c,i){return '<label class="check"><input type="checkbox" data-i="'+i+'"><span>'+esc(c)+'</span></label>';}).join("");
-  var t=0, iv=null;
+  var t=0, iv=null, fuLeft=[], fiv=null;
   function pick(){ var list=pool.filter(function(q){return cat==="all"||q.cat===cat;}); cur=list[Math.floor(Math.random()*list.length)]; showQ(); }
   function showQ(){ $("#vq").textContent=cur.q; $("#vcatl").textContent=catName(cur.cat);
     var sts=PRIV?cur.stories.map(story).filter(Boolean):[];
-    $("#vhint").innerHTML='<details><summary class="small">Hint</summary><p class="small">'+esc(cur.probe)+'</p>'+(sts.length?'<p class="small">Try: '+sts.map(function(s){return esc(s.title);}).join(", ")+'</p>':'')+'</details><details><summary class="small">Example answer</summary>'+exampleHTML(cur)+'</details>';
-    reset(); $$("#vchecks input").forEach(function(i){i.checked=false;}); $("#vres").textContent=""; $("#vplay").innerHTML=""; }
+    $("#vhint").innerHTML='<details><summary class="small">Hint</summary><p class="small">'+esc(cur.probe)+'</p>'+(sts.length?'<p class="small">Try: '+sts.map(function(s){return esc(s.title);}).join(", ")+'</p>':'')+'</details><details><summary class="small">Example answer</summary>'+exampleHTML(cur)+'</details><details><summary class="small">Likely follow-ups</summary>'+followHTML(cur)+'</details>';
+    reset(); $$("#vchecks input").forEach(function(i){i.checked=false;}); $("#vres").textContent=""; $("#vplay").innerHTML=""; $("#vfu").innerHTML=""; fuLeft=shuffle((P.followups&&P.followups[cur.id])||[]); }
   function reset(){ clearInterval(iv); iv=null; t=0; draw(); }
   function draw(){ var e=$("#vt"); e.textContent=fmt(t); e.className="timer"+(t>150?" over":t>=90?" warn":""); }
   $("#vcat").onchange=function(){cat=this.value;pick();};
   $("#vnext").onclick=pick;
   $("#vstart").onclick=function(){ if(iv) return; iv=setInterval(function(){t++;draw();},1000); timers.push(iv); };
-  $("#vstop").onclick=function(){ clearInterval(iv); iv=null; stopRec(); var b=$("#vrec"); if(b) b.textContent="● Record"; };
+  $("#vstop").onclick=function(){ clearInterval(iv); iv=null; stopRec(); var b=$("#vrec"); if(b) b.textContent="● Record"; fuOffer(); };
+  function fuOffer(){ if(!fuLeft.length){ $("#vfu").innerHTML=t?'<p class="small muted" style="text-align:center">No more follow-ups for this question.</p>':""; return; } $("#vfu").innerHTML='<div style="text-align:center"><button class="btn ghost" id="vfugo">Panel asks a follow-up</button></div>'; $("#vfugo").onclick=fuAsk; }
+  function fuAsk(){ var p=fuParse(fuLeft.shift()), q=p.q, ft=0; clearInterval(fiv);
+    $("#vfu").innerHTML='<div class="callout"><div class="kicker">Follow-up '+fuTag(p.who)+'</div><p class="big" style="margin:.2em 0;font-family:Fraunces,serif;font-size:1.2rem">'+esc(q)+'</p><p class="small muted" style="margin:0">Two or three sentences. Be specific, then stop.</p><div class="row" style="margin-top:8px"><span class="timer" id="vft" style="font-size:1.6rem;margin:0">0:00</span><button class="btn sm" id="vfdone">Done</button></div></div>';
+    fiv=setInterval(function(){ ft++; var e=$("#vft"); if(!e){clearInterval(fiv);return;} e.textContent=fmt(ft); e.className="timer"+(ft>60?" over":ft>=45?" warn":""); },1000); timers.push(fiv);
+    $("#vfdone").onclick=function(){ clearInterval(fiv); var msg=ft>60?"That ran long for a follow-up. Aim for 20 to 45 seconds.":ft<10?"Very short. Make sure you gave a specific detail.":"Good length for a follow-up."; fuOffer(); $("#vfu").insertAdjacentHTML("afterbegin",'<p class="small" style="text-align:center">'+fmt(ft)+'. '+esc(msg)+'</p>'); };
+  }
   var rb=$("#vrec");
   if(rb) rb.onclick=function(){
     if(rec&&rec.state==="recording"){ stopRec(); rb.textContent="● Record"; return; }
@@ -954,7 +1040,7 @@ V.recall = function(el){
 
 V.mock = function(el){
   var set=[], i=0, t=0, iv=null, ratings=[];
-  el.innerHTML='<h1>Mock interview</h1><p class="muted">Eight questions in a row, like the real panel. Answer each out loud, rate yourself, and move on. The clock turns amber at 1:30 and red at 2:30.</p><div class="card" id="mk"></div>';
+  el.innerHTML='<h1>Mock interview</h1><p class="muted">Eight questions in a row, like the real panel, each followed by one probing follow-up. Answer out loud, rate yourself, and move on. The clock turns amber at 1:30 and red at 2:30.</p><div class="card" id="mk"></div>';
   function intro(){
     $("#mk").innerHTML='<h2>Ready?</h2><p>The set mixes one fit question, one ethics question, one current-issues question and five others. Sit up, speak to the screen as if it were the panel, and do not pause the clock.</p>'+
     (S.mocks.length?'<p class="small muted">Past sessions: '+S.mocks.slice(-5).map(function(m){return m.d+" ("+m.avg+"/5)";}).join(", ")+'</p>':'')+'<button class="btn" id="mkgo">Begin</button>';
@@ -971,14 +1057,21 @@ V.mock = function(el){
     $("#mk").innerHTML='<div class="row" style="justify-content:space-between"><span class="tag acc">Question '+(i+1)+' of '+set.length+'</span><span class="tag">'+esc(catName(q.cat))+'</span></div><div class="meter" style="margin:10px 0"><span style="width:'+(i/set.length*100)+'%"></span></div><h2>'+esc(q.q)+'</h2><div class="timer" id="mt">0:00</div>'+
     '<p class="small"><b>Rate this answer</b></p><div class="row" id="mrate">'+[1,2,3,4,5].map(function(n){return '<button class="btn ghost sm" data-r="'+n+'">'+n+'</button>';}).join("")+'</div><p class="small muted">1 rambled or no result · 3 solid STAR · 5 crisp, specific, memorable</p>';
     iv=setInterval(function(){ t++; var e=$("#mt"); if(!e){clearInterval(iv);return;} e.textContent=fmt(t); e.className="timer"+(t>150?" over":t>=90?" warn":""); },1000); timers.push(iv);
-    $$("#mrate button").forEach(function(b){ b.onclick=function(){ ratings.push({q:q,r:+b.getAttribute("data-r"),t:t}); S.practiced[q.id]=Math.max(S.practiced[q.id]||0,+b.getAttribute("data-r")); i++; if(i<set.length) ask(); else end(); }; });
+    $$("#mrate button").forEach(function(b){ b.onclick=function(){ ratings.push({q:q,r:+b.getAttribute("data-r"),t:t}); S.practiced[q.id]=Math.max(S.practiced[q.id]||0,+b.getAttribute("data-r")); follow(q); }; });
+  }
+  function follow(q){
+    var f=(P.followups&&P.followups[q.id])||[]; if(!f.length){ i++; if(i<set.length) ask(); else end(); return; }
+    clearInterval(iv); var fp=fuParse(f[Math.floor(Math.random()*f.length)]), fq=fp.q, ft=0;
+    $("#mk").innerHTML='<div class="row" style="justify-content:space-between"><span><span class="tag acc">Follow-up to question '+(i+1)+'</span>'+fuTag(fp.who)+'</span><span class="tag">'+esc(catName(q.cat))+'</span></div><p class="small muted" style="margin-top:10px">'+esc(q.q)+'</p><h2>'+esc(fq)+'</h2><div class="timer" id="mt">0:00</div><p class="small muted">Two or three specific sentences, then stop. Aim for 20 to 45 seconds.</p><div class="row"><button class="btn" id="mfnext">'+(i+1<set.length?'Next question':'Finish')+'</button></div>';
+    iv=setInterval(function(){ ft++; var e=$("#mt"); if(!e){clearInterval(iv);return;} e.textContent=fmt(ft); e.className="timer"+(ft>60?" over":ft>=45?" warn":""); },1000); timers.push(iv);
+    $("#mfnext").onclick=function(){ clearInterval(iv); ratings[ratings.length-1].fq=fq; ratings[ratings.length-1].ft=ft; i++; if(i<set.length) ask(); else end(); };
   }
   function end(){
     clearInterval(iv); var sum=0,tt=0; ratings.forEach(function(r){sum+=r.r;tt+=r.t;}); var avg=(sum/ratings.length).toFixed(1);
     S.mocks.push({d:new Date().toLocaleDateString(),avg:avg}); save();
     var weak=ratings.filter(function(r){return r.r<=3||r.t>150||r.t<60;});
     $("#mk").innerHTML='<h2>Session complete</h2><div class="grid g3">'+stat(avg+" / 5","Average rating")+stat(fmt(Math.round(tt/ratings.length)),"Average length")+stat(weak.length,"Answers to rework")+'</div>'+
-    '<table class="t" style="margin-top:16px"><thead><tr><th>Question</th><th>Time</th><th>Rating</th></tr></thead><tbody>'+ratings.map(function(r){return '<tr><td>'+esc(r.q.q)+'</td><td>'+fmt(r.t)+'</td><td>'+r.r+'</td></tr>';}).join("")+'</tbody></table>'+
+    '<table class="t" style="margin-top:16px"><thead><tr><th>Question</th><th>Time</th><th>Rating</th><th>Follow-up time</th></tr></thead><tbody>'+ratings.map(function(r){return '<tr><td>'+esc(r.q.q)+(r.fq?'<br><span class="small muted">Follow-up: '+esc(r.fq)+'</span>':'')+'</td><td>'+fmt(r.t)+'</td><td>'+r.r+'</td><td>'+(r.fq?fmt(r.ft):'')+'</td></tr>';}).join("")+'</tbody></table>'+
     (weak.length?'<div class="callout" style="margin-top:14px"><b>Next step.</b> Rework these in Write it, then run another mock.</div>':'<div class="callout navy" style="margin-top:14px">Every answer landed in range. Try another set.</div>')+
     '<div class="row" style="margin-top:12px"><button class="btn" id="mkag">Run another</button><a class="btn ghost" href="#essay">Go to Write it</a></div>';
     $("#mkag").onclick=begin;
@@ -1059,6 +1152,7 @@ function route(){
   window.scrollTo(0,0);
   if(document.activeElement && document.activeElement.tagName==="A") el.focus({preventScroll:true});
 }
+if(PRIV) mergeBuilder();
 window.addEventListener("hashchange",route);
 document.addEventListener("click",function(e){ var a=e.target.closest&&e.target.closest("a[data-q],a[data-s]"); if(a){ if(a.getAttribute("data-q")) pendingQ=a.getAttribute("data-q"); if(a.getAttribute("data-s")) pendingS=a.getAttribute("data-s"); } },true);
 route();
