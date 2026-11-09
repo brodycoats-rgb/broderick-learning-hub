@@ -655,6 +655,247 @@ q54:["G|What did you delegate, and to whom?","E|What dropped, and how did you re
 q55:["L|What compliance practices would you put in place on day one?","G|How would you measure whether trust is improving with members?","G|What would you stop doing that utilities have traditionally done in Springfield?"]
 };
 
+// Competency bank: Ameren's six behavioral competencies plus two ComEd additions, mapped to Exelon values.
+// Example answers are concise STAR drafts built from Rick's resume. Bracketed text marks details to confirm.
+var PREP = window.PREP = window.PREP || {};
+PREP.comps = [
+ {id:"respect", ameren:"Engage Respectfully", amerenDef:"Stays professional under pressure and owns their part.", exelon:"Integrity and trust", exelonDef:"Exelon names integrity as a core value, and its director postings ask for the ability to establish trust."},
+ {id:"collab", ameren:"Foster Collaboration", amerenDef:"Works together with others and seeks out other perspectives.", exelon:"Consensus and facilitation", exelonDef:"Director postings ask for building consensus, negotiation and facilitation, and strong interpersonal skills."},
+ {id:"results", ameren:"Deliver Results", amerenDef:"Gets work done, and gets it done safely.", exelon:"Safety and creating value", exelonDef:"Exelon names safety as a core value, and its postings ask for the ability to create value."},
+ {id:"improve", ameren:"Continuously Improve", amerenDef:"Makes things better and seeks feedback.", exelon:"Innovation and culture change", exelonDef:"Exelon names innovation as a core value, and its postings ask for fostering culture change."},
+ {id:"strategic", ameren:"Be Strategic", amerenDef:"Considers the big picture and the organization's vision and values.", exelon:"Strategic planning and business acumen", exelonDef:"Director postings ask for strategic planning, business acumen and advising executive leadership."},
+ {id:"customer", ameren:"Think Customer", amerenDef:"Keeps internal and external customers central.", exelon:"Customer awareness and community service", exelonDef:"Exelon names community service as a core value, and its postings ask for customer awareness."},
+ {id:"lead", ameren:"Lead People", amerenDef:"Added for director roles. Sets expectations, develops people and holds a team accountable.", exelon:"Leading teams", exelonDef:"Director postings require management experience and describe overseeing a team of External Affairs Managers.", added:true},
+ {id:"comm", ameren:"Communicate with Impact", amerenDef:"Added for director roles. Writes and speaks clearly to every audience.", exelon:"Communication", exelonDef:"Director postings ask for superior written and oral communication with internal and external audiences.", added:true}
+];
+PREP.compSource = "Ameren competencies from Ameren's public behavioral interviewing guide. Exelon values and director competencies from Exelon job postings. Ameren sample questions are paraphrased.";
+
+// [id, comp, legacy category, sampleFlag, question, what they want, story ids, S, T, A, R, L, follow-ups]
+PREP.compRaw = [
+// ENGAGE RESPECTFULLY
+["c1","respect","crisis",1,"Tell me about a time you stayed calm and professional in a stressful or ambiguous situation.","Composure, clear thinking and how you treated people while under pressure.",["harmful"],
+ "Late in a session, an amendment surfaced on a utility bill that appeared to change cost recovery, and leadership wanted to vote the next day.","I had to get the company a position within hours without overreacting to language we had not fully read.","I got the text from committee staff, sent it to regulatory and legal with a one-hour turnaround, and called industry peers to see who else was affected. Once legal confirmed the risk sat in one section, I wrote a one-paragraph explanation and our contract lobbyists and I delivered it to both caucuses.","The amendment was pulled before the floor vote. [Confirm bill and year.] Afterward I set up a rapid review so late language gets a legal read in under two hours.","Calm comes from knowing who to call before you need them.",
+ ["G|How many hours did you have, and which leaders did you go to first?","L|How confident were you in a one-hour legal read, and how did you caveat it?","E|What would it have cost if the amendment had passed?"]],
+["c2","respect","curve",0,"Describe a time you made a mistake at work. How did you own it?","Ownership without excuses, and what you changed.",["setback"],
+ "[Choose a real example, such as a bill you rated low priority that moved faster than expected.]","Tracking that bill and keeping leadership informed was my responsibility.","As soon as I saw it move, I told my manager what I had missed, laid out the bill's impact, and proposed a plan. I worked with our experts and allies to get an amendment drafted and in front of the sponsor.","[Outcome, such as one amendment adopted.] I now send every tracked bill's status to leadership weekly, even when it is quiet.","Never assume a bill is dead until the session is over.",
+ ["E|What did the mistake cost?","G|How quickly did you tell your manager?","G|What exactly do you do differently now?"]],
+["c3","respect","conflict",0,"Tell me about a time you disagreed with a leader. How did you handle it?","Respectful candor, then commitment.",["polrd"],
+ "I had proposed a formal legislative foresight function for our department and believed in it.","As I tested it, I had to decide whether to keep pushing my own idea or tell leadership the evidence pointed elsewhere.","I built a dataset of several hundred bills across six sessions and found that early warning mostly came through relationships our team already had. I brought that to my mentor and then to leadership and recommended two small process changes instead of a new function.","Leadership supported the smaller changes, quarterly listening sessions with business units and a statutory deadline calendar. [Confirm adoption.]","Disagreeing with your own idea in front of leadership builds more credibility than defending it.",
+ ["E|How did leadership react to the change in recommendation?","G|What did the data actually show?","E|What resources did the smaller approach save?"]],
+["c4","respect","ethics",0,"Describe a time you had to deliver a difficult message to someone senior.","Courage, timing and framing.",["harmful","org"],
+ "Leadership was hoping a priority proposal would move in the coming session.","My vote count showed it did not have enough support, and I had to say so.","I confirmed the count with two allies and our contract lobbyists, asked for a short meeting, and led with the conclusion. I walked through the count member by member and offered two options, narrow the proposal or build support over the interim.","Leadership chose to narrow it, and the narrower version [moved or passed]. [Confirm example.]","Bad news early with options is a service. Bad news late is a failure.",
+ ["G|How did you build and verify the vote count?","E|Which option did leadership choose and why?","G|What happened to the broader proposal?"]],
+["c5","respect","crisis",0,"Tell me about a time someone treated you unprofessionally. How did you respond?","Self-control and keeping the relationship.",["koehler"],
+ "During a meeting, a legislator angrily blamed utilities for constituents' bills and dismissed what I said. [Confirm example.]","I needed to keep the meeting productive and protect the company's relationship with the office.","I let them finish, acknowledged that their constituents were hurting, and asked what they were hearing most. I separated supply costs from delivery costs in one sentence and offered a concrete next step, a bill assistance event in the district.","The member accepted the event, and the office called us first the next time a constituent had a problem.","People can be angry at the company without the conversation becoming personal.",
+ ["G|What did the member say that was hardest to hear?","L|Did you make any commitment that required approval?","G|Where does that relationship stand now?"]],
+["c6","respect","ethics",0,"Describe a time you had to say no to someone with influence over your work.","Backbone with tact, and a respectful alternative.",["ethics"],
+ "A request came in tied to a political event that did not fit our ethics rules. [Confirm example.]","As the person coordinating the company's fundraising events, I had to decline without damaging the relationship.","I said I needed to check before committing, confirmed with compliance, and went back the same day. I explained the rule plainly and offered an option that did fit, such as attending a different event.","The relationship stayed intact and the event ran within the rules. Since 2017 I have coordinated more than 30 events within ethics and campaign finance rules.","A clear no with a real alternative keeps the door open.",
+ ["L|Which rule applied, and who confirmed it?","G|How did the requester react?","L|How do you document a request like that?"]],
+["c7","respect","ethics",0,"Tell me about a time you protected confidential information.","Discretion and judgment about who needs to know what.",["lobbyists","datacenter"],
+ "On data center legislation, our internal analysis included cost and planning details that were not public.","I had to equip contract lobbyists and coalition partners without sharing information that should stay inside the company.","I worked with legal to separate what we could say publicly from what stayed internal. I briefed outside partners using public data and our position, and kept detailed figures to internal teams.","Partners had what they needed to advocate, and nothing sensitive left the company.","Decide what can be shared before the meeting, not during it.",
+ ["L|Who decided what was confidential?","G|How did partners react to getting less detail?","L|What would you do if something leaked?"]],
+["c8","respect","conflict",0,"Describe a time you stayed neutral while others took sides.","Fairness and facilitation.",["datacenter","sme"],
+ "On a data center bill, economic development wanted to support it and our rates team worried it would shift costs to residential customers.","As GR lead I had to get one company position without favoring either team.","I put both leads in the same meeting with the bill text and asked each to write down what they needed rather than what they wanted. I mapped the overlap, support growth and protect residential customers, and drafted a support-if-amended position for leadership to decide.","Both teams signed off and leadership approved the position before the hearing. [Confirm bill.]","Ask for needs, not positions. The overlap is usually bigger than people think.",
+ ["G|How long did it take to reach a position?","E|Who made the final call?","L|Did legal have a view on the amendment language?"]],
+
+// FOSTER COLLABORATION
+["c9","collab","coalition",1,"Tell me about a time you sought out other perspectives and applied them.","Openness to input and evidence you acted on it.",["koehler"],
+ "We developed a conversation guide to help legislators understand our Multi-Year Grid Plan.","Before using it broadly, I wanted honest feedback on whether it worked.","I asked a senator I have known for about 16 years to a no-ask lunch in his district, walked through the guide and asked what was missing. [Add what he told you.]","I revised the guide based on his feedback before using it with other members. [Confirm changes.]","A friendly expert who will tell you what does not work is the best first audience.",
+ ["G|What did he push back on?","L|How did you keep the conversation on education while the plan was before the ICC?","G|Which members did you meet next?"]],
+["c10","collab","lead",0,"Describe a time you brought together people who did not usually work together.","Convening skill and structure.",["datacenter"],
+ "Data center legislation touched economic development, clean energy transition, rates and communications, and there was no single coordinating point.","As GR lead on data center bills, I had to align those teams without any of them reporting to me.","I helped set up a cross-functional group, opened by explaining the veto session process and how GR routes bills so everyone shared one timeline, and arranged report-outs so information reached the broader organization.","The group now works from one calendar and one set of facts, and I prepare bill analyses for House and Senate hearings from it.","Give people a shared timeline first. Alignment follows.",
+ ["G|Which bills did the group take positions on?","E|Who had decision rights?","G|How do you keep it going between sessions?"]],
+["c11","collab","process",0,"Tell me about a time you built support for an idea across departments.","Influence without authority and adoption.",["sme"],
+ "Bills were reaching experts by memory and outdated lists, which slowed positions before committee action.","I wanted a routing tool that colleagues would actually use.","I combined the bill list, the latest business partner directory and a full topic list into one workbook, built suggested tags that colleagues confirm from the bill summary, and tested it with teammates before rollout.","The tool is built and used to route bills to the right leader or team quickly. [Add time saved.]","A tool gets adopted when it fits how people already work.",
+ ["E|What was the before and after?","G|How did you get colleagues to use it?","G|How do you keep it current?"]],
+["c12","collab","coalition",0,"Describe working with a competitor or outside group toward a shared goal.","Collaboration with boundaries.",["harmful","crga"],
+ "A bill would have harmed utilities and customers across the state.","I needed to coordinate with industry peers where our interests overlapped while protecting our own positions.","We agreed early on what we would coordinate on, split up member and sponsor meetings so we did not duplicate, and shared one set of public facts. I kept leadership informed about exactly what we were and were not coordinating on.","[The bill was held or amended.] The industry spoke with one voice before the bill gained momentum.","Agree on the boundaries of a partnership before you agree on anything else.",
+ ["L|How did you handle antitrust or information-sharing limits?","G|Which peer was hardest to keep aligned?","G|What happened to the bill?"]],
+["c13","collab","conflict",0,"Tell me about a time a team conflict slowed progress. What did you do?","Diagnosing the real issue and resolving it.",["datacenter","sme"],
+ "Two internal teams kept sending conflicting input on the same bill, which delayed our position.","I owned getting a company position before committee action.","I met with each lead separately to understand the underlying concern, then brought them together with a short list of decisions and a deadline. Where they still disagreed, I framed the options for the responsible executive.","We had a position before the hearing, and both teams agreed to a single point of contact for future bills.","Most conflicts are about decision rights. Settle those and the rest gets easier.",
+ ["E|Who made the final decision?","G|Did the delay cost you anything with the sponsor?","G|What process did you change?"]],
+["c14","collab","lead",0,"Describe how you have helped a colleague succeed.","Generosity and coaching.",["southwest","lobbyists"],
+ "A newer colleague was strong on research but less comfortable meeting legislators. [Confirm example.]","I wanted to help them build confidence before session.","I had them draft briefing memos for my meetings and sit in, then let them lead part of a meeting with a member they knew, and debriefed afterward with one specific piece of feedback each time.","By the end of session they were covering members on their own. [Confirm.]","People grow fastest with real reps and one piece of feedback at a time.",
+ ["G|What was the first meeting they led?","L|How did you train them on gift and disclosure rules?","E|How did their responsibilities change?"]],
+["c15","collab","coalition",0,"Tell me about a time you shared credit for a win.","Humility and team orientation.",["eima"],
+ "EIMA, in 2011, authorized a decade of grid modernization across the state's two largest utility territories.","I provided legislative support for passage. [Confirm your role.]","I made sure the experts, executives and allies who did the heavy lifting were recognized in our internal reports and with members.","EIMA passed, and I received the President's Performance Leadership Award in 2013. When I talk about it, I talk about the team that made it happen.","Wins in Springfield are always team wins.",
+ ["G|What did you personally do on EIMA?","E|What did EIMA mean for the company's investment plan?","G|What did EIMA get right and wrong?"]],
+["c16","collab","coalition",0,"Describe working with a government partner whose priorities differed from yours.","Respecting the partner's role while advancing your position.",["governor"],
+ "I work with a Deputy Governor's office on energy policy, raising company concerns and responding to administration requests.","On [issue], the administration's goal and the company's position did not fully line up.","I started by agreeing on the shared goal, brought our operations lead to explain implementation realities, and proposed a phased approach with draft language. I followed up the same day in writing.","[Outcome, such as a phased timeline.] The office began calling us earlier on similar issues.","Agree on the goal first. Then the disagreement is only about how.",
+ ["G|At what level did you engage the administration?","L|Was any of it tied to a pending ICC matter?","E|What did the compromise cost the company?"]],
+
+// DELIVER RESULTS
+["c17","results","strategy",1,"Tell me about a time you achieved strong business results.","A measurable outcome you can own.",["org"],
+ "Five natural gas peaking plants in central and southern Illinois, 2,092 MW serving roughly 650,000 to 1,000,000 homes and businesses, faced mandated retirement while demand was rising.","I lead the legislative workstream of a multi-year strategy to keep that capacity available.","I built a single tracker, ran a weekly cross-functional call, produced fiscal analyses showing tens of millions of dollars in cumulative local property tax payments, and built legislator engagement matrices, coalition trackers and executive briefings.","The company has a coordinated legislative strategy and district-level evidence for the 2026 to 2027 decision window. [Add any concrete milestone.]","Reliability arguments land when you tie megawatts to a legislator's school district.",
+ ["E|What is the business value of keeping those units?","G|Which legislators matter most, and why?","L|How do you keep legislative materials consistent with regulatory filings?"]],
+["c18","results","crisis",0,"Describe a time you delivered under a tight deadline.","Speed with quality.",["datacenter"],
+ "During veto session, data center bills moved quickly and members needed analysis before hearings.","I had to produce bill analyses for House and Senate hearings in days.","I routed each bill to the right experts with a short deadline, used a standard analysis template, and kept a data center knowledge center current so we were not starting from zero.","Analyses reached the hearings on time. [Confirm bills and dates.]","Speed under pressure comes from the preparation you did before it.",
+ ["G|Which bills and hearings?","L|Who signed off on the analyses before they went out?","E|What did the analyses change?"]],
+["c19","results","process",0,"Tell me about a goal you set and how you tracked progress.","Discipline and measurement.",["org","sme"],
+ "I manage an average of 60 assigned bills each session.","My goal was a position decision on every priority bill before committee action.","I track every bill weekly from introduction to final action, route each to the responsible executive and experts, and send leadership a weekly tracker with analyses and risk assessments.","Leadership sees status, position and risk on every bill each week. [Add a measure, such as positions in place before hearings.]","What gets tracked weekly gets done.",
+ ["G|How many of the 60 are high priority?","E|What does leadership do with the tracker?","G|What falls through the cracks?"]],
+["c20","results","crisis",0,"Describe a time you had to manage many priorities at once.","Triage and delegation.",["storm","sme"],
+ "During one session week, a hearing, a storm and an executive briefing all landed together. [Confirm example.]","I had to deliver all three well.","I ranked them by consequence. Storm updates to legislators were non-negotiable, so I set a fixed schedule. I prepared hearing notes for a contract lobbyist to cover, and moved the executive briefing to a one-page written update with a short call.","All three were handled, and executives said they preferred the written format.","Rank by consequence, delegate the rest, and change the format if the format is the problem.",
+ ["G|What did you delegate and to whom?","E|What dropped?","G|How do you plan ahead for those weeks now?"]],
+["c21","results","lead",0,"Tell me about a time you delivered results through other people.","Directing work you do not do yourself.",["lobbyists"],
+ "On my priority bills, contract lobbyists covered caucuses I could not reach every day.","I needed their work aligned with executive priorities and fully compliant.","I gave each a written list of assigned members and asks, required short contact reports after meetings, and held weekly check-ins during session. When reporting slipped, I reset expectations directly.","Our vote counts were accurate and every contact was documented. [Confirm example.]","Clear assignments and written reporting make good lobbyists better.",
+ ["L|How did you confirm their registration and reports were accurate?","E|How did you judge whether they were worth renewing?","G|How did you divide coverage?"]],
+["c22","results","ethics",0,"Describe a time safety or compliance shaped how you got work done.","Doing it right, not just fast.",["ethics","storm"],
+ "I coordinate three to four political fundraising events a year, more than 30 since 2017.","Every one must comply with state ethics and campaign finance rules.","I check dates against the session calendar under the statewide session fundraising ban, confirm approvals through the company's political process, keep official business separate from political activity, and document each event.","More than 30 events run within the rules. [Confirm no compliance issues.]","When the process is right every time, nobody is put in a position they should not be in.",
+ ["L|How do you handle session days and the day before session?","L|What records do you keep?","G|Have you ever stopped an event?"]],
+["c23","results","curve",0,"Tell me about a project that did not go as planned. How did you recover?","Resilience and learning.",["setback","harmful"],
+ "[Choose a real example, such as a harmful bill that advanced despite our opposition.]","I was responsible for [your role].","When it moved, I regrouped with allies, focused on the provisions that hurt customers most, and brought the sponsor alternative language.","[We removed the most harmful provisions even though the bill passed.]","A partial win, framed honestly, is still a win.",
+ ["E|What did it cost?","G|What would you do differently from the start?","G|How did you explain it to leadership?"]],
+["c24","results","data",0,"Describe your most measurable accomplishment.","A number you can defend.",["org","econ"],
+ "Legislators needed to see the local cost of retiring five gas peaking plants.","I owned the fiscal analysis.","I pulled property tax payments for each plant, broke them out by school district and local government, and converted them into figures a member could repeat.","The analysis showed tens of millions of dollars in cumulative property tax payments to local governments and school districts and became the core of our leave-behinds.","A number only works if a legislator can say it back to a constituent.",
+ ["L|Where did the data come from, and is it public?","G|Which members used it?","E|How did it change the campaign?"]],
+
+// CONTINUOUSLY IMPROVE
+["c25","improve","fit",1,"Tell me about a time you proactively sought feedback.","Self-awareness and follow-through.",["polrd"],
+ "I wanted to grow toward a director role and test my ideas against experienced leaders.","I sought out mentors rather than waiting for formal reviews.","I asked our VP of Clean Energy Transition to advise me on a strategic proposal and asked a senior federal government relations leader for career feedback. I took notes, asked what I should do differently, and followed up on their suggestions.","My mentor's coaching changed how I socialized the proposal, and I am now working on [specific skills from the feedback].","Ask for feedback before you need it.",
+ ["E|What was the hardest feedback you got?","G|What did you change because of it?","E|Who gives you candid feedback now?"]],
+["c26","improve","process",0,"Describe a process you improved and the value it created.","Before and after, with value.",["sme"],
+ "Bill routing relied on memory, which delayed positions before committee action.","I set out to make routing fast and reliable.","I built an SME routing tool that matches each bill or issue to the right leader, department or team, and built and maintain a network of experts across the enterprise, including when a bill affects more than one company.","Bills reach experts and decision makers quickly so positions can be set before committee action. [Add time saved.]","Systems beat heroics.",
+ ["E|How much time does it save?","G|Who uses it?","L|Does it record who reviewed each bill and when?"]],
+["c27","improve","process",0,"Tell me about a time you learned a new skill to do your job better.","Curiosity and initiative.",["econ","sme"],
+ "Leaders wanted data-driven arguments, and much of our information lived in scattered spreadsheets.","I wanted to be able to turn data into tools and analysis myself.","I taught myself to build dashboards and analysis tools, used them for a county-level economic analysis and bill trackers, and drew on my Executive MBA for the financial framing.","I now produce dashboards, analyses and briefings that inform senior leadership. [Add example.]","The skills you build on your own time often become your most useful ones.",
+ ["G|Which tool has been most useful to the team?","E|How do you check the accuracy of your analysis?","G|What are you learning now?"]],
+["c28","improve","strategy",0,"Describe a time you tested an idea and changed course.","Judgment and intellectual honesty.",["polrd"],
+ "I proposed a formal legislative foresight function for GR.","I needed to know whether it would add value before asking for resources.","I built a 385-bill dataset across 20 subject areas, analyzed six sessions of tracked bills, and tested framings against the company's strategic project criteria.","I concluded a formal function was not needed and recommended two practical changes instead. [Confirm leadership response.]","Testing your own idea honestly saves everyone time.",
+ ["E|What would the original idea have cost?","G|What did the data show?","E|How did leadership respond?"]],
+["c29","improve","fit",0,"Tell me about feedback that changed how you work.","Coachability.",["polrd"],
+ "[Choose real feedback, such as a leader saying my briefing buried the main point.]","I needed to change how I brief executives.","I rewrote my briefings with the answer in the first line and detail in a backup page, and asked for review on the next few.","Briefings got shorter and executives acted on them faster. [Confirm.]","Lead with the answer. Detail is for follow-up questions.",
+ ["E|Who gave you the feedback?","G|How has it changed your end-of-session reports?","E|What feedback are you working on now?"]],
+["c30","improve","strategy",0,"Describe how you stay current in your field.","Learning habits tied to the job.",["polrd"],
+ "Energy policy changes quickly at the state, regional and federal levels.","I need to see what is coming to Illinois before it arrives.","I follow industry trends through EEI and AGA, track EIA data, follow MISO and PJM capacity changes and federal policy, and watch multi-state legislative activity likely to reach Illinois.","I translate those trends into guidance for legislative strategy. [Add an example where it helped.]","Most ideas arrive in Illinois after they are tested somewhere else.",
+ ["G|Give me a trend you spotted early.","E|How do you share it with leadership?","G|Which states do you watch most?"]],
+["c31","improve","process",0,"Tell me about a time you challenged the way things had always been done.","Constructive change.",["sme","org"],
+ "Complex campaigns were coordinated through email and individual memory.","On a multi-year generation campaign, I wanted one source of truth.","I built a tracker that every team used, set a weekly cross-functional call, and standardized briefing materials.","Teams moved from scattered updates to one shared view of the campaign.","Change sticks when the new way is easier than the old way.",
+ ["G|Who resisted?","E|What did it change for leadership?","G|Is it still used?"]],
+["c32","improve","curve",0,"Describe a lesson from a failure that you still apply.","Reflection and lasting change.",["setback"],
+ "[Choose your setback story.]","[Your responsibility.]","[What you did when it went wrong.]","[What happened.]","[The habit you still follow because of it.]",
+ ["G|What exactly do you do differently?","E|What did it cost?","G|Has it happened again?"]],
+
+// BE STRATEGIC
+["c33","strategic","strategy",1,"Tell me about a time you used the organization's vision or values to guide a team decision.","Linking values to a real decision.",["datacenter"],
+ "Data center bills forced a choice between supporting economic growth and protecting existing customers.","As GR lead, I had to help the team reach a position.","I framed the decision around the company's commitments to customers and reliable growth, mapped which provisions served both, and proposed support for growth with cost protections for residential customers.","The team reached a position consistent with those values. [Confirm bill.]","Values make hard decisions faster because they remove some options.",
+ ["E|Which value carried the most weight?","G|How did legislators react?","L|Did the position touch any pending ICC matter?"]],
+["c34","strategic","strategy",0,"Describe a time you anticipated a problem before it arrived.","Foresight and early action.",["datacenter","polrd"],
+ "Several states were considering data center cost and tariff bills.","I suspected similar ideas would reach Illinois.","I tracked those bills, briefed our rates and planning teams, and prepared a position and fact sheet before anything was filed here.","When bills arrived, we had a position and data ready quickly. [Confirm example.]","Watch other states. They are your early warning.",
+ ["G|What was the first signal?","E|What did acting early save?","G|Which state was the model?"]],
+["c35","strategic","data",0,"Tell me about a time you connected your work to company strategy.","Business acumen.",["econ"],
+ "Lawmakers heard about utility costs but rarely about what utility investment supports.","I wanted to connect grid investment to the state economy.","I mapped BEA county GDP data to the two largest utilities' territories and found the counties the two utilities serve produce roughly 95 percent of state GDP, then built a white paper and a one-page legislator flyer.","The analysis gives leadership a clear economic case for investment. [Add how it was used.]","Pick one number that changes how people see the issue.",
+ ["L|How solid is the 95 percent, and how do you caveat it?","E|How does it support the company's capital plan?","G|Which members have seen it?"]],
+["c36","strategic","strategy",0,"Describe a long-term plan you developed and how you adjusted it.","Planning and flexibility.",["org"],
+ "Keeping 2,092 MW of peaking capacity available requires work across multiple sessions.","I lead the legislative workstream.","I organized the work into phases, building the facts, building relationships, then building toward legislation, and adjusted the message as demand forecasts and data center growth changed the conversation toward reliability.","The strategy is positioned for the 2026 to 2027 decision window. [Confirm milestones.]","Long campaigns need a fixed goal and a flexible message.",
+ ["G|What caused the biggest pivot?","E|How do you justify the resources each year?","L|How do you coordinate with the regulatory side?"]],
+["c37","strategic","strategy",0,"Tell me about a time you had to choose which battle to fight.","Prioritization of political capital.",["harmful","sme"],
+ "In a session with dozens of bills affecting us, we could not fight them all.","I had to recommend where to engage.","I weighed impact on customers and the company, likelihood of passage, cost to relationships and whether allies were already engaged, and recommended engaging hard on [bill] and watching others.","[Outcome.] Our capital went where it mattered.","Spend political capital deliberately and keep a reserve.",
+ ["G|Which bill did you let go, and what happened to it?","E|Who made the final call?","G|How did you explain that to someone who wanted to fight?"]],
+["c38","strategic","strategy",0,"Describe a time you set strategy that others carried out.","Clear strategy that travels without you.",["datacenter"],
+ "The utility data access and thermal energy network proposals were assigned to me.","I was responsible for the internal strategy, while others led the coalition work.","I identified which business units each proposal affected, brought their experts together to define interests and risks, drafted the strategy and positions, briefed leadership, and handed clear guidance to the coalition leads.","The issues grew into a broader framework the company uses. [Add outcome.]","Strategy has to be clear enough to work when you are not in the room.",
+ ["G|How did the coalition leads use your strategy?","L|Were there customer data privacy issues to manage?","E|What did the broader framework change?"]],
+["c39","strategic","data",0,"Tell me about a time you used data to shape a decision.","Evidence over opinion.",["polrd","econ"],
+ "Leadership was considering how GR should invest in early warning.","I wanted the decision based on evidence.","I built and analyzed a 385-bill dataset across 20 subject areas from 2020 to 2026 to see how issues emerged and recurred.","The data showed relationships already caught most early signals, which shaped a smaller, practical recommendation.","Let the data change your mind before it changes someone else's.",
+ ["G|What surprised you in the data?","E|What decision did it change?","G|How do you keep the dataset current?"]],
+["c40","strategic","current",0,"Describe how you think about risk when recommending a legislative position.","Risk judgment across legal, regulatory and political lines.",["harmful"],
+ "Legislative positions can affect pending ICC proceedings, customers and relationships at once.","When I recommend a position, I need to account for all three.","I deliver intelligence briefings, written analyses and risk assessments through a weekly tracker, check with legal and regulatory on any connection to pending cases, and give leadership options with the risks of each.","Leadership makes decisions with the risks in view. [Add example.]","Every position has a cost. Name it before someone else does.",
+ ["L|How do you handle a bill that overlaps a pending ICC case?","E|How do you express risk to executives?","G|Give an example of a risk you flagged early."]],
+
+// THINK CUSTOMER
+["c41","customer","crisis",1,"Tell me about a time you went above and beyond for an internal or external customer.","Extra effort with real impact.",["storm"],
+ "A major storm left many customers without power across legislative districts. [Confirm storm.]","As part of the enterprise storm response, I keep affected legislators informed.","I started before the storm hit with preparation updates, then sent regular restoration updates, and handled constituent cases quickly by connecting offices with operations.","Legislators had accurate information to share with constituents. [Add feedback.]","Legislators want to hear from you before their constituents call them.",
+ ["G|What was in a typical update?","L|How did you keep restoration estimates accurate?","G|How did you handle an angry member?"]],
+["c42","customer","current",0,"Describe a time you kept the end customer in mind in a policy decision.","Customer impact in policy work.",["datacenter"],
+ "Large-load and data center bills raised questions about who would pay for new grid upgrades.","I needed our position to protect residential customers while supporting growth.","I worked with rates and economic development to identify cost protections, such as deposits and cost responsibility for large customers, and built them into our position and talking points.","Our position supported growth with customer protection. [Confirm bill.]","Growth should pay its own way.",
+ ["E|How would protections affect economic development?","L|What can the legislature require versus the ICC?","G|Who were your allies on this?"]],
+["c43","customer","influence",0,"Tell me about a time you treated an internal partner as your customer.","Service mindset inside the company.",["sme"],
+ "Executives and subject matter experts depend on GR for timely information about bills.","I treat them as my customers.","I deliver intelligence briefings, written analyses and risk assessments, prepare executives for policymaker engagement, and keep my updates short with the answer first.","Leaders get what they need to decide quickly. [Add example.]","Make it easy for leaders to act.",
+ ["E|How do you know executives find it useful?","G|How do you prepare an executive for a member meeting?","G|What do you leave out?"]],
+["c44","customer","crisis",0,"Describe a time you resolved a customer issue through a legislator's office.","Casework and follow-through.",["storm"],
+ "A legislator's office contacted us about a constituent's problem. [Confirm example.]","I needed to resolve it quickly and close the loop with the office.","I routed it to the right team the same day, tracked it, and called the office back with the resolution and what we had done.","The constituent's issue was resolved and the office trusted us with future cases.","Close the loop every time.",
+ ["G|How fast did you respond?","L|How did you protect customer privacy?","E|What did it reveal about a broader issue?"]],
+["c45","customer","coalition",0,"Tell me about a time you balanced what a customer wanted with what was possible.","Honesty about limits.",["governor","koehler"],
+ "A stakeholder asked for a change that would require regulatory approval. [Confirm example.]","I needed to be honest about what we could and could not do.","I explained the constraint, identified what we could do now, and offered to pursue the larger change through the right process.","The stakeholder accepted the near-term step. [Outcome.]","Say what you can do, not just what you cannot.",
+ ["L|What approval was needed?","G|How did they react?","E|What did the near-term step cost?"]],
+["c46","customer","influence",0,"Describe how you explained something complex to a customer or official.","Plain language.",["koehler","econ"],
+ "Members hear about rising bills but not why.","I needed to explain capacity costs simply.","I explained the bill in two parts, the wires we own and the power we buy, described the capacity auction as insurance for the hottest days, and left a one-page chart.","Members could explain it to constituents. [Confirm example.]","Two parts and one picture beat ten minutes of market detail.",
+ ["G|How did you know they understood?","L|How do you keep simplified explanations accurate?","G|What did they do with it?"]],
+["c47","customer","crisis",0,"Tell me about a time you anticipated a customer's need.","Proactive service.",["storm"],
+ "Our storm response begins before a storm reaches the service territory.","I wanted legislators prepared before outages hit their districts.","I sent preparation updates in advance, set the update schedule, and made sure offices knew who to call.","Offices were ready when constituents called. [Confirm example.]","The best service often happens before the problem starts.",
+ ["G|What goes into a pre-storm update?","E|How does it reduce workload during restoration?","G|What feedback have offices given?"]],
+["c48","customer","current",0,"Describe a time you had to deliver bad news to a customer or official.","Candor and care.",["storm"],
+ "Restoration in one area would take longer than a legislator expected. [Confirm example.]","I needed to tell the office before they heard it elsewhere.","I called with the facts and the reason, gave an honest estimate, and offered a direct contact with operations.","The office appreciated hearing it first, and the relationship held.","Bad news delivered first and honestly builds trust.",
+ ["G|How did the member react?","L|How careful were you with estimates?","G|How did you follow up?"]],
+
+// LEAD PEOPLE
+["c49","lead","lead",0,"Tell me about a time you set clear expectations and held a team accountable.","Direct supervision and accountability.",["southwest"],
+ "At Southwest Benefit Program I directed a Taft-Hartley health benefit program for about 25,000 union members across five states.","I supervised a staff of seven.","I set performance expectations for each role, applied policies on conduct, attendance and performance consistently, and reviewed results regularly.","The team delivered [result, such as more accurate billing and faster processing], and I built a culture that supported motivation and retention.","Consistency is what makes accountability feel fair.",
+ ["G|How did you measure performance?","L|How did you document expectations?","E|What would your team have said about you?"]],
+["c50","lead","lead",0,"Describe how you addressed a performance or conduct problem.","Fair, direct, documented.",["southwest","hr"],
+ "[Choose a real example from Southwest or HR.]","As supervisor, I needed to address it quickly and fairly.","I gathered the facts, met privately, explained the expectation and the gap, agreed on a plan and timeline, and documented it consistent with policy.","[Outcome, such as improved performance or a separation handled properly.]","Lead with facts, not judgment.",
+ ["L|What did you document?","L|Did you involve HR or counsel?","G|How did the rest of the team respond?"]],
+["c51","lead","lead",0,"Tell me about a difficult personnel decision, such as a reduction or termination.","Judgment, fairness and legal awareness.",["hr"],
+ "As a senior HR consultant at my company, I supported workforce realignment and reductions while consultants redesigned operating structures.","I had to guide leaders through separations that were fair, legally sound and respectful.","I mapped new roles against current jobs and compensation, coached managers before each conversation, ensured compliance with policy, EEOC requirements and bargaining agreements, and pursued redeployment where possible.","[Number of positions affected and redeployed.] The realignment met its timeline and managers relied on me for later decisions.","How you treat people on the way out determines whether those who stay trust you.",
+ ["L|How did you make sure decisions were defensible?","E|How did you maintain productivity during the change?","G|What would you do the same as a director?"]],
+["c52","lead","lead",0,"How have you developed people or built a bench?","Talent development.",["southwest","hr"],
+ "I have developed staff as a supervisor and supported succession planning as an HR consultant.","I wanted people ready for bigger roles.","At Southwest I set development goals with each staff member. In HR I worked with leadership on succession planning, talent readiness and performance management.","[Example of someone promoted or developed.]","Develop people before you need them.",
+ ["G|Who did you develop, and where are they now?","E|How do you identify potential?","G|How would you build a bench on a GR team?"]],
+["c53","lead","lead",0,"Tell me about leading people through organizational change.","Change leadership.",["hr"],
+ "My company partnered with Accenture and IBM on cost-saving and efficiency initiatives that changed operating structures.","I helped leaders introduce the new structures.","I explained the reasons for the change, mapped roles and compensation, guided workforce realignment, and supported managers and employees through transitions.","New structures improved performance and reduced duplication. [Confirm details.]","People accept change faster when they understand why and know what it means for them.",
+ ["E|What did the change accomplish?","L|How did you handle labor agreements?","G|What would you do differently?"]],
+["c54","lead","lead",0,"How have you managed outside firms and held them accountable?","Vendor and advisor management.",["southwest","lobbyists"],
+ "At Southwest I managed outside legal counsel, accountants and third-party administrators. Today I guide contract lobbyists, inside counsel and communications consultants.","I needed quality, compliance and cost control from each.","I set clear service expectations, reviewed performance and cost, and addressed problems directly. With contract lobbyists, I align their work with executive priorities.","[Outcome, such as cost savings or improved service.]","Outside firms perform best with clear expectations and regular review.",
+ ["E|How did you control cost?","L|What contract terms matter most?","G|When did you replace a firm, and why?"]],
+["c55","lead","lead",0,"Tell me about building a culture that kept good people.","Retention and engagement.",["southwest"],
+ "A small team serving 25,000 members across five states needed stability.","I wanted to keep experienced staff.","I set clear expectations, recognized good work, developed people and handled problems fairly and consistently.","[Retention result.]","People stay where they feel treated fairly and see a future.",
+ ["G|What did you do when someone wanted to leave?","E|How did retention affect service?","G|How would you apply this to a GR team?"]],
+["c56","lead","lead",0,"Describe leading a group when no one reported to you.","Influence-based leadership.",["datacenter","council"],
+ "I lead GR's cross-functional work on data center, battery storage and decarbonization legislation, and served as Vice Chair of the Illinois Utility Business Diversity Council from 2016 to 2019.","In both roles I had to lead people from other organizations or departments.","I set shared goals, built agendas and timelines, gave everyone a role and made sure their contributions were recognized.","[Outcome from each.]","Leading without authority is harder than leading with it.",
+ ["G|What did the Council accomplish while you were Vice Chair?","E|How did you resolve disagreements?","G|How will that help you lead a team that reports to you?"]],
+["c57","lead","lead",0,"Tell me about managing a budget.","Financial stewardship.",["southwest"],
+ "At Southwest I managed annual capital and operating budgets.","I was accountable for spending and compliance.","I built budgets with the board's priorities, monitored spending, negotiated vendor contracts and oversaw audits and compliance reviews.","[Result, such as on-budget years or savings.]","A budget is a set of priorities written in numbers.",
+ ["E|How large was the budget?","L|What did the audits find?","G|How would you manage a GR budget?"]],
+["c58","lead","lead",0,"How have you worked with labor and union partners?","Labor relationships.",["southwest","hr"],
+ "I directed a Taft-Hartley fund for about 25,000 union members and later partnered with labor relations on bargaining agreements.","I needed to keep labor partners informed and respected.","I worked closely with trustees representing labor and employers, communicated changes clearly to members, and later ensured HR decisions followed bargaining agreements.","[Outcome.] Labor partners trusted the process.","Labor partners respond to consistency and respect.",
+ ["G|How do you work with labor on legislation?","L|How did bargaining agreements shape HR decisions?","E|What would you bring to a heavily unionized workforce?"]],
+
+// COMMUNICATE WITH IMPACT
+["c59","comm","influence",0,"Tell me about explaining a complex issue to a non-expert audience.","Translation into plain language.",["koehler","econ"],
+ "As a benefits consultant I presented annual benefit changes enterprise-wide. In GR I explain energy issues to legislators.","In both cases I had to make technical information clear.","I lead with what matters to the audience, use one example or picture, and leave a one-page summary.","[Example of audience understanding or action.]","Make it simple enough to repeat.",
+ ["G|What issue is hardest to explain?","L|How do you keep it accurate?","G|What visual has worked best?"]],
+["c60","comm","influence",0,"Describe a written product that changed a leader's decision.","Writing that moves people.",["sme","polrd"],
+ "Leadership relies on my weekly tracker, analyses, risk assessments and end-of-session reports.","I need those documents to drive decisions.","I put the conclusion first, explain the risk and options, and keep it short.","[Example of a decision changed by a written product.]","If they only read the first line, the first line must be the answer.",
+ ["E|Which decision changed?","G|What did you cut?","L|What do you keep out of writing?"]],
+["c61","comm","lead",0,"Tell me about preparing an executive to meet with policymakers.","Briefing discipline.",["org"],
+ "I prepare executives for engagement with policymakers.","I need them ready for the people, the issue and the hard questions.","I provide a short briefing memo covering who is in the room, what they care about, our messages, the ask and likely questions, then follow up afterward.","[Example of a successful meeting.]","Preparation makes executives sound natural.",
+ ["G|What is in your briefing memo?","L|How do you keep their remarks consistent with regulatory filings?","E|How do you debrief afterward?"]],
+["c62","comm","influence",0,"Describe communicating with a large, spread-out audience.","Clarity at scale.",["southwest"],
+ "Southwest covered about 25,000 union members across five states.","I needed members and trustees to understand benefits and changes.","I produced member and trustee communications explaining benefits, program changes and enrollment in plain language.","[Result, such as fewer questions or smoother enrollment.]","Write so the reader with the least background understands.",
+ ["G|How did you check understanding?","E|What did confusion cost?","G|How would you apply this to legislators?"]],
+["c63","comm","coalition",0,"Tell me about a negotiation you led.","Preparation and outcome.",["southwest"],
+ "At Southwest I negotiated contracts with hospital medical directors, pharmaceutical suppliers, therapy providers and equipment vendors.","I needed quality care at a sustainable cost.","I prepared by understanding each party's needs, set clear priorities, and negotiated terms with accountability for service and cost.","[Savings or improvement.]","Know what you need and what they need before you start.",
+ ["E|What did you save?","L|What terms mattered most?","G|How does that apply to legislative negotiations?"]],
+["c64","comm","coalition",0,"Tell me about building consensus among people who disagreed.","Consensus building.",["crga","harmful"],
+ "On CEJA, internal and legislative relationships had to stay aligned through difficult negotiations.","I helped facilitate the internal-to-legislative relationships and communication.","I kept internal leaders and legislative contacts informed, translated concerns in both directions, and helped unify industry responses on overlapping issues.","CEJA passed in 2021 and was one of the most significant clean energy laws in Illinois history. [Confirm your role.]","Consensus is built by keeping everyone informed before they have to decide.",
+ ["G|Where did people disagree most?","E|What did the company give up?","G|How did you keep internal leaders aligned?"]],
+["c65","comm","crisis",0,"Describe communicating during a crisis.","Accuracy, cadence and calm.",["storm"],
+ "During major storms, legislators need accurate information quickly.","I keep impacted legislators informed as part of the storm response.","I coordinate with operations, communicate early and on a fixed schedule, and follow up until restoration is complete.","[Feedback or outcome.]","In a crisis, say what you know, what you do not, and when you will update.",
+ ["G|How often did you update?","L|How did you avoid overpromising?","E|How did you coordinate with corporate communications?"]],
+["c66","comm","lead",0,"Tell me about presenting to a board.","Governance-level communication.",["southwest"],
+ "At Southwest I was the primary liaison to the Fund's Board of Trustees.","I prepared materials and recommendations for decisions.","I prepared board materials, presented recommendations with options and risks, and managed relationships among trustees, members, regulators and administrators.","[Example of a decision the board made on your recommendation.]","Boards decide faster when you give them a recommendation, not just information.",
+ ["E|What was a hard decision you brought to the board?","L|How did you handle fiduciary duties?","G|How would you brief a CEO the same way?"]]
+];
+
+(function(){
+  var P=PREP; P.examples=P.examples||{}; P.followups=P.followups||{};
+  P.compRaw.forEach(function(r){
+    P.questions.push({id:r[0],comp:r[1],cat:r[2],sample:!!r[3],q:r[4],probe:r[5],shows:[],stories:r[6].slice()});
+    P.examples[r[0]]={s:r[7],t:r[8],a:r[9],r:r[10],l:r[11]};
+    P.followups[r[0]]=r[12];
+  });
+})();
+
 </script>
 <script>
 (function(){
@@ -699,7 +940,7 @@ function exampleHTML(q){
   var h='<div class="callout navy" style="margin-top:12px"><div class="kicker" style="color:var(--navy)">Example answer</div>';
   if(e.model) h+='<p style="margin:0">'+hl(e.model)+'</p>';
   else h+=[["S","Situation",e.s],["T","Task",e.t],["A","Action",e.a],["R","Result",e.r],["L","Lesson",e.l]].map(function(p){return '<p style="margin:.35em 0"><span class="tag acc">'+p[0]+'</span> '+hl(p[2])+'</p>';}).join("");
-  h+='<p class="small muted" style="margin:.5em 0 0">Illustrative. The situation is a composite, so swap in your own story and numbers.</p></div>';
+  h+='<p class="small muted" style="margin:.5em 0 0">'+(q.comp?'Built from my resume. Bracketed details are still to confirm.':'Illustrative. The situation is a composite, so swap in your own story and numbers.')+'</p></div>';
   if(PRIV){
     var st=q.stories.map(story).filter(Boolean)[0], sc=P.scripts, fit={q40:["Your version",sc.why],q41:["Your version, 90 seconds",sc.tmay90],q42:["Your version",sc.plan90]}[q.id];
     if(fit) h+='<div class="callout priv" style="margin-top:8px"><div class="kicker" style="color:var(--bad)">'+fit[0]+'</div><p style="margin:0">'+hl(fit[1])+'</p></div>';
@@ -723,6 +964,7 @@ var NAV = [
   {id:"stories", label:"Story bank", ic:"✎", priv:true},
   {id:"builder", label:"Story builder", ic:"⚒", priv:true},
   {id:"questions", label:"Question bank", ic:"?"},
+  {id:"comp", label:"Competency bank", ic:"◆"},
   {id:"scripts", label:"Scripts", ic:"❝", priv:true},
   {grp:"Practice"},
   {id:"verbal", label:"Speak it", ic:"🎙"},
@@ -880,6 +1122,41 @@ V.questions = function(el){
   draw();
 };
 
+
+V.comp = function(el){
+  var view=S.compView||"ameren", filt="all", term="";
+  var cq=P.questions.filter(function(q){return q.comp;});
+  el.innerHTML='<h1>Competency bank</h1><p class="muted">'+cq.length+' behavioral questions organized by Ameren\'s six interview competencies plus two added for director roles, mapped to the values and competencies ComEd and Exelon list. Each has a concise example answer built from my resume and the follow-ups a panel is likely to ask.</p>'+
+  '<div class="tabs" id="cvT"><button data-v="ameren">Ameren model</button><button data-v="exelon">ComEd and Exelon model</button></div>'+
+  '<div class="callout navy small" id="cvNote"></div>'+
+  '<input type="text" id="csearch" placeholder="Search competency questions" aria-label="Search competency questions" style="margin:6px 0 12px"><div class="tabs" id="cvF"></div><div id="cvList"></div><p class="small muted" style="margin-top:14px">'+esc(P.compSource)+'</p>';
+  function nm(c){ return view==="ameren"?c.ameren:c.exelon; }
+  function df(c){ return view==="ameren"?c.amerenDef:c.exelonDef; }
+  function draw(){
+    S.compView=view; save();
+    $$("#cvT button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-v")===view);});
+    $("#cvNote").innerHTML=view==="ameren"?'<b>Ameren model.</b> Ameren uses a structured interview where every candidate gets the same core questions, built around six competencies, answered in STAR. Questions marked <span class="tag acc">Ameren sample</span> paraphrase the samples in Ameren\'s guide. Lead People and Communicate with Impact are added for director roles.':'<b>ComEd and Exelon model.</b> ComEd does not publish an interview guide. This view regroups the same questions under the values Exelon lists, safety, innovation, integrity and community service, and the competencies in its director-level external affairs postings. Use their words in your answers.';
+    $("#cvF").innerHTML='<button data-f="all" class="'+(filt==="all"?'on':'')+'">All</button>'+P.comps.map(function(c){return '<button data-f="'+c.id+'" class="'+(filt===c.id?'on':'')+'">'+esc(nm(c))+'</button>';}).join("");
+    $$("#cvF button").forEach(function(b){b.onclick=function(){filt=b.getAttribute("data-f");draw();};});
+    var h="";
+    P.comps.forEach(function(c){
+      if(filt!=="all"&&filt!==c.id) return;
+      var qs=cq.filter(function(q){return q.comp===c.id&&(!term||q.q.toLowerCase().indexOf(term)>=0);}); if(!qs.length) return;
+      var done=qs.filter(function(q){return S.practiced[q.id];}).length;
+      h+='<div class="card" style="margin:18px 0 10px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">'+esc(nm(c))+'</h2><span class="small muted">'+done+' of '+qs.length+' practiced</span></div><p class="small" style="margin:.4em 0 0">'+esc(df(c))+'</p><p class="small muted" style="margin:.3em 0 0">'+(view==="ameren"?'ComEd and Exelon equivalent: '+esc(c.exelon):'Ameren equivalent: '+esc(c.ameren))+(c.added?' · Added for director roles':'')+'</p></div>';
+      h+=qs.map(function(q){
+        return '<details class="qcard"><summary><span class="chev">▸</span><span style="flex:1">'+esc(q.q)+'<br>'+(q.sample?'<span class="tag acc">Ameren sample</span>':'')+'<span class="tag">'+esc(q.id.toUpperCase())+'</span></span>'+(S.practiced[q.id]?'<span class="done" title="Practiced">✔</span>':'')+'</summary><div style="margin-top:10px">'+
+          '<p><b>What they want.</b> '+esc(q.probe)+'</p>'+exampleHTML(q)+followHTML(q)+
+          '<div class="row" style="margin-top:12px"><a class="btn sm" href="#verbal" data-q="'+q.id+'">Speak it</a><a class="btn sm ghost" href="#essay" data-q="'+q.id+'">Write it</a></div></div></details>';
+      }).join("");
+    });
+    $("#cvList").innerHTML=h||'<p class="muted">No matches.</p>';
+  }
+  $$("#cvT button").forEach(function(b){b.onclick=function(){view=b.getAttribute("data-v");draw();};});
+  $("#csearch").oninput=function(){term=this.value.toLowerCase();draw();};
+  draw();
+};
+
 V.scripts = function(el){
   var sc=P.scripts;
   function blk(t,txt,sec){ return '<div class="card" style="margin-bottom:14px"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(t)+'</h3>'+(sec?'<span class="tag acc">~'+sec+'</span>':'')+'</div><div class="script" style="margin-top:10px">'+hl(txt)+'</div></div>'; }
@@ -1004,7 +1281,7 @@ V.flash = function(el){
   var decks={
     company:{name:"Company facts", cards:P.mcq.filter(function(m){return m.kind==="Company";}).map(function(m){return {f:m.q, b:m.opts[m.a], n:m.why};})},
     leaders:{name:"Leadership", cards:P.leaders.map(function(l){return {f:l.name, b:l.role, n:l.facts.join(" ")+(PRIV&&P.leaderNotes[l.name]?" · "+P.leaderNotes[l.name]:"")};})},
-    star:{name:"Question to strong answer", cards:P.questions.map(function(q){return {f:q.q, b:"Strong answer shows", n:q.shows.join(" · ")};})}
+    star:{name:"Question to strong answer", cards:P.questions.map(function(q){return {f:q.q, b:q.shows.length?"Strong answer shows":"They want", n:q.shows.length?q.shows.join(" · "):q.probe};})}
   };
   if(PRIV){ decks.stories={name:"Your stories", cards:P.stories.filter(function(s){return s.id!=="setback";}).map(function(s){return {f:s.title, b:"Key numbers", n:(s.numbers.join(" · ")||"")+" · Lesson: "+s.l};})};
     decks.numbers={name:"Your key numbers", cards:[].concat.apply([],P.stories.map(function(s){return s.numbers.filter(function(n){return /\d/.test(n)&&n.indexOf("[")<0;}).map(function(n){return {f:"Which story uses this number?", b:s.title, n:n};});}))}; }
