@@ -213,95 +213,186 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
 .spk{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:#fff;border-radius:18px;padding:18px;box-shadow:0 4px 18px rgba(15,27,61,.07);margin-bottom:16px}
 .spk .av{--s:96px;border-color:#e2e8f0}
 @media(max-width:560px){.spk{grid-template-columns:1fr}}
+.ail{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.3px;padding:2px 8px;border-radius:999px;background:#0b7a4b;color:#fff;margin-left:6px;vertical-align:1px}
+.ail.part{background:#fff;color:#0b7a4b;border:1.5px solid #0b7a4b}
+.ailbox{background:#f0fdf4;border:1px solid #86efac;border-left:6px solid #0b7a4b;border-radius:14px;padding:14px 18px;margin:0 0 18px}
+.ailbox h3{margin:0 0 6px;color:#065f46}
+.ailbtn{font:inherit;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;border:1.5px solid #0b7a4b;background:#fff;color:#0b7a4b;cursor:pointer;margin:4px 0 10px}
+.ailbtn.on{background:#0b7a4b;color:#fff}
+body.ailonly #results tr.nail,body.ailonly #results li.nail{display:none}
+.asof{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#0f1b3d;color:#e5e9f5;border-radius:16px;padding:14px 18px;margin:0 0 16px;font-size:13.5px}
+.asof b{display:block;color:#fde68a;font-size:12px;letter-spacing:.5px;text-transform:uppercase}
+@media(max-width:700px){.asof{grid-template-columns:1fr}}
+.kpis .kpi{background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:0 4px 18px rgba(15,27,61,.07);border-top:5px solid #1d4ed8}
+.kpi .kl{font-size:11.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+.kpi .kb{font-size:34px;font-weight:800;color:#1d4ed8;line-height:1.1;margin:4px 0}
+.kpi .kb.r{color:#dc2626}.kpi .kb.a{color:#b45309}
+.kpi .ks{font-size:13px;color:var(--muted)}
+.cand{margin:10px 0}.cn{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14.5px}
+.cn .cp{margin-left:auto;font-weight:800;font-size:18px}
+.pt{font-size:11px;font-weight:800;padding:1px 7px;border-radius:999px;color:#fff;background:#64748b}.pt.d{background:#1d4ed8}.pt.r{background:#dc2626}
+.winmk{font-size:11px;font-weight:800;color:#065f46;background:#d1fae5;padding:1px 7px;border-radius:999px}
+.cbar{height:12px;background:#e9edf5;border-radius:999px;overflow:hidden;margin:4px 0 2px}.cbar span{display:block;height:100%}.cbar .d{background:#1d4ed8}.cbar .r{background:#dc2626}.cbar .o{background:#94a3b8}
+.sub2{font-size:12px;color:var(--muted)}
+.mbar{display:flex;height:20px;border-radius:6px;overflow:hidden;font-size:11px;font-weight:800;color:#fff}
+.mbar .mr{background:#dc2626;display:flex;align-items:center;padding-left:6px}.mbar .md{background:#1d4ed8;display:flex;align-items:center;justify-content:flex-end;padding-right:6px}
+.cr{color:#b91c1c;font-weight:700}.cd{color:#1d4ed8;font-weight:700}
+.rchip{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;color:#fff;white-space:nowrap}
+.rchip.cg{background:#1d4ed8}.rchip.ck{background:#3b82f6}.rchip.ca{background:#93c5fd;color:#1e3a8a}.rchip.rk{background:#dc2626}.rchip.ra{background:#fca5a5;color:#7f1d1d}
+.upd2{font-size:12px;color:#065f46;background:#ecfdf5;border-left:3px solid #059669;padding:4px 8px;border-radius:6px;margin-top:6px}
+.legend2{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:10px}
+.legend2 .lr,.legend2 .ld{width:12px;height:12px;border-radius:3px;display:inline-block}.legend2 .lr{background:#dc2626}.legend2 .ld{background:#1d4ed8;margin-left:8px}
+.waffle{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;margin:10px 0}
+.w{display:inline-block;aspect-ratio:1;border-radius:3px;width:100%}
+.w.dk{background:#1d4ed8}.w.dl{background:#93c5fd}.w.rl{background:#fca5a5}.w.rk{background:#dc2626}
+.wl{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted)}.wl span{display:flex;align-items:center;gap:5px}.wl .w{width:12px;height:12px}
+.tagS{font-size:11px;font-weight:800;background:#dbeafe;color:#1e3a8a;padding:2px 8px;border-radius:999px;vertical-align:3px}
+.seatrow{display:grid;grid-template-columns:110px 1fr 1fr;gap:6px;align-items:center;margin:8px 0 2px;font-weight:800;font-size:14px}
+.seatrow .sd{background:#1d4ed8;color:#fff;border-radius:8px;padding:6px 10px}.seatrow .sr{background:#dc2626;color:#fff;border-radius:8px;padding:6px 10px}
+#results table td{vertical-align:middle}
+.res-banner{background:linear-gradient(120deg,#0f1b3d,#1d4ed8);color:#fff;border-radius:18px;padding:18px 22px;margin:0 0 18px}
+.res-banner b{color:#fde68a}
+.flip{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px;background:#dbeafe;color:#1e3a8a;margin-left:6px}
+.flip.r{background:#fee2e2;color:#7f1d1d}.flip.p{background:#fef3c7;color:#78350f}
+.upd{background:#ecfdf5;border:1px solid #6ee7b7;border-left:6px solid #059669;border-radius:14px;padding:12px 16px;margin:0 0 18px;font-size:14.5px}
+.upd b.h{display:block;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:#047857;margin-bottom:2px}
+.prenote{background:#f1f5f9;border:1px dashed #94a3b8;border-radius:12px;padding:10px 14px;font-size:13.5px;color:#334155;margin:24px 0 0}
+.homebtn{display:inline-block;margin:0 0 14px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;font-weight:700;font-size:14px}
+.homebtn:hover{background:rgba(255,255,255,.28)}
+nav a.hot{background:#1d4ed8;color:#fff}
 </style>
 <script src="theme.js"></script></head>
 <body>
 
 <header class="hero"><div class="wrap">
+  <a class="homebtn" href="./">&larr; Learning Hub home</a>
   <h1>Illinois 2026 Election Cycle Briefing</h1>
-  <p>A government affairs reference covering Illinois statewide, congressional, legislative and Chicago races, the national fight for Congress, and a primer on 2028. Click any underlined name or race tile for background.</p>
-  <div class="pills"><span class="pill">As of <b id="asof"></b></span><span class="pill"><b id="days"></b> days to Election Day</span><span class="pill">Election Day <b>Nov 3, 2026</b></span><span class="pill">Veto session <b>Nov 17-19 and Dec 1-3</b></span></div>
+  <p>A government affairs reference on the 2026 Illinois elections. Updated after the Nov 3 election with results, what they mean for energy and the year ahead, and reference sections on House leadership, the legislature, major issues, the Chicago mayor's race and 2028. Click any underlined name for background.</p>
+  <div class="pills"><span class="pill">As of <b id="asof"></b></span><span class="pill">Results updated <b>Nov 16, 2026</b><b id="days" style="display:none"></b></span><span class="pill">Election held <b>Nov 3, 2026</b></span><span class="pill">Veto session <b>Nov 17-19 and Dec 1-3</b></span></div>
 </div></header>
 
 <nav><div class="wrap">
-  <a href="#glance">At a glance</a><a href="#news">Latest news</a><a href="#board">Race board</a><a href="#tight">Tight races</a><a href="#money">Follow the money</a><a href="#majorities">Majorities</a><a href="#legislature">Legislature ideology</a><a href="#speaker">Speaker Welch</a><a href="#ideology">Candidate ideology</a><a href="#issues">Major issues</a><a href="#chicago">Chicago mayor</a><a href="#mayormom">Chicago momentum</a><a href="#national">National races</a><a href="#controlscen">Control scenarios</a><a href="#y2028">2028 primer</a><a href="#update">Updating</a>
+  <a class="hot" href="#results">Election results</a><a href="#speaker">House leadership</a><a href="#legislature">Legislature blocs</a><a href="#issues">Major issues</a><a href="#chicago">Chicago mayor</a><a href="#mayormom">Chicago momentum</a><a href="#y2028">2028 primer</a><a href="#update">Updating</a>
 </div></nav>
 
 <main class="wrap">
 
-<section id="glance">
-  <h2><span class="bar" style="background:#7c3aed"></span>At a glance</h2>
-  <p class="lead">Democrats are favored in every Illinois statewide race. The close contests are a handful of legislative seats, one congressional district, and the argument over electricity prices and data centers.</p>
-  <div id="s-glance"></div>
-  <div class="grid g4" id="glanceTiles"></div>
-  <div class="card" style="margin-top:16px"><h3>How to use this page</h3>
-    <ul><li>Open the purple <b>script</b> box at the top of each section for a plain-language briefing you can say out loud, plus the key points.</li>
-    <li>Click any underlined name, race tile or candidate card to open a short profile with background, positions and risks.</li>
-    <li>Green boxes are suggested follow-ups. They are recommendations, not facts.</li></ul></div>
-</section>
+<section id="results">
+  <h2><span class="bar" style="background:#1d4ed8"></span>Election results and what they mean</h2>
+  <p class="lead">Democrats swept every Illinois statewide office, and won every race they led when AP's election-night count closed. That is 13 Republican seats flipped in the General Assembly, 7 in the House and 6 in the Senate, with none lost. In Ameren Illinois territory, Democrats flipped the 56th Senate and the 104th and 114th House.</p>
 
-<section id="news">
-  <h2><span class="bar" style="background:#7c3aed"></span>Latest news and what to do about it</h2>
-  <p class="lead">The stories that moved in the last few weeks, with a suggested follow-up for each.</p>
-  <div id="s-news"></div>
-  <div class="grid g2" id="newsCards"></div>
-  <div class="card" style="margin-top:16px"><h3>Where to keep watching</h3><div id="watchList"></div></div>
-</section>
+  <details class="script" open><summary>Script, the election in 60 seconds</summary>
+    <p class="say">The blue wave hit Illinois. Governor Pritzker won a third term, Lieutenant Governor Stratton won the open U.S. Senate seat, and Democrats kept every statewide office. In Springfield, Democrats took seats that were considered safely Republican and did not lose a single seat of their own. The House goes to 85 Democrats and the Senate to 46, so supermajorities that were already historic got bigger. In our territory, Democrats flipped the 56th Senate in the Metro East and the 104th and 114th House seats in Danville and the Metro East, while Republicans kept the 71st House and the 38th Senate. The other big story is leadership. Speaker Welch will not seek another term, so the House picks a new Speaker in January. The near term is the veto session starting November 17, where data centers and energy costs are on the table.</p>
+    <h5>Key points</h5>
+    <ul><li>Every statewide Democrat won, and Pritzker becomes the first Illinois Democrat elected to a third term as governor.</li>
+    <li>Democrats flipped 13 Republican seats, 7 House and 6 Senate, and Republicans flipped none. Every candidate leading on election night went on to win.</li>
+    <li>Larger majorities mean Democratic leaders need fewer Republican votes for veto overrides and bills passed after May 31.</li>
+    <li>Three new members in Ameren territory need introductions before the lame duck session.</li></ul>
+  </details>
 
-<section id="board">
-  <h2><span class="bar" style="background:#2563eb"></span>Illinois race board</h2>
-  <p class="lead">Every race on one board, sorted from safest for Democrats on the left to safest for Republicans on the right. Click a tile for the matchup, a plain-language script and the key points. The tile border shows which party holds the seat today.</p>
-  <div id="s-board"></div>
-  <div class="card"><div class="ladder" id="ladder"></div>
-  <p class="note">Congress ratings for IL-13 (Solid D) and IL-17 (Likely D) come from Cook Political Report. All other reads are this briefing's judgment.</p></div>
-</section>
+  <div class="asof"><div><b>Governor, U.S. Senate and Congress</b>AP counts as of Nov 16, 2026 (6:10 p.m. CT for Illinois races, 10:15 p.m. CT for Congress). They may have changed since.</div><div><b>Statewide row offices and the General Assembly</b>Vote shares are election-night counts as of 3:23 a.m. CT Nov 4 (AP, about 91% counted). Winners are final, as confirmed by the GR team: every candidate leading at that count won. Official totals come with certification.</div></div>
 
-<section id="tight">
-  <h2><span class="bar" style="background:#f59e0b"></span>Tight races</h2>
-  <p class="lead">The seats where a few hundred votes or a change of mood could flip control. Sorted from closest to least close.</p>
-  <div id="s-tight"></div>
-  <div class="explain"><b>How to read the cards.</b> The big number is how many votes the winner won by last time. Fewer votes means a thinner cushion, shown by more filled bars. "Harris +4" means Kamala Harris won that district by 4 points for president in 2024, which tells you how Democratic or Republican the seat leans. Click any name for a profile.</div>
-  <div class="grid g3" id="tightCards"></div>
-  <h3 class="sec">Stress test. What if every close race goes wrong for Democrats?</h3>
-  <div class="card"><div class="stress" id="stress"></div>
-  <p class="note">Built from this briefing's target lists. Democratic-held seats at risk are HD-97, HD-76, HD-112 and SD-48, SD-36, SD-57. Democratic pickup targets are the Republican-held seats on the board. It shows a range, not a forecast.</p></div>
-</section>
-
-<section id="money">
-  <h2><span class="bar" style="background:#ea580c"></span>Follow the money</h2>
-  <p class="lead">Who has the cash, where it comes from, and what the closest races cost. The orange panel tracks utility and energy company money.</p>
-  <div id="s-money"></div>
-  <div class="grid g4" id="moneyTiles" style="margin-bottom:16px"></div>
-  <div class="moneywrap">
-    <div>
-      <div class="card"><h3>Governor, April to June 2026 (millions)</h3><p class="sub">Reports through June 30. Pritzker is largely self-funded</p>
-        <h4 style="margin:10px 0 0;font-size:13px">Raised</h4><div id="govRaised"></div>
-        <h4 style="margin:10px 0 0;font-size:13px">Spent</h4><div id="govSpent"></div>
-        <h4 style="margin:10px 0 0;font-size:13px">Cash on hand at June 30</h4><div id="govCash"></div>
-        <ul class="note" id="govNotes"></ul></div>
-      <div class="card" style="margin-top:16px"><h3>Legislative caucus war chests, July 2026 (millions)</h3><p class="sub">The committees that decide how much each close seat gets</p><div id="caucusBars"></div><p class="note">House Democrats have about 8 times House Republicans. Senate Democrats have about 7 times Senate Republicans.</p></div>
-      <div class="card" style="margin-top:16px"><h3>Who gives, by sector</h3><p class="sub">Statewide, Nov 2022 to Oct 2024</p>
-        <div class="stk"><i style="width:33%;background:#2563eb"></i><i style="width:67%;background:#cbd5e1"></i></div>
-        <p class="note" style="margin-top:2px" id="laborNote"></p><div id="sectors"></div></div>
-      <div class="card" style="margin-top:16px"><h3>Chicago mayor, cash on hand (millions)</h3><p class="sub">Second quarter 2026 reports</p><div id="mayorCash"></div>
-        <h3 style="margin-top:18px">Who is funding Giannoulias</h3><p class="sub">Largest reported gifts, in millions. Blue is labor, purple is business or individuals</p><div id="giannBars"></div><ul class="note" id="giannNotes"></ul></div>
-      <h3 class="sec">What the close races cost</h3>
-      <div class="card"><h3>2024 benchmark. Four targeted House seats (thousands of dollars)</h3><p class="sub">Solid color is money raised. Lighter color is in-kind support from party committees. Pieces are as reported by The Daily Line and may miss some periods and outside groups</p><div id="raceCost"></div>
-        <div class="explain" style="margin:12px 0 0"><b>The lesson.</b> In all four seats the Democratic side reported far more money, and Republicans still won all four, two by fewer than 300 votes. Money helps but it does not decide close seats. Republicans may also have had help from groups not captured here.</div></div>
-      <div class="grid g4" style="margin-top:16px" id="primaryTiles"></div>
-    </div>
-    <aside class="side" id="utilSide" aria-label="Utility and energy company money"></aside>
+  <div class="grid g4 kpis">
+    <div class="kpi"><div class="kl">Seats Democrats flipped</div><div class="kb">13</div><div class="ks">7 House, 6 Senate, all from Republicans</div></div>
+    <div class="kpi"><div class="kl">Seats Republicans flipped</div><div class="kb r">0</div><div class="ks">Democrats kept all 3 seats Republicans targeted</div></div>
+    <div class="kpi"><div class="kl">New makeup</div><div class="kb">85 · 46</div><div class="ks">Democratic seats in the House (of 118) and Senate (of 59)</div></div>
+    <div class="kpi"><div class="kl">Ameren territory flips</div><div class="kb">3</div><div class="ks">56th Senate, 104th House, 114th House</div></div>
   </div>
-</section>
 
-<section id="majorities">
-  <h2><span class="bar" style="background:#16a34a"></span>Majorities and control</h2>
-  <p class="lead">Dashed lines mark the number needed for a veto-proof three-fifths majority. Democrats can lose several seats and keep it.</p>
-  <div id="s-majorities"></div>
+  <h3 class="sec">Top of the ticket</h3>
   <div class="grid g2">
-    <div class="card"><h3>Illinois House (118 seats)</h3><p class="sub">Democrats need 71 for a veto-proof three-fifths majority</p><div id="ilHouse"></div></div>
-    <div class="card"><h3>Illinois Senate (59 seats)</h3><p class="sub">Democrats need 36 for three-fifths. 39 seats are on the ballot</p><div id="ilSenate"></div></div>
+    <div class="card"><h3>Governor</h3>
+      <div class="cand"><div class="cn"><b>JB Pritzker / Christian Mitchell</b> <span class="pt d">D</span> <span class=winmk>Winner, AP call</span><span class="cp">60.8%</span></div><div class="cbar"><span class="d" style="width:60.8%"></span></div><div class="sub2">Third term; Mitchell becomes lieutenant governor</div></div>
+      <div class="cand"><div class="cn"><b>Darren Bailey / Aaron Del Mar</b> <span class="pt r">R</span><span class="cp">35.9%</span></div><div class="cbar"><span class="r" style="width:35.9%"></span></div><div class="sub2">Former state senator; 2022 nominee (rematch)</div></div>
+      <div class="cand"><div class="cn"><b>Collin Corbett</b> <span class="pt o">Ind.</span><span class="cp">3.4%</span></div><div class="cbar"><span class="o" style="width:3.4%"></span></div><div class="sub2">Independent</div></div>
+      <p class="note">AP called the race. AP count as of Nov 16, 6:10 p.m. CT, estimated 98% of votes counted.</p></div>
+    <div class="card"><h3>U.S. Senate</h3>
+      <div class="cand"><div class="cn"><b>Juliana Stratton</b> <span class="pt d">D</span> <span class=winmk>Winner, AP call</span><span class="cp">62.0%</span></div><div class="cbar"><span class="d" style="width:62.0%"></span></div><div class="sub2">Lieutenant governor; succeeds retiring Sen. Durbin</div></div>
+      <div class="cand"><div class="cn"><b>Don Tracy</b> <span class="pt r">R</span><span class="cp">36.4%</span></div><div class="cbar"><span class="r" style="width:36.4%"></span></div><div class="sub2">Former Illinois GOP chair</div></div>
+      <div class="cand"><div class="cn"><b>Whitfield Harrington Jr.</b> <span class="pt o">ACP</span><span class="cp">1.6%</span></div><div class="cbar"><span class="o" style="width:1.6%"></span></div><div class="sub2">American Center Party</div></div>
+      <p class="note">AP called the race. AP count as of Nov 16, 6:10 p.m. CT, estimated 98% of votes counted.</p></div>
   </div>
+
+  <h3 class="sec">Statewide row offices</h3>
+  <div class="card"><table><tr><th>Office</th><th>Democrat</th><th>Republican</th><th>Vote share</th><th>Result</th></tr><tr><td><b>Attorney General</b></td><td><span class="cd">Kwame Raoul <i>inc.</i></span></td><td><span class="cr">Robert W. Fioretti</span></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:38.5%">38.5%</span><span class="md" style="width:61.5%">61.5%</span></div></td><td><span class="rchip ck">D WIN</span></td></tr><tr><td><b>Secretary of State</b></td><td><span class="cd">Alexi Giannoulias <i>inc.</i></span></td><td><span class="cr">Diane M. Harris</span></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:35.5%">35.5%</span><span class="md" style="width:64.5%">64.5%</span></div></td><td><span class="rchip ck">D WIN</span></td></tr><tr><td><b>Comptroller (open)</b></td><td><span class="cd">Margaret Croke</span></td><td><span class="cr">Bryan Drew</span></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:39.2%">39.2%</span><span class="md" style="width:60.8%">60.8%</span></div></td><td><span class="rchip ck">D WIN</span></td></tr><tr><td><b>Treasurer</b></td><td><span class="cd">Michael W. Frerichs <i>inc.</i></span></td><td><span class="cr">Max Solomon</span></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:38.1%">38.1%</span><span class="md" style="width:61.9%">61.9%</span></div></td><td><span class="rchip ck">D WIN</span></td></tr></table>
+  <div class="legend2"><span class="lr"></span>Republican <span class="ld"></span>Democrat</div>
+  <p class="note">Election-night count as of 3:23 a.m. CT, about 91% counted (AP via the GR election-night brief). Every Democratic nominee won.</p></div>
+
+  <h3 class="sec">General Assembly, the new makeup</h3>
+  <div class="grid g2">
+    <div class="card"><h3>Illinois House <span class="tagS">D supermajority</span></h3>
+      <p class="sub2" style="margin-top:0">All 118 seats on the ballot. Before the election D 78, R 40. Supermajority 71, majority 60.</p>
+      <div class="waffle" aria-label="Illinois House seats"><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i></div>
+      <div class="wl"><span><i class="w dk"></i>Democrats held 78</span><span><i class="w dl"></i>Democratic pickups 7</span><span><i class="w rk"></i>Republicans 33</span></div>
+      <p class="note">New House: D 85, R 33. Won from Republicans: 47th, 48th, 52nd, 65th, 70th, 104th, 114th.</p></div>
+    <div class="card"><h3>Illinois Senate <span class="tagS">D supermajority</span></h3>
+      <p class="sub2" style="margin-top:0">59 seats, 39 on the ballot. Before the election D 40, R 19. Supermajority 36, majority 30.</p>
+      <div class="waffle" aria-label="Illinois Senate seats"><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dk"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w dl"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i><i class="w rk"></i></div>
+      <div class="wl"><span><i class="w dk"></i>Democrats held 40</span><span><i class="w dl"></i>Democratic pickups 6</span><span><i class="w rk"></i>Republicans 13</span></div>
+      <p class="note">New Senate: D 46, R 13. Won from Republicans: 24th, 26th, 32nd, 33rd, 35th, 56th. Totals include 20 seats not on the ballot.</p></div>
+  </div>
+
+  <h3 class="sec">Legislative races in Ameren Illinois territory</h3>
+  <div class="card"><table><tr><th>District</th><th>Republican</th><th>Democrat</th><th>Vote share and lead, % counted</th><th>Final result</th></tr><tr><td><b>56th Senate</b><span class="ail">Ameren IL</span><div class="sub2">2024 pres. Trump +2.5</div></td><td><span class="cr">Erica Harriss <i>inc.</i></span><div class="sub2">Glen Carbon; flipped the seat in 2022 by 1,616 votes</div></td><td><span class="cd">Marsia Geldert-Murphey</span><div class="sub2">Outraised Harriss since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:47.1%">47.1%</span><span class="md" style="width:52.9%">52.9%</span></div><div class="sub2">D +5.8 · 99%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Geldert-Murphey defeated Harriss by 5 points (St. Louis Public Radio, Nov 9).</div></td></tr><tr><td><b>114th House</b><span class="ail">Ameren IL</span><div class="sub2">2024 pres. Harris +1.4</div></td><td><span class="cr">Kevin Schmidt <i>inc.</i></span><div class="sub2">Millstadt; beat Greenwood in 2022 and 2024</div></td><td><span class="cd">George McClellan</span><div class="sub2">Late House Democratic push</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:49.2%">49.2%</span><span class="md" style="width:50.8%">50.8%</span></div><div class="sub2">D +1.6 · 96%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>McClellan won. Final result per the GR team.</div></td></tr><tr><td><b>104th House</b><span class="ail">Ameren IL</span><div class="sub2">2024 pres. Harris +4</div></td><td><span class="cr">Brandun Schweizer <i>inc.</i></span><div class="sub2">Danville; first term, won 2024 by 269 votes</div></td><td><span class="cd">Mary Catherine Roberson</span><div class="sub2">Ran on vocational education and manufacturing</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:48.7%">48.7%</span><span class="md" style="width:51.3%">51.3%</span></div><div class="sub2">D +2.6 · 79%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Roberson won. Final result per the GR team.</div></td></tr><tr><td><b>48th Senate</b><span class="ail part">Shared with other utilities</span><div class="sub2">2024 pres. Harris +1</div></td><td><span class="cr">Frank Lesko</span><div class="sub2">GOP challenger; heavily outspent</div></td><td><span class="cd">Doris Turner <i>inc.</i></span><div class="sub2">Springfield; won 2022 by 1,407 votes</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:41.1%">41.1%</span><span class="md" style="width:58.9%">58.9%</span></div><div class="sub2">D +17.8 · 99%</div></td><td><span class="rchip ck">D KEEPS</span></td></tr><tr><td><b>76th House</b><span class="ail part">Shared with other utilities</span><div class="sub2">2024 pres. D by 595 (2024)</div></td><td><span class="cr">Liz Bishop</span><div class="sub2">2024 nominee, lost by 595 votes (rematch)</div></td><td><span class="cd">Amy "Murri" Briel <i>inc.</i></span><div class="sub2">Ottawa; first term</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:42.7%">42.7%</span><span class="md" style="width:57.3%">57.3%</span></div><div class="sub2">D +14.6 · 99%</div></td><td><span class="rchip ck">D KEEPS</span></td></tr><tr><td><b>71st House</b><span class="ail part">Shared with other utilities</span><div class="sub2">2024 pres. Trump +7.4</div></td><td><span class="cr">Dan Swanson <i>inc.</i></span><div class="sub2">Alpha; unopposed in 2024</div></td><td><span class="cd">Kermit Thomas</span><div class="sub2">No contributions reported since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:56.2%">56.2%</span><span class="md" style="width:43.8%">43.8%</span></div><div class="sub2">R +12.4 · 94%</div></td><td><span class="rchip rk">R KEEPS</span></td></tr><tr><td><b>38th Senate</b><span class="ail part">Shared with other utilities</span><div class="sub2">2024 pres. Trump +6.7</div></td><td><span class="cr">Sue Rezin <i>inc.</i></span><div class="sub2">Morris; unopposed in 2022</div></td><td><span class="cd">Ernie Marcelain</span><div class="sub2">$1K raised since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:52.0%">52.0%</span><span class="md" style="width:48.0%">48.0%</span></div><div class="sub2">R +4.0 · 99%</div></td><td><span class="rchip rk">R KEEPS</span><div class=upd2>Rezin held the seat. Final result per the GR team.</div></td></tr></table>
+  <div class="legend2"><span class="lr"></span>Republican <span class="ld"></span>Democrat <span class="ail" style="margin-left:10px">Ameren IL</span> mostly Ameren served <span class="ail part" style="margin-left:6px">Shared with other utilities</span> part served by ComEd, a city utility or a co-op</div>
+  <p class="note">Territory designations follow the GR election-night brief's read of district maps. Vote shares are the election-night count as of 3:23 a.m.; final results per the GR team.</p></div>
+
+  <h3 class="sec">Other key races, Chicago suburbs (ComEd territory)</h3>
+  <div class="card"><h3 style="margin-top:0">House</h3><table><tr><th>District</th><th>Republican</th><th>Democrat</th><th>Vote share and lead, % counted</th><th>Final result</th></tr><tr><td><b>47th House</b><div class="sub2">2024 pres. Harris +10.5</div></td><td><span class="cr">Robert Vrankovich</span><div class="sub2">Open seat; Rep. Amy Grant retiring</div></td><td><span class="cd">Erica Bray-Parker</span><div class="sub2">About a 15 to 1 money edge</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:40.9%">40.9%</span><span class="md" style="width:59.1%">59.1%</span></div><div class="sub2">D +18.2 · 90%</div></td><td><span class="rchip cg">D GAIN</span></td></tr><tr><td><b>52nd House</b><div class="sub2">2024 pres. Harris +5.9</div></td><td><span class="cr">Martin McLaughlin <i>inc.</i></span><div class="sub2">Barrington Hills; won 2024 by 47 votes</div></td><td><span class="cd">Maria Peterson</span><div class="sub2">2024 nominee (rematch)</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:44.1%">44.1%</span><span class="md" style="width:55.9%">55.9%</span></div><div class="sub2">D +11.8 · 95%</div></td><td><span class="rchip cg">D GAIN</span></td></tr><tr><td><b>65th House</b><div class="sub2">2024 pres. Trump +1.1</div></td><td><span class="cr">Dan Ugaste <i>inc.</i></span><div class="sub2">Geneva; won 2024 by 11 points</div></td><td><span class="cd">Ricky Rivard</span><div class="sub2">Late Chicago TV buy</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:41.9%">41.9%</span><span class="md" style="width:58.1%">58.1%</span></div><div class="sub2">D +16.2 · 63%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Rivard unseated Ugaste (WBEZ, Nov 4).</div></td></tr><tr><td><b>48th House</b><div class="sub2">2024 pres. Trump +4.4</div></td><td><span class="cr">Jennifer Sanalitro <i>inc.</i></span><div class="sub2">Hanover Park; won 2024 by about 16 points</div></td><td><span class="cd">Amanda Zahorak</span><div class="sub2">About $732K in late House Democratic support</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:45.3%">45.3%</span><span class="md" style="width:54.7%">54.7%</span></div><div class="sub2">D +9.4 · 84%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Zahorak ousted Sanalitro (Capitol News Illinois, Nov 4).</div></td></tr><tr><td><b>70th House</b><div class="sub2">2024 pres. Trump +6.8</div></td><td><span class="cr">Jeff Keicher <i>inc.</i></span><div class="sub2">Sycamore; won 2024 by about 20 points</div></td><td><span class="cd">Veronica Garcia-Martinez</span><div class="sub2">No contributions reported since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:47.3%">47.3%</span><span class="md" style="width:52.7%">52.7%</span></div><div class="sub2">D +5.4 · 74%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Garcia-Martinez won. Final result per the GR team.</div></td></tr><tr><td><b>97th House</b><div class="sub2">2024 pres. D +4 (2024)</div></td><td><span class="cr">Gabby Shanahan</span><div class="sub2">2024 nominee; lost to Benton by about 4</div></td><td><span class="cd">Jessica Dixon Heitman <i>appointed inc.</i></span><div class="sub2">Plainfield; appointed in July after Benton resigned</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:38.9%">38.9%</span><span class="md" style="width:61.1%">61.1%</span></div><div class="sub2">D +22.2 · 96%</div></td><td><span class="rchip ck">D KEEPS</span></td></tr></table>
+  <h3>Senate</h3><table><tr><th>District</th><th>Republican</th><th>Democrat</th><th>Vote share and lead, % counted</th><th>Final result</th></tr><tr><td><b>26th Senate</b><div class="sub2">2024 pres. Harris +9.5</div></td><td><span class="cr">Darby Hills <i>appointed inc.</i></span><div class="sub2">Barrington Hills; appointed 2025</div></td><td><span class="cd">Nabeela Syed</span><div class="sub2">State rep (Palatine); $2.4M since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:43.0%">43.0%</span><span class="md" style="width:57.0%">57.0%</span></div><div class="sub2">D +14.0 · 95%</div></td><td><span class="rchip cg">D GAIN</span></td></tr><tr><td><b>24th Senate</b><div class="sub2">2024 pres. Harris +3.3</div></td><td><span class="cr">Seth Lewis <i>inc.</i></span><div class="sub2">Bartlett; self-loaned about $100K</div></td><td><span class="cd">Benjamin McAdams</span><div class="sub2">Little caucus help</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:45.5%">45.5%</span><span class="md" style="width:54.5%">54.5%</span></div><div class="sub2">D +9.0 · 90%</div></td><td><span class="rchip cg">D GAIN</span></td></tr><tr><td><b>33rd Senate</b><div class="sub2">2024 pres. Harris +2.4</div></td><td><span class="cr">Danielle Penman</span><div class="sub2">First-time candidate</div></td><td><span class="cd">Michele Clark</span><div class="sub2">First-time candidate</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:37.8%">37.8%</span><span class="md" style="width:62.2%">62.2%</span></div><div class="sub2">D +24.4 · 68%</div></td><td><span class="rchip cg">D GAIN</span></td></tr><tr><td><b>32nd Senate</b><div class="sub2">2024 pres. Trump +6.2</div></td><td><span class="cr">Craig Wilcox <i>inc.</i></span><div class="sub2">McHenry; won 2022 by 11 points</div></td><td><span class="cd">Karen Battaglia</span><div class="sub2">Outspent Wilcox 2 to 1 in Q3</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:47.4%">47.4%</span><span class="md" style="width:52.6%">52.6%</span></div><div class="sub2">D +5.2 · 97%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Battaglia won. Final result per the GR team.</div></td></tr><tr><td><b>35th Senate</b><div class="sub2">2024 pres. Trump +9.5</div></td><td><span class="cr">Dave Syverson <i>inc.</i></span><div class="sub2">Cherry Valley; in the Senate since 1993</div></td><td><span class="cd">Sarah Mertens</span><div class="sub2">$1K raised since Oct. 1</div></td><td style="min-width:170px"><div class="mbar"><span class="mr" style="width:49.4%">49.4%</span><span class="md" style="width:50.6%">50.6%</span></div><div class="sub2">D +1.2 · 85%</div></td><td><span class="rchip cg">D GAIN</span><div class=upd2>Mertens unseated Syverson, in the Senate since 1993. Final result per the GR team.</div></td></tr></table>
+  <p class="note">Vote shares are the election-night count as of 3:23 a.m.; final results per the GR team. Official totals come with the State Board of Elections canvass.</p></div>
+
+  <h3 class="sec">Congress</h3>
+  <div class="grid g2">
+    <div class="card"><h3>Seats in AP's count</h3>
+      <div class="seatrow"><span class="sl">U.S. Senate</span><span class="sd">Democrats 55</span><span class="sr">Republicans 44</span></div>
+      <p class="sub2">Democrats: 21 won, 34 holdovers, including 2 who caucus with them. Republicans: 13 won, 31 holdovers. One seat is not counted for either party in the AP results, which don't say why.</p>
+      <div class="seatrow"><span class="sl">U.S. House</span><span class="sd">Democrats won 256</span><span class="sr">Republicans won 171</span></div>
+      <p class="sub2">Eight seats are not counted for either party in the AP results, which don't say why.</p>
+      <p class="note">AP as of Nov 16, 10:15 p.m. CT (Senate) and 10:16 p.m. CT (House); may have changed since. In the AP-based tally the Democratic line reads "Control reached" for the Senate and "Majority reached" for the House. Those labels are worked out from AP's counts and are not calls by AP.</p></div>
+    <div class="card"><h3>Illinois delegation</h3>
+      <p style="margin-top:0">Stays at 14 Democrats and 3 Republicans (Axios Chicago, Nov 4).</p>
+      <ul>
+        <li><b>IL-13</b><span class="ail">Ameren IL</span> Nikki Budzinski (D) won a third term over Jeff Wilson; AP called the race (St. Louis Public Radio).</li>
+        <li><b>IL-12 and IL-15</b><span class="ail">Ameren IL</span> Mike Bost (R) and Mary Miller (R) reelected (St. Louis Public Radio).</li>
+        <li><b>IL-17</b><span class="ail part">Partly Ameren IL</span> Eric Sorensen (D) reelected over Dillan Vancil, projected winner (NBC News Decision Desk).</li>
+        <li><b>IL-16</b><span class="ail part">Partly Ameren IL</span> Darin LaHood (R) reelected.</li>
+      </ul></div>
+  </div>
+
+  <h3 class="sec">What it means for Ameren Illinois</h3>
+  <div class="grid g2">
+    <div class="card"><h3>In the General Assembly</h3><ul>
+      <li>Democrats grow their three-fifths supermajorities to 85 in the House (71 needed) and 46 in the Senate (36 needed).</li>
+      <li>Ameren territory: Democrats flipped the 56th Senate, the 104th House and the 114th House, and kept the 48th Senate and 76th House. Republicans kept the 71st House and the 38th Senate.</li>
+      <li>Speaker Welch will not seek another term after 26 House Democrats called for new leadership (Capitol News Illinois, Nov 5). The vote is expected as soon as Jan 13, 2027 (FOX 32).</li></ul></div>
+    <div class="card"><h3>Next steps</h3><ul>
+      <li><b>New members to brief.</b> Sen.-elect Marsia Geldert-Murphey (56th), Rep.-elect Mary Catherine Roberson (104th) and Rep.-elect George McClellan (114th). Schedule introductions before the lame duck session.</li>
+      <li><b>New constitutional officer.</b> Comptroller-elect Margaret Croke takes the open seat.</li>
+      <li><b>Veto session, Nov 17 to 19 and Dec 1 to 3.</b> Data centers lead the agenda after Gov. Pritzker paused new data center tax incentives in June and asked for reforms (Capitol News Illinois). A POWER Act lobby day is set for Nov 18.</li>
+      <li><b>Speaker race.</b> Map where likely candidates stand on data centers, energy affordability and utility issues.</li></ul></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Chicago mayor, Feb 23, 2027</h3><p>Sixteen candidates filed by the Oct 26 deadline (Axios Chicago), including Secretary of State Giannoulias. Ballot certification Dec 17; runoff Apr 6 if no one tops 50 percent.</p></div>
+    <div class="card"><h3>National picture</h3><p>NPR reported seven Senate seats flipping from Republican control on election night: North Carolina, South Carolina, Ohio, Texas, Kansas, Iowa and Maine.</p></div>
+  </div>
+
+  <div class="prenote">The sections below are reference material that still matters after the election: House leadership, the legislature's blocs, major issues, the Chicago mayor's race and the 2028 primer. Some figures in them date from before Election Day and are labeled where they do.</div>
+</section>
+
+<section id="speaker">
+  <h2><span class="bar" style="background:#0f766e"></span>House leadership, Speaker Welch stepping aside</h2>
+  <p class="lead">The most powerful Democrat in the House, scored on money, ideology and press.</p>
+  <div class="upd"><b class="h">Post-election update, Nov 5</b>Welch said he will not seek another term as Speaker after 26 House Democrats called for new leadership. The caucus is expected to choose a successor as soon as Jan 13, 2027. The scorecard below is the pre-election view of his tenure, kept for context as the caucus picks a successor.</div>
+  <div id="s-speaker"></div>
+  <div class="spk"><span class="av" id="spkAv" data-av="welch"></span><div><h3 style="margin:0">Emanuel "Chris" Welch</h3><div class="note" style="margin:2px 0 8px">Speaker since Jan 13, 2021. First African American Speaker. Represents the 7th House district in Cook County.</div><button class="name" data-open="p:welch">Open full profile</button></div></div>
+  <div class="grid g2">
+    <div class="card"><h3>Fundraising</h3><div id="spkFund"></div></div>
+    <div class="card"><h3>Ideology and style</h3><ul id="spkIdeo"></ul></div>
+  </div>
+  <h3 class="sec">Good press and bad press</h3>
+  <div class="pm"><div class="col2 good"><h3 style="margin:0 0 6px;color:#166534">Good press</h3><div id="spkGood"></div></div><div class="col2 bad"><h3 style="margin:0 0 6px;color:#991b1b">Bad press</h3><div id="spkBad"></div></div></div>
+  <div class="card" style="margin-top:16px"><h3>Net read and what to watch</h3><p id="spkNet" style="font-weight:700"></p><ul id="spkWatch"></ul><p class="note">The net read is this briefing's judgment. Allegations described here are reported by the outlets cited, and the people named deny them or have not been charged where noted.</p></div>
 </section>
 
 <section id="legislature">
@@ -314,29 +405,6 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
   </div>
   <div class="card" style="margin-top:16px"><h3>The spectrum, left to right</h3><p class="sub">An illustrative map of the blocs. Width is not to scale</p><div id="spectrum"></div></div>
   <div class="grid g3" style="margin-top:16px" id="blocCards"></div>
-</section>
-
-<section id="speaker">
-  <h2><span class="bar" style="background:#0f766e"></span>Speaker Chris Welch</h2>
-  <p class="lead">The most powerful Democrat in the House, scored on money, ideology and press.</p>
-  <div id="s-speaker"></div>
-  <div class="spk"><span class="av" id="spkAv" data-av="welch"></span><div><h3 style="margin:0">Emanuel "Chris" Welch</h3><div class="note" style="margin:2px 0 8px">Speaker since Jan 13, 2021. First African American Speaker. Represents the 7th House district in Cook County.</div><button class="name" data-open="p:welch">Open full profile</button></div></div>
-  <div class="grid g2">
-    <div class="card"><h3>Fundraising</h3><div id="spkFund"></div></div>
-    <div class="card"><h3>Ideology and style</h3><ul id="spkIdeo"></ul></div>
-  </div>
-  <h3 class="sec">Good press and bad press</h3>
-  <div class="pm"><div class="col2 good"><h3 style="margin:0 0 6px;color:#166534">Good press</h3><div id="spkGood"></div></div><div class="col2 bad"><h3 style="margin:0 0 6px;color:#991b1b">Bad press</h3><div id="spkBad"></div></div></div>
-  <div class="card" style="margin-top:16px"><h3>Net read and what to watch</h3><p id="spkNet" style="font-weight:700"></p><ul id="spkWatch"></ul><p class="note">The net read is this briefing's judgment. Allegations described here are reported by the outlets cited, and the people named deny them or have not been charged where noted.</p></div>
-</section>
-
-<section id="ideology">
-  <h2><span class="bar" style="background:#db2777"></span>Ideology of the candidates</h2>
-  <p class="lead">Where the main figures and the competitive legislative candidates sit. Placement is based only on what the sources show. Where nothing is established, the candidate sits in the "not yet established" lane rather than being guessed.</p>
-  <div id="s-ideology"></div>
-  <div class="card"><h3>Statewide and Chicago figures</h3><p class="sub">Illustrative left to right placement</p><div id="ideo"></div></div>
-  <div class="card" style="margin-top:16px"><h3>Competitive legislative candidates by lane</h3><p class="sub">Click a name for the basis. A filled dot means two or more sources or stated positions. A hollow dot means a single source or a thin basis</p><div class="lanes" id="lanes"></div>
-  <p class="note">This is a first pass. For incumbents, the strongest evidence is roll call votes and group scorecards from labor, business and advocacy groups. Adding those is the recommended next upgrade.</p></div>
 </section>
 
 <section id="issues">
@@ -353,6 +421,7 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
 
 <section id="chicago">
   <h2><span class="bar" style="background:#c026d3"></span>Chicago mayor, Feb 23, 2027</h2>
+  <div class="upd"><b class="h">Post-election update</b>Sixteen candidates filed by the Oct 26 deadline. Ballot certification is Dec 17. Election Day is Feb 23, 2027, with a runoff Apr 6 if needed. The field below is the pre-filing view.</div>
   <p class="lead">Sixteen names appear across press rosters. The Sun-Times counts 13 declared as of its Sept 15 update. Petitions are due by 5 p.m. Oct 26 and challenges will thin the field. A runoff is set for Apr 6 if no one tops 50 percent.</p>
   <div id="s-chicago"></div>
   <h3 class="sec">Who is running</h3>
@@ -373,87 +442,17 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
   <div class="card"><div class="tablewrap" id="mayorMatrix"></div><p class="note">"Not stated" means the sources reviewed did not report a position, not that the candidate has none.</p></div>
 </section>
 
-<section id="national">
-  <h2><span class="bar" style="background:#dc2626"></span>National races, 2026 midterms</h2>
-  <p class="lead">Democrats need a net gain of four Senate seats and a handful in the House. The environment favors Democrats but the Senate map still leans Republican.</p>
-  <div id="s-national"></div>
-  <div class="grid g4" id="natTiles"></div>
+<section id="mayormom">
+  <h2><span class="bar" style="background:#c026d3"></span>Chicago mayor, momentum and early polls</h2>
+  <p class="lead">Who is gaining, who is fading, and what the thin early data says. Only one strong public poll exists so far, so treat all of this as an early read.</p>
+  <div id="s-mayormom"></div>
+  <div class="grid g4" id="mmTiles" style="margin-bottom:16px"></div>
+  <div class="card"><h3>Momentum scoreboard</h3><p class="sub">Arrows are an analyst read from money, polls and markets, not a poll result</p><div class="tablewrap"><table><thead><tr><th>Candidate</th><th>Trend</th><th>Signals</th><th>Read</th></tr></thead><tbody id="mmBoard"></tbody></table></div></div>
   <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>U.S. Senate, Cook ratings of the 35 seats up</h3><p class="sub">Republicans hold 53 seats. Democrats need 51 for control</p><div id="usSenate"></div></div>
-    <div class="card"><h3>U.S. House ratings (435 seats)</h3><p class="sub">NBC News Decision Desk ratings. 218 needed</p><div id="usHouse"></div></div>
+    <div class="card"><h3>Prediction market odds</h3><p class="sub">PredictionEdge. Kalshi shows Giannoulias 64 and Johnson 8, so the sites disagree on Johnson</p><div id="mmMarket"></div><p class="note">The percentages add to more than 100, which means they are not normalized. Use them as mood, not a forecast.</p></div>
+    <div class="card"><h3>Q2 money flow, millions of dollars</h3><p class="sub">Raised, spent and cash on hand through June 30</p><div id="mmFlow"></div></div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>Senate battlegrounds</h3><div class="tablewrap" id="senateTable"></div>
-  <p class="note">Matchups reflect nominees reported by CBS News, Cook and NPR. Confirm each name before circulating.</p></div>
-  <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>Governors, 36 races</h3><p class="sub">Four outright toss-ups in one aggregator's ratings</p><div id="govTiles" class="grid" style="grid-template-columns:repeat(2,1fr)"></div><p class="note">Illinois's own race is not among them. Pritzker is a strong favorite.</p></div>
-    <div class="card"><h3>Environment</h3><div id="envBars"></div><p class="note">Generic ballot is the NBC News average. Trump approval is from an aggregator and varies by pollster.</p></div>
-  </div>
-</section>
-
-<section id="controlscen">
-  <h2><span class="bar" style="background:#0d9488"></span>Control scenarios and energy politics</h2>
-  <p class="lead">Democrats already hold both Illinois chambers, so there is nothing to flip in Springfield. The scenarios that matter for energy are in Washington: whether Democrats take only the U.S. House, or the House and the Senate. This section is the briefing's own judgment built on public forecasts and stated agendas. It is not a prediction.</p>
-  <div class="grid g4" style="margin-bottom:16px">
-    <div class="tile t-blue"><div class="big">219 to 198</div><div class="lab">House seats favoring D vs R, 18 toss-ups. 218 needed.</div><div class="src">Fox News Power Rankings, Oct 13</div></div>
-    <div class="tile t-purple"><div class="big">56%</div><div class="lab">Democratic odds for Senate control. They need a net gain of 4.</div><div class="src">Decision Desk HQ, Oct 13</div></div>
-    <div class="tile t-gold"><div class="big">71 and 36</div><div class="lab">Illinois votes needed to override a veto in the House and Senate. Democrats hold 78 and 40.</div><div class="src">Illinois chambers are not in play</div></div>
-    <div class="tile t-teal"><div class="big">$1M</div><div class="lab">Democratic Party and Harmon committee money to Syed in SD-26 in September, vs about $80K from Republican committees to Hills</div><div class="src">WBEZ, Oct 1</div></div>
-  </div>
-  <div class="grid g3">
-    <div class="card"><h3>A. House only flips</h3><p class="sub">Most likely of the Democratic outcomes on current forecasts</p>
-      <ul>
-        <li>Split Congress. Republicans keep the Senate and the White House, so few bills become law.</li>
-        <li>Democratic committee chairs gain subpoena and hearing power. Expect oversight of utility bills, data center load, and DOE emergency orders that keep fossil plants running.</li>
-        <li>House Democrats have said they would make data centers pay for their higher power and water use. That would be messaging and hearings first, law later.</li>
-        <li>The bipartisan Senate permitting framework would have to pass a Democratic House, which makes a deal that Democrats like more likely than one they oppose.</li>
-        <li>Appropriations become the lever, not new energy statutes.</li>
-        <li>Gov. Pritzker is helping fund House pickups through his Ready for the Fight PAC (at least 20 million dollars), so a Democratic House is also a win for Illinois's governor.</li>
-      </ul>
-      <div class="act"><b>For Ameren</b>Prepare for more information requests and hearings on bills and large loads in 2027. Keep the cost-allocation story ready for MISO and large-load customers.</div></div>
-    <div class="card"><h3>B. House and Senate both flip</h3><p class="sub">Needs the toss-ups to break one way: Ohio, Iowa, Maine and Texas</p>
-      <ul>
-        <li>Unified Democratic Congress but a Republican president, so the veto is the limit. Expect large packages tied to must-pass bills such as appropriations or tax.</li>
-        <li>Senate Democratic leader Schumer has talked about restoring green tax credits and data center reform if Democrats take the majority.</li>
-        <li>The House Cheap Energy Act draft by Illinois Rep. Casten and Rep. Levin would push FERC to reform how regional grid operators are governed, create independent transmission monitors, and add a 30 percent transmission tax credit. It also would limit DOE emergency orders that delay plant retirements. It was a draft as of Sept 2025, so its current status is unconfirmed.</li>
-        <li>Senate committee gavels change hands, which matters for FERC nominations and energy oversight.</li>
-      </ul>
-      <div class="act"><b>For Ameren</b>RTO governance and transmission incentives are the items most likely to move. Brief the federal team on how those would touch MISO planning and Illinois rate cases.</div></div>
-    <div class="card"><h3>C. Republicans hold both</h3><p class="sub">The least likely on current House forecasts</p>
-      <ul>
-        <li>Continuity. The administration's approach to fossil retirements, wind and solar approvals, and tax credits continues.</li>
-        <li>Fox News says the House is likely out of reach for Republicans this year, so this case needs the toss-ups and Lean R seats to break their way.</li>
-        <li>The permitting deal faces fewer obstacles, but Democrats in the Senate would still bargain on wind and solar language.</li>
-      </ul>
-      <div class="act"><b>For Ameren</b>Plan for stability in federal policy and keep state action, such as the Illinois veto session and ICC dockets, as the main source of change.</div></div>
-  </div>
-  <div class="card" style="margin-top:16px"><h3>Illinois legislature. What we know and what we do not</h3>
-    <ul>
-      <li><b>Polling.</b> I found no public poll of any Illinois House or Senate district. The only 2026 poll found for Illinois is the statewide PPP survey. District polls, if any exist, are likely campaign internals that have not been released.</li>
-      <li><b>Money as a signal.</b> Democrats put almost 1 million dollars from the state party and a Harmon-led committee into Rep. Syed in SD-26 in September. Republican committees gave Sen. Hills almost 80,000 dollars in September after more than 300,000 in August. Democrats are on offense in the suburbs.</li>
-      <li><b>Where the contests are.</b> SD-26 (Syed v Hills), HD-52 (Peterson v McLaughlin, decided by under 50 votes in 2024), HD-76 (Murri-Briel v Bishop, under 600 votes), HD-97 (Dixon Heitman v Shanahan). WBEZ calls these among the few competitive races on a heavily drawn map.</li>
-      <li><b>Stakes.</b> Gains for Democrats would mostly pad majorities they already hold. The open question is the margin above 71 House and 36 Senate votes, which sets how easily they can pass or override on data center and energy bills.</li>
-      <li><b>Scenario for Springfield.</b> If Democrats lose all six at-risk seats on the stress test above they still keep a veto-proof majority. If they win several suburban pickups, leaders can move data center rules with fewer Republican votes in the veto or lame-duck sessions.</li>
-    </ul>
-    <p class="note">Request a refresh after Q3 reports post on Illinois Sunshine and after any released poll.</p>
-  </div>
-  <div class="card" style="margin-top:16px"><h3>What prediction markets say</h3><p class="sub">Kalshi prices, Oct 13, 2026 between 6:23 and 6:48 a.m. ET, as reported by Forbes Advisor. * marks an incumbent</p>
-    <div class="tablewrap"><table><thead><tr><th>Race</th><th>Leader</th><th>Chance</th><th>Other candidates</th></tr></thead><tbody><tr><td>Governor</td><td>Pritzker (D)*</td><td>97.4%</td><td>Bailey (R) 3.3</td></tr><tr><td>U.S. Senate</td><td>Stratton (D)</td><td>97.8%</td><td>Tracy (R) 1.6</td></tr><tr><td>IL-01</td><td>Jackson (D)*</td><td>96%</td><td>Maxwell (R) 3.8</td></tr><tr><td>IL-02</td><td>Miller (D)</td><td>95%</td><td>Noack (R) 3.9</td></tr><tr><td>IL-03</td><td>Ramirez (D)*</td><td>92.3%</td><td>Oakley (R) 2.3</td></tr><tr><td>IL-04</td><td>Garcia (D)</td><td>97.2%</td><td>Castillo (R) 3.5; Getty (I) 3; Macias (I) 2</td></tr><tr><td>IL-05</td><td>Quigley (D)*</td><td>96.4%</td><td>Hanson (R) 2.8</td></tr><tr><td>IL-06</td><td>Casten (D)*</td><td>95%</td><td>Conforti (R) 5.3</td></tr><tr><td>IL-07</td><td>Ford (D)</td><td>95.6%</td><td>Koppie (R) 4.4</td></tr><tr><td>IL-08</td><td>Bean (D)</td><td>94.9%</td><td>Davis (R) 7</td></tr><tr><td>IL-09</td><td>Biss (D)</td><td>95%</td><td>Elleson (R) 1</td></tr><tr><td>IL-10</td><td>Schneider (D)*</td><td>95.9%</td><td>Lambrecht (R) 3.8</td></tr><tr><td>IL-11</td><td>Foster (D)*</td><td>96.5%</td><td>Walter (R) 3.6</td></tr><tr><td>IL-12</td><td>Bost (R)*</td><td>97.3%</td><td>Fortier (D) 7.6</td></tr><tr><td>IL-13</td><td>Budzinski (D)*</td><td>93%</td><td>Wilson (R) 7.5</td></tr><tr><td>IL-14</td><td>Underwood (D)*</td><td>97%</td><td>Marter (R) 4.5</td></tr><tr><td>IL-15</td><td>Miller (R)*</td><td>94.5%</td><td>Todd (D) 5.7</td></tr><tr><td>IL-16</td><td>LaHood (R)*</td><td>93.4%</td><td>Nolley (D) 4.6</td></tr><tr><td>IL-17</td><td>Sorensen (D)*</td><td>97.6%</td><td>Vancil (R) 3.8</td></tr></tbody></table></div>
-    <ul>
-      <li>Every Illinois race is priced above 92 percent for the leader. Forbes says none of the 17 House races is expected to be competitive.</li>
-      <li>The thinnest leads are IL-03 (Ramirez, 92.3), IL-13 (Budzinski, 93) and IL-16 (LaHood, 93.4). The markets price IL-17 (Sorensen) at 97.6, safer than IL-13 and IL-03, so IL-17 is the most watched seat but not the one markets see as least safe.</li>
-      <li>Prices for the two sides can add to more than 100 percent because of trading spreads, and some of these markets are thin, so a few traders can move a number by a point or two.</li>
-      <li>The markets agree with the PPP poll and the forecasters. They are not independent evidence, since traders read the same polls.</li>
-    </ul>
-    <p class="note"><a href="https://www.forbes.com/advisor/investing/illinois-midterm-election-prediction-markets/" target="_blank" rel="noopener">Source, Forbes Advisor, audited Oct 13, 2026</a>. Figures were read from screenshots of the article's tables.</p></div>
-  <h3 style="margin:22px 0 10px">New energy political news</h3>
-  <div class="grid g2">
-    <div class="news"><div class="d">Sep 30 &middot; Federal</div><h4>Bipartisan Senate permitting framework released</h4><p>Sens. Lee, Capito, Heinrich and Whitehouse released a 417-page framework. It would speed energy project approvals and make data center payments for the grid upgrades they require mandatory, so costs fall on developers and not ratepayers. Wind and solar language is unresolved and talks broke down the prior week. Negotiators want a vote after the election, and it is unclear whether a shift in power would derail it.</p><p class="note"><a href="https://www.deseret.com/politics/2026/09/30/republicans-democrats-release-permitting-reform-text/" target="_blank" rel="noopener">Source, Deseret News</a></p><div class="act"><b>Suggested follow-up</b>Ask federal affairs for a read on the transmission and data center cost provisions before the lame-duck session.</div></div>
-    <div class="news"><div class="d">Sep 15 &middot; Federal</div><h4>House Democrats unveil affordability and data center agenda</h4><p>Developed by the SEEC coalition of more than 100 House Democrats, it pledges clean energy and resilience measures and would require data centers to pay for their higher electricity and water use if Democrats win the House.</p><p class="note"><a href="https://news.bgov.com/bloomberg-government-news/democrats-unveil-affordability-data-center-agenda-for-voters" target="_blank" rel="noopener">Source, Bloomberg Government</a></p><div class="act"><b>Suggested follow-up</b>Compare the cost-allocation language with the POWER Act and the Ameren large-load tariff position.</div></div>
-    <div class="news"><div class="d">Oct 2026 (exact date not shown) &middot; Pritzker</div><h4>Pritzker's PAC targets Republican-leaning House seats</h4><p>His Ready for the Fight PAC, which he chairs and seeded with at least 20 million dollars, is backing Democrats in Republican-leaning or competitive districts in states such as Texas, Ohio and Florida, including Talarico for U.S. Senate and Hinojosa for governor in Texas. He has also spent at least 1.6 million dollars on TV ads in the Nashville and Memphis markets. He spoke at an NAACP event in South Carolina, the first scheduled 2028 Democratic primary state, and denies the PAC is about 2028. He says a Democratic Congress is what is good for Illinois.</p><p class="note"><a href="https://www.thecentersquare.com/illinois/article_c2ae2b94-97d1-4cfe-a741-dbcb21178fa7.html" target="_blank" rel="noopener">Source, The Center Square</a></p><div class="act"><b>Suggested follow-up</b>His national travel and money raise his 2028 profile whatever the intent, and they tie his agenda to a Democratic House. Watch whether state business, such as the veto session, competes with his schedule.</div></div>
-    <div class="news"><div class="d">Undated, 2026 &middot; Federal</div><h4>New Democrat Coalition releases Affordability Agenda</h4><p>The energy section would change how grid costs are allocated so consumers do not bear costs tied to manufacturing and data centers, direct FERC to solicit recommendations on protecting residential ratepayers from large energy loads, and have DOE develop a National Data Center Strategy. It also calls for faster permitting and transmission, an all-of-the-above energy mix that names natural gas and nuclear, defending clean energy investments, and more efficiency and LIHEAP aid. The document shows no release date.</p><p class="note"><a href="https://newdemocratcoalition.house.gov/imo/media/doc/new_dem_affordability_agenda.pdf" target="_blank" rel="noopener">Source, New Democrat Coalition</a></p><div class="act"><b>Suggested follow-up</b>Expect FERC-centered large-load cost work, not statute, in a Democratic House. Align Ameren's large-load messaging with that framing.</div></div>
-    <div class="news"><div class="d">Oct 7 &middot; Illinois</div><h4>Data center rules wait for veto session or lame duck</h4><p>The POWER Act has not passed. Six veto days start Nov 17, with the early January lame-duck session as the fallback. Pritzker wants the industry to supply its own clean energy and pay its fair share. Republican leader McCombie says communities should decide.</p><p class="note"><a href="https://www.wandtv.com/2026/10/07/clock-ticking-illinois-data-center-regulation/" target="_blank" rel="noopener">Source, WAND</a></p></div>
-    <div class="news"><div class="d">Sep 30, 2025 &middot; Federal</div><h4>Casten and Levin draft Cheap Energy Act</h4><p>Draft text would require FERC to reform regional grid operator governance, create independent transmission monitors, add a 30 percent transmission tax credit and a savings-sharing program, set utility efficiency targets of 22 percent for electric and 14 percent for gas by 2039, and limit DOE emergency orders. The status of the bill is not confirmed.</p><p class="note"><a href="https://www.utilitydive.com/news/casten-house-energy-bill-trump-electricity/761447/" target="_blank" rel="noopener">Source, Utility Dive</a></p></div>
-  </div>
+  <div class="card" style="margin-top:16px"><h3>Early polls so far</h3><div class="tablewrap"><table><thead><tr><th>Pollster</th><th>Dates</th><th>Sample</th><th>Result</th><th>How to use it</th></tr></thead><tbody id="mmPolls"></tbody></table></div></div>
 </section>
 
 <section id="y2028">
@@ -474,19 +473,6 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
   <div class="card" style="margin-top:16px"><h3>How the road to 2028 unfolds</h3><div class="steps" id="road"></div>
   <p class="note">The 2028 primary calendar and early state order are not final. Check the parties' rules committees before quoting dates for primaries or caucuses.</p></div>
   <div class="grid g4" style="margin-top:16px" id="primerCards"></div>
-</section>
-
-<section id="mayormom">
-  <h2><span class="bar" style="background:#c026d3"></span>Chicago mayor, momentum and early polls</h2>
-  <p class="lead">Who is gaining, who is fading, and what the thin early data says. Only one strong public poll exists so far, so treat all of this as an early read.</p>
-  <div id="s-mayormom"></div>
-  <div class="grid g4" id="mmTiles" style="margin-bottom:16px"></div>
-  <div class="card"><h3>Momentum scoreboard</h3><p class="sub">Arrows are an analyst read from money, polls and markets, not a poll result</p><div class="tablewrap"><table><thead><tr><th>Candidate</th><th>Trend</th><th>Signals</th><th>Read</th></tr></thead><tbody id="mmBoard"></tbody></table></div></div>
-  <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3>Prediction market odds</h3><p class="sub">PredictionEdge. Kalshi shows Giannoulias 64 and Johnson 8, so the sites disagree on Johnson</p><div id="mmMarket"></div><p class="note">The percentages add to more than 100, which means they are not normalized. Use them as mood, not a forecast.</p></div>
-    <div class="card"><h3>Q2 money flow, millions of dollars</h3><p class="sub">Raised, spent and cash on hand through June 30</p><div id="mmFlow"></div></div>
-  </div>
-  <div class="card" style="margin-top:16px"><h3>Early polls so far</h3><div class="tablewrap"><table><thead><tr><th>Pollster</th><th>Dates</th><th>Sample</th><th>Result</th><th>How to use it</th></tr></thead><tbody id="mmPolls"></tbody></table></div></div>
 </section>
 
 <section id="update">
@@ -514,7 +500,7 @@ details.issue summary .more{font-size:11.5px;opacity:.9;margin-top:6px;font-weig
 <script>
 /* ===================== DATA (edit here) ===================== */
 const DATA = {
-  asOf: '2026-10-13',
+  asOf: '2026-11-16',
   electionDay: '2026-11-03',
   log: [
     '2026-10-13  Added Control scenarios and energy politics section (including Pritzker PAC coverage): House-only and both-chambers scenarios, Illinois legislative polling status, Kalshi market odds for every Illinois statewide and congressional race, new federal energy news including the New Democrat Coalition agenda.',
@@ -1119,15 +1105,15 @@ DATA.scripts.money = {
   act: 'Use the utilities sidebar as a checklist. Pull current contribution totals from Illinois Sunshine and the State Board of Elections before any meeting where political giving could come up.'
 };
 DATA.scripts.speaker = {
-  say: 'Speaker Chris Welch is the most powerful Democrat in the House and he is having a rough fall. On the plus side, he holds a 78 seat supermajority, sits on about 12.7 million dollars in his caucus committee, says he has balanced the budget every year he has been speaker, and drew praise for saying a new Bears stadium was insensitive when families are struggling. On the minus side, he is criticized for how his office handled harassment complaints about Representative Harry Benton, whose campaign he had given more than a million dollars. Then in September his caucus walked out of the state party\'s coordinated campaign after a fight over money, and the party gave him a 2.1 million dollar refund. His style is pragmatic, labor friendly and more interested in affordability than ideology. Republicans have called on him to step down.',
+  say: 'Speaker Chris Welch led House Democrats to their biggest majority in modern history on Election Day, then lost his own caucus two days later. Twenty six incumbent and incoming Democrats signed a statement calling for new leadership over his handling of harassment complaints about former Representative Harry Benton, and Welch said he will not seek another term as Speaker. He stays on as a member. The caucus picks a new Speaker when the new House meets in January, so for the veto session he is still in the chair but on his way out. Kam Buckner has said he wants the job, and several women in the House have been mentioned.',
   points: [
-    'Money. About 12.7 million in the caucus committee, about 8 times House Republicans.',
-    'Ideology. Pragmatic mainstream Democrat who needs 60 of his 78 members to move a bill, with 28 members from Chicago.',
-    'Good press. Supermajority, balanced budgets, the Bears stand, a push on affordability.',
-    'Bad press. Benton handling, the dispute with the state party, older allegations from before he became speaker that he denies.',
-    'He is not on the ballot for Speaker until the new House meets in January 2027.'
+    'Welch remains Speaker through the veto session and until the new House elects a successor, expected as soon as Jan 13, 2027.',
+    'The caucus grows from the 78 he led to 85 members.',
+    'The letter signers have asked for a deliberate process, so expect weeks of quiet vote counting.',
+    'A new Speaker means new committee chairs and possibly a new House point person on energy.',
+    'The scorecard below describes his tenure before the election.'
   ],
-  act: 'Assume the Speaker\'s office is stretched during the veto session. Send short, one page materials and ask for staff time rather than a principal meeting.'
+  act: 'Map where each likely Speaker candidate stands on data centers, energy affordability and utility issues, and line up staff level conversations before the caucus vote.'
 };
 
 /* ---------- money data ---------- */
@@ -1247,8 +1233,8 @@ DATA.speaker = {
     {d:'Jan 2025',h:'Heated closed-door caucus meeting',w:'A hemp regulation fight included shouting and accusations aimed at state agency staff. The governor criticized it publicly and Welch said he asked members to apologize.',u:'https://www.nprillinois.org/government-politics/2025-01-21/budget-constraints-caucus-tensions-face-house-speaker-welch-in-his-third-term'},
     {d:'2021 onward',h:'Older allegations that were never resolved',w:'Allegations from before he became Speaker resurfaced in 2021, including a 2002 police report. He was never charged and denies wrongdoing. Rep. Kelly Cassidy and NOW called for an inquiry. School board era lawsuits were dismissed or settled.',u:'https://chicago.suntimes.com/the-watchdogs/2026/07/28/illinois-house-speaker-emanuel-chris-welch-harry-benton-michael-j-madigan-sexual-harassment-inquiry'}
   ],
-  net: 'Mixed and trending negative over the last three months. Strong on money and numbers, weak on trust.',
-  watch: ['Whether more Democratic members break with him over the party funding fight.','Further inspector general reports from the Benton matter.','Whether HD-97 and HD-76 turn into losses that shrink the caucus.','The Speaker vote when the new House meets in January 2027.']
+  net: 'His tenure ends on a split note. Record majorities and money, but he lost the caucus over trust and the Benton handling.',
+watch: ['Who emerges as the leading candidate to succeed him, and how fast the caucus settles.','Whether he keeps any leadership role or committee post in the new General Assembly.','Further inspector general reports from the Benton matter.','How the transition affects veto session and lame duck deals, including on data centers.'],
 };
 
 /* ---------- news additions ---------- */
@@ -1391,9 +1377,14 @@ DATA.sources.push(
   ['PredictionEdge, Chicago mayor odds','https://www.predictionedge.com/elections/mayor/chicago-race/']
 );
 DATA.log.unshift('2026-10-02  Edition 4. Rebuilt the 2028 primer with full Democratic and Republican fields, poll averages, markets and momentum. Added a Chicago mayor momentum section with early polls, markets, money flow and a scoreboard.');
+DATA.log.unshift('2026-11-16  Rebuilt Election results in the GR election-night brief format: vote share bars, statewide row offices, seat grids for both chambers, Ameren territory and suburban race tables with margin bars and later reports, Congress and next steps.');
+DATA.log.unshift('2026-11-16  Added Ameren Illinois territory tags to statewide, congressional and legislative results, a territory summary and a filter.');
+DATA.log.unshift('2026-11-16  Cleanup. Removed pre-election sections no longer needed (At a glance, Latest news, Race board, Tight races, Follow the money, Majorities, Candidate ideology, National races, Control scenarios). Kept results, House leadership, legislature blocs, major issues, Chicago mayor, Chicago momentum and the 2028 primer.');
+DATA.log.unshift('2026-11-16  Post-election edition. Added Election results and what they mean: AP results for governor, U.S. Senate and congressional seat counts, statewide winners, delegation, General Assembly flips, Speaker Welch stepping aside, Chicago mayor filings and veto session outlook. Added post-election notes to the Speaker, Chicago and Control scenarios sections and a home link.');
 DATA.gaps += ' 2028 polls differ by who is named, so averages and markets are shown side by side. Three entries in the Pollsmax lists that looked like data noise were left out. Republican prediction market odds and the Emerson May and July question wording were not reviewed. Chicago mayor markets are thin and the two sites disagree on Johnson.';
 /* ===================== RENDERING ===================== */
-const $ = id => document.getElementById(id);
+const $ = id => document.getElementById(id) || document.createElement('div');
+(function(){var b=document.getElementById('ailToggle');if(!b)return;b.onclick=function(){var on=document.body.classList.toggle('ailonly');b.classList.toggle('on',on);b.textContent=on?'Show all races':'Show only Ameren Illinois races';};})();
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const fmtDate = s => new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 $('asof').textContent = fmtDate(DATA.asOf);
