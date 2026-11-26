@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SB4016 POWER Act briefing</title>
+<style>
+:root{
+  --bg:#f5f3ef; --panel:#ffffff; --ink:#1d2330; --muted:#5b6472; --line:#e3ded5;
+  --accent:#e8742c; --accent-soft:#fdeadc; --navy:#1f3864; --navy-soft:#e6ecf7;
+  --hi:#fff3c4; --hi-ink:#5a4300; --good:#2f7d4f; --warn:#b5651d; --bad:#b23a3a;
+  --shadow:0 8px 28px rgba(20,30,50,.08);
+}
+html[data-theme="dark"]{
+  --bg:#12151b; --panel:#1b2029; --ink:#e9edf3; --muted:#a3acb9; --line:#2b3240;
+  --accent:#ff8a3d; --accent-soft:#3a2617; --navy:#9db6e6; --navy-soft:#1f2a3d;
+  --hi:#3d3412; --hi-ink:#ffe08a; --good:#6fcf97; --warn:#f2a65a; --bad:#ff7b7b;
+  --shadow:0 8px 28px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
+a{color:var(--navy)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
+.top h1{font-size:18px;margin:0;font-weight:700}
+.top .sub{color:var(--muted);font-size:13px}
+.bar{height:3px;background:linear-gradient(90deg,var(--accent),#ffb36b,var(--accent));background-size:200% 100%;animation:slide 6s linear infinite}
+@keyframes slide{to{background-position:-200% 0}}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--navy-soft);color:var(--navy)}
+.tag.int{background:#fde2e2;color:#9b2222}
+html[data-theme="dark"] .tag.int{background:#4a1f1f;color:#ffb3b3}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:22px;max-width:1240px;margin:22px auto;padding:0 20px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.side{padding:18px;position:sticky;top:84px;align-self:start}
+@media(max-width:900px){.side{position:static}}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;text-align:center}
+.ring{width:190px;height:190px;border-radius:50%;padding:6px;background:conic-gradient(var(--accent),#ffc48a,var(--navy),var(--accent));transition:transform .3s}
+.speaking .ring{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.035)}}
+.ring svg{width:100%;height:100%;border-radius:50%;background:var(--navy-soft);display:block}
+.mouth{transform-origin:100px 128px;transition:transform .08s}
+.speaking .mouth{animation:talk .28s ease-in-out infinite alternate}
+@keyframes talk{from{transform:scaleY(.35)}to{transform:scaleY(1.25)}}
+.lid{animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(0)}96%{transform:scaleY(1)}}
+.name{font-weight:800;font-size:18px;margin-top:12px}
+.role{color:var(--muted);font-size:13px}
+.status{margin-top:8px;font-size:13px;color:var(--accent);min-height:20px;font-weight:600}
+.controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.row{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--muted)}
+.row select,.row input{flex:1;min-width:0}
+select{font:inherit;font-size:13px;padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-top:10px}
+.progress{height:8px;border-radius:99px;background:var(--line);margin-top:16px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);width:0;transition:width .4s}
+.stops{display:flex;flex-direction:column;gap:4px;margin-top:16px;max-height:320px;overflow:auto}
+.stopbtn{display:flex;gap:8px;align-items:center;text-align:left;border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;padding:7px 8px;border-radius:9px;cursor:pointer}
+.stopbtn:hover{background:var(--navy-soft)}
+.stopbtn.on{background:var(--accent-soft);font-weight:700}
+.stopbtn .n{flex:0 0 24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:var(--navy-soft);color:var(--navy);font-weight:700}
+.stopbtn.on .n{background:var(--accent);color:#fff}
+.stopbtn.done .n{background:var(--good);color:#fff}
+.main{padding:26px 28px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.chip{font-size:12.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.rel{font-weight:800}
+.rel.High{color:var(--bad);border-color:var(--bad)}
+.rel.Medium,.rel.Low-to-Medium{color:var(--warn);border-color:var(--warn)}
+.rel.Low{color:var(--good);border-color:var(--good)}
+h2{font-size:28px;line-height:1.2;margin:6px 0 16px}
+h3{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+.remember{border-left:5px solid var(--accent);background:var(--accent-soft);padding:14px 16px;border-radius:10px;font-size:18px;font-weight:700}
+.transcript p{margin:0}
+.s{border-radius:6px;padding:1px 2px;transition:background .2s}
+.s.now{background:var(--hi);color:var(--hi-ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.point{background:var(--navy-soft);border-radius:12px;padding:12px 14px;font-weight:600;font-size:14.5px;position:relative}
+.point::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:4px;background:var(--navy)}
+.point{padding-left:18px}
+ul.consider{margin:0;padding-left:20px}
+ul.consider li{margin:6px 0}
+.internal{margin-top:20px;border:2px dashed #c0504d;border-radius:14px;padding:14px 16px;background:rgba(192,80,77,.06)}
+.internal h4{margin:0 0 8px;color:#b23a3a;font-size:14px;text-transform:uppercase;letter-spacing:.05em}
+.internal .ask{margin-top:10px;font-weight:700}
+.nav{display:flex;justify-content:space-between;margin-top:26px;gap:10px}
+.note{font-size:12.5px;color:var(--muted);margin-top:18px}
+.foot{max-width:1240px;margin:0 auto 40px;padding:0 20px;font-size:12.5px;color:var(--muted)}
+.warnbox{display:none;margin-top:10px;font-size:12.5px;color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="top">
+  <div>
+    <h1>SB4016 POWER Act briefing <span class="tag">Public facts</span></h1>
+    <div class="sub">Narrated walkthrough by your Chief of Staff · Section by section · Updated November 25, 2026</div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <a class="btn" href="dcd-index.html" title="Back to the Data Center Desk">Desk</a>
+    <a class="btn" href="index.html" title="Back to the Learning Hub">Hub</a>
+    <button class="btn" id="themeBtn" aria-label="Toggle light or dark mode">Light / Dark</button>
+  </div>
+</div>
+<div class="bar"></div>
+
+<div class="wrap">
+  <aside class="card side" id="side">
+    <div class="avatar-wrap">
+      <div class="ring" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="suit" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#24345a"/><stop offset="1" stop-color="#16213d"/></linearGradient>
+          </defs>
+          <path d="M28 200 C34 158 62 142 100 142 C138 142 166 158 172 200 Z" fill="url(#suit)"/>
+          <path d="M84 142 L100 172 L116 142 Z" fill="#f4f6fa"/>
+          <path d="M96 150 L100 176 L104 150 Z" fill="#e8742c"/>
+          <rect x="88" y="118" width="24" height="26" rx="10" fill="#b9805a"/>
+          <ellipse cx="100" cy="92" rx="38" ry="44" fill="#c98e66"/>
+          <path d="M60 86 C58 52 80 40 102 40 C126 40 144 54 140 90 C134 70 120 62 100 62 C82 62 68 70 60 86 Z" fill="#2a2320"/>
+          <ellipse cx="62" cy="96" rx="6" ry="9" fill="#c08560"/>
+          <ellipse cx="138" cy="96" rx="6" ry="9" fill="#c08560"/>
+          <path d="M76 84 Q84 79 92 84" stroke="#2a2320" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M108 84 Q116 79 124 84" stroke="#2a2320" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <ellipse cx="84" cy="94" rx="5" ry="5.5" fill="#1d1a19"/>
+          <ellipse cx="116" cy="94" rx="5" ry="5.5" fill="#1d1a19"/>
+          <circle cx="86" cy="92" r="1.6" fill="#fff"/><circle cx="118" cy="92" r="1.6" fill="#fff"/>
+          <rect class="lid" x="76" y="87" width="16" height="13" fill="#c98e66" style="transform-origin:84px 87px"/>
+          <rect class="lid" x="108" y="87" width="16" height="13" fill="#c98e66" style="transform-origin:116px 87px"/>
+          <rect x="72" y="86" width="24" height="17" rx="6" fill="none" stroke="#3a3f4b" stroke-width="2"/>
+          <rect x="104" y="86" width="24" height="17" rx="6" fill="none" stroke="#3a3f4b" stroke-width="2"/>
+          <path d="M96 94 L104 94" stroke="#3a3f4b" stroke-width="2"/>
+          <path d="M100 100 Q97 110 101 113" stroke="#a8714f" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse class="mouth" cx="100" cy="125" rx="9" ry="4" fill="#7a2e2a"/>
+          <rect x="120" y="160" width="34" height="14" rx="3" fill="#e8742c"/>
+          <text x="137" y="170.5" font-size="7" font-family="Arial" font-weight="700" fill="#fff" text-anchor="middle">CoS</text>
+        </svg>
+      </div>
+      <div class="name">Avery</div>
+      <div class="role">Your Chief of Staff · Legislative briefing</div>
+      <div class="status" id="status">Press Play to start the briefing</div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="prevBtn" aria-label="Previous section">◀ Prev</button>
+      <button class="btn primary" id="playBtn" aria-label="Play or pause">▶ Play</button>
+      <button class="btn" id="nextBtn" aria-label="Next section">Next ▶</button>
+    </div>
+    <div class="controls">
+      <button class="btn" id="replayBtn">Replay this section</button>
+      <button class="btn" id="keyBtn">Key points only</button>
+    </div>
+    <div class="row"><label for="voiceSel">Voice</label><select id="voiceSel"></select></div>
+    <div class="row"><label for="rate">Speed</label><input id="rate" type="range" min="0.75" max="1.3" step="0.05" value="0.95"><span id="rateVal">0.95x</span></div>
+    <label class="toggle"><input type="checkbox" id="auto" checked> Auto advance to the next section</label>
+    <div class="warnbox" id="noSpeech">Audio is not available in this browser. You can still read each section.</div>
+    <div class="progress"><div id="prog"></div></div>
+    <div class="stops" id="stops"></div>
+  </aside>
+
+  <main class="card main" id="main" aria-live="polite"></main>
+</div>
+<div class="foot">
+  Source is SB4016 as introduced on the ILGA website and the November 18, 2026 Senate subject matter hearing. Page numbers follow the ILGA printed bill. Points to consider are general considerations for Illinois delivery utilities, not a company position.
+  Audio uses your browser's built in voices, so the sound of the voice depends on your device.
+</div>
+
+<script>
+const STOPS = [{"id": "welcome", "title": "Welcome and the bill at a glance", "cite": "SB4016 and HB5513", "pages": "Whole bill", "rel": "Overview", "narr": "Hi Rick. I'm Avery, your chief of staff for this briefing. We're going to walk through Senate Bill 4016, the POWER Act, one piece at a time. Senator Ram Villivalam filed it in February, and the House version is House Bill 5513. The printed bill runs 637 pages, but most of that is existing law reprinted. The truly new language is closer to 40 pages. It builds on CRGA, which took effect June 1. The Senate held a subject matter hearing on November 18 with no vote, and lawmakers return to Springfield on December 1. Here's the one thing to remember. This bill touches three areas at once. Environmental permits and water, utility tariffs and interconnection, and the state's clean energy programs. Let's get started.", "remember": "Three areas at once. Permits and water, utility tariffs and interconnection, and clean energy programs.", "points": ["637 printed pages, about 40 pages of new language", "Builds on CRGA, Public Act 104-458, effective June 1, 2026", "November 18 Senate subject matter hearing, no vote", "Legislature returns December 1"], "consider": ["The bill has no effective date section, so default Illinois rules would apply", "Several dates in the bill were written for spring 2026 and have already passed", "The word utility means different things in different laws the bill amends"]}, {"id": "generators", "title": "Backup generator permits", "cite": "415 ILCS 5/39 and 5/39.5", "pages": "Pages 31 to 35 and 153", "rel": "Medium", "narr": "First stop, backup generators. CRGA already set tough emission standards for new data center generators starting December 1, 2026. This bill tightens that. Every data center generator would need a full state or federal style air permit. The 24 hour grace period that let a generator keep running during an outage after falling out of compliance would be removed. Owners would publish an annual air quality report. And every one of these permits would go to a public hearing. At the hearing, labor witnesses asked that backup generation still be allowed during grid emergencies, and the data center industry said generators only run about 10 to 30 hours a year for testing. The one thing to remember. This is aimed at data centers, but it changes how much they lean on the grid for backup.", "remember": "Aimed at data centers, but it changes how much they lean on the grid for backup.", "points": ["Every data center generator needs a CAAPP or FESOP air permit", "The 24 hour outage grace period is struck", "Annual public air quality report", "Mandatory public hearing on every generator permit"], "consider": ["Will harder backup permits push customers to ask for redundant feeds or higher reliability service?", "Longer permitting shifts when load actually arrives, which affects forecasts", "How this fits with the curtailment rules in Section 16-105.9"]}, {"id": "siting", "title": "New data center chapter and the 3 mile siting limit", "cite": "415 ILCS 5/60 and 5/60.1", "pages": "Pages 153 to 160", "rel": "High", "narr": "Next, a whole new chapter of the Environmental Protection Act just for data centers. Two things matter most. First, data center has no size cutoff here, so these rules reach small sites, not just hyperscale campuses. Second, Section 60.1 bars building or expanding a data center within 3 miles of an equity investment eligible community, unless the Illinois EPA completes a cumulative impact study the developer pays for, the community consents, and the agency finds no risk. Those communities cover a large share of the state, so this works close to a moratorium in many places. The study must also show that local grid reliability and prices will improve, which would pull the utility into every review. The one thing to remember. The 3 mile buffer is the biggest siting lever in the bill.", "remember": "The 3 mile buffer is the biggest siting lever in the bill.", "points": ["No size threshold for data center in this chapter", "3 mile buffer around equity investment eligible communities", "Developer funded cumulative impact assessment and community consent", "Item (J) requires a showing that local reliability and pricing improve"], "consider": ["Map eligible communities plus 3 miles against current prospects and certified sites", "What role, if any, should a utility play in the item (J) showing?", "Would a narrower buffer or different trigger be a workable amendment?"]}, {"id": "community", "title": "Community rules. NDAs, intervenors, benefits agreements, notice", "cite": "415 ILCS 5/60.2 to 5/60.6", "pages": "Pages 160 to 167", "rel": "Medium", "narr": "Now the community rules. Local governments could not sign NDAs on data center projects. A new state fund would pay community groups, up front, to take part in zoning and permit fights. Every developer would have to sign a binding, public community benefits agreement with a community advisory board and fund a community benefit fund. Developers would run a public website updated every quarter, and mail notice to every landowner within 5 miles. At the hearing, the Data Center Coalition argued the benefits agreement could hand zoning power to a private board, which raises legal questions, while labor supported binding agreements. The one thing to remember. There's no deadline or tie breaker for reaching a benefits agreement, so it can slow projects down.", "remember": "No deadline or tie breaker on benefits agreements, so projects can stall.", "points": ["Governmental units cannot sign data center NDAs", "Intervenor compensation paid in advance and at milestones", "Mandatory public community benefits agreement, developer cannot sit on the board", "Mailed notice to landowners within 5 miles"], "consider": ["Earlier public disclosure means earlier questions to the utility about projects", "How do joint site visits work if local partners cannot sign NDAs?", "Benefits agreement talks may pull in utility community and workforce programs"]}, {"id": "fund", "title": "Public Benefits and Affordability Fund", "cite": "415 ILCS 5/60.7", "pages": "Pages 167 to 171", "rel": "High", "narr": "This is the affordability piece. Each hyperscale data center would pay 2 to 12 million dollars a year into a state fund, based on peak demand including forecast demand, rising every year with inflation. DCEO and the Illinois EPA would spend it on LIHEAP, utility disconnection avoidance, weatherization, and environmental programs near the data centers. None of it can go to gas equipment. Some quick math. For a 50 megawatt site running at 90 percent load factor, 2 million dollars is about half a cent per kilowatt hour. Because the fee steps up by tier, the cost per kilowatt hour falls near the top of each tier and jumps at the next one. The one thing to remember. It works like a tax with no end date, and the bill never says who collects it.", "remember": "Works like a tax with no end date, and the bill never says who collects it.", "points": ["2 to 12 million dollars a year by peak demand tier", "Automatic CPI-U escalator", "50 to 67 percent to DCEO programs, 33 to 50 percent to IEPA programs", "About 0.51 cents per kWh at 50 MW and 90 percent load factor"], "consider": ["Will utilities be expected to bill and collect the fee?", "Overlap with utility energy efficiency and weatherization programs", "The no gas equipment rule matters for combination utilities", "Should there be a sunset or review date?"]}, {"id": "water", "title": "The water package", "cite": "415 ILCS 5/60.8 to 5/60.16", "pages": "Pages 171 to 193", "rel": "Low to Medium", "narr": "The water package is long but simple to follow. Within 6 months, every data center, including existing ones, writes a water plan, reports use every quarter, pays the State Water Survey for an independent impact report, and keeps a drought plan that can include cutting computing load. Once rules are adopted, no data center can operate without a 5 year Water Impact Permit, with public hearings, and new sites must use cooling at least as water efficient as closed loop. The Pollution Control Board writes the rules over about 20 months, and an advisory council with no electric utility seat advises. At the hearing, advocates supported it, and the industry warned it could push sites toward air cooling, which uses more electricity. The one thing to remember. Water savings can mean more electric load.", "remember": "Water savings can mean more electric load.", "points": ["Applies to existing data centers, not just new ones", "Quarterly public water reporting", "5 year Water Impact Permit that can be suspended", "Closed loop cooling standard for new sites", "Fees of 20,000 rising to 60,000 dollars, plus 50,000 for each Water Survey report"], "consider": ["Closed loop or air cooling may raise megawatts per facility", "Drought orders could cause sudden load drops", "No electric utility seat on the advisory council", "The July 1, 2026 fee start date has already passed"]}, {"id": "codes", "title": "Energy codes for hyperscale data centers", "cite": "20 ILCS 3125/30 and 3125/60", "pages": "Pages 193 to 194", "rel": "Medium", "narr": "Energy codes. Hyperscale data centers would have to meet whichever code is toughest among the latest national energy code, the data center standard known as ASHRAE 90.4, or a future Illinois code. That's good for efficiency overall. The catch for utility efficiency programs is that savings are usually measured against code. A tougher baseline shrinks the savings a program can count from these customers. The one thing to remember. Higher code, smaller countable program savings.", "remember": "Higher code, smaller countable program savings.", "points": ["Most stringent of IECC, ASHRAE 90.4, or an Illinois data center code", "Capital Development Board sets compliance procedures", "Code ratchets up automatically as national codes update"], "consider": ["How much projected efficiency savings come from data center projects?", "Does a higher baseline affect large customer program design?"]}, {"id": "rps", "title": "Hyperscale self-direct RPS credit", "cite": "20 ILCS 3855/1-75(c)(1)(R-5)", "pages": "Pages 479 to 489", "rel": "High", "narr": "Now the clean energy programs. Hyperscale data centers could pay less into the state renewable portfolio standard charge on delivery bills if they bring new clean energy and capacity onto the grid, through on site generation or contracts of at least 10 years. The credit averages two percentages, how much of their energy and how much of their peak the new resources cover. It can reach 100 percent, but never their share of Solar for All. The Illinois Power Agency runs it, with application windows every quarter. There's also a drafting issue. One line cites Section 16-105.5 where it should cite 16-105.8. At the hearing, the industry noted the RPS budget is projected to run a deficit in 2029. The one thing to remember. A lower charge for data centers means less money for the RPS budget, unless something replaces it.", "remember": "A lower charge for data centers means less RPS money unless something replaces it.", "points": ["Credit equals the average of energy share and capacity share covered", "New resources only, contracts of at least 10 years", "Capped at 100 percent, excludes Solar for All share", "Page 489, line 6 cites 16-105.5 instead of 16-105.8"], "consider": ["Billing a customer specific RPS credit that can change", "Verification should sit with the IPA", "Who covers the funding gap?", "Same RTO resources qualify, while labor asked for in state generation"]}, {"id": "storage", "title": "Storage procurement offsets", "cite": "20 ILCS 3855/1-75(d-20)(13)", "pages": "Pages 609 to 610", "rel": "Medium", "narr": "Same idea for CRGA's new energy storage program. Data centers that build new storage through their clean energy supply plan can reduce what they pay toward state storage purchases, up to 100 percent. But two lines seem to pull against each other. One says data centers can help the state meet its storage targets. The other says their storage doesn't count toward those targets. The one thing to remember. The state still buys the full target with less money from data centers, so watch for cost shifting.", "remember": "Full target, less money from data centers. Watch for cost shifting.", "points": ["Offset up to 100 percent of storage related charges", "Storage must come through the BYO path in Section 16-105.9", "Page 609 lines 17 to 18 and page 610 lines 11 to 14 appear to conflict"], "consider": ["Who covers the difference if targets stay the same?", "Does data center storage help local reliability enough to justify the credit?"]}, {"id": "reporting", "title": "Energy and water reporting and the ICC rate study", "cite": "220 ILCS 5/4-620", "pages": "Pages 612 to 616", "rel": "Medium", "narr": "Starting in 2027, hyperscale data centers report monthly energy and water use to the ICC every year. It's kept confidential, but the ICC publishes totals and trends. Fines run up to 10,000 dollars per violation. The ICC must also study how hyperscale data centers affect everyone else's rates and report by March 31, 2028, using utility data. This is also the only place the bill defines hyperscale, as more than 50 megawatts of peak or forecast demand, and it says that definition applies to this section only. The one thing to remember. The rate study will lean on utility data, so being an early, credible source matters.", "remember": "The rate study will lean on utility data. Be the early, credible source.", "points": ["Annual disclosure by March 31, starting 2027", "Fines up to 10,000 dollars per violation", "ICC rate impact study due March 31, 2028", "Hyperscale means more than 50 MW, for this section only"], "consider": ["What data will the ICC ask utilities for?", "Should the 50 MW definition apply across the whole bill?"]}, {"id": "tariff", "title": "Hyperscale data center tariffs", "cite": "220 ILCS 5/16-105.8", "pages": "Pages 616 to 620", "rel": "High", "narr": "Here's where the bill reaches utilities most directly. Every electric utility would file a hyperscale data center tariff within 90 days. The ICC suspends it, opens a contested case, and rules within 240 days. The tariff must keep costs from shifting to other customers, including high voltage infrastructure above 100 kilovolts, and include minimum charges, long contracts, collateral and exit fees. Most of that matches how utilities already protect against stranded costs. The harder questions are about fit. Shared network upgrades benefit everyone, so a flat rule against socializing costs is imprecise. Transmission cost allocation sits largely with FERC and the regional grid operators. And MISO and PJM rules on large loads are still changing. The one thing to remember. The principle is sound, but the details may belong with the ICC rather than in statute.", "remember": "Sound principle. The details may belong with the ICC, not in statute.", "points": ["Tariff filing within 90 days, ICC decision within 240 days", "Costs including above 100 kV infrastructure assigned to the data center", "Minimum charges, contract length, collateral, exit fees", "NERC informed technical interconnection requirements"], "consider": ["Revenue sufficiency wording instead of not socialized", "A clause keeping the tariff subject to MISO, PJM and FERC rules", "How it fits with existing large load tariffs", "Hyperscale is not defined in this section"]}, {"id": "byo", "title": "Flexible interconnection and bring your own clean energy", "cite": "220 ILCS 5/16-105.9", "pages": "Pages 620 to 628", "rel": "High", "narr": "This is the heart of the utility side. A data center gets firm service only for the part of its load backed by new clean capacity it brings itself. The rest is non firm, meaning it must cut back when called, during grid emergencies, peak hours, or high price periods. Projects that hit 80 percent clean energy by 2030, 90 by 2035, and 100 by 2045 get a fast track. The utility would review each clean energy supply plan, decide how much load is firm, write the service agreement, verify compliance, report to the ICC, and could face audits and penalties. One sentence also says a utility can't earn a return on money data centers pay into utility efficiency or demand response programs. At the hearing, the sponsor side said nuclear upgrades could be negotiated, and labor and manufacturers asked for broader resources. The one thing to remember. The bill asks a delivery company to do supply market and grid operator work.", "remember": "It asks a delivery company to do supply market and grid operator work.", "points": ["Firm service only for load backed by new BYO clean capacity", "Mandatory curtailment for the non firm portion", "Fast track at 80, 90 and 100 percent clean by 2030, 2035 and 2045", "Utility reviews plans, verifies, reports, and can be audited and penalized", "No financial return on data center funded program dollars"], "consider": ["Should plan review sit with the IPA instead of the utility?", "In MISO and PJM, the grid operator calls emergency events, not the utility", "Load limiting equipment costs and liability", "Tie queue priority to a viable capacity plan rather than a clean percentage"]}, {"id": "coops", "title": "Co-ops and municipal utilities", "cite": "220 ILCS 31/1-40", "pages": "Pages 628 to 631", "rel": "Medium", "narr": "This section covers data centers served by city owned utilities and electric co-ops. It's added to the co-op and muni planning act, where the word utility means only munis and co-ops. So the updated resource plan requirement here falls on them, not on investor owned utilities. Watch that word. It means different things in different laws in this bill. The bigger point is the gap. Co-ops and munis get a lighter set of rules. The hyperscale tariff, the bring your own rules and the RPS credit are written for investor owned utilities. A data center could connect through a co-op or muni that takes transmission service from a larger utility and avoid much of that. The one thing to remember. Same word, different law, and a possible bypass.", "remember": "Same word, different law, and a possible bypass.", "points": ["In 220 ILCS 31, utility means a municipal power agency, municipality, or electric cooperative", "Updated IRP, RFP, stakeholder meeting before serving a hyperscale load", "Firm clean capacity within 5 years of service"], "consider": ["Are the co-op and muni rules comparable to the investor owned utility rules?", "Could a data center avoid fees and tariffs by connecting through a co-op or muni?"]}, {"id": "solar", "title": "Solar permitting and technical pieces", "cite": "Articles 10 and 15", "pages": "Pages 631 to 635", "rel": "Low", "narr": "Last, two smaller pieces. A new act requires cities and counties to offer instant online permits for home solar by July 1, 2027, with remote inspections, and lets people sue if they don't. That likely means more rooftop solar and storage interconnection requests arriving faster. And a technical clause handles the fact that some sections exist in before and after CRGA versions. Notice the bill has no effective date section, and a few dates in it have already passed. The one thing to remember. Expect dates and drafting fixes in any amendment.", "remember": "Expect dates and drafting fixes in any amendment.", "points": ["Automated residential solar permitting by July 1, 2027", "Remote inspections, one inspection unless it fails", "Private right of action with up to 1,000 dollar penalty", "No effective date section"], "consider": ["Faster permitting could speed interconnection requests", "Watch for date and cross reference fixes in amendments"]}, {"id": "wrap", "title": "Where things stand and your recap", "cite": "November 18 Senate hearing", "pages": "Next step December 1", "rel": "Recap", "narr": "Let's wrap up with where things stand. The November 18 hearing was subject matter only, with no vote. Members broadly agreed against a ban or moratorium, and asked labor and the data center industry for redlines on the energy and water provisions. The sponsor side defended connect now, firm up later. Labor supports cost responsibility and water reporting, but wants realistic timelines, nuclear, in state generation, and backup generation during curtailment. The data center industry accepts non firm service but objects to the operational rules. Manufacturers want all of the above. No witness spoke for the utilities. Lawmakers return December 1. Here's your recap. Three areas. Siting and water, the affordability fee, and the utility tariff and interconnection rules. If you only remember one thing, it's this. Watch who the bill asks to do the work.", "remember": "Watch who the bill asks to do the work.", "points": ["No vote on November 18", "Broad agreement against a ban or moratorium", "Redlines requested from labor and the Data Center Coalition", "No witness spoke for the utilities"], "consider": ["Who carries the utility perspective before December 1?", "Which drafting fixes are easy wins to raise first?"]}];
+const INTERNAL = {};
+let idx = 0, sentences = [], sIdx = 0, playing = false, mode = 'full', voices = [], done = new Set();
+const $ = id => document.getElementById(id);
+const synth = window.speechSynthesis;
+
+// theme
+function setTheme(t){document.documentElement.setAttribute('data-theme', t); try{localStorage.setItem('hub-theme', t);}catch(e){}}
+(function(){let t=null; try{t=localStorage.getItem('hub-theme');}catch(e){}
+  if(!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark':'light'; setTheme(t);})();
+$('themeBtn').onclick = () => setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function splitSentences(t){return t.match(/[^.!?]+[.!?]+(\s|$)/g).map(s=>s.trim());}
+function speakable(t){
+  return t.replace(/(\d+)-(\d+)\.(\d+)/g,'$1 dash $2 point $3')
+    .replace(/\bCRGA\b/g,'C R G A').replace(/\bDCEO\b/g,'D C E O').replace(/\bIPA\b/g,'I P A')
+    .replace(/\bASHRAE\b/g,'ash ray').replace(/\bRPS\b/g,'R P S').replace(/\bBYO\b/g,'B Y O')
+    .replace(/\bMISO\b/g,'my so').replace(/\bPJM\b/g,'P J M').replace(/\bFERC\b/g,'ferk')
+    .replace(/\bLIHEAP\b/g,'lie heap').replace(/\bNDAs\b/g,'N D As').replace(/\bREA\b/g,'R E A')
+    .replace(/\bDS-4\b/g,'D S 4').replace(/\bEE\b/g,'energy efficiency').replace(/\bIRP\b/g,'I R P')
+    .replace(/\bSMEs\b/g,'S M Es');
+}
+
+function buildNav(){
+  $('stops').innerHTML = STOPS.map((s,i)=>`<button class="stopbtn" data-i="${i}"><span class="n">${i}</span><span>${esc(s.title)}</span></button>`).join('');
+  document.querySelectorAll('.stopbtn').forEach(b=>b.onclick=()=>{stop(); go(+b.dataset.i); });
+}
+function render(){
+  const s = STOPS[idx];
+  const extra = INTERNAL[s.id];
+  let narr = s.narr + (extra ? ' ' + extra.say : '');
+  sentences = splitSentences(narr);
+  const relClass = s.rel.replace(/ /g,'-');
+  let html = `<div class="meta"><span class="chip">Stop ${idx} of ${STOPS.length-1}</span><span class="chip">${esc(s.cite)}</span><span class="chip">${esc(s.pages)}</span><span class="chip rel ${relClass}">Utility relevance · ${esc(s.rel)}</span></div>
+  <h2>${esc(s.title)}</h2>
+  <div class="remember">${esc(s.remember)}</div>
+  <h3>Key points</h3><div class="grid">${s.points.map(p=>`<div class="point">${esc(p)}</div>`).join('')}</div>
+  <h3>Points to consider</h3><ul class="consider">${s.consider.map(p=>`<li>${esc(p)}</li>`).join('')}</ul>`;
+  if(extra){ html += `<div class="internal"><h4>Internal only · SME feedback</h4>${extra.sme.map(p=>`<p style="margin:6px 0">${esc(p)}</p>`).join('')}<div class="ask">Draft ask · ${esc(extra.ask)}</div></div>`; }
+  html += `<h3>What Avery says</h3><div class="transcript"><p>${sentences.map((t,i)=>`<span class="s" id="s${i}">${esc(t)}</span>`).join(' ')}</p></div>
+  <div class="nav"><button class="btn" onclick="stop();go(idx-1)" ${idx===0?'disabled':''}>◀ Previous</button><button class="btn primary" onclick="stop();go(idx+1)" ${idx===STOPS.length-1?'disabled':''}>Next section ▶</button></div>`;
+  $('main').innerHTML = html;
+  document.querySelectorAll('.stopbtn').forEach((b,i)=>{b.classList.toggle('on',i===idx); b.classList.toggle('done',done.has(i)&&i!==idx);});
+  $('prog').style.width = (idx/(STOPS.length-1)*100)+'%';
+}
+function go(i){ if(i<0||i>=STOPS.length) return; idx=i; sIdx=0; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+function loadVoices(){
+  if(!synth) return;
+  voices = synth.getVoices().filter(v=>/^en/i.test(v.lang));
+  const pref = ['Samantha','Ava','Allison','Susan','Karen','Daniel','Google US English','Microsoft Aria','Microsoft Jenny'];
+  voices.sort((a,b)=>{const ia=pref.findIndex(p=>a.name.includes(p)), ib=pref.findIndex(p=>b.name.includes(p)); return (ia<0?99:ia)-(ib<0?99:ib);});
+  let saved=null; try{saved=localStorage.getItem('sb4016-voice');}catch(e){}
+  $('voiceSel').innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}" ${saved===v.name?'selected':''}>${esc(v.name)} (${v.lang})</option>`).join('') : '<option value="-1">Device default voice</option>';
+}
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; } else { $('noSpeech').style.display='block'; }
+$('voiceSel').onchange = ()=>{ const v=voices[$('voiceSel').value]; try{localStorage.setItem('sb4016-voice', v.name);}catch(e){} if(playing){ const keep=sIdx; synth.cancel(); sIdx=keep; speakNext(); } };
+$('rate').oninput = ()=>{ $('rateVal').textContent = (+$('rate').value).toFixed(2)+'x'; };
+
+function setSpeaking(on){ $('side').classList.toggle('speaking', on); $('playBtn').textContent = on ? '❚❚ Pause' : '▶ Play'; }
+function highlight(i){ document.querySelectorAll('.s.now').forEach(e=>e.classList.remove('now')); const el=$('s'+i); if(el){ el.classList.add('now'); el.scrollIntoView({block:'nearest',behavior:'smooth'}); } }
+
+function speakText(text, onend){
+  const u = new SpeechSynthesisUtterance(speakable(text));
+  const v = voices[$('voiceSel').value]; if(v) u.voice = v;
+  u.rate = +$('rate').value; u.pitch = 1;
+  u.onend = onend; u.onerror = onend;
+  synth.speak(u);
+}
+function speakNext(){
+  if(!playing) return;
+  if(mode==='key'){ return; }
+  if(sIdx >= sentences.length){
+    done.add(idx); playing=false; setSpeaking(false); highlight(-1);
+    $('status').textContent = 'Finished · ' + STOPS[idx].title;
+    if($('auto').checked && idx < STOPS.length-1){ setTimeout(()=>{ go(idx+1); play(); }, 900); }
+    else render();
+    return;
+  }
+  highlight(sIdx); $('status').textContent = 'Speaking · ' + STOPS[idx].title;
+  const i = sIdx;
+  speakText(sentences[i], ()=>{ if(!playing || i!==sIdx) return; sIdx++; speakNext(); });
+}
+function play(){ if(!synth) return; synth.cancel(); playing=true; mode='full'; setSpeaking(true); speakNext(); }
+function stop(){ playing=false; if(synth) synth.cancel(); setSpeaking(false); highlight(-1); }
+function pause(){ playing=false; if(synth) synth.cancel(); setSpeaking(false); $('status').textContent='Paused · press Play to continue'; }
+$('playBtn').onclick = ()=>{ if(playing) pause(); else play(); };
+$('prevBtn').onclick = ()=>{ stop(); go(idx-1); };
+$('nextBtn').onclick = ()=>{ stop(); go(idx+1); };
+$('replayBtn').onclick = ()=>{ stop(); sIdx=0; play(); };
+$('keyBtn').onclick = ()=>{
+  if(!synth) return; stop(); const s=STOPS[idx]; mode='key'; playing=true; setSpeaking(true);
+  $('status').textContent='Key points · ' + s.title;
+  const parts=['Key points for ' + s.title + '.'].concat(s.points.map(p=>p+'.'), ['Remember. ' + s.remember]);
+  let k=0; const nxt=()=>{ if(!playing||mode!=='key') return; if(k>=parts.length){ playing=false; setSpeaking(false); $('status').textContent='Key points done'; return; } speakText(parts[k++], nxt); }; nxt();
+};
+document.addEventListener('keydown', e=>{
+  if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if(e.code==='Space'){ e.preventDefault(); $('playBtn').click(); }
+  if(e.code==='ArrowRight'){ $('nextBtn').click(); }
+  if(e.code==='ArrowLeft'){ $('prevBtn').click(); }
+});
+buildNav(); render();
+</script>
+</body>
+</html>
