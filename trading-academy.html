@@ -329,6 +329,12 @@ nav.tabs button svg{width:15px;height:15px;vertical-align:-2px;margin-right:5px;
 .facepick img{width:100%;height:100%;object-fit:cover;display:block}
 .facepick .ill{font:800 .62rem var(--mono);color:var(--mute)}
 
+
+.cframe .snd{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:6;display:inline-flex;align-items:center;gap:8px;font:800 1rem var(--body);color:#1a0d04;background:linear-gradient(135deg,#FFB27A,#E8640F);border:0;border-radius:999px;padding:.7rem 1.2rem;cursor:pointer;box-shadow:0 10px 26px -8px rgba(0,0,0,.6);animation:bpulse 1.6s ease-in-out infinite}
+.cframe .snd span{font-size:1.3rem}
+.cframe.mini .snd{top:40%;font-size:.85rem;padding:.45rem .8rem}
+.snd-ok .cframe .snd{display:none}
+.cstat{margin:.4rem 0 0;font-weight:700}.cstat.ok{color:var(--up)}.cstat.bad{color:var(--down);font-weight:600}
 </style>
 </head>
 <body>
@@ -445,7 +451,9 @@ nav.tabs button svg{width:15px;height:15px;vertical-align:-2px;margin-right:5px;
     <button class="btn sm" id="c-mute">🔊 Sound on</button>
     <select id="c-rate" aria-label="Speaking speed"><option value="0.85">Slower</option><option value="0.95" selected>Normal</option><option value="1.08">Faster</option></select>
     <select id="c-voice" aria-label="Coach voice"></select>
+    <button class="btn sm" id="c-test">🔈 Test voice</button>
    </div>
+   <p class="small cstat" id="c-status" aria-live="polite"></p>
    <div class="facepick" id="facepick" aria-label="Choose your coach"></div>
    <p class="small muted" style="margin:.4rem 0 0">The coach uses your Mac's built-in voices. For the most natural sound, add a Premium or Enhanced voice in System Settings, Accessibility, Spoken Content, then pick it here.</p>
   </div>
@@ -1645,8 +1653,9 @@ function PhotoAvatar(host,opts,F){opts=opts||{};host.classList.add('photo');
 var REG=[];
 function faceIdx(){var v=ld('coachface',2);return (window.FACES&&v>=0&&v<FACES.length)?v:-1;}
 function makeAvatar(host,opts){var i=faceIdx();return i>=0?PhotoAvatar(host,opts,FACES[i]):SvgAvatar(host,opts);}
-function Avatar(host,opts){var rec={host:host,opts:opts,av:null};rec.av=makeAvatar(host,opts);REG.push(rec);var proxy={};['setMouth','setMood','talk'].forEach(function(k){proxy[k]=function(a){return rec.av[k](a);};});Object.defineProperty(proxy,'cap',{get:function(){return rec.av.cap;}});Object.defineProperty(proxy,'talking',{get:function(){return rec.av.talking;}});proxy._rec=rec;return proxy;}
-function setFace(i){sv('coachface',i);REG.forEach(function(r){var cap=r.av.cap.innerHTML;if(r.av.destroy)r.av.destroy();r.host.classList.remove('photo');r.av=makeAvatar(r.host,r.opts);r.av.cap.innerHTML=cap;});
+function addSnd(host){var b=document.createElement('button');b.type='button';b.className='snd';b.innerHTML='<span>🔊</span> Turn on Coach Avery\'s voice';b.onclick=function(e){e.stopPropagation();C.enableSound();};host.appendChild(b);}
+function Avatar(host,opts){var rec={host:host,opts:opts,av:null};rec.av=makeAvatar(host,opts);addSnd(host);REG.push(rec);var proxy={};['setMouth','setMood','talk'].forEach(function(k){proxy[k]=function(a){return rec.av[k](a);};});Object.defineProperty(proxy,'cap',{get:function(){return rec.av.cap;}});Object.defineProperty(proxy,'talking',{get:function(){return rec.av.talking;}});proxy._rec=rec;return proxy;}
+function setFace(i){sv('coachface',i);REG.forEach(function(r){var cap=r.av.cap.innerHTML;if(r.av.destroy)r.av.destroy();r.host.classList.remove('photo');r.av=makeAvatar(r.host,r.opts);addSnd(r.host);r.av.cap.innerHTML=cap;});
  var g=window.FACES&&FACES[i]?FACES[i].g:null;if(g&&!ld('coachvoicemanual',false)&&voices.length){var fem=/Samantha|Ava|Allison|Susan|Zoe|Karen|Moira|Victoria|Kate|Serena|Tessa|Fiona|Nicky|Joelle|Noelle/,mal=/Evan|Nathan|Tom|Alex|Daniel|Aaron|Fred|Oliver|Arthur|Gordon|Lee|Reed|Rishi/;var pickV=voices.filter(function(v){return (g==='f'?fem:mal).test(v.name);})[0];if(pickV){C.voiceName=pickV.name;sv('coachvoice',pickV.name);var sel=document.getElementById('c-voice');if(sel)sel.value=pickV.name;}}}
 function SvgAvatar(host,opts){opts=opts||{};host.innerHTML=avatarSVG()+'<div class="ov"><span class="onair live"><span class="live-dot"></span>LIVE</span></div><div class="tc"></div><div class="lt"><b>Coach Avery</b><span>'+(opts.sub||'Your trading coach')+'</span></div><div class="cap" aria-live="polite"></div>';
  var svg=host.querySelector('svg'),mouth=svg.querySelector('.mouth'),iris=svg.querySelector('.iris'),cap=host.querySelector('.cap'),tc=host.querySelector('.tc'),self={host:host,cap:cap,svg:svg,mood:'rest'};
@@ -1677,20 +1686,29 @@ var lipTimer=0,lastBoundary=0;
 function lipWord(word){clearInterval(lipTimer);var ch=word.toLowerCase().replace(/[^a-z]/g,'').split(''),i=0;if(!ch.length)return;lipTimer=setInterval(function(){if(!C.av)return;var c=ch[i++];C.av.setMouth(VIS[c]||(i%2?'E':'A'));if(i>=ch.length){clearInterval(lipTimer);setTimeout(function(){if(C.av&&C.av.talking)C.av.setMouth('M');},60);}},Math.max(45,62/C.rate));}
 var fakeTimer=0;function fakeLips(on){clearInterval(fakeTimer);if(!on)return;var seqv=['A','E','M','O','A','F','E','M'],k=0;fakeTimer=setInterval(function(){if(!C.av)return;if(Date.now()-lastBoundary<350)return;C.av.setMouth(Math.random()<.18?'M':seqv[(k++)%seqv.length]);},115);}
 function renderCap(text,activeIdx){if(!C.av)return;var words=text.split(' ');C.av.cap.innerHTML=words.map(function(w,i){return '<span class="w'+(i===activeIdx?' on':'')+'">'+w.replace(/</g,'&lt;')+'</span>';}).join(' ');}
-function stop(){seq++;if(synth)synth.cancel();clearInterval(lipTimer);fakeLips(false);if(C.av)C.av.talk(false);}
+var lastCancel=0;function stop(){seq++;if(synth&&(synth.speaking||synth.pending)){synth.cancel();lastCancel=Date.now();}clearInterval(lipTimer);fakeLips(false);if(C.av)C.av.talk(false);}
 function say(text,mood){stop();var my=seq;text=String(text||'');C.last=text;if(C.av&&mood)C.av.setMood(mood);var spoken=speakable(text),parts=sentences(spoken),display=sentences(text.replace(/<[^>]+>/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim());
  return new Promise(function(res){var i=0;
   function next(){if(my!==seq){res(false);return;}if(i>=parts.length){if(C.av)C.av.talk(false);fakeLips(false);res(true);return;}
    var p=parts[i],d=display[i]||p;i++;renderCap(d,-1);var words=p.split(/\s+/).length,est=words/(2.5*C.rate)*1000+900;
    if(C.muted||!synth){if(C.av){C.av.talk(true);fakeLips(true);}setTimeout(function(){fakeLips(false);if(C.av)C.av.talk(false);next();},C.muted?Math.max(900,words*260):est);return;}
    var u=new SpeechSynthesisUtterance(p),done=false;u.rate=C.rate;u.pitch=1;var v=voices.filter(function(x){return x.name===C.voiceName;})[0];if(v){u.voice=v;u.lang=v.lang;}
-   var fin=function(){if(done)return;done=true;clearTimeout(guard);clearInterval(lipTimer);next();};
-   u.onstart=function(){if(C.av)C.av.talk(true);fakeLips(true);};
+   var started=false,fin=function(){if(done)return;done=true;clearTimeout(guard);clearTimeout(chk);clearInterval(lipTimer);next();};
+   u.onstart=function(){started=true;C.heard=true;status('ok');if(C.av)C.av.talk(true);fakeLips(true);};
    u.onboundary=function(e){if(e.name&&e.name!=='word')return;lastBoundary=Date.now();var w=(p.substr(e.charIndex).match(/^\S+/)||[''])[0];lipWord(w);var before=p.slice(0,e.charIndex).split(/\s+/).filter(Boolean).length;var dw=d.split(' ').length;renderCap(d,Math.min(dw-1,Math.round(before*dw/Math.max(1,words))));};
-   u.onend=fin;u.onerror=fin;var guard=setTimeout(fin,est*1.8+2500);
-   synth.speak(u);}
+   u.onend=fin;u.onerror=function(e){if(e&&e.error&&e.error!=='interrupted'&&e.error!=='canceled')status('fail',e.error);fin();};var guard=setTimeout(fin,est*1.8+2500),chk=0;
+   C._u=u;var go=function(){if(my!==seq)return;try{if(synth.paused)synth.resume();synth.speak(u);}catch(x){status('fail');}chk=setTimeout(function(){if(!started&&my===seq){status(C.unlocked?'fail':'locked');if(C.av){C.av.talk(true);fakeLips(true);}}},3200);};
+   if(Date.now()-lastCancel<150)setTimeout(go,160);else go();}
   next();});}
 C.say=say;C.stop=stop;
+/* ---- sound unlock (Safari needs a tap before a page may speak) ---- */
+function unlock(){if(C.unlocked||!synth)return;C.unlocked=true;try{var u0=new SpeechSynthesisUtterance(' ');u0.volume=0;synth.speak(u0);}catch(e){}}
+document.addEventListener('pointerdown',unlock,true);document.addEventListener('keydown',unlock,true);
+function status(kind,detail){var el=document.getElementById('c-status');if(kind==='ok'){document.documentElement.classList.add('snd-ok');if(el){el.className='small cstat ok';el.textContent='🔊 Sound is working. Voice: '+(C.voiceName||'system default')+'.';}return;}
+ if(!el)return;el.className='small cstat bad';
+ el.innerHTML=kind==='locked'?'Tap <b>Turn on Coach Avery\'s voice</b> on the video to start sound.':kind==='none'?'This browser has no built-in speech. Open the page in Safari on your Mac.':'<b>No sound came through.</b> Check three things. 1. Open the page from your GitHub site in Safari, not inside a preview window, which blocks speech. 2. Turn your Mac volume up and make sure Sound is on here. 3. Pick a different voice in the menu, then press Test voice.'+(detail?' (Error: '+detail+')':'');}
+C.status=status;
+C.enableSound=function(){unlock();if(C.muted){C.muted=false;sv('coachmute',false);var m=document.getElementById('c-mute');if(m)m.textContent='🔊 Sound on';}if(!synth){status('none');return;}document.documentElement.classList.add('snd-ok');say("Hi, I'm Avery, your coach. You should hear me now. If you can, press Start, and let's get to work.",'happy');};
 C.use=function(av){C.av=av;};
 C.Avatar=Avatar;C.setFace=setFace;C.faceIdx=faceIdx;
 C.replay=function(){return say(C.last);};
@@ -1705,6 +1723,7 @@ function wire(){var m=document.getElementById('c-mute');if(!m)return;
  var r=document.getElementById('c-rate');r.value=String(C.rate);if(r.value!==String(C.rate)){r.value='0.95';C.rate=0.95;}r.onchange=function(){C.rate=+r.value;sv('coachrate',C.rate);};
  var vs=document.getElementById('c-voice');vs.onchange=function(){C.voiceName=vs.value;sv('coachvoice',C.voiceName);sv('coachvoicemanual',true);say('Hi, this is how I sound now.');};}
 wire();
+(function(){var t=document.getElementById('c-test');if(t)t.onclick=function(){C.enableSound();};if(synth){var n=0,iv=setInterval(function(){if(voices.length||n++>20){clearInterval(iv);}else pickVoices();},300);}else status('none');})();
 (function(){var fp=document.getElementById('facepick');if(!fp||!window.FACES)return;
  function draw(){var cur=faceIdx();fp.innerHTML='<span class="small muted" style="font-weight:700;margin-right:4px">Coach</span>'+FACES.map(function(f,i){return '<button data-face="'+i+'" class="'+(i===cur?'on':'')+'" title="Coach '+(i+1)+'"><img src="'+f.thumb+'" alt="Coach option '+(i+1)+'"></button>';}).join('')+'<button data-face="-1" class="ill'+(cur<0?' on':'')+'" title="Illustrated coach">ART</button>';}
  fp.onclick=function(e){var b=e.target.closest('[data-face]');if(!b)return;var i=+b.dataset.face;setFace(i);draw();say(i>=0?'Hi, I\'m Avery. I\'ll be your coach from here on.':'Hi, I\'m the illustrated version of Avery.','happy');};
