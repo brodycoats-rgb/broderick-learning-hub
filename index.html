@@ -223,17 +223,6 @@ html[data-theme="dark"] .vid::after{background:linear-gradient(to bottom,rgba(va
 
 
 .navhot{color:var(--accent)!important;font-weight:800}
-.feat{position:relative;z-index:3;display:inline-flex;align-items:center;gap:.9rem;max-width:36rem;margin:0 0 1.4rem;padding:.8rem 1rem .8rem .9rem;border-radius:14px;text-decoration:none;color:#fff;background:linear-gradient(135deg,rgba(12,24,48,.92),rgba(16,31,61,.88));border:1px solid rgba(255,154,85,.55);box-shadow:0 12px 28px -14px rgba(232,100,15,.65);transition:transform .2s,box-shadow .2s}
-.feat:hover{transform:translateY(-2px);box-shadow:0 16px 32px -14px rgba(232,100,15,.85)}
-.feat:focus-visible{outline:3px solid #FF9A55;outline-offset:3px}
-.feat-dot{flex:0 0 auto;width:12px;height:12px;border-radius:50%;background:#FF9A55;box-shadow:0 0 0 0 rgba(255,154,85,.7);animation:featp 1.8s infinite}
-@keyframes featp{0%{box-shadow:0 0 0 0 rgba(255,154,85,.7)}70%{box-shadow:0 0 0 12px rgba(255,154,85,0)}100%{box-shadow:0 0 0 0 rgba(255,154,85,0)}}
-.feat-t{display:flex;flex-direction:column;line-height:1.3}
-.feat-t b{font-size:1.05rem;color:#FFB27A}
-.feat-t span{font-size:.92rem;color:#d6deea}
-.feat-go{margin-left:auto;font-weight:800;white-space:nowrap;background:linear-gradient(135deg,#FF9A55,#E8640F);color:#1a0d04;padding:.4rem .8rem;border-radius:9px}
-@media (prefers-reduced-motion:reduce){.feat-dot{animation:none}.feat{transition:none}}
-@media (max-width:560px){.feat{display:flex}.feat-go{display:none}}
 </style>
 </head>
 <body>
@@ -263,7 +252,6 @@ html[data-theme="dark"] .vid::after{background:linear-gradient(to bottom,rgba(va
   <button class="motion" id="motion" type="button">Pause motion</button>
   <h1 class="sr">Broderick Learning Hub</h1>
   <p class="lede">Guides, dashboards and notes on Illinois energy, from the ICC docket to the General Assembly floor.</p>
-  <a class="feat" href="trading-academy.html"><span class="feat-dot" aria-hidden="true"></span><span class="feat-t"><b>New · Trading Desk Academy</b><span>Train with Coach Avery, from Finance 101 to the Bloomberg desk</span></span><span class="feat-go" aria-hidden="true">Start →</span></a>
   
   <div class="tabs" role="tablist" aria-label="Choose a group of pages"><a class="tab" role="tab" id="tab-learn" href="#learn" aria-controls="learn" aria-selected="true" tabindex="0">Learn it.</a><a class="tab" role="tab" id="tab-rehearse" href="#rehearse" aria-controls="rehearse" aria-selected="false" tabindex="-1">Rehearse it.</a><a class="tab" role="tab" id="tab-use" href="#use" aria-controls="use" aria-selected="false" tabindex="-1">Use it.</a></div>
  </section>
