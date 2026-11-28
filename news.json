@@ -1,0 +1,189 @@
+{
+ "updated": "2026-11-28T10:51:39.388689+00:00",
+ "markets": [
+  {
+   "id": "^DJI",
+   "name": "Dow",
+   "price": 50774.94,
+   "change": 591.99,
+   "pct": 1.18,
+   "asof": "2026-11-27T18:38:45+00:00"
+  },
+  {
+   "id": "^GSPC",
+   "name": "S&P 500",
+   "price": 7297.49,
+   "change": 114.71,
+   "pct": 1.6,
+   "asof": "2026-11-27T18:38:39+00:00"
+  },
+  {
+   "id": "NG=F",
+   "name": "Natural gas",
+   "price": 3.49,
+   "change": 0.22,
+   "pct": 6.79,
+   "asof": "2026-11-27T19:44:59+00:00"
+  },
+  {
+   "id": "CL=F",
+   "name": "Oil (WTI)",
+   "price": 83.08,
+   "change": -0.6,
+   "pct": -0.72,
+   "asof": "2026-11-27T19:44:59+00:00"
+  }
+ ],
+ "news": {
+  "energy": [
+   {
+    "title": "Global electricity generation more than doubled from 2000 to 2025",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68525",
+    "source": "EIA Today in Energy",
+    "published": "2026-11-27T14:00:00+00:00"
+   },
+   {
+    "title": "Solar is coming for the No. 2 spot on China\u2019s grid",
+    "link": "https://www.canarymedia.com/articles/solar/solar-no-2-china-grid",
+    "source": "Canary Media",
+    "published": "2026-11-27T08:30:00+00:00"
+   },
+   {
+    "title": "What is holding back bidirectional EV charging as a grid resource?",
+    "link": "https://www.utilitydive.com/news/what-is-holding-back-bidirectional-ev-charging-as-a-grid-resource/875766/",
+    "source": "Utility Dive",
+    "published": "2026-11-25T16:12:22+00:00"
+   },
+   {
+    "title": "Bright Horizon utility lands Microsoft data center deals amid Wyoming buildout",
+    "link": "https://www.utilitydive.com/news/cheyenne-light-microsoft-google-data-center-bright-horizon/875739/",
+    "source": "Utility Dive",
+    "published": "2026-11-25T15:00:39+00:00"
+   },
+   {
+    "title": "2026 Q3 earnings roundup: Utilities seek to reassure investors amid election fallout",
+    "link": "https://www.utilitydive.com/news/2026-q3-roundup-utilities-seek-to-reassure-investors-amid-election-fallout/875726/",
+    "source": "Utility Dive",
+    "published": "2026-11-25T14:22:42+00:00"
+   },
+   {
+    "title": "Almost 60% of primary energy used for electricity is lost to conversion and transmission",
+    "link": "https://www.eia.gov/todayinenergy/detail.php?id=68504",
+    "source": "EIA Today in Energy",
+    "published": "2026-11-25T14:00:00+00:00"
+   },
+   {
+    "title": "These Maine heat-pump owners will get discounted power this winter",
+    "link": "https://www.canarymedia.com/articles/heat-pumps/maine-heat-pump-winter-discount",
+    "source": "Canary Media",
+    "published": "2026-11-25T08:30:00+00:00"
+   },
+   {
+    "title": "Uber drivers are flocking to EVs amid high gas prices",
+    "link": "https://www.canarymedia.com/articles/electric-vehicles/uber-drivers-flocking-to-evs",
+    "source": "Canary Media",
+    "published": "2026-11-25T08:30:00+00:00"
+   }
+  ],
+  "illinois": [
+   {
+    "title": "Horoscope for Saturday, November 28, 2026",
+    "link": "https://chicago.suntimes.com/horoscopes/2026/11/28/horoscopes-today-saturday-november-28-2026",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-28T06:01:00+00:00"
+   },
+   {
+    "title": "Sacred Heart-Griffin's Mikey Groesch scores in OT to beat Morris and win Class 4A",
+    "link": "https://chicago.suntimes.com/high-school-football/2026/11/27/sacred-heart-griffins-mikey-groesch-scores-in-ot-to-beat-morris-and-win-class-4a",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-28T05:22:27.203000+00:00"
+   },
+   {
+    "title": "Cubs stay busy in free agency with reported addition of lefty reliever Ryan Yarbrough",
+    "link": "https://chicago.suntimes.com/cubs/2026/11/27/cubs-ryan-yarbrough-mlb-offseason-free-agency-trade-rumors-relief-pitcher-bullpen",
+    "source": "Chicago Sun-Times",
+    "published": "2026-11-28T04:37:17.702000+00:00"
+   },
+   {
+    "title": "Grammy nominee Lil\u2019 Ed Williams is carrying the Chicago blues tradition forward",
+    "link": "https://www.wbez.org/music/2026/11/27/grammy-awards-lil-ed-williams-blues-imperials-slideways-alligator-records",
+    "source": "WBEZ",
+    "published": "2026-11-27T15:10:17.436000+00:00"
+   },
+   {
+    "title": "\u2018A chance to get out and stay out\u2019",
+    "link": "https://capitolnewsillinois.com/news/a-chance-to-get-out-and-stay-out/",
+    "source": "Capitol News Illinois",
+    "published": "2026-11-27T13:00:28+00:00"
+   },
+   {
+    "title": "Isaiah White prevails in close race in Downtown and Near North Side District 6a Chicago School Board",
+    "link": "https://www.wbez.org/education/2026/11/03/chicago-school-board-district-6a-results",
+    "source": "WBEZ",
+    "published": "2026-11-26T14:00:00+00:00"
+   },
+   {
+    "title": "The Rundown: A storied bartending career",
+    "link": "https://www.wbez.org/wbez-newsletter/2026/11/25/the-rundown-a-storied-bartending-career",
+    "source": "WBEZ",
+    "published": "2026-11-25T21:45:00+00:00"
+   },
+   {
+    "title": "No ill effects reported from Iowa lead detonation",
+    "link": "https://capitolnewsillinois.com/news/no-ill-effects-from-iowa-lead-detonation-reported/",
+    "source": "Capitol News Illinois",
+    "published": "2026-11-25T19:12:34+00:00"
+   }
+  ],
+  "top": [
+   {
+    "title": "Two staff killed in Israeli strike on Gaza medical clinic, MSF says",
+    "link": "https://www.bbc.co.uk/news/articles/cm5y10yydln3o?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-11-28T10:34:58+00:00"
+   },
+   {
+    "title": "U.S. forces disable commercial ship that allegedly tried to breach Iran blockade",
+    "link": "https://www.cbsnews.com/live-updates/iran-war-trump-us-threats-diplomacy-strait-of-hormuz/",
+    "source": "CBS News",
+    "published": "2026-11-28T10:26:51+00:00"
+   },
+   {
+    "title": "New wave of Democratic attorneys general may reshape the justice system",
+    "link": "https://www.npr.org/2026/11/28/g-s1-155837/democratic-attorneys-general-justice-system-texas",
+    "source": "NPR",
+    "published": "2026-11-28T10:00:00+00:00"
+   },
+   {
+    "title": "Pensions and benefits services still down after 'cyber incident'",
+    "link": "https://www.bbc.co.uk/news/articles/cm1wrgqyq4d8o?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-11-28T09:10:32+00:00"
+   },
+   {
+    "title": "Power being slowly restored as heavy Thanksgiving storm eases",
+    "link": "https://www.cbsnews.com/news/east-coast-thanksgiving-storm-power-outages-cleanup/",
+    "source": "CBS News",
+    "published": "2026-11-28T03:54:12+00:00"
+   },
+   {
+    "title": "U.S. Air Force cloud platform breached by hackers, report says",
+    "link": "https://www.cbsnews.com/news/u-s-air-force-cloud-platform-breached-by-hackers/",
+    "source": "CBS News",
+    "published": "2026-11-28T02:44:55+00:00"
+   },
+   {
+    "title": "Sudan's lost generation: War is stealing the childhood of millions",
+    "link": "https://www.npr.org/2026/11/27/nx-s1-6053049/sudans-lost-generation-war-is-stealing-a-generation-of-childhood",
+    "source": "NPR",
+    "published": "2026-11-27T22:54:53+00:00"
+   },
+   {
+    "title": "Catherine's emotional cancer documentary strips away the stiff upper lip",
+    "link": "https://www.bbc.co.uk/news/articles/c6zxvy9j0wpjo?at_medium=RSS&at_campaign=rss",
+    "source": "BBC News",
+    "published": "2026-11-27T22:03:22+00:00"
+   }
+  ]
+ }
+}
